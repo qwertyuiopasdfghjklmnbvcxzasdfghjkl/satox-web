@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>BITARK</title>
+  </head>
+  <body>
+    <script>
+      let domain = location.protocol + '//' + location.host;
+      // 获取URL参数
+      function getUrlParams () {
+        let search = location.search
+        if (!search) {
+          return {}
+        }
+        let ps = search.substring(1)
+        if (!ps) {
+          return {}
+        }
+        ps = ps.split('&')
+        let params = {}
+        for (let i = 0; i < ps.length; i++) {
+          let p = ps[i].split('=')
+          if (p[0]) {
+            params[p[0]] = p[1] || ''
+          }
+        }
+        return params
+      };
+      var params = getUrlParams();
+      var apiToken = '';
+      let userInfo = localStorage.getItem('userInfo');
+      if (userInfo) {
+        apiToken = JSON.parse(userInfo).apiToken || '';
+      }
+      let url = domain + '/api/v2/user/zendesk?apiToken=' + apiToken;
+      location.href = url;
+    </script>
+  </body>
+</html>

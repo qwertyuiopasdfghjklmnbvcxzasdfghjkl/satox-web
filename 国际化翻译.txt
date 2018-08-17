@@ -1,0 +1,10 @@
+未完成翻译：
+authen/anthentication1.vue
+authen/anthentication2.vue
+dialog/feedback.vue
+helpe/helpecont.vue
+helpe/helpeleft.vue
+market/entrust.vue
+myassets/dugassets.vue
+myassets/entrust.vue
+authentication.vue

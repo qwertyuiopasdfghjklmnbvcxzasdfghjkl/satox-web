@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>BITARK</title>
+    <link href="/static/favicon.ico" rel="icon"/>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      (function(){
+        // 针对生产环境，只允许跳转到https://www.bitark.io
+        var protocol = location.protocol;
+        var host = location.host;
+        if (host === 'pre.bitark.io') {
+          return
+        }
+        if (host.indexOf('bitark.io') !== -1 && (protocol !== 'https:' || host !== 'www.bitark.io')) {
+          location.href = 'https://www.bitark.io';
+        }
+      })();
+    </script>
+    <!-- built files will be auto injected -->
+    <script type="text/javascript" src="/static/js/jsencrypt.min.js"></script>
+    <script type="text/javascript" src="/static/js/gt.js"></script>
+  </body>
+</html>
