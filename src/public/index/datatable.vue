@@ -171,7 +171,6 @@
         this.tabContent = tabindex
       },
       remove (index) {
-        var curobj = this.optionalList[index]
         this.optionalList.splice(index, 1)
       },
       sortMarket (active) {
