@@ -8,20 +8,12 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import en from '@/assets/images/home/banner-home-en.png'
-import zhCN from '@/assets/images/home/banner-home-zh-cn.png'
-import CHT from '@/assets/images/home/banner-home-zh-tw.png'
+import banner from '@/assets/images/home/banner.png'
 export default {
   computed: {
     ...mapGetters(['getLang']),
     image () {
-      if (this.getLang === 'zh-CN') {
-        return zhCN
-      } else if (this.getLang === 'cht') {
-        return CHT
-      } else {
-        return en
-      }
+      return banner
     }
   }
 }

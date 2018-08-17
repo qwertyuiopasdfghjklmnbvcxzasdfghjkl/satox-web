@@ -18,13 +18,6 @@
                   <li v-for="data in curProducts" :key="data.marketId" class="list1-item" :class="{'list1-item-active':data.market === symbol}" @click="changeSymbol(data)">
                       <em class="list1-collection icon-star-full" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                       <span class="list1-col list1-currency">
-                          <!--
-                          <em class="list1-currency-icon" :class="['icon-'+data.currencySymbol.toLowerCase()]">
-                            <template v-if="getIconsConfig[data.currencySymbol.toLowerCase()]">
-                              <i v-for="n in getIconsConfig[data.currencySymbol.toLowerCase()]" :class="['path' + n]" :key="n"></i>
-                            </template>
-                          </em>
-                          -->
                           <em class="list1-currency-icon">
                             <img :src="`/static/images/coin-small-icons/${data.currencySymbol.toLowerCase()}.png`"/>
                           </em>
@@ -105,7 +98,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getIconsConfig', 'getBtcValues']),
+    ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getBtcValues']),
     markets () {
       // 收藏
       return ['collection', 'BTC', 'ETH', 'BARK']

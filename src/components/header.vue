@@ -8,29 +8,21 @@
                     <li>
                       <a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">
                         {{$t('otc_public.otc_navigation_trade')}}<!--OTC-->
-                        <!--<font style="font-weight:bold;color:#ff0e0e;font-size:14px;">Beta</font>-->
                       </a>
                     </li>
                     <li>
                       <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
                         {{$t('public.navigation_exchange')}}<!--币币交易-->
-                        <!--<font style="font-weight:bold;color:#ff0e0e;font-size:14px;">Coming soon...</font>-->
                       </a>
                     </li>
                     <li>
-                      <a :href="getLang === 'en' ? 'https://bitark.zendesk.com/hc/en-us/categories/360000756111-Announcement' : 'https://bitark.zendesk.com/hc/zh-cn/categories/360000756111-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83'" target="_blank">
+                      <a href="javascript:;" target="_blank">
                         {{$t('public.navigation_news')}}<!--公告中心-->
                       </a>
                     </li>
                     <li>
-                      <a :href="getLang === 'en' ? 'https://bitark.zendesk.com/hc/en-us/categories/360000759671-Help' : 'https://bitark.zendesk.com/hc/zh-cn/categories/360000759671-%E5%B8%AE%E5%8A%A9%E4%B8%AD%E5%BF%83'" target="_blank">
+                      <a href="javascript:;" target="_blank">
                         {{$t('public.navigation_support')}}<!--帮助中心-->
-                      </a>
-                    </li>
-                    <li>
-                      <!--isTest ? 'http://10.0.2.193:8080/session/sso' : 'http://bitark.club/'-->
-                      <a href="http://bitark.club/" target="_blank">
-                        {{$t('message.msg_forum')}}<!--论坛-->
                       </a>
                     </li>
                 </ul>
@@ -88,7 +80,7 @@
                                 <div class="message-panel-nologin" v-if="!isLogin">
                                     <div class="nologin-icon icon-msg-hi"></div>
                                     <div class="nologin-text">
-                                        {{$t('message.msg_use_BITARK').format('BITARK')}}<!--欢迎使用BITARK!-->
+                                        {{$t('message.msg_use_BITARK').format('NEWTON')}}<!--欢迎使用NEWTON!-->
                                     </div>
                                     <div class="nologin-text">
                                         {{$t('message.msg_please')}}<!--请先-->
@@ -343,7 +335,7 @@ export default {
 .header-center{display: flex;justify-content: space-between;align-items: center;width: 1200px;height: 60px;margin-left: auto;margin-right: auto;transition: width .2s ease-out;}
 .header-center.full-screen{box-sizing: border-box;min-width:1200px;width: 100%;padding-left: 20px;padding-right: 10px;}
 .header-center .center-left{display: flex;align-items: center;}
-.header-center .center-left > a{width: 158px;height: 36px;background: url(../assets/images/logo.png) no-repeat center center;background-size:100%;}
+.header-center .center-left > a{width: 167px;height: 45px;background: url(../assets/images/logo.png) no-repeat center center;background-size:100%;}
 .header-center .center-left > ul{height: 24px;}
 .header-center .center-left > ul li{float: left;margin-left: 12px;height: 24px;line-height: 24px;}
 .header-center .center-left > ul li:first-of-type{margin-left: 54px;}

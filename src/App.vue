@@ -7,7 +7,7 @@
     </template>
     <bheader v-if="$route.name !== 'homephone' && $route.name !== 'maintenance'"/>
     <div v-if="isIE" class="compatible" v-show="browser">
-      <div class="compatible-w">{{$t('public0.public239').format('Bitark')}}<!--建议您使用Chrome浏览器获取Bitark最佳体验。如使用360或QQ浏览器，可切换至极速模式。--><span @click="closeCompa">×</span></div>
+      <div class="compatible-w">{{$t('public0.public239').format('NEWTON')}}<!--建议您使用Chrome浏览器获取NEWTON最佳体验。如使用360或QQ浏览器，可切换至极速模式。--><span @click="closeCompa">×</span></div>
     </div>
     <router-view/>
   </div>

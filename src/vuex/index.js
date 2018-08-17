@@ -29,9 +29,6 @@ export default new Vuex.Store({
     entrustNewPrice: 0,
     networkSignal: 0,
     events: {},
-    iconsConfig: {
-      bark: 2
-    },
     btcValues: {}
   },
   getters: {
@@ -87,9 +84,6 @@ export default new Vuex.Store({
     },
     getNetworkSignal (state) {
       return state.networkSignal
-    },
-    getIconsConfig (state) {
-      return state.iconsConfig
     },
     getBtcValues (state) {
       return state.btcValues

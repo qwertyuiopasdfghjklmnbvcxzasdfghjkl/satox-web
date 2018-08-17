@@ -9,13 +9,6 @@
               <div class="top-left-header">
                 <ul>
                   <li class="last-item">
-                    <!--
-                    <a :class="['symbol-icon', 'icon-' + currentSymbol.toLowerCase()]">
-                      <template v-if="getIconsConfig[currentSymbol.toLowerCase()]">
-                        <i v-for="n in getIconsConfig[currentSymbol.toLowerCase()]" :class="['path' + n]" :key="n"></i>
-                      </template>
-                    </a>
-                    -->
                     <img class="symbol-icon" :src="`/static/images/coin-small-icons/${currentSymbol.toLowerCase()}.png`"/>
                     <span>{{currentSymbol}}/{{baseSymbol}}</span>
                     <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em>
@@ -101,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getLast24h', 'getIconsConfig', 'getCoinSign', 'getUSDCNY', 'getBtcValues']),
+    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues']),
     baseSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {

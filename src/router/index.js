@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Index from '@/public'
 import exchange from './exchange'
 import otc from './otc'
-import Homephone from '@/public/homephone'
 import login from '@/public/login'
 import twoverify from '@/public/twoverify'
 import register from '@/public/register'
@@ -23,11 +22,6 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Index
-    },
-    {
-      path: '/homephone',
-      name: 'homephone',
-      component: Homephone
     },
     {
       path: '/login',

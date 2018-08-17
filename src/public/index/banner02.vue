@@ -3,10 +3,10 @@
         <router-link :to="{name:'otc_index'}">
             <img :src="image1" style="" />
         </router-link>
-        <a href="https://bitark.zendesk.com/" target="_blank">
+        <a href="javascript:;" target="_blank">
             <img :src="image3"/>
         </a>
-        <a href="http://bitark.club/" target="_blank">
+        <a href="javascript:;" target="_blank">
             <img :src="image2"/>
         </a>
     </div>

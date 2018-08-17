@@ -1,4 +1,4 @@
-# bitark-exchange-front-web
+# newton-web
 
 > A Vue.js project
 

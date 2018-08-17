@@ -82,7 +82,7 @@
                     </div>
                     <div class="row-file-prompt" :class="{error: getError('hand')['isError']}">{{getError('hand')['value']}}</div>
                 </div>
-                <div class="row-description">{{$t('public0.public103').format('Bitark')}}<!--请您上传一张手持证件及写有“Bitark”和当天日期的卡片的照片。请确保头像、证件内容、卡片上Bitark和当天日期内容清晰可见。--></div>
+                <div class="row-description">{{$t('public0.public103').format('NEWTON')}}<!--请您上传一张手持证件及写有“NEWTON”和当天日期的卡片的照片。请确保头像、证件内容、卡片上NEWTON和当天日期内容清晰可见。--></div>
             </div>
             <div class="form-button">
                 <input class="cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="switch_tab('mycenter')"><!--取消-->

@@ -2,13 +2,13 @@
   <div class="news">
       <ul>
           <li>
-              <a href="javascript:;"><em></em> BITARK  listed LTC </a>
+              <a href="javascript:;"><em></em> NEWTON  listed LTC </a>
           </li>
           <li>
               <a href="javascript:;"><em></em> Will Support EOS MainNet Token Swap (03-16) </a>
           </li>
           <li>
-              <a href="javascript:;"><em></em> BITARK  listed LTC </a>
+              <a href="javascript:;"><em></em> NEWTON  listed LTC </a>
           </li>
       </ul>
   </div>

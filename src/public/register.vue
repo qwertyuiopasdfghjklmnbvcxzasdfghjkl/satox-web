@@ -37,20 +37,20 @@
                     <template v-if="formData.registerType==0">
                       <inputbox name="email" :maxLength="255" v-model="formData.email" v-validate="'required|email'" :msgs="msgs.email" :errs="errors" :placeholder="$t('login_register.email')"/><!--邮箱-->
                     </template>
-                    <inputbox id="bitark-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
+                    <inputbox id="newton-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
                     <inputbox class="invitedCode" name="invitedCode" :maxLength="255" v-model="formData.invitedCode" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
                           <em @click="checked=!checked">{{$t('login_register.agree_Service')}}<!--我已阅读并同意--></em>
-                          <a :href="getLang === 'en' ? 'https://bitark.zendesk.com/hc/en-us/articles/360010724752-BITARK-Terms-of-Use' : 'https://bitark.zendesk.com/hc/zh-cn/articles/360010724752-BITARK%E6%9C%8D%E5%8A%A1%E6%9D%A1%E6%AC%BE'" target="_blank">{{$t('login_register.bitark_service').format('BITARK')}}<!--BITARK服务条款--></a>
+                          <a href="javascript:" target="_blank">{{$t('login_register.bitark_service').format('NEWTON')}}<!--NEWTON服务条款--></a>
                         </span>
                     </div>
                     <div class="button-group">
                         <buttonbox :text="$t('login_register.register')" @click="register"/><!--注册-->
                         <div class="link">
-                            <a href="javascript:;" @click="loginDialog">{{$t('login_register.Already_registered_Login').format('BITARK')}}<!--已有BITARK账号，请登录--></a>
+                            <a href="javascript:;" @click="loginDialog">{{$t('login_register.Already_registered_Login').format('NEWTON')}}<!--已有NEWTON账号，请登录--></a>
                         </div>
                     </div>
                 </div>

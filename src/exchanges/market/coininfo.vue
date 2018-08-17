@@ -2,13 +2,6 @@
     <div class="coininfo" :class="{show:isShow}">
         <div class="coininfo-top">
             <div class="coininfo-top-left">
-                <!--
-                <em class="coin-icon" :class="[`icon-${currentSymbol.toLowerCase()}`]">
-                    <template v-if="getIconsConfig[currentSymbol.toLowerCase()]">
-                      <i v-for="n in getIconsConfig[currentSymbol.toLowerCase()]" :class="['path' + n]" :key="n"></i>
-                    </template>
-                </em>
-                -->
                 <img class="coin-icon" :src="`/static/images/coin-large-icons/${currentSymbol.toLowerCase()}.png`"/>
                 <span class="coin-title">
                     <span>{{currentSymbol}}<font>({{currentSymbol}})</font></span>
@@ -59,7 +52,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCoinSign', 'getIconsConfig', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
+    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
     symbolDescription () {
       return this.$t(`symbol_desc.${this.currentSymbol}`)
     },

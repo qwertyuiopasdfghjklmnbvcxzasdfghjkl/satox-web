@@ -26,7 +26,6 @@
     data () {
       return {
         fixedNumber: 8,
-        barkAyyay: [],
         products: []
       }
     },

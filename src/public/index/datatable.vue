@@ -90,9 +90,6 @@
   export default {
     data () {
       return {
-        // BTC成交量
-        // ETH成交量
-        // BARK成交量
         sort: 'asc', // 默认升序
         sortActive: 'market',
         symbolVolumes: [], // 币种成交量
@@ -106,22 +103,10 @@
         active: 'BTC',
         marketArry: [], // 市场信息
         filterMarketAtty: [], // 前台过滤'BTCETH、ETHBTC、BTCMARKET'市场信息
-        btcArray: [],
-        ethArray: [],
-        barkAyyay: [],
         products: []
       }
     },
     created () {
-      this.btcArray.forEach((item) => {
-        item.checked = false
-      })
-      this.ethArray.forEach((item) => {
-        item.checked = false
-      })
-      this.barkAyyay.forEach((item) => {
-        item.checked = false
-      })
       this.getMarketList() // 初始化数据
     },
     methods: {
@@ -187,21 +172,6 @@
       },
       remove (index) {
         var curobj = this.optionalList[index]
-        this.btcArray.forEach((item) => {
-          if (item.inde === curobj.inde) {
-            item.selected = false
-          }
-        })
-        this.ethArray.forEach((item) => {
-          if (item.inde === curobj.inde) {
-            item.selected = false
-          }
-        })
-        this.barkAyyay.forEach((item) => {
-          if (item.inde === curobj.inde) {
-            item.selected = false
-          }
-        })
         this.optionalList.splice(index, 1)
       },
       sortMarket (active) {
@@ -284,21 +254,6 @@
       /* 选中数据的集合 */
       mytotalList: function () {
         let checkedArry = []
-        this.btcArray.forEach((item) => {
-          if (item.selected === true) {
-            checkedArry.push(item)
-          }
-        })
-        this.ethArray.forEach((item) => {
-          if (item.selected === true) {
-            checkedArry.push(item)
-          }
-        })
-        this.barkAyyay.forEach((item) => {
-          if (item.selected === true) {
-            checkedArry.push(item)
-          }
-        })
         this.optionalList = checkedArry
       }
     },
