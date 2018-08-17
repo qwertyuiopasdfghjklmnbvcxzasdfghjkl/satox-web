@@ -1,0 +1,7 @@
+package.json
+cnpm install --save-dev node-sass sass-loader babel-preset-es2015
+
+cnpm install --save axios vuex vee-validate vue-i18n
+
+.babelrc
+"es2015",
