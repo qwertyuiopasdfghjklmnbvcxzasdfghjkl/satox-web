@@ -41,8 +41,8 @@
             </p>
             <p class="sale" v-if="false">
               <span>
-                {{$t('account.user_center_pay_fees').format('BARK', '50%')}}<!--使用BARK支付交易手续费（50% 折扣）-->
-                <a class="icon-checkbox" href="javascript:;" :class="isUseBarkPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
+                {{$t('account.user_center_pay_fees').format('NEWTON', '50%')}}<!--使用NEWTON支付交易手续费（50% 折扣）-->
+                <a class="icon-checkbox" href="javascript:;" :class="isUseNewtonPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
               </span>
             </p>
             <p class="limit">
@@ -133,7 +133,7 @@ export default {
         verifyState: 0,
         verifyTimes: 0
       },
-      isUseBarkPay: false,
+      isUseNewtonPay: false,
       distributeHistory: [], // 分发记录
       distributeParam: {
         page: 1, // 当前页
@@ -211,7 +211,7 @@ export default {
           verifyState: data.verifyState,
           verifyTimes: data.verifyTimes
         }
-        this.isUseBarkPay = data.coinState === 1
+        this.isUseNewtonPay = data.coinState === 1
       }, (msg) => {
         console.error(msg)
       })
@@ -232,9 +232,9 @@ export default {
       }
     },
     switchCoinState () {
-      // 切换使用BARK支付交易手续费（50% 折扣）
-      userUtils.switchBarkChargeState((msg) => {
-        this.isUseBarkPay = !this.isUseBarkPay
+      // 切换使用Newton支付交易手续费（50% 折扣）
+      userUtils.switchNewtonChargeState((msg) => {
+        this.isUseNewtonPay = !this.isUseNewtonPay
       }, (msg) => {
         console.error(msg)
       })
