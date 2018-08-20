@@ -101,7 +101,7 @@ export default {
     ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getBtcValues']),
     markets () {
       // 收藏
-      return ['collection', 'BTC', 'ETH', 'BARK']
+      return ['collection', 'BTC', 'ETH']
     },
     tipPrice () {
       return this.getCurPrice(this.hoverItem || {})

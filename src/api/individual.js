@@ -158,8 +158,8 @@ const getUserState = function (success, error) {
 }
 individual.getUserState = getUserState
 
-// 使用BARK支付交易手续费
-const switchBarkChargeState = function (success, error) {
+// 使用NEWTON支付交易手续费
+const switchNewtonChargeState = function (success, error) {
   api.get(`api/v2/individual/coinState`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
@@ -168,7 +168,7 @@ const switchBarkChargeState = function (success, error) {
     }
   }, error)
 }
-individual.switchBarkChargeState = switchBarkChargeState
+individual.switchNewtonChargeState = switchNewtonChargeState
 
 // 编辑昵称
 const editNickname = function (data, success, error) {

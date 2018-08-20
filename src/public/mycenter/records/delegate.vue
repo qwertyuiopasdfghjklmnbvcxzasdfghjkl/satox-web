@@ -162,7 +162,7 @@ export default {
         history: '0', // 0 当前，1 历史
         start: '', // 开始时间
         end: '', // 结束时间
-        market: '', // ‘’全部 BARKETH、ETHBTC BARKBTC
+        market: '', // 全部
         direction: '', // ‘’空字符串 全部 1买 2卖
         hideCancelled: 0, // 1是, 0否显示
         tp: 0, // 0 委托记录 1 币币成交记录

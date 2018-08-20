@@ -15,7 +15,7 @@
             </li>
           </ul>
           <div class="layui-tab-content">
-            <!--2、btc市场、eth市场、bark市场-->
+            <!--2、btc市场、eth市场-->
             <div class="layui-tab-item" v-show="tabContent===2">
               <table class="layui-table" lay-size="sm" lay-even="" lay-skin="line">
                 <colgroup>
@@ -248,7 +248,7 @@
       },
       markets () {
         // 收藏
-        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'BARK']
+        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH']
       },
       /* 选中数据的集合 */
       mytotalList: function () {
@@ -297,15 +297,14 @@
 .layui-tab{margin: 0 0; text-align: left!important;}
 .layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #586687;}
-.layui-tab-title li:nth-child(-n+4){border: 1px solid #404b69; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
-.layui-tab-title li:nth-child(-n+3){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
+.layui-tab-title li:nth-child(-n+3){border: 1px solid #404b69; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
+.layui-tab-title li:nth-child(-n+2){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
-.layui-tab-title li:nth-child(5){text-align: left;border: 0;border-left: 1px solid #404b69;}
+.layui-tab-title li:nth-child(4){text-align: left;border: 0;border-left: 1px solid #404b69;}
 .layui-tab-title li.layuithis{border-bottom-color: #182138; background-color: #182138;}
-.layui-tab-title li:nth-child(5)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
-.layui-tab-title li:nth-child(n+6){padding: 0;}
-.layui-tab-title li:nth-child(n+6)>span{color: #becbe8;}
-.layui-tab-title li:nth-child(10){width: 102px;}
+.layui-tab-title li:nth-child(4)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
+.layui-tab-title li:nth-child(n+5){padding: 0;}
+.layui-tab-title li:nth-child(n+5)>span{color: #becbe8;}
 .layui-tab-title li.last-li{float: right;}
 
 table{border-collapse: collapse; border-spacing: 0;}
