@@ -11,14 +11,14 @@
     <div id="app"></div>
     <script type="text/javascript">
       (function(){
-        // 针对生产环境，只允许跳转到https://www.newton.io
+        // 针对生产环境，只允许跳转到http://www.newtonXchange.com
         var protocol = location.protocol;
         var host = location.host;
         if (host === 'pre.newton.io') {
           return
         }
-        if (host.indexOf('newton.io') !== -1 && (protocol !== 'https:' || host !== 'www.newton.io')) {
-          location.href = 'https://www.newton.io';
+        if (host.indexOf('newton.io') !== -1 && (protocol !== 'http:' || host !== 'www.newtonXchange.com')) {
+          location.href = 'http://www.newtonXchange.com';
         }
       })();
     </script>
