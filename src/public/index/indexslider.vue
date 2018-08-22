@@ -10,7 +10,6 @@
 
 <script>
   import banner01 from './banner01'
-  import banner02 from './banner02'
   import slider from 'vue-concise-slider'// 引入slider组件
   export default {
     data () {
@@ -18,9 +17,6 @@
         pages: [
           {
             component: banner01
-          },
-          {
-            component: banner02
           }
         ],
         // 滑动配置[obj]
@@ -46,10 +42,10 @@
 
 <style scoped>
   .bk-wrap{position:relative;overflow:hidden;width:100%;}
-  .bk-main{position:relative;overflow:hidden;margin:0 auto;width:1200px;}
+  .bk-main{position:relative;overflow:hidden;margin:0 auto;width:100%;}
   .index-slider{background: #0c1426;}
   .index-slider .index-content{
-    height: 360px;
+    height: 395px;
   }
   .index-content .slider-item{
      background-size: initial;
@@ -58,10 +54,10 @@
     bottom: 26px;
   }
 .slider-container /deep/ .slider-pagination-bullets>.slider-pagination-bullet{
-    background:#47577f none repeat scroll 0 0;
+    background:#CCCCCC none repeat scroll 0 0;
     border-radius: 5px!important;
     display: inline-block!important;
-    height: 7px!important;
+    height: 4px!important;
     opacity: 1;
     width: 35px!important;
     cursor: pointer!important;
@@ -69,11 +65,9 @@
   }
 
   .slider-container /deep/ div.slider-pagination-bullets .slider-pagination-bullet-active{
-    background: #48bcff none repeat scroll 0 0;
+    background: #FFDE00 none repeat scroll 0 0;
     opacity: 1;
   }
-  .beijing001{background:#0c1426;}
-  .beijing001-center{display:flex;height:360px;flex-flow:row wrap;justify-content:space-between;align-items:center;}
   .slider-nav{position:absolute;bottom:22px;left:45%;}
   .slider-nav ul{margin:0 auto;width:170px;}
   .slider-nav ul li{display:inline-block;width:35px;}

@@ -331,7 +331,7 @@ export default {
 .message-panel-operation span.disabled:hover{color: #999;}
 
 .header{height: 60px;}
-.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%;background-color: #1b1e2e;}
+.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%;background:url(../assets/images/bj-header.png) no-repeat;background-size:100%;}
 .header-center{display: flex;justify-content: space-between;align-items: center;width: 1200px;height: 60px;margin-left: auto;margin-right: auto;transition: width .2s ease-out;}
 .header-center.full-screen{box-sizing: border-box;min-width:1200px;width: 100%;padding-left: 20px;padding-right: 10px;}
 .header-center .center-left{display: flex;align-items: center;}
@@ -339,17 +339,17 @@ export default {
 .header-center .center-left > ul{height: 24px;}
 .header-center .center-left > ul li{float: left;margin-left: 12px;height: 24px;line-height: 24px;}
 .header-center .center-left > ul li:first-of-type{margin-left: 54px;}
-.header-center .center-left > ul li a{padding-left: 6px;padding-right: 6px;font-size: 14px;color: #becbe8;cursor: pointer;}
-.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #11a8fe;}
+.header-center .center-left > ul li a{padding-left: 6px;padding-right: 6px;font-size: 14px;color: #FFFFFF;cursor: pointer;}
+.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #FFDE00;}
 .header-center .center-right{display: flex;align-items: center;}
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}
-.header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 6px;font-size:14px;cursor: pointer;}
-.header-center .center-right > ul > li > a:hover{color: #11a8fe;}
+.header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 6px;font-size:14px;cursor: pointer;color:#FFFFFF;}
+.header-center .center-right > ul > li > a:hover{color: #FFDE00;}
 .header-center .center-right ul li.translations{position: relative;margin-left: 18px;}
-.header-center .center-right ul li.translations a{display: block;height: 22px;padding-left: 0;padding-right: 0;line-height: 22px;font-size: 14px;color: #becbe8;text-align: center;border-radius: 12px;margin-top:1px;}
+.header-center .center-right ul li.translations a{display: block;height: 22px;padding-left: 0;padding-right: 0;line-height: 22px;font-size: 14px;color: #FFFFFF;text-align: center;border-radius: 12px;margin-top:1px;}
 .header-center .center-right ul li.translations a:hover,
-.header-center .center-right ul li.translations a.unfold{color: #11a8fe; border-color: #11a8fe;}
+.header-center .center-right ul li.translations a.unfold{color: #FFDE00; border-color: #FFDE00;}
 .header-center .center-right ul li.translations a i{padding-left: 12px;font-size: 12px;}
 .header-center .center-right ul li.translations .lang-list{display:flex;flex-flow:column;width:104px;height:117px;position: absolute;top: 24px;right:0;background-color: #12141f;box-shadow:0 3px 6px #12141f;}
 .header-center .center-right ul li.translations .lang-item{flex:1;height: 38px;line-height: 38px;font-size: 14px;color: #a1a8bb;text-align: center;border-bottom: 1px solid #252e44;cursor: pointer;}
@@ -358,7 +358,7 @@ export default {
 .header-center .center-right ul li.message{position: relative;margin-left: 0;}
 .header-center .center-right ul li.message > a{display: block;position: relative;
   height: 20px;padding-left: 0; padding-right: 0;margin-top: 2px;line-height: 20px;font-size: 20px;}
-.header-center .center-right ul li.message > a.unfold{color: #11a8fe;}
+.header-center .center-right ul li.message > a.unfold{color: #FFDE00;}
 .header-center .center-right ul li.message > a em{position: absolute;top: -5px;left: 11px;min-width: 6px;height: 12px;padding-left: 3px;padding-right: 3px;line-height: 10px;font-size: 12px;color: #fff;background-color: #e2261c;border-radius: 5px;}
 
 @media screen and (max-width: 1600px) and (max-height: 900px) {

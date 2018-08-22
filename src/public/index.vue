@@ -105,11 +105,11 @@
 </script>
 
 <style scoped>
-.container{width:100%;height:895px;}
+.container{width:100%;min-height:calc(100% - 60px);display:flex;flex-direction:column;}
 .volume{font-size: 12px;}
 .bk-wrap{position:relative;overflow:hidden;width:100%;}
 .bk-main{position:relative;overflow:hidden;margin:0 auto;width:1172px;}
-.bottom{background: #090f1f;}
+.bottom{background: #1D1D1D;}
 .bottom-center{display:flex;margin:0 auto;width:1172px;height:50px;border-bottom:1px solid #404b69;color:#586687;justify-content:space-between;align-items:center;}
 .bottom-center .item{text-align:left;-webkit-transition:all .2s;transition:all .2s;flex:1 1 auto;}
 .bottom-center .item a{color:#586687;}
@@ -160,10 +160,10 @@ a.icon-weixin:hover .wechat{display: block;}
   .center-btn-en{margin-bottom: 10px;}
 }
 .footer-main{
-  background: #090f1f;
+  background: #1D1D1D;
 }
 .footer{
-  background: #090f1f;
+  background: #1D1D1D;
   color: #586687;
 }
 .footer > p{
