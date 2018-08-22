@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="symbol-list">
     <section class="wrap">
       <section class="xmain beijing002-content">
         <div class="layui-tab layui-tab-card">
@@ -274,6 +274,8 @@
   }
 </script>
 <style scoped>
+.symbol-list{min-height: 530px;background: #100E0E;display:flex;margin-bottom:20px;flex:1;height:fit-content;}
+.wrap{width: 100%; background: #100E0E;}
 .icondown{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-up.png") no-repeat -4px -3px}
 .iconup{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-down.png") no-repeat -4px -3px}
 .idefault{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/moren.png") no-repeat -4px -3px}
@@ -286,8 +288,6 @@
 .layui-table .font-green{color: #48d417;}
 .bk-wrap{width: 100%; position: relative; overflow: hidden;}
 .bk-main{width: 1172px; margin: 0 auto; position: relative; overflow: hidden;}
-.beijing001{background-color: #0c1426;}
-.beijing001-center{display: flex; height: 360px; flex-flow: row wrap; justify-content: space-between; align-items: center;}
 
 .slider-nav{position: absolute; bottom: 22px; left: 45%;}
 .slider-nav ul{width: 170px; margin: 0 auto;}
@@ -301,17 +301,18 @@
 .layui-tab-title li:nth-child(-n+2){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
 .layui-tab-title li:nth-child(4){text-align: left;border: 0;border-left: 1px solid #404b69;}
-.layui-tab-title li.layuithis{border-bottom-color: #182138; background-color: #182138;}
+.layui-tab-title li.layuithis{border-bottom-color: #100E0E; background-color: #100E0E;}
 .layui-tab-title li:nth-child(4)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
 .layui-tab-title li:nth-child(n+5){padding: 0;}
 .layui-tab-title li:nth-child(n+5)>span{color: #becbe8;}
-.layui-tab-title li.last-li{float: right;}
+.layui-tab-title li.last-li{float: right;color:#FFFFFF;}
+.layui-tab-title li.last-li span{color:#FFFFFF;}
 
 table{border-collapse: collapse; border-spacing: 0;}
-.layui-table{width: 100%; background-color: #182138; color: #586687;}
+.layui-table{width: 100%;color: #586687;}
 .layui-table tr{transition: all .3s; -webkit-transition: all .3s;cursor: pointer}
 .layui-table th{text-align: left; font-weight: 400;}
-.layui-table tbody tr:hover{background-color: #0c142c;}
+.layui-table tbody tr:hover{background-color: #202226;}
 .layui-table[lay-skin=nob] td,
 .layui-table[lay-skin=nob] th{border: none;}
 .layui-table td,
@@ -321,7 +322,6 @@ table{border-collapse: collapse; border-spacing: 0;}
 .layui-table[lay-skin=line] th{border-width: 0 0 1px;}
 .layui-table[lay-size=sm] td,
 .layui-table[lay-size=sm] th{font-size: 12px; padding: 5px 10px;}
-.wrap{width: 100%; background: #182138; height: 530px;}
 .xmain{margin: 0 auto; width: 1200px;}
 
 /*网络信号*/
