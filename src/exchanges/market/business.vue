@@ -541,22 +541,25 @@ export default {
 .price-balance{height:44px;line-height:44px;justify-content:flex-end;color:#d6dff9;font-size:16px;margin-bottom:0;}
 .formel-label{width:70px;line-height:36px;text-align:right;color:#a1a8bb;overflow: hidden;text-overflow: ellipsis;padding-right:20px;}
 .formel-text{width:calc(100% - 90px);position:relative;color:#d6dff9;}
-.formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #2d344e;padding:0 8px;background:#2d344e;color:#d6dff9;font-size:16px;}
+.formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #100E0E;padding:0 8px;background:#100E0E;color:#d6dff9;font-size:16px;}
 .formel-textbox[readonly='readonly']{cursor:not-allowed;}
-.formel-textbox:focus{border-color:#11a8fe!important;}
-.tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:#2d344e;}
-.percent{width:calc(100% - 104px);height:4px;display:flex;background:#2d344e;margin:18px 0 18px 97px;position:relative;}
+.formel-textbox:focus{border-color:#FFDE00!important;}
+.tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:#100E0E;}
+.percent{width:calc(100% - 104px);height:4px;display:flex;background:#100E0E;margin:18px 0 18px 97px;position:relative;}
 .percent-line{width:100%;height:100%;display:flex;}
-.percent-light-line{height:100%;background:#11a8fe;position:absolute;z-index:1;}
+.percent-light-line{height:100%;background:#FFDE00;position:absolute;z-index:1;}
 .percent-circle{flex:1;position:relative;}
-.percent-circle::before,.percent-circle:last-child::after{display:block;content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#2d344e;top:-3px;left:-5px;z-index:4;}
-.percent-circle-light::before{background:#11a8fe;}
+.percent-circle::before,.percent-circle:last-child::after{
+  display:block;content:"";position:absolute;width:10px;height:10px;border-radius:50%;
+  background:#100E0E;top:-3px;left:-5px;z-index:4;
+}
+.percent-circle-light::before{background:#FFDE00;}
 .percent-circle:last-child::after{left:initial;right:-5px;}
 .percent-item,.drag-circle{width:14px;height:14px;position:absolute;background:#fff;border-radius:50%;top:-6px;left:-7px;z-index:10;cursor: pointer;display:flex;align-items:center;justify-content:center;}
-.percent-item::before,.drag-circle::before{display:block;content:"";width:10px;height:10px;border-radius:50%;background:#11a8fe;}
+.percent-item::before,.drag-circle::before{display:block;content:"";width:10px;height:10px;border-radius:50%;background:#FFDE00;}
 .drag-circle /deep/ em{position:relative;}
-.drag-circle /deep/ em i{display:flex;width:42px;height:27px;line-height:27px;text-align:center;background:#525879;color:#fff;font-size:12px;border-radius:4px;position:absolute;top:-45px;left:-26px;justify-content:center;}
-.drag-circle /deep/ em i::before{color:#525879;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
+.drag-circle /deep/ em i{display:flex;width:42px;height:27px;line-height:27px;text-align:center;background:#2F3D45;color:#fff;font-size:12px;border-radius:4px;position:absolute;top:-45px;left:-26px;justify-content:center;}
+.drag-circle /deep/ em i::before{color:#2F3D45;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
 .percent-item{z-index:5;opacity:0;transition:100ms;overflow:hidden;}
 .percent-item:hover{opacity:1;overflow:visible;}
 .percent-item-0{left:-7px;}
@@ -565,8 +568,8 @@ export default {
 .percent-item-3{left:calc(75% - 7px);}
 .percent-item-4{left:calc(100% - 7px);}
 .percent-item /deep/ em{position:relative;}
-.percent-item /deep/ em i{display:flex;width:42px;height:27px;line-height:27px;text-align:center;background:#525879;color:#fff;font-size:12px;border-radius:4px;position:absolute;top:-45px;left:-26px;justify-content:center;}
-.percent-item /deep/ em i::before{color:#525879;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
+.percent-item /deep/ em i{display:flex;width:42px;height:27px;line-height:27px;text-align:center;background:#2F3D45;color:#fff;font-size:12px;border-radius:4px;position:absolute;top:-45px;left:-26px;justify-content:center;}
+.percent-item /deep/ em i::before{color:#2F3D45;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
 .sum{width:100%;height:25px;line-height:25px;}
 .buttons{width:100%;height:36px;display:flex;text-align:center;color:#fff;font-size:16px;font-weight:bold;}
 .buttons /deep/ span{flex:1;height:36px;line-height:36px;cursor:pointer;margin-left:90px;}

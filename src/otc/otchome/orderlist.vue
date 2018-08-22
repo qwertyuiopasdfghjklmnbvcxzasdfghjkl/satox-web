@@ -118,7 +118,6 @@ import numUtils from '@/assets/js/numberUtils'
 import utils from '@/assets/js/utils'
 import buyitem from '@/otc/otchome/list/buy'
 import sellitem from '@/otc/otchome/list/sell'
-import application from './application'
 import appeal from './appeal'
 import page from '@/components/page'
 export default {
@@ -355,17 +354,6 @@ export default {
       var surplusTime = sp[0] * 60 + sp[1] * 1
       return surplusTime <= 5 * 60
     },
-    delay (item) {
-      if (item && item.to_user_apply === 1) {
-        return
-      }
-      utils.setDialog(application, {
-        id: item.id,
-        okCallback: () => {
-          this.getOrderList()
-        }
-      })
-    },
     apeal (item) { // 发起申诉
       utils.setDialog(appeal, {
         orderNumber: item.order_number,
@@ -394,16 +382,16 @@ export default {
 
 <style scoped>
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none !important;margin: 0;}
-.order-list{position:relative;margin-bottom:8px;background-color:#181b2a;}
+.order-list{position:relative;margin-bottom:8px;background-color:#222121;}
 .order-list ul {display: flex;}
 .order-list .order-list-title{padding: 0 20px;border-bottom:1px solid #404b69;}
 .order-list ul li{height: 24px;line-height: 24px;color: #8b94a9;cursor: pointer;margin: 0 20px 0 20px;display: flex;justify-content: space-between;border-bottom:1px solid #404b69;}
 .order-list .order-list-title > li{margin: 0 40px -1px 0;}
 .order-list > ul > li:hover,
-.order-list > ul > li.active{border-bottom:1px solid #11a8fe;color:#11a8fe;}
+.order-list > ul > li.active{border-bottom:1px solid #FFDE00;color:#FFDE00;}
 .order-list-content{display:flex;flex-flow:column;}
 .undone{position: relative;padding: 0 8px;margin-top:10px;}
-.undone-title{height: 24px;line-height: 24px;background-color: #2d344e;padding-left: 18px; border-bottom:1px solid #404b69;padding-right: 16px;display: flex;justify-content: space-between;}
+.undone-title{height: 24px;line-height: 24px;background-color: #333232;padding-left: 18px; border-bottom:1px solid #222121;padding-right: 16px;display: flex;justify-content: space-between;}
 .undone-title span{display:flex;align-items:center;color:#8a93a8;font-size: 12px;}
 .undone-title span::before{padding-right:2px;}
 .undone-title span.numer{margin-left:18px;width:250px;}
@@ -419,7 +407,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 .undone-title span.second em.realname{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .undone-title span.second em.username{max-width: 170px;padding-left: 0;color: #8a93a8;}
 .undone-title span.second em.realname{max-width: 216px;color: #aeb7d0;}
-.bgh{width: 8px;height: 100%;position: absolute;background-color: #11a8fe;z-index: 99;left: 8px;}
+.bgh{width: 8px;height: 100%;position: absolute;background-color: #FFDE00;z-index: 99;left: 8px;}
 .order-list ul.completed{display: block;}
 .completed-li span{display: inline-block;color: #8b94a9;font-size: 12px;line-height:22px;}
 .completed-li span.ordernumber{width: 160px}

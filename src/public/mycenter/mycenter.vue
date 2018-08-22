@@ -279,8 +279,8 @@ export default {
 </script>
 
 <style scoped>
-.mycenter h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
-.mycenter .top{background-color: #181b2a;}
+.mycenter h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
+.mycenter .top{background-color: #222121;}
 .mycenter .top .info{display: flex;height: 150px;padding-top: 30px;}
 .mycenter .top .info .info-pic{position: relative;}
 .mycenter .top .info .info-pic form{display: flex;justify-content: center;position: absolute;top: 4px;left: 30px;width: 70px;height: 70px;}
@@ -306,7 +306,7 @@ export default {
 .mycenter .top .info .info-message span a:hover,
 .mycenter .top .info .info-message label /deep/ a:hover{color: #15c9ff;}
 
-.distribution{margin-top: 8px;background-color: #181b2a;}
+.distribution{margin-top: 8px;background-color: #222121;}
 .distribution ul{padding-left: 8px;padding-right: 8px;}
 .distribution ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
 .distribution ul li span{color: #8b94a9;}

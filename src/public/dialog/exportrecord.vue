@@ -137,8 +137,8 @@ export default {
 </script>
 
 <style scoped>
-.export-record{width: 370px;background-color: #404b69;}
-.export-record-title{display: flex;justify-content: center;align-items: center;height: 30px;padding-left: 18px;padding-right: 18px;background-color: #283149;}
+.export-record{width: 370px;background-color: #222121;}
+.export-record-title{display: flex;justify-content: center;align-items: center;height: 30px;padding-left: 18px;padding-right: 18px;background-color: #333232;}
 .export-record-title h3{margin-left: auto;margin-right: -12px;font-size: 14px;color: #becbe8;}
 .export-record-title i{margin-left: auto;font-size: 12px;color: #becbe8;cursor: pointer;}
 .export-record-title i:hover{color: #11a8fe;}

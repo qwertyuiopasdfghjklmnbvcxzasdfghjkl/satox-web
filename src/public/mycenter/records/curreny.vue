@@ -179,7 +179,7 @@ export default {
 <style>
 .curreny .filtrate,
 .curreny .filtrate > div{display: flex;align-items: center;}
-.curreny .filtrate{height: 54px;background-color: #262a42;}
+.curreny .filtrate{height: 54px;background-color: #222121;}
 .curreny .filtrate > div{margin-right: 14px;}
 .curreny .filtrate .operation{margin-right: 0;cursor: pointer;}
 .curreny .filtrate .allrepeal,
@@ -207,9 +207,9 @@ export default {
 .curreny .filtrate .disabled:hover a,
 .curreny .filtrate .disabled:hover i{color: #999;}
 
-.curreny h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.curreny h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
-.curreny .record{background-color: #181b2a;}
+.curreny .record{background-color: #222121;}
 .curreny .record ul{padding-left: 8px;padding-right: 8px;}
 .curreny .record ul li{height: 32px;line-height: 32px;border-bottom: 1px solid #404b69;}
 .curreny .record ul li span{display: inline-block;font-size: 12px;color: #8b94a9;}

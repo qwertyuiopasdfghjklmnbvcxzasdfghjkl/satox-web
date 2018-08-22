@@ -36,6 +36,6 @@ export default {
 .transaction .tabcontrol {font-size: 0;line-height: 0;border-bottom: 1px solid #b1bedb;}
 .transaction .tabcontrol li{display: inline-block;height: 24px;margin-right: 40px;margin-bottom: -1px;line-height: 24px;font-size: 16px;color: #becbe8;border-bottom: 1px solid #b1bedb;cursor: pointer;}
 .transaction .tabcontrol li:hover,
-.transaction .tabcontrol li.active{color: #11a8fe;border-bottom-color: #11a8fe;}
+.transaction .tabcontrol li.active{color: #E3CB2B;border-bottom-color: #E3CB2B;}
 </style>
 

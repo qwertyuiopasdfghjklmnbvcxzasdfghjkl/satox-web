@@ -212,11 +212,11 @@ export default {
 
 <style scoped>
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {appearance:none !important;margin: 0;}
-.buy{width: 320px;background-color: #404b69;color: #aeb7d0;}
-.title{text-align: center;font-size: 14px;color: #aeb7d0;height: 24px;line-height: 24px;background-color: #29304a;text-transform: uppercase;}
+.buy{width: 320px;background-color: #222121;color: #aeb7d0;}
+.title{text-align: center;font-size: 14px;color: #aeb7d0;height: 24px;line-height: 24px;background-color: #333232;text-transform: uppercase;}
 .buy-cont{padding: 10px 30px 30px 30px;}
 .buy-cont p{display: flex;justify-content: space-between;line-height: 30px;position: relative;}
-.buy-cont p input{display: block;width: 100%;height: 30px;background-color: transparent;border: 1px solid #2e2f4d;color: #aeb7d0;}
+.buy-cont p input{display: block;width: 100%;height: 30px;background-color: transparent;border: 1px solid #54616c;color: #aeb7d0;}
 .buy-cont p input.error{border-color: #e53f3f;}
 .buy-cont p em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#11a8fe;}
 .buy-cont p em.unit{font-size: 12px;color: #11a8fe}

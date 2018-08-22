@@ -212,8 +212,8 @@ export default {
 </script>
 
 <style scoped>
-.recharge{background-color: #181b2a;}
-.recharge h3{position: relative;height: 24px;line-height: 24px;background-color: #1e2233;}
+.recharge{background-color: #222121;}
+.recharge h3{position: relative;height: 24px;line-height: 24px;background-color: #333232;}
 .recharge h3 span{margin-left: 8px;font-weight: normal;font-size: 14px;color: #cbd4ec;}
 .recharge h3 a{position: absolute;top: 0;right: 8px;height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
 .recharge h3 a:hover{color: #15c9ff;}
@@ -230,8 +230,8 @@ export default {
 .recharge ul li span.status.underway{color: #11a8fe;}
 .recharge ul li span.status.success{color: #03c087;}
 
-.withdrawal{margin-top: 8px;background-color: #181b2a;}
-.withdrawal h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.withdrawal{margin-top: 8px;background-color: #222121;}
+.withdrawal h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .withdrawal ul{padding-left: 8px;padding-right: 8px;}
 .withdrawal ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
 .withdrawal ul li span{color: #8b94a9;}

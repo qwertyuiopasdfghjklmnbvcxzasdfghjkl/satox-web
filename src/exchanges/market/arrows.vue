@@ -50,8 +50,8 @@ export default {
 
 <style scoped>
 .arrows{width:35px;height:34px;display:flex;flex-flow:column;position:absolute;top:1px;right:1px;}
-.up,.down{flex:1;height:17px;background:#2d344e;cursor:pointer;display:flex;justify-content:center;align-items:center;color:#949bad;}
-.up:hover,.down:hover{background:#36425d;color:#fff;}
+.up,.down{flex:1;height:17px;background:#100E0E;cursor:pointer;display:flex;justify-content:center;align-items:center;color:#949bad;}
+.up:hover,.down:hover{background:#333232;color:#fff;}
 .disabled .up,.disabled .down{color:#a1a8bb;cursor:not-allowed;}
 .disabled .up:hover,.disabled .down:hover{background:#2d344e;color:#a1a8bb;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {

@@ -30,29 +30,53 @@
                 <thead>
                 <tr>
                   <th></th>
-                  <th @click="sortMarket('market')">{{$t('home.home_pair')}}
-                    <em v-if="sortActive==='market'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('market')">
+                    {{$t('home.home_pair')}}
+                    <em v-if="sortActive==='market'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--市场-->
-                  <th @click="sortMarket('lastPrice')">{{$t('home.home_last_price')}}
-                    <em v-if="sortActive==='lastPrice'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('lastPrice')">
+                    {{$t('home.home_last_price')}}
+                    <em v-if="sortActive==='lastPrice'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--最新价-->
-                  <th @click="sortMarket('change24h')">{{$t('home.home_change_24h')}}
-                    <em v-if="sortActive==='change24h'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('change24h')">
+                    {{$t('home.home_change_24h')}}
+                    <em v-if="sortActive==='change24h'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--24小时涨跌-->
-                  <th @click="sortMarket('highPrice24h')">{{$t('home.home_high_24h')}}
-                    <em v-if="sortActive==='highPrice24h'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('highPrice24h')">
+                    {{$t('home.home_high_24h')}}
+                    <em v-if="sortActive==='highPrice24h'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--24h最高-->
-                  <th @click="sortMarket('lowPrice24h')">{{$t('home.home_low_24h')}}
-                    <em v-if="sortActive==='lowPrice24h'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('lowPrice24h')">
+                    {{$t('home.home_low_24h')}}
+                    <em v-if="sortActive==='lowPrice24h'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--24h最低-->
-                  <th @click="sortMarket('dealAmount')">{{$t('home.home_volume_24h')}}
-                    <em v-if="sortActive==='dealAmount'" :class="[sort==='desc' ? 'icon-arrow-down': 'icon-arrow-up']"></em>
+                  <th @click="sortMarket('dealAmount')">
+                    {{$t('home.home_volume_24h')}}
+                    <em v-if="sortActive==='dealAmount'">
+                      <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                      <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                    </em>
                   </th><!--24h成交量-->
                 </tr>
                 </thead>
                 <tbody>
                 <!--<tr v-for=" btc in getMarketFilter()" >-->
-                <tr v-for=" btc in curProducts" >
+                <tr v-for="(btc, index) in curProducts" :key="index">
                   <td><i :class="[!btc.collection?'icon_hollow':'icon_solid']" @click.stop="keep(btc)" ></i></td>
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
                     <span class="font-white">{{btc.currencySymbol}}</span><span class="font-default">/{{btc.baseSymbol}}</span>
@@ -215,25 +239,29 @@
       curProducts () {
         let val = this.filterValue.toUpperCase()
         let datas = this.products.sort((item1, item2) => {
-          if (this.sortActive === 'price') {
+          if (this.sortActive === 'lastPrice') {
             let m1 = numUtils.BN(item1.lastPrice)
             let m2 = numUtils.BN(item2.lastPrice)
             return this.sort === 'asc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
-          } else if (this.sortActive === 'fall') {
+          } else if (this.sortActive === 'change24h') {
             let m1 = numUtils.BN(item1.openingPrice).equals(0) ? numUtils.BN(0) : numUtils.BN(item1.change24h).div(item1.openingPrice)
             let m2 = numUtils.BN(item2.openingPrice).equals(0) ? numUtils.BN(0) : numUtils.BN(item2.change24h).div(item2.openingPrice)
             return this.sort === 'asc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
-          } else if (this.sortActive === 'volume') {
+          } else if (this.sortActive === 'dealAmount') {
             let m1 = numUtils.BN(item1.dealAmount)
             let m2 = numUtils.BN(item2.dealAmount)
             return this.sort === 'asc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
-          } else if (this.sortActive === 'taker') {
-            let m1 = numUtils.BN(item1.direction)
-            let m2 = numUtils.BN(item2.direction)
+          } else if (this.sortActive === 'highPrice24h') {
+            let m1 = numUtils.BN(item1.highPrice24h)
+            let m2 = numUtils.BN(item2.highPrice24h)
+            return this.sort === 'asc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
+          } else if (this.sortActive === 'lowPrice24h') {
+            let m1 = numUtils.BN(item1.lowPrice24h)
+            let m2 = numUtils.BN(item2.lowPrice24h)
             return this.sort === 'asc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
           } else {
-            let m1 = item1.currencySymbol
-            let m2 = item2.currencySymbol
+            let m1 = item1.market
+            let m2 = item2.market
             return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
           }
         })
@@ -248,7 +276,7 @@
       },
       markets () {
         // 收藏
-        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH']
+        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'AIT', 'USDT']
       },
       /* 选中数据的集合 */
       mytotalList: function () {
@@ -297,14 +325,14 @@
 .layui-tab{margin: 0 0; text-align: left!important;}
 .layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #586687;}
-.layui-tab-title li:nth-child(-n+3){border: 1px solid #404b69; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
-.layui-tab-title li:nth-child(-n+2){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
+.layui-tab-title li:nth-child(-n+5){border: 1px solid #404b69; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
+.layui-tab-title li:nth-child(-n+4){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
-.layui-tab-title li:nth-child(4){text-align: left;border: 0;border-left: 1px solid #404b69;}
+.layui-tab-title li:nth-child(6){text-align: left;border: 0;border-left: 1px solid #404b69;}
 .layui-tab-title li.layuithis{border-bottom-color: #100E0E; background-color: #100E0E;}
-.layui-tab-title li:nth-child(4)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
-.layui-tab-title li:nth-child(n+5){padding: 0;}
-.layui-tab-title li:nth-child(n+5)>span{color: #becbe8;}
+.layui-tab-title li:nth-child(6)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
+.layui-tab-title li:nth-child(n+7){padding: 0;}
+.layui-tab-title li:nth-child(n+7)>span{color: #becbe8;}
 .layui-tab-title li.last-li{float: right;color:#FFFFFF;}
 .layui-tab-title li.last-li span{color:#FFFFFF;}
 
@@ -312,6 +340,10 @@ table{border-collapse: collapse; border-spacing: 0;}
 .layui-table{width: 100%;color: #586687;}
 .layui-table tr{transition: all .3s; -webkit-transition: all .3s;cursor: pointer}
 .layui-table th{text-align: left; font-weight: 400;}
+.layui-table th em{position:relative;}
+.layui-table th em i{position:absolute;top:0px;}
+.layui-table th em i.icon-arrow-down{top:10px;}
+.layui-table th em i.active{color:#FFDE00;}
 .layui-table tbody tr:hover{background-color: #202226;}
 .layui-table[lay-skin=nob] td,
 .layui-table[lay-skin=nob] th{border: none;}

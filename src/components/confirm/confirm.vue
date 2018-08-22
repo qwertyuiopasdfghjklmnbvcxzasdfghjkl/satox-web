@@ -133,8 +133,8 @@ export default {
 </script>
 
 <style scoped>
-.dialog{display:flex;justify-content:center;flex-flow:column;background-color:#404b69;}
-.top{width:100%;height:30px;position:relative;background-color:#283149;justify-content:center;align-items:center;display:flex;color:#becbe8;}
+.dialog{display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
+.top{width:100%;height:30px;position:relative;background-color:#333232;justify-content:center;align-items:center;display:flex;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;padding:30px;}
 .content{color:#becbe8;font-size:16px;}
 .buttons{margin-top:20px;display:flex;align-items:center;}

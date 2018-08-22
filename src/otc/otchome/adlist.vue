@@ -266,11 +266,11 @@ export default {
 </script>
 
 <style scoped>
-.ad-container{position:relative;background-color:#181b2a;}
+.ad-container{position:relative;background-color:#222121;}
 .ad-tabs{display:flex;padding:0 20px;border-bottom:1px solid #404b69;}
 .ad-tabs-item{height:24px;line-height:24px;margin-right:40px;margin-bottom:-1px;color:#8b94a9;border-bottom:1px solid #404b69;cursor:pointer;}
 .ad-tabs-item:hover,
-.ad-tabs-item.active{border-bottom-color: #11a8fe;color:#11a8fe;}
+.ad-tabs-item.active{border-bottom-color: #FFDE00;color:#FFDE00;}
 .ad-list{display:flex;flex-flow:column;padding-bottom:24px;}
 .ad-list-history{padding-bottom: 0;}
 .ad-list-item{display:flex;justify-content:space-between;padding:0 20px;border-bottom:1px solid #404b69;}

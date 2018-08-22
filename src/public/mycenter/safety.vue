@@ -393,7 +393,7 @@ export default {
 }
 </script>
 <style>
-.safety h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.safety h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .safety .cellphone h3{font-size: 0;line-height: 0;text-indent: 0;}
 .safety .cellphone h3 .text{display: inline-block;height: 24px;font-size: 14px;line-height: 24px;text-indent: 8px;}
 .cellphone-tips{display: inline-block;margin-top: 6px;margin-left: 6px;}
@@ -411,12 +411,12 @@ export default {
 .secretkey .secretkey-tips{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;margin-left: 6px;}
 .secretkey .secretkey-tips .tips-icon{background-color: #e53f3f;}
 
-.password{background-color: #181b2a;}
+.password{background-color: #222121;}
 .password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px;}
 .password-level-left{font-size: 0;line-height: 0;}
 .password-level-left img{margin-right: 50px;vertical-align: middle;}
 .password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #becbe8;vertical-align: middle;}
-.password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #2d344e;border-radius: 8px;}
+.password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #100E0E;border-radius: 8px;}
 .password-level-left .state span{display: block;height: 16px;font-size: 14px;line-height: 16px;color: #fff;text-align: center;border-radius: 8px;}
 .password-level-left .state span.low{width: 70px;background-color: #e76d42;}
 .password-level-left .state span.middle{width: 140px;background-color: #e76d42;}
@@ -424,7 +424,7 @@ export default {
 .password-level-right input{min-width: 140px;height: 30px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
 .password-level-right input:hover{background-color: #15c9ff;}
 
-.google{margin-top: 8px;background-color: #181b2a;}
+.google{margin-top: 8px;background-color: #222121;}
 .google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px;}
 .google-content-left{font-size: 0;line-height: 0;}
 .google-content-left img{margin-right: 50px;vertical-align: middle;}

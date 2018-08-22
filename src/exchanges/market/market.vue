@@ -101,7 +101,7 @@ export default {
     ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getBtcValues']),
     markets () {
       // 收藏
-      return ['collection', 'BTC', 'ETH']
+      return ['collection', 'BTC', 'ETH', 'AIT', 'USDT']
     },
     tipPrice () {
       return this.getCurPrice(this.hoverItem || {})
@@ -308,20 +308,20 @@ export default {
 .list-item .font-red { /* 红 卖  deriction 2 */
   color: #e76d42;
 }
-.market{display:flex;flex-flow:column;position:relative;width:calc(100% - 20px);padding:30px 10px 10px 10px;background-color:#181b2a;}
+.market{display:flex;flex-flow:column;position:relative;width:calc(100% - 20px);padding:30px 10px 10px 10px;background-color:#222121;}
 .market-icon{position: absolute;color:#fff;font-size:24px;top:2px;right:2px;cursor: pointer;}
 .market-tip{position:absolute;padding:0 20px;top:50px;left:calc(100%);height:24px;line-height:24px;background-color:#fff;border-radius:4px;font-weight:bold;z-index:1200;white-space: nowrap;}
 .market-tip-icon{position:relative;float:left;}
 .market-tip-icon::before{position:absolute;left:-32px!important;top:4px!important;color:#fff;transform:rotate(-90deg);}
 .top{display:flex;align-items:center;}
 .top-search{display:flex;height:36px;max-height:32px;}
-.icon-search{width:20px;height:30px;margin-right:-20px;line-height:30px;color:#a1a8bb;text-align:center;}
-.top-input-box{width:100%;height:30px;padding:0;color:#fff;text-indent:20px;background-color:transparent;border-bottom:2px solid #283149;}
-.top-input-box:focus{border-bottom-color:#283149 !important;}
-.tabs{display:flex;justify-content:space-between;height:26px;max-height:22px;padding:0 30px 0 10px;border-bottom:2px solid #283149;}
-.tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#fff;text-align:center;border-bottom:2px solid #283149;cursor:pointer;}
+.icon-search{width:20px;height:30px;margin-right:-20px;line-height:30px;color:#E7E7E7;text-align:center;}
+.top-input-box{width:100%;height:30px;padding:0;color:#fff;text-indent:20px;background-color:transparent;border-bottom:2px solid #333232;}
+.top-input-box:focus{border-bottom-color:#333232 !important;}
+.tabs{display:flex;justify-content:space-between;height:26px;max-height:22px;padding:0 30px 0 10px;border-bottom:2px solid #333232;}
+.tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#fff;text-align:center;border-bottom:2px solid #333232;cursor:pointer;}
 .tabs-item:hover,
-.tabs-item.active{color:#11a8fe;border-bottom-color:#11a8fe;}
+.tabs-item.active{color:#FFDE00;border-bottom-color:#FFDE00;}
 
 .list1,
 .list{height:calc(100% - 10px);margin-top:10px;margin-right:-17px;overflow-x:hidden;overflow-y: scroll;}
@@ -330,18 +330,18 @@ export default {
 .list-panel{height:100%;overflow:hidden;}
 /* list1 */
 .list1-item{height:80px;display:flex;position:relative;margin-bottom:5px;cursor:pointer;}
-.list1-item::after{content: "";display:inline-block;height:1px;width:100%;background-color:#283149;position:absolute;bottom:-3px;left:0;}
-.list1-item:hover{background-color:#252e44;}
+.list1-item::after{content: "";display:inline-block;height:1px;width:100%;background-color:#545353;position:absolute;bottom:-3px;left:0;}
+.list1-item:hover{background-color:#333232;}
 .list1-item-active,
-.list1-item-active:hover{background-color:#36425d;}
+.list1-item-active:hover{background-color:#333232;}
 .list1-collection{position:absolute;top:10px;right:10px;color:#a1a8bb;cursor:pointer;}
-.list1-collection.collection{color:#11a8fe;}
+.list1-collection.collection{color:#FFDE00;}
 .list1-currency{display:flex;color:#fff;flex-flow:column;align-items:flex-start;justify-content:center;width:80px;margin-left:10px;}
 /*.list1-currency-icon{font-size:18px;width:22px;height:22px;background-color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .list1-currency-icon::before{color:#181b2a;}*/
 .list1-currency-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
 .list1-currency-icon img{width:100%;height:100%;}
-.list1-currency /deep/ font{margin-top:8px;display:block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;width:calc(100% - 4px);padding-right:4px;}
+.list1-currency /deep/ font{margin-top:8px;display:block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;width:calc(100% - 4px);padding-right:4px;font-weight:bold;}
 .list1-right{flex:1;display:flex;color:#fff;flex-flow:column;align-items:flex-start;justify-content:center;}
 .list1-percent{font-weight:bold;}
 .list1-price{margin:2px 0;color:#cbd4ec;}
@@ -354,15 +354,15 @@ export default {
 .list-item{height:20px;line-height:20px;cursor:pointer;display:flex;justify-content:space-between;}
 .list-header{color:#a1a8bb;}
 .list-item{height:30px;line-height:30px;color:#cbd4ec;margin-bottom:2px;font-size:12px;}
-.list-item:hover{background-color:#252e44;}
+.list-item:hover{background-color:#333232;}
 .list-item-active,
-.list-item-active:hover{background-color:#36425d;}
+.list-item-active:hover{background-color:#333232;}
 .list-item-active /deep/ .currency{color:#fff;}
 .list-item-active /deep/ .price,
 .list-item-active /deep/ .fall{font-weight:bold;}
 .list-col{font-size:12px;position:relative;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
 .list-collection{color:#a1a8bb;}
-.list-collection.collection{color:#11a8fe;}
+.list-collection.collection{color:#FFDE00;}
 .icon-arrow-down,
 .icon-arrow-up{position:relative;margin-left:4px;}
 .icon-arrow-down::before,
