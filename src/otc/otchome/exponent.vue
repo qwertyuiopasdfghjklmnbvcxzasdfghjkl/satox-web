@@ -144,7 +144,7 @@ export default {
             itemStyle: {
               normal: {
                 lineStyle: {
-                  color: '#11a8fe',
+                  color: '#DDCF6F',
                   width: 1.2
                 }
               }
@@ -159,19 +159,19 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: '#1384c7'
+                    color: '#DDCF6F'
                   }, {
                     offset: 0.25,
-                    color: '#146194'
+                    color: '#DDCF6F'
                   }, {
                     offset: 0.5,
-                    color: '#174061'
+                    color: '#DDCF6F'
                   }, {
                     offset: 0.75,
-                    color: '#182437'
+                    color: '#DDCF6F'
                   }, {
                     offset: 1,
-                    color: '#181b2a'
+                    color: '#222121'
                   }
                 ],
                 globalCoord: false
@@ -189,7 +189,7 @@ export default {
 </script>
 
 <style scoped>
-.exponent{background-color: #181b2a;}
+.exponent{background-color: #222121;}
 .exponent-top{padding: 8px 8px 30px 8px;}
 .keypoint-cont p{display: flex;justify-content: space-between;align-items: center;padding-left: 6px;padding-right: 6px;}
 .keypoint-cont p.type{height: 42px;padding-left: 0;padding-right: 0;}

@@ -341,7 +341,7 @@ export default {
 <style>
 .delegate .filtrate,
 .delegate .filtrate > div{display: flex;align-items: center;}
-.delegate .filtrate{height: 54px;background-color: #262a42;}
+.delegate .filtrate{height: 54px;background-color: #222121;}
 .delegate .filtrate > div{margin-right: 14px;}
 .delegate .filtrate .operation{margin-right: 0;cursor: pointer;}
 .delegate .filtrate .allrepeal,
@@ -369,9 +369,9 @@ export default {
 .delegate .filtrate .disabled:hover a,
 .delegate .filtrate .disabled:hover i{color: #999;}
 
-.delegate h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.delegate h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
-.delegate .record{background-color: #181b2a;}
+.delegate .record{background-color: #222121;}
 .delegate .record ul{padding-left: 8px;padding-right: 8px;}
 .delegate .record ul li{height: 32px;line-height: 32px;border-bottom: 1px solid #404b69;}
 .delegate .record ul li span{display: inline-block;font-size: 12px;color: #8b94a9;}

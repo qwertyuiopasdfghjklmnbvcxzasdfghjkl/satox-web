@@ -297,10 +297,10 @@ export default {
 </script>
 
 <style scoped>
-.depth{flex:1;display:flex;flex-flow:column;min-height:0;padding:10px 10px 10px 0;background-color:#181b2a;}
+.depth{flex:1;display:flex;flex-flow:column;min-height:0;padding:10px 10px 10px 0;background-color:#DCDCDC;}
 .top{display:flex;justify-content:space-between;min-height:24px;height:24px;margin-bottom:10px;}
 .top-layout{display:flex;justify-content:space-between;width:90px;margin-left:20px;}
-.top-stats-dots{width:22px;height:22px;border:1px solid #181b2a;cursor:pointer;}
+.top-stats-dots{width:22px;height:22px;border:1px solid #DCDCDC;cursor:pointer;}
 .top-stats-dots.ask-color{background-color:#ff7342;}
 .top-stats-dots.bid-color{background-color:#0ee7a5;}
 .top-stats-dots.askbid-color{background-color:#cbd4ec;}
@@ -317,26 +317,26 @@ export default {
 .top-stats-dots.bid-color.active::after,
 .top-stats-dots.askbid-color.active::after{border-color:#cbd4ec #181b2a #181b2a #cbd4ec;}
 
-.top-right{color:#c6cfe5;display:flex;}
+.top-right{color:#333333;display:flex;}
 .top-right /deep/ span{display:inline-block;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:14px;}
-.top-select{height:18px;line-height:18px;border-bottom:1px solid #c6cfe5;color:#c6cfe5;cursor: pointer;}
+.top-select{height:18px;line-height:18px;border-bottom:1px solid #333333;color:#333333;cursor: pointer;}
 
 .list-bid,.list-ask{width:100%;height:calc((100% - 104px) / 2);overflow-x:visible;overflow-y:hidden;display:flex;flex-flow:column;}
 .list-ask{justify-content:flex-end;}
 .list{width:calc(100% - 10px);padding-left:10px;}
 .list-overflow{overflow:auto;max-height:100%;}
 .list-item{
-  display:flex;height:20px;line-height:20px;font-size:12px;color:#d6dff9;cursor:pointer;
+  display:flex;height:20px;line-height:20px;font-size:12px;color:#333333;cursor:pointer;
   background-size:0 98%;background-repeat:no-repeat;background-position:center right;
 }
-.list-header{color:#a1a8bb!important;}
-.list-item.bid:hover,.list-item.ask:hover{background-color:#252e44;font-weight:bold;}
+.list-header{color:#333333!important;}
+.list-item.bid:hover,.list-item.ask:hover{background-color:#FFFFFF;font-weight:bold;}
 .list-item .ask-color{color:#e76d42;}
 .list-item .bid-color{color:#03c087;}
 .list-item:hover .ask-color{color:#ff7342;}
 .list-item:hover .bid-color{color:#0ee7a5;}
-.list-item.bid:hover /deep/ .amount,.list-item.ask:hover /deep/ .amount{color:#fff;}
-.list-item.bid:hover /deep/ .sum,.list-item.ask:hover /deep/ .sum{color:#fff;}
+.list-item.bid:hover /deep/ .amount,.list-item.ask:hover /deep/ .amount{color:#333333;}
+.list-item.bid:hover /deep/ .sum,.list-item.ask:hover /deep/ .sum{color:#333333;}
 .list-item.ask{background-image:url(../../assets/images/depth-bid-bg.png);}
 .list-item.bid{background-image:url(../../assets/images/depth-ask-bg.png);}
 .list-col{flex: 1 1 auto;}
@@ -345,7 +345,10 @@ export default {
 .amount{width:110px;padding-right:10px;text-align:center;}
 .sum{width:100px;text-align:right;}
 /*.sum{text-align:right;}*/
-.lastprice{position:relative;height:30px;margin:10px 0 10px 10px;font-weight:bold;font-size:18px;line-height:30px;color:#d6dff9;text-align:center;background-color:#12141f;}
+.lastprice{
+  position:relative;width:calc(100% + 10px);height:30px;margin:10px 0 10px 10px;font-weight:bold;font-size:18px;line-height:30px;
+  color:#FFFFFF;text-align:center;background-color:#172026;margin-left:0px;
+}
 .lastprice-ask{color:#ff7342;}
 .lastprice-bid{color:#0ee7a5;}
 .lastprice-aob{margin-bottom:0px;}

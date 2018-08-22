@@ -447,9 +447,9 @@ export default {
 
 <style scoped>
 .form-list{display: flex;flex-flow: column;}
-.form-item{margin-top: 8px;background-color: #181b2a;}
+.form-item{margin-top: 8px;background-color: #222121;}
 .form-item:first-of-type{margin-top: 0;}
-.form-item h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.form-item h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
 .form-flex{display: flex;justify-content: space-between;align-items: center;height: 120px;padding-left: 30px;padding-right: 30px;}
 .form-flex-left{font-size: 0;line-height: 0;}

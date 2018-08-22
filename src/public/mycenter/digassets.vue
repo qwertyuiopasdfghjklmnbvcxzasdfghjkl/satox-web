@@ -165,8 +165,8 @@ export default {
 .icon-checkbox em{color: #11a8fe;cursor: pointer;}
 .icon-checkbox em:hover{color: #15c9ff;}
 
-.digassets{background-color: #181b2a;}
-.digassets h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.digassets{background-color: #222121;}
+.digassets h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .balance_search {display: flex;justify-content: space-between;position: relative;padding-left: 8px;padding-right: 8px;border-bottom: 1px solid #404b69;}
 .balance_search .total{color: #d6dff9;height: 40px;line-height: 40px;}
 .balance_search i{position: absolute;right: 24px;top: 13px;color: #404b69;}

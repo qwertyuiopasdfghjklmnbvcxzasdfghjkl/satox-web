@@ -61,19 +61,22 @@ export default {
 </script>
 
 <style scoped>
-.business-panel{margin-bottom: 10px;background-color: #181b2a;}
+.business-panel{margin-bottom: 10px;background-color: #222121;}
 .business-panel.unfold{height: 304px;}
-.tabs{background-color: #1b1e2e;overflow: auto;}
-.tabs .tab-item{float: left;min-width: 76px;height: 38px;padding: 0 10px;margin-right: 40px;font-size: 16px;line-height: 38px;color: #cbd4ec;text-align: center;border-bottom: 2px solid #1b1e2e;cursor: pointer;}
+.tabs{background-color: #333232;overflow: auto;}
+.tabs .tab-item{
+  float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-right:2px;font-size: 16px;
+  line-height: 38px;color: #FFFFFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
+}
 .tabs .tab-item:hover,
-.tabs .tab-item.selected{color: #11a8fe;border-bottom-color: #11a8fe;}
+.tabs .tab-item.selected{color: #FFDE00;border-top-color: #FFDE00;background:#222121;}
 .tabs .arrow-item{position: relative;float: left;width: 40px;height: 40px;}
 .tabs .arrow-item em{position: absolute;top: 50%;left: 10px;width: 16px;height: 16px;margin-top: -8px;overflow: hidden;cursor: pointer;}
-.tabs .arrow-item em i{position: absolute;left: 0;font-size: 16px;color: #cbd4ec;}
+.tabs .arrow-item em i{position: absolute;left: 0;font-size: 16px;color: #FFF;}
 .tabs .arrow-item em i:first-of-type{top: -3px;}
 .tabs .arrow-item em i:last-of-type{top: 3px;}
 .tabs .arrow-item em:hover i,
-.tabs .arrow-item em.unfold i{color: #11a8fe;}
+.tabs .arrow-item em.unfold i{color: #FFDE00;}
 .tabs .procedure-item{float: right;height: 24px;margin-top: 8px;margin-right: 30px;line-height: 24px;color: #a1a8bb;}
 
 .business-panel-form{display: flex;}

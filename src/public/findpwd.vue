@@ -2,7 +2,6 @@
     <div class="login">
         <div class="login-container">
             <div class="login-left">
-                <img src="../assets/images/logo.png" alt="">
             </div>
             <div class="login-right">
                 <div class="login-right-item item-findpwd">
@@ -199,7 +198,7 @@ export default {
 
 <style scoped>
 .login{display: flex;justify-content: center;align-items: center;width: 1200px;height: calc(100% - 60px);min-height: 800px;margin-left: auto;margin-right: auto;}
-.login-container{width: 1096px;height: 600px;background-color: #181b2a;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
+.login-container{width: 1096px;height: 600px;background-color: #222121;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
 .login-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.jpg) no-repeat center center;}
 .login-left img{margin-top: 282px;}
 
@@ -213,8 +212,11 @@ export default {
 .login-right-item /deep/ .inputbox{width: auto !important;min-height: auto !important;}
 .login-right-item /deep/ .title{height: 26px;line-height: 26px;font-size: 16px;color: #d6dff9;text-align: left;}
 .login-right-item /deep/ .inputdiv{position: relative;display: block;padding-bottom: 24px;}
-.login-right-item /deep/ .input{width: 100% !important;height: 40px;margin: 0;padding: 0;font-size: 16px;line-height: normal;color: #d6dff9;background-color: transparent;border-width: 0;border-bottom: 1px solid #404b69;outline: none;}
-.login-right-item /deep/ .input:focus{background-color: transparent;}
+.login-right-item /deep/ .input{
+  width: 100% !important;height: 40px;margin: 0;padding: 0;font-size: 16px;line-height: normal;color: #d6dff9;
+  background-color: transparent;border-width: 0;border-bottom: 1px solid #404b69;outline: none;
+}
+.login-right-item /deep/ .input:focus{background-color: transparent;border-bottom-color:#E3CB2B!important;}
 .login-right-item /deep/ .input.error{background-color: transparent;border-bottom-color: #e53f3f;}
 .login-right-item /deep/ .errorinfo{position: absolute;bottom: 0;left: 0;width: auto;height: 24px;padding-top: 0;color: #e53f3f;font-style: normal;line-height: 24px;white-space: nowrap;}
 
@@ -231,8 +233,12 @@ export default {
 .login-right-item .checkbox-group span a:hover{color: #15c9ff;}
 
 .login-right-item .button-group{position: absolute;bottom:30px;left: 60px;width: 428px;}
-.login-right-item .button-group /deep/ .button{display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;font-weight: bold;font-size: 18px;color: #fff;background-color: #11a8fe;border: none;border-radius: 0;cursor: pointer;}
-.login-right-item .button-group /deep/ .button:hover{background-color: #15c9ff;}
+.login-right-item .button-group /deep/ .button{
+  display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;
+  margin-top: 0;font-weight: bold;font-size: 18px;color: #fff;background-color: #E3CB2B;border: none;
+  border-radius: 0;cursor: pointer;
+}
+.login-right-item .button-group /deep/ .button:hover{background-color: #E3CB2B;}
 .login-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .login-right-item .button-group .link{padding-top: 6px;overflow: auto;}
 .login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
@@ -240,10 +246,10 @@ export default {
 .login-right-item .button-group .link a:last-of-type{float: right;}
 .login-right-item .button-group .link a:hover{color: #15c9ff;}
 
-.login-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #404b69;}
-.login-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #404b69;}
-.login-right-item /deep/ input:-moz-placeholder{font-size: 14px;color: #404b69;}
-.login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #404b69;}
+.login-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #8a96b2;}
+.login-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #8a96b2;}
+.login-right-item /deep/ input:-moz-placeholder{font-size: 14px;color: #8a96b2;}
+.login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 
 .item-registerType{font-size:16px;color:#d6dff9;margin:20px 0;}
 .item-registerType /deep/ label{cursor: pointer}

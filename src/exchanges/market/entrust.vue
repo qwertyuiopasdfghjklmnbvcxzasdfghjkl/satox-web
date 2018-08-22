@@ -351,23 +351,27 @@ export default {
 </script>
 
 <style scoped>
-.entrust{background-color: #181b2a;}
+.entrust{background-color: #222121;}
 .entrust.unfold{height: 200px;}
-.title{position: relative;background-color: #1b1e2e;overflow: auto;}
+.title{position: relative;background-color: #333232;overflow: auto;}
 .menu-arrow{position: absolute;top: 50%;left: 10px;width: 16px;height: 16px;margin-top: -8px;overflow: hidden;cursor: pointer;}
-.menu-arrow i{position: absolute;left: 0;font-size: 16px;color: #cbd4ec;}
+.menu-arrow i{position: absolute;left: 0;font-size: 16px;color: #FFF;}
 .menu-arrow i:first-of-type{top: -3px;}
 .menu-arrow i:last-of-type{top: 3px;}
 .menu-arrow:hover i,
-.menu-arrow.unfold i{color: #11a8fe;}
-.menu-title{float: left;min-width: 76px;height: 38px;padding: 0 10px;margin-left: 40px;font-size: 16px;line-height: 38px;color: #cbd4ec;text-align: center;border-bottom: 2px solid #1b1e2e;cursor: pointer;}
+.menu-arrow.unfold i{color: #FFDE00;}
+.menu-title{
+  float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-left: 2px;font-size: 16px;
+  line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #1b1e2e;cursor: pointer;
+}
+.menu-title:first-of-type{margin-left:40px;}
 .menu-title:hover,
-.menu-title.menu-selected{color: #11a8fe;border-bottom-color: #11a8fe;}
+.menu-title.menu-selected{color: #FFDE00;border-top-color: #FFDE00;background:#222121;}
 .menu-allrepeal{display: flex;align-items: center;float: right;height: 24px;margin-top: 8px;margin-right: 10px;cursor: pointer;}
-.menu-allrepeal a{color:#11a8fe;}
-.menu-allrepeal i{padding-left: 8px;margin-top: 1px;font-size: 14px;color: #11a8fe;}
+.menu-allrepeal a{color:#FFDE00;}
+.menu-allrepeal i{padding-left: 8px;margin-top: 1px;font-size: 14px;color: #FFDE00;}
 .menu-allrepeal:hover a,
-.menu-allrepeal:hover i{color: #15c9ff;}
+.menu-allrepeal:hover i{color: #FFDE00;}
 .menu-allrepeal.disabled a,
 .menu-allrepeal.disabled i{color: #a1a8bb;cursor: not-allowed;}
 .menu-allrepeal.disabled:hover a,
@@ -380,7 +384,7 @@ export default {
 .list-item{display: flex;}
 .list-header-item{color: #a1a8bb;}
 .list-item{color: #cbd4ec;}
-.list-item:hover{background-color: #566a96;}
+.list-item:hover{background-color: #333232;}
 .list-col{flex: 1 1 auto;}
 .col-time,
 .col-etime{width: 170px;}
@@ -400,7 +404,7 @@ export default {
 .list-col div:first-of-type{float: left;max-width: calc(100% - 10px);height: 20px;font-size: 12px;line-height: 20px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .col-operate div:first-of-type,
 .col-state div:first-of-type{float: right;}
-.col-operate div:first-of-type .cancel{color: #11a8fe;cursor: pointer;}
+.col-operate div:first-of-type .cancel{color: #FFDE00;cursor: pointer;}
 .list-header-item .col-etime div:first-of-type{max-width: calc(100% - 28px);}
 .list-header-item .col-etime .tips{display: flex;justify-content: center;position: relative;float: left;width: 12px;height: 12px;margin: 4px 10px 0 6px;}
 .list-header-item .col-etime .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}

@@ -52,11 +52,14 @@ export default {
 
 <style scoped>
 .myassets-left{float: left;width: 192px;}
-.myassets-left ul{background-color: #2d344e;}
-.myassets-left ul li{padding-left: 20px;margin-top: 1px;font-size: 0;line-height: 0;color: #cbd4ec;text-align: left;background-color: #181b2a;border-left: 5px solid #2d344e;cursor: pointer;}
+.myassets-left ul{background-color: #333232;}
+.myassets-left ul li{
+    padding-left: 20px;margin-top: 1px;font-size: 0;line-height: 0;color: #cbd4ec;text-align: left;
+    background-color: #222121;border-left: 5px solid #333232;cursor: pointer;
+}
 .myassets-left ul li:first-of-type{margin-top: 0;}
 .myassets-left ul li:hover,
-.myassets-left ul li.active{color: #11a8fe;border-left-color: #11a8fe;}
+.myassets-left ul li.active{color: #FFDE00;border-left-color: #FFDE00;}
 .myassets-left ul li i,
 .myassets-left ul li span{display: inline-block;vertical-align: middle;}
 .myassets-left ul li i{font-size: 16px;}

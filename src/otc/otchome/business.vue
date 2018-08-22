@@ -45,12 +45,12 @@ export default {
 
 
 <style scoped>
-.bus{height: 110px;margin-bottom: 8px;background-color: #181b2a;}
+.bus{height: 110px;margin-bottom: 8px;background-color: #222121;}
 .bus ul{display: flex;justify-content: space-between;}
 .bus ul li{text-align: center;}
 .bus ul li.buy{width: 150px;}
-.bus ul li.sell{width: 149px;border-left: 1px solid #262a42;}
-.bus ul li > a{display: block;height: 30px;line-height: 30px;color: #aeb7d0;background-color: #1e2233;}
+.bus ul li.sell{width: 149px;border-left: 1px solid #333232;}
+.bus ul li > a{display: block;height: 30px;line-height: 30px;color: #aeb7d0;background-color: #333232;}
 .bus ul li.buy > a.current{color: #fff;background-color: #03c087;}
 .bus ul li.sell > a.current{color: #fff;background-color: #ff7342;}
 .bus-ul-li-div span{display: block;}

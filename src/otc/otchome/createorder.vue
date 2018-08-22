@@ -441,9 +441,9 @@ export default {
 </script>
 
 <style scoped>
-.createorder{width: 340px; background-color: #404b69;}
+.createorder{width: 340px; background-color: #222121;}
 .createorder.englishsize{width: 360px;}
-.createorder .title{height: 30px;line-height: 30px;text-align: center;color: #becbe8;background-color: #283149;}
+.createorder .title{height: 30px;line-height: 30px;text-align: center;color: #becbe8;background-color: #333232;}
 .createorder .cont{padding: 20px 30px 20px 30px;}
 .cont-item .row{display: flex;justify-content: space-between;align-items: center;}
 .cont-item label{display: block;height: 24px;line-height: 24px;font-size: 12px;color: #becbe8;}
@@ -458,14 +458,17 @@ export default {
 .cont-item label.label-tips .tips-icon:hover + .tips-text{display: block;}
 .cont-item .value{position: relative;}
 .cont-item.tradetype .value{display: flex; justify-content: space-between;align-items: center;height: 24px;}
-.cont-item .value select{height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #becbe8;background-position: right 4px center;border: 1px solid #283149;cursor: pointer;}
+.cont-item .value select{
+  height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #becbe8;background-position: right 4px center;
+  border: 1px solid #54616c;cursor: pointer;
+}
 .cont-item.exchange .value select{width: 124px;}
 .cont-item.timelimit .value select{position: relative; z-index: 1;width: 80px;}
 .cont-item .value span{font-size: 12px;color: #becbe8;}
 .cont-item.tradetype .value span{cursor: pointer;}
 .cont-item.tradetype .value span i{padding-right: 4px;color: #11a8fe;}
 .cont-item.tradetype .value span i:hover{color: #15c9ff;}
-.cont-item .value input{box-sizing: border-box;width: 100%;height: 30px;padding-left: 12px;padding-right: 12px;font: 12px/normal 'Microsoft YaHei';color: #becbe8;background-color: transparent;border: 1px solid #283149;}
+.cont-item .value input{box-sizing: border-box;width: 100%;height: 30px;padding-left: 12px;padding-right: 12px;font: 12px/normal 'Microsoft YaHei';color: #becbe8;background-color: transparent;border: 1px solid #54616c;}
 .cont-item .value input.error{border-color: #e53f3f;}
 .cont-item.premium .value input,
 .cont-item.dispose .value input,

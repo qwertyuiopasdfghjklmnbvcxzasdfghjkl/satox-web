@@ -89,12 +89,13 @@ export default {
 </script>
 
 <style scoped>
-.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#404b69;}
-.top{width:100%;height:30px;position:relative;background-color:#283149;}
+.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
+.top{width:100%;height:30px;position:relative;background-color:#333232;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
 .icon-close:hover{color: #11a8fe;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
+.form /deep/ .input{background:#100E0E;border-color:#54616c;}
 .captcha /deep/ em.errorinfo{white-space:nowrap!important;}
 .captcha,.bottom{display:flex;justify-content:space-between;width:272px;}
 .code-image{width:100px;height:32px;cursor:pointer;}

@@ -139,21 +139,21 @@ export default {
 </script>
 
 <style scoped>
-.appeal{width: 400px;background-color: #404b69;}
-.appeal h3{position: relative;height: 30px;font-weight: normal;font-size: 14px;line-height: 30px;color: #cbd4ec;text-align: center;background-color: #283149;}
+.appeal{width: 400px;background-color: #222121;}
+.appeal h3{position: relative;height: 30px;font-weight: normal;font-size: 14px;line-height: 30px;color: #cbd4ec;text-align: center;background-color: #333232;}
 .appeal h3 a{position: absolute;right: 8px;top: 8px;color: #becbe8;}
 .appeal h3 a:hover{color: #11a8fe;}
 
 .appeal-cont{padding: 10px 10px 20px 10px;}
-.explain{padding: 10px;background-color: #525e7f;border-radius: 4px;}
+.explain{padding: 10px;background-color: #333232;border-radius: 4px;}
 .explain p{padding-bottom: 10px;color: #becbe8;}
 .explain p:last-of-type{padding-bottom: 0;}
 .question{padding-top: 10px;}
 .question-row label{display: block;height: 24px;line-height: 24px;color: #becbe8;}
 .question-row label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
-.question-row select{width: 100%;height: 30px;padding-left: 4px;padding-right: 20px;color: #becbe8;background-position: right 4px center;border:1px solid #283149;cursor: pointer;}
+.question-row select{width: 100%;height: 30px;padding-left: 4px;padding-right: 20px;color: #becbe8;background-position: right 4px center;border:1px solid #54616c;cursor: pointer;}
 .question-row select.error{border-color: #e53f3f;}
-.question-row textarea{box-sizing: border-box;width: 100%;height: 72px;padding: 5px;font: 12px/20px serif;color: #becbe8;vertical-align: top;background-color: transparent;border:1px solid #283149;resize: none;}
+.question-row textarea{box-sizing: border-box;width: 100%;height: 72px;padding: 5px;font: 12px/20px serif;color: #becbe8;vertical-align: top;background-color: transparent;border:1px solid #54616c;resize: none;}
 .question-row textarea.error{border-color: #e53f3f;}
 .question-row textarea::-webkit-input-placeholder{color: #999;}
 .question-row textarea::-moz-placeholder{color: #999;}

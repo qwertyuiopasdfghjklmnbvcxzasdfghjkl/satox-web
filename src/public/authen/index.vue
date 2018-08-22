@@ -49,8 +49,8 @@ export default {
 </script>
 
 <style scoped>
-.authentication{background-color: #181b2a;}
-.authentication h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #1e2233;}
+.authentication{background-color: #222121;}
+.authentication h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .authentication .tab{padding: 16px 8px 0 8px;}
 .authentication .tab-list{font-size: 0;line-height: 0;border-bottom: 1px solid #404b69;}
 .authentication .tab-item{display: inline-block;height: 24px;margin-right: 20px;margin-bottom: -1px;font-size: 16px;line-height: 24px;color: #becbe8;border-bottom: 1px solid #404b69;cursor: pointer;}

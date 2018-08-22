@@ -112,18 +112,18 @@ export default {
 </script>
 
 <style scoped>
-.lastdeal{height:334px;padding:10px;background-color:#181b2a;margin-top:10px;}
-.title{height:24px;line-height:24px;font-size:16px;margin-bottom:10px;color:#cbd4ec;text-indent:10px;}
+.lastdeal{height:334px;padding:10px;background-color:#DCDCDC;margin-top:10px;}
+.title{height:24px;line-height:24px;font-size:16px;margin-bottom:10px;color:#333;text-indent:10px;}
 .container{height:calc(100% - 54px);overflow:hidden;}
 .list{height:100%;margin-right:-17px;overflow-x:hidden;overflow-y:scroll;}
 .list::-webkit-scrollbar{width:17px;}
 .list-header-item,
 .list-item{height:20px;line-height:20px;display:flex;font-size:12px;}
-.list-header-item{color:#a1a8bb;}
-.list-item{color:#d6dff9;cursor:default;}
+.list-header-item{color:#333;}
+.list-item{color:#333;cursor:default;}
 .price.bid{color:#e76d42;}
 .price.ask{color:#03c087;}
-.list-item:hover{background-color:#252e44;font-weight:bold;color:#fff;}
+.list-item:hover{background-color:#FFF;font-weight:bold;color:#333;}
 .list-item:hover .price.bid{color:#ff7342;}
 .list-item:hover .price.ask{color:#0ee7a5;}
 .list-col{flex: 1 1 auto;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}

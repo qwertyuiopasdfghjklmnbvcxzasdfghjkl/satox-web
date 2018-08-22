@@ -201,7 +201,7 @@ export default {
 
 <style scoped>
 .twoverify{display: flex;justify-content: center;align-items: center;width: 1200px;height: calc(100% - 60px);min-height: 800px;margin-left: auto;margin-right: auto;}
-.twoverify-container{width: 1096px;height: 600px;background-color: #181b2a;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
+.twoverify-container{width: 1096px;height: 600px;background-color: #222121;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
 .twoverify-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.jpg) no-repeat center center;}
 .twoverify-left img{margin-top: 282px;}
 
@@ -237,8 +237,11 @@ export default {
 .twoverify-right-item .checkbox-group span a:hover{color: #15c9ff;}
 
 .twoverify-right-item .button-group{position: absolute;bottom: 40px;left: 60px;width: 428px;}
-.twoverify-right-item .button-group /deep/ .button{display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;font-weight: bold;font-size: 18px;color: #fff;background-color: #11a8fe;border: none;border-radius: 0;cursor: pointer;}
-.twoverify-right-item .button-group /deep/ .button:hover{background-color: #15c9ff;}
+.twoverify-right-item .button-group /deep/ .button{
+  display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;
+  font-weight: bold;font-size: 18px;color: #fff;background-color: #E3CB2B;border: none;border-radius: 0;cursor: pointer;
+}
+.twoverify-right-item .button-group /deep/ .button:hover{background-color: #E3CB2B;}
 .twoverify-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .twoverify-right-item .button-group .link{padding-top: 6px;overflow: auto;}
 .twoverify-right-item .button-group .link a{height: 24px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
@@ -253,8 +256,8 @@ export default {
 
 .verifyCode{position: relative;}
 .verifyCode /deep/ ul{display:flex;width:100%;height:41px;position:absolute;top:34px;left:0px;justify-content:space-between;}
-.verifyCode /deep/ ul li{display:flex;margin-right:8px;border-bottom:1px solid #404b69;height:100%;flex:1;font-size:24px;font-weight:bold;color:#CBD4EC;align-items:center;justify-content:center;}
-.verifyCode /deep/ ul li.active{border-bottom-color:#11a8fe;}
+.verifyCode /deep/ ul li{display:flex;margin-right:8px;border-bottom:1px solid #54616c;height:100%;flex:1;font-size:24px;font-weight:bold;color:#CBD4EC;align-items:center;justify-content:center;}
+.verifyCode /deep/ ul li.active{border-bottom-color:#E3CB2B;}
 .verifyCode /deep/ ul li:last-child{margin-right:0;}
 .sendVerifyCode{height:34px;line-height:34px;cursor:pointer;position:absolute;z-index:10;right:0;top:0;color:#11a8fe;}
 .sendVerifyCode:hover{color:#15c9ff;}

@@ -60,13 +60,16 @@ export default {
 </script>
 
 <style scoped>
-.nickname-dialog{width: 400px;background-color: #404b69;}
-.nickname-dialog-title{height: 30px;line-height: 30px;color: #becbe8;text-align: center;background-color: #283048;}
+.nickname-dialog{width: 400px;background-color: #222121;}
+.nickname-dialog-title{height: 30px;line-height: 30px;color: #becbe8;text-align: center;background-color: #333232;}
 .nickname-dialog-form{padding: 30px;}
 .nickname-dialog-row:last-of-type{padding-top: 10px;font-size: 0;line-height: 0;text-align: center;}
 .nickname-dialog-label{display: block;min-height: 24px;margin-bottom: 10px;line-height: 24px;color: #becbe8;}
 .nickname-dialog-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
-.nickname-dialog-input{display: block;width: 330px;height: 28px;color:#becbe8;background-color: transparent;border: 1px solid #2e3852;}
+.nickname-dialog-input{
+  display: block;width: 330px;height: 28px;color:#becbe8;background-color: transparent;border: 1px solid #54616c;
+  background:#100E0E;
+}
 .nickname-dialog-input.error{border-color: #e53f3f;}
 .nickname-dialog-prompt{display: block;height: 30px;line-height: 30px;color: #e53f3f;}
 .nickname-dialog-confirm,

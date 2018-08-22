@@ -367,7 +367,10 @@ export default {
 </script>
 <style scoped>
 .pendorder{position: relative;}
-.pendorder-title{display: flex;justify-content: space-between;align-items: center;height: 50px;padding-left: 16px;padding-right: 16px;margin-bottom: 8px;background-color: #181b2a;}
+.pendorder-title{
+  display: flex;justify-content: space-between;align-items: center;height: 50px;padding-left: 16px;padding-right: 16px;
+  margin-bottom: 8px;background-color: #222121;
+}
 .pendorder-title span{font-size: 12px;color: #aeb7d0;}
 .pendorder-title span.quantity,
 .pendorder-title span.type,
@@ -398,7 +401,7 @@ export default {
 .notice-dialog-cont p a{color: #11a8fe;text-decoration: underline;}
 .notice-dialog-cont p a:hover{color: #15c9ff;}
 
-.list{height: 540px;background-color: #181b2a;}
+.list{height: 540px;background-color: #222121;}
 .list li{display: flex;}
 .list-title{align-items: center;height: 24px;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #404b69;}
 .list-title span{font-size: 12px;color: #8b94a9;}
@@ -409,8 +412,8 @@ export default {
 .list-title span.price{width: 130px;}
 .list-title span.lave{width: 120px;}
 .list-item{align-items: center;height: 62px;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #fff;}
-.list-item:nth-of-type(odd){background-color: #1e2233;border-bottom-color: #181b2a;}
-.list-item:nth-of-type(even){background-color: #181b2a;border-bottom-color: #1e2233;}
+.list-item:nth-of-type(odd){background-color: #333232;border-bottom-color: #333232;}
+.list-item:nth-of-type(even){background-color: #222121;border-bottom-color: #222121;}
 .list-item span{margin-right: 20px;}
 .list-item span.name{display: flex;align-items: center;width: 120px;}
 .list-item span.trust{width: 110px;}

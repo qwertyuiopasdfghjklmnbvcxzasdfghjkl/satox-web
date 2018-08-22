@@ -230,15 +230,15 @@ export default {
 .list-item{display: flex;font-size: 12px;line-height: 20px;}
 .list-header-item{color: #a1a8bb;}
 .list-item{color: #cbd4ec;}
-.list-item:hover{background-color: #252e44;}
+.list-item:hover{background-color: #333232;}
 .list-col{flex: 1 1 auto;padding-right: 10px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .col-currency{width: 140px;}
 .col-sum,
 .col-balance,
 .col-fsum{width: 240px;text-align: right;}
 .col-operate{width: 240px;text-align: right;}
-.col-operate a{margin-left: 10px;font-size: 12px;color: #11a8fe;}
-.col-operate a:hover{color: #15c9ff;}
+.col-operate a{margin-left: 10px;font-size: 12px;color: #FFDE00;}
+.col-operate a:hover{color: #FFDE00;}
 .col-operate a.disabled{color: #ababab;cursor: not-allowed;}
 .col-operate a.disabled:hover{color: #ababab;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {

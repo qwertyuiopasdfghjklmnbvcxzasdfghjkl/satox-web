@@ -51,7 +51,7 @@
           <div class="container-transform" :class="{depth:canvasStyles.active==='depth'}">
             <div ref="canvas" class="canvas">
               <div v-if="showLoading" class="loading">
-                <img width="100" height="100" src="../../assets/images/loading.gif"/>
+                <loading></loading>
               </div>
             </div>
             <div ref="depth" class="depth">
@@ -67,6 +67,7 @@ import KLineChart from '@/assets/js/kline.draw'
 import DepthChart from '@/assets/js/kline.depth'
 import fullscreen from '@/assets/js/fullscreen'
 import numUtils from '@/assets/js/numberUtils'
+import loading from '@/components/loading'
 import coininfo from './coininfo'
 import { mapGetters, mapActions } from 'vuex'
 let chartSettings = window.localStorage.getItem('chartSettings')
@@ -90,7 +91,8 @@ export default {
     }
   },
   components: {
-    coininfo
+    coininfo,
+    loading
   },
   data () {
     return {
@@ -316,6 +318,11 @@ export default {
         hideDepth: true,
         scale: 3,
         fixedNumber: 8,
+        ThemeColor: {
+          Background: '#333232',
+          Grid0: '#54616c',
+          Grid1: '#54616c'
+        },
         onToolCallback: () => {
           this.drawtoolsActive = 'CrossCursor'
         }
@@ -387,7 +394,7 @@ export default {
 </script>
 
 <style scoped>
-.market{display:flex;flex:1;justify-content:center;align-items:center;width:100%;background:#181b2a;position:relative;}
+.market{display:flex;flex:1;justify-content:center;align-items:center;width:100%;background:#333232;position:relative;}
 .market.marketfull{position:absolute;width:100%;height:100vh;z-index:9999;top:0;left:0;}
 .left{width:44px;height:100%;margin-right:6px;overflow:hidden;}
 .right{display:flex;flex-flow:column;flex:1;height:100%;}
@@ -395,7 +402,7 @@ export default {
 .tools{width:100%;height:36px;display:flex;align-items:center;font-size:18px;}
 .menus{display:flex;}
 .dropdown{
-  min-width:60px;line-height:24px;height:24px;border:1px solid #636e87;margin-right:4px;background:#182138;font-size:14px;
+  min-width:60px;line-height:24px;height:24px;border:1px solid #636e87;margin-right:4px;background:transparent;font-size:14px;
   display:flex;text-align:center;position:relative;text-transform:none;cursor:pointer;
 }
 .dropdown-txt{width:calc(100% - 14px);color:#d6dff9;border-right:1px solid #636e87;padding:0 4px;}
@@ -408,16 +415,16 @@ export default {
    -webkit-transform:rotate(-180deg);-o-transform:rotate(-180deg);
 }
 .dropdown-list{
-  position:absolute;z-index:10;top:26px;left:-1px;background:#182138;width:150px;border:1px solid #636e87;
+  position:absolute;z-index:10;top:26px;left:-1px;background:#333232;width:150px;border:1px solid #636e87;
   display:flex;flex-flow:column;
 }
 .dropdown-item{
   width:100%;height:24px;line-height:24px;text-align:left;text-indent:10px;text-transform:none;color:#d6dff9;
 }
-.dropdown-item.selected,.dropdown-item:hover{background:#404b69;}
-.fullscreen{display:flex;justify-content:center;align-items:center;cursor:pointer;color:#d6dff9;background:#182138;width:24px;height:24px;border:1px solid #636e87;}
+.dropdown-item.selected,.dropdown-item:hover{background:#222121;}
+.fullscreen{display:flex;justify-content:center;align-items:center;cursor:pointer;color:#d6dff9;background:transparent;width:24px;height:24px;border:1px solid #636e87;}
 .fullscreen:hover,.dropdown:hover,.dropdown.active{}
-.container{width:calc(100% - 12px);height:calc(100% - 46px);overflow:hidden;border:1px solid #313c5a;}
+.container{width:calc(100% - 12px);height:calc(100% - 46px);overflow:hidden;border:1px solid #54616c;}
 .container-transform{width:200%;height:100%;display:flex;transition:300ms;}
 .container-transform.depth{margin-left:-100%;}
 .canvas{display:flex;flex:1;position:relative;overflow:hidden;}

@@ -194,7 +194,7 @@ export default {
 <style scoped>
 .important-tips{position:absolute;bottom:-18px;left:0px;font-size:12px;line-height:22px;background-color:#343d53;color:#666;padding:0 4px;}
 .moreinfo{padding: 8px;}
-.depositBox{background-color: #2d344e;border-radius: 4px;}
+.depositBox{background-color: #333232;border-radius: 4px;}
 .depositBox .filed{width: 100%;}
 .depositBox .filed span{display: inline-block;width: 25px;height: 25px;margin-right: 5px;background: none no-repeat left center;}
 .depositBox .filed span.icon_copy{background-image: url(../../assets/images/icon_copy.png);}
