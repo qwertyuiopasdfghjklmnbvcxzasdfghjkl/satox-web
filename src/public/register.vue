@@ -47,7 +47,7 @@
                         </span>
                     </div>
                     <div class="button-group">
-                        <buttonbox :text="$t('login_register.register')" @click="register"/><!--注册-->
+                        <buttonbox :class="{disabled:locked||gtLocked}" :text="$t('login_register.register')" @click="register"/><!--注册-->
                         <div class="link">
                             <a href="javascript:;" @click="loginDialog">{{$t('login_register.Already_registered_Login').format('NEWTON')}}<!--已有NEWTON账号，请登录--></a>
                         </div>
@@ -73,6 +73,7 @@ export default {
   data () {
     return {
       locked: false,
+      gtLocked: false,
       checked: false,
       disabled: false,
       formData: {
@@ -147,6 +148,7 @@ export default {
         if (this.locked) {
           return
         }
+        this.gtLocked = true
         utils.gtValidate((gtParams) => {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
@@ -164,6 +166,8 @@ export default {
             this.locked = false
             Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
           })
+        }, () => {
+          this.gtLocked = false
         })
       })
     },

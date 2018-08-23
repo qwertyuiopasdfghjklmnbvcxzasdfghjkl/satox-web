@@ -25,7 +25,7 @@
                         </ul>
                     </div>
                     <div class="button-group">
-                        <buttonbox :text="$t('login_register.login')" @click="login"/><!--登录-->
+                        <buttonbox :class="{disabled:locked}" :text="$t('login_register.login')" @click="login"/><!--登录-->
                     </div>
                 </div>
             </div>
@@ -143,6 +143,7 @@ export default {
           verifyCode: this.formData.verifyCode,
           username: this.formData.username
         }
+        this.locked = true
         myApi[m](formData, (apiToken) => {
           window.localStorage.removeItem('$twoverify_username')
           this.locked = false
