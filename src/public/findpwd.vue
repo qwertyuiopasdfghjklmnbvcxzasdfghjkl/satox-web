@@ -33,8 +33,8 @@
                     </template>
                     <inputbox name="username" ref="email" v-show="registerType==0" :maxLength="255" v-model="formData.username" v-validate="'required|email'" :msgs="msgs.username" :errs="errors" :title="$t('otc_exchange.otc_exchange_Email')" :placeholder="$t('login_register.email')"/>
                     <div class="button-group">
-                        <buttonbox v-if="registerType==1" :text="$t('exchange.exchange_determine')" @click="updatePwd"/><!--确定-->
-                        <buttonbox v-if="registerType==0" :text="$t('login_register.Next_step')" @click="next"/><!--下一步-->
+                        <buttonbox :class="{disabled:locked||gtLocked}" v-if="registerType==1" :text="$t('exchange.exchange_determine')" @click="updatePwd"/><!--确定-->
+                        <buttonbox :class="{disabled:locked||gtLocked}" v-if="registerType==0" :text="$t('login_register.Next_step')" @click="next"/><!--下一步-->
                     </div>
                 </div>
             </div>
@@ -57,6 +57,7 @@ export default {
   data () {
     return {
       locked: false,
+      gtLocked: false,
       registerType: 1,
       mobileFormData: {
         phoneNumber: '',
@@ -114,6 +115,7 @@ export default {
         if (!validResult) {
           return
         }
+        this.gtLocked = true
         utils.gtValidate((gtParams) => {
           this.locked = true
           let formData = {}
@@ -133,6 +135,8 @@ export default {
             this.locked = false
             Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
           })
+        }, () => {
+          this.gtLocked = false
         })
       })
     },
@@ -144,6 +148,7 @@ export default {
         if (!validResult) {
           return
         }
+        this.gtLocked = true
         utils.gtValidate((gtParams) => {
           this.locked = true
           let formData = {}
@@ -165,6 +170,8 @@ export default {
             this.locked = false
             Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
           })
+        }, () => {
+          this.gtLocked = false
         })
       })
     },

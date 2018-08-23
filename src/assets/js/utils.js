@@ -433,10 +433,10 @@ utils.getCheckedTimeRange = getCheckedTimeRange
 
 /**
  * 极速验证
- * @param {*} okCallback 
+ * @param {*} okCallback
  */
 let isGtDialogOpen = false
-const gtValidate = function (okCallback) {
+const gtValidate = function (okCallback, endCallback) {
   if (isGtDialogOpen) {
     return
   }
@@ -447,6 +447,7 @@ const gtValidate = function (okCallback) {
     })
     captcha.onSuccess(() => {
       isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
       let gtParams = captcha.getValidate()
       if (typeof okCallback === 'function') {
         okCallback({
@@ -456,11 +457,13 @@ const gtValidate = function (okCallback) {
         })
       }
     })
-    captcha.onClose(() => {
+    captcha.onClose && captcha.onClose(() => {
       isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
     })
     captcha.onError(() => {
       isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
     })
   }
   // 调用 initGeetest 初始化参数

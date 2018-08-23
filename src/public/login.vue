@@ -12,7 +12,7 @@
                     <inputbox name="email" ref="email" v-model="formData.username" v-validate="'required'" :msgs="msgs.username" :errs="errors" :title="`${$t('otc_exchange.otc_exchange_Email')}/${$t('account.user_center_phone')}`" :placeholder="$t('public0.public246')" :autocomplete="'on'" @keyupEnter="login"/><!--邮箱/手机号-->
                     <inputbox type="password" name="password" v-model="formData.password" v-validate="'required'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')" :autocomplete="'on'" @keyupEnter="login"/><!--密码-->
                     <div class="button-group">
-                        <buttonbox :text="$t('login_register.login')" @click="login"/><!--登录-->
+                        <buttonbox :class="{disabled:locked||gtLocked}" :text="$t('login_register.login')" @click="login"/><!--登录-->
                         <div class="link">
                             <a href="javascript:;" @click="registerDialog">{{$t('exchange.exchange_not_account')}}<!--立即注册--></a>
                             <a href="javascript:;" @click="sendemailDialog">{{$t('login_register.forget_password')}}<!--忘记密码--></a>
@@ -40,6 +40,7 @@ export default {
   data () {
     return {
       locked: false,
+      gtLocked: false,
       formData: {
         username: '',
         password: ''
@@ -71,6 +72,7 @@ export default {
         if (this.locked) {
           return
         }
+        this.gtLocked = true
         utils.gtValidate((gtParams) => {
           this.locked = true
           let formData = {}
@@ -104,6 +106,8 @@ export default {
               console.log(this.formData.username)
             }
           })
+        }, () => {
+          this.gtLocked = false
         })
       })
     },
