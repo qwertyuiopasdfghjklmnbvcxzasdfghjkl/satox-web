@@ -393,7 +393,7 @@ export default {
 .pendorder-title span.operate .werben:hover{color: #15c9ff;border-color: #15c9ff;}
 
 .notice-dialog{position: absolute;top: 58px;left: 0;display: flex;justify-content: center;align-items: center;width: 892px;height: 540px;background-color: rgba(0, 0, 0, 0.5);}
-.notice-dialog-container{position: relative;width: 732px;padding: 12px 24px;background-color: #262a42;border-radius: 4px;}
+.notice-dialog-container{position: relative;width: 732px;padding: 12px 24px;background-color: #222121;border-radius: 4px;}
 .notice-dialog-close{position: absolute;top: 10px;right: 10px;}
 .notice-dialog-close:hover{color: #11a8fe;}
 .notice-dialog-cont p{min-height: 24px;padding: 12px 0 12px 24px;line-height: 24px;color: #ececec;}
