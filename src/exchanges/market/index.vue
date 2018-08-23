@@ -333,6 +333,8 @@ export default {
 
       // 深度图
       this.depthChart = DepthChart({
+        gridLineColor: '#54616c',
+        tpFillStyle: '#333232',
         container: this.$refs.depth
       })
     })
