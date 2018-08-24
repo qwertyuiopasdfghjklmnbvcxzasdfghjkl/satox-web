@@ -331,7 +331,7 @@ export default {
 .message-panel-operation span.disabled:hover{color: #999;}
 
 .header{height: 60px;}
-.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%;background:url(../assets/images/bj-header.png) no-repeat;background-size:100%;}
+.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%;background:url(../assets/images/bj-header.png) no-repeat;background-size:100% 100%;}
 .header-center{display: flex;justify-content: space-between;align-items: center;width: 1200px;height: 60px;margin-left: auto;margin-right: auto;transition: width .2s ease-out;}
 .header-center.full-screen{box-sizing: border-box;min-width:1200px;width: 100%;padding-left: 20px;padding-right: 10px;}
 .header-center .center-left{display: flex;align-items: center;}
