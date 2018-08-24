@@ -43,9 +43,9 @@
 <style scoped>
   .bk-wrap{position:relative;overflow:hidden;width:100%;}
   .bk-main{position:relative;overflow:hidden;margin:0 auto;width:100%;}
-  .index-slider{background: #0c1426;}
+  .index-slider{background: #100E0E;min-width:1200px;}
   .index-slider .index-content{
-    height: 395px;
+    height: auto;
   }
   .index-content .slider-item{
      background-size: initial;
