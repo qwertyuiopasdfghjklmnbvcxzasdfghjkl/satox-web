@@ -76,9 +76,15 @@ export default {
   computed: {
     ...mapGetters(['getApiToken', 'getUSDCNY', 'getBTCValuation', 'getCoinSign', 'getUserInfo']),
     BTCValuation () {
+      if (!this.getApiToken) {
+        return numUtils.BN(0).toFixed(this.fixedNumber)
+      }
       return numUtils.BN(this.getBTCValuation).toFixed(this.fixedNumber).toMoney()
     },
     USDCNY () {
+      if (!this.getApiToken) {
+        return numUtils.BN(0).toFixed(2)
+      }
       return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2)
     },
     fromWallet () {
