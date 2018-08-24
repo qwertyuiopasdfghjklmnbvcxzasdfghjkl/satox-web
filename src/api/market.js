@@ -2,6 +2,7 @@
  * 交易市场api接口
  */
 import api from '@/api'
+import uuid from 'uuid/v1'
 
 let domain = process.env.NODE_ENV === 'development' ? `` : ''
 let market = {}
@@ -259,6 +260,9 @@ market.removeCollection = removeCollection
 
 // 市场买入和卖出
 const marketBuyorSell = function (data, success, error) {
+  if (data) {
+    data.nonce = uuid()
+  }
   api.post(`${domain}api/v2/account/entrust`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
