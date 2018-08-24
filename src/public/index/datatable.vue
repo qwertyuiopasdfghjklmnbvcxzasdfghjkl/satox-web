@@ -276,7 +276,7 @@
       },
       markets () {
         // 收藏
-        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'AIT', 'USDT']
+        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'ATN', 'USDT']
       },
       /* 选中数据的集合 */
       mytotalList: function () {
