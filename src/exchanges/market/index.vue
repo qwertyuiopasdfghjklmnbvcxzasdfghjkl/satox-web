@@ -328,6 +328,7 @@ export default {
         }
       })
       this.kLineChart && this.kLineChart.switch_indic(this.quotas.active)
+      this.kLineChart && this.kLineChart.switch_language(this.langs[this.getLang])
       window.addEventListener('click', this.wclick, false)
       window.addEventListener('resize', this.resize, false)
 
