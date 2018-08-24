@@ -126,6 +126,10 @@ export default {
   methods: {
     ...mapActions(['addEvents', 'removeEvents']),
     balanceEvent (res) {
+      // 已退出登录后，返回的数据不在处理。
+      if (!this.getApiToken) {
+        return
+      }
       if (res && res.type === 'updateData') {
         let temp = {}
         res.data.forEach((item) => {

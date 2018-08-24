@@ -249,6 +249,10 @@ export default {
   methods: {
     ...mapActions(['setEntrustPrices', 'addEvents', 'removeEvents', 'tiggerEvents']),
     extrustEvent (res) {
+      // 已退出登录后，返回的数据不在处理。
+      if (!this.getApiToken) {
+        return
+      }
       if (res && res.type === 'current') {
         // 当前委托
         this.cdatas = res.data
