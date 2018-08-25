@@ -441,7 +441,7 @@ export default {
 </script>
 
 <style scoped>
-.createorder{width: 340px; background-color: #222121;}
+.createorder{width: 340px; background-color: #222121;max-height:calc(100% - 20px);overflow-y:auto;}
 .createorder.englishsize{width: 360px;}
 .createorder .title{height: 30px;line-height: 30px;text-align: center;color: #becbe8;background-color: #333232;}
 .createorder .cont{padding: 20px 30px 20px 30px;}
