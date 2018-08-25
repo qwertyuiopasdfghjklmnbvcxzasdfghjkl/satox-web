@@ -47,7 +47,6 @@
                             <div class="opreat f-right ng-binding">
                               {{$t('otc_exchange.otc_exchange_operating')}}<!--操作-->
                             </div>
-                            <div class="action f-right"></div>
                         </div>
                     </li>
                     <li v-for="(data, index) in filterDatas" :key="data.accountId">
@@ -187,8 +186,11 @@ export default {
 .accountInfo-lists li a{color: #eeba42;}
 .accountInfo-lists li a:hover a{text-decoration: underline;}
 .accountInfo-lists li.bg{background-color: rgba(232,179,66,0.05);}
-.accountInfo-lists li .items{overflow: hidden;height: 40px;line-height: 40px;}
-.accountInfo-lists li .items>div{float: left;font-size: 14px;color: #d6dff9;text-align: left;box-sizing: border-box;height: 40px; line-height: 40px;display: flex;align-items: center;}
+.accountInfo-lists li .items{overflow: hidden;min-height: 40px;display:flex;}
+.accountInfo-lists li .items>div{
+  font-size: 14px;color: #d6dff9;text-align: left;box-sizing: border-box;min-height: 40px;line-height:22px;
+  display: flex;align-items: center;white-space:normal;word-break:break-all;padding:0 4px;
+}
 .accountInfo-lists li .items>div .btn{display: inline-block;height: 22px;padding: 0;line-height: 22px;font-size: 24px;color: #11a8fe;text-align: left;cursor: pointer;}
 .accountInfo-lists li .items>div .btn:hover{color: #15c9ff;}
 .accountInfo-lists li .items>div .cur{background-color: #e8b342;border-color: #e8b342;color: #fff;}
