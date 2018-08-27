@@ -44,7 +44,7 @@
 
     <section class="bk-wrap footer-main">
       <section class="bk-main footer">
-        <p>© 2017-2018 newton.io All Rights Reserved</p>
+        <p>© 2017-2018 www.newtonXchange.com All Rights Reserved</p>
       </section>
     </section>
   </div>
