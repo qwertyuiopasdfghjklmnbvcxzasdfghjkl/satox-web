@@ -9,7 +9,7 @@
             </div>
             <form ref="form" v-if="!isExistUserAvatar">
               <input class="file" type="file" @change="uploadImage" name="source" title=" "/>
-              <span class="tips">{{$t('account.user_center_set_photo')}}</span>
+              <span class="tips">{{$t('account.user_center_set_photo')}}<!--头像只能设置一次--></span>
             </form>
           </div>
           <div class="info-message">
@@ -33,7 +33,7 @@
               </span>
             </p>
             <p class="nickname">
-              <span>{{$t('public0.public190')}}：</span>
+              <span>{{$t('public0.public190')}}：<!--昵称--></span>
               <span class="nickname-text">{{updateNickname}}</span>
               <span class="nickname-modify" v-if="!isAlreadyModifyNickname" @click="nicknameDialog">
                 {{$t('public0.public40')}}<!--修改昵称-->

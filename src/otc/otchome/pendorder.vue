@@ -3,7 +3,7 @@
       <div class="pendorder-title">
           <span class="quantity">
             <i class="icon-my"></i>
-            <em>{{$t('otc_exchange.otc_exchange_frequency').format(`：${baseInfo.tradeCount}`)}}<!--交易次数：999--></em>
+            <em>{{$t('otc_exchange.otc_exchange_frequency')}}<!--交易次数-->：{{baseInfo.tradeCount}}</em>
           </span>
           <span class="praise">
             <label>{{$t('otc_ad.otc_ad_Praise')}}<!--好评-->：</label>
@@ -43,7 +43,15 @@
       </div>
       <ul class="list">
           <li class="list-title" v-if="!loading && datas.length>0">
-              <span class="name">{{$t('otc_exchange.otc_exchange_username')}}<!--用户名--></span>
+              <span class="name">
+                <em>{{$t('otc_exchange.otc_exchange_username')}}<!--用户名--></em>
+                <div class="tips">
+                  <span class="tips-container">
+                    <i class="tips-icon">?</i>
+                    <em class="tips-text">{{$t('otc_ad.otc_ad_only_online')}}<!--仅展示在线用户--></em>
+                  </span>
+                </div>
+              </span>
               <span class="trust">{{$t('otc_exchange.otc_exchange_credit')}}<!--信用--></span>
               <span class="paytype">{{$t('otc_ad.otc_ad_Payment_method')}}<!--支付方式--></span>
               <span class="limit">{{$t('otc_exchange.otc_exchange_Trading_limits')}}<!--交易限额--></span>
@@ -368,10 +376,7 @@ export default {
 </script>
 <style scoped>
 .pendorder{position: relative;}
-.pendorder-title{
-  display: flex;justify-content: space-between;align-items: center;height: 50px;padding-left: 16px;padding-right: 16px;
-  margin-bottom: 8px;background-color: #222121;
-}
+.pendorder-title{display: flex;justify-content: space-between;align-items: center;height: 50px;padding-left: 16px;padding-right: 16px;margin-bottom: 8px;background-color: ##222121;}
 .pendorder-title span{font-size: 12px;color: #aeb7d0;}
 .pendorder-title span.quantity,
 .pendorder-title span.type,
@@ -406,12 +411,20 @@ export default {
 .list li{display: flex;}
 .list-title{align-items: center;height: 24px;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #404b69;}
 .list-title span{font-size: 12px;color: #8b94a9;}
-.list-title span.name{width: 140px;}
+.list-title span.name{width: 140px;font-size: 0;}
 .list-title span.trust{width: 130px;}
 .list-title span.paytype{width: 120px;}
 .list-title span.limit{width: 160px;}
 .list-title span.price{width: 130px;}
 .list-title span.lave{width: 120px;}
+.list-title span.name em{font-size: 12px;}
+.list-title span.name .tips{display: inline-block;margin-top: 2px;margin-left: 6px;vertical-align: top;}
+.list-title span.name .tips-container{display: flex;justify-content: center;position: relative;z-index: 1;width: 12px;height: 12px;}
+.list-title span.name .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}
+.list-title span.name .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
+.list-title span.name .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
+.list-title span.name .tips-icon:hover + .tips-text{display: block;}
+
 .list-item{align-items: center;height: 62px;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #fff;}
 .list-item:nth-of-type(odd){background-color: #333232;border-bottom-color: #333232;}
 .list-item:nth-of-type(even){background-color: #222121;border-bottom-color: #222121;}
@@ -428,7 +441,7 @@ export default {
 .list-item span p:last-of-type{font-size: 12px;color: #aeb7d0;}
 .list-item span.name img{width: 28px;height: 28px;border:1px solid #11a8fe;border-radius: 50%;}
 .list-item span.name em{width: 88px;font-size: 14px;color: #ececec;white-space: nowrap;text-indent: 10px;text-overflow: ellipsis;overflow: hidden;}
-.list-item span.paytype{line-height: 0;display:flex;}
+.list-item span.paytype{display: flex;line-height: 0;}
 .list-item span.paytype em{margin-left: 10px;font-size: 16px;color: #fff;}
 .list-item span.paytype em:first-of-type{margin-left: 0;}
 .list-item span.operation a{display: block;width: 50px;height: 22px;line-height: 22px;font-size: 12px;text-align: center;border: 1px solid #fff;border-radius: 4px;}

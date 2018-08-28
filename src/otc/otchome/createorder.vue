@@ -1,10 +1,21 @@
 <template>
-    <div class="createorder" :class="[{'sell-pend':formData.ad_type===2}, {'englishsize':getLang==='en'}]">
+    <div class="createorder" :class="[{'sell-pend': formData.ad_type === 2}, {'englishsize': getLang === 'en'}]">
         <div class="title">{{$t(ad_id ? 'otc_ad.otc_edit_title' : 'otc_ad.otc_post_title').format(tradeParams.title1, formData.symbol)}}<!--发布广告||修改广告--></div>
         <div class="cont">
+            <div class="cont-item currency">
+              <div class="row">
+                <label>{{$t('otc_ad.otc_current_currency')}}：<!--当前法币--></label>
+                <div class="value">
+                  <select v-model="formData.currency">
+                    <option v-for="item in currencyList" :key="item.id" :value="item.currency">{{$t(`otc_exchange.otc_exchange_${item.currency}`)}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="prompt"></div>
+            </div>
             <div class="cont-item exchange">
                 <div class="row">
-                    <label>{{$t('otc_exchange.otc_exchange_Bid')}}<!--对标交易所-->：</label>
+                    <label>{{$t('otc_exchange.otc_exchange_Bid')}}：<!--对标交易所--></label>
                     <div class="value">
                         <select v-model="formData.bench_marking_id">
                             <option v-for="item in benchDatas" :key="item.bench_marking_id" :value="item.bench_marking_id">{{item.marking_name}}</option>
@@ -15,7 +26,7 @@
             </div>
             <div class="cont-item currentprice">
                 <div class="row">
-                    <label>{{$t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})<!--交易所价格-->：</label>
+                    <label>{{$t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})：<!--交易所价格--></label>
                     <div class="value">
                         <span>{{benchItem.lowestPrice}}</span>
                     </div>
@@ -25,7 +36,7 @@
             <div class="cont-item premium">
                 <div class="row">
                     <label class="label-tips">
-                      <span>{{$t('otc_ad.otc_ad_Premium')}}<!--溢价-->：</span>
+                      <span>{{$t('otc_ad.otc_ad_Premium')}}：<!--溢价--></span>
                       <div class="tips">
                         <span class="tips-container">
                           <i class="tips-icon" v-tip.top="tip1">?</i>
@@ -56,7 +67,7 @@
                 <div class="row">
                     <label>{{tradeParams.title2}}<!--可接受的最低单价||可接受的最高单价-->({{formData.currency}})：</label>
                     <div class="value">
-                        <numberbox :class="{error: errors.has('lowest_price')}" v-model="formData.lowest_price" :size="12" :accuracy="2" v-validate="'intOrDecimal|maxInputValue:999999999'" data-vv-name="lowest_price"/>
+                        <numberbox :class="{error: errors.has('lowest_price')}" v-model="formData.lowest_price" :size="13" :accuracy="2" v-validate="'intOrDecimal|maxInputValue:9999999999'" data-vv-name="lowest_price"/>
                     </div>
                 </div>
                 <div class="prompt">{{getErrorMsg('lowest_price')}}</div>
@@ -65,7 +76,7 @@
                 <div class="row">
                     <label>{{tradeParams.title3}}<!--我要出售多少||我要购买多少-->({{formData.symbol}})：<em class="asterisk">&nbsp;*</em></label>
                     <div class="value">
-                        <numberbox :class="{error: errors.has('symbol_count')}" v-model="formData.symbol_count" :size="15" :accuracy="5" v-validate="'required|intOrDecimal|buyAmountLimitValid|maxInputValue:999999999'" data-vv-name="symbol_count" />
+                        <numberbox :class="{error: errors.has('symbol_count')}" v-model="formData.symbol_count" :size="15" :accuracy="4" v-validate="'required|intOrDecimal|buyAmountLimitValid|maxInputValue:9999999999'" data-vv-name="symbol_count"/>
                     </div>
                 </div>
                 <div class="prompt">{{getErrorMsg('symbol_count')}}<!--请输入币种数量--></div>
@@ -73,21 +84,21 @@
             <div class="cont-item tradelimit">
                 <label>{{$t('otc_ad.otc_ad_Trading_restrictions')}}<!--交易限额-->({{formData.ad_type === 1 ? formData.symbol : formData.currency}})：<em class="asterisk">&nbsp;*</em></label>
                 <div class="value">
-                    <numberbox id="ads_min_amount" :class="{error: errors.has('min_amount')}" v-model="formData.min_amount" :size="tradeLimitAccuracy.size" :accuracy="tradeLimitAccuracy.accuracy" v-validate="'required|intOrDecimal|minAmountValid|minamount|maxInputValue:999999999,public0.public258'" data-vv-name="min_amount"/>
+                    <numberbox id="ads_min_amount" :class="{error: errors.has('min_amount')}" v-model="formData.min_amount" :size="tradeLimitAccuracy.size" :accuracy="tradeLimitAccuracy.accuracy" v-validate="'required|intOrDecimal|minAmountValid|minamount|maxInputValue:9999999999,public0.public258'" data-vv-name="min_amount"/>
                     <em>{{$t('public0.public114')}}<!--最小限额--></em>
                 </div>
                 <div class="prompt">{{getErrorMsg('min_amount')}}</div>
                 <div class="value">
-                    <numberbox id="ads_max_amount" :class="{error: errors.has('max_amount')}" v-model="formData.max_amount" :size="tradeLimitAccuracy.size" :accuracy="tradeLimitAccuracy.accuracy" v-validate="'required|intOrDecimal|maxamount|maxInputValue:999999999,public0.public259'" data-vv-name="max_amount"/>
+                    <numberbox id="ads_max_amount" :class="{error: errors.has('max_amount')}" v-model="formData.max_amount" :size="tradeLimitAccuracy.size" :accuracy="tradeLimitAccuracy.accuracy" v-validate="'required|intOrDecimal|maxamount|maxInputValue:9999999999,public0.public259'" data-vv-name="max_amount"/>
                     <em>{{$t('public0.public115')}}<!--最大限额--></em>
                 </div>
                 <div class="prompt">{{getErrorMsg('max_amount')}}</div>
             </div>
             <div class="cont-item tradetype">
-                <label>{{$t('otc_exchange.otc_exchange_transaction_method')}}<!--交易方式-->：<em class="asterisk">&nbsp;*</em></label>
+                <label>{{$t('otc_exchange.otc_exchange_transaction_method')}}：<!--交易方式--><em class="asterisk">&nbsp;*</em></label>
                 <div class="value">
                     <input :class="{error: errors.has('pay_type')}" type="hidden" v-validate="'required'" data-vv-name="pay_type" v-model="formData.pay_type"/>
-                    <span v-for="item in payments" :key="item.id" @click="setPayment(item)" v-if="myPayType.indexOf(item.id)!==-1">
+                    <span v-for="item in payments" :key="item.id" @click="setPayment(item)" v-if="myPayType.indexOf(item.id) !== -1">
                         <i :class="[item.checked ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked']"></i>{{$t(item.key)}}
                     </span>
                 </div>
@@ -96,7 +107,7 @@
             <div class="cont-item dispose">
                 <div class="row">
                     <label class="label-tips">
-                      <span>{{$t('otc_ad.otc_ad_maximum_orders')}}<!--最大处理订单数-->：<em class="asterisk">&nbsp;*</em></span>
+                      <span>{{$t('otc_ad.otc_ad_maximum_orders')}}：<!--最大处理订单数--><em class="asterisk">&nbsp;*</em></span>
                       <div class="tips">
                         <span class="tips-container">
                           <i class="tips-icon" v-tip.top="tip2">?</i>
@@ -108,7 +119,7 @@
                       </div>
                     </label>
                     <div class="value">
-                        <numberbox :class="{error: errors.has('max_process_num')}" v-model="formData.max_process_num" :size="1" v-validate="'required|pInteger|otcProcessNumValid'" data-vv-name="max_process_num"/>
+                        <numberbox :class="{error: errors.has('max_process_num')}" v-model="formData.max_process_num" :size="maxOrderProcessing.toString().length" v-validate="`required|pInteger|otcProcessNumValid:${1},${maxOrderProcessing}`" data-vv-name="max_process_num"/>
                     </div>
                 </div>
                 <div class="prompt">{{getErrorMsg('max_process_num')}}</div>
@@ -116,7 +127,7 @@
             <div class="cont-item good">
                 <div class="row">
                     <label class="label-tips">
-                      <span>{{$t('otc_exchange.otc_exchange_Good_rating')}}<!--好评率-->：<em class="asterisk">&nbsp;*</em></span>
+                      <span>{{$t('otc_exchange.otc_exchange_Good_rating')}}：<!--好评率--><em class="asterisk">&nbsp;*</em></span>
                       <div class="tips">
                         <span class="tips-container">
                           <i class="tips-icon" v-tip.top="tip3">?</i>
@@ -136,7 +147,7 @@
             </div>
             <div class="cont-item timelimit">
               <div class="row">
-                <label>{{$t('otc_ad.otc_ad_expiration_pay')}}<!--付款期限-->：<em class="asterisk">&nbsp;*</em></label>
+                <label>{{$t('otc_ad.otc_ad_expiration_pay')}}：<!--付款期限--><em class="asterisk">&nbsp;*</em></label>
                 <div class="value">
                   <select v-model="formData.pay_limit_time" v-validate="'required'" data-vv-name="pay_limit_time">
                     <option value="15">15</option>
@@ -173,8 +184,9 @@ export default {
   },
   data () {
     return {
-      coins: otcConfig.coins,
-      currency: otcConfig.currencys,
+      coinMinLimit: 0,
+      currencyMinLimit: 0,
+      maxOrderProcessing: 0,
       payments: JSON.parse(JSON.stringify(otcConfig.payments)),
       isClickPayments: false,
       formData: {
@@ -187,12 +199,13 @@ export default {
         lowest_price: null,
         symbol_count: null,
         min_amount: null,
-        max_amount: null,
+        max_amount: Number(this.params.ad_type) === 2 ? null : 20000,
         pay_type: null,
         max_process_num: 2,
         praise_rate: 50,
         pay_limit_time: 15
       },
+      currencyList: [],
       benchItem: {
         price: null,
         lowestPrice: null
@@ -232,7 +245,7 @@ export default {
         symbol_count: {required: this.$t('public0.public112')}, // 请输入币种数量
         praise_rate: {required: this.$t('public0.public186')}, // 请输入好评率
         pay_type: {required: this.$t('public0.public118')}, // 请选择交易方式
-        max_process_num: {required: this.$t('public0.public163')} // 请输入整数1~5
+        max_process_num: {required: this.$t('public0.public163').format(1, this.maxOrderProcessing)} // 请输入整数{0}~{1}
       }
     },
     benchSymbolParams () {
@@ -265,24 +278,8 @@ export default {
         return this.benchItem.lowestPrice
       }
     },
-    coinMinLimit () {
-      for (let i = 0; i < this.coins.length; i++) {
-        if (this.coins[i].symbol === this.formData.symbol) {
-          return this.coins[i].minLimit
-        }
-      }
-      return null
-    },
-    currencyMinLimit () {
-      for (let i = 0; i < this.currency.length; i++) {
-        if (this.currency[i].value === this.formData.currency) {
-          return this.currency[i].minLimit
-        }
-      }
-      return null
-    },
     tradeLimitAccuracy () {
-      return this.formData.ad_type === 1 ? {size: 15, accuracy: 5} : {size: 12, accuracy: 2}
+      return this.formData.ad_type === 1 ? {size: 15, accuracy: 4} : {size: 13, accuracy: 2}
     }
   },
   watch: {
@@ -299,6 +296,11 @@ export default {
         })
       }
     },
+    'formData.symbol_count' (newVal) {
+      if (this.formData.ad_type === 1) {
+        this.formData.max_amount = newVal
+      }
+    },
     benchSymbolParams () {
       this.getBenchSymbolInfo()
     }
@@ -307,9 +309,9 @@ export default {
     Validator.extend('minAmountValid', {
       getMessage: (field, args) => {
         if (this.formData.ad_type === 1) {
-          return this.$t('public0.public110').format(this.coinMinLimit)
+          return this.$t('public0.public110').format(this.coinMinLimit) // 最小限额必须大于等于{0}
         } else {
-          return this.$t('public0.public110').format(this.currencyMinLimit)
+          return this.$t('public0.public110').format(this.currencyMinLimit) // 最小限额必须大于等于{0}
         }
       },
       validate: (value, args) => {
@@ -322,15 +324,13 @@ export default {
       }
     })
     Validator.extend('buyAmountLimitValid', {
-      getMessage: (field, args) => this.$t('public0.public111'), // 购买量必须大于等于最小限额
+      getMessage: (field, args) => {
+        return this.$t('public0.public119').format(this.coinMinLimit) // 购买数量必须大于等于{0}
+      },
       validate: (value, args) => {
-        if (!value || !this.formData.min_amount) {
-          return true
-        }
+        value = parseFloat(value)
         if (this.formData.ad_type === 1) {
-          value = parseFloat(value)
-          var max = parseFloat(this.formData.min_amount || 0)
-          return value >= max
+          return value >= this.coinMinLimit
         } else {
           return true
         }
@@ -339,6 +339,7 @@ export default {
     this.$nextTick(() => {
       this.fnGetBenchExchange()
       this.fnGetAdvertisementDetail()
+      this.fnGetBaseInfo()
     })
   },
   methods: {
@@ -350,9 +351,16 @@ export default {
         }
       })
     },
+    getBenchSymbolInfo () { // 获取对标交易所币种价格
+      otcApi.getBenchSymbolInfo(this.benchSymbolParams, (res) => {
+        this.benchItem.price = numUtils.BN(res.cur_price || 0).toFixed(2)
+        this.benchItem.lowestPrice = numUtils.BN(res.market_price || 0).toFixed(2)
+      })
+    },
     fnGetAdvertisementDetail () { // 修改广告 - 获取广告详情
       if (this.ad_id) {
         otcApi.getAdvertisementDetail(this.ad_id, (res) => {
+          // 数据格式化
           for (var i in this.formData) {
             if (i === 'price_rate' && utils.removeEndZero(res[i] || '0') === '0') {
               continue
@@ -371,23 +379,54 @@ export default {
             }
             this.formData[i] = res[i]
           }
-          this.formData.symbol_count = numUtils.BN(res.symbol_count.toFixed(5))
-          this.formData.min_amount = numUtils.BN(res.min_amount.toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
-          this.formData.max_amount = numUtils.BN(res.max_amount.toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
-          // 类型转换
-          this.formData.ad_type = parseInt(res.ad_type)
+          this.formData.ad_type = res.ad_type
           this.formData.bench_marking_id = parseInt(res.bench_marking_id)
+          this.formData.symbol_count = utils.removeEndZero(numUtils.BN(res.symbol_count).toFixed(5))
+          this.formData.min_amount = utils.removeEndZero(numUtils.BN(res.min_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
+          this.formData.max_amount = utils.removeEndZero(numUtils.BN(res.max_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
+          // 获取Symbol或Currency的最小交易限额
+          this.fnGetSymbolAndCurrency(false, res.ad_type)
+        }, (msg) => {
+          console.error(msg)
         })
       } else {
-        this.formData.min_amount = this.formData.ad_type === 1 ? this.coinMinLimit : this.currencyMinLimit
-        this.formData.max_amount = this.formData.ad_type === 1 ? null : 20000
         this.formData.pay_type = this.myPayType
+        // 获取Symbol或Currency的最小交易限额
+        this.fnGetSymbolAndCurrency(true, this.formData.ad_type)
       }
     },
-    getBenchSymbolInfo () {
-      otcApi.getBenchSymbolInfo(this.benchSymbolParams, (res) => {
-        this.benchItem.price = numUtils.BN(res.cur_price || 0).toFixed(2)
-        this.benchItem.lowestPrice = numUtils.BN(res.market_price || 0).toFixed(2)
+    fnGetSymbolAndCurrency (isNew, adType) {
+      otcApi.getCoinsList((data) => { // 获取币种信息
+        data.forEach((item) => {
+          if (item.symbol === this.formData.symbol) {
+            this.coinMinLimit = item.minLimit
+            if (isNew) {
+              this.formData.min_amount = item.minLimit
+            }
+          }
+        })
+        otcApi.getCurrencys((data2) => { // 获取法币信息
+          data2.forEach((item2) => {
+            if (item2.currency === this.formData.currency) {
+              this.currencyMinLimit = item2.minLimit
+              if (isNew && adType === 2) {
+                this.formData.min_amount = item2.minLimit
+              }
+            }
+          })
+          this.currencyList = data2
+        }, (msg2) => {
+          console.error(msg2)
+        })
+      }, (msg) => {
+        console.error(msg)
+      })
+    },
+    fnGetBaseInfo () { // 获取最大处理订单数
+      otcApi.getBaseInfo(this.formData.symbol, (data) => {
+        this.maxOrderProcessing = data.adMaxConcurrency
+      }, (msg) => {
+        console.error(msg)
       })
     },
     setPayment (item) {
@@ -471,7 +510,7 @@ export default {
 </script>
 
 <style scoped>
-.createorder{width: 340px; background-color: #222121;max-height:calc(100% - 20px);overflow-y:auto;}
+.createorder{width: 340px;max-height: calc(100% - 20px);background-color: #222121;overflow-x: hidden;overflow-y: auto;}
 .createorder.englishsize{width: 360px;}
 .createorder .title{height: 30px;line-height: 30px;text-align: center;color: #becbe8;background-color: #333232;}
 .createorder .cont{padding: 20px 30px 20px 30px;}
@@ -488,10 +527,8 @@ export default {
 .cont-item label.label-tips .tips-icon:hover + .tips-text{display: block;}
 .cont-item .value{position: relative;}
 .cont-item.tradetype .value{display: flex; justify-content: space-between;align-items: center;height: 24px;}
-.cont-item .value select{
-  height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #becbe8;background-position: right 4px center;
-  border: 1px solid #54616c;cursor: pointer;
-}
+.cont-item .value select{height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #becbe8;background-position: right 4px center;border: 1px solid #54616c;cursor: pointer;}
+.cont-item.currency .value select{width: 80px;}
 .cont-item.exchange .value select{width: 124px;}
 .cont-item.timelimit .value select{position: relative; z-index: 1;width: 80px;}
 .cont-item .value span{font-size: 12px;color: #becbe8;}
