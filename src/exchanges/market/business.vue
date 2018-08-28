@@ -403,7 +403,6 @@ export default {
       }
       let minQuantity = numUtils.BN(this.getMarketConfig[this.symbol].minQuantity).toString()
       let minAmount = numUtils.BN(this.getMarketConfig[this.symbol].minAmount).toString()
-
       // 限价 最小金额控制
       if (this.active === 'limit' && numUtils.BN(this.formData.total).lt(minAmount)) {
         // 最小金额必须大于等于{0}{1}
@@ -482,7 +481,13 @@ export default {
         Vue.$koallTipBox({icon: 'success', message: this.$t('exchange.exchange_Commissioned_success')}) // 委托成功
       }, (msg) => {
         this.lockExtrust = false
-        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        if (msg === 'AMOUNT_ERROR') {
+          // 最小金额必须大于等于{0}{1}
+          let minAmount = numUtils.BN(this.getMarketConfig[this.symbol].minAmount).toString()
+          Vue.$koallTipBox({icon: 'notification', message: this.$t('public.min_total_greater_than').format(minAmount, this.baseSymbol)})
+        } else {
+          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        }
       })
     },
     changePriceValue (price) {

@@ -43,6 +43,7 @@
           <span class="price">{{$t('otc_exchange.otc_exchange_ask')}}<!--单价--></span>
           <span class="volume">{{$t('exchange.exchange_amount')}}<!--数量--></span>
           <span class="sum">{{$t('exchange.exchange_total')}}<!--金额--></span>
+          <span class="charge">{{$t('exchange.advanced_fee')}}<!--手续费--></span>
           <span class="ordersTime">{{$t('otc_ad.otc_ad_end_time')}}<!--完成时间--></span>
         </li>
         <li class="list" v-for="data in tradeData" :key="data.id">
@@ -50,9 +51,10 @@
           <span class="type" :class="data.to_user_name === getUserInfo.username ? 'buy' : 'sell'">{{data.to_user_name === getUserInfo.username ? $t('otc_exchange.otc_exchange_buy') : $t('otc_exchange.otc_exchange_sell')}}<!--类型--></span>
           <span class="status">{{getOrderState(data.state)}}<!--状态--></span>
           <span class="currency">{{data.symbol}}<!--币种--></span>
-          <span class="price">{{toFixed(data.cur_price, 2)}}{{data.currency}}<!--单价--></span>
+          <span class="price">{{toFixed(data.cur_price, 2)}} {{data.currency}}<!--单价--></span>
           <span class="volume">{{toFixed(data.symbol_count)}} {{data.symbol}}<!--数量--></span>
           <span class="sum">{{toFixed(data.currency_count, 2)}} {{data.currency}}<!--金额--></span>
+          <span class="charge">{{toFixed(data.order_fee, 8)}} {{data.symbol}}<!--手续费--></span>
           <span class="ordersTime">{{data.updated_at}}<!--完成时间--></span>
         </li>
       </ul>
@@ -216,15 +218,16 @@ export default {
 
 .otccurreny .record{background-color: #222121;}
 .otccurreny .record ul{padding-left: 8px;padding-right: 8px;}
-.otccurreny .record ul li{height: 32px;line-height: 32px;border-bottom: 1px solid #404b69;}
-.otccurreny .record ul li span{display: inline-block;font-size: 12px;color: #8b94a9;}
-.otccurreny .record ul li span.number{width: 170px;overflow: hidden;text-overflow: ellipsis;vertical-align: middle;}
+.otccurreny .record ul li{border-bottom: 1px solid #404b69;}
+.otccurreny .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
+.otccurreny .record ul li span.number{width: 160px;}
 .otccurreny .record ul li span.type{width: 60px;}
 .otccurreny .record ul li span.status{width: 80px;}
-.otccurreny .record ul li span.currency{width: 80px;}
-.otccurreny .record ul li span.price{width: 140px;}
-.otccurreny .record ul li span.volume{width: 160px;}
-.otccurreny .record ul li span.sum{width: 140px;}
+.otccurreny .record ul li span.currency{width: 60px;}
+.otccurreny .record ul li span.price{width: 120px;}
+.otccurreny .record ul li span.volume{width: 120px;}
+.otccurreny .record ul li span.sum{width: 120px;}
+.otccurreny .record ul li span.charge{width: 100px;}
 .otccurreny .record ul li span.ordersTime{width: 120px;}
 .otccurreny .record ul li.list span.buy{color: #03c087;}
 .otccurreny .record ul li.list span.sell{color: #e76d42;}

@@ -1,42 +1,46 @@
 <template>
     <div class="balance">
-        <div class="title">
-            {{$t('exchange.exchange_valuation')}}<!--当前总估值-->：{{BTCValuation}} BTC / {{getCoinSign}}{{String(USDCNY).toMoney()}}
+        <div class="balance-content" v-if="!showLoading && !isFrozen">
+            <div class="title">
+                {{$t('exchange.exchange_valuation')}}<!--当前总估值-->：{{BTCValuation}} BTC / {{getCoinSign}}{{String(USDCNY).toMoney()}}
+            </div>
+            <ul class="list-header">
+                <li class="list-header-item">
+                    <span class="list-col col-currency">
+                      {{$t('account.estimated_value_coin')}}<!--币种-->
+                    </span>
+                    <span class="list-col col-sum">
+                      {{$t('account.estimated_value_total')}}<!--总金额-->
+                    </span>
+                    <span class="list-col col-balance">
+                      {{$t('account.estimated_value_available')}}<!--可用余额-->
+                    </span>
+                   <span class="list-col col-fsum">
+                      {{$t('public0.public34')}}<!--冻结金额-->
+                    </span>
+                    <span class="list-col col-operate">
+                      {{$t('otc_exchange.otc_exchange_operating')}}<!--操作-->
+                    </span>
+                </li>
+            </ul>
+            <ul class="list">
+                <li class="list-item" v-for="(item, index) in datas" :key="index">
+                    <span class="list-col col-currency">{{item.symbol}}</span><!--币种-->
+                    <span class="list-col col-sum">{{toFixed(item.totalBalance).toMoney()}}</span><!--总金额-->
+                    <span class="list-col col-balance">{{toFixed(item.availableBalance).toMoney()}}</span><!--可用余额-->
+                    <span class="list-col col-fsum">{{toFixed(item.frozenBalance).toMoney()}}</span><!--冻结金额-->
+                    <span class="list-col col-operate">
+                      <a class="recharge-link" :class="{disabled:Number(item.rechargeFlag) !== 1}" href="javascript:;" @click="Number(item.rechargeFlag) !== 1 ? false : openQrCode(item)">{{$t('account.estimated_value_deposit')}}<!--充值--></a>
+                      <a class="withdrawals-link" :class="{disabled:Number(item.withdrawFlag) !== 1}" href="javascript:;" @click="Number(item.withdrawFlag) !== 1 ? false : withdrawDalog(item)">{{$t('account.estimated_value_withdrawal')}}<!--提现--></a>
+                    </span><!--操作-->
+                </li>
+            </ul>
         </div>
-        <ul class="list-header">
-            <li class="list-header-item">
-                <span class="list-col col-currency">
-                  {{$t('account.estimated_value_coin')}}<!--币种-->
-                </span>
-                <span class="list-col col-sum">
-                  {{$t('account.estimated_value_total')}}<!--总金额-->
-                </span>
-                <span class="list-col col-balance">
-                  {{$t('account.estimated_value_available')}}<!--可用余额-->
-                </span>
-               <span class="list-col col-fsum">
-                  {{$t('public0.public34')}}<!--冻结金额-->
-                </span>
-                <span class="list-col col-operate">
-                  {{$t('otc_exchange.otc_exchange_operating')}}<!--操作-->
-                </span>
-            </li>
-        </ul>
-        <ul class="list">
-            <li class="list-item" v-for="(item, index) in datas" :key="index">
-                <span class="list-col col-currency">{{item.symbol}}</span><!--币种-->
-                <span class="list-col col-sum">{{toFixed(item.totalBalance).toMoney()}}</span><!--总金额-->
-                <span class="list-col col-balance">{{toFixed(item.availableBalance).toMoney()}}</span><!--可用余额-->
-                <span class="list-col col-fsum">{{toFixed(item.frozenBalance).toMoney()}}</span><!--冻结金额-->
-                <span class="list-col col-operate">
-                  <a class="recharge-link" :class="{disabled:Number(item.rechargeFlag) !== 1}" href="javascript:;" @click="Number(item.rechargeFlag) !== 1 ? false : openQrCode(item)">{{$t('account.estimated_value_deposit')}}<!--充值--></a>
-                  <a class="withdrawals-link" :class="{disabled:Number(item.withdrawFlag) !== 1}" href="javascript:;" @click="Number(item.withdrawFlag) !== 1 ? false : withdrawDalog(item)">{{$t('account.estimated_value_withdrawal')}}<!--提现--></a>
-                </span><!--操作-->
-            </li>
-            <li class="list-loading" v-if="showLoading">
-              <loading :size="24"/>
-            </li>
-        </ul>
+        <div class="frozen-prompt" v-if="!showLoading && isFrozen">
+          <div class="text">{{frozenText}}</div>
+          <div class="text">{{$t('public0.public111')}}<!--如有疑问，请联系客服。--></div>
+        </div>
+        <loading :size="24" v-if="showLoading"/>
     </div>
 </template>
 
@@ -66,8 +70,10 @@ export default {
   },
   data () {
     return {
-      googleState: null,
-      verifyState: null,
+      isFrozen: false,
+      frozenText: null,
+      googleState: 0,
+      verifyState: 0,
       mobileState: 0,
       showLoading: true,
       datas: []
@@ -132,7 +138,7 @@ export default {
   methods: {
     ...mapActions(['addEvents', 'removeEvents']),
     balanceEvent (res) {
-      // 已退出登录后，返回的数据不在处理。
+      // 已退出登录后，返回的数据不在处理
       if (!this.getApiToken) {
         return
       }
@@ -154,14 +160,20 @@ export default {
     changeLogin () {
       if (this.getApiToken) {
         this.showLoading = true
-        walletApi.myAssets(null, (res) => {
-          this.showLoading = false
-          res.forEach((item) => {
+        walletApi.myAssets({}, (data) => {
+          data.forEach((item) => {
             item.frozenBalance = numUtils.add(item.frozenBalance, item.adFrozenBalance).add(item.loanBalance).toFixed(8)
           })
-          this.datas = res
-        }, () => {
+          this.datas = data
           this.showLoading = false
+        }, (data, msg) => {
+          if (data) {
+            this.isFrozen = true
+            this.frozenText = this.$t(`error_code.${msg}`)
+            this.showLoading = false
+          } else {
+            console.error(msg)
+          }
         })
         // 获取当前用户状态信息
         userApi.getUserState((data) => {
@@ -172,11 +184,13 @@ export default {
           console.error(msg)
         })
       } else {
-        this.showLoading = false
-        this.datas = []
+        this.isFrozen = false
+        this.frozenText = null
         this.googleState = 0
         this.verifyState = 0
         this.mobileState = 0
+        this.showLoading = false
+        this.datas = []
       }
     },
     openQrCode (item) { // 充值地址
@@ -251,6 +265,9 @@ export default {
 .col-operate a:hover{color: #FFDE00;}
 .col-operate a.disabled{color: #ababab;cursor: not-allowed;}
 .col-operate a.disabled:hover{color: #ababab;}
+.frozen-prompt .text{height: 60px;color: #FFDE00;text-align: center;}
+.frozen-prompt .text:first-of-type{line-height: 90px;}
+.frozen-prompt .text:last-of-type{line-height: 30px;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {
   .title{height: 30px;line-height: 30px;font-size: 14px;}
   .list{height: 90px;}

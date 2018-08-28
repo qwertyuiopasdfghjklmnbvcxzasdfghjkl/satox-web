@@ -46,7 +46,7 @@
                 <span class="ad-list-item-type">{{$t('exchange.exchange_type')}}<!--类型--></span>
                 <span class="ad-list-item-limit">{{$t('otc_exchange.otc_exchange_Trading_limits')}}<!--交易限额--></span>
                 <span class="ad-list-item-price">{{$t('otc_exchange.otc_exchange_ask')}}<!--单价--></span>
-                <span class="ad-list-item-surplus">{{$t('message.msg_surplus')}}<!--剩余--></span>
+                <span class="ad-list-item-amount">{{$t('exchange.exchange_amount')}}<!--数量--></span>
                 <span class="ad-list-item-status">{{$t('otc_ad.otc_ad_status')}}<!--状态--></span>
             </li>
             <li class="ad-list-item" v-for="item in hDatas" :key="item.id">
@@ -54,7 +54,7 @@
                 <span class="ad-list-item-type" :class="[item.ad_type === 2 ? 'sell' : 'buy']">{{$t(item.ad_type === 2 ? 'exchange.exchange_sell' : 'exchange.exchange_buy')}}</span>
                 <span class="ad-list-item-limit">{{item.min_amount}}-{{item.max_amount}} {{item.ad_type === 2 ? item.currency : item.symbol}}</span>
                 <span class="ad-list-item-price">{{item.cur_price}} {{item.currency}}</span>
-                <span class="ad-list-item-surplus">{{item.remain_count}} {{item.symbol}}</span>
+                <span class="ad-list-item-amount">{{item.symbol_count}} {{item.symbol}}</span>
                 <span class="ad-list-item-status">{{$t('otc_ad.otc_ad_completed')}}</span>
             </li>
         </ul>
@@ -271,15 +271,16 @@ export default {
 .ad-tabs-item{height:24px;line-height:24px;margin-right:40px;margin-bottom:-1px;color:#8b94a9;border-bottom:1px solid #404b69;cursor:pointer;}
 .ad-tabs-item:hover,
 .ad-tabs-item.active{border-bottom-color: #FFDE00;color:#FFDE00;}
-.ad-list{display:flex;flex-flow:column;padding-bottom:24px;}
+.ad-list{display:flex;flex-flow:column;padding: 0 20px 24px 20px;}
 .ad-list-history{padding-bottom: 0;}
-.ad-list-item{display:flex;justify-content:space-between;padding:0 20px;border-bottom:1px solid #404b69;}
+.ad-list-item{display:flex;justify-content:space-between;border-bottom:1px solid #404b69;}
 .ad-list-item span{height:30px;line-height:30px;font-size:12px;color:#8b94a9;}
 .ad-list-item-coin{width:60px;}
 .ad-list-item-type{width:60px;}
 .ad-list-item-limit{width:260px;}
 .ad-list-item-price{width:130px;}
 .ad-list-item-surplus{width:160px;}
+.ad-list-item-amount{width:160px;}
 .ad-list-item-status{width:100px;}
 .ad-list-item-operate{width:80px;}
 .ad-list-item-type.buy{color:#0ee7a5;}

@@ -19,7 +19,7 @@
         <span><em class="unit">&nbsp;{{params.symbol}}</em></span>
       </p>
       <p>
-        <numberbox :class="{error: errors.has('symbol_count')}" v-model="symbol_count" v-validate="`required|intOrDecimal|buyOrSellNotLargeRemainCount${sellType ? '|minTradeLimit:1|maxTradeLimit:1' : ''}`" data-vv-name="symbol_count" :accuracy="5"/>
+        <numberbox :class="{error: errors.has('symbol_count')}" v-model="symbol_count" v-validate="`required|intOrDecimal|buyOrSellNotLargeRemainCount${sellType ? '|minTradeLimit:1|maxTradeLimit:1' : ''}`" data-vv-name="symbol_count" :accuracy="4"/>
         <a href="javascript:;" @click="buyAll">{{$t('otc_exchange.otc_exchange_Buy_all')}}<!--一键扫货--></a>
       </p>
       <p class="msg">
