@@ -60,6 +60,7 @@
                   <p>{{$t('otc_ad.otc_ad_Praise')}}<!--好评-->：{{Math.floor(data.user_level||0)}}%</p>
               </span>
               <span class="paytype">
+                  <em class="wechat icon-paypal" :title="$t('public0.public219')" v-if="(data.pay_type||'').indexOf('4')!==-1"></em><!--PayPal支付-->
                   <em class="wechat icon-wechat" :title="$t('otc_ad.otc_ad_WeChatPay')" v-if="(data.pay_type||'').indexOf('3')!==-1"></em><!--微信支付-->
                   <em class="zfb icon-alipay" :title="$t('otc_ad.otc_ad_Alipay_pay')" v-if="(data.pay_type||'').indexOf('2')!==-1"></em><!--支付宝支付-->
                   <em class="card icon-bank" :title="$t('otc_ad.otc_ad_BankPay')" v-if="(data.pay_type||'').indexOf('1')!==-1"></em><!--银行卡支付-->

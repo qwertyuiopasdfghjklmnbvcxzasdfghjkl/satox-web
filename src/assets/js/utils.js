@@ -155,12 +155,15 @@ utils.countDown = countDown
 
 // 获取支付类型ICON
 const getPayType = function (payType) {
+  payType = Number(payType)
   if (payType === 1) {
     return 'icon-bank'
   } else if (payType === 2) {
     return 'icon-alipay'
   } else if (payType === 3) {
     return 'icon-wechat'
+  } else if (payType === 4) {
+    return 'icon-paypal'
   }
 }
 utils.getPayType = getPayType
