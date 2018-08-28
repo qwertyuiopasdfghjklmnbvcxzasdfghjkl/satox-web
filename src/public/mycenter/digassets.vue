@@ -2,7 +2,7 @@
     <div class="digassets">
         <h3>{{$t('account.userDigitalAssets')}}<!--我的数字资产--></h3>
         <div class="hcontainer">
-            <div class="chargeWithdraw" v-if="!showLoaing">
+            <div class="chargeWithdraw" v-if="!showLoaing && !isFrozen">
                 <div class="balance_search">
                     <div class="total">
                         {{$t('exchange.exchange_valuation')}}：<!--总当前估值：-->
@@ -25,8 +25,8 @@
                         <div class="items">
                             <div class="coin ng-binding">
                                 {{$t('account.estimated_value_coin')}}<!--币种-->
-                                <div class="icon-checkbox f-fl">
-                                    <em  :class="[hideZero?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="hideZero=!hideZero"></em>
+                                <div class="icon-checkbox f-fl" @click="hideZero=!hideZero">
+                                    <em  :class="[hideZero?'icon-checkbox-checked':'icon-checkbox-unchecked']"></em>
                                     <label class="ng-binding">
                                       {{$t('account.estimated_value_hide')}}<!--隐藏-->&nbsp;0&nbsp;{{$t('account.estimated_value_balances')}}<!--金额-->
                                     </label>
@@ -64,6 +64,10 @@
                     </li>
                 </ul>
             </div>
+            <div class="frozen-prompt" v-if="!showLoaing && isFrozen">
+              <div class="text">{{frozenText}}</div>
+              <div class="text">{{$t('public0.public111')}}<!--如有疑问，请联系客服。--></div>
+            </div>
             <loading v-if="showLoaing"/>
         </div>
     </div>
@@ -79,6 +83,8 @@ import loading from '@/components/loading'
 export default {
   data () {
     return {
+      isFrozen: false,
+      frozenText: null,
       showLoaing: true,
       hideZero: false,
       filterTitle: '',
@@ -149,8 +155,14 @@ export default {
         })
         this.myAssets = data
         this.showLoaing = false
-      }, (msg) => {
-        console.error(msg)
+      }, (data, msg) => {
+        if (data) {
+          this.isFrozen = true
+          this.frozenText = this.$t(`error_code.${msg}`)
+          this.showLoaing = false
+        } else {
+          console.error(msg)
+        }
       })
     },
     toFixed (value, fixed) {
@@ -162,7 +174,8 @@ export default {
 
 <style scoped>
 .icon-checkbox em{color: #11a8fe;cursor: pointer;}
-.icon-checkbox em:hover{color: #15c9ff;}
+.icon-checkbox:hover em{color: #15c9ff;}
+.icon-checkbox label{cursor: pointer;}
 
 .digassets{background-color: #222121;}
 .digassets h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
@@ -209,5 +222,9 @@ export default {
 .accountInfo-lists li .items>div.locked{width: 180px;}
 .accountInfo-lists li .items>div.opreat{width: 80px;}
 .accountInfo-lists li .items>div.action{width: 80px;color: #11a8fe;}
+
+.frozen-prompt .text{height: 60px;color: #11a8fe;text-align: center;}
+.frozen-prompt .text:first-of-type{line-height: 90px;}
+.frozen-prompt .text:last-of-type{line-height: 30px;}
 </style>
 

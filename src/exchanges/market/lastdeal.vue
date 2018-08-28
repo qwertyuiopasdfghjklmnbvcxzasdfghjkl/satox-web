@@ -4,8 +4,8 @@
     <ul class="list-header">
         <li class="list-header-item">
             <span class="list-col time">{{$t('exchange.exchange_date')}}<!--时间--></span>
-            <span class="list-col price">{{$t('exchange.exchange_price')}}<!--价格--></span>
-            <span class="list-col volume">{{$t('exchange.exchange_amount')}}<!--数量--></span>
+            <span class="list-col price">{{$t('exchange.exchange_price')}}<!--价格-->({{toCoin}})</span>
+            <span class="list-col volume">{{$t('exchange.exchange_amount')}}<!--数量-->({{fromCoin}})</span>
         </li>
     </ul>
     <div class="container">
@@ -30,6 +30,14 @@ import loading from '@/components/loading'
 import numUtils from '@/assets/js/numberUtils'
 export default {
   props: {
+    baseSymbol: {
+      type: String,
+      default: ''
+    },
+    currentSymbol: {
+      type: String,
+      default: ''
+    },
     fixedNumber: {
       type: Number
     },
@@ -47,7 +55,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken'])
+    ...mapGetters(['getApiToken']),
+    fromCoin () {
+      return this.currentSymbol
+    },
+    toCoin () {
+      return this.baseSymbol
+    }
   },
   watch: {
     getApiToken () {

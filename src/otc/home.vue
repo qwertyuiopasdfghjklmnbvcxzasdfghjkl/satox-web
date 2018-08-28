@@ -14,8 +14,6 @@
       <adlist ref="adlist" :params="params" @goToMyCenter="goToMyCenter" @goToSettings="goToSettings"/>
       <chat ref="chat" v-if="getApiToken" v-show="showChat" v-model="showChat" :orderNumber="orderNumber" :switchNew="switchNew" :firstEnter="firstEnter" @markNewMsg="markNewMsg"/>
       <em class="chat-icon" :class="{'new':newMsg}" v-if="getApiToken" @click="openChat"></em>
-
-      <div class="warmPrompt" style="display: none;position:fixed;bottom:0;right:0;width:200px;height:120px;padding:29px;font:20px/30px 'Microsoft YaHei';color:#ff8000;border: 1px solid #ff8000;background-color:#283149;">注意：您正在进行模拟体验，非正常交易，请不要给任何人转账！</div>
   </div>
 </template>
 

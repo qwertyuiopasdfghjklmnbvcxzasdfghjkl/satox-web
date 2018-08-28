@@ -50,7 +50,7 @@
           </div>
           <div class="home-right">
             <depth ref="depth" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber"/>
-            <lastdeal ref="lastdeal" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed"/>
+            <lastdeal ref="lastdeal" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed"/>
           </div>
         </div>
     </div>
@@ -301,10 +301,7 @@ export default {
 .home-center{flex:1;display:flex;flex-flow:column;min-width:500px;margin:10px;}
 .home-center-top{flex:1;display:flex;flex-flow:column;min-height:0;}
 .home-center-bottom{margin-top:10px;}
-.top-left-header{
-  display:flex;font-size:18px;color:#fff;height:50px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  align-items:center;background-color:#333232;justify-content:space-between;margin-bottom:3px;
-}
+.top-left-header{display:flex;font-size:18px;color:#fff;height:50px;margin-bottom: 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-items:center;background-color:#333232;justify-content:space-between;}
 .top-left-header > ul{display:flex;align-items:center;height:100%;}
 .top-left-header-right{flex:1;justify-content:space-between;}
 /*.symbol-icon{background-color:#fff;width:32px;height:32px;border-radius:50%;color:#181b2a;display:flex;justify-content:center;align-items:center;font-size:26px;margin-right:10px;}*/
