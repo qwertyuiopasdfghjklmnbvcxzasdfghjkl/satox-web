@@ -160,6 +160,50 @@
                 </ul>
               </form>
           </li>
+
+          <!-- PayPal -->
+          <li class="form-item">
+              <h3>{{$t('public0.public218')}}<!--PayPal收款--></h3>
+              <div class="form-flex" v-if="paypalReadOnly">
+                <div class="form-flex-left">
+                  <i class="icon-paypal"></i>
+                  <em>{{$t('public0.public219')}}<!--PayPal--></em>
+                </div>
+                <div class="form-flex-center">
+                  <div class="not-set" v-if="!paypalData.paypal_number">
+                    <p>{{$t('public0.public220')}}<!--请设置PayPal信息--></p>
+                  </div>
+                  <div class="have-set" v-if="paypalData.paypal_number">
+                    <p class="wechat_name">{{$t('otc_legal.otc_legal_Payee_Name')}}<!--收款人姓名-->：{{paypalData.paypal_name}}</p>
+                    <p class="wechat_number">{{$t('otc_legal.public221')}}<!--PayPal账号-->：{{paypalData.paypal_number}}</p>
+                  </div>
+                </div>
+                <div class="form-flex-right">
+                  <span @click="checkVerifyState('paypal_scope')">{{$t('otc_legal.otc_legal_Set')}}<!--设置--></span>
+                </div>
+              </div>
+              <form class="form-col" ref="paypalForm" v-if="!paypalReadOnly" data-vv-scope="paypal_scope">
+                <ul class="form-table">
+                    <li class="form-row form-row-top">
+                      <i class="form-icon icon-paypal"></i>
+                      <label class="form-label">{{$t('public0.public219')}}<!--PayPal--></label>
+                    </li>
+                    <li class="form-row">
+                      <label class="form-label">{{$t('otc_legal.otc_legal_Payee_Name')}}<!--收款人姓名--><em class="asterisk">&nbsp;*</em></label>
+                      <input class="form-input" type="text" name="paypal_name" :value="paypalData.paypal_name" autocomplete="off" readonly/>
+                    </li>
+                    <li class="form-row">
+                      <label class="form-label">{{$t('public0.public221')}}<!--PayPal账号--><em class="asterisk">&nbsp;*</em></label>
+                      <input class="form-input" :class="{error: errors.has('paypal_scope.paypal_number')}" type="text" name="paypal_number" v-model="paypalData.paypal_number" v-validate="'required'" maxlength="32" autocomplete="off"/>
+                      <span class="form-error" v-if="errors.has('paypal_scope.paypal_number')">{{msgs.paypal_number[errors.firstRule('paypal_number')]}}</span>
+                    </li>
+                    <li class="form-row form-row-bottom">
+                        <input class="form-cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="paypalReadOnly=true"/><!--取消-->
+                        <input class="form-save" type="button" :value="$t('otc_legal.otc_legal_save')" @click="saveSettings(4)"/><!--保存-->
+                    </li>
+                </ul>
+              </form>
+          </li>
       </ul>
     </div>
 </template>
@@ -205,6 +249,15 @@ export default {
         alipay_number: '',
         alipay_QRcode: ''
       },
+      paypalReadOnly: true,
+      paypalData: {
+        paypal_name: '',
+        paypal_number: ''
+      },
+      oldPayPalData: {
+        paypal_name: '',
+        paypal_number: ''
+      },
       isShowUpload: {
         wechat_QRcode: true,
         alipay_QRcode: true
@@ -220,7 +273,8 @@ export default {
         wechat_number: {required: this.$t('otc_legal.otc_legal_input_WeChat_number')}, // 请输入微信账号
         wechat_QRcode: {required: this.$t('public0.public90')}, // 未选择文件
         alipay_number: {required: this.$t('otc_legal.otc_legal_input_Alipay_number')}, // 请输入支付宝账号
-        alipay_QRcode: {required: this.$t('public0.public90')} // 未选择文件
+        alipay_QRcode: {required: this.$t('public0.public90')}, // 未选择文件
+        paypal_number: {required: this.$t('public0.public222')} // 请输入PayPal账号
       }
     }
   },
@@ -254,6 +308,16 @@ export default {
         } else {
           this.alipayData = JSON.parse(JSON.stringify(this.oldAlipayData))
           this.$refs.alipayForm.querySelector('input[name="source"]').value = null
+        }
+      }
+    },
+    paypalReadOnly (newVal) { // PayPal
+      if (newVal) {
+        if (this.isSaveSettings) {
+          this.oldPayPalData = JSON.parse(JSON.stringify(this.paypalData))
+          this.isSaveSettings = false
+        } else {
+          this.paypalData = JSON.parse(JSON.stringify(this.oldPayPalData))
         }
       }
     }
@@ -300,6 +364,15 @@ export default {
           wechat_number: res.data.wechat_number,
           wechat_QRcode: res.data.wechat_QRcode
         }
+        // PayPal
+        this.paypalData = {
+          paypal_name: res.real_name,
+          paypal_number: res.data.paypal_number
+        }
+        this.oldPayPalData = {
+          paypal_name: res.real_name,
+          paypal_number: res.data.paypal_number
+        }
         callback && callback()
       }, (res) => {
         if (res.msg === 'NO_PAY_TYPE') {
@@ -312,6 +385,9 @@ export default {
           // 微信
           this.wechatData.wechat_name = res.real_name
           this.oldWechatData.wechat_name = res.real_name
+          // PayPal
+          this.paypalData.paypal_name = res.real_name
+          this.oldPayPalData.paypal_name = res.real_name
         } else {
           console.error(res.msg)
         }
@@ -333,6 +409,10 @@ export default {
           scope = 'wechat_scope'
           formData = new FormData(this.$refs.wechatForm)
           break
+        case 4:
+          scope = 'paypal_scope'
+          formData = new FormData(this.$refs.paypalForm)
+          break
       }
       this.$validator.validateAll(scope).then((validResult) => {
         if (!validResult) {
@@ -349,6 +429,9 @@ export default {
               break
             case 3:
               this.wechatReadOnly = true
+              break
+            case 4:
+              this.paypalReadOnly = true
               break
           }
           Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
@@ -424,6 +507,9 @@ export default {
             break
           case 'alipay_scope':
             this.alipayReadOnly = false
+            break
+          case 'paypal_scope':
+            this.paypalReadOnly = false
             break
         }
         this.$validator.errors.clear(scope)

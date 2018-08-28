@@ -16,12 +16,12 @@
                       </a>
                     </li>
                     <li>
-                      <a href="javascript:;" target="_blank">
+                      <a href="https://newtonexchange.zendesk.com/hc/en-us/sections/360002051572-Announcements" target="_blank">
                         {{$t('public.navigation_news')}}<!--公告中心-->
                       </a>
                     </li>
                     <li>
-                      <a href="javascript:;" target="_blank">
+                      <a href="https://newtonexchange.zendesk.com/hc/en-us/sections/360002051592-Help" target="_blank">
                         {{$t('public.navigation_support')}}<!--帮助中心-->
                       </a>
                     </li>
