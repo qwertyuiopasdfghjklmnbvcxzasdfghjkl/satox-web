@@ -428,7 +428,7 @@ export default {
 .list-item span p:last-of-type{font-size: 12px;color: #aeb7d0;}
 .list-item span.name img{width: 28px;height: 28px;border:1px solid #11a8fe;border-radius: 50%;}
 .list-item span.name em{width: 88px;font-size: 14px;color: #ececec;white-space: nowrap;text-indent: 10px;text-overflow: ellipsis;overflow: hidden;}
-.list-item span.paytype{line-height: 0;}
+.list-item span.paytype{line-height: 0;display:flex;}
 .list-item span.paytype em{margin-left: 10px;font-size: 16px;color: #fff;}
 .list-item span.paytype em:first-of-type{margin-left: 0;}
 .list-item span.operation a{display: block;width: 50px;height: 22px;line-height: 22px;font-size: 12px;text-align: center;border: 1px solid #fff;border-radius: 4px;}
