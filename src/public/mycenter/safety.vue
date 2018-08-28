@@ -1,0 +1,456 @@
+<template>
+    <div class="safety">
+        <!--登录密码 begin-->
+        <div class="password">
+            <h3>{{$t('account.user_center_login_password')}}<!--登录密码--></h3>
+            <div class="password-level">
+                <div class="password-level-left">
+                    <img src="../../assets/images/lock_icon.png" />
+                    <span class="label">{{$t('public0.public193')}}<!--安全级别--></span>
+                    <div class="state">
+                        <!--<span class="low middle high">低、中、高级别对应的class名</span>-->
+                        <span :class="[pwdLevelInfo.css]">{{pwdLevelInfo.text}}</span>
+                    </div>
+                </div>
+                <div class="password-level-right">
+                    <input type="button" :value="$t('account.user_center_change_password')" @click="changepwdDialog"/><!--修改密码-->
+                </div>
+            </div>
+        </div>
+        <!--登录密码 end-->
+        <!--谷歌验证 begin-->
+        <div class="google" v-show="delayedShow">
+            <h3>{{$t('auth_warning.warning_google_auth')}}<!--谷歌验证--></h3>
+            <div class="google-content">
+                <div class="google-content-left">
+                    <img src="../../assets/images/google_icon.png"/>
+                    <span class="label">{{googleState === 0 ? $t('public0.public195') : $t('account.user_Google_verified_binding')}}<!--扫二维码绑定谷歌验证||已绑定谷歌验证--></span>
+                </div>
+                <div class="google-content-center">
+                    <!--<div class="state" v-if="googleState === 1 && !showUnbindGoogleForm">
+                      {{$t('account.user_center_state_bind')}}&lt;!&ndash;已绑定&ndash;&gt;
+                    </div>-->
+                    <div class="bind clearfix" v-if="googleState === 0">
+                      <div class="bind-qrcode">
+                          <div class="bind-qrcode-img" ref="qrcode"></div>
+                      </div>
+                      <div class="bind-form">
+                          <p><span>{{$t('account.user_center_backup_key')}}：<!--密钥--></span></p>
+                          <p class="secretkey">
+                            <span class="secretkey-code">{{bindGoogleFormData.key}}</span>
+                            <span class="secretkey-tips">
+                              <i class="tips-icon">?</i>
+                              <em class="tips-text">{{$t('public0.public240')}}<!--强烈建议备份此密钥！--></em>
+                            </span>
+                          </p>
+                          <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p>
+                              <input :class="{error: errors.has('password')}" type="password" v-model="bindGoogleFormData.password" v-validate="'required'" data-vv-name="password"/>
+                              <em class="error">{{errorsInfo.password}}</em>
+                          </p>
+                          <p><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p>
+                              <input :class="{error: errors.has('verifyCode')}" type="text" maxlength="6" v-model="bindGoogleFormData.verifyCode" v-validate="'required|pInteger'" data-vv-name="verifyCode"/>
+                              <em class="error">{{errorsInfo.code}}</em>
+                          </p>
+                      </div>
+                    </div>
+                    <div class="unbind" v-if="showUnbindGoogleForm">
+                        <div class="unbind-form">
+                            <p><span>{{$t('public0.public41')}}<!--解除谷歌二次验证--></span></p>
+                            <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
+                            <p>
+                                <input :class="{error: errors.has('password')}" type="password" v-model="unbindGoogleFormData.password" v-validate="'required'" data-vv-name="password"/>
+                                <em class="error">{{errorsInfo.password}}</em>
+                            </p>
+                            <p><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                            <p>
+                                <input :class="{error: errors.has('verifyCode')}" type="text" maxlength="6" v-model="unbindGoogleFormData.verifyCode" v-validate="'required|pInteger'" data-vv-name="verifyCode"/>
+                                <em class="error">{{errorsInfo.code}}</em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="google-content-right">
+                    <input type="button" v-if="googleState === 0" :value="$t('account.user_center_google_auth')" @click="bindGoogleAuth"/><!--绑定二次验证-->
+                    <input type="button" v-if="showUnbindGoogleButton" :value="$t('public0.public42')" @click="fnShowUnbindGoogleForm"/><!--解除绑定-->
+                    <input type="button" v-if="showUnbindGoogleForm" :value="$t('exchange.exchange_determine')" @click="unbindGoogleAuth"/><!--确定-->
+                    <br/>
+                    <input class="cancel" type="button" v-if="showUnbindGoogleForm" :value="$t('otc_legal.otc_legal_cancel')" @click="fnShowUnbindGoogleForm"/><!--取消-->
+                </div>
+            </div>
+          </div>
+          <!--谷歌验证 end-->
+          <!--短信验证 begin-->
+          <div class="cellphone google" v-show="delayedShow">
+            <h3>
+              <span class="text">{{$t('auth_warning.warning_SMS_auth')}}<!--短信验证--></span>
+              <span class="cellphone-tips">
+                <span class="tips-container">
+                  <i class="tips-icon">?</i>
+                  <em class="tips-text">{{$t('account.priority_select_cellphone')}}<!--我们将优先选择手机短信验证码进行二次验证--></em>
+                </span>
+              </span>
+            </h3>
+            <div class="google-content">
+                <div class="google-content-left">
+                    <img src="../../assets/images/cellphone_icon.png"/>
+                    <span class="label">
+                      {{$t('account.user_bind_SMS_verification')}}<!--绑定短信验证-->
+                    </span>
+                </div>
+                <div class="google-content-center">
+                    <div class="state" v-if="!showBindMobile">
+                      {{mobileState === 1 ? $t('account.user_center_state_bind') : $t('account.user_center_state_unbind')}}<!--已绑定||未绑定-->
+                    </div>
+                    <div class="bind clearfix" v-if="showBindMobile">
+                      <div class="bind-form">
+                          <p><span>{{$t('account.user_center_phone')}}：<!--手机号--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p v-if="mobileState == 1 || readonly">
+                            {{mobileFormData.phoneNumber}}
+                          </p>
+                          <p v-if="mobileState == 0 && !readonly">
+                              <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
+                              <em class="error">
+                                <template v-if="errors.firstRule('phoneNumber')==='required'">{{$t('public0.public6')}}</template>
+                                <template v-if="errors.firstRule('phoneNumber')==='telphone'">{{$t(errors.first('phoneNumber'))}}</template>
+                              </em>
+                          </p>
+                          <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p>
+                              <input :class="{error: errors.has('phonepassword')}" type="password" v-model="mobileFormData.phonepassword" v-validate="'required'" data-vv-name="phonepassword"/>
+                              <em class="error">
+                                <template v-if="errors.firstRule('phonepassword')==='required'">{{$t('login_register.password')}}</template>
+                              </em>
+                          </p>
+                          <p><span>{{$t('account.user_center_SMS_code')}}：<!--短信验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p>
+                              <input :class="{error: errors.has('smsCode')}" type="text" maxlength="6" v-model="mobileFormData.smsCode" v-validate="'required|pInteger'" data-vv-name="smsCode" style="width:64px;"/>
+                              <button :class="{disabled:btnDisabled}" @click="sendSMSCode">{{$t('account.user_center_send_SMS')}}<!--发送验证码-->{{disabled ? `（${time}s）` : ''}}</button>
+                              <em class="error">
+                                <template v-if="errors.firstRule('smsCode')==='required'">{{$t('login_register.verify_code')}}</template>
+                                <template v-if="errors.firstRule('smsCode')==='pInteger'">{{$t(errors.first('smsCode'))}}</template>
+                              </em>
+                          </p>
+                      </div>
+                    </div>
+                </div>
+                <div class="google-content-right">
+                    <input type="button" v-if="mobileState === 0 && !showBindMobile" :value="$t('account.user_center_operate_bind')" @click="showBindMobile=true"/><!--绑定-->
+                    <input v-if="mobileState == 1 && !showBindMobile" type="button" :value="$t('account.user_center_operate_unbind')" @click="clickShowBindMobile"/><!--解绑-->
+                    <template v-if="showBindMobile">
+                      <input type="button" :value="$t('exchange.exchange_determine')" @click="bindMobile"/><!--确定-->
+                      <br/>
+                      <input class="cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="showBindMobile=false"/><!--取消-->
+                    </template>
+                </div>
+            </div>
+        </div>
+        <!--短信验证 end-->
+    </div>
+</template>
+<script>
+import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
+import userApi from '@/api/individual'
+import myApi from '@/api/user'
+import utils from '@/assets/js/utils'
+import changepwd from '@/public/dialog/changepwd'
+export default {
+  data () {
+    return {
+      delayedShow: false,
+      googleState: 0,
+      mobileState: 0,
+      pwdLevel: null,
+      bindGoogleFormData: {
+        key: '',
+        verifyCode: '',
+        password: ''
+      },
+      unbindGoogleFormData: {
+        verifyCode: '',
+        password: ''
+      },
+      showUnbindGoogleButton: false,
+      showUnbindGoogleForm: false,
+      mobileFormData: {
+        phoneNumber: '',
+        phonepassword: '',
+        smsCode: ''
+      },
+      showBindMobile: false,
+      disabled: false,
+      readonly: false,
+      time: 60
+    }
+  },
+  computed: {
+    ...mapGetters(['getUserInfo']),
+    errorsInfo () {
+      let info = {}
+      this.errors.has('password') && (info.password = this.$t('login_register.password')) // 请输入密码
+      this.errors.firstRule('verifyCode') === 'required' && (info.code = this.$t('login_register.verify_code')) // 请输入验证码
+      this.errors.firstRule('verifyCode') === 'pInteger' && (info.code = this.$t('error_code.NUMERIC')) // 输入类型必须为数字
+      return info
+    },
+    pwdLevelInfo () {
+      if (this.pwdLevel === 2) {
+        return {
+          css: 'middle',
+          text: this.$t('public0.public194_Medium') // 中
+        }
+      } else if (this.pwdLevel === 3) {
+        return {
+          css: 'high',
+          text: this.$t('public0.public194_High') // 高
+        }
+      } else {
+        return {
+          css: 'low',
+          text: this.$t('public0.public194_Low') // 低
+        }
+      }
+    },
+    btnDisabled () {
+      if (this.mobileFormData.phoneNumber === '') {
+        return true
+      } else if (this.errors.has('phoneNumber')) {
+        return true
+      } else {
+        return this.disabled
+      }
+    }
+  },
+  created () {
+    this.fnUserState()
+    this.getMyUserInfo()
+  },
+  methods: {
+    ...mapActions(['setUserInfo']),
+    fnUserState () { // 获取当前用户状态信息
+      userApi.getUserState((data) => {
+        this.googleState = data.googleState
+        this.mobileState = data.mobileAuthState
+        this.pwdLevel = Number(data.passwdLevel)
+        this.showUnbindGoogleButton = data.googleState === 1
+        if (data.googleState === 0) {
+          userApi.createGoogleKey((res) => {
+            this.bindGoogleFormData.key = res.key
+            var qrCode = `otpauth://totp/${res.company}:${this.getUserInfo.username}?secret=${res.key}&issuer=${res.company}`
+            utils.qrcode(this.$refs.qrcode, {
+              width: 150,
+              height: 150,
+              text: qrCode
+            })
+          }, (msg) => {
+            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          })
+        }
+        this.delayedShow = true
+      }, (msg) => {
+        console.error(msg)
+      })
+    },
+    changepwdDialog () { // 修改密码
+      utils.setDialog(changepwd)
+    },
+    fnShowUnbindGoogleForm () { // 显示解除谷歌二次验证的内容
+      this.showUnbindGoogleButton = !this.showUnbindGoogleButton
+      this.showUnbindGoogleForm = !this.showUnbindGoogleForm
+    },
+    bindGoogleAuth () { // 绑定谷歌二次验证
+      this.$validator.validateAll(this.bindGoogleFormData).then((validResult) => {
+        if (!validResult) {
+          return
+        }
+        let formData = {}
+        for (let i in this.bindGoogleFormData) {
+          formData[i] = this.bindGoogleFormData[i]
+        }
+        formData.password = utils.encryptPwd(formData.password)
+        userApi.bindGoogleAuth(formData, (msg) => {
+          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+          this.bindGoogleFormData = {key: '', verifyCode: '', password: ''}
+          this.fnUserState()
+        }, (msg) => {
+          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        })
+      })
+    },
+    unbindGoogleAuth () { // 解除谷歌二次验证
+      this.$validator.validateAll(this.unbindGoogleFormData).then((validResult) => {
+        if (!validResult) {
+          return
+        }
+        let formData = {}
+        for (let i in this.unbindGoogleFormData) {
+          formData[i] = this.unbindGoogleFormData[i]
+        }
+        formData.password = utils.encryptPwd(formData.password)
+        userApi.unbindGoogleAuth(formData, (msg) => {
+          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+          this.unbindGoogleFormData = {verifyCode: '', password: ''}
+          this.fnUserState()
+          this.showUnbindGoogleForm = false
+        }, (msg) => {
+          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        })
+      })
+    },
+    clickShowBindMobile () {
+      Vue.$confirmDialog({
+        content: this.$t('public0.public245'), // 为了您的资产安全，不建议您解除手机短信验证码功能。
+        okCallback: () => {
+          this.showBindMobile = true
+        }
+      })
+    },
+    bindMobile () {
+      this.$validator.validateAll(this.mobileFormData).then((validResult) => {
+        if (!validResult) {
+          return
+        }
+        let formData = {}
+        for (let i in this.mobileFormData) {
+          formData[i] = this.mobileFormData[i]
+        }
+        formData.password = formData.phonepassword
+        delete formData.phonepassword
+        formData.password = utils.encryptPwd(formData.password)
+        if (Number(this.mobileState) === 1) {
+          userApi.unbindMobile(formData, (msg) => {
+            this.showBindMobile = false
+            this.disabled = false
+            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+            this.mobileFormData = {
+              phoneNumber: '',
+              phonepassword: '',
+              smsCode: ''
+            }
+            this.fnUserState()
+            this.getMyUserInfo()
+          }, (msg) => {
+            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          })
+          return
+        }
+        userApi.bindMobile(formData, (msg) => {
+          this.showBindMobile = false
+          this.disabled = false
+          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+          this.mobileFormData = {
+            phoneNumber: '',
+            phonepassword: '',
+            smsCode: ''
+          }
+          this.fnUserState()
+          this.getMyUserInfo()
+        }, (msg) => {
+          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        })
+      })
+    },
+    getMyUserInfo () {
+      myApi.getUserInfo((userInfo) => {
+        if (userInfo.mobile) {
+          this.readonly = true
+        } else {
+          this.readonly = false
+        }
+        this.mobileFormData.phoneNumber = userInfo.mobile
+        this.setUserInfo(userInfo)
+      }, (msg) => {
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+      })
+    },
+    sendSMSCode () {
+      if (this.btnDisabled) {
+        return
+      }
+      this.disabled = true
+      userApi.sendAuthSMSCode({
+        phoneNumber: this.mobileFormData.phoneNumber
+      }, (msg) => {
+        let timeOut = () => {
+          this.time--
+          if (this.time === 0) {
+            this.disabled = false
+            this.time = 60
+            return
+          }
+          setTimeout(timeOut, 1000)
+        }
+        this.time = 60
+        setTimeout(timeOut, 1000)
+        Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+      }, (msg) => {
+        this.disabled = false
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+      })
+    }
+  }
+}
+</script>
+<style>
+.safety h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
+.safety .cellphone h3{font-size: 0;line-height: 0;text-indent: 0;}
+.safety .cellphone h3 .text{display: inline-block;height: 24px;font-size: 14px;line-height: 24px;text-indent: 8px;}
+.cellphone-tips{display: inline-block;margin-top: 6px;margin-left: 6px;}
+.cellphone-tips .tips-container{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;}
+.secretkey-tips .tips-icon,
+.cellphone-tips .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}
+.secretkey-tips .tips-text,
+.cellphone-tips .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
+.secretkey-tips .tips-text:before,
+.cellphone-tips .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
+.secretkey-tips .tips-icon:hover + .tips-text,
+.cellphone-tips .tips-icon:hover + .tips-text{display: block;}
+.secretkey{display: flex;align-items: center;}
+.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #404b69;}
+.secretkey .secretkey-tips{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;margin-left: 6px;}
+.secretkey .secretkey-tips .tips-icon{background-color: #e53f3f;}
+
+.password{background-color: #222121;}
+.password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px;}
+.password-level-left{font-size: 0;line-height: 0;}
+.password-level-left img{margin-right: 50px;vertical-align: middle;}
+.password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #becbe8;vertical-align: middle;}
+.password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #100E0E;border-radius: 8px;}
+.password-level-left .state span{display: block;height: 16px;font-size: 14px;line-height: 16px;color: #fff;text-align: center;border-radius: 8px;}
+.password-level-left .state span.low{width: 70px;background-color: #e76d42;}
+.password-level-left .state span.middle{width: 140px;background-color: #e76d42;}
+.password-level-left .state span.high{width: 210px;background-color: #03c087;}
+.password-level-right input{min-width: 140px;height: 30px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
+.password-level-right input:hover{background-color: #15c9ff;}
+
+.google{margin-top: 8px;background-color: #222121;}
+.google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px;}
+.google-content-left{font-size: 0;line-height: 0;}
+.google-content-left img{margin-right: 50px;vertical-align: middle;}
+.google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #becbe8;vertical-align: middle;}
+.google-content-center .state{color: #becbe8;}
+.google-content-center .bind-qrcode{float: left;width: 150px;height: 150px;padding: 10px;background-color: #ccc;}
+.google-content-center .bind-form{float: left;width: 200px;padding-left: 24px;}
+.cellphone .google-content-center .bind-form{padding-left: 0;}
+.google-content-center .bind-form p,
+.google-content-center .unbind-form p{min-height: 24px;line-height: 24px;color: #becbe8;}
+.google-content-center .bind-form input,
+.google-content-center .unbind-form input{width: 190px;height: 22px;color: #becbe8;vertical-align: top;background-color: transparent;border: 1px solid #becbe8;}
+.google-content-center .bind-form input.error,
+.google-content-center .unbind-form input.error{border-color: #e53f3f;}
+.google-content-center .bind-form em.asterisk,
+.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.google-content-center .bind-form em.error,
+.google-content-center .unbind-form em.error{display: block;height: 24px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
+.google-content-center button{width:120px;height:24px;padding: 0;color:#fff;background-color:#11a8fe;border-radius:4px;cursor:pointer;}
+.google-content-center button:hover{background-color: #15c9ff;}
+.google-content-center button.disabled,
+.google-content-center button.disabled:hover{background-color:#999;cursor:not-allowed;}
+.google-content-right input{min-width: 140px;height: 30px;padding: 0px 30px;color: #fff;text-align: center;vertical-align: top;border-radius: 4px;background-color: #11a8fe;cursor: pointer;}
+.google-content-right input:hover{background-color: #15c9ff;}
+.google-content-right input.cancel{margin-top:4px;color:#11a8fe;background-color:transparent;border:1px solid #11a8fe;}
+.google-content-right input.cancel:hover{color:#15c9ff;border-color:#15c9ff;}
+</style>
+
+
