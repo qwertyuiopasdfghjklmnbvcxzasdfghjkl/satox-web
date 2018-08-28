@@ -322,17 +322,15 @@ const formatSystemMessage = function (msg, isI18n) {
   if (isI18n === false) {
     return msg
   }
+  let lang = this.$store.getters['getLang']
+  let errorCodes = window.$i18n.getLocaleMessage(lang)['error_code']
   msg = (msg || '').split(' ')
   let joinSplit = ' '
-  if (msg.length === 1) {
-    joinSplit = ''
-    msg[0] = this.$t('error_code.' + msg[0])
-  } else if (msg.length === 2) {
-    msg[1] = this.$t('error_code.' + msg[1])
-  } else if (msg.length === 3) {
-    msg[0] = this.$t('error_code.' + msg[0])
-    msg[2] = this.$t('error_code.' + msg[2])
-  }
+  msg.forEach((m, index) => {
+    if (errorCodes[m]) {
+      msg[index] = errorCodes[m]
+    }
+  })
   return msg.join(joinSplit)
 }
 utils.formatSystemMessage = formatSystemMessage
