@@ -6,17 +6,20 @@ import VueI18n from 'vue-i18n'
 import App from './App'
 import router from './router'
 import store from '@/vuex'
+import Vtip from '@/assets/js/vtip.min'
 import '@/components/dialog'
 import '@/components/confirm'
 import '@/components/messageTipBox'
 import '@/assets/js/vee-validate'
 import '../node_modules/hopscotch/dist/css/hopscotch.min.css'
+import 'vtip/lib/index.min.css'
 import '@/assets/css/style.css'
 import '@/assets/css/mian.css'
 import langApi from '@/api/language'
 
 Vue.use(VeeValidate)
 Vue.use(VueI18n)
+Vue.use(Vtip.directive)
 let i18n = window.$i18n = new VueI18n({
   locale: 'en',
   messages: {

@@ -54,3 +54,7 @@ div.hopscotch-bubble h3,div.hopscotch-bubble .hopscotch-content{color:#aeb7d0;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {
     body{font-size: 12px;}
 }
+
+.v-tip-container{color:#181b2a;background:#FFF;border-color:#FFF;box-shadow:none;-webkit-box-shadow:none;padding:4px 8px;}
+.v-tip-container .v-tip-arrows[class*=' top-']::after, .v-tip-container .v-tip-arrows[class^=top-]::after{border-top:#FFF;}
+.v-tip-container .v-tip-content{line-height:inherit;}

@@ -28,8 +28,11 @@
                       <span>{{$t('otc_ad.otc_ad_Premium')}}<!--溢价-->：</span>
                       <div class="tips">
                         <span class="tips-container">
-                          <i class="tips-icon">?</i>
-                          <em class="tips-text">{{$t('otc_exchange.otc_exchange_price_float_rate')}}<!--对交易所价格的浮动比例--></em>
+                          <i class="tips-icon" v-tip.top="tip1">?</i>
+                          <!--对交易所价格的浮动比例-->
+                          <!--
+                          <em class="tips-text">{{$t('otc_exchange.otc_exchange_price_float_rate')}}</em>
+                          -->
                         </span>
                       </div>
                     </label>
@@ -96,8 +99,11 @@
                       <span>{{$t('otc_ad.otc_ad_maximum_orders')}}<!--最大处理订单数-->：<em class="asterisk">&nbsp;*</em></span>
                       <div class="tips">
                         <span class="tips-container">
-                          <i class="tips-icon">?</i>
-                          <em class="tips-text">{{$t('otc_ad.otc_ad_max_uncompleted_orders')}}<!--单个广告可同时存在的未完成订单最大数量--></em>
+                          <i class="tips-icon" v-tip.top="tip2">?</i>
+                          <!--单个广告可同时存在的未完成订单最大数量-->
+                          <!--
+                          <em class="tips-text">{{$t('otc_ad.otc_ad_max_uncompleted_orders')}}</em>
+                          -->
                         </span>
                       </div>
                     </label>
@@ -113,8 +119,11 @@
                       <span>{{$t('otc_exchange.otc_exchange_Good_rating')}}<!--好评率-->：<em class="asterisk">&nbsp;*</em></span>
                       <div class="tips">
                         <span class="tips-container">
-                          <i class="tips-icon">?</i>
-                          <em class="tips-text">{{$t('otc_exchange.otc_exchange_good_rating')}}<!--要求对手方好评率必须大于此设定值--></em>
+                          <i class="tips-icon" v-tip.top="tip3">?</i>
+                          <!--要求对手方好评率必须大于此设定值-->
+                          <!--
+                          <em class="tips-text">{{$t('otc_exchange.otc_exchange_good_rating')}}</em>
+                          -->
                         </span>
                       </div>
                     </label>
@@ -193,6 +202,27 @@ export default {
   },
   computed: {
     ...mapGetters(['getLang']),
+    tip1 () {
+      return {
+        container: document.body,
+        zIndex: 9999999,
+        content: this.$t('otc_exchange.otc_exchange_price_float_rate')
+      }
+    },
+    tip2 () {
+      return {
+        container: document.body,
+        zIndex: 9999999,
+        content: this.$t('otc_ad.otc_ad_max_uncompleted_orders')
+      }
+    },
+    tip3 () {
+      return {
+        container: document.body,
+        zIndex: 9999999,
+        content: this.$t('otc_exchange.otc_exchange_good_rating')
+      }
+    },
     msgs () {
       return {
         lowest_price: {required: this.$t('public0.public113')}, // 请输入单价
