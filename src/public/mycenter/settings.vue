@@ -175,7 +175,7 @@
                   </div>
                   <div class="have-set" v-if="paypalData.paypal_number">
                     <p class="wechat_name">{{$t('otc_legal.otc_legal_Payee_Name')}}<!--收款人姓名-->：{{paypalData.paypal_name}}</p>
-                    <p class="wechat_number">{{$t('otc_legal.public221')}}<!--PayPal账号-->：{{paypalData.paypal_number}}</p>
+                    <p class="wechat_number">{{$t('public0.public221')}}<!--PayPal账号-->：{{paypalData.paypal_number}}</p>
                   </div>
                 </div>
                 <div class="form-flex-right">
