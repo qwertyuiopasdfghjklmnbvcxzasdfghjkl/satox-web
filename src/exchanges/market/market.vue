@@ -19,7 +19,7 @@
                       <em class="list1-collection icon-star-full" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                       <span class="list1-col list1-currency">
                           <em class="list1-currency-icon">
-                            <img :src="`/static/images/coin-small-icons/${data.currencySymbol.toLowerCase()}.png`"/>
+                            <img :src="`${origin}${data.iconUrl}`"/>
                           </em>
                           <font>{{data.currencySymbol}}</font>
                       </span>
@@ -73,6 +73,7 @@ import numUtils from '@/assets/js/numberUtils'
 import marketApi from '@/api/market'
 import loading from '@/components/loading'
 import utils from '@/assets/js/utils'
+import config from '@/assets/js/config'
 export default {
   props: {
     symbol: null,
@@ -86,6 +87,7 @@ export default {
   },
   data () {
     return {
+      origin: config.origin,
       isList1: true,
       isShowMarketTip: false,
       sortActive: 'market',
@@ -154,10 +156,7 @@ export default {
     marketConfig () {
       let config = {}
       this.products.forEach((item) => {
-        config[item.market] = {
-          minAmount: item.minAmount,
-          minQuantity: item.minQuantity
-        }
+        config[item.market] = item
       })
       return utils.isPlainEmpty(config) ? null : config
     },
