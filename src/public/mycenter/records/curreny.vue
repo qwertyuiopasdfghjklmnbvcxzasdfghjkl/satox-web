@@ -211,8 +211,8 @@ export default {
 
 .curreny .record{background-color: #222121;}
 .curreny .record ul{padding-left: 8px;padding-right: 8px;}
-.curreny .record ul li{height: 32px;line-height: 32px;border-bottom: 1px solid #404b69;}
-.curreny .record ul li span{display: inline-block;font-size: 12px;color: #8b94a9;}
+.curreny .record ul li{border-bottom: 1px solid #404b69;}
+.curreny .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
 .curreny .record ul li span.time{width: 160px;}
 .curreny .record ul li span.market{width: 100px;}
 .curreny .record ul li span.type{width: 80px;}

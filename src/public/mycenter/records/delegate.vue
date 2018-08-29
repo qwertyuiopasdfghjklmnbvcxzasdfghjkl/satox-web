@@ -373,8 +373,8 @@ export default {
 
 .delegate .record{background-color: #222121;}
 .delegate .record ul{padding-left: 8px;padding-right: 8px;}
-.delegate .record ul li{height: 32px;line-height: 32px;border-bottom: 1px solid #404b69;}
-.delegate .record ul li span{display: inline-block;font-size: 12px;color: #8b94a9;}
+.delegate .record ul li{border-bottom: 1px solid #404b69;}
+.delegate .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
 
 .delegate .entrust-current ul li span.time{width: 140px;}
 .delegate .entrust-current ul li span.market{width: 100px;}
@@ -385,12 +385,12 @@ export default {
 .delegate .entrust-current ul li span.sum{width: 140px;}
 .delegate .entrust-current ul li span.operation{width: 60px;}
 
-.delegate .entrust-history ul li span.entrustTime{width: 120px;}
+.delegate .entrust-history ul li span.entrustTime{width: 140px;}
 .delegate .entrust-history ul li span.market{width: 80px;}
 .delegate .entrust-history ul li span.type{width: 60px;}
 .delegate .entrust-history ul li span.price{width: 120px;}
 .delegate .entrust-history ul li span.avgPrice{width: 120px;}
-.delegate .entrust-history ul li span.tradeVolume{width: 150px;}
+.delegate .entrust-history ul li span.tradeVolume{width: 130px;}
 .delegate .entrust-history ul li span.volume{width: 120px;}
 .delegate .entrust-history ul li span.tradeSum{width: 120px;}
 .delegate .entrust-history ul li span.status{width: 60px;}
