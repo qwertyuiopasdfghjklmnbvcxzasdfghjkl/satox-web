@@ -339,6 +339,7 @@ export default {
         this.params.total = res.total
         this.loading = false
       }, (msg) => {
+        this.loading = false
         console.error(msg)
       })
     },

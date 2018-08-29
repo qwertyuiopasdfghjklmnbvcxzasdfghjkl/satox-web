@@ -179,6 +179,7 @@ export default {
         this.cDatas = res
         this.currentLoading = false
       }, (msg) => {
+        this.currentLoading = false
         console.error(msg)
       })
     },
@@ -207,6 +208,7 @@ export default {
         this.formData.total = res.total
         this.historyLoading = false
       }, (msg) => {
+        this.historyLoading = false
         console.error(msg)
       })
     },
