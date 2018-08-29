@@ -2,7 +2,7 @@
     <div class="coininfo" :class="{show:isShow}">
         <div class="coininfo-top">
             <div class="coininfo-top-left">
-                <img class="coin-icon" :src="`/static/images/coin-large-icons/${currentSymbol.toLowerCase()}.png`"/>
+                <img class="coin-icon" :src="iconUrl"/>
                 <span class="coin-title">
                     <span>{{currentSymbol}}<font>({{currentSymbol}})</font></span>
                     <span>
@@ -45,7 +45,7 @@ import { mapGetters, mapActions } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import marketApi from '@/api/market'
 export default {
-  props: ['currentSymbol', 'isShow'],
+  props: ['currentSymbol', 'isShow', 'iconUrl'],
   data () {
     return {
       symbolInfo: {}
