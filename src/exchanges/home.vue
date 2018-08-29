@@ -9,7 +9,7 @@
               <div class="top-left-header">
                 <ul>
                   <li class="last-item">
-                    <img class="symbol-icon" :src="`/static/images/coin-small-icons/${currentSymbol.toLowerCase()}.png`"/>
+                    <img class="symbol-icon" :src="iconUrl"/>
                     <span>{{currentSymbol}}/{{baseSymbol}}</span>
                     <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em>
                   </li>
@@ -40,7 +40,7 @@
                 </ul>
               </div>
               <div class="market-container">
-                <market ref="kline" :klineData="klineData" :currentSymbol="currentSymbol" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
+                <market ref="kline" :iconUrl="iconUrl" :klineData="klineData" :currentSymbol="currentSymbol" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
               </div>
             </div>
             <div class="home-center-bottom">
@@ -66,6 +66,7 @@ import KLineWebSocket from '@/assets/js/websocket'
 import marketApi from '@/api/market'
 import numUtils from '@/assets/js/numberUtils'
 import { mapGetters, mapActions } from 'vuex'
+import config from '@/assets/js/config'
 let chartSettings = window.localStorage.getItem('chartSettings')
 chartSettings && (chartSettings = JSON.parse(chartSettings))
 
@@ -94,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues']),
+    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig']),
     baseSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
@@ -124,6 +125,15 @@ export default {
       } else {
         return '0.00'
       }
+    },
+    iconUrl () {
+      if (!this.getMarketConfig) {
+        return null
+      }
+      if (!this.getMarketConfig[this.symbol]) {
+        return null
+      }
+      return config.origin + this.getMarketConfig[this.symbol].iconUrl
     }
   },
   watch: {

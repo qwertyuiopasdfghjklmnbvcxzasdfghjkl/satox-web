@@ -1,6 +1,6 @@
 <template>
   <div class="market" :class="[fullscreen && fullscreen.isFullscreen ? 'marketfull' : '']">
-      <coininfo :currentSymbol="currentSymbol" :isShow="isShowCoinInfo"/>
+      <coininfo :iconUrl="iconUrl" :currentSymbol="currentSymbol" :isShow="isShowCoinInfo"/>
       <div class="left" v-if="canvasStyles.active==='kline'">
         <ul class="drawtools">
           <li v-for="item in drawtools.datas" :key="item.id" v-show="hideDrawItem(item.key)" class="drawicon" @click="drawtoolsActive=item.key"
@@ -79,6 +79,7 @@ export default {
       default: ''
     },
     currentSymbol: null,
+    iconUrl: null,
     klineData: {
       type: Array,
       defualt: () => {
