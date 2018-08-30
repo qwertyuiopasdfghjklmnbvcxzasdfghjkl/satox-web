@@ -24,7 +24,7 @@
                 </li>
             </ul>
             <ul class="list">
-                <li class="list-item" v-for="(item, index) in datas" :key="index">
+                <li class="list-item" v-for="(item, index) in sortDatas" :key="index">
                     <span class="list-col col-currency">{{item.symbol}}</span><!--币种-->
                     <span class="list-col col-sum">{{toFixed(item.totalBalance).toMoney()}}</span><!--总金额-->
                     <span class="list-col col-balance">{{toFixed(item.availableBalance).toMoney()}}</span><!--可用余额-->
@@ -110,6 +110,17 @@ export default {
         }
       })
       return w
+    },
+    sortDatas () {
+      let ndatas = this.datas.sort((item1, item2) => {
+        let m1 = numUtils.BN(item1.totalBalance)
+        let m2 = numUtils.BN(item2.totalBalance)
+        if (m1.equals(m2)) {
+          return 0
+        }
+        return this.sort === 'asc' ? (m1.gt(m2) ? -1 : 1) : (m1.lt(m2) ? -1 : 1)
+      })
+      return ndatas
     }
   },
   watch: {

@@ -366,7 +366,7 @@ export default {
 .menu-arrow.unfold i{color: #FFDE00;}
 .menu-title{
   float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-left: 2px;font-size: 16px;
-  line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #1b1e2e;cursor: pointer;
+  line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
 }
 .menu-title:first-of-type{margin-left:40px;}
 .menu-title:hover,

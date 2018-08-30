@@ -23,26 +23,46 @@
                 <ul class="accountInfo-lists">
                     <li class="th">
                         <div class="items">
-                            <div class="coin ng-binding">
+                            <div class="coin ng-binding" @click="sortAssets('symbol')">
                                 {{$t('account.estimated_value_coin')}}<!--币种-->
-                                <div class="icon-checkbox f-fl" @click="hideZero=!hideZero">
+                                <em v-if="sortActive==='symbol'">
+                                  <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                                  <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                                </em>
+                                <div class="icon-checkbox f-fl" @click.stop="hideZero=!hideZero">
                                     <em  :class="[hideZero?'icon-checkbox-checked':'icon-checkbox-unchecked']"></em>
                                     <label class="ng-binding">
                                       {{$t('account.estimated_value_hide')}}<!--隐藏-->&nbsp;0&nbsp;{{$t('account.estimated_value_balances')}}<!--金额-->
                                     </label>
                                 </div>
                             </div>
-                            <div class="fullName ng-binding">
+                            <div class="fullName ng-binding" @click="sortAssets('fullName')">
                               {{$t('account.estimated_value_name')}}<!--全称-->
+                              <em v-if="sortActive==='fullName'">
+                                <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
+                                <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
+                              </em>
                             </div>
-                            <div class="total f-right ng-binding">
+                            <div class="total f-right ng-binding" @click="sortAssets('total')">
                               {{$t('account.estimated_value_total')}}<!--总金额-->
+                              <em v-if="sortActive==='total'">
+                                <i class="icon-arrow-up" :class="{active:sort==='desc'}"></i>
+                                <i class="icon-arrow-down" :class="{active:sort==='asc'}"></i>
+                              </em>
                             </div>
-                            <div class="useable f-right ng-binding">
+                            <div class="useable f-right ng-binding" @click="sortAssets('available')">
                               {{$t('account.estimated_value_available')}}<!--可用余额-->
+                              <em v-if="sortActive==='available'">
+                                <i class="icon-arrow-up" :class="{active:sort==='desc'}"></i>
+                                <i class="icon-arrow-down" :class="{active:sort==='asc'}"></i>
+                              </em>
                             </div>
-                            <div class="locked f-right ng-binding">
+                            <div class="locked f-right ng-binding" @click="sortAssets('frozen')">
                               {{$t('public0.public34')}}<!--冻结金额-->
+                              <em v-if="sortActive==='frozen'">
+                                <i class="icon-arrow-up" :class="{active:sort==='desc'}"></i>
+                                <i class="icon-arrow-down" :class="{active:sort==='asc'}"></i>
+                              </em>
                             </div>
                             <div class="opreat f-right ng-binding">
                               {{$t('otc_exchange.otc_exchange_operating')}}<!--操作-->
@@ -83,6 +103,8 @@ import loading from '@/components/loading'
 export default {
   data () {
     return {
+      sortActive: null,
+      sort: null,
       isFrozen: false,
       frozenText: null,
       showLoaing: true,
@@ -101,7 +123,7 @@ export default {
   computed: {
     ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign']),
     filterDatas () {
-      return this.myAssets.filter((item) => {
+      let ndatas = this.myAssets.filter((item) => {
         if (this.hideZero) {
           if (this.filterTitle) {
             return (item.caption.toUpperCase().indexOf(this.filterTitle.toUpperCase()) !== -1 || item.symbol.indexOf(this.filterTitle.toUpperCase()) !== -1) && numUtils.BN(item.availableBalance).toString() !== numUtils.BN(0).toString()
@@ -114,6 +136,39 @@ export default {
           return true
         }
       })
+      ndatas.sort((item1, item2) => {
+        if (this.sortActive === 'symbol') {
+            let m1 = item1.symbol
+            let m2 = item2.symbol
+            return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
+          } else if (this.sortActive === 'fullName') {
+            let m1 = this.$t(`symbol.${item1.symbol}`)
+            let m2 = this.$t(`symbol.${item2.symbol}`)
+            return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
+          } else if (this.sortActive === 'available') {
+            let m1 = numUtils.BN(item1.availableBalance)
+            let m2 = numUtils.BN(item2.availableBalance)
+            if (m1.equals(m2)) {
+              return 0
+            }
+            return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
+          } else if (this.sortActive === 'frozen') {
+            let m1 = numUtils.BN(item1.frozenBalance)
+            let m2 = numUtils.BN(item2.frozenBalance)
+            if (m1.equals(m2)) {
+              return 0
+            }
+            return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
+          } else {
+            let m1 = numUtils.BN(item1.totalBalance)
+            let m2 = numUtils.BN(item2.totalBalance)
+            if (m1.equals(m2)) {
+              return 0
+            }
+            return this.sort === 'asc' ? (m1.gt(m2) ? -1 : 1) : (m1.lt(m2) ? -1 : 1)
+          }
+      })
+      return ndatas
     },
     USDCNY () {
       return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2).toMoney()
@@ -143,6 +198,14 @@ export default {
     })
   },
   methods: {
+    sortAssets (active) {
+      if (active === this.sortActive) {
+        this.sort = this.sort === 'asc' ? 'desc' : 'asc'
+      } else {
+        this.sortActive = active
+        this.sort = 'asc'
+      }
+    },
     switchTab (tab) {
       this.$emit('switchTab', tab)
     },
@@ -195,6 +258,11 @@ export default {
 .balance_search .f-fr .limit span{color: #11a8fe;text-decoration: underline;cursor: pointer;}
 .balance_search .f-fr .limit span:hover{color: #15c9ff;}
 .accountInfo-lists{padding: 0 8px 40px 8px;}
+.accountInfo-lists li.th > .items > div{align-items:center;}
+.accountInfo-lists li.th > .items > div > em{position:relative;display:inline-block;width:8px;height:26px;line-height:0px;flex:initial;display:flex;margin-left:2px;}
+.accountInfo-lists li.th > .items > div > em i{position:absolute;top:0px;left:0px;}
+.accountInfo-lists li.th > .items > div > em i.icon-arrow-down{top:inherit;bottom:0px;}
+.accountInfo-lists li.th > .items > div > em i.acitve{color:#FFDE00;}
 .accountInfo-lists li{padding: 0;border-bottom: 1px solid #404b69;}
 .accountInfo-lists li a{color: #eeba42;}
 .accountInfo-lists li a:hover a{text-decoration: underline;}
@@ -210,10 +278,10 @@ export default {
 .accountInfo-lists li .items>div .disabled{cursor: not-allowed;color: #ababab;}
 .accountInfo-lists li .items>div .disabled:hover{color: #ababab;}
 .accountInfo-lists li .items>div .active{border: none;color: #11a8fe;}
-.accountInfo-lists li .items>div.coin{width: 224px;text-align: left;}
+.accountInfo-lists li .items>div.coin{flex:1;text-align: left;}
 .accountInfo-lists li .items>div.coin .icon-checkbox{margin-left: 14px;}
 .accountInfo-lists li .items>div.coin img{vertical-align: middle;height: 16px;margin-right: 6px;}
-.accountInfo-lists li .items>div.fullName{width: 140px;}
+.accountInfo-lists li .items>div.fullName{width: 130px;}
 .accountInfo-lists li .items>div.fullName a{color: #666;}
 .accountInfo-lists li .items>div.fullName a:visited{color: #666;}
 .accountInfo-lists li .items>div.coin>img{display: inline-block;width: 20px;height: 20px;vertical-align: middle;}
