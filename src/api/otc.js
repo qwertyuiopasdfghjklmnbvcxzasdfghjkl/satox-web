@@ -106,7 +106,7 @@ otc.uploadImage = uploadImage
 // 下载收款二维码 - 收款方式设置
 const downloadImage = function (type, success, error) {
   // type 2:支付宝，3:微信
-  api.get(`${domain}api/v2/otc/download/${type}`, (res) => {
+  api.get(`${domain}api/v2/otc/download/code/${type}`, (res) => {
     if (res.rst === 1) {
       success && success(`${res.url ? res.url + '?' + Date.now() : ''}`)
     } else {
@@ -119,7 +119,7 @@ otc.downloadImage = downloadImage
 // 下载收款二维码 - 未完成的购买订单
 const downloadImageByUserId = function (type, formData, success, error) {
   // type 2:支付宝，3:微信
-  api.post(`${domain}api/v2/otc/download/${type}`, formData, (res) => {
+  api.post(`${domain}api/v2/otc/download/commonCode/${type}`, formData, (res) => {
     if (res.rst === 1) {
       success && success(res.url)
     } else {
@@ -155,7 +155,7 @@ otc.getPaySettings = getPaySettings
 
 // 获取支付方式，不需要apiToken
 const getPaySettingsNoToken = function (formData, success, error) {
-  api.post(`${domain}api/v2/otc/paytypes`, formData, (res) => {
+  api.post(`${domain}api/v2/otc/paytypes/common`, formData, (res) => {
     if (res.rst === 1) {
       success && success(res || {})
     } else {

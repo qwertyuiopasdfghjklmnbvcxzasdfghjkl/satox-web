@@ -324,6 +324,9 @@ const formatSystemMessage = function (msg, isI18n) {
   }
   let lang = this.$store.getters['getLang']
   let errorCodes = window.$i18n.getLocaleMessage(lang)['error_code']
+  if (!errorCodes) {
+    return msg
+  }
   msg = (msg || '').split(' ')
   let joinSplit = ' '
   msg.forEach((m, index) => {
