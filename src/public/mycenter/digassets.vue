@@ -156,7 +156,7 @@ export default {
         this.myAssets = data
         this.showLoaing = false
       }, (data, msg) => {
-        if (data) {
+        if (data === 1) {
           this.isFrozen = true
           this.frozenText = this.$t(`error_code.${msg}`)
           this.showLoaing = false
