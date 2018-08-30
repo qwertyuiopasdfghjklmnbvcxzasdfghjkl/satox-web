@@ -262,7 +262,7 @@ export default {
 .accountInfo-lists li.th > .items > div > em{position:relative;display:inline-block;width:8px;height:26px;line-height:0px;flex:initial;display:flex;margin-left:2px;}
 .accountInfo-lists li.th > .items > div > em i{position:absolute;top:0px;left:0px;}
 .accountInfo-lists li.th > .items > div > em i.icon-arrow-down{top:inherit;bottom:0px;}
-.accountInfo-lists li.th > .items > div > em i.acitve{color:#FFDE00;}
+.accountInfo-lists li.th > .items > div > em i.active{color:#FFDE00;}
 .accountInfo-lists li{padding: 0;border-bottom: 1px solid #404b69;}
 .accountInfo-lists li a{color: #eeba42;}
 .accountInfo-lists li a:hover a{text-decoration: underline;}
