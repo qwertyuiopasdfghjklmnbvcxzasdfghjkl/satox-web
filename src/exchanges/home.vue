@@ -316,7 +316,7 @@ export default {
 .top-left-header > ul{display:flex;align-items:center;height:100%;}
 .top-left-header-right{flex:1;justify-content:space-between;}
 /*.symbol-icon{background-color:#fff;width:32px;height:32px;border-radius:50%;color:#181b2a;display:flex;justify-content:center;align-items:center;font-size:26px;margin-right:10px;}*/
-.symbol-icon{width:32px;height:32px;margin-right:10px;}
+.symbol-icon{width:32px;height:32px;margin-right:10px;border-radius:50%;}
 .market-symbol{font-size:18px;}
 .last-item{display:flex;padding-right:10px;flex-flow:column;}
 .last-item:not(:first-child){margin-left:40px;justify-self:flex-end;}

@@ -344,7 +344,7 @@ export default {
 /*.list1-currency-icon{font-size:18px;width:22px;height:22px;background-color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .list1-currency-icon::before{color:#181b2a;}*/
 .list1-currency-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
-.list1-currency-icon img{width:100%;height:100%;}
+.list1-currency-icon img{width:100%;height:100%;border-radius:50%;}
 .list1-currency /deep/ font{margin-top:8px;display:block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;width:calc(100% - 4px);padding-right:4px;font-weight:bold;}
 .list1-right{flex:1;display:flex;color:#fff;flex-flow:column;align-items:flex-start;justify-content:center;}
 .list1-percent{font-weight:bold;}
