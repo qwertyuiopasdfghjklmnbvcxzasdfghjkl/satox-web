@@ -132,7 +132,7 @@ export default {
 .coininfo-top{height:80px;margin:40px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;}
 .coininfo-top-left,.coininfo-top-right{display:flex;align-items:center;}
 /*.coin-icon{display:flex;color:#fff;border:4px solid #fff;width:52px;height:52px;font-size:40px;border-radius:50%;justify-content:center;align-items:center;}*/
-.coin-icon{width:53px;height:53px;}
+.coin-icon{width:53px;height:53px;border-radius:50%;}
 .coin-title{display:flex;margin-left:30px;flex-flow:column;}
 .coin-title /deep/ span{font-size:24px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .coin-title /deep/ span:first-child{font-weight:bold;}
