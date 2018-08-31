@@ -19,7 +19,7 @@
                       <em class="list1-collection icon-star-full" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                       <span class="list1-col list1-currency">
                           <em class="list1-currency-icon">
-                            <img :src="`${origin}${data.iconUrl}`"/>
+                            <img :src="data.iconBase64?`data:image/png;base64,${data.iconBase64}`:`${origin}${data.iconUrl}`"/>
                           </em>
                           <font>{{data.currencySymbol}}</font>
                       </span>
@@ -213,10 +213,15 @@ export default {
         let datas = this.products
         let tempObj = {}
         datas.forEach((item) => {
-          tempObj[item.market] = item.collection
+           tempObj[item.market] = item
         })
         res.data.forEach((item) => {
-          item.collection = tempObj[item.market]
+          let d = tempObj[item.market]
+          if (d) {
+            item.collection = d.collection
+            item.iconBase64 = d.iconBase64
+            item.iconUrl = d.iconUrl
+          }
         })
         this.products = res.data
       }
