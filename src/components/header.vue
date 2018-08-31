@@ -21,7 +21,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="https://newtonexchange.zendesk.com/hc/en-us/sections/360002051592-Help" target="_blank">
+                      <a :href="helperUrl" target="_blank">
                         {{$t('public.navigation_support')}}<!--帮助中心-->
                       </a>
                     </li>
@@ -153,6 +153,13 @@ export default {
         }
       }
       return false
+    },
+    helperUrl () {
+      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000871252`
+      } else {
+        return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000871252-Help-Center`
+      }
     }
   },
   watch: {
