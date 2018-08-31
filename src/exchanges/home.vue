@@ -130,10 +130,11 @@ export default {
       if (!this.getMarketConfig) {
         return null
       }
-      if (!this.getMarketConfig[this.symbol]) {
+      let d = this.getMarketConfig[this.symbol]
+      if (!d) {
         return null
       }
-      return config.origin + this.getMarketConfig[this.symbol].iconUrl
+      return d.iconBase64 ? `data:image/png;base64,${d.iconBase64}` : config.origin + d.iconUrl
     }
   },
   watch: {
