@@ -60,7 +60,7 @@
           </li>
           <li class="list-item" v-for="data in datas" :key="data.ad_id">
               <span class="name">
-                  <img :src="data.image_path||avatarUrl" />
+                  <img :src="data.header_image||avatarUrl" />
                   <em :title="data.nickname||data.username">{{data.nickname||data.username}}</em>
               </span>
               <span class="trust">
@@ -106,7 +106,6 @@
 <script>
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
-import userApi from '@/api/individual'
 import otcApi from '@/api/otc'
 import utils from '@/assets/js/utils'
 import numUtils from '@/assets/js/numberUtils'
@@ -338,10 +337,6 @@ export default {
             item.max_amount = utils.removeEndZero(numUtils.BN(item.max_amount).toFixed(8))
           }
           item.remain_count = utils.removeEndZero(numUtils.BN(item.remain_count).toFixed(8))
-          item.image_path = null
-          userApi.downloadHeaderOther(item.from_user_id, (url) => {
-            item.image_path = url
-          })
         })
         this.datas = res.data
         this.params.total = res.total
