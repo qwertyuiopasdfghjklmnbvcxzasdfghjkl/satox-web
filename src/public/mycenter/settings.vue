@@ -323,13 +323,10 @@ export default {
     }
   },
   created () {
-    this.loadData(() => {
-      this.downloadWeChat()
-      this.downloadAlipay()
-    })
+    this.loadData()
   },
   methods: {
-    loadData (callback) {
+    loadData () {
       otcApi.getPaySettings((res) => {
         // 银行卡
         this.bankData = {
@@ -346,23 +343,23 @@ export default {
         this.alipayData = {
           alipay_name: res.real_name,
           alipay_number: res.data.alipay_number,
-          alipay_QRcode: res.data.alipay_QRcode
+          alipay_QRcode: res.data.alipay_image_path
         }
         this.oldAlipayData = {
           alipay_name: res.real_name,
           alipay_number: res.data.alipay_number,
-          alipay_QRcode: res.data.alipay_QRcode
+          alipay_QRcode: res.data.alipay_image_path
         }
         // 微信
         this.wechatData = {
           wechat_name: res.real_name,
           wechat_number: res.data.wechat_number,
-          wechat_QRcode: res.data.wechat_QRcode
+          wechat_QRcode: res.data.wechat_image_path
         }
         this.oldWechatData = {
           wechat_name: res.real_name,
           wechat_number: res.data.wechat_number,
-          wechat_QRcode: res.data.wechat_QRcode
+          wechat_QRcode: res.data.wechat_image_path
         }
         // PayPal
         this.paypalData = {
@@ -478,22 +475,6 @@ export default {
       } else {
         event.target.value = null
       }
-    },
-    downloadWeChat () {
-      // 微信二维码
-      otcApi.downloadImage(3, (url) => {
-        this.oldWechatData.wechat_QRcode = this.wechatData.wechat_QRcode = url
-      }, (msg) => {
-        console.log(msg)
-      })
-    },
-    downloadAlipay () {
-      // 支付宝二维码
-      otcApi.downloadImage(2, (url) => {
-        this.oldAlipayData.alipay_QRcode = this.alipayData.alipay_QRcode = url
-      }, (msg) => {
-        console.log(msg)
-      })
     },
     checkVerifyState (scope) {
       // 检查是否完成实名验证

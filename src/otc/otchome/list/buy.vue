@@ -44,7 +44,7 @@
                 <p>{{formData.pay_type === 2 ? $t('otc_legal.otc_legal_Alipay_number') : $t('otc_legal.otc_legal_Wechat_number')}}：{{payInfo.number}}</p><!--支付宝账号||微信账号-->
             </div>
             <div class="undoneimg" v-if="formData.pay_type !== 1">
-                <img :src="payInfo.url" @click="openQrCode" />
+                <img :src="payInfo.url" @click="openQrCode"/>
             </div>
         </div>
         <div class="undone-center" v-if="item.state === 2">
@@ -160,13 +160,13 @@ export default {
         return {
           name: this.payTypes.real_name,
           number: this.payTypes.data.alipay_number,
-          url: this.payTypes.data.alipay_url
+          url: this.payTypes.data.alipay_image_path
         }
       } else if (this.formData.pay_type === 3) {
         return {
           name: this.payTypes.real_name,
           number: this.payTypes.data.wechat_number,
-          url: this.payTypes.data.wechat_url
+          url: this.payTypes.data.wechat_image_path
         }
       } else {
         return {}
@@ -209,22 +209,6 @@ export default {
       otcApi.getPaySettingsNoToken({
         user_id: this.item.from_user_id
       }, (res) => {
-        res.data.wechat_url = ''
-        res.data.alipay_url = ''
-        if (this.item.pay_type.indexOf(2) !== -1) {
-          otcApi.downloadImageByUserId(2, {
-            user_id: res.data.user_id
-          }, (url) => {
-            res.data.alipay_url = url
-          })
-        }
-        if (this.item.pay_type.indexOf(3) !== -1) {
-          otcApi.downloadImageByUserId(3, {
-            user_id: res.data.user_id
-          }, (url) => {
-            res.data.wechat_url = url
-          })
-        }
         this.payTypes = {
           real_name: res.real_name,
           data: res.data
