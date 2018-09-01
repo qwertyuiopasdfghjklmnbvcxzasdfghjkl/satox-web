@@ -153,18 +153,23 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.password = utils.encryptPwd(formData.password)
-          formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
           this.locked = true
-          userApi.register(formData, (msg) => {
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.register(formData, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+              setTimeout(() => {
+                this.$router.push({name: 'login'})
+              }, 1500)
+            }, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+            })
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-            setTimeout(() => {
-              this.$router.push({name: 'login'})
-            }, 1500)
-          }, (msg) => {
-            this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
           })
         }, () => {
           this.gtLocked = false
