@@ -18,10 +18,6 @@
                 </FormItem>
             </Col>
         </Row>
-        <!-- <FormItem label="中文名全称" prop="captionCN">
-            <Input v-model="formLeft.captionCN" name="captionCN"></Input>
-        </FormItem> -->
-
          <Row>
             <Col span="12">
                 <FormItem label="中文名全称" prop="captionCN">
@@ -46,17 +42,6 @@
                 </FormItem>
             </Col>
         </Row>
-<!-- 
-        <FormItem label="发行总量" prop="captionCN">
-            <Input v-model="formLeft.captionCN" name="captionCN"></Input>
-        </FormItem>
-        <FormItem label="流通总量" prop="captionCN">
-            <Input v-model="formLeft.captionCN" name="captionCN"></Input>
-        </FormItem> -->
-        <!-- <FormItem label="发行价格" prop="captionCN">
-            <Input v-model="formLeft.captionCN" name="captionCN"></Input>
-        </FormItem> -->
-
         <FormItem label="货币类型" prop="flag">
             <RadioGroup ref="flag" v-model="formLeft.flag">
                 <Radio label="1">
@@ -86,19 +71,9 @@
         <FormItem label="ICON" prop="iconFile">
             <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
         </FormItem>
-        <!-- <FormItem label="钱包服务器" prop="symbolServer">
-            <Input v-model="formLeft.symbolServer" name="symbolServer"></Input>
-        </FormItem> -->
         <FormItem label="ERC20合约地址" prop="contractAddr" v-if="this.formLeft.flag === '1'">
             <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
         </FormItem>
-        <!-- <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1'">
-            <Input v-model="formLeft.contractDecimals" name="contractDecimals" ></Input>
-        </FormItem>
-        <FormItem label="最小提币数量" prop="minWithdrawQuantity">
-            <numberbox ref="price" type="text" :min="0.1" name="minWithdrawQuantity" v-model="formLeft.minWithdrawQuantity" style="width100%;border:1px solid #dddee1;"/>
-        </FormItem> -->
-
          <Row>
             <Col span="12">
                  <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1'">
@@ -123,14 +98,6 @@
                 </FormItem>
             </Col>
         </Row>
-
-        <!-- <FormItem label="GASPrice" prop="gasprice" v-if="this.formLeft.symbolType === '2'">
-            <InputNumber style="width:100%;" :min="0.1" name="gasprice" v-model="formLeft.gasprice"></InputNumber>
-        </FormItem>
-        <FormItem label="GASNumber" prop="gaslimit" v-if="this.formLeft.symbolType === '2'">
-            <InputNumber style="width:100%;" :min="0.1" name="gaslimit" v-model="formLeft.gaslimit"></InputNumber>
-        </FormItem> -->
-
         <Row>
             <Col span="12">
                 <FormItem label="GASPrice" prop="gasprice" v-if="this.formLeft.symbolType === '2'">
@@ -143,10 +110,6 @@
                 </FormItem>
             </Col>
         </Row>
-
-        <!-- <FormItem label="上浮百分比" prop="riseRatio">
-            <InputNumber style="width:100%;" :min="0.1" name="riseRatio" v-model="formLeft.riseRatio"></InputNumber>
-        </FormItem> -->
         <FormItem label="充币权限" prop="rechargeFlag">
             <RadioGroup ref="rechargeFlag" v-model="formLeft.rechargeFlag">
                 <Radio label="1">
