@@ -4,7 +4,7 @@
 import api from '@/api'
 import uuid from 'uuid/v1'
 
-let domain = process.env.NODE_ENV === 'development' ? `` : ''
+let domain = ''
 let market = {}
 
 // 市场列表 获取所有产品

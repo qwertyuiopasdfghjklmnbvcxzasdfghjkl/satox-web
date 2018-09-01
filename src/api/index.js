@@ -1,10 +1,10 @@
 import axios from 'axios'
 import JsCookies from 'js-cookie'
-import Config from '@/assets/js/config'
+import config from '@/assets/js/config'
 import userApi from './user'
 import Vue from 'vue'
 
-const DOMAIN = process.env.NODE_ENV === 'development' ? `http://${Config.domain}:80/` : '/'
+const DOMAIN = process.env.NODE_ENV === 'development' ? `http://${config.domain}:80/` : '/'
 
 axios.defaults.baseURL = DOMAIN
 axios.defaults.timeout = 30000

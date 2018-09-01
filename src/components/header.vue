@@ -16,7 +16,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="https://newtonexchange.zendesk.com/hc/en-us/sections/360002051572-Announcements" target="_blank">
+                      <a :href="noticeUrl" target="_blank">
                         {{$t('public.navigation_news')}}<!--公告中心-->
                       </a>
                     </li>
@@ -153,6 +153,13 @@ export default {
         }
       }
       return false
+    },
+    noticeUrl () {
+      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83`
+      } else {
+        return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000905872-Announcement`
+      }
     },
     helperUrl () {
       if (this.getLang === 'zh-CN' || this.getLang === 'cht') {

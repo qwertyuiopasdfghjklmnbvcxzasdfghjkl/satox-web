@@ -82,29 +82,34 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.password = utils.encryptPwd(formData.password)
-          userApi.login(formData, (apiToken, res) => {
-            if (apiToken) {
-              this.setApiToken(apiToken)
-              myAPi.addLoginHistory()
-              return
-            }
-            // 二次验证
-            this.$router.push({
-              name: 'twoverify',
-              params: {
-                username: this.formData.username,
-                type: res.type,
-                mobile: res.mobile
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.login(formData, (apiToken, res) => {
+              if (apiToken) {
+                this.setApiToken(apiToken)
+                myAPi.addLoginHistory()
+                return
+              }
+              // 二次验证
+              this.$router.push({
+                name: 'twoverify',
+                params: {
+                  username: this.formData.username,
+                  type: res.type,
+                  mobile: res.mobile
+                }
+              })
+            }, (msg, rst) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+              if (rst === 300) {
+                this.$router.push({name: 'sendemail', params: {email: this.formData.username}})
+                console.log(this.formData.username)
               }
             })
-          }, (msg, rst) => {
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
-            if (rst === 300) {
-              this.$router.push({name: 'sendemail', params: {email: this.formData.username}})
-              console.log(this.formData.username)
-            }
           })
         }, () => {
           this.gtLocked = false

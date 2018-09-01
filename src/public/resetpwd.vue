@@ -53,19 +53,24 @@ export default {
         for (let i in this.formData) {
           formData[i] = this.formData[i]
         }
-        formData.password = utils.encryptPwd(formData.password)
-        formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
-        userApi.forgetPwdChangePwd(formData, () => {
-          Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 操作成功
-          setTimeout(() => {
-            this.$router.push({name: 'login'})
-          }, 1500)
-        }, (msg) => {
+        userApi.getRsaPublicKey((rsaPublicKey) => {
+          formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+          formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+          formData.rsaPublicKey = rsaPublicKey
+          userApi.forgetPwdChangePwd(formData, () => {
+            Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 操作成功
+            setTimeout(() => {
+              this.$router.push({name: 'login'})
+            }, 1500)
+          }, (msg) => {
+            this.locked = false
+            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+            setTimeout(() => {
+              this.$router.push({name: 'findpwd'})
+            }, 1500)
+          })
+        }, () => {
           this.locked = false
-          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
-          setTimeout(() => {
-            this.$router.push({name: 'findpwd'})
-          }, 1500)
         })
       })
     }

@@ -158,17 +158,22 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.password = utils.encryptPwd(formData.password)
-          formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
-          userApi.mobileResetPwd(formData, () => {
-            Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 邮件发送成功
-            setTimeout(() => {
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.mobileResetPwd(formData, () => {
+              Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 邮件发送成功
+              setTimeout(() => {
+                this.locked = false
+                this.$router.push({name: 'login'})
+              }, 1500)
+            }, (msg) => {
               this.locked = false
-              this.$router.push({name: 'login'})
-            }, 1500)
-          }, (msg) => {
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+            })
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
           })
         }, () => {
           this.gtLocked = false

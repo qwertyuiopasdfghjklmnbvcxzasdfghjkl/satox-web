@@ -78,6 +78,7 @@
 import Vue from 'vue'
 import userUtils from '@/api/wallet'
 import userApi from '@/api/individual'
+import myApi from '@/api/user'
 import numUtils from '@/assets/js/numberUtils'
 import { Validator } from 'vee-validate'
 import numberbox from '@/components/formel/numberbox'
@@ -249,6 +250,7 @@ export default {
         // 二次验证
         utils.setDialog(this.mobileState === 1 ? smswithdraw : googleAuth, {
           authType: 'getCode',
+          isWithdrawal: true,
           okCallback: (code) => {
             let formData = { // 提现
               symbol: this.symbol,
@@ -258,25 +260,32 @@ export default {
               alias: this.alias,
               lang: window.localStorage.getItem('lang') === 'zh-CN' ? 'cn' : 'en'
             }
+            let saveFun = () => {
+              userUtils.walletWithdraw(formData, () => {
+                let msg = typeof code === 'object' && code.type === 1 ? this.$t('message.WITHDRAWALS_SUCCESS') : this.$t('login_register.Mail_sent_successfully')
+                Vue.$koallTipBox({icon: 'success', message: msg}) // 邮件发送成功
+                this.$emit('okCallback')
+                this.$emit('removeDialog')
+              }, (msg) => {
+                Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+              })
+            }
             if (typeof code === 'string') {
               // 谷歌验证提现
               formData.googleCode = code
               formData.type = 0
+              saveFun()
             } else {
               // 手机短信验证提现
               for (let i in code) {
                 formData[i] = code[i]
               }
-              formData.password = utils.encryptPwd(formData.password)
+              myApi.getRsaPublicKey((rsaPublicKey) => {
+                formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+                formData.rsaPublicKey = rsaPublicKey
+                saveFun()
+              })
             }
-            userUtils.walletWithdraw(formData, () => {
-              let msg = typeof code === 'object' && code.type === 1 ? `提现成功` : this.$t('login_register.Mail_sent_successfully')
-              Vue.$koallTipBox({icon: 'success', message: msg}) // 邮件发送成功
-              this.$emit('okCallback')
-              this.$emit('removeDialog')
-            }, (msg) => {
-              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
-            })
           }
         })
       })
