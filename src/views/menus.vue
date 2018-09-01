@@ -29,7 +29,7 @@ export default {
         {id: 'systemconfig', path: 'systemconfig_index', name: '系统参数', menus: systemConfigRouter},
         {id: 'systemcogs', path: 'systemlogs_index', name: '系统日志', menus: systemLogsRouter},
         {id: 'monitoring', path: 'monitoring_index', name: '监控平台', menus: monitoringRouter},
-        // {id: 'fund', path: 'fund_index', name: '平台资金管理', menus: fundRouter}
+        {id: 'fund', path: 'fund_index', name: '平台资金管理', menus: fundRouter}
       ]
     }
   },
