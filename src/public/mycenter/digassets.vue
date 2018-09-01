@@ -2,7 +2,7 @@
     <div class="digassets">
         <h3>{{$t('account.userDigitalAssets')}}<!--我的数字资产--></h3>
         <div class="hcontainer">
-            <div class="chargeWithdraw" v-if="!showLoaing && !isFrozen">
+            <div class="chargeWithdraw" v-if="!showLoaing">
                 <div class="balance_search">
                     <div class="total">
                         {{$t('exchange.exchange_valuation')}}：<!--总当前估值：-->
@@ -84,16 +84,13 @@
                     </li>
                 </ul>
             </div>
-            <div class="frozen-prompt" v-if="!showLoaing && isFrozen">
-              <div class="text">{{frozenText}}</div>
-              <div class="text">{{$t('public0.public111')}}<!--如有疑问，请联系客服。--></div>
-            </div>
             <loading v-if="showLoaing"/>
         </div>
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import userUtils from '@/api/wallet'
@@ -105,8 +102,6 @@ export default {
     return {
       sortActive: null,
       sort: null,
-      isFrozen: false,
-      frozenText: null,
       showLoaing: true,
       hideZero: false,
       filterTitle: '',
@@ -219,13 +214,9 @@ export default {
         this.myAssets = data
         this.showLoaing = false
       }, (data, msg) => {
-        if (data === 1) {
-          this.isFrozen = true
-          this.frozenText = this.$t(`error_code.${msg}`)
-          this.showLoaing = false
-        } else {
-          console.error(msg)
-        }
+        console.error(msg)
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        this.showLoaing = false
       })
     },
     toFixed (value, fixed) {
@@ -290,9 +281,5 @@ export default {
 .accountInfo-lists li .items>div.locked{width: 180px;}
 .accountInfo-lists li .items>div.opreat{width: 80px;}
 .accountInfo-lists li .items>div.action{width: 80px;color: #11a8fe;}
-
-.frozen-prompt .text{height: 60px;color: #11a8fe;text-align: center;}
-.frozen-prompt .text:first-of-type{line-height: 90px;}
-.frozen-prompt .text:last-of-type{line-height: 30px;}
 </style>
 
