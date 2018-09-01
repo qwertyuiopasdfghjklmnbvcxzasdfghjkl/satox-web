@@ -17,6 +17,7 @@
     "axios": "^0.17.1",
     "echarts": "^4.0.4",
     "hopscotch": "^0.3.1",
+    "html2canvas": "^1.0.0-alpha.12",
     "js-cookie": "^2.2.0",
     "uuid": "^3.2.1",
     "vee-validate": "^2.0.0-rc.27",
