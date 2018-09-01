@@ -8,9 +8,9 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import en from '@/assets/images/home/banner.png'
-import zhCN from '@/assets/images/home/banner.png'
-import CHT from '@/assets/images/home/banner.png'
+import en from '@/assets/images/home/banner-en.png'
+import zhCN from '@/assets/images/home/banner-zhcn.png'
+import CHT from '@/assets/images/home/banner-cht.png'
 export default {
   computed: {
     ...mapGetters(['getLang']),

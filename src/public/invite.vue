@@ -2,7 +2,7 @@
     <div class="invite">
         <div class="banner">
            <div class="banner-img">
-                <img src="../assets/images/home/banner.png"/>
+                <img src="../assets/images/home/banner-zhcn.png"/>
            </div>
         </div>
         <div class="content">
@@ -79,8 +79,8 @@
                         </div>
                         <div class="invite_list witer">
                             <div class="invite_caption_left">{{$t('referral.poster')}}<!--海报--></div>
-                            <span class="invite_span">{{$t('referral.invitation_poster')}}<!--邀请海报-->  </span>
-                            <span class="share" @click="shareImg">{{$t('referral.share_to_friends')}}<!--点击分享给好友--></span>
+                            <span class="invite_span" @click="shareImg">{{$t('referral.invitation_poster')}}<!--邀请海报-->  </span>
+                            <span class="share">{{$t('referral.share_to_friends')}}<!--点击分享给好友--></span>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <div class="detail">{{$t('referral.important_notice_nt')}}<!--由于市场环境的改变，欺诈风险的存在等原因，Bitark保留随时对活动邀请规则做出调整的最终解释权。--></div>
                     </div>
                 </div>
-           
+
         </div>
         <div class="bottom">
         <div class="bottom-center">
