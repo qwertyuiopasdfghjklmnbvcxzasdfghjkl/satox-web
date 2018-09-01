@@ -37,8 +37,8 @@ export default {
   computed: {
     ...mapGetters(['getApiToken', 'getOtcSocketEvents']),
     isIE () {
-      let userAgent = navigator.userAgent
-      return userAgent.indexOf('Firefox') === -1 && userAgent.indexOf('Chrome') === -1
+      // (true = IE9) || true >= IE10
+      return (document.all && document.addEventListener && !window.atob) || (document.body.style.msTouchAction !== undefined)
     }
   },
   watch: {

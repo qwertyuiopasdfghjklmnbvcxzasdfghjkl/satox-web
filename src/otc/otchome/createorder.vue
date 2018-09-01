@@ -6,14 +6,17 @@
               <div class="row">
                 <label>{{$t('otc_ad.otc_current_currency')}}：<!--当前法币--></label>
                 <div class="value">
-                  <select v-model="formData.currency">
+                  <select v-if="!isATN" v-model="formData.currency">
                     <option v-for="item in currencyList" :key="item.id" :value="item.currency">{{$t(`otc_exchange.otc_exchange_${item.currency}`)}}</option>
+                  </select>
+                  <select v-if="isATN" v-model="formData.currency">
+                    <option value="USD">{{$t('otc_exchange.otc_exchange_USD')}}</option>
                   </select>
                 </div>
               </div>
               <div class="prompt"></div>
             </div>
-            <div class="cont-item exchange">
+            <div class="cont-item exchange" v-if="!isATN">
                 <div class="row">
                     <label>{{$t('otc_exchange.otc_exchange_Bid')}}：<!--对标交易所--></label>
                     <div class="value">
@@ -26,14 +29,14 @@
             </div>
             <div class="cont-item currentprice">
                 <div class="row">
-                    <label>{{$t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})：<!--交易所价格--></label>
+                    <label>{{isATN ? this.$t('public0.public256') : $t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})：<!--当前价格||交易所价格--></label>
                     <div class="value">
-                        <span>{{benchItem.lowestPrice}}</span>
+                        <span>{{isATN ? formData.lowest_price : benchItem.lowestPrice}}</span>
                     </div>
                 </div>
                 <div class="prompt"></div>
             </div>
-            <div class="cont-item premium">
+            <div class="cont-item premium" v-if="!isATN">
                 <div class="row">
                     <label class="label-tips">
                       <span>{{$t('otc_ad.otc_ad_Premium')}}：<!--溢价--></span>
@@ -54,7 +57,7 @@
                 </div>
                 <div class="prompt">{{getErrorMsg('price_rate')}}</div>
             </div>
-            <div class="cont-item price">
+            <div class="cont-item price" v-if="!isATN">
                 <div class="row">
                     <label>{{$t('otc_exchange.otc_exchange_price')}}<!--溢价后单价-->({{formData.currency}})：</label>
                     <div class="value">
@@ -63,7 +66,7 @@
                 </div>
                 <div class="prompt"></div>
             </div>
-            <div class="cont-item acceptable">
+            <div class="cont-item acceptable" v-if="!isATN">
                 <div class="row">
                     <label>{{tradeParams.title2}}<!--可接受的最低单价||可接受的最高单价-->({{formData.currency}})：</label>
                     <div class="value">
@@ -192,11 +195,11 @@ export default {
       formData: {
         ad_type: Number(this.params.ad_type) === 2 ? 1 : 2,
         symbol: this.params.symbol || otcConfig.symbol,
-        currency: this.params.currency || 'CNY',
+        currency: this.params.currency,
         bench_marking_id: null,
         price_rate: null,
-        price_type: 1,
-        lowest_price: null,
+        price_type: this.params.symbol === otcConfig.additional[0].symbol ? 2 : 1,
+        lowest_price: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : null,
         symbol_count: null,
         min_amount: null,
         max_amount: Number(this.params.ad_type) === 2 ? null : 20000,
@@ -210,7 +213,8 @@ export default {
         price: null,
         lowestPrice: null
       },
-      benchDatas: [] // 对标交易所
+      benchDatas: [], // 对标交易所
+      isATN: this.params.symbol === otcConfig.additional[0].symbol
     }
   },
   computed: {
@@ -365,7 +369,7 @@ export default {
             if (i === 'price_rate' && utils.removeEndZero(res[i] || '0') === '0') {
               continue
             } else if (i === 'lowest_price' && numUtils.BN(0).equals(res[i])) {
-              continue
+              res[i] = null
             } else if (i === 'min_amount' || i === 'max_amount' || i === 'lowest_price') {
               res[i] = utils.removeEndZero(res[i])
             } else if (i === 'pay_type') {
@@ -384,6 +388,16 @@ export default {
           this.formData.symbol_count = utils.removeEndZero(numUtils.BN(res.symbol_count).toFixed(5))
           this.formData.min_amount = utils.removeEndZero(numUtils.BN(res.min_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
           this.formData.max_amount = utils.removeEndZero(numUtils.BN(res.max_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
+          // 当前广告币种为ATN时的处理
+          if (res.symbol === otcConfig.additional[0].symbol) {
+            this.formData.price_type = 2
+            this.formData.lowest_price = otcConfig.additional[0].price
+            this.isATN = true
+          } else {
+            this.formData.price_type = res.price_type
+            this.formData.lowest_price = utils.removeEndZero(res.lowest_price)
+            this.isATN = false
+          }
           // 获取Symbol或Currency的最小交易限额
           this.fnGetSymbolAndCurrency(false, res.ad_type)
         }, (msg) => {
@@ -451,6 +465,7 @@ export default {
         }
         var formData = JSON.parse(JSON.stringify(this.formData))
         formData.lowestPrice = this.benchItem.lowestPrice
+        formData.isATN = this.isATN
         Vue.$confirmDialog({
           id: 'ads_create_or_edit_confirm',
           title: this.$t(this.ad_id ? 'public0.public253' : 'public0.public254'), // 修改广告确认；发布广告确认

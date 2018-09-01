@@ -370,7 +370,6 @@ export default {
           paypal_name: res.real_name,
           paypal_number: res.data.paypal_number
         }
-        callback && callback()
       }, (res) => {
         if (res.msg === 'NO_PAY_TYPE') {
           // 银行卡

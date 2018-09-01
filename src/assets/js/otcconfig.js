@@ -13,6 +13,9 @@ let config = {
     {id: 2, key: 'otc_ad.otc_ad_Alipay_pay', name: '支付宝支付', css: 'zfb icon-alipay', checked: false},
     {id: 1, key: 'otc_ad.otc_ad_BankPay', name: '银行卡支付', css: 'card icon-bank', checked: false},
     {id: 4, key: 'public0.public219', name: 'PayPal支付', css: 'icon-paypal', checked: false}
+  ],
+  additional: [
+    {symbol: 'ATN', price: 0.1}
   ]
 }
 otcApi.getCoinsList((res) => {
