@@ -118,7 +118,7 @@ export default {
         if (m1.equals(m2)) {
           return 0
         }
-        return this.sort === 'asc' ? (m1.gt(m2) ? -1 : 1) : (m1.lt(m2) ? -1 : 1)
+        return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
       })
       return ndatas
     }
