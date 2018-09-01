@@ -22,7 +22,7 @@
     "vee-validate": "^2.0.0-rc.27",
     "vtip": "^1.0.6",
     "vue": "^2.5.2",
-    "vue-concise-slider": "^2.4.8",
+    "vue-concise-slider": "2.4.8",
     "vue-i18n": "^7.3.3",
     "vue-router": "^3.0.1",
     "vuejs-datepicker": "^1.2.0",
