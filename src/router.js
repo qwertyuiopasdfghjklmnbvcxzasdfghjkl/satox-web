@@ -223,18 +223,18 @@ export const exchangeRouter = [
             { path: 'index', title: '交易市场管理', name: 'exchange_markets_index', component: resolve => { require(['./views/manage_exchange/markets.vue'], resolve); } }
         ]
     },
-    {
-        path: '/exchange_api',
-        name: 'exchange_api',
-        title: '开放API管理',
-        component: Main,
-        meta:{
-            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
-        },
-        children: [
-            { path: 'index', title: '开放API管理', name: 'exchange_api_index', component: resolve => { require(['./views/manage_exchange/api.vue'], resolve); } }
-        ]
-    },
+    // {
+    //     path: '/exchange_api',
+    //     name: 'exchange_api',
+    //     title: '开放API管理',
+    //     component: Main,
+    //     meta:{
+    //         roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+    //     },
+    //     children: [
+    //         { path: 'index', title: '开放API管理', name: 'exchange_api_index', component: resolve => { require(['./views/manage_exchange/api.vue'], resolve); } }
+    //     ]
+    // },
     {
         path: '/exchange_address',
         name: 'exchange_address',

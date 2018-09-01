@@ -3,13 +3,13 @@
         <Card>
             <p slot="title">地址查询</p>
              <Row style="margin-bottom: 20px;">
-                <Col span="1">币种</Col>
-                <Col span="3">
+                <Col span="2">币种</Col>
+                <Col span="4">
                      <Input v-model="symbol" style="width:150px;"/>
                 </Col>
                 <Col span="1">地址</Col>
-                <Col span="5">
-                     <Input v-model="address" style="width:300px;"/>
+                <Col span="6">
+                     <Input v-model="address" style="width:200px;"/>
                 </Col>
                 <Col span="3">
                      <Button type="primary" @click="getAddress">查询</Button>
@@ -64,6 +64,6 @@ export default {
 }
 </script>
 <style>
-.exchange_address{}
+.exchange_address{width: 1500px;}
 </style>
 
