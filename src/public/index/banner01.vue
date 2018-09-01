@@ -8,7 +8,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import banner from '@/assets/images/home/banner.png'
+import banner from '@/assets/images/home/banner1.png'
 export default {
   computed: {
     ...mapGetters(['getLang']),
