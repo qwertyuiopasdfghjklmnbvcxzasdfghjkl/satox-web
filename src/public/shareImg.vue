@@ -81,8 +81,8 @@ export default {
 .shareImg .code_p .qrcode>img{width: 88px;}
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
 .shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
-.qrcode{width: 88px;height: 88px;background-color: #fff;position: absolute;top: -223px;left: 175px;border-radius: 4px;padding: 10px;}
+.qrcode{width: 88px;height: 88px;background-color: #fff;position: absolute;top: -223px;left: 26px;border-radius: 4px;padding: 10px;}
 .code_p{position: relative;}
-#picture{margin-top: 20px;}
+#picture{width: 333px;height: 593px;margin: 0 auto;margin-top: 20px;}
 </style>
 
