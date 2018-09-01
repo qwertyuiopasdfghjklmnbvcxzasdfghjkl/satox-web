@@ -1,6 +1,6 @@
 <template>
     <div class="balance">
-        <div class="balance-content" v-if="!showLoading && !isFrozen">
+        <div class="balance-content" v-if="!showLoading">
             <div class="title">
                 {{$t('exchange.exchange_valuation')}}<!--当前总估值-->：{{BTCValuation}} BTC / {{getCoinSign}}{{String(USDCNY).toMoney()}}
             </div>
@@ -36,10 +36,6 @@
                 </li>
             </ul>
         </div>
-        <div class="frozen-prompt" v-if="!showLoading && isFrozen">
-          <div class="text">{{frozenText}}</div>
-          <div class="text">{{$t('public0.public111')}}<!--如有疑问，请联系客服。--></div>
-        </div>
         <loading :size="24" v-if="showLoading"/>
     </div>
 </template>
@@ -70,8 +66,6 @@ export default {
   },
   data () {
     return {
-      isFrozen: false,
-      frozenText: null,
       googleState: 0,
       verifyState: 0,
       mobileState: 0,
@@ -178,13 +172,9 @@ export default {
           this.datas = data
           this.showLoading = false
         }, (data, msg) => {
-          if (data === 1) {
-            this.isFrozen = true
-            this.frozenText = this.$t(`error_code.${msg}`)
-            this.showLoading = false
-          } else {
-            console.error(msg)
-          }
+          console.error(msg)
+          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          this.showLoaing = false
         })
         // 获取当前用户状态信息
         userApi.getUserState((data) => {
@@ -195,8 +185,6 @@ export default {
           console.error(msg)
         })
       } else {
-        this.isFrozen = false
-        this.frozenText = null
         this.googleState = 0
         this.verifyState = 0
         this.mobileState = 0
@@ -276,9 +264,6 @@ export default {
 .col-operate a:hover{color: #FFDE00;}
 .col-operate a.disabled{color: #ababab;cursor: not-allowed;}
 .col-operate a.disabled:hover{color: #ababab;}
-.frozen-prompt .text{height: 60px;color: #FFDE00;text-align: center;}
-.frozen-prompt .text:first-of-type{line-height: 90px;}
-.frozen-prompt .text:last-of-type{line-height: 30px;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {
   .title{height: 30px;line-height: 30px;font-size: 14px;}
   .list{height: 90px;}
