@@ -6,10 +6,11 @@
       <a class="ivu-icon ivu-icon-close" href="javascript:;" style="float:right;margin-top:3px;color:#1c2438;" @click="closeDialog"></a>
     </p>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">
-      <FormItem label="币种" prop="symbol">
-        <Input type="text" v-model="formValidate.symbol" :readonly="isEdit"></Input>
+      <FormItem label="币种：" prop="symbol">
+          <b>{{formValidate.symbol}}</b>
+        <!-- <Input type="text" v-model="formValidate.symbol" :readonly="isEdit" disabled></Input> -->
       </FormItem>
-      <FormItem label="用户名" prop="username">
+      <FormItem label="用户名：" prop="username">
         <Input type="text" v-model="formValidate.username"></Input>
       </FormItem>
       <FormItem style="line-height:0;text-align:center;">

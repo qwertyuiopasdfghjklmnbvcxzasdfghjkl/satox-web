@@ -49,7 +49,7 @@ export default {
                 {title: '总量', key: 'total'},
                 {title: '金额', key: 'amount',
                     render: (h, params) => {
-                        return h('div', params.row.amount === -1 ? '市价': params.row.amount)
+                        return h('div', params.row.price === -1 ? '市价': (params.row.price * params.row.exchangeQuantity).toFixed(8))
                     }
                 }
             ],
@@ -88,7 +88,11 @@ export default {
                 }},
                 {title: '成交均价', key: 'averagePrice'},
                 {title: '成交量', key: 'exchangeQuantity'},
-                {title: '成交金额', key: 'exchangeAmount'},
+                {title: '成交金额', key: 'exchangeAmount',
+                    render: (h, params) => { 
+                        return h('div', (params.row.exchangeAmount).toFixed(8))
+                    }
+                },
                 {title: '手续费', key: 'fee'}
             ],
             data1: [],

@@ -6,7 +6,8 @@
         </p>
         <!-- <Table :columns="columns1" :data="data1"></Table> -->
         <Row >
-            <Col span="6" v-for="(data, index) in data1" :key="index">{{index+1}}. {{(data.market).replace(/(BTC|ETH|BARK)$/, function (m) { return ' / ' + m })}}</Col>
+            <!-- <Col span="6" v-for="(data, index) in data1" :key="index">{{index+1}}. {{(data.market).replace(/(BTC|ETH|BARK)$/, function (m) { return ' / ' + m })}}</Col> -->
+            <Col span="6" v-for="(data, index) in data1" :key="index">{{index+1}}. {{(data.market).replace(/(BTC|ETH|ATN)$/, function (m) { return ' / ' + m })}}</Col>            
         </Row>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
      </Card>

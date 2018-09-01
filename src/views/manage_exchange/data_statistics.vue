@@ -9,7 +9,7 @@
             日全站交易量：
             <span style="margin-right:15px;">{{datas.length ? datas[0].btcTransactionAmount : 0}}BTC</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
-            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}BARK</span>
+            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}ATN</span>
           </p>
         </Col>
         <Col span="7">
@@ -49,7 +49,7 @@
             <Select v-model="formItem.symbol" style="width:100px">
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
-                <Option value="BARK">BARK</Option>
+                <Option value="ATN">ATN</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目">

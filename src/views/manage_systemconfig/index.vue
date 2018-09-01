@@ -333,8 +333,10 @@ export default {
     changePage (page, flag) {
       if (flag === 1) {
         this.accountsPage.currentPage = page
+        this.fnFindAdminAccounts()
       } else if (flag === 2) {
         this.coinPoolsPage.currentPage = page
+        this.fnFindAdminCoinPools()
       } else {
         return false
       }

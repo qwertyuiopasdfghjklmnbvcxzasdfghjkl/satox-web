@@ -23,7 +23,7 @@
                                     </Row>
                                     <Table :columns="columns" :data="datas"></Table>
                                 </TabPane>
-                                <TabPane label="BARK市场" name="BARK">
+                                <TabPane label="ATN市场" name="ATN">
                                     <Row style="margin-bottom:10px;">
                                         <Button type="primary">添加新币种</Button>
                                     </Row>
