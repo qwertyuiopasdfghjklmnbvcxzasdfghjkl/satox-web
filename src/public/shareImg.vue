@@ -77,10 +77,11 @@ export default {
 .shareImg{width: 630px;background: #394363;text-align: center;}
 .shareImg .title{font-size: 18px;color: #cbd4ec;background: #252a40; padding-left: 30px;padding-right: 30px; height: 50px;line-height: 50px;display: flex;justify-content: space-between;}
 .shareImg .title em{line-height: 52px;cursor: pointer;}
-.shareImg img{margin: 0 auto;margin-top: 20px;width: 333px;}
+.shareImg img{margin: 0 auto;width: 333px;}
+.shareImg .code_p .qrcode>img{width: 85px;}
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
 .shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
-.qrcode{width: 110px;height: 110px;background: #fff;position: absolute;top: -168px;left: 254px;border-radius: 5px;padding: 10px;}
+.qrcode{width: 85px;height: 88px;background: #fff;position: absolute;top: -222px;left: 176px;border-radius: 5px;padding: 10px;}
 .code_p{position: relative;}
 #picture{margin-top: 20px;}
 </style>
