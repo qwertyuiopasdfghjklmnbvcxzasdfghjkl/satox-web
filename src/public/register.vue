@@ -38,7 +38,7 @@
                     </template>
                     <inputbox id="newton-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
-                    <inputbox class="invitedCode" name="invitedCode" :maxLength="255" v-model="formData.invitedCode" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
+                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
@@ -84,7 +84,7 @@ export default {
         email: '',
         password: '',
         passwordConfirm: '',
-        invitedCode: ''
+        ref: ''
       },
       time: 60
     }
@@ -117,11 +117,11 @@ export default {
       })
     },
     $route () {
-      this.formData.invitedCode = utils.getUrlHashParams().invitedCode
+      this.formData.ref = utils.getUrlHashParams().ref
     }
   },
   created () {
-    this.formData.invitedCode = utils.getUrlHashParams().invitedCode
+    this.formData.ref = utils.getUrlHashParams().ref
   },
   methods: {
     register () {
@@ -278,7 +278,7 @@ export default {
   position:absolute;content:"";display:block;width:8px;height:8px;top:4px;left:4px;border-radius:50%;
   background:#11A8FE;
 }
-.invitedCode /deep/ .inputdiv{padding-bottom:10px;}
+.ref /deep/ .inputdiv{padding-bottom:10px;}
 .mobile{position:relative;}
 .mobile /deep/ select{
   position: absolute;top: 0;left: 0;z-index: 1;width: 120px;height: 38px;padding-right: 20px;color: #d6dff9;
