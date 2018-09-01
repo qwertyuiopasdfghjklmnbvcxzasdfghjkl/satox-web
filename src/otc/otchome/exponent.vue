@@ -6,18 +6,21 @@
           <span>
             <i class="icon" :class="[`icon-${params.symbol.toLowerCase()}`]"></i>
             <em class="label">{{params.symbol}} {{$t('public0.public158')}}<!--指数--></em>
-            <span class="tips">
+            <span class="tips" v-if="!isATN">
               <i class="tips-icon">?</i>
               <em class="tips-text">{{$t('otc_ad.data_sources')}}<!--数据来自coinmarket--></em>
             </span>
           </span>
           <!-- <span>CNY</span> -->
-          <select v-model="params.currency">
+          <select v-if="!isATN" v-model="params.currency">
             <option v-for="item in currencys" :key="item.id" :value="item.value">{{$t(item.text)}}</option>
+          </select>
+          <select v-if="isATN" v-model="params.currency">
+            <option value="USD">{{$t('otc_exchange.otc_exchange_USD')}}</option>
           </select>
         </p>
         <p class="newest" :class="percent.indexOf('-') === -1 ? 'up' : 'down'">
-          <strong>{{curPrice}} {{params.currency}}</strong>
+          <strong>{{curPrice}} {{isATN ? 'USD' : params.currency}}</strong>
           <small>{{percent}}%</small>
         </p>
         <p class="low">
@@ -30,7 +33,7 @@
         </p>
       </div>
     </div>
-    <div class="exponent-bottom">
+    <div class="exponent-bottom" :style="`visibility:${isATN ? 'hidden' : 'visible'};`">
       <div class="kline-cont">
         <div class="kline-cont-canvas" ref="canvas"></div>
       </div>
@@ -47,11 +50,12 @@ export default {
   props: ['params'],
   data () {
     return {
-      curPrice: 0,
+      curPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : 0,
       percent: '0',
-      minPrice: '0.00',
-      maxPrice: '0.00',
-      currencys: otcConfig.currencys
+      minPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : '0.00',
+      maxPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : '0.00',
+      currencys: otcConfig.currencys,
+      isATN: this.params.symbol === otcConfig.additional[0].symbol
     }
   },
   computed: {
@@ -64,6 +68,20 @@ export default {
     }
   },
   watch: {
+    'params.symbol' (newVal) {
+      if (newVal === otcConfig.additional[0].symbol) {
+        this.curPrice = otcConfig.additional[0].price
+        this.percent = '0'
+        this.minPrice = otcConfig.additional[0].price
+        this.maxPrice = otcConfig.additional[0].price
+        this.isATN = true
+      } else {
+        this.curPrice = 0
+        this.minPrice = '0.00'
+        this.maxPrice = '0.00'
+        this.isATN = false
+      }
+    },
     paramsChange () {
       this.getCoinMarket()
     }
@@ -75,6 +93,9 @@ export default {
   },
   methods: {
     getCoinMarket () {
+      if (this.isATN) {
+        return
+      }
       otcApi.getCoinMarket(this.paramsChange, (res) => {
         let priceArray = []
         let timeArray = []
@@ -190,7 +211,7 @@ export default {
 
 <style scoped>
 .exponent{background-color: #222121;}
-.exponent-top{padding: 8px 8px 30px 8px;}
+.exponent-top{padding: 8px 8px 0 8px;}
 .keypoint-cont p{display: flex;justify-content: space-between;align-items: center;padding-left: 6px;padding-right: 6px;}
 .keypoint-cont p.type{height: 42px;padding-left: 0;padding-right: 0;}
 .keypoint-cont p.type > span{display: flex;align-items: flex-end;}
@@ -214,7 +235,7 @@ export default {
 .keypoint-cont p.high{height: 24px;}
 .keypoint-cont p.low span,
 .keypoint-cont p.high span{font-size: 12px;color: #ececec;}
-.kline-cont{padding-bottom: 20px;}
+.kline-cont{padding-bottom: 10px;}
 .kline-cont-canvas{height: 300px;}
 </style>
 
