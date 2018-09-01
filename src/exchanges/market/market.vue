@@ -213,7 +213,7 @@ export default {
         let datas = this.products
         let tempObj = {}
         datas.forEach((item) => {
-           tempObj[item.market] = item
+          tempObj[item.market] = item
         })
         res.data.forEach((item) => {
           let d = tempObj[item.market]
