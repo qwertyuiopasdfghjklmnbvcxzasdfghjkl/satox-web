@@ -2,7 +2,7 @@
     <div class="invite">
         <div class="banner">
            <div class="banner-img">
-                <img src="../assets/images/invite/banner.png"/>
+                <img src="../assets/images/home/banner.png"/>
            </div>
         </div>
         <div class="content">
@@ -235,7 +235,7 @@ export default {
 .invite{position: relative;overflow: hidden;margin: 0 auto;}
 .banner{background:  #0d1426;}
 .banner-img{width: 1200px;margin: 0 auto;}
-.banner img{width: 100%;padding-top: 20px;}
+.banner img{width: 100%;}
 .invite_code{background: #181b2a;margin-top: 30px; }
 .invite_code .title{background: #1b1e2e;height: 40px;line-height: 40px;color: #cbd4ec;font-size: 16px;padding-left: 30px;}
 .content{width: 1200px;margin:  0 auto;}

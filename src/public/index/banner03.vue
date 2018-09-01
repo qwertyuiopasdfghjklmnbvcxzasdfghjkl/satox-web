@@ -8,9 +8,9 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import en from '@/assets/images/home/banner3en.png'
-import zhCN from '@/assets/images/home/banner3.png'
-import CHT from '@/assets/images/home/banner3cht.png'
+import en from '@/assets/images/home/banner.png'
+import zhCN from '@/assets/images/home/banner.png'
+import CHT from '@/assets/images/home/banner.png'
 export default {
   computed: {
     ...mapGetters(['getLang']),
@@ -29,5 +29,5 @@ export default {
 
 <style scoped>
 .banner{display: flex;justify-content: space-between;width: 100%;}
-.banner /deep/ img{width:100%;height:225px;}
+.banner /deep/ img{width:100%;}
 </style>
