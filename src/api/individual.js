@@ -301,4 +301,16 @@ const sendAuthSMSCode = function (data, success, error) {
 }
 individual.sendAuthSMSCode = sendAuthSMSCode
 
+// 邀请
+const invitedAwardRank = function (success, error) {
+  api.get(`${domain}api/v2/individual/invitedAwardRank`, (res) => {
+    if (res.rst === 1) {
+      success && success(res)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+individual.invitedAwardRank = invitedAwardRank
+
 export default individual
