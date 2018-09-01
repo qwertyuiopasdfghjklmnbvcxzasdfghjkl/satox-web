@@ -18,9 +18,9 @@ import { mapGetters } from 'vuex'
 import utils from '@/assets/js/utils'
 import html2canvas from 'html2canvas'
 import Vue from 'vue'
-import en from '@/assets/images/invite/poster.jpg'
-import zhCN from '@/assets/images/invite/poster.jpg'
-import CHT from '@/assets/images/invite/poster.jpg'
+import en from '@/assets/images/invite/poster-en.jpg'
+import zhCN from '@/assets/images/invite/poster-zhcn.jpg'
+import CHT from '@/assets/images/invite/poster-cht.jpg'
 const copyText = (str) => {
   var save = function (e) {
     e.clipboardData.setData('text/plain', str)
@@ -78,10 +78,10 @@ export default {
 .shareImg .title{font-size: 18px;color: #cbd4ec;background: #252a40; padding-left: 30px;padding-right: 30px; height: 50px;line-height: 50px;display: flex;justify-content: space-between;}
 .shareImg .title em{line-height: 52px;cursor: pointer;}
 .shareImg img{margin: 0 auto;width: 333px;}
-.shareImg .code_p .qrcode>img{width: 85px;}
+.shareImg .code_p .qrcode>img{width: 88px;}
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
 .shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
-.qrcode{width: 85px;height: 88px;background: #fff;position: absolute;top: -222px;left: 176px;border-radius: 5px;padding: 10px;}
+.qrcode{width: 88px;height: 88px;background-color: #fff;position: absolute;top: -223px;left: 175px;border-radius: 4px;padding: 10px;}
 .code_p{position: relative;}
 #picture{margin-top: 20px;}
 </style>

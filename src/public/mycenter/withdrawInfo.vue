@@ -60,15 +60,7 @@
                 <ul class="tips">
                     <li>{{$t('account.user_minimum_number_of_cash').format(`：${minWithdraw} ${symbol}`)}}<!--最小提现数量为{0}。--></li>
                     <li>{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
-                    <li>{{$t('account.user_prompt8')}}<!--提现请求申请成功后，请去邮箱点击链接确认本次提现请求。--></li>
-                    <li>
-                        <!--{{$t('account.user_recharge_the_cash')}}--><!--您可以在充值提现-->
-                        <!-- <a href="/#/hisnotes"> -->
-                        <!--{{$t('account.userViewTheHistory')}}--><!--历史记录-->
-                        <!-- </a> -->
-                        <!--{{$t('account.user_Page_tracking_status')}}--><!--历史记录页面跟踪状态。-->
-                        {{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。-->
-                    </li>
+                    <li>{{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。--></li>
                 </ul>
             </div>
        </div>

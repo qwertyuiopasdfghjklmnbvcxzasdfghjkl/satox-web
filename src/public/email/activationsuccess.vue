@@ -3,7 +3,7 @@
         <div class="mailbox-title">{{$t('public0.public159')}}<!--邮箱验证--></div>
         <div class="mailbox-cont">
             <img class="mailbox-img" width="84" height="67" src="../../assets/images/activation.png" />
-            <p class="mailbox-p">{{$t('public0.public69')}}<!--邮箱激活成功--></p>
+            <p class="mailbox-p">{{$t('public0.public69')}}<!--邮箱激活成功，马上开始交易--></p>
             <a class="mailbox-a" href="javascript:;" @click="goLogin">{{$t('public0.public142')}}<!--前往登录--></a>
         </div>
     </div>
