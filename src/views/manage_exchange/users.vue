@@ -1,7 +1,9 @@
 <!-- 用户管理 -->
 <template>
     <Card>
-        <p slot="title">用户管理</p>
+        <p slot="title">用户管理
+            <Button type="primary" @click="getList">刷新</Button>
+        </p>
         <Row>
             <span>账号</span>
             <Input v-model="username" placeholder="账号" style="width: 150px;"></Input>
@@ -195,6 +197,6 @@ export default {
 }
 </script>
 
-<style lang="less">
-
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

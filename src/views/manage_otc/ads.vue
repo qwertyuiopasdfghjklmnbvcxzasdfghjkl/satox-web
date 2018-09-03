@@ -1,7 +1,9 @@
 <!-- 广告管理 -->
 <template>
   <Card>
-    <p slot="title">广告管理</p>
+    <p slot="title">广告管理
+        <Button type="primary" @click="getAdsList">刷新</Button>
+    </p>
     <Row>
       <Select v-model="symbol" style="width:200px" @on-change="getAdsList">
           <Option value="BTC">BTC</Option>
@@ -144,5 +146,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

@@ -2,7 +2,9 @@
 <template>
   <div>
     <Card>
-        <p slot="title">紧急异常预警</p>
+        <p slot="title">紧急异常预警
+              <Button type="primary" @click="getfindReconciliation">刷新</Button>
+        </p>
         <Row>
           <Col span="8">待处理紧急异常数：0</Col>
           <Col span="8">待处理紧急预警告数：0</Col>
@@ -126,3 +128,6 @@ import otcApi from '../../api/otcAberrant'
         }
     }
 </script>
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
+</style>
