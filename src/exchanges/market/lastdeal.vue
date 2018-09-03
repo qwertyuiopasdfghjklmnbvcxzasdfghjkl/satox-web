@@ -144,8 +144,8 @@ export default {
 .time{text-align:left;padding:0 10px 0 10px;width:110px;}
 .price{width:110px;padding-right:10px;text-align:center;}
 .volume{text-align:right;width:100px;}
-@media screen and (max-width: 1600px) and (max-height: 900px) {
-  .lastdeal{height:280px;}
+@media screen and (max-width: 1600px) {
+  .lastdeal{height:274px;margin-top:4px;}
   .title{font-size:14px;}
   .time{width:107px;}
   .price{width:107px;}

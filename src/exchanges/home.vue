@@ -345,5 +345,11 @@ export default {
   .market-symbol{font-size:16px;}
   .last-valuation-price{font-size:12px;}
 }
+@media screen and (max-width: 1600px){
+  .home-left{margin:4px 0 4px 4px;}
+  .home-center{margin:4px;}
+  .home-right{margin:4px 4px 4px 0;}
+  .home-center-bottom{margin-top:4px;}
+}
 </style>
 

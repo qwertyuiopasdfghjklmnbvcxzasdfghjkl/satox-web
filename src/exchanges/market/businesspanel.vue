@@ -83,13 +83,14 @@ export default {
 .business-panel-left,
 .business-panel-right{flex: 1;margin: 0 25px;}
 
-@media screen and (max-width: 1600px) and (max-height: 900px) {
+@media screen and (max-width: 1600px) {
   .business-panel.unfold{height: 260px;}
   .tabs .tab-item{height: 28px;margin-right: 30px;font-size: 14px;line-height: 28px;}
   .tabs .arrow-item{width: 30px;height: 30px;}
   .tabs .procedure-item{margin-top: 3px;margin-right: 20px;font-size: 12px;}
   .business-panel-left,
   .business-panel-right{margin: 0 15px;}
+  .business-panel{margin-bottom:4px;}
 }
 @media screen and (max-width: 1400px) {
   .tabs .procedure-item{margin-right: 15px;}
