@@ -24,20 +24,16 @@
         <div class="item"></div>
         <div class="item">{{$t('public.foot_contact')}}</div><!--联系我们-->
         <div class="item">
-          <a class="contact-icons icon-facebook" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-facebook" href="https://www.facebook.com/NewtonExchange" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-twitter" href="https://twitter.com/ExchangeNewton" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-telegram" href="https://twitter.com/ExchangeNewton" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>
-        </div>
-        <div class="item">
-          <a class="contact-icons icon-weixin">
-          </a>
+          <a class="contact-icons icon-slack" href="https://newtonexchange.slack.com" target="_blank"></a>
         </div>
       </div>
     </div>
