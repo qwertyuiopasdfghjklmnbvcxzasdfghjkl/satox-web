@@ -45,7 +45,7 @@ export default {
 
 
 <style scoped>
-.bus{height: 150px;margin-bottom: 8px;background-color: #222121;}
+.bus{min-height: 110px;margin-bottom: 8px;background-color: #222121;}
 .bus ul{display: flex;justify-content: space-between;}
 .bus ul li{text-align: center;}
 .bus ul li.buy{width: 150px;}

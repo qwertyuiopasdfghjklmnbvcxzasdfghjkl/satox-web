@@ -144,7 +144,7 @@ export default {
 .otchome{width: 1200px;padding-top: 8px;padding-bottom: 60px;margin: 0 auto;}
 .home-bottom{display: flex;justify-content: space-between;margin-bottom: 8px;}
 .home-bottom-left{width:300px;}
-.home-bottom-right{width:892px;}
+.home-bottom-right{width:892px;display:flex;flex:1;margin-left:8px;}
 .news{display: none;}
 .chat-icon{position:fixed;z-index:999;left:4px;bottom:4px;width:70px;height:70px;cursor:pointer;background:url(../assets/images/chat.png) no-repeat center;}
 .chat-icon:hover{background-image:url(../assets/images/chat_hover.png);}
