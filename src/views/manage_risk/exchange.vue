@@ -2,7 +2,9 @@
 <template>
   <div>
     <Card>
-      <p slot="title">币币异常预警</p>
+      <p slot="title">币币异常预警
+          <Button type="primary" @click="reshAll">刷新</Button>
+      </p>
       <Row>
           <Col span="12">待处理异常预警数：{{this.datas.waitHandleAmount}}</Col>
           <Col span="12">日新增预警数：{{this.datas.dailyIncreaseAmount}}</Col>
@@ -292,6 +294,13 @@ export default {
       this.getabnormal()
   },
   methods: {
+      reshAll () {
+        this.getMonitoring()
+        this.getAbnormalInfo()
+        this.getPriceFloat()
+        this.getAmountFloat()
+        this.getabnormal()
+      },
       getabnormal () {
           otcApi.abnormalAmountInfo((res) => {
               this.datas = res
@@ -349,5 +358,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

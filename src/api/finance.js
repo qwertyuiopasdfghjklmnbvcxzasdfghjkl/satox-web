@@ -129,6 +129,55 @@ finance.findAbnormalExchangeList = findAbnormalExchangeList
 // }
 // finance.getExchangeList = getExchangeList
 
+// 财务管理--平账管理--漏记
+const ledgerAdd = function (data, success, error) {
+  api.post(`api/bm/account/ledger/add`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.ledgerAdd = ledgerAdd
 
+
+// 财务管理--平账管理--多记
+const ledgerReduce = function (data, success, error) {
+  api.post(`api/bm/account/ledger/reduce`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.ledgerReduce = ledgerReduce
+
+
+// 财务管理--平账管理--平差
+const ledgerBalance = function (data, success, error) {
+  api.post(`api/bm/account/ledger/balance`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.ledgerBalance = ledgerBalance
+
+
+// 财务管理--平账管理--错记
+const ledgerFix = function (data, success, error) {
+  api.post(`api/bm/account/ledger/fix`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.ledgerFix = ledgerFix
 
 export default finance

@@ -1,7 +1,9 @@
 <!-- 用户管理 -->
 <template>
   <Card>
-    <p slot="title">用户管理</p>
+    <p slot="title">用户管理
+        <Button type="primary" @click="getfindUserManage">刷新</Button>
+    </p>
     <Row>
         <Input style="width: 300px;" v-model="userSearh" placeholder="如：123456@qq.com"></Input>
         <Button type="primary" @click="curPage=1;getfindUserManage()">查询</Button>
@@ -142,5 +144,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

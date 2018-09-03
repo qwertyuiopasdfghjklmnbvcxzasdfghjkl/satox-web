@@ -2,7 +2,9 @@
 <template>
   <Row>
     <Card>
-      <p slot="title">数据统计</p>
+      <p slot="title">数据统计
+         <Button type="primary" @click="refreshAll">刷新</Button>
+      </p>
       <Row>
         <Col span="8">
           用户在线数量：{{data1.onlineAmount || 0}}
@@ -40,7 +42,7 @@
             <Select v-model="formItem.symbol" style="width:100px">
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
-                <Option value="ATN">ATN</Option>
+                <Option value="BARK">BARK</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目"><!--1,在线用户数量 2,上架广告数量 3,正在交易的订单数 4,当天完成订单数 5,当天交易额 6,待处理申述数 7,当天异常预警数-->
@@ -126,6 +128,13 @@ export default {
     })
   },
   methods: {
+    refreshAll (){
+        this.getfindDataStatistic()
+        this.getfindTransactionData()
+        this.$nextTick(() => {
+          this.getfindChartDataList()
+        })
+    },
     exportTable () {
       let paramStr = []
       for (var i in this.params) {
@@ -220,6 +229,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .manage_exchange_canvas{display:flex;margin:20px;height:400px;}
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

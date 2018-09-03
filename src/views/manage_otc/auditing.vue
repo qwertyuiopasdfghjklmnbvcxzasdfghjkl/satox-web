@@ -2,7 +2,9 @@
 <template>
     <Row>
         <Card>
-            <p slot="title">审核管理</p>
+            <p slot="title">审核管理
+               <Button type="primary" @click="getRequestManage('1')">刷新</Button>
+            </p>
             <Row>
               审核管理：<Checkbox v-model="single" @on-change="curPage=1;getRequestManage('1')">显示全部</Checkbox>
             </Row>
@@ -120,5 +122,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>
