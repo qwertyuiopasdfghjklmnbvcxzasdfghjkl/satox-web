@@ -27,8 +27,8 @@ const saveSysParam = function (data, success, error) {
 system.saveSysParam = saveSysParam
 
 // 系统参数设置--查询交易所手续费账户
-const findAdminAccounts = function (curPage, data, success, error) {
-  api.post(`api/bm/sysParam/findAdminAccounts/1/${curPage}`, data, (res) => {
+const findAdminAccounts = function (pageSize, curPage, data, success, error) {
+  api.post(`api/bm/sysParam/findAdminAccounts/${pageSize}/${curPage}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {

@@ -6,6 +6,7 @@
       <Select v-model="symbol" style="width:200px" @on-change="getAdsList">
           <Option value="BTC">BTC</Option>
           <Option value="ETH">ETH</Option>
+          <Option value="ETH">ATN</Option>
       </Select>
     </Row>
     <Tabs style="margin-top:10px;" @on-click="changeTab">
