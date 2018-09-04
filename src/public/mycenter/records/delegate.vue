@@ -338,70 +338,70 @@ export default {
 }
 </script>
 
-<style>
-.delegate .filtrate,
-.delegate .filtrate > div{display: flex;align-items: center;}
-.delegate .filtrate{height: 54px;background-color: #222121;}
-.delegate .filtrate > div{margin-right: 14px;}
-.delegate .filtrate .operation{margin-right: 0;cursor: pointer;}
-.delegate .filtrate .allrepeal,
-.delegate .filtrate .export{margin-left: auto;}
-.delegate .filtrate label{font-size: 12px;color: #becbe8;}
-.delegate .filtrate input{height: 22px;font: 12px/normal "Microsoft YaHei";color: #becbe8;background-color: transparent;border: 1px solid #777f96;}
-.delegate .filtrate .joint{width: 12px;font-size: 12px;color: #becbe8;text-align: center;}
-.delegate .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #becbe8;background: url(../../../assets/images/icon_arrowdown.png) no-repeat right 4px center;border: 1px solid #777f96;cursor: pointer;}
-.delegate .filtrate button{float: left;min-width: 38px;height: 24px;font-size: 12px;background-color: transparent;cursor: pointer;}
-.delegate .filtrate .time /deep/ input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png) no-repeat right 4px center;cursor: pointer;}
-.delegate .filtrate .market input{width: 50px;}
-.delegate .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #11a8fe;}
-.delegate .filtrate .button .search:hover{background-color: #15c9ff;}
-.delegate .filtrate .button .reset{color: #11a8fe;border: 1px solid #11a8fe;}
-.delegate .filtrate .button .reset:hover{color: #15c9ff;border-color: #15c9ff;}
-.delegate .filtrate .operation a,
-.delegate .filtrate .operation i{font-size: 12px;color: #11a8fe;}
-.delegate .filtrate .operation i{padding-left: 8px;margin-top: 1px;}
-.delegate .filtrate .allrepeal i,
-.delegate .filtrate .export i{font-size: 14px;}
-.delegate .filtrate .operation:hover a,
-.delegate .filtrate .operation:hover i{color: #15c9fe;}
-.delegate .filtrate .disabled a,
-.delegate .filtrate .disabled i{color: #999;cursor: not-allowed;}
-.delegate .filtrate .disabled:hover a,
-.delegate .filtrate .disabled:hover i{color: #999;}
+<style scoped>
+.delegate /deep/ .filtrate,
+.delegate /deep/ .filtrate > div{display: flex;align-items: center;}
+.delegate /deep/ .filtrate{height: 54px;background-color: #222121;}
+.delegate /deep/ .filtrate > div{margin-right: 14px;}
+.delegate /deep/ .filtrate .operation{margin-right: 0;cursor: pointer;}
+.delegate /deep/ .filtrate .allrepeal,
+.delegate /deep/ .filtrate .export{margin-left: auto;}
+.delegate /deep/ .filtrate label{font-size: 12px;color: #becbe8;}
+.delegate /deep/ .filtrate input{height: 22px;font: 12px/normal "Microsoft YaHei";color: #becbe8;background-color: transparent;border: 1px solid #777f96;}
+.delegate /deep/ .filtrate .joint{width: 12px;font-size: 12px;color: #becbe8;text-align: center;}
+.delegate /deep/ .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #becbe8;background: url(../../../assets/images/icon_arrowdown.png) no-repeat right 4px center;border: 1px solid #777f96;cursor: pointer;}
+.delegate /deep/ .filtrate button{float: left;min-width: 38px;height: 24px;font-size: 12px;background-color: transparent;cursor: pointer;}
+.delegate /deep/ .filtrate .time /deep/ input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png) no-repeat right 4px center;cursor: pointer;}
+.delegate /deep/ .filtrate .market input{width: 50px;}
+.delegate /deep/ .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #11a8fe;}
+.delegate /deep/ .filtrate .button .search:hover{background-color: #15c9ff;}
+.delegate /deep/ .filtrate .button .reset{color: #11a8fe;border: 1px solid #11a8fe;}
+.delegate /deep/ .filtrate .button .reset:hover{color: #15c9ff;border-color: #15c9ff;}
+.delegate /deep/ .filtrate .operation a,
+.delegate /deep/ .filtrate .operation i{font-size: 12px;color: #11a8fe;}
+.delegate /deep/ .filtrate .operation i{padding-left: 8px;margin-top: 1px;}
+.delegate /deep/ .filtrate .allrepeal i,
+.delegate /deep/ .filtrate .export i{font-size: 14px;}
+.delegate /deep/ .filtrate .operation:hover a,
+.delegate /deep/ .filtrate .operation:hover i{color: #15c9fe;}
+.delegate /deep/ .filtrate .disabled a,
+.delegate /deep/ .filtrate .disabled i{color: #999;cursor: not-allowed;}
+.delegate /deep/ .filtrate .disabled:hover a,
+.delegate /deep/ .filtrate .disabled:hover i{color: #999;}
 
-.delegate h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
+.delegate /deep/ h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
-.delegate .record{background-color: #222121;}
-.delegate .record ul{padding-left: 8px;padding-right: 8px;}
-.delegate .record ul li{border-bottom: 1px solid #404b69;}
-.delegate .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
+.delegate /deep/ .record{background-color: #222121;}
+.delegate /deep/ .record ul{padding-left: 8px;padding-right: 8px;}
+.delegate /deep/ .record ul li{border-bottom: 1px solid #404b69;}
+.delegate /deep/ .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
 
-.delegate .entrust-current ul li span.time{width: 140px;}
-.delegate .entrust-current ul li span.market{width: 100px;}
-.delegate .entrust-current ul li span.type{width: 80px;}
-.delegate .entrust-current ul li span.price{width: 140px;}
-.delegate .entrust-current ul li span.tradeVolume{width: 150px;}
-.delegate .entrust-current ul li span.volume{width: 140px;}
-.delegate .entrust-current ul li span.sum{width: 140px;}
-.delegate .entrust-current ul li span.operation{width: 60px;}
+.delegate /deep/ .entrust-current ul li span.time{width: 140px;}
+.delegate /deep/ .entrust-current ul li span.market{width: 100px;}
+.delegate /deep/ .entrust-current ul li span.type{width: 80px;}
+.delegate /deep/ .entrust-current ul li span.price{width: 140px;}
+.delegate /deep/ .entrust-current ul li span.tradeVolume{width: 150px;}
+.delegate /deep/ .entrust-current ul li span.volume{width: 140px;}
+.delegate /deep/ .entrust-current ul li span.sum{width: 140px;}
+.delegate /deep/ .entrust-current ul li span.operation{width: 60px;}
 
-.delegate .entrust-history ul li span.entrustTime{width: 140px;}
-.delegate .entrust-history ul li span.market{width: 80px;}
-.delegate .entrust-history ul li span.type{width: 60px;}
-.delegate .entrust-history ul li span.price{width: 120px;}
-.delegate .entrust-history ul li span.avgPrice{width: 120px;}
-.delegate .entrust-history ul li span.tradeVolume{width: 130px;}
-.delegate .entrust-history ul li span.volume{width: 120px;}
-.delegate .entrust-history ul li span.tradeSum{width: 120px;}
-.delegate .entrust-history ul li span.status{width: 60px;}
+.delegate /deep/ .entrust-history ul li span.entrustTime{width: 140px;}
+.delegate /deep/ .entrust-history ul li span.market{width: 80px;}
+.delegate /deep/ .entrust-history ul li span.type{width: 60px;}
+.delegate /deep/ .entrust-history ul li span.price{width: 120px;}
+.delegate /deep/ .entrust-history ul li span.avgPrice{width: 120px;}
+.delegate /deep/ .entrust-history ul li span.tradeVolume{width: 130px;}
+.delegate /deep/ .entrust-history ul li span.volume{width: 120px;}
+.delegate /deep/ .entrust-history ul li span.tradeSum{width: 120px;}
+.delegate /deep/ .entrust-history ul li span.status{width: 60px;}
 
-.delegate .record ul li.list span.buy{color: #03c087;}
-.delegate .record ul li.list span.sell{color: #e76d42;}
-.delegate .record ul li.list span.operation a{color: #11a8fe;}
-.delegate .record ul li.list span.operation a:hover{color: #15c9ff;}
+.delegate /deep/ .record ul li.list span.buy{color: #03c087;}
+.delegate /deep/ .record ul li.list span.sell{color: #e76d42;}
+.delegate /deep/ .record ul li.list span.operation a{color: #11a8fe;}
+.delegate /deep/ .record ul li.list span.operation a:hover{color: #15c9ff;}
 
-.delegate .record .nodata{text-align: center;}
-.delegate .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
-.delegate .record .nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
+.delegate /deep/ .record .nodata{text-align: center;}
+.delegate /deep/ .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
+.delegate /deep/ .record .nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>
 

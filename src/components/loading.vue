@@ -28,6 +28,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .loading{padding-top: 28px;padding-bottom: 28px;line-height: 0;text-align: center;}
 </style>

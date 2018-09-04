@@ -23,8 +23,8 @@
                     </div>
                     <template v-if="formData.registerType==1">
                       <div class="mobile">
-                        <select>
-                          <option value="86">{{$t('countrys.China')}}<!--中国大陆-->&nbsp;+&nbsp;86</option>
+                        <select v-model="areaCode">
+                          <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
                         </select>
                         <inputbox name="mobile" :maxLength="255" v-model="formData.mobile" v-validate="'required|telphone'" :msgs="msgs.mobile" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
                       </div>
@@ -65,6 +65,7 @@ import userApi from '@/api/user'
 import inputbox from '@/components/formel/inputbox'
 import buttonbox from '@/components/formel/buttonbox'
 import utils from '@/assets/js/utils'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   components: {
     inputbox,
@@ -76,6 +77,8 @@ export default {
       gtLocked: false,
       checked: false,
       disabled: false,
+      areaCodeList: commonConfig.areaCodeList,
+      areaCode: '+86',
       formData: {
         registerType: 1,
         mobile: '',
@@ -108,6 +111,9 @@ export default {
       } else {
         return this.disabled
       }
+    },
+    realMobilePhone () {
+      return this.areaCode + this.formData.mobile
     }
   },
   watch: {
@@ -158,6 +164,10 @@ export default {
             formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
             formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
             formData.rsaPublicKey = rsaPublicKey
+            if (Number(formData.registerType) === 1) {
+              formData.mobile = this.realMobilePhone
+              formData.username = this.realMobilePhone
+            }
             userApi.register(formData, (msg) => {
               this.locked = false
               Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
@@ -185,7 +195,7 @@ export default {
       }
       this.disabled = true
       userApi.sendSMSCode({
-        phoneNumber: this.formData.mobile
+        phoneNumber: this.realMobilePhone
       }, (res) => {
         let timeOut = () => {
           this.time--

@@ -110,7 +110,12 @@
                             {{mobileFormData.phoneNumber}}
                           </p>
                           <p v-if="mobileState == 0 && !readonly">
-                              <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
+                              <span class="mobile">
+                                <select v-model="areaCode">
+                                  <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
+                                </select>
+                                <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
+                              </span>
                               <em class="error">
                                 <template v-if="errors.firstRule('phoneNumber')==='required'">{{$t('public0.public6')}}</template>
                                 <template v-if="errors.firstRule('phoneNumber')==='telphone'">{{$t(errors.first('phoneNumber'))}}</template>
@@ -156,6 +161,7 @@ import userApi from '@/api/individual'
 import myApi from '@/api/user'
 import utils from '@/assets/js/utils'
 import changepwd from '@/public/dialog/changepwd'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   data () {
     return {
@@ -174,6 +180,9 @@ export default {
       },
       showUnbindGoogleButton: false,
       showUnbindGoogleForm: false,
+      areaCodeList: commonConfig.areaCodeList,
+      areaCodeReg: commonConfig.areaCodeReg,
+      areaCode: '+86',
       mobileFormData: {
         phoneNumber: '',
         phonepassword: '',
@@ -220,6 +229,9 @@ export default {
       } else {
         return this.disabled
       }
+    },
+    realMobilePhone () {
+      return this.areaCode + this.mobileFormData.phoneNumber
     }
   },
   created () {
@@ -321,6 +333,7 @@ export default {
         for (let i in this.mobileFormData) {
           formData[i] = this.mobileFormData[i]
         }
+        formData.phoneNumber = this.realMobilePhone
         formData.password = formData.phonepassword
         delete formData.phonepassword
         myApi.getRsaPublicKey((rsaPublicKey) => {
@@ -364,10 +377,16 @@ export default {
       myApi.getUserInfo((userInfo) => {
         if (userInfo.mobile) {
           this.readonly = true
+          let match = userInfo.mobile.match(commonConfig.areaCodeReg)
+          if (match) {
+            this.areaCode = match[0]
+            this.mobileFormData.phoneNumber = userInfo.mobile.replace(this.areaCode, '')
+          } else {
+            this.mobileFormData.phoneNumber = userInfo.mobile
+          }
         } else {
           this.readonly = false
         }
-        this.mobileFormData.phoneNumber = userInfo.mobile
         this.setUserInfo(userInfo)
       }, (msg) => {
         Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
@@ -379,7 +398,7 @@ export default {
       }
       this.disabled = true
       userApi.sendAuthSMSCode({
-        phoneNumber: this.mobileFormData.phoneNumber
+        phoneNumber: this.realMobilePhone
       }, (msg) => {
         let timeOut = () => {
           this.time--
@@ -460,6 +479,14 @@ export default {
 .google-content-right input:hover{background-color: #15c9ff;}
 .google-content-right input.cancel{margin-top:4px;color:#11a8fe;background-color:transparent;border:1px solid #11a8fe;}
 .google-content-right input.cancel:hover{color:#15c9ff;border-color:#15c9ff;}
+
+.mobile{position:relative;}
+.mobile /deep/ select{
+  position:absolute;left:4px;top:0px;
+  width: 120px;height:22px;padding-right: 20px;color: #d6dff9;z-index: 1;
+  background-position: right 4px center;
+}
+.mobile /deep/ input{padding-left:126px;width:120px!important;}
 </style>
 
 

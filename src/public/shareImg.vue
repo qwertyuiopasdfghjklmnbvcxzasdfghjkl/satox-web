@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .shareImg{width: 630px;background: #394363;text-align: center;}
 .shareImg .title{font-size: 18px;color: #cbd4ec;background: #252a40; padding-left: 30px;padding-right: 30px; height: 50px;line-height: 50px;display: flex;justify-content: space-between;}
 .shareImg .title em{line-height: 52px;cursor: pointer;}
