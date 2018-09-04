@@ -54,6 +54,10 @@ import monitApi from '../../api/monitoring'
                         key: 'nodeIp'
                     },
                     {
+                        title: '已扫描到区块',
+                        key: 'scanningBlockNumber'
+                    },
+                    {
                         title: '私有节点最新区块',
                         key: 'nodeLastBlockNumber'
                     },
@@ -62,7 +66,11 @@ import monitApi from '../../api/monitoring'
                         key: 'mainNetLastBlockNumber'
                     },
                     {
-                        title: '差值',
+                        title: '扫描区块差值',
+                        key: 'scanDifference'
+                    },
+                    {
+                        title: '同步区块差值',
                         key: 'difference'
                     }
                 ],

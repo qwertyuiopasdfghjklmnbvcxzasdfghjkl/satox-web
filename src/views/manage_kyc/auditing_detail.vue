@@ -18,8 +18,8 @@
             </Col>
       </Row>
       <Row type="flex" justify="center" v-if="this.type !== 'manage'">
-          <Button type="ghost" style="margin-right: 8px" @click="passfirstReview('false')">不通过</Button>
-          <Button type="primary" @click="tongguo()">通过</Button>
+          <Button type="ghost" style="margin-right: 8px" @click="disagree">不通过</Button>
+          <Button type="primary" @click="pass()">通过</Button>
       </Row>
   </Card>
 </template>
@@ -28,6 +28,7 @@
 import kycApi from '../../api/kyc'
 import util from '../../libs/util'
 import check from './auditing_check'
+import reason from './reason'
 export default {
     props: ['verifyId', 'type', 'params'],
     data () {
@@ -67,7 +68,12 @@ export default {
         
     },
     methods: {
-        tongguo () {
+        disagree () {
+             util.setDialog(reason, {
+                 verifyId: this.verifyId
+             })
+        },
+        pass () {
             if (this.type) {
                 this.passfirstReview('true')
                 return

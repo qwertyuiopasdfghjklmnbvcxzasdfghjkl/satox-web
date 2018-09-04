@@ -33,12 +33,44 @@ export default {
             {title: '账号', key: 'username'},
             {title: '在线状态', key: 'online',
                 render: (h, params) => { 
-                    return h('div', params.row.online == 1 ? '在线' : '离线')
+                    render: (h, params) => { 
+                        // return h('div', params.row.online == 1 ? '在线' : '离线')
+                        let status = params.row.online
+                        let color = ''
+                        switch(status){
+                            case true:
+                                color = 'green'
+                                break;
+                            case false:
+                                color = '#ff8041'
+                                break;
+                        }
+                        return h('div', [
+                            h('div', {
+                                style: { color: color}
+                            }, params.row.online === true ? '在线' : '离线'),
+                        ])
+                    }
                 }
             },
             {title: '账号状态', key: 'frozenState',
                 render: (h, params) => { 
-                    return h('div', params.row.frozenState == 0 ? '正常' : '冻结')
+                    // return h('div', params.row.frozenState == 0 ? '正常' : '冻结')
+                    let status = params.row.frozenState
+                    let color = ''
+                    switch(status){
+                        case 0:
+                            color = 'green'
+                            break;
+                        case 1:
+                            color = '#ff8041'
+                            break;
+                    }
+                    return h('div', [
+                        h('div', {
+                            style: { color: color}
+                        }, params.row.frozenState === 0 ? '正常' : '冻结'),
+                    ])
                 }
             },
             {title: '操作', key: 'action', render: (h, params) => {

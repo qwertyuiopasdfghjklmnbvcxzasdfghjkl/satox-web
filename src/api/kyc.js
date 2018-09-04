@@ -146,8 +146,17 @@ const showReviewStatusCount = function (data, success, error) {
 }
 kyc.showReviewStatusCount = showReviewStatusCount
 
-
-
+// KYC不通过原因
+const listVerifyFailReasons = function (data, success, error) {
+  api.get('/api/bm/kycManage/listVerifyFailReasons', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+kyc.listVerifyFailReasons = listVerifyFailReasons
 
 
 // KYC详情
