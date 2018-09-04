@@ -100,7 +100,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getBtcValues']),
+    ...mapGetters(['getApiToken', 'getUSDCNY', 'getCoinSign', 'getBtcValues', 'getUsdRate', 'getLang']),
     markets () {
       // 收藏
       return ['collection', 'BTC', 'ETH', 'ATN', 'USDT']
@@ -231,6 +231,17 @@ export default {
     },
     getCurPrice (data) {
       if (data.lastPrice && this.getUSDCNY) {
+        if (data.baseSymbol === 'USDT') {
+          if (this.getLang === 'en') {
+            return numUtils.BN(data.lastPrice).toFixed(2).toMoney()
+          }
+          return numUtils.div(data.lastPrice, this.getUsdRate).toFixed(2).toMoney()
+        } else if (data.baseSymbol === 'ATN') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(data.lastPrice, '0.1').toFixed(2).toMoney()
+          }
+          return numUtils.div(numUtils.mul(data.lastPrice, '0.1'), this.getUsdRate).toFixed(2).toMoney()
+        }
         let curMarketBtc = this.getBtcValues[data.baseSymbol]
         let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
         return numUtils.mul(data.lastPrice, curMarketPrice).toFixed(2).toMoney()
