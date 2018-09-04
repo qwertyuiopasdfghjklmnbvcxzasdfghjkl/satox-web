@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="invite_list">
-                            <div class="invite_caption12">{{$t('referral.referral_friends')}}<!--我的邀请奖励--></div>
+                            <div class="invite_caption12">{{$t('referral.commission_value')}}<!--我的邀请奖励--></div>
                             <div class="invite_caption1">
                                 <div>{{(getUserInfo.m1) * 15}}&nbsp;ATN</div>
                                 <div>{{(getUserInfo.m1) * 3}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
@@ -216,10 +216,10 @@ export default {
   computed: {
     ...mapGetters(['isLogin', 'getApiToken', 'getLang', 'getUserInfo']),
     reward () {
-      return (this.getUserInfo.m1) * 15 + (this.getUserInfo.m1) * 10 + (this.getUserInfo.m1) * 5
+      return (this.getUserInfo.m1) * 15 + (this.getUserInfo.m2) * 10 + (this.getUserInfo.m3) * 5
     },
     reward1 () {
-      return (this.getUserInfo.m1) * 3 + (this.getUserInfo.m1) * 2 + (this.getUserInfo.m1) * 1
+      return (this.getUserInfo.m1) * 3 + (this.getUserInfo.m2) * 2 + (this.getUserInfo.m3) * 1
     },
     aaa () {
       if (this.getUserInfo.myInvitationUrl === null) {
