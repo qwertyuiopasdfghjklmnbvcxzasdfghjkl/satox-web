@@ -216,10 +216,10 @@ export default {
   computed: {
     ...mapGetters(['isLogin', 'getApiToken', 'getLang', 'getUserInfo']),
     reward () {
-      return (this.getUserInfo.m1) * 15 + (this.getUserInfo.m1) * 10 + (this.getUserInfo.m1) * 5
+      return (this.getUserInfo.m1) * 15 + (this.getUserInfo.m2) * 10 + (this.getUserInfo.m3) * 5
     },
     reward1 () {
-      return (this.getUserInfo.m1) * 3 + (this.getUserInfo.m1) * 2 + (this.getUserInfo.m1) * 1
+      return (this.getUserInfo.m1) * 3 + (this.getUserInfo.m2) * 2 + (this.getUserInfo.m3) * 1
     },
     aaa () {
       if (this.getUserInfo.myInvitationUrl === null) {

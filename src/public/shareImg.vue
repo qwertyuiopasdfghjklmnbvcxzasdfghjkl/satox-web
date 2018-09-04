@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .shareImg{width: 630px;background: #394363;text-align: center;}
 .shareImg .title{font-size: 18px;color: #cbd4ec;background: #252a40; padding-left: 30px;padding-right: 30px; height: 50px;line-height: 50px;display: flex;justify-content: space-between;}
 .shareImg .title em{line-height: 52px;cursor: pointer;}
@@ -82,6 +82,7 @@ export default {
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
 .shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
 .qrcode{width: 88px;height: 88px;background-color: #fff;position: absolute;top: -223px;left: 26px;border-radius: 4px;padding: 10px;}
+.qrcode >img {width: 88px;height: 88px; }
 .code_p{position: relative;}
 #picture{width: 333px;height: 593px;margin: 0 auto;margin-top: 20px;}
 </style>
