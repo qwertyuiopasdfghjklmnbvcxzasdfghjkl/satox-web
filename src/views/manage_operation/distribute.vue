@@ -28,13 +28,13 @@ export default {
                     title: '对象',
                     key: 'userId'
                 },
-                {
-                    title: '规则',
-                    key: '121212121',
+                // {
+                //     title: '规则',
+                //     key: '121212121',
                     // render: (h, params) => {
                     //     return h('div', params.row.distributeType === 0 ? '单条分发': '多条分发')
                     // }
-                },
+                // },
                 {
                     title: '时间',
                     key: 'createdTime'
@@ -55,6 +55,9 @@ export default {
                                   click: () => {
                                      extendApi.distribute(params.row.distributeId, (res) => {
                                          this.$Message.success({content: '分发成功'})
+                                         this.getDistribute()
+                                     }, (msg) => {
+                                         this.$Message.erroe({content: msg})
                                      })
                                   }
                               }
@@ -93,7 +96,11 @@ export default {
         this.getDistribute()
       },
       creates () {
-        util.setDialog(create)
+        util.setDialog(create, {
+            okCallback: () => {
+                this.getDistribute()
+            }
+        })
       }
     }
 }

@@ -10,6 +10,7 @@
             <span style="margin-right:15px;">{{datas.length ? datas[0].btcTransactionAmount : 0}}BTC</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
             <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}ATN</span>
+            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}USDT</span>
           </p>
         </Col>
         <Col span="7">

@@ -5,12 +5,12 @@
         <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
       </p>
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" >
-            <FormItem label="编号" prop="serialNumber">
+            <!-- <FormItem label="编号" prop="serialNumber">
                 <Input v-model="formValidate.serialNumber" name="serialNumber"></Input>
-            </FormItem>
-            <FormItem label="创建时间" prop="creatTime">
+            </FormItem> -->
+            <!-- <FormItem label="创建时间" prop="creatTime">
                 <DatePicker type="date" placeholder="请选择时间" name="creatTime" v-model="formValidate.creatTime" width="100%"></DatePicker>
-            </FormItem>
+            </FormItem> -->
             <FormItem label="币种" prop="symbol">
                 <Select v-model="formValidate.symbol" name="symbol">
                     <Option :value="data.symbol" v-for="data in symbolData" :key="data.id">{{data.symbol}}</Option>
@@ -29,7 +29,7 @@
                 <Input v-model="formValidate.sourceAccountId" name="sourceAccountId"></Input>
             </FormItem>
              <FormItem label="备注" prop="remarks">
-                <Input v-model="formValidate.remarks" name="remarks"></Input>
+                <Input v-model="formValidate.remarks" name="remarks" :maxlength="255"></Input>
             </FormItem>
             <div style="text-align:center;margin-top:15px;">
                 <Button type="primary" style="margin-right:10px;" @click="creat">创建</Button>
@@ -51,7 +51,7 @@ export default {
                 userId: null,
                 accountId: null,
                 sourceAccountId: null,
-                remarks: ''
+                remarks: null
             },
             ruleValidate: {
                 serialNumber: [
@@ -100,7 +100,8 @@ export default {
                     let formData = new FormData(this.$refs.formValidate.$el);
                     extendApi.createSingleDistribute(formData, (res) => {
                         this.$Message.success({content: '创建成功'})
-                        this.findSymbolInfo()
+                        // this.findSymbolInfo()
+                        this.$emit('okCallback')
                         this.$emit('removeDialog')
                     })
                 }

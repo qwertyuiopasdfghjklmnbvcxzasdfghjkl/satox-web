@@ -7,8 +7,8 @@
     </p>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">
       <FormItem label="币种：" prop="symbol">
-          <b>{{formValidate.symbol}}</b>
-        <!-- <Input type="text" v-model="formValidate.symbol" :readonly="isEdit" disabled></Input> -->
+        <b v-if="isEdit">{{formValidate.symbol}}</b>
+        <Input type="text" v-model="formValidate.symbol" :readonly="isEdit"  v-if="!isEdit"></Input>
       </FormItem>
       <FormItem label="用户名：" prop="username">
         <Input type="text" v-model="formValidate.username"></Input>

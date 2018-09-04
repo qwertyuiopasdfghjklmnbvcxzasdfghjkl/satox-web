@@ -12,7 +12,7 @@
             </FormItem>
             <FormItem>
                 <Button type="primary" @click="audit('2')">同意</Button>
-                <Button type="ghost" style="margin-left: 8px" @click="audit('1')">不同意</Button>
+                <Button type="ghost" style="margin-left: 8px" @click="disagree">不同意</Button>
             </FormItem>
         </Form>
     </Card>
@@ -41,6 +41,9 @@ export default {
         }
     },
     methods: {
+        disagree () {
+
+        },
         closeDialog () {
             this.$emit('removeDialog')
         },
