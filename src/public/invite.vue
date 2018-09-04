@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="invite_list">
-                            <div class="invite_caption12">{{$t('referral.referral_friends')}}<!--我的邀请奖励--></div>
+                            <div class="invite_caption12">{{$t('referral.commission_value')}}<!--我的邀请奖励--></div>
                             <div class="invite_caption1">
                                 <div>{{(getUserInfo.m1) * 15}}&nbsp;ATN</div>
                                 <div>{{(getUserInfo.m1) * 3}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
