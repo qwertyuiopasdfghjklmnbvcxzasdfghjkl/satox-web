@@ -30,7 +30,7 @@
           <a class="contact-icons icon-twitter" href="https://twitter.com/ExchangeNewton" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-telegram" href="https://twitter.com/ExchangeNewton" target="_blank"></a>
+          <a class="contact-icons icon-telegram" href="https://t.me/newtonxchange" target="_blank"></a>
         </div>
         <div class="item">
           <a class="contact-icons icon-slack" href="https://newtonexchange.slack.com" target="_blank"></a>
