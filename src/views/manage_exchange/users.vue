@@ -10,6 +10,7 @@
             <span style="margin-left:10px;">昵称</span>
             <Input v-model="nickname" placeholder="昵称" style="width: 150px"></Input>
             <Button type="primary" @click="getList('1')">查询</Button>
+            <Checkbox v-model="single" @on-change="curPage=1;getList('1')">显示在线</Checkbox>
         </Row>
         <Table :columns="columns1" :data="data1" style="margin-top:20px;"></Table>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
@@ -31,6 +32,7 @@ import Cookies from 'js-cookie'
 export default {
   data () {
     return {
+      single: false,
       curPage: 1,
       total: 0,
       username: '',
@@ -56,8 +58,27 @@ export default {
               title: '状态',
               key: 'online',
               render: (h, params) => {
-                  return h('div', params.row.online == true ? '在线' : '离线')
+                //   return h('div', params.row.online == true ? '在线' : '离线')
+                let status = params.row.online
+                let color = ''
+                switch(status){
+                    case true:
+                        color = 'green'
+                        break;
+                    case false:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.online === true ? '在线' : '离线'),
+                ])
               }
+          },
+          {
+              title: '注册时间',
+              key: 'createdTime'
           },
           {
               title: '操作',
@@ -65,7 +86,7 @@ export default {
               width: 350,
               render: (h, params) => {
                 return h('div', {
-                    style: {margin: '10px 0'}
+                    style: {margin: '10px 0px'}
                 }, [
                     h('Button', {
                         props: {type: 'primary', size: 'small'},
@@ -179,15 +200,28 @@ export default {
         } else {
             this.curPage = this.curPage
         }
-        currenyApi.getfindUserList(this.curPage, {
-            username: this.username || null,
-            nickname: this.nickname || null
-        }, (res, total) => {
-            this.total = total
-            this.data1 = res
-        }, (msg) => {
-            this.$Message.error({content: msg})
-        })
+        if (this.single) {
+            currenyApi.getfindUserList(this.curPage, {
+                username: this.username || null,
+                nickname: this.nickname || null,
+                online: true
+            }, (res, total) => {
+                this.total = total
+                this.data1 = res
+            }, (msg) => {
+                this.$Message.error({content: msg})
+            })
+        } else {
+            currenyApi.getfindUserList(this.curPage, {
+                username: this.username || null,
+                nickname: this.nickname || null
+            }, (res, total) => {
+                this.total = total
+                this.data1 = res
+            }, (msg) => {
+                this.$Message.error({content: msg})
+            })
+        }
     },
     changePage (page) {
       this.curPage = page

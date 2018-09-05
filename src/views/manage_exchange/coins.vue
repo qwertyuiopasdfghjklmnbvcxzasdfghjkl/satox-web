@@ -80,14 +80,43 @@ export default {
               title: '充值权限',
               key: 'rechargeFlag', //1 正常 2  暂停
               render: (h, params) => {
-                  return h('div', params.row.rechargeFlag == 1 ? '正常' : '暂停')
+                  let status = params.row.rechargeFlag
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.rechargeFlag == 1 ? '正常' : '暂停'),
+                ])
+                //   return h('div', params.row.rechargeFlag == 1 ? '正常' : '暂停')
               }
           },
           {
               title: '提币权限', //1 正常 2  暂停
               key: 'withdrawFlag',
               render: (h, params) => {
-                  return h('div', params.row.withdrawFlag == 1 ? '正常' : '暂停')
+                let status = params.row.withdrawFlag
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.withdrawFlag == 1 ? '正常' : '暂停'),
+                ])
               }
           },
           {
@@ -126,10 +155,24 @@ export default {
               }
           },
           {
-              title: '状态', //1 正常 2  暂停
+              title: '状态', //1 上线 2  下线
               key: 'status',
               render: (h, params) => {
-                  return h('div', params.row.status == 1 ? '上线' : '下线')
+                  let status = params.row.status
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.status == 1 ? '上线' : '下线'),
+                ])
               }
           },
           {
@@ -161,7 +204,10 @@ export default {
                         on: {
                             click: () => {
                                 util.setDialog(updata,{
-                                     item: params.row
+                                     item: params.row,
+                                     okCallback: () => {
+                                        this.reshAll()
+                                     }
                                 })
                             }
                         }
