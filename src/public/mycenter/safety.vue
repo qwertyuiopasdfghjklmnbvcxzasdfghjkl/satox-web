@@ -111,7 +111,7 @@
                           </p>
                           <p v-if="mobileState == 0 && !readonly">
                               <span class="mobile">
-                                <select v-model="areaCode">
+                                <select v-model="mobileFormData.countryCode">
                                   <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
                                 </select>
                                 <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
@@ -182,8 +182,8 @@ export default {
       showUnbindGoogleForm: false,
       areaCodeList: commonConfig.areaCodeList,
       areaCodeReg: commonConfig.areaCodeReg,
-      areaCode: '+86',
       mobileFormData: {
+        countryCode: '+86',
         phoneNumber: '',
         phonepassword: '',
         smsCode: ''
@@ -229,9 +229,6 @@ export default {
       } else {
         return this.disabled
       }
-    },
-    realMobilePhone () {
-      return this.areaCode + this.mobileFormData.phoneNumber
     }
   },
   created () {
@@ -333,7 +330,6 @@ export default {
         for (let i in this.mobileFormData) {
           formData[i] = this.mobileFormData[i]
         }
-        formData.phoneNumber = this.realMobilePhone
         formData.password = formData.phonepassword
         delete formData.phonepassword
         myApi.getRsaPublicKey((rsaPublicKey) => {
@@ -377,13 +373,8 @@ export default {
       myApi.getUserInfo((userInfo) => {
         if (userInfo.mobile) {
           this.readonly = true
-          let match = userInfo.mobile.match(commonConfig.areaCodeReg)
-          if (match) {
-            this.areaCode = match[0]
-            this.mobileFormData.phoneNumber = userInfo.mobile.replace(this.areaCode, '')
-          } else {
-            this.mobileFormData.phoneNumber = userInfo.mobile
-          }
+          this.mobileFormData.countryCode = userInfo.countryCode
+          this.mobileFormData.phoneNumber = userInfo.mobile
         } else {
           this.readonly = false
         }
@@ -398,7 +389,8 @@ export default {
       }
       this.disabled = true
       userApi.sendAuthSMSCode({
-        phoneNumber: this.realMobilePhone
+        countryCode: this.mobileFormData.countryCode,
+        phoneNumber: this.mobileFormData.phoneNumber
       }, (msg) => {
         let timeOut = () => {
           this.time--
