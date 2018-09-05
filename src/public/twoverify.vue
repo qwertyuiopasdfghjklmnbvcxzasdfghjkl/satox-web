@@ -149,7 +149,7 @@ export default {
         let m = Number(this.formData.verifyType) === 0 ? 'loginMobileVerify' : 'loginTwo'
         let formData = Number(this.formData.verifyType) === 0 ? {
           smsCode: this.formData.verifyCode,
-          username: this.formData.username
+          username: this.formData.mobile
         } : {
           verifyCode: this.formData.verifyCode,
           username: this.formData.username
