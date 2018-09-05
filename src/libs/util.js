@@ -29,7 +29,7 @@ const setDialog = function (component, opts) {
 };
 util.setDialog = setDialog;
 
-const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.dev.koall.io/';
+ const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.dev.koall.io/';
 // const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://10.0.1.35:9009';
 
 
