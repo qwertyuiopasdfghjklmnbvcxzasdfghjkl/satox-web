@@ -30,19 +30,24 @@ export default {
           })
         },
         passfirstReview (code) {
-            kycAPI[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code,{
-              verifyId: this.verifyId
-            }, (res) => {
-                if (code) {
-                    this.$Message.success({content: '审核通过'})
-                    this.$emit('okCallback')
-                    this.$emit('removeDialog')
-                } else {
-                    this.$Message.error({content: '审核不通过'})
-                    this.$emit('okCallback')
-                    this.$emit('removeDialog')
-                }
-            })
+            if (code) {
+              kycAPI[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code,{
+                verifyId: this.verifyId
+              }, (res) => {
+                  if (code) {
+                      this.$Message.success({content: '审核通过'})
+                      this.$emit('okCallback')
+                      this.$emit('removeDialog')
+                  } else {
+                      this.$Message.error({content: '审核不通过'})
+                      this.$emit('okCallback')
+                      this.$emit('removeDialog')
+                  }
+              })
+            } else {
+               this.$emit('okCallback')
+               this.$emit('removeDialog')
+            }
         }
     }
 }
