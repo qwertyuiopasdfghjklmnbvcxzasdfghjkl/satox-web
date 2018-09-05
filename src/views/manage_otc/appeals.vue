@@ -2,7 +2,9 @@
 <template>
     <Row>
       <Card>
-          <p slot="title">申诉管理</p>
+          <p slot="title">申诉管理
+            <Button type="primary" @click="unprocessed">刷新</Button>
+          </p>
           申诉管理：<Checkbox v-model="single" @on-change = "curPage=1;unprocessed()">只显示待处理</Checkbox>
       </Card>
       <Card v-for="(data, index) in datas" :key="index" style="margin-top:10px;">
@@ -126,5 +128,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang=" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

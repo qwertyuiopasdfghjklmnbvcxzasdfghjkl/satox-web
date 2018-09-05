@@ -2,7 +2,9 @@
 <template>
   <Row>
     <Card>
-      <p slot="title">KYC审核</p>
+      <p slot="title">KYC审核
+        <Button type="primary" @click="getList">刷新</Button>
+      </p>
       <Row>
         <Col span="8">待审核用户数量：{{data2.verifyWaitFirstCheck || 0}}个</Col>
         <Col span="8">待复核用户数量：{{data2.verifyWaitSecondCheck || 0}}个</Col>
@@ -133,5 +135,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

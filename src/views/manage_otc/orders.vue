@@ -1,11 +1,14 @@
 <!-- 订单管理 -->
 <template>
   <Card>
-    <p slot="title">订单管理</p>
+    <p slot="title">订单管理
+         <Button type="primary" @click="getOrdersList">刷新</Button>
+    </p>
     <Row>
       <Select v-model="formData.symbol" style="width:200px">
           <Option value="BTC">BTC</Option>
           <Option value="ETH">ETH</Option>
+          <Option value="ATN">ATN</Option>
       </Select>
       <Input v-model="formData.orderNumber" clearable style="width: 300px;" placeholder="OTC45941545316384768"></Input>
       <Button type="primary" @click="curPage=1;getOrdersList()">查询</Button>
@@ -187,5 +190,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

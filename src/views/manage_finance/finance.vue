@@ -4,7 +4,9 @@
     <Col span="24">
       <Row style="margin:10px 0;">
         <Card>
-          <p slot="title">充值监控</p>
+          <p slot="title">充值监控
+            <Button type="primary" @click="reshAll">刷新</Button>
+          </p>
           <Table :columns="columns1" :data="data1"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
@@ -122,6 +124,13 @@ export default {
     this.getAccountList()
   },
   methods: {
+    reshAll () {
+      this.getMonitorList()
+      this.getStatisticsList()
+      this.getCheckingList()
+      this.getPoolList()
+      this.getAccountList()
+    },
     getMonitorList() {
       financeApi.findRechargeMonitorList( this.curPage, (res, total) => {
         this.total = total
@@ -176,5 +185,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

@@ -2,7 +2,9 @@
 <template>
   <Row>
     <Card>
-      <p slot="title">KYC复核</p>
+      <p slot="title">KYC复核
+        <Button type="primary" @click="getCheckVerifys">刷新</Button>
+      </p>
       <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
@@ -92,5 +94,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

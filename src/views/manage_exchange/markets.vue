@@ -2,7 +2,9 @@
 <template>
   <div>
     <Card>
-        <p slot="title">交易市场管理</p>
+        <p slot="title">交易市场管理
+            <Button type="primary" @click="reshAll">刷新</Button>
+        </p>
         <Row>
             <span>市场名称</span>
             <Input v-model="symbol" style="width: 300px"></Input>
@@ -142,6 +144,10 @@ export default {
     this.getMarketList()
   },
   methods: {
+    reshAll () {
+        this.findMarketList()
+        this.getMarketList()
+    },
     findMarket () {
         currenyApi.findMarketExchangeInfoList({
              market: this.symbol 
@@ -195,6 +201,6 @@ export default {
 }
 </script>
 
-<style lang="less">
-
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

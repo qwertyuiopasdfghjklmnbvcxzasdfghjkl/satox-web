@@ -4,7 +4,9 @@
     <Col span="24">
       <Row>
         <Card>
-          <p slot="title">提审核</p>
+          <p slot="title">提审核
+                <Button type="primary" @click="reshAll">刷新</Button>
+          </p>
           <Row>
             <Col span="12">
               <p>自动审核</p>
@@ -78,6 +80,10 @@ export default {
       this.getAuditingData()
     },
     methods: {
+      reshAll () {
+         this.getAuditing()
+         this.getAuditingData()
+      },
       switchStaus(state) {//0 未审核 1 审核不通过 2 审核通过
         switch(state){
             case 0:
@@ -112,5 +118,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

@@ -2,7 +2,9 @@
 <template>
   <Row>
     <Card>
-        <p slot="title">币种管理</p>
+        <p slot="title">币种管理
+             <Button type="primary" @click="reshAll">刷新</Button>
+        </p>
         <Row>
             <span>代号</span>
             <Input v-model="symbol" placeholder="Search" style="width: 300px"></Input>
@@ -78,14 +80,43 @@ export default {
               title: '充值权限',
               key: 'rechargeFlag', //1 正常 2  暂停
               render: (h, params) => {
-                  return h('div', params.row.rechargeFlag == 1 ? '正常' : '暂停')
+                  let status = params.row.rechargeFlag
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.rechargeFlag == 1 ? '正常' : '暂停'),
+                ])
+                //   return h('div', params.row.rechargeFlag == 1 ? '正常' : '暂停')
               }
           },
           {
               title: '提币权限', //1 正常 2  暂停
               key: 'withdrawFlag',
               render: (h, params) => {
-                  return h('div', params.row.withdrawFlag == 1 ? '正常' : '暂停')
+                let status = params.row.withdrawFlag
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.withdrawFlag == 1 ? '正常' : '暂停'),
+                ])
               }
           },
           {
@@ -124,10 +155,24 @@ export default {
               }
           },
           {
-              title: '状态', //1 正常 2  暂停
+              title: '状态', //1 上线 2  下线
               key: 'status',
               render: (h, params) => {
-                  return h('div', params.row.status == 1 ? '上线' : '下线')
+                  let status = params.row.status
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.status == 1 ? '上线' : '下线'),
+                ])
               }
           },
           {
@@ -159,7 +204,10 @@ export default {
                         on: {
                             click: () => {
                                 util.setDialog(updata,{
-                                     item: params.row
+                                     item: params.row,
+                                     okCallback: () => {
+                                        this.reshAll()
+                                     }
                                 })
                             }
                         }
@@ -231,6 +279,10 @@ export default {
      this.findSymbolList()
  },
  methods: {
+    reshAll () {
+        this.getchangeList()
+        this.findSymbolList()
+    },
     switchStaus(state) {
         switch(state){
             case 1:
@@ -286,6 +338,6 @@ export default {
 }
 </script>
 
-<style lang="less">
-
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

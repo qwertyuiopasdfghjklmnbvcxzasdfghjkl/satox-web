@@ -32,6 +32,14 @@ export default {
                 {
                     title: '主网最新区块',
                     key: 'mainNetLastBlockNumber'
+                },
+                {
+                    title: '扫描区块差值',
+                    key: 'scanDifference'
+                },
+                {
+                    title: '同步区块差值',
+                    key: 'difference'
                 }
             ],
             data1: []

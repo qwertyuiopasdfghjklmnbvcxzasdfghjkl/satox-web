@@ -41,26 +41,7 @@ export default {
                     key: 'type'
                 }
             ],
-            data1: [
-                {
-                    time: '2016-10-03',
-                    symbol: 'BTC',
-                    dection: '买',
-                    number: 1,
-                    txid: 'asfdyhtyiuyiyujgyjhngngjghjh',
-                    address: 'sfsdgfdgdfgfdg',
-                    type: '自动转账'     
-                },
-                {
-                    time: '2016-10-03',
-                    symbol: 'BTC',
-                    dection: '买',
-                    number: 1,
-                    txid: 'asfdyhtyiuyiyujgyjhngngjghjh',
-                    address: 'sfsdgfdgdfgfdg',
-                    type: '自动转账'     
-                }
-            ]
+            data1: []
         }
     },
     methods: {

@@ -1,10 +1,13 @@
 <!-- 用户管理 -->
 <template>
   <Card>
-    <p slot="title">用户管理</p>
+    <p slot="title">用户管理
+        <Button type="primary" @click="getfindUserManage">刷新</Button>
+    </p>
     <Row>
         <Input style="width: 300px;" v-model="userSearh" placeholder="如：123456@qq.com"></Input>
         <Button type="primary" @click="curPage=1;getfindUserManage()">查询</Button>
+        <Checkbox v-model="single" @on-change="curPage=1;getfindUserManage('1')">显示在线</Checkbox>
     </Row>
     <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
     <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
@@ -23,6 +26,7 @@ import Cookies from 'js-cookie';
 export default {
   data () {
     return {
+        single: false,
         curPage: 1, 
         total: 0,
         userSearh: '',
@@ -31,13 +35,47 @@ export default {
             {title: '账号', key: 'username'},
             {title: '在线状态', key: 'online',
                 render: (h, params) => { 
-                    return h('div', params.row.online == 1 ? '在线' : '离线')
+                    // return h('div', params.row.online == 1 ? '在线' : '离线')
+                    let status = params.row.online
+                    let color = ''
+                    switch(status){
+                        case true:
+                            color = 'green'
+                            break;
+                        case false:
+                            color = '#ff8041'
+                            break;
+                    }
+                    return h('div', [
+                        h('div', {
+                            style: { color: color}
+                        }, params.row.online === true ? '在线' : '离线'),
+                    ])
                 }
             },
             {title: '账号状态', key: 'frozenState',
                 render: (h, params) => { 
-                    return h('div', params.row.frozenState == 0 ? '正常' : '冻结')
+                    // return h('div', params.row.frozenState == 0 ? '正常' : '冻结')
+                    let status = params.row.frozenState
+                    let color = ''
+                    switch(status){
+                        case 0:
+                            color = 'green'
+                            break;
+                        case 1:
+                            color = '#ff8041'
+                            break;
+                    }
+                    return h('div', [
+                        h('div', {
+                            style: { color: color}
+                        }, params.row.frozenState === 0 ? '正常' : '冻结'),
+                    ])
                 }
+            },
+            {
+                title: '注册时间',
+                key: 'createdTime'
             },
             {title: '操作', key: 'action', render: (h, params) => {
                 return h('div', [
@@ -125,14 +163,26 @@ export default {
   },
   methods: {
       getfindUserManage () {
-          otcApi.findUserManage(this.curPage, {
-              username: this.userSearh || null
-          }, (res, total) => {
-              this.total = total
-              this.data1 = res
-          }, (msg) => {
-              this.$Message.error({content: msg})
-          })
+          if (this.single) {
+                otcApi.findUserManage(this.curPage, {
+                    username: this.userSearh || null,
+                    online: true
+                }, (res, total) => {
+                    this.total = total
+                    this.data1 = res
+                }, (msg) => {
+                    this.$Message.error({content: msg})
+                })
+          } else {
+                otcApi.findUserManage(this.curPage, {
+                    username: this.userSearh || null
+                }, (res, total) => {
+                    this.total = total
+                    this.data1 = res
+                }, (msg) => {
+                    this.$Message.error({content: msg})
+                })
+          }
       },
       changePage (page) {
         this.curPage = page
@@ -142,5 +192,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

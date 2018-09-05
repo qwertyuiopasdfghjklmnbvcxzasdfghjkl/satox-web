@@ -4,6 +4,7 @@
     <Card>
       <p slot="title">
         KYC管理
+        <Button type="primary" @click="getList">刷新</Button>
       </p>
       <Row>
         <Col span="16">
@@ -102,28 +103,28 @@ export default {
                         }
                     }
                 }, '查看详情'),
-                // h('Button', {
-                //     props: {type: 'primary', size: 'small'},
-                //     on: {
-                //         click: () => {
-                //           this.$Modal.confirm({
-                //                 content: '<p style="font-size:20px;margin-top:-6px;">确认删除？</p>',
-                //                 style: {fontSize: '20px'},
-                //                 onOk: () => {
-                //                   kyc.deleteVerify({
-                //                     verifyId: params.row.verifyId,
-                //                     verifyStatus: params.row.verifyStatus
-                //                   }, (msg) => {
-                //                     this.$Message.success({content: '删除成功'});
-                //                     this.getList();
-                //                   }, (msg) => {
-                //                     this.$Message.error({content: msg});
-                //                   })     
-                //                 }
-                //             });
-                //         }
-                //     }
-                // }, '删除')
+                h('Button', {
+                    props: {type: 'primary', size: 'small'},
+                    on: {
+                        click: () => {
+                          this.$Modal.confirm({
+                                content: '<p style="font-size:20px;margin-top:-6px;">确认删除？</p>',
+                                style: {fontSize: '20px'},
+                                onOk: () => {
+                                  kyc.deleteVerify({
+                                    verifyId: params.row.verifyId,
+                                    verifyStatus: params.row.verifyStatus
+                                  }, (msg) => {
+                                    this.$Message.success({content: '删除成功'});
+                                    this.getList();
+                                  }, (msg) => {
+                                    this.$Message.error({content: msg});
+                                  })     
+                                }
+                            });
+                        }
+                    }
+                }, '删除')
             ]);
         }}
       ],
@@ -193,4 +194,5 @@ export default {
 
 <style lang="less">
 .ivu-modal-confirm-body{font-size: 20px;}
+.ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

@@ -58,20 +58,20 @@ import monitApi from '../../api/monitoring'
                         title: '锁定状态', // 0  未锁定   1  锁定
                         key: 'locked',
                         render: (h, params) => {
-                            let status = Number(params.row.locked)
+                            let status = params.row.locked
                             let color = ''
                             switch(status){
-                                case 0:
-                                    color = '#495060'
+                                case '0':
+                                    color = 'green'
                                     break;
-                                case 1:
-                                    color = 'red'
+                                case '1':
+                                    color = '#ff8041'
                                     break;
                             }
                             return h('div', [
                                 h('div', {
                                     style: { color: color}
-                                }, params.row.locked === '0' ? '未锁定': '锁定'),
+                                }, params.row.locked === '1' ? '锁定' : '未锁定'),
                             ])
                         }
                     },

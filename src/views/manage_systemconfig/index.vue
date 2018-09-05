@@ -34,7 +34,7 @@
         <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 2" :key="data.id">
           <Col span="6">{{data.codeDesc}}</Col>
           <Col span="6" v-if="data.code !== 'otcCoinType'">{{data.value}}</Col>
-          <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency'">
+          <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency' && data.code !== 'adCountLimit' && data.code !== 'priceBasePlatform'">
             <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;" v-if="data.code !== 'priceBasePlatform'"/>
             <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'" style="width:80px;"></Input>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
@@ -336,7 +336,7 @@ export default {
         this.fnFindAdminAccounts()
       } else if (flag === 2) {
         this.coinPoolsPage.currentPage = page
-        this.fnFindAdminCoinPools()
+        this.fnFindAdminCoinPools
       } else {
         return false
       }

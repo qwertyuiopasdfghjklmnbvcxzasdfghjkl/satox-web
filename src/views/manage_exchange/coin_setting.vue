@@ -235,7 +235,6 @@ export default {
         }, (res) =>{
             this.item.confirmBlock = this.confirmBlock
             this.$Message.success({content: '修改成功'})
-            debugger
             this.getchangeInfoList()
         }, (msg) => {
             this.$Message.error({content: msg})
