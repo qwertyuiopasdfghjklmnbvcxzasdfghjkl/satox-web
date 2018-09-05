@@ -97,6 +97,7 @@ export default {
                 params: {
                   username: this.formData.username,
                   type: res.type,
+                  countryCode: res.countryCode,
                   mobile: res.mobile
                 }
               })

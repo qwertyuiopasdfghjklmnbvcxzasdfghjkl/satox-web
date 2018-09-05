@@ -24,7 +24,7 @@
                     </div>
                     <template v-if="registerType==1">
                       <div class="mobile">
-                        <select v-model="areaCode">
+                        <select v-model="countryCode">
                           <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
                         </select>
                         <inputbox name="phoneNumber" ref="email" :maxLength="255" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" :msgs="msgs.phoneNumber" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
@@ -66,7 +66,7 @@ export default {
       gtLocked: false,
       registerType: 1,
       areaCodeList: commonConfig.areaCodeList,
-      areaCode: '+86',
+      countryCode: '+86',
       mobileFormData: {
         phoneNumber: '',
         smsCode: '',
@@ -98,9 +98,6 @@ export default {
       } else {
         return this.disabled
       }
-    },
-    realMobilePhone () {
-      return this.areaCode + this.mobileFormData.phoneNumber
     }
   },
   watch: {
@@ -173,7 +170,6 @@ export default {
             formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
             formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
             formData.rsaPublicKey = rsaPublicKey
-            formData.phoneNumber = this.realMobilePhone
             userApi.mobileResetPwd(formData, () => {
               Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 邮件发送成功
               setTimeout(() => {
@@ -198,7 +194,8 @@ export default {
       }
       this.disabled = true
       myApi.sendAuthSMSCode({
-        phoneNumber: this.realMobilePhone
+        countryCode: this.countryCode,
+        phoneNumber: this.mobileFormData.phoneNumber
       }, (msg) => {
         let timeOut = () => {
           this.time--

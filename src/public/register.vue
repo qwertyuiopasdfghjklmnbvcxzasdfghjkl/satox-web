@@ -23,7 +23,7 @@
                     </div>
                     <template v-if="formData.registerType==1">
                       <div class="mobile">
-                        <select v-model="areaCode">
+                        <select v-model="formData.countryCode">
                           <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
                         </select>
                         <inputbox name="mobile" :maxLength="255" v-model="formData.mobile" v-validate="'required|telphone'" :msgs="msgs.mobile" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
@@ -78,9 +78,9 @@ export default {
       checked: false,
       disabled: false,
       areaCodeList: commonConfig.areaCodeList,
-      areaCode: '+86',
       formData: {
         registerType: 1,
+        countryCode: '+86',
         mobile: '',
         smsCode: '',
         username: '',
@@ -111,9 +111,6 @@ export default {
       } else {
         return this.disabled
       }
-    },
-    realMobilePhone () {
-      return this.areaCode + this.formData.mobile
     }
   },
   watch: {
@@ -164,10 +161,6 @@ export default {
             formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
             formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
             formData.rsaPublicKey = rsaPublicKey
-            if (Number(formData.registerType) === 1) {
-              formData.mobile = this.realMobilePhone
-              formData.username = this.realMobilePhone
-            }
             userApi.register(formData, (msg) => {
               this.locked = false
               Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
@@ -195,7 +188,8 @@ export default {
       }
       this.disabled = true
       userApi.sendSMSCode({
-        phoneNumber: this.realMobilePhone
+        countryCode: this.formData.countryCode,
+        phoneNumber: this.formData.mobile
       }, (res) => {
         let timeOut = () => {
           this.time--

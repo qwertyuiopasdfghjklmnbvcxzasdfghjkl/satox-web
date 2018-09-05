@@ -88,6 +88,7 @@ export default {
       }
       this.disabled = true
       myApi.sendAuthSMSCode({
+        countryCode: this.getUserInfo.countryCode,
         phoneNumber: this.getUserInfo.mobile
       }, (msg) => {
         let timeOut = () => {
