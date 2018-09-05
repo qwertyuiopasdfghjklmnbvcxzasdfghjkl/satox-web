@@ -157,7 +157,7 @@ export default {
       return this.userState.nickname
     },
     contactHtml () {
-      let alink = `<a href="javascript:;" target="_blank">${this.$t('public0.public241')}</a>`
+      let alink = `<a href="${this.getLang === 'en' ? 'https://newtonexchange.zendesk.com/hc/en-us/requests/new' : 'https://newtonexchange.zendesk.com/hc/zh-cn/requests/new'}" target="_blank">${this.$t('public0.public241')}</a>`
       return `（${this.$t('account.user_prompt5').format(alink)}）`
     }
   },
