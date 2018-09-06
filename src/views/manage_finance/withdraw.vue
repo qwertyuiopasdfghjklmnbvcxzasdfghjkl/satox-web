@@ -43,11 +43,11 @@ export default {
             curPage: 1,
             total: 0,
             columns: [
-                {key: 'accountId', title: '交易编号'},
+                {key: 'createdTime', title: '创建时间'},
                 {key: 'userName', title: '用户账号'},
                 {key: 'withdrawAmount', title: '提现金额',
                     render: (h, params) => { 
-                        return h('div', [params.row.auditStatus, params.row.symbol])
+                        return h('div', [params.row.withdrawAmount, params.row.symbol])
                     }
                 },
                 {key: 'phoneNumber', title: '电话'},
