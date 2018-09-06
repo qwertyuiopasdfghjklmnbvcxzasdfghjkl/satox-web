@@ -50,7 +50,8 @@ export default {
           })
       },
       passfirstReview (code) {
-            kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code,{
+            if (Number(this.verifyAuditNoPassType) !== 0) {
+              kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code,{
               verifyId: this.verifyId,
               verifyAuditNoPassType: Number(this.verifyAuditNoPassType)
             }, (res) => {
@@ -64,6 +65,9 @@ export default {
                     this.$emit('removeDialog')
                 }
             })
+          } else {
+              this.$Message.error({content: '请选择理由'})
+          }
         }
   }
 }
