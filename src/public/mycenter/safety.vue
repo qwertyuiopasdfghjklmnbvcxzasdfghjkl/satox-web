@@ -373,7 +373,9 @@ export default {
       myApi.getUserInfo((userInfo) => {
         if (userInfo.mobile) {
           this.readonly = true
-          this.mobileFormData.countryCode = userInfo.countryCode
+          if (userInfo.countryCode) {
+            this.mobileFormData.countryCode = userInfo.countryCode
+          }
           this.mobileFormData.phoneNumber = userInfo.mobile
         } else {
           this.readonly = false
