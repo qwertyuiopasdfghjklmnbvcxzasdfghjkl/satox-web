@@ -37,7 +37,15 @@ export default {
             columns1: [
                 {title: '业务领域', key: 'domain'},
                 {title: '操作类型', key: 'operate'},
-                {title: '操作详细说明', key: 'operateData'},
+                {title: '操作详细说明', key: 'operateData', width: 250, 
+                 render: (h, params) => {
+                            return h('div', [
+                                h('div', {
+                                    style: {height: '100px', overflow: 'auto'},
+                                }, params.row.operateData)
+                            ]);
+                        }
+                },
                 {title: '操作时间', key: 'operateTime'},
                 // {title: '操作人员姓名', key: 'operatorName'}
             ],
@@ -72,6 +80,5 @@ export default {
 </script>
 
 <style scoped>
-.update_record {width: 800px;height: 600px;overflow: auto;}
+.update_record{width: 800px;height: 600px;}
 </style>
-
