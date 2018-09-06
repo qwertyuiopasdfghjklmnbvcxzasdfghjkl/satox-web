@@ -45,7 +45,11 @@ export default {
             columns: [
                 {key: 'accountId', title: '交易编号'},
                 {key: 'userName', title: '用户账号'},
-                {key: 'withdrawAmount', title: '提现金额'},
+                {key: 'withdrawAmount', title: '提现金额',
+                    render: (h, params) => { 
+                        return h('div', [params.row.auditStatus, params.row.symbol])
+                    }
+                },
                 {key: 'phoneNumber', title: '电话'},
                 {key: 'auditStatus', title: '状态',
                     render: (h, params) => { 
