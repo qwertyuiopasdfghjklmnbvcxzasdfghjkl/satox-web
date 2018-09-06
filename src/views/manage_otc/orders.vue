@@ -164,7 +164,10 @@ export default {
         }
       },
       getOrdersList () {
-        otcApi.listAllOrders(this.curPage, this.formData, (res, total) => {
+        otcApi.listAllOrders(this.curPage, {
+            symbol: this.formData.symbol,
+            orderNumber: this.formData.orderNumber
+        }, (res, total) => {
             res.forEach((item, index) => {
                 item.createTime = item.createdAt
                 let date = util.formatDate(item.createTime).getTime()
