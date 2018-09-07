@@ -64,10 +64,10 @@ export default {
               title: '市场',
               key: 'market'
           },
-          {
-              title: '钱包服务器',
-              key: 'symbolServer'
-          },
+        //   {
+        //       title: '钱包服务器',
+        //       key: 'symbolServer'
+        //   },
           {
               title: 'ERC20合约地址',
               key: 'contractAddr'
