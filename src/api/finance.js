@@ -180,4 +180,16 @@ const ledgerFix = function (data, success, error) {
 }
 finance.ledgerFix = ledgerFix
 
+// 财务管理--主地址币种
+const getAdminWithdrawAccountInfo = function (curPage, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/getAdminWithdrawAccountInfo/10/${curPage}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.getAdminWithdrawAccountInfo = getAdminWithdrawAccountInfo
+
 export default finance

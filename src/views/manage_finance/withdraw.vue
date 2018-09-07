@@ -4,7 +4,7 @@
     <Col span="24">
       <Row>
         <Card>
-          <p slot="title">提审核
+          <p slot="title">提币审核
                 <Button type="primary" @click="reshAll">刷新</Button>
           </p>
           <Row>

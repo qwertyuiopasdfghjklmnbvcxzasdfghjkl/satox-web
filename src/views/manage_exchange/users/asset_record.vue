@@ -213,25 +213,10 @@ export default {
     switchStaus(state) {
         switch(state){
             case 1:
-                return '未处理'
+                return '体现中'
                 break;
             case 2:
-                return '等待交易发起'
-                break;
-            case 3:
-                return '交易已发送(等待对账)'
-                break;
-            case 4:
-                return '撤销'
-                break;
-            case 5:
-                return '提现失败'
-                break;
-            case 6:
-                return '对账完成'
-                break;
-            case 7:
-                return '提现失败资金返还'
+                return '已完成'
                 break;
         }
     },

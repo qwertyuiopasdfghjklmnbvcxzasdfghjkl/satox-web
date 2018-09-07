@@ -40,6 +40,13 @@
           <Page :current="curPage4" :total="total4" @on-change="changePage4" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
+      <Row style="margin-top:10px;">
+        <Card>
+          <p slot="title">主地址币种数量</p>
+          <Table :columns="columns6" :data="data6"></Table>
+          <Page :current="curPage5" :total="total5" @on-change="changePage5" style="text-align:center;margin-top:20px;"></Page>  
+        </Card>
+      </Row>
     </Col>
   </Row>
 </template>
@@ -61,6 +68,8 @@ export default {
       total3: 0,
       curPage4: 1,
       total4: 0,
+      curPage5: 1,
+      total5: 0,
       columns1: [
         {title: '公链币种', key: 'symbol'},
         {title: '监控地址数量', key: 'currentMonitorAddrCount'},
@@ -113,7 +122,18 @@ export default {
         {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity'},
         {title: '日收取', key: 'collectfeeDailyQuantity'}
       ],
-      data5: []
+      data5: [],
+      columns6: [
+        {title: '币种', key: 'symbol'},
+        {title: '账号', key: 'username'},
+        {title: '地址', key: 'address'},
+        {title: '数量', key: 'availableBalance',
+           render: (h, params) => {
+             return h('div', [params.row.availableBalance, params.row.symbol])
+           }
+        }
+      ],
+      data6: []
     }
   },
   created() {
@@ -122,6 +142,7 @@ export default {
     this.getCheckingList()
     this.getPoolList()
     this.getAccountList()
+    this.getAdminWithdrawAccountInfo()
   },
   methods: {
     reshAll () {
@@ -130,6 +151,7 @@ export default {
       this.getCheckingList()
       this.getPoolList()
       this.getAccountList()
+      this.getAdminWithdrawAccountInfo()
     },
     getMonitorList() {
       financeApi.findRechargeMonitorList( this.curPage, (res, total) => {
@@ -180,7 +202,17 @@ export default {
     changePage4 (page) {
       this.curPage4 = page
       this.getAccountList()
-    }
+    },
+    getAdminWithdrawAccountInfo () {
+      financeApi.getAdminWithdrawAccountInfo(this.curPage, (res, total) => {
+        this.total5 = total
+        this.data6 = res
+      })
+    },
+    changePage5 (page) {
+      this.curPage5 = page
+      this.getAccountList()
+    },
   }
 }
 </script>

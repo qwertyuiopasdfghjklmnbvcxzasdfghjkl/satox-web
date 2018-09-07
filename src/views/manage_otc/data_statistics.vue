@@ -36,13 +36,13 @@
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
     </Card>
     <Card style="margin-top:10px;">
-      <p slot="title">查询</p>
+      <p slot="title">图表展示</p>
       <Form ref="formItem" :model="formItem" :label-width="80" inline>
         <FormItem prop="user" label="币种">
             <Select v-model="formItem.symbol" style="width:100px">
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
-                <Option value="BARK">BARK</Option>
+                <Option value="ATN">ATN</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目"><!--1,在线用户数量 2,上架广告数量 3,正在交易的订单数 4,当天完成订单数 5,当天交易额 6,待处理申述数 7,当天异常预警数-->
