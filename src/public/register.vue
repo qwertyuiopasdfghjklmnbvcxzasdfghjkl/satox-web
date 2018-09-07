@@ -133,6 +133,7 @@ export default {
         formData[i] = this.formData[i]
       }
       if (Number(formData.registerType) === 0) {
+        delete formData.countryCode
         delete formData.mobile
         delete formData.smsCode
         formData.username = formData.email
