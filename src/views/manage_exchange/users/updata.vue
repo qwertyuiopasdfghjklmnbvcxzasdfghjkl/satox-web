@@ -130,7 +130,7 @@
             <Button type="primary" @click="tabs1('symbolType')">保存</Button>
         </Col>
       </Row>
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+      <!-- <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
         <Col span="5">钱包服务器</Col>
         <Col span="8" style="width:255px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{this.datas.symbolServer || 0}}</Col>
         <Col span="8">
@@ -139,7 +139,7 @@
         <Col span="3">
             <Button type="primary" @click="tabs('symbolServer')">保存</Button>
         </Col>
-      </Row>
+      </Row> -->
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
         <Col span="5">ERC20合约地址</Col>
         <Col span="8" >{{this.datas.contractAddr || 0}}
@@ -175,7 +175,7 @@ export default {
             symbol: '1',
             caption: '',
             captionCN: '',
-            symbolServer: '',
+            // symbolServer: '',
             contractDecimals: null,
             contractAddr: '',
             iconFile: '',
@@ -188,7 +188,7 @@ export default {
                 symbol: '1',
                 caption: '',
                 captionCN: '',
-                symbolServer: '',
+                // symbolServer: '',
                 contractDecimals: null,
                 contractAddr: '',
                 iconFile: '',
