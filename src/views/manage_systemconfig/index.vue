@@ -336,7 +336,7 @@ export default {
         this.fnFindAdminAccounts()
       } else if (flag === 2) {
         this.coinPoolsPage.currentPage = page
-        this.fnFindAdminCoinPools
+        this.fnFindAdminCoinPools()
       } else {
         return false
       }
