@@ -103,7 +103,7 @@ export default {
     },
       getAuditing() {
         financeApi.getAuditingList(this.curPage, {
-          auditType: 1 // 1 自动  2  人工
+          auditType: 2 // 1 自动  2  人工
         }, (res, total) => {
           this.total = total
           this.datas = res
