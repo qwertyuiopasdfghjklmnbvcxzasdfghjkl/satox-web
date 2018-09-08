@@ -26,7 +26,7 @@
 <script>
 import kycApi from '../../api/kyc'
 export default {
-  props: ['verifyId'],
+  props: ['verifyId', 'type'],
   data () {
       return {
           verifyAuditNoPassType: '0',
@@ -50,6 +50,7 @@ export default {
           })
       },
       passfirstReview (code) {
+          console.log(this.type)
             if (Number(this.verifyAuditNoPassType) !== 0) {
               kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code,{
               verifyId: this.verifyId,

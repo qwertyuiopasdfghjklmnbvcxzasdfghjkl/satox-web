@@ -29,14 +29,14 @@
       <Row>
         <Card>
           <p slot="title">资金池情况</p>
-          <Table :columns="columns4" :data="data4"></Table>
+          <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="custom"></Table>
           <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
       <Row style="margin-top:10px;">
         <Card>
           <p slot="title">手续费账户</p>
-          <Table :columns="columns5" :data="data5"></Table>
+          <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="custom1"></Table>
           <Page :current="curPage4" :total="total4" @on-change="changePage4" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
@@ -58,6 +58,9 @@ import financeApi from '../../api/finance'
 export default {
   data () {
     return {
+      flag: 1,
+      flag1: 1,
+      ase: 1,
       curPage: 1,
       total: 0,
       curPage1: 1,
@@ -110,14 +113,14 @@ export default {
       ],
       data3: [],
       columns4: [
-        {title: '币种', key: 'symbol'},
+        {title: '币种', key: 'symbol', sortable: 'custom', sortType: 'asc'},
         {title: '当前数量', key: 'currentCapitalPoolQuantity'},
         {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity'},
         {title: '日净增', key: 'increaseDailyQuantity'}
       ],
       data4: [],
       columns5: [
-        {title: '币种', key: 'symbol'},
+        {title: '币种', key: 'symbol', sortable: 'custom', sortType: 'asc'},
         {title: '当前数量', key: 'currentCapitalPoolQuantity'},
         {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity'},
         {title: '日收取', key: 'collectfeeDailyQuantity'}
@@ -145,6 +148,28 @@ export default {
     this.getAdminWithdrawAccountInfo()
   },
   methods: {
+    custom1 (o) {
+      this.curPage4 = 1
+      if (o.order === 'desc') {
+        this.flag1 = 0
+        this.getAccountList()
+      } else {
+        this.$refs.test1.cloneColumns[0]._sortType = 'asc'
+        this.flag1 = 1
+        this.getAccountList()
+      }
+    },
+    custom (o) {
+      this.curPage3 = 1
+      if (o.order === 'desc') {
+        this.flag = 0
+        this.getPoolList()
+      } else {
+        this.$refs.test.cloneColumns[0]._sortType = 'asc'
+        this.flag = 1
+        this.getPoolList()
+      }
+    },
     reshAll () {
       this.getMonitorList()
       this.getStatisticsList()
@@ -184,7 +209,7 @@ export default {
       this.getCheckingList()
     },
     getPoolList() {
-      financeApi.findCapitalPoolList(this.curPage3, (res, total) => {
+      financeApi.findCapitalPoolList(this.curPage3, this.flag, (res, total) => {
         this.total3 = total
         this.data4 = res
       })
@@ -194,7 +219,7 @@ export default {
       this.getPoolList()
     },
     getAccountList() {
-      financeApi.findServiceFeeAccountList(this.curPage4, (res, total) => {
+      financeApi.findServiceFeeAccountList(this.curPage4, this.flag1,  (res, total) => {
         this.total4 = total
         this.data5 = res
       })
@@ -204,19 +229,21 @@ export default {
       this.getAccountList()
     },
     getAdminWithdrawAccountInfo () {
-      financeApi.getAdminWithdrawAccountInfo(this.curPage, (res, total) => {
+      financeApi.getAdminWithdrawAccountInfo(this.curPage5, (res, total) => {
         this.total5 = total
         this.data6 = res
       })
     },
     changePage5 (page) {
       this.curPage5 = page
-      this.getAccountList()
-    },
+      this.getAdminWithdrawAccountInfo()
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.ivu-table-sort i{display: none;}
+.ivu-table-cell .ivu-table-sort i:first-child{display: none;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

@@ -131,6 +131,10 @@ export default {
         })
     },
     tabs(propName) {
+        if (!this[propName]) {
+          this.$Message.error({content: '请输入值'})
+          return
+        }
         let data = {
            marketId: this.item.marketId
          }

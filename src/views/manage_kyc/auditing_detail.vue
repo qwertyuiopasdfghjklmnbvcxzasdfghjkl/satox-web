@@ -71,6 +71,7 @@ export default {
         disagree () {
              util.setDialog(reason, {
                  verifyId: this.verifyId,
+                 type: this.type,
                  okCallback: () => {
                     this.$emit('okCallback')
                     this.$emit('removeDialog')

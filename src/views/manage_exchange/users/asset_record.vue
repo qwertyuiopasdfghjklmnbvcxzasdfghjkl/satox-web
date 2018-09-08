@@ -213,7 +213,7 @@ export default {
     switchStaus(state) {
         switch(state){
             case 1:
-                return '体现中'
+                return '提现中'
                 break;
             case 2:
                 return '已完成'

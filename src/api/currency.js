@@ -234,8 +234,8 @@ const findUserPermissionChangeRecordList = function (curPage, userId, success, e
 curreny.findUserPermissionChangeRecordList = findUserPermissionChangeRecordList
 
 // 用户管理--操作日志
-const findUserOperateLogList = function (curPage, data, success, error) {
-  api.post(`api/bm/bbManage/userManage/findUserOperateLogList/10/${curPage}`, data, (res) => {
+const findUserOperateLogList = function (pageSize, curPage, data, success, error) {
+  api.post(`api/bm/bbManage/userManage/findUserOperateLogList/${pageSize}/${curPage}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
