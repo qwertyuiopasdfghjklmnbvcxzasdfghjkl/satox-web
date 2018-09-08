@@ -14,7 +14,6 @@ const getAuditingList = function (curPage, data, success, error) {
   }
 finance.getAuditingList = getAuditingList
 
-
 // 财务管理--提币审核统计数据
 const findTotalWithdrawAuditingData = function (success, error) {
   api.get('api/bm/financialManage/withdrawAuditing/findTotalWithdrawAuditingData', (res) => {
@@ -26,7 +25,6 @@ const findTotalWithdrawAuditingData = function (success, error) {
   }, error)
 }
 finance.findTotalWithdrawAuditingData = findTotalWithdrawAuditingData
-
 
 // 财务管理--审核提币清单
 const updateWithdrawAuditing = function (data, success, error) {
@@ -77,8 +75,8 @@ const findRealTimeCheckingList = function (curPage, success, error) {
 finance.findRealTimeCheckingList = findRealTimeCheckingList
 
 // 财务管理--资金池情况
-const findCapitalPoolList = function (curPage, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}`, (res) => {
+const findCapitalPoolList = function (curPage, ase, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}/${ase}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -88,12 +86,9 @@ const findCapitalPoolList = function (curPage, success, error) {
 }
 finance.findCapitalPoolList = findCapitalPoolList
 
-
-
-
 // 财务管理--手续费转账
-const findServiceFeeAccountList = function (curPage, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}`, (res) => {
+const findServiceFeeAccountList = function (curPage, ase, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}/${ase}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -102,7 +97,6 @@ const findServiceFeeAccountList = function (curPage, success, error) {
   }, error)
 }
 finance.findServiceFeeAccountList = findServiceFeeAccountList
-
 
 // 财务管理--异常交易数据
 const findAbnormalExchangeList = function (curPage, success, error) {
