@@ -181,7 +181,6 @@ export default {
       showUnbindGoogleButton: false,
       showUnbindGoogleForm: false,
       areaCodeList: commonConfig.areaCodeList,
-      areaCodeReg: commonConfig.areaCodeReg,
       mobileFormData: {
         countryCode: '+86',
         phoneNumber: '',
