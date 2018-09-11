@@ -163,4 +163,29 @@ const transfer = function (data, success, error) {
 fund.transfer  = transfer
 
 
+// 冷钱包设置--新增地址
+const addColdWalletAddress = function (data, success, error) {
+  api.post(`api/bm/coinTask/coinColdWallet/addColdWalletAddress`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+fund.addColdWalletAddress  = addColdWalletAddress
+
+   
+// 冷钱包设置--删除地址
+const deleteColdWallet = function (data, success, error) {
+  api.post(`api/bm/coinTask/coinColdWallet/deleteColdWallet`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+fund.deleteColdWallet  = deleteColdWallet
+
 export default fund

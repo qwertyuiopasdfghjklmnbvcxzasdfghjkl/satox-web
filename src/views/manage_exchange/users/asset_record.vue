@@ -3,8 +3,8 @@
   <div>
       <Card style="width:1200px;">
          <p slot="title">
-             资产记录
-             <span>
+            <span>资产记录</span>
+            <span>
                 <Button type="primary" @click="reshAll" style="margin-right:50px;">刷新</Button>
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer; margin-top: 14px;" @click="closeDialog"></i>
             </span>
