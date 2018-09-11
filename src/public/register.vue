@@ -43,7 +43,7 @@
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
                           <em @click="checked=!checked">{{$t('login_register.agree_Service')}}<!--我已阅读并同意--></em>
-                          <a href="javascript:" target="_blank">{{$t('login_register.bitark_service').format('NEWTON')}}<!--NEWTON服务条款--></a>
+                          <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('NEWTON')}}<!--NEWTON服务条款--></a>
                         </span>
                     </div>
                     <div class="button-group">
@@ -110,6 +110,13 @@ export default {
         return true
       } else {
         return this.disabled
+      }
+    },
+    getAgreementUrl () {
+      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015235052-%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE'
+      } else {
+        return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
       }
     }
   },
