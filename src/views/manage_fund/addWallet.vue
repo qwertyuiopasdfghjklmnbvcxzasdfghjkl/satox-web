@@ -22,7 +22,7 @@
                          <Button type="primary" @click="closeDialog">取消</Button>
                     </Col>
                     <Col span="12">
-                         <Button type="primary" >确定</Button>
+                         <Button type="primary" @click="addColdWallet('formLeft')">确定</Button>
                     </Col>
                 </Row>
             </Form>
@@ -30,6 +30,7 @@
     </div>
 </template>
 <script>
+import fundApi from '../../api/fund'
 export default {
     data () {
         return {
@@ -50,6 +51,23 @@ export default {
     methods: {
         closeDialog () {
             this.$emit('removeDialog')
+        },
+        addColdWallet (name) {
+            if (this.formLeft.symbol) {
+                if (this.formLeft.address) {
+                    fundApi.addColdWallet(this.formLeft, (res) => {
+                        this.$Message.success({content: '添加成功'})
+                        this.$emit('okCallback')
+                        this.$emit('removeDialog')
+                    }, (msg) => {
+                        this.$Message.error({content: msg})                        
+                    })
+                } else {
+                    this.$Message.error({content: '请输入地址'})
+                }
+            } else {
+                this.$Message.error({content: '请输入币种'})
+            }
         }
     }
 }

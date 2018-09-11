@@ -74,7 +74,8 @@
                 <Col span="6">提现额度</Col>
                 <Col span="6">{{data2.withdrawLimitAmount}}BTC</Col>
                 <Col span="6">
-                    <Input v-model="withdrawLimitAmount"></Input>
+                     <!--<Input v-model="withdrawLimitAmount"></Input> -->
+                    <InputNumber v-model="withdrawLimitAmount"></InputNumber>
                 </Col>
                 <Col span="6">
                     <Button type="primary" style="float:right;" @click="tabs('withdrawLimitAmount', true)">保存</Button>

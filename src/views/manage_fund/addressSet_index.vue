@@ -1,33 +1,62 @@
 <template>
     <div class="addressSet">
         <Card>
-            <p slot="title">自动转账</p>
-             <Table :columns="columns1" :data="data1"></Table>
+            <p slot="title">自动转账
+                <Button @click="adddEploy">添加配置</Button>
+            </p>
+            <Table :columns="columns1" :data="data1"></Table>
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
          <Card>
             <p slot="title">手动转账</p>
              <Table :columns="columns2" :data="data2"></Table>
+            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>               
         </Card>
     </div>
 </template>
 <script>
 import upAddress from './upAddress'
 import util from '../../libs/util'
+import fundApi from '../../api/fund'
+import eploy from './eploy'
 export default {
     data () {
         return {
+            curPage: 1,
+            total: 0,
+            curPage1: 1,
+            total1: 0,
             columns1: [
                 {
                     title: '币种',
-                    key: 'name'
+                    key: 'symbol'
                 },
                 {
-                    title: '触发数量',
-                    key: 'age'
+                    title: '最小金额',
+                    key: 'coinMin'
                 },
                 {
-                    title: '剩余数量',
-                    key: 'age'
+                    title: '保留金额',
+                    key: 'coinReserve'
+                },
+                {
+                    title: 'BTC矿工费',
+                    key: 'minerFee'
+                },
+                {
+                    title: 'ETH GAS单价',
+                    key: 'gasPrice'
+                },
+                {
+                    title: 'ETH GAS上限',
+                    key: 'gasLimit'
+                },
+                {
+                    title: '是否可用',
+                    key: 'enable',
+                    render: (h, params) => {
+                        return h('div', params.row.enable === 0 ? '不可用' : '可用')
+                    }
                 },
                 {
                     title: ' ',
@@ -38,8 +67,13 @@ export default {
                                 props: {type: 'primary', size: 'small'},
                                 style: {marginRight: '10px'},
                                 on: {
-                                    click () {
-                                        util.setDialog(upAddress)
+                                    click: () => {
+                                        util.setDialog(upAddress, {
+                                            item: params.row,
+                                            okCallback: () => {
+                                                this.getTransferConfig()
+                                            }
+                                        })
                                     }
                                 }
                             }, '修改')
@@ -51,11 +85,15 @@ export default {
             columns2: [
                 {
                     title: '币种',
-                    key: 'name'
+                    key: 'symbol'
                 },
                 {
-                    title: '转账数量',
-                    key: 'age'
+                    title: '账户',
+                    key: 'username'
+                },
+                {
+                    title: '地址',
+                    key: 'address'
                 },
                 {
                     title: ' ',
@@ -66,11 +104,20 @@ export default {
                                 props: {type: 'primary', size: 'small'},
                                 style: {marginRight: '10px'},
                                 on: {
-                                    click () {
-                                        util.setDialog(upAddress)
+                                    click: () => {
+                                        // util.setDialog(upAddress)
+                                        fundApi.transfer ({
+                                            param: '2000',
+                                            transferTye: 1,
+                                            symbol: params.row.symbol
+                                        },(res) => {
+                                            this.$Message.success({content: '操作成功'})
+                                        }, (msg) => {
+                                            this.$Message.error({content: msg})                                            
+                                        })
                                     }
                                 }
-                            }, '执行')
+                            }, '转账')
                         ]);
                     }
                 }
@@ -78,7 +125,34 @@ export default {
             data2: []
         }
     },
+    created () {
+        this.getTransferConfig()
+        this.getAdminCoinPool()
+    },
     methods: {
+        adddEploy () {
+            util.setDialog(eploy)
+        },
+        getTransferConfig () {
+            fundApi.findTransferConfig(this.curPage, (res, total) => {
+                this.total = total
+                this.data1 = res
+            })
+        },
+        changePage (page) {
+            this.curPage = page,
+            this.getTransferConfig()
+        },
+        getAdminCoinPool () {
+            fundApi.getAdminCoinPool(this.curPage1, (res, total) => {
+                this.total1= total
+                this.data2 = res.data
+            })
+        },
+        changePage1 (page) {
+            this.curPage = page,
+            this.getAdminCoinPool()
+        },
     }
 }
 </script>

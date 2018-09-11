@@ -98,4 +98,18 @@ const updateAdminCoinPools = function (data, success, error) {
 }
 system.updateAdminCoinPools = updateAdminCoinPools
 
+
+
+// 系统参数设置--查找提币主地址账户
+const findCollectConfig = function (curPage, data, success, error) {
+  api.get(`api/bm/sysParam/findCollectConfig/5/${curPage}`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.error)
+    }
+  }, error)
+}
+system.findCollectConfig = findCollectConfig
+
 export default system

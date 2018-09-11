@@ -57,7 +57,7 @@ export default {
                                          this.$Message.success({content: '分发成功'})
                                          this.getDistribute()
                                      }, (msg) => {
-                                         this.$Message.erroe({content: msg})
+                                         this.$Message.error({content: msg})
                                      })
                                   }
                               }
