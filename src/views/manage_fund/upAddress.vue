@@ -1,28 +1,88 @@
 <template>
     <div class="addWallet">
         <Card>
-            <p slot="title">修改</p>
-            <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
-                <Row>
-                    <Col span="24">
-                        <FormItem label="触发数量" prop="symbol">
-                            <Input v-model="formLeft.symbol" name="symbol"></Input>
-                        </FormItem>
+            <p slot="title">修改
+                <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+            </p>
+            <Form ref="formItem"  label-position="left" :label-width="100">
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">币种</Col>
+                    <Col span="6">{{this.item.symbol}}</Col>
+                    <Col span="6">
+                    <Input v-model="symbol"></Input>
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('symbol')">保存</Button>
                     </Col>
                 </Row>
-                <Row>
-                    <Col span="24">
-                        <FormItem label="剩余数量" prop="address">
-                            <Input v-model="formLeft.address" name="address"></Input>
-                        </FormItem>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">最小金额</Col>
+                    <Col span="6">{{this.item.coinMin}}</Col>
+                    <Col span="6">
+                    <InputNumber style="width:100%;" :min="0.1" name="coinMin" v-model="coinMin"></InputNumber>
+                    <!-- <Input v-model="coinMin"></Input> -->
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('coinMin')">保存</Button>
                     </Col>
                 </Row>
-                <Row>
-                    <Col span="12">
-                         <Button type="primary" @click="closeDialog">取消</Button>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">保留金额</Col>
+                    <Col span="6">{{this.item.coinReserve}}</Col>
+                    <Col span="6">
+                    <Input v-model="coinReserve"></Input>
                     </Col>
-                    <Col span="12">
-                         <Button type="primary" >确定</Button>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('coinReserve')">保存</Button>
+                    </Col>
+                </Row>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">BTC矿工费</Col>
+                    <Col span="6">{{this.item.minerFee}}</Col>
+                    <Col span="6">
+                    <Input v-model="minerFee"></Input>
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('minerFee')">保存</Button>
+                    </Col>
+                </Row>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">ETH GAS单价</Col>
+                    <Col span="6">{{this.item.gasPrice}}</Col>
+                    <Col span="6">
+                    <Input v-model="gasPrice"></Input>
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('gasPrice')">保存</Button>
+                    </Col>
+                </Row>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">ETH GAS上限</Col>
+                    <Col span="6">{{item.gasLimit}}</Col>
+                    <Col span="6">
+                    <Input v-model="gasLimit"></Input>
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                    <Button type="primary" @click="tabs('gasLimit')">保存</Button>
+                    </Col>
+                </Row>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">是否可用{{item.enable}}</Col>
+                    <Col span="6"> 
+                        <!-- {{this.item.enable}} -->
+                    </Col>
+                    <Col span="6">
+                        <RadioGroup v-model="enable" >
+                            <Radio label="1">
+                                <span>是{{enable}}</span>
+                            </Radio>
+                            <Radio label="0">
+                                <span>否</span>
+                            </Radio>
+                        </RadioGroup>
+                    </Col>
+                    <Col span="6" style="text-align:right;">
+                        <Button type="primary" @click="tabs1('enable')">保存</Button>
                     </Col>
                 </Row>
             </Form>
@@ -30,24 +90,73 @@
     </div>
 </template>
 <script>
+import fundApi from '../../api/fund'
 export default {
+    props: ['item'],
     data () {
         return {
-            formLeft: {
-                symbol: '',
-                address: ''
-            },
-            ruleInline: {
-                symbol: [
-                    { required: true, message: '请输入币种', trigger: 'blur' }
-                ],
-                address: [
-                    { required: true, message: '请输入地址', trigger: 'blur' }
-                ]
-            }
+            symbol: '',
+            coinMin: null,
+            coinReserve: null,
+            minerFee: null,
+            gasPrice: null,
+            gasLimit: null,
+            enable: this.item.enable.toString(),
+            datas: []
         }
     },
+    created () {
+        this.getConfig()
+    },
     methods: {
+        getConfig () {
+            fundApi.findOneTransferConfig({
+                configId: this.item.configId
+            }, (res) => {
+                this.datas = res
+            })
+        },
+        tabs1(propName) {
+            if (!this[propName]) {
+                this.$Message.error({content: '请输入值'})
+                return
+            }
+            let data = {
+                configId: this.item.configId,
+                version: this.item.version,
+                marketId: this.item.marketId
+            }
+            data[propName] = this[propName]
+            fundApi.updateConfig(data, (res) =>{
+                this.item[propName] = this[propName]
+                this.$Message.success({content: '修改成功'})
+                this.$emit('okCallback')
+                this.$emit('removeDialog')
+            }, (msg) => {
+                this.$Message.error({content: msg})
+            })
+        },
+        tabs(propName) {
+            if (!this[propName]) {
+                this.$Message.error({content: '请输入值'})
+                return
+            }
+            let data = {
+                configId: this.item.configId,
+                version: this.item.version,
+                marketId: this.item.marketId
+            }
+            data[propName] = this[propName]
+            fundApi.updateConfig(data, (res) =>{
+                this.item[propName] = this[propName]
+                this.$Message.success({content: '修改成功'})
+                this[propName] = ''
+                this.$emit('okCallback')
+                this.$emit('removeDialog')
+            }, (msg) => {
+                this.$Message.error({content: msg})
+            })
+        },
         closeDialog () {
             this.$emit('removeDialog')
         }
@@ -56,6 +165,7 @@ export default {
 </script>
 
 <style>
-.addWallet{}
+.addWallet{width: 500px;}
+.ivu-form-item-error .ivu-input{width: 200px;}
 </style>
 

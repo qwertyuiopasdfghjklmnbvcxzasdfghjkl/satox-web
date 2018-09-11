@@ -77,17 +77,17 @@ export default {
         {title: '公链币种', key: 'symbol'},
         {title: '监控地址数量', key: 'currentMonitorAddrCount'},
         {title: '日充值待确认笔数', key: 'dailyRechargeWaitComfirmCount'},
-        {title: '日充值待确认总量', key: 'dailyRechargeWaitComfirmAmount'},
+        // {title: '日充值待确认总量', key: 'dailyRechargeWaitComfirmAmount'},
         {title: '日充值完成笔数', key: 'dailyRechargeFinishCount'},
-        {title: '日充值完成总量', key: 'dailyRechargeWaitComfirmAmount'}
+        // {title: '日充值完成总量', key: 'dailyRechargeWaitComfirmAmount'}
       ],
       data1: [],
       columns2: [
         {title: '公链币种', key: 'symbol'},
         {title: '日待提币笔数', key: 'withdrawDailyToBeConfirmedCount'},
-        {title: '日待提币总量', key: 'withdrawDailyToBeConfirmedAmount'},
+        // {title: '日待提币总量', key: 'withdrawDailyToBeConfirmedAmount'},
         {title: '日已提币笔数', key: 'withdrawDailyFinishCount'},
-        {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
+        // {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
       ],
       data2: [],
       columns3: [

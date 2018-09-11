@@ -68,6 +68,10 @@
                 </Radio>
             </RadioGroup>
         </FormItem>
+         <FormItem label="Property ID" prop="propertyId">
+             <Input v-model="formLeft.propertyId" name="propertyId"></Input>
+            <!-- <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/> -->
+        </FormItem>
         <FormItem label="ICON" prop="iconFile">
             <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
         </FormItem>
@@ -195,7 +199,8 @@ export default {
         minerFee: null,
         totalIssuance: null, //发行总量
         totalCirculation: null, //流通总量
-        issuePrice: null //发行价格
+        issuePrice: null, //发行价格
+        propertyId: null
       },
       ruleInline: {
             symbol: [
@@ -273,6 +278,9 @@ export default {
             gaslimit: [
                 { required: true, message: '请输入gaslimit'},
                 { validator: customValidator, message: '请输入gaslimit', trigger: 'blur' },
+            ],
+            propertyId: [
+                { required: true, message: '请输入propertyId'},
             ]
         }
     }

@@ -4,7 +4,10 @@
       <Card style="width:1200px;">
          <p slot="title">
              资产记录
-            <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+             <span>
+                <Button type="primary" @click="reshAll" style="margin-right:50px;">刷新</Button>
+                <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer; margin-top: 14px;" @click="closeDialog"></i>
+            </span>
          </p>
          <Tabs value="name1">
             <TabPane label="当前资产" name="name1">

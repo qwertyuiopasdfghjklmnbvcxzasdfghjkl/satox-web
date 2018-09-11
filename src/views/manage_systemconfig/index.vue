@@ -70,6 +70,10 @@
           <Page :current="coinPoolsPage.currentPage" :total="coinPoolsPage.total" @on-change="changePage(arguments[0], 2)" style="text-align:center;margin-top:20px;"></Page>
         </Card>
       </TabPane>
+      <TabPane label="币池钱包整理参数">
+        <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
+        <Page :current="curPage" :total="total" :page-size="pageSize" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+      </TabPane>
     </Tabs>
   </Card>
 </template>
@@ -84,6 +88,65 @@ import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress'
 export default {
   data () {
     return {
+      curPage: 1,
+      total: 0,
+      pageSize: 5,
+      columnsSymbol: [
+        {
+                    title: '币种',
+                    key: 'symbol'
+                },
+                {
+                    title: '最小金额',
+                    key: 'coinMin'
+                },
+                {
+                    title: '保留金额',
+                    key: 'coinReserve'
+                },
+                {
+                    title: 'BTC矿工费',
+                    key: 'minerFee'
+                },
+                {
+                    title: 'ETH GAS单价',
+                    key: 'gasPrice'
+                },
+                {
+                    title: 'ETH GAS上限',
+                    key: 'gasLimit'
+                },
+                {
+                    title: '是否可用',
+                    key: 'enable',
+                    render: (h, params) => {
+                        return h('div', params.row.enable === 0 ? '不可用' : '可用')
+                    }
+                },
+                // {
+                //     title: ' ',
+                //     key: 'address',
+                //     render: (h, params) => {
+                //         return h('div', [
+                //             h('Button', {
+                //                 props: {type: 'primary', size: 'small'},
+                //                 style: {marginRight: '10px'},
+                //                 on: {
+                //                     click: () => {
+                //                         util.setDialog(upAddress, {
+                //                             item: params.row,
+                //                             okCallback: () => {
+                //                                 this.getTransferConfig()
+                //                             }
+                //                         })
+                //                     }
+                //                 }
+                //             }, '修改')
+                //         ]);
+                //     }
+                // }
+      ],
+      columnsSymbolData: [],
       dataSymbol: [],
       exchangeItem: [],
       item: {
@@ -207,8 +270,19 @@ export default {
     this.getdataSymbol()
     this.fnFindAdminAccounts()
     this.fnFindAdminCoinPools()
+    this.getfindCollectConfig()
   },
   methods: {
+   getfindCollectConfig () {
+      system.findCollectConfig(this.curPage,(res, total) => {
+        this.total = total
+        this.columnsSymbolData = res.data
+      })
+    },
+    changePage (page) {
+      this.curPage = page
+      this.getfindCollectConfig()
+    },
     getfindSysParam () {
       system.findSysParam((res) => {
         res.forEach((d) => {

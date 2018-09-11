@@ -253,6 +253,7 @@
             }
         },
         mounted () {
+
             this.init();
             // 全屏相关
             document.addEventListener('fullscreenchange', () => {

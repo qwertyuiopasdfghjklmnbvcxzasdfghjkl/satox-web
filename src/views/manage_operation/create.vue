@@ -5,9 +5,9 @@
         <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
       </p>
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" >
-            <!-- <FormItem label="编号" prop="serialNumber">
+             <FormItem label="编号" prop="serialNumber">
                 <Input v-model="formValidate.serialNumber" name="serialNumber"></Input>
-            </FormItem> -->
+            </FormItem> 
             <!-- <FormItem label="创建时间" prop="creatTime">
                 <DatePicker type="date" placeholder="请选择时间" name="creatTime" v-model="formValidate.creatTime" width="100%"></DatePicker>
             </FormItem> -->
