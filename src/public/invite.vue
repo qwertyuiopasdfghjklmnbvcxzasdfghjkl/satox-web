@@ -126,45 +126,45 @@
                 </div>
 
         </div>
-        <div class="bottom">
-        <div class="bottom-center">
-            <div class="item">
-            <a href="javascript:;" target="_blank">{{$t('public.foot_about')}}</a>
-            </div><!--关于我们-->
-            <div class="item">
-            <a href="javascript:;" target="_blank">{{$t('public.foot_terms')}}</a>
-            </div><!--服务协议-->
-            <div class="item">
-            <a href="javascript:;" target="_blank">{{$t('public.foot_privacy')}}</a>
-            </div><!--隐私声明-->
-            <div class="item">
-            <a href="javascript:;" target="_blank">{{$t('public.foot_fees')}}</a>
-            </div><!--费率标准-->
-            <div class="item"></div>
-            <div class="item">{{$t('public.foot_contact')}}</div><!--联系我们-->
-            <div class="item">
-            <a class="contact-icons icon-facebook" href="javascript:;" target="_blank"></a>
+        <div class="bottom" style="display:none;">
+            <div class="bottom-center">
+                <div class="item">
+                <a href="javascript:;" target="_blank">{{$t('public.foot_about')}}</a>
+                </div><!--关于我们-->
+                <div class="item">
+                <a href="javascript:;" target="_blank">{{$t('public.foot_terms')}}</a>
+                </div><!--服务协议-->
+                <div class="item">
+                <a href="javascript:;" target="_blank">{{$t('public.foot_privacy')}}</a>
+                </div><!--隐私声明-->
+                <div class="item">
+                <a href="javascript:;" target="_blank">{{$t('public.foot_fees')}}</a>
+                </div><!--费率标准-->
+                <div class="item"></div>
+                <div class="item">{{$t('public.foot_contact')}}</div><!--联系我们-->
+                <div class="item">
+                <a class="contact-icons icon-facebook" href="javascript:;" target="_blank"></a>
+                </div>
+                <div class="item">
+                <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
+                </div>
+                <div class="item">
+                <a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>
+                </div>
+                <div class="item">
+                <a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>
+                </div>
+                <div class="item">
+                <a class="contact-icons icon-weixin">
+                </a>
+                </div>
             </div>
-            <div class="item">
-            <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
-            </div>
-            <div class="item">
-            <a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>
-            </div>
-            <div class="item">
-            <a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>
-            </div>
-            <div class="item">
-            <a class="contact-icons icon-weixin">
-            </a>
-            </div>
-        </div>
         </div>
 
-        <section class="bk-wrap footer-main">
-        <section class="bk-main footer">
-            <p>© 2017-2018 www.newtonXchange.com All Rights Reserved</p>
-        </section>
+        <section class="bk-wrap footer-main"style="display:none;">
+            <section class="bk-main footer">
+                <p>© 2017-2018 www.newtonXchange.com All Rights Reserved</p>
+            </section>
         </section>
     </div>
 </template>
@@ -279,7 +279,7 @@ export default {
 .invite_code_list ul li span>em{display: block;line-height: 30px;}
 .invite_code_list ul {padding-left: 30px;padding-right: 30px;}
 .rule .title{background: #1b1e2e;height: 40px;line-height: 40px;color: #cbd4ec;font-size: 16px;}
-.rule {margin-top: 30px; color: #becbe8;background: #181b2a;padding-left: 40px;padding-right: 40px;padding-bottom: 40px;}
+.rule {margin-top: 30px; color: #becbe8;background: #181b2a;padding-left: 40px;padding-right: 40px;padding-bottom: 40px;margin-bottom: 30px;}
 .rule p{line-height: 40px;}
 .remark_title {font-size: 14px;color: #becbe8;line-height: 40px;}
 .remark_title span{color: #11a8fe;margin-right: 20px;}
