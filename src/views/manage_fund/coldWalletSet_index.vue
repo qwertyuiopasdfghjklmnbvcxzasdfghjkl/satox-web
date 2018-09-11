@@ -15,6 +15,7 @@ import upWallet from './upWallet'
 import util from '../../libs/util'
 import fundApi from '../../api/fund'
 import updataWaletAddress from './updataWaletAddress'
+import addAddress from './addAddress'
     export default {
         data () {
             return {
@@ -45,11 +46,11 @@ import updataWaletAddress from './updataWaletAddress'
                         key: 'address',
                         render: (h, params) => {
                             let o = this.detail(params.row.addressList, h);
-                            console.log(params.row.$select_value)
-                            console.log(o.valueAll.address)
+                            // console.log(o)
+                            console.log( o.valueAll.enable)
                             return h('div', [
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small'},                                    
+                                    props: {type: 'primary', size: 'small', disabled: o.valueAll.enable === null },                                    
                                     // props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll.enable===1) || params.row.$select_value==o.valueAll.address},
                                     style: {marginRight: '10px'},
                                     on: {
@@ -73,12 +74,10 @@ import updataWaletAddress from './updataWaletAddress'
                                                 enable: sel.enable
                                             }, (res) => {
                                                 this.$Message.success({content: '启用成功'})
-                                            })
+                                            })  
                                         }
                                     }
-                                }, o.valueAll.enable ===1 ? '禁用': '启用'),
-                                
-                                // }, sel.enable === 1 ? '禁用': '启用'),
+                                }, o.valueAll.enable === 1 ? '禁用': '启用'),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll.enable===1) || params.row.$select_value==o.valueAll.address},
                                     style: {marginRight: '10px'},
@@ -139,7 +138,36 @@ import updataWaletAddress from './updataWaletAddress'
                                             })
                                         }
                                     }
-                                }, '修改')
+                                }, '修改'),
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {marginRight: '10px'},
+                                    on: {
+                                        click: () => {
+                                            util.setDialog(addAddress, {
+                                                symbol: params.row.symbol,
+                                                okCallback: () => {
+                                                    this.getAllColdWallet()
+                                                }
+                                            })
+                                        }
+                                    }
+                                }, '新增地址'),
+                                // h('Button', {
+                                //     props: {type: 'primary', size: 'small'},
+                                //     style: {marginRight: '10px'},
+                                //     on: {
+                                //         click: () => {
+                                //             let o = this.detail(params.row.addressList, h)
+                                //             fundApi.deleteColdWallet({
+                                //                 walletId: o.valueAll.walletId
+                                //             }, (res) => {
+                                //                 this.$Message.success({content: '删除成功'})
+                                //                 this.getAllColdWallet()
+                                //             })
+                                //         }
+                                //     }
+                                // }, '删除地址')
                             ]);
                         }
                     }
@@ -156,19 +184,26 @@ import updataWaletAddress from './updataWaletAddress'
                 let options = []
                 let selValue = null
                 let valueAll = null
+                let abled = false
                 addressList.forEach((item) => {
                     if (item.defaultFlag == 1) {
                         selValue = item.address
                         valueAll = item
                     }
-                    options.push(h('Option', {
-                      props: {value: item.address, label: item.address}
-                    }))
+                    if (item.address === null) {
+                        abled = true
+                    } else {
+                        options.push(h('Option', {
+                            props: {value: item.address, label: item.address}
+                        }))
+                    }
+                    
                 })
                 return {
                     options: options,
                     selValue: selValue,
-                    valueAll: valueAll
+                    valueAll: valueAll,
+                    abled: abled
                 }
             },
             add () {
