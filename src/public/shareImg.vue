@@ -2,7 +2,7 @@
     <div class="shareImg">
         <div class="title">{{$t('referral.invite_friends')}}<!--邀请好友--><em class="icon-close" @click="closeDialog"></em></div>
         <div id="picture" >
-            <img :src="image" />
+            <img :src="image"/>
             <div class="code_p">
                 <div ref="qrcode" class="qrcode"></div>
             </div>
@@ -35,8 +35,8 @@ export default {
     this.$nextTick(() => {
       utils.qrcode(this.$refs.qrcode, {
         text: this.getUserInfo.myInvitationUrl,
-        width: 110,
-        height: 110
+        width: 100,
+        height: 100
       })
     })
   },
@@ -81,9 +81,10 @@ export default {
 .shareImg .code_p .qrcode>img{width: 88px;}
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
 .shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
-.qrcode{width: 88px;height: 88px;background-color: #fff;position: absolute;top: -223px;left: 26px;border-radius: 4px;padding: 10px;}
+.qrcode{width: 100px;height: 100px;background-color: #fff;position: absolute;top: -223px;left: 26px;border-radius: 4px;padding: 5px;}
 .qrcode >img {width: 88px;height: 88px; }
 .code_p{position: relative;}
+.code_p .qrcode>img{width: 100px;height: 100px;}
 #picture{width: 333px;height: 593px;margin: 0 auto;margin-top: 20px;}
 </style>
 
