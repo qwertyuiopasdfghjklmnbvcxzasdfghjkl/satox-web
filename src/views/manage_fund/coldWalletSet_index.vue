@@ -47,10 +47,10 @@ import addAddress from './addAddress'
                         render: (h, params) => {
                             let o = this.detail(params.row.addressList, h);
                             // console.log(o)
-                            console.log( o.valueAll.enable)
+                            // console.log( o.valueAll.enable)
                             return h('div', [
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small', disabled: o.valueAll.enable === null },                                    
+                                    props: {type: 'primary', size: 'small', disabled: o.valueAll && o.valueAll.enable === null },                                    
                                     // props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll.enable===1) || params.row.$select_value==o.valueAll.address},
                                     style: {marginRight: '10px'},
                                     on: {
@@ -77,9 +77,9 @@ import addAddress from './addAddress'
                                             })  
                                         }
                                     }
-                                }, o.valueAll.enable === 1 ? '禁用': '启用'),
+                                }, o.valueAll && o.valueAll.enable === 1 ? '禁用': '启用'),
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll.enable===1) || params.row.$select_value==o.valueAll.address},
+                                    props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll && o.valueAll.enable === 1) || o.valueAll &&  params.row.$select_value==o.valueAll.address},
                                     style: {marginRight: '10px'},
                                     on: {
                                         click: () => {
@@ -102,17 +102,17 @@ import addAddress from './addAddress'
                                                     oldVersion = item1.version
                                                 }
                                             })
-
-                                            fundApi.setDetail({
-                                                oldDefaultWalletId:selValue,
-                                                newDefaultWalletId: sel.walletId,
-                                                oldVersion:oldVersion,
-                                                newVersion: sel.version
-                                            }, () => {
-                                                this.$Message.success({content: '设置成功'})
-                                            }, (msg) => {
-                                                 this.$Message.error({content: msg})
-                                            })
+                                                fundApi.setDetail({
+                                                    oldDefaultWalletId:selValue || null,
+                                                    newDefaultWalletId: sel.walletId,
+                                                    oldVersion:oldVersion || null,
+                                                    newVersion: sel.version
+                                                }, () => {
+                                                    this.$Message.success({content: '设置成功'})
+                                                }, (msg) => {
+                                                    this.$Message.error({content: msg})
+                                                })
+                                            
                                         }
                                     }
                                 }, '设为默认'),
@@ -133,9 +133,18 @@ import addAddress from './addAddress'
                                                     break
                                                 }
                                             }
-                                            util.setDialog(updataWaletAddress, {
-                                                item: selItem
-                                            })
+                                            if (!selItem) {
+                                                this.$Message.error({content: '请选择默认地址'})
+                                            } else {
+                                                util.setDialog(updataWaletAddress, {
+                                                    item: selItem,
+                                                    okCallback: () => {
+                                                        this.getAllColdWallet()
+                                                    }
+                                                })
+                                                
+                                            }
+                                            
                                         }
                                     }
                                 }, '修改'),
@@ -153,21 +162,21 @@ import addAddress from './addAddress'
                                         }
                                     }
                                 }, '新增地址'),
-                                // h('Button', {
-                                //     props: {type: 'primary', size: 'small'},
-                                //     style: {marginRight: '10px'},
-                                //     on: {
-                                //         click: () => {
-                                //             let o = this.detail(params.row.addressList, h)
-                                //             fundApi.deleteColdWallet({
-                                //                 walletId: o.valueAll.walletId
-                                //             }, (res) => {
-                                //                 this.$Message.success({content: '删除成功'})
-                                //                 this.getAllColdWallet()
-                                //             })
-                                //         }
-                                //     }
-                                // }, '删除地址')
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {marginRight: '10px'},
+                                    on: {
+                                        click: () => {
+                                            let o = this.detail(params.row.addressList, h)
+                                            fundApi.deleteColdWallet({
+                                                walletId: o.valueAll.walletId
+                                            }, (res) => {
+                                                this.$Message.success({content: '删除成功'})
+                                                this.getAllColdWallet()
+                                            })
+                                        }
+                                    }
+                                }, '删除地址')
                             ]);
                         }
                     }

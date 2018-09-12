@@ -140,18 +140,18 @@
             <Button type="primary" @click="tabs('symbolServer')">保存</Button>
         </Col>
       </Row> -->
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-        <Col span="5">ERC20合约地址</Col>
-        <Col span="8" >{{this.datas.contractAddr || 0}}
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.symbolType === '3'">
+        <Col span="5">Property ID</Col>
+        <Col span="8" >{{this.datas.propertyId || 0}}
         </Col>
-        <Col span="8">
+        <!-- <Col span="8">
              <Input v-model="contractAddr" style="width: 150px" />
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs('contractAddr')">保存</Button>
-        </Col>
+        </Col> -->
       </Row>
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;">
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
         <Col span="5">合约精度</Col>
         <Col span="8">{{this.datas.contractDecimals || 0}}</Col>
         <Col span="8">
@@ -161,6 +161,17 @@
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs2('contractDecimals')">保存</Button>
+        </Col>
+      </Row>
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
+        <Col span="5">ERC20合约地址</Col>
+        <Col span="8" >{{this.datas.contractAddr || 0}}
+        </Col>
+        <Col span="8">
+             <Input v-model="contractAddr" style="width: 150px" />
+        </Col>
+        <Col span="3">
+            <Button type="primary" @click="tabs('contractAddr')">保存</Button>
         </Col>
       </Row>
     </Card>

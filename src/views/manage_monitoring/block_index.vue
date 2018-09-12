@@ -26,8 +26,11 @@
             <Col span="2">
                 <select v-model="direction" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                     <option value="">全部</option>
-                    <option value="1">充值</option>
-                    <option value="2">提现</option>
+                    <option value="1">用户充值</option>
+                    <option value="2">用户提现</option>
+                    <option value="3">交易所归集</option>
+                    <option value="4">冷钱包充值</option>
+                    <option value="5">冷钱包提现</option>
                 </select>
             </Col>
             <Col span="1">区块等待时长：</Col>
@@ -104,7 +107,7 @@ import util from '../../libs/util';
                         title: '交易方向',
                         key: 'direction',
                         render: (h, params) => {
-                            return h('div', params.row.direction === 1 ? '充值': '提现')
+                            return h('div', this.switchStaus1(params.row.direction))
                         }
                     },
                     {
@@ -185,6 +188,25 @@ import util from '../../libs/util';
             this.getconfirmList()
         },
         methods: {
+            switchStaus1(state) { 
+                switch(state){
+                    case 1:
+                        return '用户充值'
+                        break;
+                    case 2:
+                        return '用户提现'
+                        break;
+                    case 3:
+                        return '交易所归集'
+                        break;
+                    case 4:
+                        return '冷钱包充值'
+                        break;
+                    case 5:
+                        return '冷钱包提现'
+                        break;
+                }
+            },
             block () {
                 util.setDialog(block_scan)
             },
