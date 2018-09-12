@@ -3,16 +3,15 @@
   <Card>
     <p slot="title">推广活动</p>
     <Table :columns="columns1" :data="data1"></Table>
-    <Row style="margin-top:10px;">
-        <Col span="12" style="text-align:center;">添加BANNER页<Icon type="plus-round" style="cursor:pointer; color: #2d8cf0;font-size:24px;verticalAlign:middle;margin-left:10px;"></Icon></Col>
-        <Col span="12"></Col>
-    </Row>
+    <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
   </Card>
   
 </template>
 
 <script>
 import extendApi from '../../api/extend'
+import updaImg from './updaImg'
+import util from '../../libs/util'
 export default {
   data () {
     return {
@@ -32,14 +31,14 @@ export default {
               key: 'activityImgName',
           },
           {
-              title: '展示时长',
-              key: 'display_duration',
+              title: '跳转地址',
+              key: 'jumpAddress',
             //   render: (h, params) => {
             //       h('div', [(params.row.displayBeginTime) - (params.row.displayEndTime)  ])
             //   }
               render: (h, params) => {
                   return h('div', [
-                      h('span', [(params.row.displayBeginTime) - (params.row.displayEndTime)  ]),
+                      h('span', [params.row.jumpAddress]),
                       h('Icon', {
                         props: {type: 'gear-b', size: 20},
                         style: {cursor: 'pointer', marginLeft: '10px',verticalAlign: 'middle'}
@@ -52,13 +51,34 @@ export default {
               key: 'opreat',
               render: (h, params) => {
                   return h('div', [
-                      h('Upload', {
-                          props: {action: '//jsonplaceholder.typicode.com/posts/'}
-                      }, [
-                        h('Button', {
-                          props: {type: 'primary', size: 'small', icon: 'ios-cloud-upload-outline'}
-                        }, '上传图片')
-                      ])
+                      h('Button', {
+                        props: {type: 'primary', size: 'small'},
+                        on: {
+                            click: () => {
+                                util.setDialog(updaImg, {
+                                    item: params.row,
+                                    okCallback:() => {
+                                        this.getfindAllActivity()
+                                    }
+                                });
+                            }
+                        }
+                    }, '修改'),
+                    h('Button', {
+                        props: {type: 'primary', size: 'small'},
+                        on: {
+                            click: () => {
+                                extendApi.deleteBannerPage({
+                                    promotionActivityId: params.row.promotionActivityId
+                                }, (res) => {
+                                    this.$Message.success({contnet: '删除成功'})
+                                    this.getfindAllActivity()
+                                }, (msg) => {
+                                    this.$Message.error({contnet: msg})
+                                })
+                            }
+                        }
+                    }, '删除')
                   ]);
               }
           }
@@ -71,7 +91,8 @@ export default {
   },
   methods: {
       getfindAllActivity () {
-          extendApi.findAllActivity(this.curPage, { },(res) => {
+          extendApi.findAllActivity(this.curPage, { },(res, total) => {
+              this.total = total
               this.data1 = res
           })
       },

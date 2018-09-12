@@ -68,19 +68,19 @@
                 </Radio>
             </RadioGroup>
         </FormItem>
-         <FormItem label="Property ID" prop="propertyId">
+         <FormItem label="Property ID" prop="propertyId" v-if="this.formLeft.symbolType === '3'">
              <Input v-model="formLeft.propertyId" name="propertyId"></Input>
             <!-- <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/> -->
         </FormItem>
         <FormItem label="ICON" prop="iconFile">
             <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
         </FormItem>
-        <FormItem label="ERC20合约地址" prop="contractAddr" v-if="this.formLeft.flag === '1'">
+        <FormItem label="ERC20合约地址" prop="contractAddr" v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
             <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
         </FormItem>
          <Row>
             <Col span="12">
-                 <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1'">
+                 <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                     <Input v-model="formLeft.contractDecimals" name="contractDecimals" ></Input>
                 </FormItem>
             </Col>
