@@ -13,11 +13,11 @@
             </a>
         </template>
         <template v-if="!isWeiXi">
-            <a class="button mtb">
+            <a class="button mtb" @click="showTip2">
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
-            <a class="button">
+            <a href="/static/newton-pro-0912.apk" class="button" download="newton-pro-0912.apk">
                 <img width="20px" height="25px" src="../assets/images/download/android.png"/>
                 <span>Android</span>
             </a>
@@ -40,6 +40,9 @@ export default {
   methods: {
     showTip () {
       Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public213')})
+    },
+    showTip2 () {
+      Vue.$confirmDialog({content: 'Coming soon', showCancel: false})
     }
   }
 }
