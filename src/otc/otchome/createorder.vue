@@ -6,17 +6,14 @@
               <div class="row">
                 <label>{{$t('otc_ad.otc_current_currency')}}：<!--当前法币--></label>
                 <div class="value">
-                  <select v-if="!isATN" v-model="formData.currency">
+                  <select v-model="formData.currency">
                     <option v-for="item in currencyList" :key="item.id" :value="item.currency">{{$t(`otc_exchange.otc_exchange_${item.currency}`)}}</option>
-                  </select>
-                  <select v-if="isATN" v-model="formData.currency">
-                    <option value="USD">{{$t('otc_exchange.otc_exchange_USD')}}</option>
                   </select>
                 </div>
               </div>
               <div class="prompt"></div>
             </div>
-            <div class="cont-item exchange" v-if="!isATN">
+            <div class="cont-item exchange">
                 <div class="row">
                     <label>{{$t('otc_exchange.otc_exchange_Bid')}}：<!--对标交易所--></label>
                     <div class="value">
@@ -29,9 +26,9 @@
             </div>
             <div class="cont-item currentprice">
                 <div class="row">
-                    <label>{{isATN ? this.$t('public0.public256') : $t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})：<!--当前价格||交易所价格--></label>
+                    <label>{{$t('otc_ad.otc_ad_prompt1')}}({{formData.currency}})：<!--交易所价格--></label>
                     <div class="value">
-                        <span>{{isATN ? formData.lowest_price : benchItem.lowestPrice}}</span>
+                        <span>{{benchItem.lowestPrice}}</span>
                     </div>
                 </div>
                 <div class="prompt"></div>
@@ -199,7 +196,7 @@ export default {
         bench_marking_id: null,
         price_rate: null,
         price_type: this.params.symbol === otcConfig.additional[0].symbol ? 2 : 1,
-        lowest_price: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : null,
+        lowest_price: null,
         symbol_count: null,
         min_amount: null,
         max_amount: Number(this.params.ad_type) === 2 ? null : 20000,
@@ -359,6 +356,11 @@ export default {
       otcApi.getBenchSymbolInfo(this.benchSymbolParams, (res) => {
         this.benchItem.price = numUtils.BN(res.cur_price || 0).toFixed(2)
         this.benchItem.lowestPrice = numUtils.BN(res.market_price || 0).toFixed(2)
+        if (this.isATN) {
+          this.formData.lowest_price = this.benchItem.lowestPrice
+        } else {
+          this.formData.lowest_price = null
+        }
       })
     },
     fnGetAdvertisementDetail () { // 修改广告 - 获取广告详情
@@ -391,11 +393,9 @@ export default {
           // 当前广告币种为ATN时的处理
           if (res.symbol === otcConfig.additional[0].symbol) {
             this.formData.price_type = 2
-            this.formData.lowest_price = otcConfig.additional[0].price
             this.isATN = true
           } else {
             this.formData.price_type = res.price_type
-            this.formData.lowest_price = utils.removeEndZero(res.lowest_price)
             this.isATN = false
           }
           // 获取Symbol或Currency的最小交易限额

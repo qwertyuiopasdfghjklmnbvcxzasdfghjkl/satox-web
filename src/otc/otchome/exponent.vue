@@ -6,30 +6,26 @@
           <span>
             <i class="icon" :class="[`icon-${params.symbol.toLowerCase()}`]"></i>
             <em class="label">{{params.symbol}} {{$t('public0.public158')}}<!--指数--></em>
-            <span class="tips" v-if="!isATN">
+            <span class="tips">
               <i class="tips-icon">?</i>
               <em class="tips-text">{{$t('otc_ad.data_sources')}}<!--数据来自coinmarket--></em>
             </span>
           </span>
-          <!-- <span>CNY</span> -->
-          <select v-if="!isATN" v-model="params.currency">
+          <select v-model="params.currency">
             <option v-for="item in currencys" :key="item.id" :value="item.value">{{$t(item.text)}}</option>
           </select>
-          <select v-if="isATN" v-model="params.currency">
-            <option value="USD">{{$t('otc_exchange.otc_exchange_USD')}}</option>
-          </select>
         </p>
-        <p class="newest" :class="percent.indexOf('-') === -1 ? 'up' : 'down'">
-          <strong>{{curPrice}} {{isATN ? 'USD' : params.currency}}</strong>
+        <p class="newest" :class="percent.toString().indexOf('-') === -1 ? 'up' : 'down'">
+          <strong>{{curPrice}} {{params.currency}}</strong>
           <small>{{percent}}%</small>
         </p>
         <p class="low">
           <span>{{$t('exchange.exchange_low')}}<!--24h最低价--></span>
-          <span>{{minPrice}}</span>
+          <span>{{minPrice||'0.00'}}</span>
         </p>
         <p class="high">
           <span>{{$t('exchange.exchange_high')}}<!--24h最高价--></span>
-          <span>{{maxPrice}}</span>
+          <span>{{maxPrice||'0.00'}}</span>
         </p>
       </div>
     </div>
@@ -50,10 +46,10 @@ export default {
   props: ['params'],
   data () {
     return {
-      curPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : 0,
-      percent: '0',
-      minPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : '0.00',
-      maxPrice: this.params.symbol === otcConfig.additional[0].symbol ? otcConfig.additional[0].price : '0.00',
+      curPrice: 0,
+      percent: 0,
+      minPrice: 0,
+      maxPrice: 0,
       currencys: otcConfig.currencys,
       isATN: this.params.symbol === otcConfig.additional[0].symbol
     }
@@ -69,18 +65,7 @@ export default {
   },
   watch: {
     'params.symbol' (newVal) {
-      if (newVal === otcConfig.additional[0].symbol) {
-        this.curPrice = otcConfig.additional[0].price
-        this.percent = '0'
-        this.minPrice = otcConfig.additional[0].price
-        this.maxPrice = otcConfig.additional[0].price
-        this.isATN = true
-      } else {
-        this.curPrice = 0
-        this.minPrice = '0.00'
-        this.maxPrice = '0.00'
-        this.isATN = false
-      }
+      this.isATN = newVal === otcConfig.additional[0].symbol
     },
     paramsChange () {
       this.getCoinMarket()
@@ -93,21 +78,23 @@ export default {
   },
   methods: {
     getCoinMarket () {
-      if (this.isATN) {
-        return
-      }
       otcApi.getCoinMarket(this.paramsChange, (res) => {
         let priceArray = []
         let timeArray = []
         this.curPrice = numUtils.BN(res[0].price).toFixed(2)
-        this.percent = (res[0].percent_change_24h || '0').toString()
+        this.percent = res[0].percent_change_24h || 0
         res.reverse()
         res.forEach((item) => {
           priceArray.push(item.price)
           timeArray.push(item.time)
         })
-        this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(2)
-        this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(2)
+        priceArray = priceArray.length ? priceArray : [0]
+        if (this.isATN) {
+          this.maxPrice = this.minPrice = this.curPrice
+        } else {
+          this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(2)
+          this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(2)
+        }
         this.createCanvas(priceArray, timeArray)
       }, (msg) => {
         console.error(msg)
