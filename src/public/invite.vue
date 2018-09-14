@@ -248,9 +248,10 @@ export default {
 .invite_caption3{width: 230px}
 .invite_caption4{width: 230px;line-height: 33px;}
 .invite_list>div{display: inline-block;text-align: center;}
-.invite_caption_left{text-align: left !important;display: inline-block;width: 70px;padding-left: 10px;line-height: 60px;}
+.invite_list>div.invite_caption12{text-align: left;}
+.invite_caption_left{text-align: left !important;display: inline-block;width: 70px;line-height: 60px;}
 .my_code .invite_caption12{margin-right: 108px;}
-.invite_caption12{width: 100px;line-height: 60px;}
+.invite_caption12{width: 200px;line-height: 60px;}
 .invite_caption1>div>span{display: inline-block;width: 62px;height: 20px;color:#fff; line-height: 20px;text-align: center;background: #e4ac46;}
 .invite_caption1>div>img{position: absolute;top: 4px;left: 74px}
 .invite_caption1>div{position: relative;line-height: 33px;}
