@@ -48,6 +48,10 @@ import otcApi from '../../api/otcAberrant'
                         key: 'abnormalReason'
                     },
                     {
+                        title: '异常时间',
+                        key: 'createdTime'
+                    },
+                    {
                         title: '操作',
                         key: 'opreat',
                         render: (h, params) => {
@@ -98,16 +102,7 @@ import otcApi from '../../api/otcAberrant'
                       }
                     }
                 ],
-                data2: [
-                    {
-                        time: '2018.04.24 12:00',
-                        overtime: '222MS'
-                    },
-                    {
-                        time: '2018.04.24 12:00',
-                        overtime: '222MS'
-                    }
-                ]
+                data2: []
             }
         },
         created () {

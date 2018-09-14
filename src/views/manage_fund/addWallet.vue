@@ -18,6 +18,26 @@
                     </Col>
                 </Row>
                 <Row>
+                    <Col>
+                        <FormItem label="主链类型" prop="symbolType">
+                            <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
+                                <Radio label="2">
+                                    <span>ETH</span>
+                                </Radio>
+                                <Radio label="1">
+                                    <span>BTC</span>
+                                </Radio>
+                                <Radio label="3">
+                                    <span>OMNI</span>
+                                </Radio>
+                                <Radio label="4">
+                                    <span>MBT</span>
+                                </Radio>
+                            </RadioGroup>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row>
                     <Col span="12">
                          <Button type="primary" @click="closeDialog">取消</Button>
                     </Col>
@@ -36,7 +56,8 @@ export default {
         return {
             formLeft: {
                 symbol: '',
-                address: ''
+                address: '',
+                symbolType: '1'
             },
             ruleInline: {
                 symbol: [

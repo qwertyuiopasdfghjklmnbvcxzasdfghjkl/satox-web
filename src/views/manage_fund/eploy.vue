@@ -33,6 +33,22 @@
                     <Input v-model="formLeft.gasLimit" style="width:200px;" ></Input>
                 </FormItem>
             </Row>
+            <FormItem label="主链类型" prop="symbolType">
+                <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
+                    <Radio label="2">
+                        <span>ETH</span>
+                    </Radio>
+                    <Radio label="1">
+                        <span>BTC</span>
+                    </Radio>
+                    <Radio label="3">
+                        <span>OMNI</span>
+                    </Radio>
+                    <Radio label="4">
+                        <span>MBT</span>
+                    </Radio>
+                </RadioGroup>
+            </FormItem>
             <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                 <FormItem prop="gasPrice" label="是否可用">
                      <RadioGroup v-model="formLeft.enable" >
@@ -67,7 +83,8 @@ export default {
                 minerFee: '',
                 gasPrice: '',
                 gasLimit: '',
-                enable: '1'
+                enable: '1',
+                symbolType: '1'
             },
             ruleInline: {
                 symbol: [

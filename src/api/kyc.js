@@ -148,7 +148,7 @@ kyc.showReviewStatusCount = showReviewStatusCount
 
 // KYC不通过原因
 const listVerifyFailReasons = function (data, success, error) {
-  api.get('/api/bm/kycManage/listVerifyFailReasons', data, (res) => {
+  api.get('api/bm/kycManage/listVerifyFailReasons', data, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -157,6 +157,22 @@ const listVerifyFailReasons = function (data, success, error) {
   }, error)
 }
 kyc.listVerifyFailReasons = listVerifyFailReasons
+
+
+// KYC -- 审核发消息
+const sendSystemMessage = function (data, success, error) {
+  api.get('api/bm/kycManage/firstVerify/sendSystemMessage', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+kyc.sendSystemMessage = sendSystemMessage
+
+
+
 
 
 // KYC详情

@@ -73,7 +73,7 @@
       <TabPane label="币池钱包整理参数">
         <Card>
           <p slot="title">币池钱包整理参数
-            <Button type="ghost" @click="addCion()">添加</Button>
+            <Button type="primary" @click="addCion()">添加</Button>
           </p>
           <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
@@ -91,6 +91,7 @@ import numberbox from '../components/dialog/numberbox'
 import addOrEditFeeAccount from './addOrEditFeeAccount'
 import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress'
 import addConfig from './addConfig'
+import upAddress from './upAddress'
 export default {
   data () {
     return {
@@ -128,28 +129,28 @@ export default {
                         return h('div', params.row.enable === 0 ? '不可用' : '可用')
                     }
                 },
-                // {
-                //     title: ' ',
-                //     key: 'address',
-                //     render: (h, params) => {
-                //         return h('div', [
-                //             h('Button', {
-                //                 props: {type: 'primary', size: 'small'},
-                //                 style: {marginRight: '10px'},
-                //                 on: {
-                //                     click: () => {
-                //                         util.setDialog(upAddress, {
-                //                             item: params.row,
-                //                             okCallback: () => {
-                //                                 this.getTransferConfig()
-                //                             }
-                //                         })
-                //                     }
-                //                 }
-                //             }, '修改')
-                //         ]);
-                //     }
-                // }
+                {
+                    title: ' ',
+                    key: 'address',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {type: 'primary', size: 'small'},
+                                style: {marginRight: '10px'},
+                                on: {
+                                    click: () => {
+                                        util.setDialog(upAddress, {
+                                            item: params.row,
+                                            okCallback: () => {
+                                                this.getfindCollectConfig()
+                                            }
+                                        })
+                                    }
+                                }
+                            }, '修改')
+                        ]);
+                    }
+                }
       ],
       columnsSymbolData: [],
       dataSymbol: [],
