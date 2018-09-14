@@ -71,8 +71,13 @@
         </Card>
       </TabPane>
       <TabPane label="币池钱包整理参数">
-        <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
-        <Page :current="curPage" :total="total" :page-size="pageSize" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+        <Card>
+          <p slot="title">币池钱包整理参数
+            <Button type="ghost" @click="addCion()">添加</Button>
+          </p>
+          <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
+          <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
+        </Card>
       </TabPane>
     </Tabs>
   </Card>
@@ -85,12 +90,12 @@ import util from '../../libs/util'
 import numberbox from '../components/dialog/numberbox'
 import addOrEditFeeAccount from './addOrEditFeeAccount'
 import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress'
+import addConfig from './addConfig'
 export default {
   data () {
     return {
       curPage: 1,
       total: 0,
-      pageSize: 5,
       columnsSymbol: [
         {
                     title: '币种',
@@ -273,13 +278,20 @@ export default {
     this.getfindCollectConfig()
   },
   methods: {
-   getfindCollectConfig () {
-      system.findCollectConfig(this.curPage,(res, total) => {
-        this.total = total
-        this.columnsSymbolData = res.data
+    addCion () {
+      util.setDialog (addConfig,{
+        okCallback: () => {
+          this.getfindCollectConfig()
+        }
       })
     },
-    changePage (page) {
+    getfindCollectConfig () {
+      system.findCollectConfig(this.curPage, {}, (res, total) => {
+        this.total = total
+        this.columnsSymbolData = res
+      })
+    },
+    changePage1 (page) {
       this.curPage = page
       this.getfindCollectConfig()
     },
