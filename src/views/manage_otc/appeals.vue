@@ -3,7 +3,7 @@
     <Row>
       <Card>
           <p slot="title">申诉管理
-            <Button type="primary" @click="unprocessed">刷新</Button>
+            <span class="refresh" @click="unprocessed"></span>
           </p>
           申诉管理：<Checkbox v-model="single" @on-change = "curPage=1;unprocessed()">只显示待处理</Checkbox>
       </Card>
@@ -129,5 +129,6 @@ export default {
 </script>
 
 <style lang=" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

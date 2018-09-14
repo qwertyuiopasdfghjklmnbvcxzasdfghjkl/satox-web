@@ -14,7 +14,6 @@ const findOtcAbnormalInfo = function (curPage, data, success, error) {
 };
 otcAberrant.findOtcAbnormalInfo = findOtcAbnormalInfo;
 
-
 // otc日常预警详情
 const findOtcOrderInfo = function (data, success, error) {
     api.post(`api/bm/riskManage/otc/findOtcOrderInfo`, data, (res) => {
@@ -51,7 +50,6 @@ const abnormalInfo = function ( data, success, error) {
 };
 otcAberrant.abnormalInfo = abnormalInfo;
 
-
 // 币币预警--大额提币
 const getMonitoring = function (curPage, data, success, error) {
     api.post(`api/bm/riskManage/bb/findWithdrawAbnormalInfo/10/${curPage}`, data, (res) => {
@@ -63,7 +61,6 @@ const getMonitoring = function (curPage, data, success, error) {
     }, error)
 };
 otcAberrant.getMonitoring = getMonitoring;
-
 
 // 币币预警--处理大额提币
 const handleMonitoring = function (data, success, error) {
@@ -77,7 +74,6 @@ const handleMonitoring = function (data, success, error) {
 };
 otcAberrant.handleMonitoring = handleMonitoring;
 
-
 // 币币预警--大额充值
 const getAbnormalInfo = function (curPage, data, success, error) {
     api.post(`api/bm/riskManage/bb/findRechargeAbnormalInfo/10/${curPage}`, data, (res) => {
@@ -89,7 +85,6 @@ const getAbnormalInfo = function (curPage, data, success, error) {
     }, error)
 };
 otcAberrant.getAbnormalInfo = getAbnormalInfo;
-
 
 // 币币预警--处理大额充值
 const handleRecharge = function (data, success, error) {
@@ -127,7 +122,6 @@ const getTransactionAmountFloat = function (curPage, data, success, error) {
 };
 otcAberrant.getTransactionAmountFloat = getTransactionAmountFloat;
 
-
 // 币币预警--处理交易异常
 const handleMarketAbnormal = function (data, success, error) {
     api.post(`api/bm/riskManage/bb/handleMarketAbnormal`, data, (res) => {
@@ -139,7 +133,6 @@ const handleMarketAbnormal = function (data, success, error) {
     }, error)
 };
 otcAberrant.handleMarketAbnormal = handleMarketAbnormal;
-
 
 // 币币预警--日常预警
 const abnormalAmountInfo = function (success, error) {
@@ -165,7 +158,6 @@ const findReconciliation = function (curPage, data, success, error) {
 };
 otcAberrant.findReconciliation = findReconciliation;
 
-
 // 
 const handleReconciliationAbnormal = function (data, success, error) {
     api.post(`api/bm/riskManage/emMonitoring/handleReconciliationAbnormal`, data, (res) => {
@@ -177,5 +169,31 @@ const handleReconciliationAbnormal = function (data, success, error) {
     }, error)
 };
 otcAberrant.handleReconciliationAbnormal = handleReconciliationAbnormal;
+
+
+// 查询用户异常登录预警
+const findAbnormalLoginUserInfo = function (curPage, data, success, error) {
+    api.post(`api/bm/riskManage/bb/findAbnormalLoginUserInfo/10/${curPage}`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+otcAberrant.findAbnormalLoginUserInfo = findAbnormalLoginUserInfo;
+
+
+// 处理用户异常登录预警
+const handleUserLoginAbnormal = function (data, success, error) {
+    api.post(`api/bm/riskManage/bb/handleUserLoginAbnormal`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+otcAberrant.handleUserLoginAbnormal = handleUserLoginAbnormal;
 
 export default otcAberrant;

@@ -4,7 +4,7 @@
     <Card>
       <p slot="title">
         KYC管理
-        <Button type="primary" @click="getList">刷新</Button>
+        <span class="refresh" @click="getList"></span>
       </p>
       <Row>
         <Col span="16">
@@ -193,6 +193,7 @@ export default {
 </script>
 
 <style lang="less">
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-modal-confirm-body{font-size: 20px;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

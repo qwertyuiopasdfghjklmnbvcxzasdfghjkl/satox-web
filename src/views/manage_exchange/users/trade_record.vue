@@ -120,6 +120,9 @@ export default {
                 case 3:
                     return '全部成交'
                     break;
+                case 4:
+                    return '冻结余额消化完，被系统标为完成'
+                    break;
             }
         },
         closeDialog () {

@@ -34,7 +34,7 @@
         <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 2" :key="data.id">
           <Col span="6">{{data.codeDesc}}</Col>
           <Col span="6" v-if="data.code !== 'otcCoinType'">{{data.value}}</Col>
-          <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency'">
+          <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency' && data.code !== 'adCountLimit' && data.code !== 'priceBasePlatform'">
             <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;" v-if="data.code !== 'priceBasePlatform'"/>
             <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'" style="width:80px;"></Input>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
@@ -70,6 +70,15 @@
           <Page :current="coinPoolsPage.currentPage" :total="coinPoolsPage.total" @on-change="changePage(arguments[0], 2)" style="text-align:center;margin-top:20px;"></Page>
         </Card>
       </TabPane>
+      <TabPane label="币池钱包整理参数">
+        <Card>
+          <p slot="title">币池钱包整理参数
+            <Button type="ghost" @click="addCion()">添加</Button>
+          </p>
+          <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
+          <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
+        </Card>
+      </TabPane>
     </Tabs>
   </Card>
 </template>
@@ -81,9 +90,68 @@ import util from '../../libs/util'
 import numberbox from '../components/dialog/numberbox'
 import addOrEditFeeAccount from './addOrEditFeeAccount'
 import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress'
+import addConfig from './addConfig'
 export default {
   data () {
     return {
+      curPage: 1,
+      total: 0,
+      columnsSymbol: [
+        {
+                    title: '币种',
+                    key: 'symbol'
+                },
+                {
+                    title: '最小金额',
+                    key: 'coinMin'
+                },
+                {
+                    title: '保留金额',
+                    key: 'coinReserve'
+                },
+                {
+                    title: 'BTC矿工费',
+                    key: 'minerFee'
+                },
+                {
+                    title: 'ETH GAS单价',
+                    key: 'gasPrice'
+                },
+                {
+                    title: 'ETH GAS上限',
+                    key: 'gasLimit'
+                },
+                {
+                    title: '是否可用',
+                    key: 'enable',
+                    render: (h, params) => {
+                        return h('div', params.row.enable === 0 ? '不可用' : '可用')
+                    }
+                },
+                // {
+                //     title: ' ',
+                //     key: 'address',
+                //     render: (h, params) => {
+                //         return h('div', [
+                //             h('Button', {
+                //                 props: {type: 'primary', size: 'small'},
+                //                 style: {marginRight: '10px'},
+                //                 on: {
+                //                     click: () => {
+                //                         util.setDialog(upAddress, {
+                //                             item: params.row,
+                //                             okCallback: () => {
+                //                                 this.getTransferConfig()
+                //                             }
+                //                         })
+                //                     }
+                //                 }
+                //             }, '修改')
+                //         ]);
+                //     }
+                // }
+      ],
+      columnsSymbolData: [],
       dataSymbol: [],
       exchangeItem: [],
       item: {
@@ -207,8 +275,26 @@ export default {
     this.getdataSymbol()
     this.fnFindAdminAccounts()
     this.fnFindAdminCoinPools()
+    this.getfindCollectConfig()
   },
   methods: {
+    addCion () {
+      util.setDialog (addConfig,{
+        okCallback: () => {
+          this.getfindCollectConfig()
+        }
+      })
+    },
+    getfindCollectConfig () {
+      system.findCollectConfig(this.curPage, {}, (res, total) => {
+        this.total = total
+        this.columnsSymbolData = res
+      })
+    },
+    changePage1 (page) {
+      this.curPage = page
+      this.getfindCollectConfig()
+    },
     getfindSysParam () {
       system.findSysParam((res) => {
         res.forEach((d) => {

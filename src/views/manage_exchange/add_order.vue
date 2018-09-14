@@ -68,15 +68,19 @@
                 </Radio>
             </RadioGroup>
         </FormItem>
+         <FormItem label="Property ID" prop="propertyId" v-if="this.formLeft.symbolType === '3'">
+             <Input v-model="formLeft.propertyId" name="propertyId"></Input>
+            <!-- <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/> -->
+        </FormItem>
         <FormItem label="ICON" prop="iconFile">
             <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
         </FormItem>
-        <FormItem label="ERC20合约地址" prop="contractAddr" v-if="this.formLeft.flag === '1'">
+        <FormItem label="ERC20合约地址" prop="contractAddr" v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
             <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
         </FormItem>
          <Row>
             <Col span="12">
-                 <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1'">
+                 <FormItem label="合约精度" prop="contractDecimals" v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                     <Input v-model="formLeft.contractDecimals" name="contractDecimals" ></Input>
                 </FormItem>
             </Col>
@@ -195,7 +199,8 @@ export default {
         minerFee: null,
         totalIssuance: null, //发行总量
         totalCirculation: null, //流通总量
-        issuePrice: null //发行价格
+        issuePrice: null, //发行价格
+        propertyId: null
       },
       ruleInline: {
             symbol: [
@@ -273,6 +278,9 @@ export default {
             gaslimit: [
                 { required: true, message: '请输入gaslimit'},
                 { validator: customValidator, message: '请输入gaslimit', trigger: 'blur' },
+            ],
+            propertyId: [
+                { required: true, message: '请输入propertyId'},
             ]
         }
     }

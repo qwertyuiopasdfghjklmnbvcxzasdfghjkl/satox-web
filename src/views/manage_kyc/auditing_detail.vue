@@ -70,7 +70,12 @@ export default {
     methods: {
         disagree () {
              util.setDialog(reason, {
-                 verifyId: this.verifyId
+                 verifyId: this.verifyId,
+                 type: this.type,
+                 okCallback: () => {
+                    this.$emit('okCallback')
+                    this.$emit('removeDialog')
+                }
              })
         },
         pass () {

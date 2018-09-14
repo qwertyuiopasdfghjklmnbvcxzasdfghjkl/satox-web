@@ -3,7 +3,7 @@
   <Row>
     <Card>
       <p slot="title">数据统计
-         <Button type="primary" @click="refreshAll">刷新</Button>
+         <span class="refresh" @click="refreshAll"></span>
       </p>
       <Row>
         <Col span="8">
@@ -36,13 +36,13 @@
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
     </Card>
     <Card style="margin-top:10px;">
-      <p slot="title">查询</p>
+      <p slot="title">图表展示</p>
       <Form ref="formItem" :model="formItem" :label-width="80" inline>
         <FormItem prop="user" label="币种">
             <Select v-model="formItem.symbol" style="width:100px">
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
-                <Option value="BARK">BARK</Option>
+                <Option value="ATN">ATN</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目"><!--1,在线用户数量 2,上架广告数量 3,正在交易的订单数 4,当天完成订单数 5,当天交易额 6,待处理申述数 7,当天异常预警数-->
@@ -230,6 +230,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .manage_exchange_canvas{display:flex;margin:20px;height:400px;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

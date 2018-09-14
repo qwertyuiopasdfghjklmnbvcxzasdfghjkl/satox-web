@@ -4,8 +4,8 @@
     <Col span="24">
       <Row>
         <Card>
-          <p slot="title">提审核
-                <Button type="primary" @click="reshAll">刷新</Button>
+          <p slot="title">提币审核
+              <span class="refresh" @click="reshAll"></span>
           </p>
           <Row>
             <Col span="12">
@@ -43,9 +43,13 @@ export default {
             curPage: 1,
             total: 0,
             columns: [
-                {key: 'accountId', title: '交易编号'},
+                {key: 'createdTime', title: '创建时间'},
                 {key: 'userName', title: '用户账号'},
-                {key: 'withdrawAmount', title: '提现金额'},
+                {key: 'withdrawAmount', title: '提现金额',
+                    render: (h, params) => { 
+                        return h('div', [params.row.withdrawAmount, params.row.symbol])
+                    }
+                },
                 {key: 'phoneNumber', title: '电话'},
                 {key: 'auditStatus', title: '状态',
                     render: (h, params) => { 
@@ -99,7 +103,7 @@ export default {
     },
       getAuditing() {
         financeApi.getAuditingList(this.curPage, {
-          auditType: 1 // 1 自动  2  人工
+          auditType: '' // 1 自动  2  人工
         }, (res, total) => {
           this.total = total
           this.datas = res
@@ -119,5 +123,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

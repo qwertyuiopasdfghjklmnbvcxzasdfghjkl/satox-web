@@ -3,8 +3,11 @@
   <div>
       <Card style="width:1200px;">
          <p slot="title">
-             资产记录
-            <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+            <span>资产记录</span>
+            <span>
+                <span class="refresh" @click="reshAll" style="margin-right:50px;"></span>
+                <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer; margin-top: 14px;" @click="closeDialog"></i>
+            </span>
          </p>
          <Tabs value="name1">
             <TabPane label="当前资产" name="name1">
@@ -213,25 +216,10 @@ export default {
     switchStaus(state) {
         switch(state){
             case 1:
-                return '未处理'
+                return '提现中'
                 break;
             case 2:
-                return '等待交易发起'
-                break;
-            case 3:
-                return '交易已发送(等待对账)'
-                break;
-            case 4:
-                return '撤销'
-                break;
-            case 5:
-                return '提现失败'
-                break;
-            case 6:
-                return '对账完成'
-                break;
-            case 7:
-                return '提现失败资金返还'
+                return '已完成'
                 break;
         }
     },
@@ -320,4 +308,7 @@ export default {
    }
 }
 </script>
+<style>
+.refresh{width: 49px;height: 24px;background: url(../../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
+</style>
 

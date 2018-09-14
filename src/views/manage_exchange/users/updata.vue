@@ -45,32 +45,35 @@
             <Button type="primary" @click="tabs('captionCN')">保存</Button>
         </Col>
       </Row>
-      
-       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
+
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
         <Col span="5">发行总量</Col>
         <Col span="8">{{this.datas.totalIssuance  || 0}}</Col>
         <Col span="8">
-             <Input v-model="totalIssuance" style="width: 150px" />
+         <InputNumber style="width:100%;" v-model="totalIssuance"></InputNumber>
+             <!-- <Input v-model="totalIssuance" style="width: 150px" /> -->
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs('totalIssuance')">保存</Button>
         </Col>
       </Row>
-       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
         <Col span="5">流通总量</Col>
         <Col span="8">{{this.datas.totalCirculation  || 0}}</Col>
         <Col span="8">
-             <Input v-model="totalCirculation" style="width: 150px" />
+         <InputNumber style="width:100%;" v-model="totalCirculation"></InputNumber>
+             <!-- <Input v-model="totalCirculation" style="width: 150px" /> -->
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs('totalCirculation')">保存</Button>
         </Col>
       </Row>
-       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
         <Col span="5">发行价格</Col>
         <Col span="8">{{this.datas.issuePrice  || 0}}</Col>
         <Col span="8">
-             <Input v-model="issuePrice" style="width: 150px" />
+         <InputNumber style="width:100%;" v-model="issuePrice"></InputNumber>
+             <!-- <Input v-model="issuePrice" style="width: 150px" /> -->
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs('issuePrice')">保存</Button>
@@ -127,7 +130,7 @@
             <Button type="primary" @click="tabs1('symbolType')">保存</Button>
         </Col>
       </Row>
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+      <!-- <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
         <Col span="5">钱包服务器</Col>
         <Col span="8" style="width:255px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{this.datas.symbolServer || 0}}</Col>
         <Col span="8">
@@ -136,19 +139,19 @@
         <Col span="3">
             <Button type="primary" @click="tabs('symbolServer')">保存</Button>
         </Col>
-      </Row>
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-        <Col span="5">ERC20合约地址</Col>
-        <Col span="8" >{{this.datas.contractAddr || 0}}
+      </Row> -->
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.symbolType === '3'">
+        <Col span="5">Property ID</Col>
+        <Col span="8" >{{this.datas.propertyId || 0}}
         </Col>
-        <Col span="8">
+        <!-- <Col span="8">
              <Input v-model="contractAddr" style="width: 150px" />
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs('contractAddr')">保存</Button>
-        </Col>
+        </Col> -->
       </Row>
-      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;">
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
         <Col span="5">合约精度</Col>
         <Col span="8">{{this.datas.contractDecimals || 0}}</Col>
         <Col span="8">
@@ -158,6 +161,17 @@
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs2('contractDecimals')">保存</Button>
+        </Col>
+      </Row>
+      <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
+        <Col span="5">ERC20合约地址</Col>
+        <Col span="8" >{{this.datas.contractAddr || 0}}
+        </Col>
+        <Col span="8">
+             <Input v-model="contractAddr" style="width: 150px" />
+        </Col>
+        <Col span="3">
+            <Button type="primary" @click="tabs('contractAddr')">保存</Button>
         </Col>
       </Row>
     </Card>
@@ -172,7 +186,7 @@ export default {
             symbol: '1',
             caption: '',
             captionCN: '',
-            symbolServer: '',
+            // symbolServer: '',
             contractDecimals: null,
             contractAddr: '',
             iconFile: '',
@@ -181,7 +195,17 @@ export default {
             totalIssuance: null,
             datas: {
                 flag: '',
-                symbolType: ''
+                symbolType: '',
+                symbol: '1',
+                caption: '',
+                captionCN: '',
+                // symbolServer: '',
+                contractDecimals: null,
+                contractAddr: '',
+                iconFile: '',
+                issuePrice: null,
+                totalCirculation: null,
+                totalIssuance: null,
             }
          } 
     },
@@ -196,6 +220,7 @@ export default {
                 for (var i in res) {
                     this.datas[i] = res[i] ? String(res[i]) : null
                 }
+                console.log(this.datas)
             }, (msg) => {
                 this.$Message.error({content: msg})
             })
@@ -244,6 +269,7 @@ export default {
             currenyApi.updateSymbol(data, (res) =>{
                 this.getSymbolInfo()
                 this.$Message.success({content: '修改成功'})
+                // this.$emit('okCallback')
             }, (msg) => {
                 this.$Message.error({content: msg})
             }) 

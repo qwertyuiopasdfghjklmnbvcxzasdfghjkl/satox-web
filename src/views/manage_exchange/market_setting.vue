@@ -104,15 +104,15 @@ export default {
     return {
       curPage: 1,
       total: 0,
-      value1: null || 0,
+      value1: null,
       data1: [],
-      accuracy: null || 0,
-      digit: null || 0,
-      minPlaceOrderAmount: null || 0,
-      minPlaceOrderQuantity: null || 0,
+      accuracy: null,
+      digit: null,
+      minPlaceOrderAmount: null,
+      minPlaceOrderQuantity: null,
       currencySymbol: '',
       baseSymbol: '',
-      openingPrice: 0
+      openingPrice: null
     }
   },
   created() {
@@ -131,6 +131,10 @@ export default {
         })
     },
     tabs(propName) {
+        if (!this[propName]) {
+          this.$Message.error({content: '请输入值'})
+          return
+        }
         let data = {
            marketId: this.item.marketId
          }

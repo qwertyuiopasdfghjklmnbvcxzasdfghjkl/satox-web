@@ -2,7 +2,7 @@
 <template>
   <Card style="width:440px">
     <p slot="title">
-      <span>{{isEdit ? '修改' : '添加'}}手续费账户</span>
+      <span>{{isEdit ? '修改' : '添加'}}手续费账户2</span>
       <a class="ivu-icon ivu-icon-close" href="javascript:;" style="float:right;margin-top:3px;color:#1c2438;" @click="closeDialog"></a>
     </p>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">
@@ -13,6 +13,22 @@
       <FormItem label="用户名" prop="username">
         <Input type="text" v-model="formValidate.username"></Input>
       </FormItem>
+      <FormItem label="主链类型" prop="symbolType">
+            <RadioGroup ref="symbolType" v-model="formValidate.symbolType">
+                <Radio label="2">
+                    <span>ETH</span>
+                </Radio>
+                <Radio label="1">
+                    <span>BTC</span>
+                </Radio>
+                <Radio label="3">
+                    <span>OMNI</span>
+                </Radio>
+                <Radio label="4">
+                    <span>MBT</span>
+                </Radio>
+            </RadioGroup>
+        </FormItem>
       <FormItem style="line-height:0;text-align:center;">
         <Button type="ghost" style="width:100px;margin-right:50px;" @click="closeDialog">取消</Button>
         <Button type="primary" style="width:100px;" @click="save">确定</Button>
@@ -30,6 +46,7 @@ export default {
       formValidate: {
         symbol: this.isEdit ? this.symbol : null,
         username: this.isEdit ? this.username : null,
+        symbolType: this.isEdit ? this.symbolType : '1'
       },
       ruleValidate: {
         symbol: [
@@ -48,7 +65,8 @@ export default {
           if (this.isEdit) {
             system.updateAdminAccounts({
               symbol: this.formValidate.symbol,
-              username: this.formValidate.username
+              username: this.formValidate.username,
+              symbolType: Number(this.formValidate.symbolType)
             }, (msg) => {
               this.$Message.success({content: '保存成功'})
               this.$emit('okCallback')
@@ -59,7 +77,8 @@ export default {
           } else {
             system.addAdminAccounts({
               symbol: this.formValidate.symbol,
-              username: this.formValidate.username
+              username: this.formValidate.username,
+              symbolType:  Number(this.formValidate.symbolType)
             }, (msg) => {
               this.$Message.success({content: '保存成功'})
               this.$emit('okCallback')
