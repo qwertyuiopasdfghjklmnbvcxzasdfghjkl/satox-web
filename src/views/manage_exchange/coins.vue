@@ -3,7 +3,7 @@
   <Row>
     <Card>
         <p slot="title">币种管理
-             <Button type="primary" @click="reshAll">刷新</Button>
+             <span class="refresh" @click="reshAll"></span>
         </p>
         <Row>
             <span>代号</span>
@@ -340,4 +340,5 @@ export default {
 
 <style lang="less" scoped>
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 </style>

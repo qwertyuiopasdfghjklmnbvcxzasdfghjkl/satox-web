@@ -3,7 +3,7 @@
     <Row>
         <Card>
             <p slot="title">审核管理
-               <Button type="primary" @click="getRequestManage('1')">刷新</Button>
+                <span class="refresh" @click="getRequestManage('1')"></span>
             </p>
             <Row>
               审核管理：<Checkbox v-model="single" @on-change="curPage=1;getRequestManage('1')">显示全部</Checkbox>
@@ -123,5 +123,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

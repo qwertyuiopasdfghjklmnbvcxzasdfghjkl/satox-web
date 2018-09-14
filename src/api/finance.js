@@ -186,4 +186,30 @@ const getAdminWithdrawAccountInfo = function (curPage, success, error) {
 }
 finance.getAdminWithdrawAccountInfo = getAdminWithdrawAccountInfo
 
+
+// 财务管理--用户总资产数据
+const findUserAssetList = function (curPage, ase, success, error) {
+  api.get(`/api/bm/financialManage/financialStatistics/findUserAssetList/10/${curPage}/${ase}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.findUserAssetList = findUserAssetList
+
+
+// 财务管理--用户充值记录
+const findRechargeRecords = function (curPage, success, error) {
+  api.get(`/api/bm/financialManage/financialStatistics/findRechargeRecords/10/${curPage}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.findRechargeRecords = findRechargeRecords
+
 export default finance

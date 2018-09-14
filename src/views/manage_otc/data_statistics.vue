@@ -3,7 +3,7 @@
   <Row>
     <Card>
       <p slot="title">数据统计
-         <Button type="primary" @click="refreshAll">刷新</Button>
+         <span class="refresh" @click="refreshAll"></span>
       </p>
       <Row>
         <Col span="8">
@@ -230,6 +230,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .manage_exchange_canvas{display:flex;margin:20px;height:400px;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

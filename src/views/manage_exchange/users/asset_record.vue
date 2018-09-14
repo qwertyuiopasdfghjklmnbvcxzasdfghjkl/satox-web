@@ -5,7 +5,7 @@
          <p slot="title">
             <span>资产记录</span>
             <span>
-                <Button type="primary" @click="reshAll" style="margin-right:50px;">刷新</Button>
+                <span class="refresh" @click="reshAll" style="margin-right:50px;"></span>
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer; margin-top: 14px;" @click="closeDialog"></i>
             </span>
          </p>
@@ -308,4 +308,7 @@ export default {
    }
 }
 </script>
+<style>
+.refresh{width: 49px;height: 24px;background: url(../../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
+</style>
 

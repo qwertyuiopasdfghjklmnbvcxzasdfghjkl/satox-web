@@ -3,7 +3,7 @@
   <Row>
     <Card>
       <p slot="title">KYC复核
-        <Button type="primary" @click="getCheckVerifys">刷新</Button>
+        <span class="refresh" @click="getCheckVerifys"></span>
       </p>
       <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
@@ -95,5 +95,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>
