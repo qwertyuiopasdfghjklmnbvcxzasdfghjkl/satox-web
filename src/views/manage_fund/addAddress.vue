@@ -63,14 +63,15 @@
 <script>
 import fundApi from '../../api/fund'
 export default {
-    props: ['symbol'],
+    props: ['symbol', 'symbolType'],
     data () {
         return {
             formLeft: {
                 symbol: this.symbol,
                 address: '',
                 defaultFlag: '1',
-                enable: '1'
+                enable: '1',
+                symbolType: this.symbolType
             },
             ruleInline: {
                 address: [

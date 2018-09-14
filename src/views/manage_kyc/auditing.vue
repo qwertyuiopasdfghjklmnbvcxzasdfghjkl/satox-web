@@ -67,7 +67,22 @@ export default {
                           })
                         }
                     }
-                }, '查看详情并处理')
+                }, '查看详情并处理'),
+                // h('i', {
+                //     class: 'ivu-icon ivu-icon-volume-medium',
+                //     style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                //     on: {
+                //         click: () => {
+                //             if (this.readOnly) {
+                //                 return
+                //             }
+                //             util.setDialog(messageModel, {
+                //                 userId: params.row.userId,
+                //                 username: params.row.username
+                //             });
+                //         }
+                //     }
+                // })
             ]);
         }}
       ],

@@ -72,6 +72,10 @@ export default {
               key: 'withdrawAmount'
           },
           {
+              title: '异常时间',
+              key: 'createdTime'
+          },
+          {
               title: '操作',
               key: 'opreat',
               render: (h, params) => {
@@ -111,6 +115,10 @@ export default {
           {
               title: '充值数',
               key: 'rechargeAmount'
+          },
+          {
+              title: '异常时间',
+              key: 'createdTime'
           },
           {
               title: '操作',
@@ -161,6 +169,10 @@ export default {
               }
           },
           {
+              title: '异常时间',
+              key: 'transactionTime'
+          },
+          {
               title: '操作',
               key: 'opreat',
               render: (h, params) => {
@@ -206,6 +218,10 @@ export default {
               render: (h, params) => { 
                     return h('div', [params.row.floatChange * 100, '%' ])
               }
+          },
+          {
+              title: '异常时间',
+              key: 'transactionTime'
           },
           {
               title: '操作',
@@ -261,6 +277,10 @@ export default {
               }
           },
           {
+              title: '异常时间',
+              key: 'createTime'
+          },
+          {
               title: '操作',
               key: 'opreat',
               render: (h, params) => {
@@ -293,6 +313,10 @@ export default {
           {
               title: '访问次数',
               key: 'fiveMinutesAgo'
+          },
+          {
+              title: '异常时间',
+              key: 'createdTime'
           },
           {
               title: '操作',

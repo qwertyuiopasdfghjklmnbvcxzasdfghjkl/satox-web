@@ -69,7 +69,6 @@
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">是否可用{{item.enable}}</Col>
                     <Col span="6"> 
-                        <!-- {{this.item.enable}} -->
                     </Col>
                     <Col span="6">
                         <RadioGroup v-model="enable" >
@@ -83,6 +82,28 @@
                     </Col>
                     <Col span="6" style="text-align:right;">
                         <Button type="primary" @click="tabs1('enable')">保存</Button>
+                    </Col>
+                </Row>
+                <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+                    <Col span="6">主链类型{{item.symbolType}}</Col>
+                    <Col span="14">
+                        <RadioGroup v-model="symbolType" >
+                             <Radio label="2">
+                                <span>ETH</span>
+                            </Radio>
+                            <Radio label="1">
+                                <span>BTC</span>
+                            </Radio>
+                            <Radio label="3">
+                                <span>OMNI</span>
+                            </Radio>
+                            <Radio label="4">
+                                <span>MBT</span>
+                            </Radio>
+                        </RadioGroup>
+                    </Col>
+                    <Col span="4" style="text-align:right;">
+                        <Button type="primary" @click="tabs1('symbolType')">保存</Button>
                     </Col>
                 </Row>
             </Form>
@@ -102,6 +123,7 @@ export default {
             gasPrice: null,
             gasLimit: null,
             enable: this.item.enable.toString(),
+            symbolType: this.item.symbolType.toString(),
             datas: []
         }
     },

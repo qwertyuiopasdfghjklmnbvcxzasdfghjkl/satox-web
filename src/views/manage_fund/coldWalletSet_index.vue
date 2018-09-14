@@ -27,6 +27,13 @@ import addAddress from './addAddress'
                         key: 'symbol'
                     },
                     {
+                        title: '主链类型',
+                        key: 'symbolType',
+                        render: (h, params) => {
+                            return h('div', this.switchStaus(params.row.symbolType))
+                        }
+                    },
+                    {
                         title: '地址',
                         key: 'address',
                         render: (h, params) => {
@@ -155,6 +162,7 @@ import addAddress from './addAddress'
                                         click: () => {
                                             util.setDialog(addAddress, {
                                                 symbol: params.row.symbol,
+                                                symbolType: params.row.symbolType,
                                                 okCallback: () => {
                                                     this.getAllColdWallet()
                                                 }
@@ -189,6 +197,22 @@ import addAddress from './addAddress'
             this.getAllColdWallet()
         },
         methods: {
+            switchStaus(state) { 
+                switch(state){// 0: 未处理  1:已处理  2：已取消  3：已审核
+                case 1:
+                    return 'BTC'
+                    break;
+                case 2:
+                    return 'ETH'
+                    break;
+                case 3:
+                    return 'OMNI'
+                    break;
+                case 4:
+                    return 'MBT'
+                    break;
+                }
+            },
             detail (addressList, h) {
                 let options = []
                 let selValue = null
