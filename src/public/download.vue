@@ -13,7 +13,7 @@
             </a>
         </template>
         <template v-if="!isWeiXi">
-            <a class="button mtb" @click="showTip2">
+            <a class="button mtb" href="/static/newton-pro-0914.ipa">
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
