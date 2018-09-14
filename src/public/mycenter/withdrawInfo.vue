@@ -82,6 +82,9 @@ export default {
     symbol: {
       type: String
     },
+    symbolType: {
+      type: Number
+    },
     fromAccount: {
       type: String
     },
@@ -215,7 +218,7 @@ export default {
       this.amount = this.available
     },
     walletWithdraw () { // 提现请求
-      var validData = {}
+      let validData = {}
       if (!this.showNewAddress) {
         validData = {
           selToAddress: this.toAddress,
@@ -246,6 +249,7 @@ export default {
           okCallback: (code) => {
             let formData = { // 提现
               symbol: this.symbol,
+              symbolType: this.symbolType,
               amount: this.amount,
               fromAccount: this.fromAccount, // 用户id
               toAddress: this.toAddress,
