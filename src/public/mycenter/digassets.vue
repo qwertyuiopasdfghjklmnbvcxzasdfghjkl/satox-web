@@ -139,28 +139,31 @@ export default {
         } else if (this.sortActive === 'fullName') {
           let m1 = this.$t(`symbol.${item1.symbol}`)
           let m2 = this.$t(`symbol.${item2.symbol}`)
-          return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
+          return this.sort === 'desc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
         } else if (this.sortActive === 'available') {
           let m1 = numUtils.BN(item1.availableBalance)
           let m2 = numUtils.BN(item2.availableBalance)
           if (m1.equals(m2)) {
-            return 0
+            return item1.idx < item2.idx ? -1 : 1
+          } else {
+            return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
           }
-          return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
         } else if (this.sortActive === 'frozen') {
           let m1 = numUtils.BN(item1.frozenBalance)
           let m2 = numUtils.BN(item2.frozenBalance)
           if (m1.equals(m2)) {
-            return 0
+            return item1.idx < item2.idx ? -1 : 1
+          } else {
+            return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
           }
-          return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
         } else {
           let m1 = numUtils.BN(item1.totalBalance)
           let m2 = numUtils.BN(item2.totalBalance)
           if (m1.equals(m2)) {
-            return 0
+            return item1.idx < item2.idx ? -1 : 1
+          } else {
+            return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
           }
-          return this.sort === 'desc' ? (m1.lt(m2) ? -1 : 1) : (m1.gt(m2) ? -1 : 1)
         }
       })
       return ndatas
