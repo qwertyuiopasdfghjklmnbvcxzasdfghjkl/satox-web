@@ -172,6 +172,7 @@ export default {
       }
       utils.setDialog(withdrawInfo, {
         symbol: this.item.symbol,
+        symbolType: this.item.symbolType,
         available: this.item.availableBalance,
         fromAddress: this.item.address,
         procedure: this.item.procedureFee,
