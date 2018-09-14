@@ -3,7 +3,7 @@
   <div>
     <Card>
         <p slot="title">紧急异常预警
-              <Button type="primary" @click="getfindReconciliation">刷新</Button>
+            <span class="refresh" @click="getfindReconciliation"></span>
         </p>
         <Row>
           <Col span="8">待处理紧急异常数：0</Col>
@@ -129,5 +129,6 @@ import otcApi from '../../api/otcAberrant'
     }
 </script>
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

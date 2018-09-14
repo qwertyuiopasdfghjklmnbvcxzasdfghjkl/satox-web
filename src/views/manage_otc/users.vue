@@ -2,7 +2,7 @@
 <template>
   <Card>
     <p slot="title">用户管理
-        <Button type="primary" @click="getfindUserManage">刷新</Button>
+        <span class="refresh" @click="getfindUserManage"></span>
     </p>
     <Row>
         <Input style="width: 300px;" v-model="userSearh" placeholder="如：123456@qq.com"></Input>
@@ -193,5 +193,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>

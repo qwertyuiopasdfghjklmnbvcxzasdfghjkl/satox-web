@@ -3,7 +3,7 @@
   <Row>
     <Card>
       <p slot="title">KYC审核
-        <Button type="primary" @click="getList">刷新</Button>
+        <span class="refresh" @click="getList"></span>
       </p>
       <Row>
         <Col span="8">待审核用户数量：{{data2.verifyWaitFirstCheck || 0}}个</Col>
@@ -80,6 +80,11 @@ export default {
     this.getList()
     this.getStatusCount()
   },
+  computed: {
+        image () {
+            return '../../src/images/frsh.png'
+        }
+  },
   methods: {
     switchStaus(state) {// 0：驾照，1：护照，2：国民身份证）
         switch(state){
@@ -137,4 +142,5 @@ export default {
 
 <style lang="less" scoped>
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 </style>

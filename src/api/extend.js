@@ -39,8 +39,8 @@ const cancelDistribute = function (distributeId, success, error) {
 extend.cancelDistribute = cancelDistribute;
 
 //查找分发记录
-const findAllDistribute = function (curPage, success, error) {
-    api.post(`api/bm/promotionManage/distribute/findAllDistribute/10/${curPage}`, (res) => {
+const findAllDistribute = function (curPage, data, success, error) {
+    api.post(`api/bm/promotionManage/distribute/findAllDistribute/10/${curPage}`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {

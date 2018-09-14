@@ -131,7 +131,11 @@ export default {
     },
     methods: {
         adddEploy () {
-            util.setDialog(eploy)
+            util.setDialog(eploy, {
+                okCallback: () => {
+                    this.getTransferConfig()
+                }
+            })
         },
         getTransferConfig () {
             fundApi.findTransferConfig(this.curPage, (res, total) => {

@@ -48,7 +48,7 @@ export default {
             }
         }
     },
-     computed: {
+    computed: {
         image () {
             return this.item.activityImgUrl
         }
@@ -83,5 +83,6 @@ export default {
 .updaImge{width: 500px;height: 300px;background: #fff;padding: 10px;}
 .allUpdata{ display: flex;justify-content: space-between;}
 .updaBtn{display: flex;justify-content: space-around;}
+.allUpdata-left img{width: 150px;height: 150px;}
 </style>
 

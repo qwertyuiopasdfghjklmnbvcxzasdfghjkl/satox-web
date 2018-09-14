@@ -98,16 +98,10 @@ export default {
         addEploy () {
             this.$refs.formItem.validate((valid) => {
                 if (valid) {
-                    fundApi.addConfig({
-                        symbol: this.symbol,
-                        coinMin: this.coinMin,
-                        coinReserve:this.coinReserve,
-                        minerFee:this.minerFee,
-                        gasPrice: this.gasPrice,
-                        gasLimit: this.gasLimit,
-                        enable: this.enable
-                    }, (res) => {
+                    fundApi.addConfig(this.formLeft, (res) => {
                         this.$Message.success({content: '添加成功'})
+                        this.$emit('removeDialog')
+                        this.$emit('okCallback')
                     }, (msg) => {
                         this.$Message.error({content: msg})                
                     })

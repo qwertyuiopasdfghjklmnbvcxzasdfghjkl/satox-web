@@ -3,7 +3,7 @@
   <div>
     <Card>
       <p slot="title">币币异常预警
-          <Button type="primary" @click="reshAll">刷新</Button>
+          <span class="refresh" @click="reshAll"></span>
       </p>
       <Row>
           <Col span="12">待处理异常预警数：{{this.datas.waitHandleAmount}}</Col>
@@ -32,6 +32,7 @@
       <Card style="margin-top:16px;">
         <p slot="title">用户异常登录</p>
         <Table :columns="columns5" :data="data5"></Table>
+        <Page :current="curPage5" :total="total5" @on-change="changePage5" style="text-align:center;margin-top:20px;"></Page>        
       </Card>
       <Card style="margin-top:16px;">
         <p slot="title">高频API访问</p>
@@ -55,6 +56,8 @@ export default {
       total2: 0,
       curPage3: 1, 
       total3: 0,
+      curPage5: 1, 
+      total5: 0,
       columns1: [
           {
               title: '用户',
@@ -234,11 +237,28 @@ export default {
       data4: [],
       columns5: [{
               title: '用户',
-              key: 'market'
+              key: 'username'
+          },
+           {
+              title: '异常类型',
+              key: 'type',
+              render: (h, params) => {
+                  return h('div', params.row.type === 1 ? '登录频率过高' : '异地登录')
+              }
           },
           {
-              title: '登录次数',
-              key: 'fiveMinutesAgo'
+              title: '登录次数/登录地点个数',
+              key: 'loginCount',
+              render: (h, params) => {
+                  return h('div', [params.row.type === 1 ? params.row.loginCount : params.row.loginAddressAmount])
+              }
+          },
+          {
+              title: '登录时间/登录地点',
+              key: 'loginCount',
+              render: (h, params) => {
+                  return h('div', [params.row.type === 1 ? params.row.loginTimes : params.row.loginAddresses])
+              }
           },
           {
               title: '操作',
@@ -250,6 +270,14 @@ export default {
                         style: {marginRight: '10px'},
                         on: {
                             click: () => {
+                                otcApi.handleUserLoginAbnormal({
+                                    abnormalLoginId: params.row.abnormalLoginId
+                                }, (res) => {
+                                    this.$Message.success({content: '处理成功'})
+                                    this.getLoginUserInfo()
+                                }, (msg) => {
+                                    this.$Message.error({content: msg})
+                                })
                             }
                         }
                     }, '忽略')
@@ -292,6 +320,7 @@ export default {
       this.getPriceFloat()
       this.getAmountFloat()
       this.getabnormal()
+      this.getLoginUserInfo()
   },
   methods: {
       reshAll () {
@@ -300,6 +329,7 @@ export default {
         this.getPriceFloat()
         this.getAmountFloat()
         this.getabnormal()
+        this.getLoginUserInfo()
       },
       getabnormal () {
           otcApi.abnormalAmountInfo((res) => {
@@ -353,11 +383,24 @@ export default {
       changePage3 (page) {
         this.curPage3 = page
         this.getAmountFloat()
-      }
+      },
+      getLoginUserInfo () {
+          otcApi.findAbnormalLoginUserInfo(this.curPage, {
+              displayAll: false
+          }, (res, total) => {
+              this.total5 = total
+              this.data5 = res
+          })
+      },
+      changePage5 (page) {
+        this.curPage5 = page
+        this.getAmountFloat()
+      },
   }
 }
 </script>
 
 <style lang="less" scoped>
+.refresh{width: 49px;height: 24px;background: url(../../images/frsh.png) center/cover no-repeat;background-size: contain;cursor: pointer;color: #2d8cf0;}
 .ivu-card-head-inner, .ivu-card-head p{display: flex !important;justify-content: space-between  !important;height: 40px !important; line-height: 40px !important;}
 </style>
