@@ -13,7 +13,7 @@
             </a>
         </template>
         <template v-if="!isWeiXi">
-            <a class="button mtb" href="/static/newton-pro-0914.ipa">
+            <a class="button mtb" href="/static/newton-pro-0915.ipa" download="newton-pro-0915">
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
