@@ -164,7 +164,7 @@
             </div>
             <div class="cont-item button">
                 <button class="cancel" @click="closeDalg">{{$t('otc_legal.otc_legal_cancel')}}<!--取消--></button>
-                <button class="comfirm" @click="saveAds">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></button>
+                <button class="comfirm" :class="{disabled:locked}" @click="saveAds">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></button>
             </div>
         </div>
     </div>
@@ -190,6 +190,7 @@ export default {
       coinMinLimit: 0,
       currencyMinLimit: 0,
       maxOrderProcessing: 0,
+      locked: false,
       payments: JSON.parse(JSON.stringify(otcConfig.payments)),
       isClickPayments: false,
       formData: {
@@ -475,6 +476,10 @@ export default {
           width: 620,
           item: formData,
           okCallback: () => {
+            if (this.locked) {
+              return
+            }
+            this.locked = true
             if (this.ad_id) {
               this.updateAds()
             } else {
@@ -487,10 +492,12 @@ export default {
     createAds () {
       var formData = JSON.parse(JSON.stringify(this.formData))
       otcApi.createAdvertisement(formData, (msg) => {
+        this.locked = false
         Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
         this.params.newAdCount++
         this.$emit('removeDialog')
       }, (msg) => {
+        this.locked = false
         let errMsg = typeof msg === 'string' ? msg : msg[0]
         let errArr = errMsg.split(' ')
         errMsg = errArr.length === 1 ? this.$t(`error_code.${errArr[0]}`) : this.$t(`error_code.${errArr[0]}`) + this.$t('public0.public260') + this.$t(`error_code.${errArr[1]}`)
@@ -505,10 +512,12 @@ export default {
     updateAds () {
       var formData = JSON.parse(JSON.stringify(this.formData))
       otcApi.updateAdvertisement(this.ad_id, formData, (msg) => {
+        this.locked = false
         Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
         this.params.newAdCount++
         this.$emit('removeDialog')
       }, (msg) => {
+        this.locked = false
         let errMsg = typeof msg === 'string' ? msg : msg[0]
         let errArr = errMsg.split(' ')
         errMsg = errArr.length === 1 ? this.$t(`error_code.${errArr[0]}`) : this.$t(`error_code.${errArr[0]}`) + this.$t('public0.public260') + this.$t(`error_code.${errArr[1]}`)
@@ -567,4 +576,6 @@ export default {
 .cont-item.button button.cancel:hover{color: #15c9ff;border-color: #15c9ff;}
 .cont-item.button button.comfirm{color: #fff;background-color: #11a8fe;}
 .cont-item.button button.comfirm:hover{background-color: #15c9ff;}
+.cont-item.button button.comfirm.disabled{background-color: #999;cursor:not-allowed;}
+.cont-item.button button.comfirm.disabled:hover{background-color: #999;}
 </style>
