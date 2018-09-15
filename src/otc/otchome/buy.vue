@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      locked: true,
+      locked: false,
       detailData: {},
       symbol_count: '',
       currency_count: '',
