@@ -17,7 +17,7 @@
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
-            <a href="/static/newton-pro-0912.apk" class="button" download="newton-pro-0912.apk">
+            <a href="/static/newton-pro-0915.apk" class="button" download="newton-pro-0915.apk">
                 <img width="20px" height="25px" src="../assets/images/download/android.png"/>
                 <span>Android</span>
             </a>
