@@ -9,8 +9,8 @@
             日全站交易量：
             <span style="margin-right:15px;">{{datas.length ? datas[0].btcTransactionAmount : 0}}BTC</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
-            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}ATN</span>
-            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}USDT</span>
+            <span style="margin-right:15px;">{{datas.length ? datas[0].atnTransactionAmount : 0}}ATN</span>
+            <span style="margin-right:15px;">{{datas.length ? datas[0].usdtTransactionAmount : 0}}USDT</span>
           </p>
         </Col>
         <Col span="7">
@@ -39,10 +39,10 @@
       <Table :columns="columns3" :data="data3"></Table>
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
-    <Card>
+    <!-- <Card>
       <p slot="title">风控情况</p>
       <Table :columns="columns4" :data="data4"></Table>
-    </Card>
+    </Card> -->
     <Card style="margin-top:10px;">
       <p slot="title">图表展示</p>
       <Form ref="formItem" :model="formItem" :label-width="80" inline>

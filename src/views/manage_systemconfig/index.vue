@@ -50,9 +50,11 @@
         <Card>
           <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
             <span style="height:32px;font-weight:normal;line-height:32px;">交易所手续费账户</span>
-            <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
-            <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
-            <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+            <span>
+              <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+            </span>
             <Button type="primary" style="float:right;" @click="addOrEditFeeAccountDialog">添加手续费账户</Button>
           </p>
           <Table :columns="accountsColumns" :data="accountsData" style="margin-top:10px;"></Table>
@@ -61,9 +63,11 @@
         <Card style="margin-top:16px;">
           <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
             <span style="height:32px;font-weight:normal;line-height:32px;">提币主地址设置</span>
-            <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
-            <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
-            <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+            <span>
+              <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+            </span>
             <Button type="primary" style="float:right;" @click="addOrEditWithdrawalAddressDialog">添加提币主地址</Button>
           </p>
           <Table :columns="coinPoolsColumns" :data="coinPoolsData" style="margin-top:10px;"></Table>

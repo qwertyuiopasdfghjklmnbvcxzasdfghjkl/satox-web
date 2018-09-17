@@ -15,6 +15,7 @@
 import util from '../../libs/util';
 import detail from './auditing_detail'
 import kycAPI from '../../api/kyc'
+import messageModel from './messageModel'
 export default {
   props: ['userId'],
   data () {
@@ -52,7 +53,20 @@ export default {
                           })
                         }
                     }
-                }, '查看详情并处理')
+                }, '查看详情并处理'),
+                h('i', {
+                    class: 'ivu-icon ivu-icon-volume-medium',
+                    style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', marginLeft:'10px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                    on: {
+                        click: () => {
+                            util.setDialog(messageModel, {
+                                userId: params.row.verifyUserID,
+                                username: params.row.account,
+                                type: 2
+                            });
+                        }
+                    }
+                })
             ]);
         }}
       ],

@@ -152,7 +152,7 @@ fund.getAdminCoinPool  = getAdminCoinPool
 
 // 主地址转冷钱包设置--手动转账
 const transfer = function (data, success, error) {
-  api.post(`api/bm/coinTask/transferTask/transfer`, data, (res) => {
+  api.post(`api/bm/coinTask/transferTask/ManagerTransfer`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {

@@ -21,6 +21,7 @@ import util from '../../libs/util';
 import check from './auditing_check'
 import detail from './auditing_detail'
 import kycAPI from '../../api/kyc'
+import messageModel from './messageModel'
 export default {
   data () {
     return {
@@ -68,21 +69,27 @@ export default {
                         }
                     }
                 }, '查看详情并处理'),
-                // h('i', {
-                //     class: 'ivu-icon ivu-icon-volume-medium',
-                //     style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
-                //     on: {
-                //         click: () => {
-                //             if (this.readOnly) {
-                //                 return
-                //             }
-                //             util.setDialog(messageModel, {
-                //                 userId: params.row.userId,
-                //                 username: params.row.username
-                //             });
-                //         }
-                //     }
-                // })
+                h('i', {
+                    class: 'ivu-icon ivu-icon-volume-medium',
+                    style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', marginLeft:'10px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                    on: {
+                        click: () => {
+                          // kycAPI.firstSendSystemMessage((res) => {
+                          //   this.$Message.success({content: '发送成功'})
+                          // }, (msg) => {
+                          //   this.$Message.error({content: msg})
+                          // })
+                            // if (this.readOnly) {
+                            //     return
+                            // }
+                            util.setDialog(messageModel, {
+                                userId: params.row.verifyUserID,
+                                username: params.row.account,
+                                type: 1
+                            });
+                        }
+                    }
+                })
             ]);
         }}
       ],
