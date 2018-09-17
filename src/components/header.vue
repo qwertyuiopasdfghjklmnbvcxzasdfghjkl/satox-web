@@ -211,18 +211,22 @@ export default {
       return false
     },
     noticeUrl () {
-      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+      if (this.getLang === 'zh-CN') {
         return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83`
-      } else {
+      } else if (this.getLang === 'cht'){
+        return `https://newtonexchange.zendesk.com/hc/zh-tw/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83 `
+      } else if (this.getLang === 'en'){
         return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000905872-Announcement`
-      }
+      } 
     },
     helperUrl () {
-      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+      if (this.getLang === 'zh-CN') {
         return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000871252`
-      } else {
+      } else if (this.getLang === 'cht') {
+        return `https://newtonexchange.zendesk.com/hc/zh-tw/categories/360000871252-%E5%B9%AB%E5%8A%A9%E4%B8%AD%E5%BF%83`
+      } else if (this.getLang === 'en'){
         return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000871252-Help-Center`
-      }
+      } 
     }
   },
   watch: {
