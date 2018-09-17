@@ -2,12 +2,9 @@
     <div class="updataWaletAddress">
         <Card>
             <p slot="title">修改地址</p>
-            <Row>
-                <Col span="2">
+            <Row style="margin-bottom: 20px;">
+                <Col span="5">
                     地址
-                </Col>
-                <Col span="12">
-                    {{this.item.address}}
                 </Col>
                 <Col span="10">
                     <Input v-model="address" ></Input>
@@ -28,7 +25,7 @@ export default {
     props: ['item'],
     data () {
         return {
-            address: ''
+            address: this.item.address
         }
     },
     methods: {
@@ -55,6 +52,5 @@ export default {
 }
 </script>
 <style>
-.updataWaletAddress{width: 800px;background: #fff;padding: 20px;}
+.updataWaletAddress{width: 500px;background: #fff;padding: 20px;}
 </style>
-

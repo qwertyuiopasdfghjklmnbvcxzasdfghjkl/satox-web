@@ -62,7 +62,7 @@
                   </Col>
                 </Row>
 
-                <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;" v-if="this.item.symbolType === 1">
+               <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;" v-if="this.item.symbolType !== 2">
                   <Col span="8">矿工费</Col>
                   <Col span="8">{{data1.minerFee || 0}}</Col>
                   <Col span="8">

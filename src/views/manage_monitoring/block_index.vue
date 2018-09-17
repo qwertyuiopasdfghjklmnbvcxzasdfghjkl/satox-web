@@ -20,6 +20,14 @@
             <Col span="2">
                 <Input v-model="userName" style="width:100px;"/>
             </Col>
+            <Col span="1">状态：</Col>
+             <Col span="2">
+                <select v-model="status" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
+                    <option value="">全部</option>
+                    <option value="1">等待</option>
+                    <option value="2">完成</option>
+                </select>
+            </Col>
         </Row>
         <Row style="margin-bottom: 20px;">
             <Col span="1">交易方向：</Col>
@@ -77,6 +85,7 @@ import util from '../../libs/util';
                 direction: '',
                 userName: '',
                 txId: '',
+                status: 1,
                 curPage: 1,
                 total: 0,
                 columns1: [
@@ -234,7 +243,7 @@ import util from '../../libs/util';
                     direction: this.direction || '',
                     userName: this.userName || '',
                     txId: this.txId || '',
-                    status: 1
+                    status: this.status
                 }, (res, total) => {
                     this.total = total
                     this.data1 = res

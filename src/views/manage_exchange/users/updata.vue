@@ -127,7 +127,7 @@
             </RadioGroup>
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs1('symbolType')">保存</Button>
+             <!-- <Button type="primary" @click="tabs1('symbolType')">保存</Button> -->
         </Col>
       </Row>
       <!-- <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">

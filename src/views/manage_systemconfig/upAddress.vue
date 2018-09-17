@@ -73,7 +73,7 @@
                     <Col span="6">
                         <RadioGroup v-model="enable" >
                             <Radio label="1">
-                                <span>是</span>
+                                <span>是{{enable}}</span>
                             </Radio>
                             <Radio label="0">
                                 <span>否</span>
@@ -85,7 +85,7 @@
                     </Col>
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-                    <Col span="6">主链类型</Col>
+                    <Col span="6">主链类型{{item.symbolType}}</Col>
                     <Col span="14">
                         <RadioGroup v-model="symbolType" >
                              <Radio label="2">
@@ -153,7 +153,6 @@ export default {
                 this.item[propName] = this[propName]
                 this.$Message.success({content: '修改成功'})
                 this.$emit('okCallback')
-                this.$emit('removeDialog')
             }, (msg) => {
                 this.$Message.error({content: msg})
             })
