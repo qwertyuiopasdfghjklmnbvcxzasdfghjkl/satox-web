@@ -38,7 +38,7 @@ export default {
                 },
                 {
                     title: '对象',
-                    key: 'userId'
+                    key: 'username'
                 },
                 {
                     title: '时间',
