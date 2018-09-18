@@ -75,7 +75,7 @@
                 <Col span="6">{{data2.withdrawLimitAmount}}BTC</Col>
                 <Col span="6">
                      <!--<Input v-model="withdrawLimitAmount"></Input> -->
-                    <InputNumber v-model="withdrawLimitAmount"></InputNumber>
+                    <InputNumber v-model="withdrawLimitAmount" max="10000"></InputNumber>
                 </Col>
                 <Col span="6">
                     <Button type="primary" style="float:right;" @click="tabs('withdrawLimitAmount', true)">保存</Button>
