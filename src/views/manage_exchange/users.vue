@@ -178,7 +178,8 @@ export default {
                         on: {
                             click: () => {
                                 util.setDialog(update_record, {
-                                   userId: params.row.userId
+                                   userId: params.row.userId,
+                                   username: params.row.username
                                 });
                             }
                         }
