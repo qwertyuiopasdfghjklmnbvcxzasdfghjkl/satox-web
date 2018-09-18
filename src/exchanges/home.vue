@@ -40,7 +40,7 @@
                 </ul>
               </div>
               <div class="market-container">
-                <market ref="kline" :iconUrl="iconUrl" :klineData="klineData" :currentSymbol="currentSymbol" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
+                <market ref="kline" :iconUrl="iconUrl" :klineData="klineData" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
               </div>
             </div>
             <div class="home-center-bottom">
@@ -95,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig']),
+    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig', 'getUsdRate']),
     baseSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
@@ -119,9 +119,20 @@ export default {
     },
     curPrice () {
       if (this.getUSDCNY && this.getLast24h.close) {
+        if (this.baseSymbol === 'USDT') {
+          if (this.getLang === 'en') {
+            return numUtils.BN(this.getLast24h.close).toFixed(2).toMoney()
+          }
+          return numUtils.div(this.getLast24h.close, this.getUsdRate).toFixed(2).toMoney()
+        } else if (this.baseSymbol === 'ATN') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(this.getLast24h.close, '0.1').toFixed(2).toMoney()
+          }
+          return numUtils.div(numUtils.mul(this.getLast24h.close, '0.1'), this.getUsdRate).toFixed(2).toMoney()
+        }
         let curMarketBtc = this.getBtcValues[this.baseSymbol]
         let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-        return numUtils.mul(curMarketPrice, this.getLast24h.close).toFixed(2).toMoney()
+        return numUtils.mul(this.getLast24h.close, curMarketPrice).toFixed(2).toMoney()
       } else {
         return '0.00'
       }
