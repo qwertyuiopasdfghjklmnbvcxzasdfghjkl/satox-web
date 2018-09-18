@@ -213,6 +213,15 @@ export default {
       this.allRecord()
   },
   methods: {
+    reshAll () {
+        this.getAssetsList()
+        this.getRecordList()
+        this.getWithdraw()
+        this.getRecharge()
+        this.getWithdrawAddrList()
+        this.getDistribute()
+        this.allRecord()
+    },
     switchStaus(state) {
         switch(state){
             case 1:

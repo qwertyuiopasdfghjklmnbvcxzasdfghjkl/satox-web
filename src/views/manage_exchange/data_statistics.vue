@@ -37,7 +37,7 @@
     <Card style="margin:10px 0;">
       <p slot="title">财务情况</p>
       <Table :columns="columns3" :data="data3"></Table>
-      <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+      <Page :current="curPage" :total="total" :page-size="pageSize1" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
     <!-- <Card>
       <p slot="title">风控情况</p>
@@ -105,6 +105,7 @@ export default {
       curPage1: 1,
       total1: 0,
       pageSize: 3,
+      pageSize1: 3,
       columns1: [
         {title: '市场', key: 'market'},
         {title: '最新价格', key: 'currentPrice'},
@@ -262,7 +263,7 @@ export default {
       myChart.setOption(option);
     },
     getDataList () {
-      currenyApi.findFinancialDataList({}, this.curPage, (res, total) => {
+      currenyApi.findFinancialDataList(this.pageSize1, this.curPage, {}, (res, total) => {
         this.total = total
         this.data3 = res
       })
