@@ -13,11 +13,11 @@
             </a>
         </template>
         <template v-if="!isWeiXi">
-            <a class="button mtb" href="/static/newton-pro-0915.ipa" download="newton-pro-0915">
+            <a class="button mtb" href="/static/newton-pro-0918.ipa" download="newton-pro-0918.ipa">
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
-            <a href="/static/newton-pro-0915.apk" class="button" download="newton-pro-0915.apk">
+            <a href="/static/newton-pro-0918.apk" class="button" download="newton-pro-0918.apk">
                 <img width="20px" height="25px" src="../assets/images/download/android.png"/>
                 <span>Android</span>
             </a>
