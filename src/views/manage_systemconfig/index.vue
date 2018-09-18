@@ -41,7 +41,7 @@
           </Col>
           <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);min-height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
             <CheckboxGroup v-model="data.$value"  @on-change="updataSystem(data)">
-              <Checkbox :label="da.symbol" v-for="da in dataSymbol" :key="data.id">{{da.symbol}}</Checkbox>
+              <Checkbox :label="`${da.symbol}-${da.symbolType}`" v-for="da in dataSymbol" :key="data.id">{{da.symbol}}</Checkbox>
             </CheckboxGroup>
           </Row>
         </Row>
@@ -271,7 +271,7 @@ export default {
     symbolMap () {
       let m = {}
       this.dataSymbol.forEach((item) => {
-        m[item.symbol] = item
+        m[item.symbol+'-'+item.symbolType] = item
       })
       return m
     }
@@ -319,9 +319,6 @@ export default {
           this.tempItem[d.code] = d
           if (d.code === 'otcCoinType') {
             d.$value = d.value.split(',')
-            d.$value.forEach((item, index) => {
-              d.$value[index] = item.substring(0, item.indexOf('-'))
-            })
           } else {
             d.$value = 0
           }
@@ -370,7 +367,7 @@ export default {
       } else {
         value.forEach((symbol) => {
           if (this.symbolMap[symbol]) {
-            nValues.push(`${symbol}-${this.symbolMap[symbol].symbolType}`)
+            nValues.push(symbol)
           }
         })
       }
