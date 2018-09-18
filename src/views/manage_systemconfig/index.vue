@@ -39,7 +39,7 @@
             <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'" style="width:80px;"></Input>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
           </Col>
-          <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
+          <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);min-height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
             <CheckboxGroup v-model="data.$value"  @on-change="updataSystem(data)">
               <Checkbox :label="da.symbol" v-for="da in dataSymbol" :key="data.id">{{da.symbol}}</Checkbox>
             </CheckboxGroup>
@@ -267,6 +267,15 @@ export default {
   components: {
     numberbox
   },
+  computed: {
+    symbolMap () {
+      let m = {}
+      this.dataSymbol.forEach((item) => {
+        m[item.symbol] = item
+      })
+      return m
+    }
+  },
   watch: {
     accountsPage () {
       this.fnFindAdminAccounts(this.accountsSymbolParam)
@@ -278,7 +287,7 @@ export default {
   created () {
     this.getfindSysParam()
     this.getdataSymbol()
-    // this.fnFindAdminAccounts()
+    this.fnFindAdminAccounts()
     this.fnFindAdminCoinPools()
     this.getfindCollectConfig()
   },
@@ -310,6 +319,9 @@ export default {
           this.tempItem[d.code] = d
           if (d.code === 'otcCoinType') {
             d.$value = d.value.split(',')
+            d.$value.forEach((item, index) => {
+              d.$value[index] = item.substring(0, item.indexOf('-'))
+            })
           } else {
             d.$value = 0
           }
@@ -351,11 +363,18 @@ export default {
     updataSystem (data) {
       let code = data.code;
       let value = data.$value
+      let nValues = []
       if (!value || (code === 'otcCoinType' && value.length === 0)) {
         this.$Message.error({content: '请输入内容'})
         return
+      } else {
+        value.forEach((symbol) => {
+          if (this.symbolMap[symbol]) {
+            nValues.push(`${symbol}-${this.symbolMap[symbol].symbolType}`)
+          }
+        })
       }
-      value = code === 'otcCoinType' ? value.join(',') : value
+      value = code === 'otcCoinType' ? nValues.join(',') : value
       system.saveSysParam({
         value: value,
         sysParamId: this.tempItem[code].sysParamId,

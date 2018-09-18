@@ -328,7 +328,7 @@ otc.findDataStatistic = findDataStatistic;
 
 // 数据统计--交易数据
 const findTransactionData = function (curPage, data, success, error) {
-    api.get(`api/bm/otcManage/findTransactionData/10/${curPage}`, data, (res) => {
+    api.get(`api/bm/otcManage/findTransactionData/100/${curPage}`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {
