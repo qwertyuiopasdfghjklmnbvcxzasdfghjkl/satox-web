@@ -56,9 +56,16 @@
         <FormItem prop="password" label="项目">
             <Select v-model="formItem.project" style="width:150px">
                 <Option value="1">在线用户数量</Option>
-                <Option value="2">上架广告数量</Option>
-                <Option value="3">正在交易订单数量</Option>
-                <Option value="4">当天完成订单数量</Option>
+                <Option value="2">全站交易量</Option>
+                <Option value="3">新注册用户数</Option>
+                <Option value="4">总用户数</Option>
+                <Option value="5">交易用户数</Option>
+                <Option value="6">登录用户</Option>
+                <Option value="7">异常预警数</Option>
+                <Option value="8">提现数量</Option>
+                <Option value="9">充值数量</Option>
+                <Option value="10">待审核提现笔数</Option>
+                <Option value="11">待审核提现数量</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="时间段">
@@ -185,20 +192,28 @@ export default {
         let data2 = []
         res.forEach((item) => {
           data1.push(item.createdAt)
-          if (this.formItem.project === '1') {
+           if (this.formItem.project === '1') {
             data2.push(item.onlineUserAmount)
           } else if (this.formItem.project === '2') {
-            data2.push(item.listAdvertisementAmount)
+            data2.push(item.dailyTransactionAmount)
           } else if (this.formItem.project === '3') {
-            data2.push(item.transcationingOrderAmount)
+            data2.push(item.newRegisterUserAmount)
           } else if (this.formItem.project === '4') {
-            data2.push(item.completedOrderAmount)
+            data2.push(item.allUserAmount)
           } else if (this.formItem.project === '5') {
-            data2.push(item.transactionSum)
+            data2.push(item.transactionUserAmount)
           } else if (this.formItem.project === '6') {
-            data2.push(item.waitHandleAppealAmount)
+            data2.push(item.loginUserAmount)
           } else if (this.formItem.project === '7') {
-            data2.push(item.abnormalWarningAmount )
+            data2.push(item.abnormalWarningAmount)
+          } else if (this.formItem.project === '8') {
+            data2.push(item.withdrawAmount)
+          } else if (this.formItem.project === '9') {
+            data2.push(item.rechargeAmount)
+          } else if (this.formItem.project === '10') {
+            data2.push(item.waitCheckWithdrawCount)
+          } else if (this.formItem.project === '11') {
+            data2.push(item.waitCheckWithdrawAmount)
           }
         })
         this.initCanvas(data1, data2);

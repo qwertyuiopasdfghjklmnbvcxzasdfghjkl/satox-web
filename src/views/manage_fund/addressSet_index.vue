@@ -154,7 +154,7 @@ export default {
             })
         },
         changePage1 (page) {
-            this.curPage = page,
+            this.curPage1 = page,
             this.getAdminCoinPool()
         },
     }
