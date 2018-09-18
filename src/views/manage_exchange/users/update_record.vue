@@ -27,7 +27,7 @@
 <script>
 import currenyApi from '../../../api/currency'
 export default {
-    props: ['userId'],
+    props: ['userId', 'username'],
     data () {
         return {
             domain: '',
