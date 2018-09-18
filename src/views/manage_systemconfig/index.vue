@@ -278,7 +278,7 @@ export default {
   created () {
     this.getfindSysParam()
     this.getdataSymbol()
-    this.fnFindAdminAccounts()
+    // this.fnFindAdminAccounts()
     this.fnFindAdminCoinPools()
     this.getfindCollectConfig()
   },

@@ -366,8 +366,8 @@ const findSymbolWithdrawFees = function (data, success, error) {
 curreny.findSymbolWithdrawFees = findSymbolWithdrawFees
 
 // 数据统计--分页查找财务情况信息
-const findFinancialDataList = function (data, curPage, success, error) {
-  api.get(`api/bm/bbManage/DataStatistic/findFinancialDataList/3/${curPage}`, data, (res) => {
+const findFinancialDataList = function (pageSize, curPage, data,success, error) {
+  api.get(`api/bm/bbManage/DataStatistic/findFinancialDataList/${pageSize}/${curPage}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
