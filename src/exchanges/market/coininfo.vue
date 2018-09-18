@@ -52,7 +52,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
+    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang', 'getBtcValues']),
     isRed () {
       return numUtils.BN(this.getLast24h.percent).lt(0)
     },
