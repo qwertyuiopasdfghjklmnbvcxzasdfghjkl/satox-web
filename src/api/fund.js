@@ -53,7 +53,7 @@ fund.findTransferConfig  = findTransferConfig
 
 // 查询转账记录
 const findTransactionRecords = function (curPage, success, error) {
-  api.get(`api/bm/coinTask/transactionRecords/findTransactionRecords/15/${curPage}`, (res) => {
+  api.get(`api/bm/coinTask/transactionRecords/findTransactionRecords/10/${curPage}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
