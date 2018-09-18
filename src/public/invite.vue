@@ -25,40 +25,40 @@
                                     <img src="../assets/images/invite/M1-icon.png" />
                                     <Span>M1</Span>
                                 </div>
-                                <div>{{getUserInfo.m1}}</div>
+                                <div>{{getUserInfo.totalM1}}</div>
                             </div>
                             <div class="invite_caption2">
                                 <div class="m2">
                                     <img src="../assets/images/invite/M2-ICON.png" />
                                     <Span>M2</Span>
                                 </div>
-                                <div>{{getUserInfo.m2}}</div>
+                                <div>{{getUserInfo.totalM2}}</div>
                             </div>
                             <div class="invite_caption3">
                                 <div class="m3">
                                     <img src="../assets/images/invite/m3-icon.png" />
                                     <Span>M3</Span>
                                 </div>
-                                <div>{{getUserInfo.m3}}</div>
+                                <div>{{getUserInfo.totalM3}}</div>
                             </div>
                             <div class="invite_caption4">
                                 <div>{{$t('referral.total')}}<!--合计--></div>
-                                <div>{{(getUserInfo.m1) + (getUserInfo.m2) + (getUserInfo.m3)}}</div>
+                                <div>{{(getUserInfo.totalM1) + (getUserInfo.totalM2) + (getUserInfo.totalM3)}}</div>
                             </div>
                         </div>
                         <div class="invite_list">
                             <div class="invite_caption12">{{$t('referral.commission_value')}}<!--我的邀请奖励--></div>
                             <div class="invite_caption1">
-                                <div>{{(getUserInfo.m1) * 15}}&nbsp;ATN</div>
-                                <div>{{(getUserInfo.m1) * 3}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
+                                <div>{{(getUserInfo.totalM1) * 15}}&nbsp;ATN</div>
+                                <div>{{(getUserInfo.totalM1) * 3}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
                             </div>
                             <div class="invite_caption2">
-                                <div>{{(getUserInfo.m2) * 10}}&nbsp;ATN</div>
-                                <div>{{(getUserInfo.m2) * 2}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
+                                <div>{{(getUserInfo.totalM2) * 10}}&nbsp;ATN</div>
+                                <div>{{(getUserInfo.totalM2) * 2}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
                             </div>
                             <div class="invite_caption3">
-                                <div>{{(getUserInfo.m3) * 5}}&nbsp;ATN</div>
-                                <div>{{(getUserInfo.m3) * 1}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
+                                <div>{{(getUserInfo.totalM3) * 5}}&nbsp;ATN</div>
+                                <div>{{(getUserInfo.totalM3) * 1}}&nbsp;{{$t('referral.gift_coupon')}}<!--奖券--></div>
                             </div>
                             <div class="invite_caption4">
                                 <div>{{this.reward}}&nbsp;ATN</div>
@@ -216,10 +216,10 @@ export default {
   computed: {
     ...mapGetters(['isLogin', 'getApiToken', 'getLang', 'getUserInfo']),
     reward () {
-      return (this.getUserInfo.m1) * 15 + (this.getUserInfo.m2) * 10 + (this.getUserInfo.m3) * 5
+      return (this.getUserInfo.totalM1) * 15 + (this.getUserInfo.totalM2) * 10 + (this.getUserInfo.totalM3) * 5
     },
     reward1 () {
-      return (this.getUserInfo.m1) * 3 + (this.getUserInfo.m2) * 2 + (this.getUserInfo.m3) * 1
+      return (this.getUserInfo.totalM1) * 3 + (this.getUserInfo.totalM2) * 2 + (this.getUserInfo.totalM3) * 1
     },
     aaa () {
       if (this.getUserInfo.myInvitationUrl === null) {
