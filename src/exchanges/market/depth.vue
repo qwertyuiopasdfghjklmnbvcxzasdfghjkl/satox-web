@@ -86,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getLast24h', 'getUSDCNY', 'getEntrustPrices', 'getCoinSign', 'getNetworkSignal', 'getUsdRate']),
+    ...mapGetters(['getLast24h', 'getUSDCNY', 'getEntrustPrices', 'getCoinSign', 'getNetworkSignal', 'getUsdRate', 'getBtcValues']),
     fromCoin () {
       return this.currentSymbol
     },
