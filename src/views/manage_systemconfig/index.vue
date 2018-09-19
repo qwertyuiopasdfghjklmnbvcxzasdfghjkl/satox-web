@@ -15,12 +15,12 @@
           <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value}}次</Col>
           <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value2}}分钟</Col>
           <Col span="12" v-if="data.code === 'loginLockCount'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;"/>
-            <numberbox ref="price" type="text" v-model="data.$value2" style="width:80px;border:1px solid #dddee1;"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
+            <Input ref="price" type="text" v-model="data.$value2" style="width:80px;"/>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">修改</Button>
           </Col>
           <Col span="12" v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !== 'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
           </Col>
         </Row>
@@ -35,7 +35,7 @@
           <Col span="6">{{data.codeDesc}}</Col>
           <Col span="6" v-if="data.code !== 'otcCoinType'">{{data.value}}</Col>
           <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency' && data.code !== 'adCountLimit' && data.code !== 'priceBasePlatform'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;" v-if="data.code !== 'priceBasePlatform'"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;" v-if="data.code !== 'priceBasePlatform'"/>
             <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'" style="width:80px;"></Input>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
           </Col>
@@ -320,9 +320,9 @@ export default {
           if (d.code === 'otcCoinType') {
             d.$value = d.value.split(',')
           } else {
-            d.$value = 0
+            d.$value = ''
           }
-          d.$valu2 = 0
+          d.$valu2 = ''
         })
         this.exchangeItem = res
       }, (msg) => {
@@ -365,11 +365,14 @@ export default {
         this.$Message.error({content: '请输入内容'})
         return
       } else {
-        value.forEach((symbol) => {
-          if (this.symbolMap[symbol]) {
-            nValues.push(symbol)
-          }
-        })
+        if (code === 'otcCoinType') {
+          value.forEach((symbol) => {
+            if (this.symbolMap[symbol]) {
+              nValues.push(symbol)
+            }
+          })
+        }
+        
       }
       value = code === 'otcCoinType' ? nValues.join(',') : value
       system.saveSysParam({

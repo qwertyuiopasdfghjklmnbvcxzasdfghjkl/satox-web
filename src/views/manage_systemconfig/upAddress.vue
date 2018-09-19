@@ -67,13 +67,13 @@
                     </Col>
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-                    <Col span="6">是否可用{{item.enable}}</Col>
+                    <Col span="6">是否可用</Col>
                     <Col span="6"> 
                     </Col>
                     <Col span="6">
                         <RadioGroup v-model="enable" >
                             <Radio label="1">
-                                <span>是{{enable}}</span>
+                                <span>是</span>
                             </Radio>
                             <Radio label="0">
                                 <span>否</span>
@@ -85,7 +85,7 @@
                     </Col>
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-                    <Col span="6">主链类型{{item.symbolType}}</Col>
+                    <Col span="6">主链类型</Col>
                     <Col span="14">
                         <RadioGroup v-model="symbolType" >
                              <Radio label="2">
