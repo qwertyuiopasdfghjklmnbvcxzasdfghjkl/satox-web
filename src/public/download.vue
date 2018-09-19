@@ -13,7 +13,7 @@
             </a>
         </template>
         <template v-if="!isWeiXi">
-            <a class="button mtb" href="/static/newton-pro-0918.ipa" download="newton-pro-0918.ipa">
+            <a class="button mtb" href="https://www.pgyer.com/nCfg">
                 <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
                 <span>iPhone</span>
             </a>
