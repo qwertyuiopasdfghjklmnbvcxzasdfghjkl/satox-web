@@ -66,17 +66,22 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.passwordOld = utils.encryptPwd(formData.passwordOld)
-          formData.password = utils.encryptPwd(formData.password)
-          formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
           this.locked = true
-          userApi.changePwd(formData, (msg) => {
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.passwordOld = utils.encryptPwd(rsaPublicKey, formData.passwordOld)
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.changePwd(formData, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'success', message: this.$t('error_code.CHANGE_PASSWORD_SUCCESS')})
+              this.$emit('removeDialog')
+            }, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+            })
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'success', message: this.$t('error_code.CHANGE_PASSWORD_SUCCESS')})
-            this.$emit('removeDialog')
-          }, (msg) => {
-            this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
           })
         })
       })
@@ -95,7 +100,7 @@ export default {
 .icon-close:hover{color: #11a8fe;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .input{background:#100E0E;border-color:#54616c;}
+.form /deep/ .input{background-color:#100E0E;border-color:#54616c;}
 .captcha /deep/ em.errorinfo{white-space:nowrap!important;}
 .captcha,.bottom{display:flex;justify-content:space-between;width:272px;}
 .code-image{width:100px;height:32px;cursor:pointer;}

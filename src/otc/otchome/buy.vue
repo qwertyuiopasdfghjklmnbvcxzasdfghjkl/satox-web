@@ -37,7 +37,7 @@
       </p>
       <div class="btn">
         <span class="cancel" @click="cancel">{{$t('otc_legal.otc_legal_cancel')}}<!--取消--></span>
-        <span class="cimfir" @click="createOrder">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></span>
+        <span class="cimfir" :class="{disabled:locked}" @click="createOrder">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></span>
       </div>
     </div>
   </div>
@@ -58,6 +58,7 @@ export default {
   },
   data () {
     return {
+      locked: false,
       detailData: {},
       symbol_count: '',
       currency_count: '',
@@ -183,6 +184,10 @@ export default {
             matchPayType: this.matchPayType
           },
           okCallback: () => {
+            if (this.locked) {
+              return
+            }
+            this.locked = true
             otcApi.createOrders({
               ad_id: this.ad_id,
               trade_type: this.params.ad_type === 1 ? 2 : 1,
@@ -191,11 +196,13 @@ export default {
               symbol_count: this.symbol_count,
               currency_count: this.currency_count
             }, (id, msg) => {
+              this.locked = false
               this.params.newOrderCount++
               this.$emit('okCallback', id)
               Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
               this.$emit('removeDialog')
             }, (msg) => {
+              this.locked = false
               let errMsg = typeof msg === 'string' ? msg : msg[0]
               Vue.$confirmDialog({showCancel: false, content: this.$t(`error_code.${errMsg}`)})
             })
@@ -232,6 +239,8 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {appearance:no
 .cancel:hover{color: #15c9ff;border-color: #15c9ff;}
 .cimfir{color: #fff;background-color: #11a8fe;}
 .cimfir:hover{background-color: #15c9ff;}
+.cimfir.disabled{background-color: #999;cursor:not-allowed;}
+.cimfir.disabled:hover{background-color: #999;}
 .msg{height: 30px;color: #e53f3f;}
 </style>
 

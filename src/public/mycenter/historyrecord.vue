@@ -20,7 +20,7 @@
                     <span class="currency">{{item.symbol}}</span>
                     <span class="quantity">{{toFixed(item.amount)}}</span>
                     <span class="address" :title="item.fromAddress">{{item.fromAddress}}</span>
-                    <span class="progress">{{Math.min(item.confirmation, item.blockConfirm)}}/{{item.blockConfirm}}</span>
+                    <span class="progress">{{Math.min(item.confirmation < 0 ? 1 : item.confirmation, item.blockConfirm)}}/{{item.blockConfirm}}</span>
                     <span class="status" :class="getRechargeState(item.status)['className']">{{getRechargeState(item.status)['value']}}</span>
                     <span class="time">{{item.competedAt ? new Date(Number(item.competedAt)).format() : '--'}}</span>
                 </li>

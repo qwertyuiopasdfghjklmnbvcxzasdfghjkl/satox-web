@@ -4,7 +4,7 @@
         <div class="header-center" :class="{'full-screen': $route.name === 'exchange_index2' || $route.name === 'exchange_index'}">
             <div class="center-left">
                 <a href="javascript:;" @click="goHome"></a>
-                <ul>
+                <ul class="maxWidth">
                     <li>
                       <a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">
                         {{$t('otc_public.otc_navigation_trade')}}<!--OTC-->
@@ -16,7 +16,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="https://newtonexchange.zendesk.com/hc/en-us/sections/360002051572-Announcements" target="_blank">
+                      <a :href="noticeUrl" target="_blank">
                         {{$t('public.navigation_news')}}<!--公告中心-->
                       </a>
                     </li>
@@ -25,10 +25,20 @@
                         {{$t('public.navigation_support')}}<!--帮助中心-->
                       </a>
                     </li>
+                    <li>
+                      <router-link :to="{name:'download'}">
+                        {{$t('public0.public212')}}<!--APP下载-->
+                      </router-link>
+                    </li>
                 </ul>
             </div>
             <div class="center-right">
-                <ul>
+                <ul class="minWidth">
+                  <li>
+                    <a class="icon-market-list1" @click="showMinMenu=!showMinMenu"></a>
+                  </li>
+                </ul>
+                <ul class="maxWidth">
                     <li class="translations" @mouseover="showLang=true" @mouseout="showLang=false">
                         <a :class="{unfold: showLang}" href="javascript:;">
                           {{getCurLang.name}}<i class="icon-arrow-down"></i>
@@ -100,6 +110,51 @@
             </div>
         </div>
         </div>
+        <ul class="minWidthList" :class="{show:showMinMenu}" v-show="showMinMenu" @click="showMinMenu=false">
+          <li>
+            <a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">
+              {{$t('otc_public.otc_navigation_trade')}}<!--OTC-->
+            </a>
+          </li>
+          <li>
+            <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
+              {{$t('public.navigation_exchange')}}<!--币币交易-->
+            </a>
+          </li>
+          <li>
+            <a :href="noticeUrl" target="_blank">
+              {{$t('public.navigation_news')}}<!--公告中心-->
+            </a>
+          </li>
+          <li>
+            <a :href="helperUrl" target="_blank">
+              {{$t('public.navigation_support')}}<!--帮助中心-->
+            </a>
+          </li>
+          <li>
+            <router-link :to="{name:'download'}">
+              {{$t('public0.public212')}}<!--APP下载-->
+            </router-link>
+          </li>
+          <li v-if="!isLogin">
+            <a href="javascript:;" @click="registerDialog">
+              {{$t('public.navigation_register')}}<!--注册-->
+            </a>
+          </li>
+          <li v-if="!isLogin">
+            <a href="javascript:;" @click="loginDialog">
+              {{$t('public.navigation_login')}}<!--登录-->
+            </a>
+          </li>
+          <li v-if="isLogin">
+            <a @click="reloadPage('mycenter')">{{username}}</a>
+          </li>
+          <li v-if="isLogin">
+            <a href="javascript:;" @click="loginOut">
+              {{$t('public.navigation_logout')}}<!--退出-->
+            </a>
+          </li>
+        </ul>
     </div>
 </template>
 
@@ -112,6 +167,7 @@ import utils from '@/assets/js/utils'
 export default {
   data () {
     return {
+      showMinMenu: false,
       showLang: false,
       messageList: [],
       unReadLength: 0,
@@ -154,10 +210,21 @@ export default {
       }
       return false
     },
+    noticeUrl () {
+      if (this.getLang === 'zh-CN') {
+        return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83`
+      } else if (this.getLang === 'cht') {
+        return `https://newtonexchange.zendesk.com/hc/zh-tw/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83 `
+      } else if (this.getLang === 'en') {
+        return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000905872-Announcement`
+      }
+    },
     helperUrl () {
-      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+      if (this.getLang === 'zh-CN') {
         return `https://newtonexchange.zendesk.com/hc/zh-cn/categories/360000871252`
-      } else {
+      } else if (this.getLang === 'cht') {
+        return `https://newtonexchange.zendesk.com/hc/zh-tw/categories/360000871252-%E5%B9%AB%E5%8A%A9%E4%B8%AD%E5%BF%83`
+      } else if (this.getLang === 'en') {
         return `https://newtonexchange.zendesk.com/hc/en-us/categories/360000871252-Help-Center`
       }
     }
@@ -367,9 +434,25 @@ export default {
   height: 20px;padding-left: 0; padding-right: 0;margin-top: 2px;line-height: 20px;font-size: 20px;}
 .header-center .center-right ul li.message > a.unfold{color: #FFDE00;}
 .header-center .center-right ul li.message > a em{position: absolute;top: -5px;left: 11px;min-width: 6px;height: 12px;padding-left: 3px;padding-right: 3px;line-height: 10px;font-size: 12px;color: #fff;background-color: #e2261c;border-radius: 5px;}
+.header-center .center-right > ul.minWidth{display:none;}
+.header .minWidthList{position:absolute;z-index:1000;left:-100%;top:60px;width:100%;background:#222121;display:none;flex-direction:column;height:fit-content;transition:0.3s;}
+.header .minWidthList li{display:flex;}
+.header .minWidthList li a{display:flex;flex:1;height:24px;line-height:24px;cursor:pointer;padding:0 10px;}
 
-@media screen and (max-width: 1600px) and (max-height: 900px) {
+@media screen and (max-width: 1600px) {
     .header,.header-center{height:50px;}
     .header-center .center-right ul li.translations .lang-item{height:30px;line-height:30px;}
+}
+
+@media screen and (max-width: 1199px) {
+  .header-center{min-width:100%!important;width:100%;}
+  .header-center .center-left > a{background-size:70%;}
+  .header-center .center-left > ul.maxWidth,
+  .header-center .center-right > ul.maxWidth{display:none;}
+  .header-center .center-right > ul.minWidth{height:40px;display:flex;}
+  .header-center .center-right > ul.minWidth > li{height:40px;line-height:40px;}
+  .header-center .center-right > ul.minWidth .icon-market-list1{font-size:40px;}
+  .header .minWidthList{top:50px;}
+  .header .minWidthList.show{display:flex;left:0px;}
 }
 </style>

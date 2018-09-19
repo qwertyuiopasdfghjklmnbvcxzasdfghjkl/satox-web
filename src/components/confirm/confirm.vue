@@ -133,10 +133,10 @@ export default {
 </script>
 
 <style scoped>
-.dialog{display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
+.dialog{display:flex;flex-flow:column;background-color:#222121;}
 .top{width:100%;height:30px;position:relative;background-color:#333232;justify-content:center;align-items:center;display:flex;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;padding:30px;}
-.content{color:#becbe8;font-size:16px;}
+.content{color:#becbe8;font-size:16px;word-wrap:break-word;word-break:normal;}
 .buttons{margin-top:20px;display:flex;align-items:center;}
 .buttons-center{align-self:center;}
 .buttons-right{align-self:flex-end;}

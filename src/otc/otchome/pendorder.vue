@@ -371,7 +371,7 @@ export default {
 }
 </script>
 <style scoped>
-.pendorder{position: relative;}
+.pendorder{position: relative;display:flex;flex-direction:column;flex:1;}
 .pendorder-title{display: flex;justify-content: space-between;align-items: center;height: 50px;padding-left: 16px;padding-right: 16px;margin-bottom: 8px;background-color: ##222121;}
 .pendorder-title span{font-size: 12px;color: #aeb7d0;}
 .pendorder-title span.quantity,
@@ -403,7 +403,7 @@ export default {
 .notice-dialog-cont p a{color: #11a8fe;text-decoration: underline;}
 .notice-dialog-cont p a:hover{color: #15c9ff;}
 
-.list{height: 540px;background-color: #222121;}
+.list{min-height: 540px;background-color: #222121;flex:1;}
 .list li{display: flex;}
 .list-title{align-items: center;height: 24px;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #404b69;}
 .list-title span{font-size: 12px;color: #8b94a9;}

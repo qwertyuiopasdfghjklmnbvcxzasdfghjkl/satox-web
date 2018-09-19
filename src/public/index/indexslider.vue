@@ -10,6 +10,7 @@
 
 <script>
   import banner01 from './banner01'
+  import banner03 from './banner03'
   import slider from 'vue-concise-slider'// 引入slider组件
   export default {
     data () {
@@ -17,6 +18,9 @@
         pages: [
           {
             component: banner01
+          },
+          {
+            component: banner03
           }
         ],
         // 滑动配置[obj]

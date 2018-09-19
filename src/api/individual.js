@@ -3,17 +3,18 @@
  */
 import api from '@/api'
 
+let domain = ''
 let individual = {}
 
 // 登录之后添加一条登录记录
 const addLoginHistory = function () {
-  api.get(`api/v2/individual/addRecentLoginRecord`)
+  api.get(`${domain}api/v2/individual/addRecentLoginRecord`)
 }
 individual.addLoginHistory = addLoginHistory
 
 // 获取最近登录记录
 const getLoginHistory = function (success, error) {
-  api.get(`api/v2/individual/userRecentlyLogin`, (res) => {
+  api.get(`${domain}api/v2/individual/userRecentlyLogin`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -25,7 +26,7 @@ individual.getLoginHistory = getLoginHistory
 
 // 生成谷歌秘钥
 const createGoogleKey = function (success, error) {
-  api.get(`api/v2/individual/googleAuth`, (res) => {
+  api.get(`${domain}api/v2/individual/googleAuth`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -37,7 +38,7 @@ individual.createGoogleKey = createGoogleKey
 
 // 绑定谷歌验证
 const bindGoogleAuth = function (data, success, error) {
-  api.post(`api/v2/individual/binding`, data, (res) => {
+  api.post(`${domain}api/v2/individual/binding`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -54,7 +55,7 @@ individual.bindGoogleAuth = bindGoogleAuth
  * @param {*} error 失败回调函数
  */
 const loginGoogleAuth = function (data, success, error) {
-  api.post(`api/v2/individual/loginVerify`, data, (res) => {
+  api.post(`${domain}api/v2/individual/loginVerify`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -71,7 +72,7 @@ individual.loginGoogleAuth = loginGoogleAuth
  * @param {*} error 失败回调函数
  */
 const loginTwo = function (data, success, error) {
-  api.post(`api/v2/individual/loginTwo`, data, (res) => {
+  api.post(`${domain}api/v2/individual/loginTwo`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.api_token)
     } else {
@@ -88,7 +89,7 @@ individual.loginTwo = loginTwo
  * @param {*} error 失败回调函数
  */
 const loginMobileVerify = function (data, success, error) {
-  api.post(`api/v2/individual/loginMobileVerify`, data, (res) => {
+  api.post(`${domain}api/v2/individual/loginMobileVerify`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.api_token)
     } else {
@@ -100,7 +101,7 @@ individual.loginMobileVerify = loginMobileVerify
 
 // 解除谷歌验证
 const unbindGoogleAuth = function (data, success, error) {
-  api.post(`api/v2/individual/unbind`, data, (res) => {
+  api.post(`${domain}api/v2/individual/unbind`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -112,7 +113,7 @@ individual.unbindGoogleAuth = unbindGoogleAuth
 
 // 获取分发记录
 const getDistributeHistory = function (data, success, error) {
-  api.post(`api/v2/account/showDistribution`, data, (res) => {
+  api.post(`${domain}api/v2/account/showDistribution`, data, (res) => {
     if (res.rst === 1) {
       success && success(res)
     } else {
@@ -124,7 +125,7 @@ individual.getDistributeHistory = getDistributeHistory
 
 // 提交身份认证信息
 const submitIdentityInfo = function (data, success, error) {
-  api.postForm(`api/v2/individual/UpVerify`, data, (res) => {
+  api.postForm(`${domain}api/v2/individual/UpVerify`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -136,7 +137,7 @@ individual.submitIdentityInfo = submitIdentityInfo
 
 // 获取国家区域信息
 const getAreas = function (success, error) {
-  api.get(`api/v2/individual/country`, (res) => {
+  api.get(`${domain}api/v2/individual/country`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -148,7 +149,7 @@ individual.getAreas = getAreas
 
 // 获取用户状态
 const getUserState = function (success, error) {
-  api.get(`api/v2/individual/user/individualState`, (res) => {
+  api.get(`${domain}api/v2/individual/user/individualState`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -160,7 +161,7 @@ individual.getUserState = getUserState
 
 // 使用NEWTON支付交易手续费
 const switchNewtonChargeState = function (success, error) {
-  api.get(`api/v2/individual/coinState`, (res) => {
+  api.get(`${domain}api/v2/individual/coinState`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -172,7 +173,7 @@ individual.switchNewtonChargeState = switchNewtonChargeState
 
 // 编辑昵称
 const editNickname = function (data, success, error) {
-  api.post(`api/v2/individual/editName`, data, (res) => {
+  api.post(`${domain}api/v2/individual/editName`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -189,7 +190,7 @@ individual.editNickname = editNickname
  * @param {*} error 失败回调函数
  */
 const getMessages = function (data, success, error) {
-  api.post(`api/v2/individual/msg`, data, (res) => {
+  api.post(`${domain}api/v2/individual/msg`, data, (res) => {
     if (res.rst === 1) {
       success && success(res)
     } else {
@@ -206,7 +207,7 @@ individual.getMessages = getMessages
  * @param {*} error 失败回调函数
  */
 const markItemRead = function (data, success, error) {
-  api.post(`api/v2/individual/readItemMsg`, data, (res) => {
+  api.post(`${domain}api/v2/individual/readItemMsg`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -218,7 +219,7 @@ individual.markItemRead = markItemRead
 
 // 标记所有消息为已读
 const markAllRead = function (success, error) {
-  api.get(`api/v2/individual/readAllMsg`, (res) => {
+  api.get(`${domain}api/v2/individual/readAllMsg`, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -230,7 +231,7 @@ individual.markAllRead = markAllRead
 
 // 上传头像
 const uploadHeader = function (data, success, error) {
-  api.postForm(`api/v2/individual/upload/header`, data, (res) => {
+  api.postForm(`${domain}api/v2/individual/upload/header`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -242,7 +243,7 @@ individual.uploadHeader = uploadHeader
 
 // 下载自己头像
 const downloadHeader = function (success, error) {
-  api.get(`api/v2/individual/download/header`, (res) => {
+  api.get(`${domain}api/v2/individual/download/header`, (res) => {
     if (res.rst === 1) {
       success && success(`${res.url ? res.url + '?' + Date.now() : ''}`)
     } else {
@@ -254,7 +255,7 @@ individual.downloadHeader = downloadHeader
 
 // 下载别人头像
 const downloadHeaderOther = function (id, success, error) {
-  api.get(`api/v2/individual/download/header?user_id=${id}`, (res) => {
+  api.get(`${domain}api/v2/individual/download/header?user_id=${id}`, (res) => {
     if (res.rst === 1) {
       success && success(`${res.url ? res.url + '?' + Date.now() : ''}`)
     } else {
@@ -266,7 +267,7 @@ individual.downloadHeaderOther = downloadHeaderOther
 
 // 绑定手机号
 const bindMobile = function (data, success, error) {
-  api.post(`api/v2/individual/bindMobile`, data, (res) => {
+  api.post(`${domain}api/v2/individual/bindMobile`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -278,7 +279,7 @@ individual.bindMobile = bindMobile
 
 // 解除手机号
 const unbindMobile = function (data, success, error) {
-  api.post(`api/v2/individual/unbindMobile`, data, (res) => {
+  api.post(`${domain}api/v2/individual/unbindMobile`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -290,7 +291,7 @@ individual.unbindMobile = unbindMobile
 
 // 发送授权短信验证码（6位）
 const sendAuthSMSCode = function (data, success, error) {
-  api.post(`api/v2/individual/sendAuthSms`, data, (res) => {
+  api.post(`${domain}api/v2/individual/sendAuthSms`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {
@@ -299,5 +300,17 @@ const sendAuthSMSCode = function (data, success, error) {
   }, error)
 }
 individual.sendAuthSMSCode = sendAuthSMSCode
+
+// 邀请
+const invitedAwardRank = function (success, error) {
+  api.get(`${domain}api/v2/individual/invitedAwardRank`, (res) => {
+    if (res.rst === 1) {
+      success && success(res)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+individual.invitedAwardRank = invitedAwardRank
 
 export default individual

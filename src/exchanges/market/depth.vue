@@ -86,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getLast24h', 'getUSDCNY', 'getEntrustPrices', 'getCoinSign', 'getNetworkSignal']),
+    ...mapGetters(['getLast24h', 'getUSDCNY', 'getEntrustPrices', 'getCoinSign', 'getNetworkSignal', 'getUsdRate', 'getBtcValues', 'getLang']),
     fromCoin () {
       return this.currentSymbol
     },
@@ -95,7 +95,20 @@ export default {
     },
     curPrice () {
       if (this.getUSDCNY && this.getLast24h.close) {
-        return numUtils.mul(this.getUSDCNY, this.getLast24h.close).toFixed(2).toMoney()
+        if (this.baseSymbol === 'USDT') {
+          if (this.getLang === 'en') {
+            return numUtils.BN(this.getLast24h.close).toFixed(2).toMoney()
+          }
+          return numUtils.div(this.getLast24h.close, this.getUsdRate).toFixed(2).toMoney()
+        } else if (this.baseSymbol === 'ATN') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(this.getLast24h.close, '0.1').toFixed(2).toMoney()
+          }
+          return numUtils.div(numUtils.mul(this.getLast24h.close, '0.1'), this.getUsdRate).toFixed(2).toMoney()
+        }
+        let curMarketBtc = this.getBtcValues[this.baseSymbol]
+        let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
+        return numUtils.mul(this.getLast24h.close, curMarketPrice).toFixed(2).toMoney()
       } else {
         return '0.00'
       }

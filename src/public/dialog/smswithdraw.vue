@@ -88,6 +88,7 @@ export default {
       }
       this.disabled = true
       myApi.sendAuthSMSCode({
+        countryCode: this.getUserInfo.countryCode,
         phoneNumber: this.getUserInfo.mobile
       }, (msg) => {
         let timeOut = () => {
@@ -118,13 +119,13 @@ export default {
 .icon-close:hover{color: #11a8fe;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .input{background:#100E0E;border-color:#54616c;}
+.form /deep/ .input{background-color:#100E0E;border-color:#54616c;}
 .smsCode{position: relative;}
 .smsCode /deep/ input{width:120px!important;}
 .smsCode /deep/ .button{position:absolute;top:20px;right:0;}
 .smsCode /deep/ .disabled{background:#999;cursor:not-allowed;}
-.buttons{display:flex;align-items:center;justify-content:space-between;}
-.buttons input{width:100px!important;}
+.buttons{display:flex;justify-content:space-between;align-items:center;width:272px;}
+.buttons input{width:100px !important;}
 .buttons input:first-child{margin-right:20px;}
 .buttons input:last-child{border:1px solid #11a8fe;color:#11a8fe;;background:transparent;}
 .buttons input:last-child:hover{border-color:#15c9ff;color:#15c9ff;}

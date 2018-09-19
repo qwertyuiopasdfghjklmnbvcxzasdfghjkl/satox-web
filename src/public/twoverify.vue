@@ -47,6 +47,7 @@ export default {
   data () {
     return {
       locked: false,
+      countryCode: '+86',
       formData: {
         verifyType: 0,
         username: '',
@@ -124,6 +125,16 @@ export default {
         this.type = type
       }
     }
+    let countryCode = this.$route.params.countryCode
+    if (countryCode) {
+      this.countryCode = countryCode
+      window.localStorage.setItem('$twoverify_countryCode', countryCode)
+    } else {
+      countryCode = window.localStorage.getItem('$twoverify_countryCode')
+      if (countryCode) {
+        this.countryCode = countryCode
+      }
+    }
   },
   methods: {
     ...mapActions(['setApiToken', 'setUserInfo']),
@@ -138,7 +149,7 @@ export default {
         let m = Number(this.formData.verifyType) === 0 ? 'loginMobileVerify' : 'loginTwo'
         let formData = Number(this.formData.verifyType) === 0 ? {
           smsCode: this.formData.verifyCode,
-          username: this.formData.username
+          username: this.formData.mobile
         } : {
           verifyCode: this.formData.verifyCode,
           username: this.formData.username
@@ -178,6 +189,7 @@ export default {
       }
       this.disabled = true
       myApi.sendAuthSMSCode({
+        countryCode: this.countryCode,
         phoneNumber: this.formData.mobile
       }, (msg) => {
         let timeOut = () => {

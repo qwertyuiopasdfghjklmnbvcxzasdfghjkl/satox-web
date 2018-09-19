@@ -14,6 +14,8 @@ import mycenter from '@/public/mycenter'
 import Activation from '@/public/email/activation'
 import Activationsuccess from '@/public/email/activationsuccess'
 import maintenance from '@/public/maintenance'
+import Invite from '@/public/invite'
+import Download from '@/public/download'
 Vue.use(Router)
 
 export default new Router({
@@ -22,6 +24,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Index
+    },
+    {
+      path: '/invite',
+      name: 'invite',
+      component: Invite
     },
     {
       path: '/login',
@@ -93,6 +100,11 @@ export default new Router({
       path: '/maintenance',
       name: 'maintenance',
       component: maintenance
+    },
+    {
+      path: '/download',
+      name: 'download',
+      component: Download
     },
     {
       path: '*',

@@ -57,7 +57,7 @@
                     </div>
                     <div class="unbind" v-if="showUnbindGoogleForm">
                         <div class="unbind-form">
-                            <p><span>{{$t('public0.public41')}}<!--解除谷歌二次验证--></span></p>
+                            <p><span>{{$t('account.user_unbind_google_authentication')}}<!--解除谷歌验证--></span></p>
                             <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
                             <p>
                                 <input :class="{error: errors.has('password')}" type="password" v-model="unbindGoogleFormData.password" v-validate="'required'" data-vv-name="password"/>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="google-content-right">
                     <input type="button" v-if="googleState === 0" :value="$t('account.user_center_google_auth')" @click="bindGoogleAuth"/><!--绑定二次验证-->
-                    <input type="button" v-if="showUnbindGoogleButton" :value="$t('public0.public42')" @click="fnShowUnbindGoogleForm"/><!--解除绑定-->
+                    <input type="button" v-if="showUnbindGoogleButton" :value="$t('account.user_center_operate_unbind')" @click="fnShowUnbindGoogleForm"/><!--解绑-->
                     <input type="button" v-if="showUnbindGoogleForm" :value="$t('exchange.exchange_determine')" @click="unbindGoogleAuth"/><!--确定-->
                     <br/>
                     <input class="cancel" type="button" v-if="showUnbindGoogleForm" :value="$t('otc_legal.otc_legal_cancel')" @click="fnShowUnbindGoogleForm"/><!--取消-->
@@ -110,7 +110,12 @@
                             {{mobileFormData.phoneNumber}}
                           </p>
                           <p v-if="mobileState == 0 && !readonly">
-                              <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
+                              <span class="mobile">
+                                <select v-model="mobileFormData.countryCode">
+                                  <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
+                                </select>
+                                <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
+                              </span>
                               <em class="error">
                                 <template v-if="errors.firstRule('phoneNumber')==='required'">{{$t('public0.public6')}}</template>
                                 <template v-if="errors.firstRule('phoneNumber')==='telphone'">{{$t(errors.first('phoneNumber'))}}</template>
@@ -156,6 +161,7 @@ import userApi from '@/api/individual'
 import myApi from '@/api/user'
 import utils from '@/assets/js/utils'
 import changepwd from '@/public/dialog/changepwd'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   data () {
     return {
@@ -174,7 +180,9 @@ export default {
       },
       showUnbindGoogleButton: false,
       showUnbindGoogleForm: false,
+      areaCodeList: commonConfig.areaCodeList,
       mobileFormData: {
+        countryCode: '+86',
         phoneNumber: '',
         phonepassword: '',
         smsCode: ''
@@ -268,13 +276,16 @@ export default {
         for (let i in this.bindGoogleFormData) {
           formData[i] = this.bindGoogleFormData[i]
         }
-        formData.password = utils.encryptPwd(formData.password)
-        userApi.bindGoogleAuth(formData, (msg) => {
-          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-          this.bindGoogleFormData = {key: '', verifyCode: '', password: ''}
-          this.fnUserState()
-        }, (msg) => {
-          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        myApi.getRsaPublicKey((rsaPublicKey) => {
+          formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+          formData.rsaPublicKey = rsaPublicKey
+          userApi.bindGoogleAuth(formData, (msg) => {
+            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+            this.bindGoogleFormData = {key: '', verifyCode: '', password: ''}
+            this.fnUserState()
+          }, (msg) => {
+            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          })
         })
       })
     },
@@ -287,14 +298,17 @@ export default {
         for (let i in this.unbindGoogleFormData) {
           formData[i] = this.unbindGoogleFormData[i]
         }
-        formData.password = utils.encryptPwd(formData.password)
-        userApi.unbindGoogleAuth(formData, (msg) => {
-          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-          this.unbindGoogleFormData = {verifyCode: '', password: ''}
-          this.fnUserState()
-          this.showUnbindGoogleForm = false
-        }, (msg) => {
-          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+        myApi.getRsaPublicKey((rsaPublicKey) => {
+          formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+          formData.rsaPublicKey = rsaPublicKey
+          userApi.unbindGoogleAuth(formData, (msg) => {
+            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+            this.unbindGoogleFormData = {verifyCode: '', password: ''}
+            this.fnUserState()
+            this.showUnbindGoogleForm = false
+          }, (msg) => {
+            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          })
         })
       })
     },
@@ -317,9 +331,27 @@ export default {
         }
         formData.password = formData.phonepassword
         delete formData.phonepassword
-        formData.password = utils.encryptPwd(formData.password)
-        if (Number(this.mobileState) === 1) {
-          userApi.unbindMobile(formData, (msg) => {
+        myApi.getRsaPublicKey((rsaPublicKey) => {
+          formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+          formData.rsaPublicKey = rsaPublicKey
+          if (Number(this.mobileState) === 1) {
+            userApi.unbindMobile(formData, (msg) => {
+              this.showBindMobile = false
+              this.disabled = false
+              Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+              this.mobileFormData = {
+                phoneNumber: '',
+                phonepassword: '',
+                smsCode: ''
+              }
+              this.fnUserState()
+              this.getMyUserInfo()
+            }, (msg) => {
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+            })
+            return
+          }
+          userApi.bindMobile(formData, (msg) => {
             this.showBindMobile = false
             this.disabled = false
             Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
@@ -333,21 +365,6 @@ export default {
           }, (msg) => {
             Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
           })
-          return
-        }
-        userApi.bindMobile(formData, (msg) => {
-          this.showBindMobile = false
-          this.disabled = false
-          Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-          this.mobileFormData = {
-            phoneNumber: '',
-            phonepassword: '',
-            smsCode: ''
-          }
-          this.fnUserState()
-          this.getMyUserInfo()
-        }, (msg) => {
-          Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
         })
       })
     },
@@ -355,10 +372,13 @@ export default {
       myApi.getUserInfo((userInfo) => {
         if (userInfo.mobile) {
           this.readonly = true
+          if (userInfo.countryCode) {
+            this.mobileFormData.countryCode = userInfo.countryCode
+          }
+          this.mobileFormData.phoneNumber = userInfo.mobile
         } else {
           this.readonly = false
         }
-        this.mobileFormData.phoneNumber = userInfo.mobile
         this.setUserInfo(userInfo)
       }, (msg) => {
         Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
@@ -370,6 +390,7 @@ export default {
       }
       this.disabled = true
       userApi.sendAuthSMSCode({
+        countryCode: this.mobileFormData.countryCode,
         phoneNumber: this.mobileFormData.phoneNumber
       }, (msg) => {
         let timeOut = () => {
@@ -392,7 +413,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .safety h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .safety .cellphone h3{font-size: 0;line-height: 0;text-indent: 0;}
 .safety .cellphone h3 .text{display: inline-block;height: 24px;font-size: 14px;line-height: 24px;text-indent: 8px;}
@@ -451,6 +472,14 @@ export default {
 .google-content-right input:hover{background-color: #15c9ff;}
 .google-content-right input.cancel{margin-top:4px;color:#11a8fe;background-color:transparent;border:1px solid #11a8fe;}
 .google-content-right input.cancel:hover{color:#15c9ff;border-color:#15c9ff;}
+
+.mobile{position:relative;}
+.mobile /deep/ select{
+  position:absolute;left:4px;top:0px;
+  width: 120px;height:22px;padding-right: 20px;color: #d6dff9;z-index: 1;
+  background-position: right 4px center;
+}
+.mobile /deep/ input{padding-left:126px;width:120px!important;}
 </style>
 
 

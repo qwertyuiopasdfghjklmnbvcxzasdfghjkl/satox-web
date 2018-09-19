@@ -32,7 +32,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .transaction .tabcontrol {font-size: 0;line-height: 0;border-bottom: 1px solid #b1bedb;}
 .transaction .tabcontrol li{display: inline-block;height: 24px;margin-right: 40px;margin-bottom: -1px;line-height: 24px;font-size: 16px;color: #becbe8;border-bottom: 1px solid #b1bedb;cursor: pointer;}
 .transaction .tabcontrol li:hover,

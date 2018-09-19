@@ -52,7 +52,7 @@ export default {
       params: {
         ad_type: otcParams.ad_type || 2,
         symbol: otcParams.symbol || otcConfig.symbol,
-        currency: 'CNY',
+        currency: (otcParams.symbol || otcConfig.symbol) === otcConfig.additional[0].symbol ? 'USD' : 'CNY',
         current_price: 100000,
         pay_type: null,
         sort_mode: 1,
@@ -74,6 +74,16 @@ export default {
     }
   },
   watch: {
+    'params.symbol' (val) {
+      if (val === otcConfig.additional[0].symbol) {
+        this.params.currency = 'USD'
+      } else {
+        this.params.currency = 'CNY'
+      }
+    },
+    'params.newOrderCount' () {
+      this.showChat = true
+    },
     otcParams () {
       localStorage.setItem('otcParams', JSON.stringify(this.otcParams))
     },
@@ -81,9 +91,6 @@ export default {
       if (val) {
         this.firstEnter++
       }
-    },
-    'params.newOrderCount' () {
-      this.showChat = true
     }
   },
   created () {
@@ -137,7 +144,7 @@ export default {
 .otchome{width: 1200px;padding-top: 8px;padding-bottom: 60px;margin: 0 auto;}
 .home-bottom{display: flex;justify-content: space-between;margin-bottom: 8px;}
 .home-bottom-left{width:300px;}
-.home-bottom-right{width:892px;}
+.home-bottom-right{width:892px;display:flex;flex:1;margin-left:8px;}
 .news{display: none;}
 .chat-icon{position:fixed;z-index:999;left:4px;bottom:4px;width:70px;height:70px;cursor:pointer;background:url(../assets/images/chat.png) no-repeat center;}
 .chat-icon:hover{background-image:url(../assets/images/chat_hover.png);}

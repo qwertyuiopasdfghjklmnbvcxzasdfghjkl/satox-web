@@ -10,34 +10,30 @@
     <div class="bottom">
       <div class="bottom-center">
         <div class="item">
-          <a href="javascript:;" target="_blank">{{$t('public.foot_about')}}</a>
+          <a :href="aboutUrl" target="_blank">{{$t('public.foot_about')}}</a>
         </div><!--关于我们-->
         <div class="item">
-          <a href="javascript:;" target="_blank">{{$t('public.foot_terms')}}</a>
+          <a :href="serviceAgreementUrl" target="_blank">{{$t('public.foot_terms')}}</a>
         </div><!--服务协议-->
         <div class="item">
-          <a href="javascript:;" target="_blank">{{$t('public.foot_privacy')}}</a>
+          <a :href="privacyNoticeUrl" target="_blank">{{$t('public.foot_privacy')}}</a>
         </div><!--隐私声明-->
         <div class="item">
-          <a href="javascript:;" target="_blank">{{$t('public.foot_fees')}}</a>
+          <a :href="rateStandardUrl" target="_blank">{{$t('public.foot_fees')}}</a>
         </div><!--费率标准-->
         <div class="item"></div>
         <div class="item">{{$t('public.foot_contact')}}</div><!--联系我们-->
         <div class="item">
-          <a class="contact-icons icon-facebook" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-facebook" href="https://www.facebook.com/NewtonExchange" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-twitter" href="https://twitter.com/ExchangeNewton" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-telegram" href="https://t.me/newtonxchange" target="_blank"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>
-        </div>
-        <div class="item">
-          <a class="contact-icons icon-weixin">
-          </a>
+          <a class="contact-icons icon-slack" href="https://newtonexchange.slack.com" target="_blank"></a>
         </div>
       </div>
     </div>
@@ -66,7 +62,35 @@
       indexrecom
     },
     computed: {
-      ...mapGetters(['getApiToken', 'getLang'])
+      ...mapGetters(['getApiToken', 'getLang']),
+      aboutUrl () {
+        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+          return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015426231-%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC'
+        } else {
+          return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015426231-About-Us'
+        }
+      },
+      serviceAgreementUrl () {
+        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+          return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015235052-%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE'
+        } else {
+          return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
+        }
+      },
+      privacyNoticeUrl () {
+        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+          return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015235072-%E9%9A%90%E7%A7%81%E5%A3%B0%E6%98%8E'
+        } else {
+          return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015235072-Privacy-Policy'
+        }
+      },
+      rateStandardUrl () {
+        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+          return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015426331-%E8%B4%B9%E7%8E%87%E6%A0%87%E5%87%86'
+        } else {
+          return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015426331-Fee'
+        }
+      }
     },
     watch: {
       getApiToken () {

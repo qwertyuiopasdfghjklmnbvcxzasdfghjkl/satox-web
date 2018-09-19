@@ -23,7 +23,12 @@
                       </label>
                     </div>
                     <template v-if="registerType==1">
-                      <inputbox name="phoneNumber" ref="email" :maxLength="255" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" :msgs="msgs.phoneNumber" :errs="errors" :title="$t('account.user_center_phone')" :placeholder="$t('public0.public6')"/><!--手机号-->
+                      <div class="mobile">
+                        <select v-model="countryCode">
+                          <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
+                        </select>
+                        <inputbox name="phoneNumber" ref="email" :maxLength="255" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" :msgs="msgs.phoneNumber" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
+                      </div>
                       <div class="smsCode">
                         <inputbox name="smsCode" :maxLength="6" v-model="mobileFormData.smsCode" v-validate="'required'" :msgs="msgs.smsCode" :errs="errors" :title="$t('account.user_center_SMS_code')" :placeholder="$t('login_register.verify_code')"/><!--短信验证码-->
                         <a href="javascript:;" :class="{disabled:btnDisabled}" @click="sendSMSCode">{{$t('account.user_center_send_SMS')}}<!--发送验证码-->{{disabled ? `（${time}s）` : ''}}</a>
@@ -49,6 +54,7 @@ import myApi from '@/api/individual'
 import inputbox from '@/components/formel/inputbox'
 import buttonbox from '@/components/formel/buttonbox'
 import utils from '@/assets/js/utils'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   components: {
     inputbox,
@@ -59,6 +65,8 @@ export default {
       locked: false,
       gtLocked: false,
       registerType: 1,
+      areaCodeList: commonConfig.areaCodeList,
+      countryCode: '+86',
       mobileFormData: {
         phoneNumber: '',
         smsCode: '',
@@ -158,17 +166,22 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.password = utils.encryptPwd(formData.password)
-          formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
-          userApi.mobileResetPwd(formData, () => {
-            Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 邮件发送成功
-            setTimeout(() => {
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.mobileResetPwd(formData, () => {
+              Vue.$koallTipBox({icon: 'success', message: this.$t('account.user_center_Successful')}) // 邮件发送成功
+              setTimeout(() => {
+                this.locked = false
+                this.$router.push({name: 'login'})
+              }, 1500)
+            }, (msg) => {
               this.locked = false
-              this.$router.push({name: 'login'})
-            }, 1500)
-          }, (msg) => {
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+            })
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
           })
         }, () => {
           this.gtLocked = false
@@ -181,6 +194,7 @@ export default {
       }
       this.disabled = true
       myApi.sendAuthSMSCode({
+        countryCode: this.countryCode,
         phoneNumber: this.mobileFormData.phoneNumber
       }, (msg) => {
         let timeOut = () => {
@@ -275,8 +289,13 @@ export default {
   background:#11A8FE;
 }
 .mobile{position:relative;}
-.mobile /deep/ select{position:absolute;height:39px;top:0;color:#3F4D6E;width:90px;padding-right:15px;z-index:10;}
-.mobile /deep/ .inputdiv{position:relative;}
+.mobile /deep/ select{
+  position: absolute;top: 0;left: 0;z-index: 1;width: 120px;height: 38px;padding-right: 20px;color: #d6dff9;
+  background-position: right 4px center;
+}
+.mobile /deep/ .inputdiv{position: relative;}
+.mobile /deep/ .inputdiv:before{position: absolute;top: 7px;left: 122px;content: "";width: 1px;height: 24px;background-color: #404b69;}
+.mobile /deep/ .input{width: 296px !important;padding-left: 132px;}
 .smsCode{position:relative;}
 .smsCode /deep/ a{position:absolute;height:22px;line-height:22px;color:#11A8FE;right:0;top:34px;}
 .smsCode /deep/ a.disabled{color:#999;cursor:not-allowed;}

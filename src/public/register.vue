@@ -23,8 +23,8 @@
                     </div>
                     <template v-if="formData.registerType==1">
                       <div class="mobile">
-                        <select>
-                          <option value="86">{{$t('countrys.China')}}<!--中国大陆-->&nbsp;+&nbsp;86</option>
+                        <select v-model="formData.countryCode">
+                          <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
                         </select>
                         <inputbox name="mobile" :maxLength="255" v-model="formData.mobile" v-validate="'required|telphone'" :msgs="msgs.mobile" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
                       </div>
@@ -38,12 +38,12 @@
                     </template>
                     <inputbox id="newton-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
-                    <inputbox class="invitedCode" name="invitedCode" :maxLength="255" v-model="formData.invitedCode" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
+                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
                           <em @click="checked=!checked">{{$t('login_register.agree_Service')}}<!--我已阅读并同意--></em>
-                          <a href="javascript:" target="_blank">{{$t('login_register.bitark_service').format('NEWTON')}}<!--NEWTON服务条款--></a>
+                          <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('NEWTON')}}<!--NEWTON服务条款--></a>
                         </span>
                     </div>
                     <div class="button-group">
@@ -65,6 +65,7 @@ import userApi from '@/api/user'
 import inputbox from '@/components/formel/inputbox'
 import buttonbox from '@/components/formel/buttonbox'
 import utils from '@/assets/js/utils'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   components: {
     inputbox,
@@ -76,15 +77,17 @@ export default {
       gtLocked: false,
       checked: false,
       disabled: false,
+      areaCodeList: commonConfig.areaCodeList,
       formData: {
         registerType: 1,
+        countryCode: '+86',
         mobile: '',
         smsCode: '',
         username: '',
         email: '',
         password: '',
         passwordConfirm: '',
-        invitedCode: ''
+        ref: ''
       },
       time: 60
     }
@@ -108,6 +111,13 @@ export default {
       } else {
         return this.disabled
       }
+    },
+    getAgreementUrl () {
+      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        return 'https://newtonexchange.zendesk.com/hc/zh-cn/articles/360015235052-%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE'
+      } else {
+        return 'https://newtonexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
+      }
     }
   },
   watch: {
@@ -117,11 +127,11 @@ export default {
       })
     },
     $route () {
-      this.formData.invitedCode = utils.getUrlHashParams().invitedCode
+      this.formData.ref = utils.getUrlHashParams().ref
     }
   },
   created () {
-    this.formData.invitedCode = utils.getUrlHashParams().invitedCode
+    this.formData.ref = utils.getUrlHashParams().ref
   },
   methods: {
     register () {
@@ -130,6 +140,7 @@ export default {
         formData[i] = this.formData[i]
       }
       if (Number(formData.registerType) === 0) {
+        delete formData.countryCode
         delete formData.mobile
         delete formData.smsCode
         formData.username = formData.email
@@ -153,18 +164,23 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
-          formData.password = utils.encryptPwd(formData.password)
-          formData.passwordConfirm = utils.encryptPwd(formData.passwordConfirm)
           this.locked = true
-          userApi.register(formData, (msg) => {
+          userApi.getRsaPublicKey((rsaPublicKey) => {
+            formData.password = utils.encryptPwd(rsaPublicKey, formData.password)
+            formData.passwordConfirm = utils.encryptPwd(rsaPublicKey, formData.passwordConfirm)
+            formData.rsaPublicKey = rsaPublicKey
+            userApi.register(formData, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+              setTimeout(() => {
+                this.$router.push({name: 'login'})
+              }, 1500)
+            }, (msg) => {
+              this.locked = false
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+            })
+          }, () => {
             this.locked = false
-            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-            setTimeout(() => {
-              this.$router.push({name: 'login'})
-            }, 1500)
-          }, (msg) => {
-            this.locked = false
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
           })
         }, () => {
           this.gtLocked = false
@@ -180,6 +196,7 @@ export default {
       }
       this.disabled = true
       userApi.sendSMSCode({
+        countryCode: this.formData.countryCode,
         phoneNumber: this.formData.mobile
       }, (res) => {
         let timeOut = () => {
@@ -273,7 +290,7 @@ export default {
   position:absolute;content:"";display:block;width:8px;height:8px;top:4px;left:4px;border-radius:50%;
   background:#11A8FE;
 }
-.invitedCode /deep/ .inputdiv{padding-bottom:10px;}
+.ref /deep/ .inputdiv{padding-bottom:10px;}
 .mobile{position:relative;}
 .mobile /deep/ select{
   position: absolute;top: 0;left: 0;z-index: 1;width: 120px;height: 38px;padding-right: 20px;color: #d6dff9;

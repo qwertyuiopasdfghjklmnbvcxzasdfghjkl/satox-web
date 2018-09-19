@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import store from '@/vuex'
 import QRCode from '@/assets/js/qrcode'
-import Config from '@/assets/js/config'
+import config from '@/assets/js/config'
 import userApi from '@/api/user'
 
 String.prototype.format = function () {
@@ -292,7 +292,7 @@ const uploadImage = function (e, size) {
   }
   let imgCon = target.parentNode.previousElementSibling
   var imageUrl = null
-  if (Config.imageType.test(target.files.item(0).name) === false) {
+  if (config.imageType.test(target.files.item(0).name) === false) {
     Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public43')}) // 请上传JPG、PNG、JPEG、BMP格式的图片
     target.value = ''
     return
@@ -506,8 +506,7 @@ utils.gtValidate = gtValidate
  * @param {*} pwd 密码
  * @param {*} okCallback 成功回调函数
  */
-const publickey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCI0+KZEQJ4eiT42gOZfVaIMMwD0neLsh1/BQlwVMJgXJUom6U/DkGPxY+1QOt8dnvjWZg+gNebblxe9N0oJp4grJSKdqNoj4P6Vmo3GnmFa6oDOpxOjBMSBBWMMU21ppssirPUDCESic8ND2FvsHTcTUWMzLzINh52CFTZCQuI/QIDAQAB'
-const encryptPwd = function (pwd) {
+const encryptPwd = function (publickey, pwd) {
   var encrypt = new JSEncrypt()
   encrypt.setPublicKey(publickey)
   pwd = encrypt.encrypt(pwd)

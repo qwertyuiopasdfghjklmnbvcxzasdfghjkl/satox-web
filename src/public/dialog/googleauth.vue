@@ -7,6 +7,10 @@
       <div class="form">
         <inputbox ref="box" v-validate="'required|pInteger'" :maxLength="6" name="verifyCode" :msgs="msgs.verifyCode" :errs="errors" v-model="formData.verifyCode" :title="$t('account.user_center_Google_verification_code')"  @keyupEnter="auth"/><!--谷歌验证码-->
         <buttonbox :text="$t('exchange.exchange_determine')" @click="auth"/><!--确定-->
+        <div class="warm-prompt" v-if="isWithdrawal">
+          <p>{{$t('public0.public243')}}：<!--温馨提示--></p>
+          <p>{{$t('account.user_prompt8')}}<!--提现请求申请成功后，请去邮箱点击链接确认本次提现请求。--></p>
+        </div>
       </div>
   </div>
 </template>
@@ -18,7 +22,7 @@ import inputbox from '@/components/formel/inputbox'
 import buttonbox from '@/components/formel/buttonbox'
 import myApi from '@/api/individual'
 export default {
-  props: ['username', 'authType'],
+  props: ['username', 'authType', 'isWithdrawal'],
   components: {
     pdialog,
     inputbox,
@@ -104,5 +108,7 @@ export default {
 .icon-close:hover{color: #11a8fe;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .input{background:#100E0E;border-color:#54616c;}
+.form /deep/ .input{background-color:#100E0E;border-color:#54616c;}
+.warm-prompt{width: 272px;padding-top: 20px;}
+.warm-prompt p{min-height: 20px;line-height: 20px;color: #becbe8;}
 </style>

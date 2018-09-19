@@ -14,7 +14,7 @@
         // 针对生产环境，只允许跳转到http://www.newtonxchange.com
         var protocol = location.protocol;
         var host = location.host.toLowerCase();
-        if (host === 'pre.newton.io') {
+        if (host === 'pre.newtonxchange.com' || host === 'test.newtonxchange.com') {
           return
         }
         if (host.indexOf('newtonxchange.com') !== -1 && (protocol !== 'https:' || host !== 'www.newtonxchange.com')) {

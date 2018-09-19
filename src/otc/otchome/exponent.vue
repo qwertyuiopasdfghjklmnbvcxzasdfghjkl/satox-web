@@ -11,26 +11,25 @@
               <em class="tips-text">{{$t('otc_ad.data_sources')}}<!--数据来自coinmarket--></em>
             </span>
           </span>
-          <!-- <span>CNY</span> -->
           <select v-model="params.currency">
             <option v-for="item in currencys" :key="item.id" :value="item.value">{{$t(item.text)}}</option>
           </select>
         </p>
-        <p class="newest" :class="percent.indexOf('-') === -1 ? 'up' : 'down'">
+        <p class="newest" :class="percent.toString().indexOf('-') === -1 ? 'up' : 'down'">
           <strong>{{curPrice}} {{params.currency}}</strong>
           <small>{{percent}}%</small>
         </p>
         <p class="low">
           <span>{{$t('exchange.exchange_low')}}<!--24h最低价--></span>
-          <span>{{minPrice}}</span>
+          <span>{{minPrice||'0.00'}}</span>
         </p>
         <p class="high">
           <span>{{$t('exchange.exchange_high')}}<!--24h最高价--></span>
-          <span>{{maxPrice}}</span>
+          <span>{{maxPrice||'0.00'}}</span>
         </p>
       </div>
     </div>
-    <div class="exponent-bottom">
+    <div class="exponent-bottom" :style="`visibility:${isATN ? 'hidden' : 'visible'};`">
       <div class="kline-cont">
         <div class="kline-cont-canvas" ref="canvas"></div>
       </div>
@@ -48,10 +47,11 @@ export default {
   data () {
     return {
       curPrice: 0,
-      percent: '0',
-      minPrice: '0.00',
-      maxPrice: '0.00',
-      currencys: otcConfig.currencys
+      percent: 0,
+      minPrice: 0,
+      maxPrice: 0,
+      currencys: otcConfig.currencys,
+      isATN: this.params.symbol === otcConfig.additional[0].symbol
     }
   },
   computed: {
@@ -64,6 +64,9 @@ export default {
     }
   },
   watch: {
+    'params.symbol' (newVal) {
+      this.isATN = newVal === otcConfig.additional[0].symbol
+    },
     paramsChange () {
       this.getCoinMarket()
     }
@@ -79,14 +82,19 @@ export default {
         let priceArray = []
         let timeArray = []
         this.curPrice = numUtils.BN(res[0].price).toFixed(2)
-        this.percent = (res[0].percent_change_24h || '0').toString()
+        this.percent = res[0].percent_change_24h || 0
         res.reverse()
         res.forEach((item) => {
           priceArray.push(item.price)
           timeArray.push(item.time)
         })
-        this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(2)
-        this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(2)
+        priceArray = priceArray.length ? priceArray : [0]
+        if (this.isATN) {
+          this.maxPrice = this.minPrice = this.curPrice
+        } else {
+          this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(2)
+          this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(2)
+        }
         this.createCanvas(priceArray, timeArray)
       }, (msg) => {
         console.error(msg)
@@ -190,7 +198,7 @@ export default {
 
 <style scoped>
 .exponent{background-color: #222121;}
-.exponent-top{padding: 8px 8px 30px 8px;}
+.exponent-top{padding: 8px 8px 0 8px;}
 .keypoint-cont p{display: flex;justify-content: space-between;align-items: center;padding-left: 6px;padding-right: 6px;}
 .keypoint-cont p.type{height: 42px;padding-left: 0;padding-right: 0;}
 .keypoint-cont p.type > span{display: flex;align-items: flex-end;}
@@ -214,7 +222,7 @@ export default {
 .keypoint-cont p.high{height: 24px;}
 .keypoint-cont p.low span,
 .keypoint-cont p.high span{font-size: 12px;color: #ececec;}
-.kline-cont{padding-bottom: 20px;}
+.kline-cont{padding-bottom: 10px;}
 .kline-cont-canvas{height: 300px;}
 </style>
 
