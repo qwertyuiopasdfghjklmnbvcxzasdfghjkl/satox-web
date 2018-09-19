@@ -56,8 +56,7 @@ import addAddress from './addAddress'
                             let o = this.detail(params.row.addressList, h)
                             return h('div', [
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small', disabled: o.valueAll && o.valueAll.enable === null },                                    
-                                    // props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll.enable===1) || params.row.$select_value==o.valueAll.address},
+                                    props: {type: 'primary', size: 'small', disabled: o.valueAll && o.valueAll.enable === null },
                                     style: {marginRight: '10px'},
                                     on: {
                                         click: () => {
@@ -65,21 +64,30 @@ import addAddress from './addAddress'
                                             let list = params.row.addressList
                                             for (let i=0;i<list.length;i++) {
                                                 let d = list[i]
-                                                if (d.address === params.row.$select_value) {
-                                                    sel = d
-                                                    break
+                                                if (params.row.$select_value) {
+                                                    if (d.address === params.row.$select_value) {
+                                                        sel = d
+                                                        break
+                                                    }
+                                                } else {
+                                                    if (d.defaultFlag == 1) {
+                                                        sel = d
+                                                        break
+                                                    }
                                                 }
                                             }
+                                            
                                             if (!sel && list.length) {
                                                 sel = list[0]
                                             }
-                                            fundApi.updateColdWallet({
+                                           fundApi.updateColdWallet({
                                                 walletId: sel.walletId,
                                                 version: sel.version,
                                                 enable: o.valueAll.enable === 1 ? 0 : 1
                                             }, (res) => {
                                                 this.$Message.success({content: '启用成功'})
-                                            })  
+                                            }) 
+                                             
                                         }
                                     }
                                 }, o.valueAll && o.valueAll.enable === 1 ? '禁用': '启用'),
@@ -171,31 +179,31 @@ import addAddress from './addAddress'
                                         }
                                     }
                                 }, '新增地址'),
-                                h('Button', {
-                                    props: {type: 'primary', size: 'small'},
-                                    style: {marginRight: '10px'},
-                                    on: {
-                                        click: () => {
-                                            if (!params.row.addressList.length) {
-                                                return
-                                            }
-                                            let o = this.detail(params.row.addressList, h)
-                                            o = o.valueAll
-                                            if (!o) {
-                                                o = params.row.addressList[0]
-                                            }
-                                            if (!o.walletId) {
-                                                return
-                                            }
-                                            fundApi.deleteColdWallet({
-                                                walletId: o.walletId
-                                            }, (res) => {
-                                                this.$Message.success({content: '删除成功'})
-                                                this.getAllColdWallet()
-                                            })
-                                        }
-                                    }
-                                }, '删除地址')
+                                // h('Button', {
+                                //     props: {type: 'primary', size: 'small'},
+                                //     style: {marginRight: '10px'},
+                                //     on: {
+                                //         click: () => {
+                                //             if (!params.row.addressList.length) {
+                                //                 return
+                                //             }
+                                //             let o = this.detail(params.row.addressList, h)
+                                //             o = o.valueAll
+                                //             if (!o) {
+                                //                 o = params.row.addressList[0]
+                                //             }
+                                //             if (!o.walletId) {
+                                //                 return
+                                //             }
+                                //             fundApi.deleteColdWallet({
+                                //                 walletId: o.walletId
+                                //             }, (res) => {
+                                //                 this.$Message.success({content: '删除成功'})
+                                //                 this.getAllColdWallet()
+                                //             })
+                                //         }
+                                //     }
+                                // }, '删除地址')
                             ]);
                         }
                     }
