@@ -31,13 +31,18 @@
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
             </li>
-             <li >
+            <li :class="{'active': active === 'message'}" @click="switch_like">
+                <i class="icon-like"></i>
+                <span>{{$t('message.my_referral_center')}}</span>
+                <!--我的推荐中心-->
+            </li>
+            <!-- <li >
                  <a href="https://www.newtonxchange.com/#/invite">
                     <i class="icon-like"></i>
                     <span>{{$t('message.my_referral_center')}}</span>
                  </a>
-                <!--我的推荐中心 -->
-            </li>
+                我的推荐中心
+            </li> -->
         </ul>
     </div>
 </template>
@@ -50,6 +55,9 @@ export default {
     }
   },
   methods: {
+    switch_like () {
+        this.$router.push({name: 'invite'})
+    },
     switch_tab (tab) {
       this.$emit('switchTab', tab)
     }
@@ -71,6 +79,6 @@ export default {
 .myassets-left ul li span{display: inline-block;vertical-align: middle;}
 .myassets-left ul li i{font-size: 16px;}
 .myassets-left ul li span{height: 50px;line-height: 50px;font-size: 14px;text-indent: 10px;}
-.myassets-left ul li a i.icon-like:before{color: #cbd4ec}
-.myassets-left ul li a:hover,.myassets-left ul li a:hover i:before{color: #FFDE00;border-left-color: #FFDE00;}
+.myassets-left ul li i.icon-like:before{color: #cbd4ec}
+.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #FFDE00;border-left-color: #FFDE00;}
 </style>

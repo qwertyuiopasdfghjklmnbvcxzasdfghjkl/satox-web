@@ -13,7 +13,7 @@
             <li class="tab-item" :class="{selected:isShow && active==='market'}" @click="switchTab('market')">
               {{$t('exchange.exchange_market')}}<!--市价委托-->
             </li>
-            <li class="procedure-item" v-if="isShow">{{$t('public.fee_rate')}}：0.2%<!--手续费率--></li>
+            <li class="procedure-item" v-if="isShow">{{$t('public.fee_rate')}}：{{rateData || 0.01}}%<!--手续费率--></li>
         </ul>
         <div class="business-panel-form" v-show="isShow">
             <div class="business-panel-left">
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import marketApi from '@/api/market'
 import { mapActions } from 'vuex'
 import business from '@/exchanges/market/business'
 export default {
@@ -37,7 +38,8 @@ export default {
   data () {
     return {
       isShow: true,
-      active: 'limit'
+      active: 'limit',
+      rateData: null
     }
   },
   watch: {
@@ -50,11 +52,23 @@ export default {
       })
     }
   },
+  created () {
+    this.getrateSysparams()
+  },
   methods: {
     ...mapActions(['tiggerEvents']),
     switchTab (tab, isShow) {
       this.isShow = !isShow
       this.active = tab
+    },
+    getrateSysparams () {
+      marketApi.rateSysparams((res) => {
+        res.forEach((item) => {
+          if (item.code === 'transactionRate') {
+            this.rateData = item.value
+          }
+        })
+      })
     }
   }
 }

@@ -309,4 +309,16 @@ const getSymbolIntroduce = function (symbol, success, error) {
 }
 market.getSymbolIntroduce = getSymbolIntroduce
 
+// 首页手续费率
+const rateSysparams = function (success, error) {
+  api.get(`${domain}api/v2/trade/sys_params`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+market.rateSysparams = rateSysparams
+
 export default market
