@@ -95,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig', 'getUsdRate']),
+    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig', 'getUsdRate', 'getLang']),
     baseSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
