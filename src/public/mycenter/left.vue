@@ -36,13 +36,6 @@
                 <span>{{$t('message.my_referral_center')}}</span>
                 <!--我的推荐中心-->
             </li>
-            <!-- <li >
-                 <a href="https://www.newtonxchange.com/#/invite">
-                    <i class="icon-like"></i>
-                    <span>{{$t('message.my_referral_center')}}</span>
-                 </a>
-                我的推荐中心
-            </li> -->
         </ul>
     </div>
 </template>
