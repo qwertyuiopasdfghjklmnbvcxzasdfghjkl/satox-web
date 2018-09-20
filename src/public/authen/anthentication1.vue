@@ -198,8 +198,8 @@ export default {
 .form-summary p{min-height: 30px;line-height: 30px;color: #becbe8;}
 .form-row{padding-bottom: 10px;overflow: auto;}
 .form-row .row-label{float: left;width: 150px;min-height: 30px;padding-right: 10px;line-height: 30px;color: #becbe8;}
-.form-row .row-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
-.form-row .row-text{float: left;width: 290px;height: 28px;color: #becbe8;background-color: transparent;border: 1px solid #505e83;}
+.form-row .row-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
+.form-row .row-text{float: left;width: 290px;height: 28px;color: #261003;background-color: #FFF;border: 1px solid #505e83;}
 .form-row .row-text.error{border-color: #e53f3f;}
 .form-row .row-error{float: left;height: 30px;line-height: 30px;color: #e53f3f;text-indent: 10px;}
 .form-row .row-file{position: relative;float: left;width: 140px;}
@@ -213,10 +213,10 @@ export default {
 .form-row .row-description{float: left;width: 674px;min-height: 30px;padding-left: 10px;line-height: 30px;color: #becbe8;}
 .form-button{font-size: 0;line-height: 0;padding-left: 160px;}
 .form-button input{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;border-radius: 4px;cursor: pointer;}
-.form-button input.cancel{margin-right: 30px;color: #11a8fe;background-color: transparent;border: 1px solid #11a8fe;}
-.form-button input.cancel:hover{color: #15c9ff;border-color: #15c9ff;}
-.form-button input.confirm{color: #fff;background-color: #11a8fe;}
-.form-button input.confirm:hover{background-color: #15c9ff;}
+.form-button input.cancel{margin-right: 30px;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;}
+.form-button input.cancel:hover{color: #fdb902;border-color: #fdb902;}
+.form-button input.confirm{color: #261003;background-color: #fdb902;}
+.form-button input.confirm:hover{background-color: #fdb902;}
 .form-button input.confirm.disabled{background-color: #999;cursor: not-allowed}
 .form-button input.confirm.disabled:hover{background-color: #999;}
 </style>

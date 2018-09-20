@@ -116,17 +116,19 @@ export default {
 .dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
 .top{width:100%;height:30px;position:relative;background-color:#333232;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #11a8fe;}
+.icon-close:hover{color: #fdb902;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .input{background-color:#100E0E;border-color:#54616c;}
+.form /deep/ .title{color:#becbe8;}
+.form /deep/ .input,.form /deep/ .input.error{background-color:#FFF;border-color:#54616c;color:#261003;}
+.form /deep/ .input:focus{background-color:#FFF;}
 .smsCode{position: relative;}
 .smsCode /deep/ input{width:120px!important;}
 .smsCode /deep/ .button{position:absolute;top:20px;right:0;}
-.smsCode /deep/ .disabled{background:#999;cursor:not-allowed;}
+.smsCode /deep/ .disabled{background:#999;color:#FFF;cursor:not-allowed;}
 .buttons{display:flex;justify-content:space-between;align-items:center;width:272px;}
 .buttons input{width:100px !important;}
 .buttons input:first-child{margin-right:20px;}
-.buttons input:last-child{border:1px solid #11a8fe;color:#11a8fe;;background:transparent;}
-.buttons input:last-child:hover{border-color:#15c9ff;color:#15c9ff;}
+.buttons input:last-child{border:1px solid #fdb902;color:#fdb902;;background:transparent;}
+.buttons input:last-child:hover{border-color:#fdb902;color:#fdb902;}
 </style>

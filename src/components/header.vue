@@ -396,11 +396,11 @@ export default {
 .message-panel-nologin .nologin-icon{font-size: 60px;text-align: center;}
 .message-panel-nodata .nodata-text,
 .message-panel-nologin .nologin-text{font-size: 14px;color: #181b2a;}
-.message-panel-nologin .nologin-text a{color: #11a8fe;}
-.message-panel-nologin .nologin-text a:hover{color: #15c9ff;}
+.message-panel-nologin .nologin-text a{color: #fdb902;}
+.message-panel-nologin .nologin-text a:hover{color: #fdb902;}
 .message-panel-operation{display: flex;justify-content: space-between;align-items: center;width: 430px;height: 30px;}
 .message-panel-operation span{font-size: 12px;color: #aeb7d0;cursor: pointer;}
-.message-panel-operation span:hover{color: #11a8fe;}
+.message-panel-operation span:hover{color: #fdb902;}
 .message-panel-operation span.disabled{color: #999;cursor: not-allowed;}
 .message-panel-operation span.disabled:hover{color: #999;}
 
@@ -414,16 +414,16 @@ export default {
 .header-center .center-left > ul li{float: left;margin-left: 12px;height: 24px;line-height: 24px;}
 .header-center .center-left > ul li:first-of-type{margin-left: 54px;}
 .header-center .center-left > ul li a{padding-left: 6px;padding-right: 6px;font-size: 14px;color: #FFFFFF;cursor: pointer;}
-.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #FFDE00;}
+.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #fdb902;}
 .header-center .center-right{display: flex;align-items: center;}
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}
 .header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 6px;font-size:14px;cursor: pointer;color:#FFFFFF;}
-.header-center .center-right > ul > li > a:hover{color: #FFDE00;}
+.header-center .center-right > ul > li > a:hover{color: #fdb902;}
 .header-center .center-right ul li.translations{position: relative;margin-left: 18px;}
 .header-center .center-right ul li.translations a{display: block;height: 22px;padding-left: 0;padding-right: 0;line-height: 22px;font-size: 14px;color: #FFFFFF;text-align: center;border-radius: 12px;margin-top:1px;}
 .header-center .center-right ul li.translations a:hover,
-.header-center .center-right ul li.translations a.unfold{color: #FFDE00; border-color: #FFDE00;}
+.header-center .center-right ul li.translations a.unfold{color: #fdb902; border-color: #fdb902;}
 .header-center .center-right ul li.translations a i{padding-left: 12px;font-size: 12px;}
 .header-center .center-right ul li.translations .lang-list{display:flex;flex-flow:column;width:104px;height:117px;position: absolute;top: 24px;right:0;background-color: #12141f;box-shadow:0 3px 6px #12141f;}
 .header-center .center-right ul li.translations .lang-item{flex:1;height: 38px;line-height: 38px;font-size: 14px;color: #a1a8bb;text-align: center;border-bottom: 1px solid #252e44;cursor: pointer;}
@@ -432,7 +432,7 @@ export default {
 .header-center .center-right ul li.message{position: relative;margin-left: 0;}
 .header-center .center-right ul li.message > a{display: block;position: relative;
   height: 20px;padding-left: 0; padding-right: 0;margin-top: 2px;line-height: 20px;font-size: 20px;}
-.header-center .center-right ul li.message > a.unfold{color: #FFDE00;}
+.header-center .center-right ul li.message > a.unfold{color: #fdb902;}
 .header-center .center-right ul li.message > a em{position: absolute;top: -5px;left: 11px;min-width: 6px;height: 12px;padding-left: 3px;padding-right: 3px;line-height: 10px;font-size: 12px;color: #fff;background-color: #e2261c;border-radius: 5px;}
 .header-center .center-right > ul.minWidth{display:none;}
 .header .minWidthList{position:absolute;z-index:1000;left:-100%;top:60px;width:100%;background:#222121;display:none;flex-direction:column;height:fit-content;transition:0.3s;}

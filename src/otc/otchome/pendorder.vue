@@ -389,19 +389,19 @@ export default {
 .pendorder-title span.freeze em{max-width: 123px;word-wrap: break-word;}
 .pendorder-title span.transfer{width: 55px;}
 .pendorder-title span.operate{align-items: center;}
-.pendorder-title span.operate .notice{margin-right: 24px;font-size: 12px;color: #11a8fe;}
-.pendorder-title span.operate .notice:hover{color: #15c9ff;}
-.pendorder-title span.operate .werben{width: 84px;height: 22px;line-height: 22px;font-size: 12px;text-align: center;color: #11a8fe;border: 1px solid #11a8fe;border-radius: 4px;}
-.pendorder-title span.operate .werben:hover{color: #15c9ff;border-color: #15c9ff;}
+.pendorder-title span.operate .notice{margin-right: 24px;font-size: 12px;color: #fdb902;}
+.pendorder-title span.operate .notice:hover{color: #fdb902;}
+.pendorder-title span.operate .werben{width: 84px;height: 22px;line-height: 22px;font-size: 12px;text-align: center;color: #fdb902;border: 1px solid #fdb902;border-radius: 4px;}
+.pendorder-title span.operate .werben:hover{color: #fdb902;border-color: #fdb902;}
 
 .notice-dialog{position: absolute;top: 58px;left: 0;display: flex;justify-content: center;align-items: center;width: 892px;height: 540px;background-color: rgba(0, 0, 0, 0.5);}
 .notice-dialog-container{position: relative;width: 732px;padding: 12px 24px;background-color: #222121;border-radius: 4px;}
 .notice-dialog-close{position: absolute;top: 10px;right: 10px;}
-.notice-dialog-close:hover{color: #11a8fe;}
+.notice-dialog-close:hover{color: #fdb902;}
 .notice-dialog-cont p{min-height: 24px;padding: 12px 0 12px 24px;line-height: 24px;color: #ececec;}
 .notice-dialog-cont p span{display: inline-block;width: 24px;height: 24px;margin-left: -24px;line-height: 24px;vertical-align: top;}
-.notice-dialog-cont p a{color: #11a8fe;text-decoration: underline;}
-.notice-dialog-cont p a:hover{color: #15c9ff;}
+.notice-dialog-cont p a{color: #fdb902;text-decoration: underline;}
+.notice-dialog-cont p a:hover{color: #fdb902;}
 
 .list{min-height: 540px;background-color: #222121;flex:1;}
 .list li{display: flex;}
@@ -435,7 +435,7 @@ export default {
 .list-item span p{height: 24px;line-height: 24px;}
 .list-item span p:first-of-type{font-size: 14px;color: #ececec;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .list-item span p:last-of-type{font-size: 12px;color: #aeb7d0;}
-.list-item span.name img{width: 28px;height: 28px;border:1px solid #11a8fe;border-radius: 50%;}
+.list-item span.name img{width: 28px;height: 28px;border:1px solid #fdb902;border-radius: 50%;}
 .list-item span.name em{width: 88px;font-size: 14px;color: #ececec;white-space: nowrap;text-indent: 10px;text-overflow: ellipsis;overflow: hidden;}
 .list-item span.paytype{display: flex;line-height: 0;}
 .list-item span.paytype em{margin-left: 10px;font-size: 16px;color: #fff;}

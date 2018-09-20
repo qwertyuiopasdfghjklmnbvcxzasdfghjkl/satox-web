@@ -33,7 +33,7 @@
         </div>
       </div>
       <h3>{{$t('trade_record.exchange_record')}}<!--币币成交记录--></h3>
-      <ul v-if="!coinsLoading && coinsEntrust.length > 0">
+      <ul class="header" v-if="!coinsLoading && coinsEntrust.length > 0">
         <li>
           <span class="time">{{$t('exchange.exchange_date')}}<!--时间--></span>
           <span class="market">{{$t('exchange.exchange_pair')}}<!--市场--></span>
@@ -43,6 +43,8 @@
           <span class="tradeSum">{{$t('exchange.exchange_Transaction_amount')}}<!--成交金额--></span>
           <span class="charge">{{$t('exchange.advanced_fee')}}<!--手续费--></span>
         </li>
+      </ul>
+      <ul v-if="!coinsLoading && coinsEntrust.length > 0">
         <li class="list" v-for="(item, index) in coinsEntrust" :key="item.id">
           <span class="time">{{new Date(Number(item.createdAt)).format()}}</span><!--时间-->
           <span class="market">{{getMarketByType(item.direction, item.toSymbol, item.fromSymbol)}}</span><!--市场-->
@@ -140,6 +142,7 @@ export default {
         this.coinsEntrust = res.data
         this.coinsLoading = false
       }, (msg) => {
+        this.coinsLoading = false
         console.error(msg)
       })
     },
@@ -179,29 +182,30 @@ export default {
 <style scoped>
 .curreny /deep/ .filtrate,
 .curreny /deep/ .filtrate > div{display: flex;align-items: center;}
-.curreny /deep/ .filtrate{height: 54px;background-color: #222121;}
+.curreny /deep/ .filtrate{height: 54px;background-color: #FFF;}
 .curreny /deep/ .filtrate > div{margin-right: 14px;}
 .curreny /deep/ .filtrate .operation{margin-right: 0;cursor: pointer;}
 .curreny /deep/ .filtrate .allrepeal,
 .curreny /deep/ .filtrate .export{margin-left: auto;}
-.curreny /deep/ .filtrate label{font-size: 12px;color: #becbe8;}
+.curreny /deep/ .filtrate label{font-size: 12px;color: #261003;}
 .curreny /deep/ .filtrate input{height: 22px;font: 12px/normal "Microsoft YaHei";color: #becbe8;background-color: transparent;border: 1px solid #777f96;}
 .curreny /deep/ .filtrate .joint{width: 12px;font-size: 12px;color: #becbe8;text-align: center;}
-.curreny /deep/ .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #becbe8;background: url(../../../assets/images/icon_arrowdown.png) no-repeat right 4px center;border: 1px solid #777f96;cursor: pointer;}
+.curreny /deep/ .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #becbe8;background: url(../../../assets/images/icon_arrowdown.png) #261003 no-repeat right 4px center;border: 1px solid #777f96;cursor: pointer;}
 .curreny /deep/ .filtrate button{float: left;min-width: 38px;height: 24px;font-size: 12px;background-color: transparent;cursor: pointer;}
-.curreny /deep/ .filtrate .time input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png) no-repeat right 4px center;cursor: pointer;}
+.curreny /deep/ .filtrate .time input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png) #261003 no-repeat right 4px center;cursor: pointer;}
 .curreny /deep/ .filtrate .market input{width: 50px;border: 1px solid #777f96;}
-.curreny /deep/ .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #11a8fe;}
-.curreny /deep/ .filtrate .button .search:hover{background-color: #15c9ff;}
-.curreny /deep/ .filtrate .button .reset{color: #11a8fe;border: 1px solid #11a8fe;}
-.curreny /deep/ .filtrate .button .reset:hover{color: #15c9ff;border-color: #15c9ff;}
+.curreny /deep/ .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #fdb902;}
+.curreny /deep/ .filtrate .button .search:hover{background-color: #fdb902;}
+.curreny /deep/ .filtrate .button .reset{color: #fdb902;border: 1px solid #fdb902;}
+.curreny /deep/ .filtrate .button .reset:hover{color: #fdb902;border-color: #fdb902;}
 .curreny /deep/ .filtrate .operation a,
-.curreny /deep/ .filtrate .operation i{font-size: 12px;color: #11a8fe;}
+.curreny /deep/ .filtrate .operation i{font-size: 12px;color: #fdb902;}
 .curreny /deep/ .filtrate .operation i{padding-left: 8px;margin-top: 1px;}
 .curreny /deep/ .filtrate .allrepeal i,
 .curreny /deep/ .filtrate .export i{font-size: 14px;}
 .curreny /deep/ .filtrate .operation:hover a,
-.curreny /deep/ .filtrate .operation:hover i{color: #15c9fe;}
+.curreny /deep/ .filtrate .operation:hover i{color: #261003;}
+.curreny /deep/ .filtrate .operation:hover i{color:#fdb902}
 .curreny /deep/ .filtrate .disabled a,
 .curreny /deep/ .filtrate .disabled i{color: #999;cursor: not-allowed;}
 .curreny /deep/ .filtrate .disabled:hover a,
@@ -211,7 +215,9 @@ export default {
 
 .curreny /deep/ .record{background-color: #222121;}
 .curreny /deep/ .record ul{padding-left: 8px;padding-right: 8px;}
+.curreny /deep/ .record ul.header{background:#dedede;}
 .curreny /deep/ .record ul li{border-bottom: 1px solid #404b69;}
+.curreny /deep/ .record ul.header li{border-bottom:none;}
 .curreny /deep/ .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
 .curreny /deep/ .record ul li span.time{width: 160px;}
 .curreny /deep/ .record ul li span.market{width: 100px;}

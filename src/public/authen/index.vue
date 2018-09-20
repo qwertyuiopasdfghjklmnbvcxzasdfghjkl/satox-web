@@ -55,6 +55,6 @@ export default {
 .authentication .tab-list{font-size: 0;line-height: 0;border-bottom: 1px solid #404b69;}
 .authentication .tab-item{display: inline-block;height: 24px;margin-right: 20px;margin-bottom: -1px;font-size: 16px;line-height: 24px;color: #becbe8;border-bottom: 1px solid #404b69;cursor: pointer;}
 .authentication .tab-item:hover,
-.authentication .tab-item.active{color: #11a8fe;border-bottom-color: #11a8fe;}
+.authentication .tab-item.active{color: #fdb902;border-bottom-color: #fdb902;}
 </style>
 

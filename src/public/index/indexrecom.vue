@@ -92,7 +92,7 @@
   .ticker-list em{font-size: 14px;color: #727272;}
   .type_symbol{width: 100%;background-color:#100E0E;overflow: hidden;min-height:16px;}
   .type_symbol ul{display:flex;text-align:center;justify-content:center;align-items: center;flex-flow: wrap}
-  .type_symbol ul li{font-size: 14px;background-color: #CCCCCC;padding: 10px;width: 210px;text-align: left;margin: 16px 0;margin-right:12.5px;}
+  .type_symbol ul li{font-size: 14px;background-color: #FFF;padding: 10px;width: 210px;text-align: left;margin: 16px 0;margin-right:12.5px;}
   .type_symbol ul li:last-child{margin-right:0;}
   .infotip{float: right;font-size: 12px;}
   .volume{font-size: 12px;}

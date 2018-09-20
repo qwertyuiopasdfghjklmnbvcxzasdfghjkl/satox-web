@@ -273,12 +273,12 @@ export default {
 .undone-center-number-font{font-size: 16px;font-weight: bold;color:#aeb7d0;}
 .undone-center-buys p{line-height:32px;}
 .undone-center-adress p{font-size:12px;color: #aeb7d0;line-height: 22px;white-space:normal;word-break:break-all;max-width:200px;}
-.undone-center-adress p em{color:#11a8fe;cursor: pointer;}
-.undone-center-adress .remark{color:#11a8fe;cursor: pointer; }
+.undone-center-adress p em{color:#fdb902;cursor: pointer;}
+.undone-center-adress .remark{color:#fdb902;cursor: pointer; }
 .undone-right{width:145px;display:flex;flex-flow:column;align-items:center;justify-content:center;}
 .undone-right p{color: #0ee7a5;font-size: 14px;font-weight: bold;line-height:16px;text-align: center;margin-bottom:10px;}
-.undone-right a{display: inline-block;min-width: 80px;height: 24px;line-height: 24px;color: #fff;text-align: center;background-color: #11a8fe;border-radius: 4px;}
-.undone-right a:hover{background-color: #15c9ff;}
+.undone-right a{display: inline-block;min-width: 80px;height: 24px;line-height: 24px;color: #261003;text-align: center;background-color: #fdb902;border-radius: 4px;}
+.undone-right a:hover{background-color: #fdb902;}
 .undone-right a.disabled{color: #afb9ce;background-color: #6e778c;cursor: not-allowed;}
 .undone-center-type select{color: #aeb7d0;width:100px;}
 .undone-center-type select[disabled]{background-image:none;}
@@ -289,5 +289,5 @@ export default {
 .evaluate ul li{width: 70px;cursor: pointer;}
 .evaluate ul li em{font-size: 24px;cursor: pointer;}
 .evaluate ul li em:hover,
-.evaluate ul li em.active{color: #11a8fe;}
+.evaluate ul li em.active{color: #fdb902;}
 </style>

@@ -45,20 +45,20 @@ export default {
 
 
 <style scoped>
-.bus{min-height: 110px;margin-bottom: 8px;background-color: #222121;}
+.bus{min-height: 110px;margin-bottom: 8px;background-color: #FFF;}
 .bus ul{display: flex;justify-content: space-between;}
 .bus ul li{text-align: center;}
 .bus ul li.buy{width: 150px;}
 .bus ul li.sell{width: 149px;border-left: 1px solid #333232;}
 .bus ul li > a{display: block;height: 30px;line-height: 30px;color: #aeb7d0;background-color: #333232;}
-.bus ul li.buy > a.current{color: #fff;background-color: #03c087;}
-.bus ul li.sell > a.current{color: #fff;background-color: #ff7342;}
+.bus ul li.buy > a.current{color: #261003;background-color: #fdb902;}
+.bus ul li.sell > a.current{color: #261003;background-color: #fdb902;}
 .bus-ul-li-div span{display: block;}
-.bus-ul-li-div span a{display: block;height: 40px;line-height: 40px;font-weight: bold;font-size: 14px;color: #fff;}
+.bus-ul-li-div span a{display: block;height: 40px;line-height: 40px;font-weight: bold;font-size: 14px;color: #261003;font-weight:bold;}
 .buy .bus-ul-li-div span a:hover,
-.buy .bus-ul-li-div span a.active{color: #03c087;}
+.buy .bus-ul-li-div span a.active{color: #fdb902;}
 .sell .bus-ul-li-div span a:hover,
-.sell .bus-ul-li-div span a.active{color: #ff7342;}
+.sell .bus-ul-li-div span a.active{color: #fdb902;}
 .bus-ul-li-div span i{padding-right: 16px;}
 </style>
 
