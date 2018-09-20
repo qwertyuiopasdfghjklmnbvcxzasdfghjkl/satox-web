@@ -540,7 +540,7 @@ export default {
 .createorder .cont{padding: 20px 30px 20px 30px;}
 .cont-item .row{display: flex;justify-content: space-between;align-items: center;}
 .cont-item label{display: block;height: 24px;line-height: 24px;font-size: 12px;color: #becbe8;}
-.cont-item label em.asterisk{position: relative;top: 6px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.cont-item label em.asterisk{position: relative;top: 6px;line-height: 0;font-size: 18px;color: #fdb902;}
 .cont-item label.label-tips{font-size: 0;}
 .cont-item label.label-tips > span{font-size: 12px;}
 .cont-item label.label-tips .tips{display: inline-block;margin-top: 6px;margin-left: 6px;vertical-align: top;}
@@ -557,8 +557,8 @@ export default {
 .cont-item.timelimit .value select{position: relative; z-index: 1;width: 80px;}
 .cont-item .value span{font-size: 12px;color: #becbe8;}
 .cont-item.tradetype .value span{cursor: pointer;}
-.cont-item.tradetype .value span i{padding-right: 4px;color: #11a8fe;}
-.cont-item.tradetype .value span i:hover{color: #15c9ff;}
+.cont-item.tradetype .value span i{padding-right: 4px;color: #fdb902;}
+.cont-item.tradetype .value span i:hover{color: #fdb902;}
 .cont-item .value input{box-sizing: border-box;width: 100%;height: 30px;padding-left: 12px;padding-right: 12px;font: 12px/normal 'Microsoft YaHei';color: #becbe8;background-color: transparent;border: 1px solid #54616c;}
 .cont-item .value input.error{border-color: #e53f3f;}
 .cont-item.premium .value input,
@@ -572,10 +572,10 @@ export default {
 .cont-item .prompt{height: 20px;line-height: 20px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
 .cont-item.button{line-height: 0;font-size: 0;text-align: right;}
 .cont-item.button button{width: 74px;height: 30px;font-size: 12px;border-radius: 4px;cursor: pointer;}
-.cont-item.button button.cancel{margin-right: 10px;color: #11a8fe;background-color: transparent;border: 1px solid #11a8fe;}
-.cont-item.button button.cancel:hover{color: #15c9ff;border-color: #15c9ff;}
-.cont-item.button button.comfirm{color: #fff;background-color: #11a8fe;}
-.cont-item.button button.comfirm:hover{background-color: #15c9ff;}
+.cont-item.button button.cancel{margin-right: 10px;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;}
+.cont-item.button button.cancel:hover{color: #fdb902;border-color: #fdb902;}
+.cont-item.button button.comfirm{color: #261003;background-color: #fdb902;}
+.cont-item.button button.comfirm:hover{background-color: #fdb902;}
 .cont-item.button button.comfirm.disabled{background-color: #999;cursor:not-allowed;}
 .cont-item.button button.comfirm.disabled:hover{background-color: #999;}
 </style>

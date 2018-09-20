@@ -235,7 +235,7 @@ export default {
 .recharge ul li span.progress{width: 120px;}
 .recharge ul li span.status{width: 100px;}
 .recharge ul li span.time{width: 140px;}
-.recharge ul li span.status.underway{color: #11a8fe;}
+.recharge ul li span.status.underway{color: #fdb902;}
 .recharge ul li span.status.success{color: #03c087;}
 
 .withdrawal{margin-top: 8px;background-color: #222121;}
@@ -251,7 +251,7 @@ export default {
 .withdrawal ul li span.address{width: 250px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .withdrawal ul li span.status{width: 100px;}
 .withdrawal ul li span.time{width: 140px;}
-.withdrawal ul li span.status.underway{color: #11a8fe;}
+.withdrawal ul li span.status.underway{color: #fdb902;}
 .withdrawal ul li span.status.fail{color: #e76d42;}
 .withdrawal ul li span.status.success{color: #03c087;}
 

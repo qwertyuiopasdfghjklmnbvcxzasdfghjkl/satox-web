@@ -272,7 +272,6 @@ export default {
 .login-right-item /deep/ input:-moz-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 
-/*#11A8FE*/
 .item-registerType{font-size:16px;color:#d6dff9;}
 .item-registerType /deep/ label{cursor: pointer}
 .item-registerType /deep/ label:last-of-type{margin-left:20px;}

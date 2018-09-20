@@ -182,5 +182,5 @@ export default {
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 /*设置chrome浏览器自动填写用户名/密码的input样式*/
 .login-right-item /deep/ input:-webkit-autofill{-webkit-text-fill-color: #d6dff9;border-width: 0 !important;border-bottom: 1px solid #404b69 !important;box-shadow: 0 0 0 1000px #181b2a inset;}
-.login-right-item /deep/ input:-webkit-autofill:focus{border-bottom-color: #11a8fe !important;}
+.login-right-item /deep/ input:-webkit-autofill:focus{border-bottom-color: #fdb902 !important;}
 </style>

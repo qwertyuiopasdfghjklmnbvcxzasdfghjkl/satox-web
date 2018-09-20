@@ -519,7 +519,7 @@ export default {
 
 .form-flex{display: flex;justify-content: space-between;align-items: center;height: 120px;padding-left: 30px;padding-right: 30px;}
 .form-flex-left{font-size: 0;line-height: 0;}
-.form-flex-left i{display: inline-block;margin-right: 20px;font-size: 20px;color: #11a8fe;vertical-align: middle;}
+.form-flex-left i{display: inline-block;margin-right: 20px;font-size: 20px;color: #fdb902;vertical-align: middle;}
 .form-flex-left em{display: inline-block;width: 160px;min-height: 20px;font-size: 14px;line-height: 20px;vertical-align: middle;color: #261003;}
 .form-flex-center{width:300px;}
 .form-flex-center p{line-height: 24px;color: #261003;}
