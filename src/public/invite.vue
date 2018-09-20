@@ -2,7 +2,9 @@
     <div class="invite">
         <div class="banner">
            <div class="banner-img">
-                <img src="../assets/images/home/banner-zhcn.png"/>
+               <img v-if="getLang=='zh-CN'" src="../assets/images/invite/banner-zh.png"/>
+               <img v-if="getLang=='cht'" src="../assets/images/invite/banner-tw.png"/>
+                <img v-if="getLang=='en'" src="../assets/images/invite/banner-en.png"/>
            </div>
         </div>
         <div class="content">
