@@ -22,11 +22,11 @@
                     </a>
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
-                    <a class="button" href="/static/newton-pro-0918.apk" download="newton-pro-0918.apk">
+                    <a class="button" :class="{en:getLang=='en'}" href="/static/newton-pro-0918.apk" download="newton-pro-0918.apk">
                         <!--安卓下载-->
                         {{$t('public0.public226')}}
                     </a>
-                    <a class="button" href="https://www.pgyer.com/nCfg">
+                    <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/nCfg">
                         <!--IOS下载-->
                         {{$t('public0.public227')}}
                     </a>
@@ -46,11 +46,15 @@
 
 <script>
 import Vue from 'vue'
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
       isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent)
     }
+  },
+  computed: {
+    ...mapGetters(['getLang'])
   },
   methods: {
     showTip () {
@@ -80,6 +84,7 @@ export default {
     display:flex;width:200px;height:121px;line-height:140px;background:url(../assets/images/download/btn.png) no-repeat center;
     cursor: pointer;justify-content:center;color:#FFF;font-size:24px;font-weight:bold;
 }
+.download .banner1 .content .buttons .button.en{font-size:18px;}
 .download .banner1 .content .title4{font-size:20px;font-weight:bold;color:#BAB9B9;line-height:70px;}
 .download .tips{position: relative;display:flex;justify-content:center;}
 .download .tips img{width:100%;}
