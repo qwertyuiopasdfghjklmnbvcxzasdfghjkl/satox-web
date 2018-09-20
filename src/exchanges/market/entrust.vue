@@ -358,7 +358,7 @@ export default {
 .entrust{background-color: #222121;}
 .entrust.unfold{height: 200px;}
 .title{position: relative;background-color: #333232;overflow: auto;}
-.entrust.unfold .title{background:#dcdcdc;}
+.entrust.unfold .title{background:#FFF;}
 .menu-arrow{position: absolute;top: 50%;left: 10px;width: 16px;height: 16px;margin-top: -8px;overflow: hidden;cursor: pointer;}
 .menu-arrow i{position: absolute;left: 0;font-size: 16px;color: #FFF;}
 .menu-arrow i:first-of-type{top: -3px;}
@@ -371,7 +371,7 @@ export default {
   float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-left: 2px;font-size: 16px;
   line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
 }
-.entrust.unfold .menu-title{color:#000;border-top-color:#dcdcdc;}
+.entrust.unfold .menu-title{color:#000;border-top-color:#FFF;}
 .menu-title:first-of-type{margin-left:40px;}
 .menu-title:hover,
 .menu-title.menu-selected{color: #FFDE00!important;border-top-color: #FFDE00!important;background:#222121;}
