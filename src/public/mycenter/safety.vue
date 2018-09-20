@@ -461,7 +461,7 @@ export default {
 .google-content-center .bind-form input.error,
 .google-content-center .unbind-form input.error{border-color: #e53f3f;}
 .google-content-center .bind-form em.asterisk,
-.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #e53f3f;}
+.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
 .google-content-center .bind-form em.error,
 .google-content-center .unbind-form em.error{display: block;height: 24px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
 .google-content-center button{width:120px;height:24px;padding: 0;color:#261003;background-color:#fdb902;border-radius:4px;cursor:pointer;}

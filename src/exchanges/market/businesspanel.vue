@@ -78,12 +78,12 @@ export default {
 .business-panel{margin-bottom: 10px;background-color: #222121;}
 .business-panel.unfold{height: 304px;}
 .tabs{background-color: #333232;overflow: auto;}
-.business-panel.unfold .tabs{background-color:#DCDCDC;}
+.business-panel.unfold .tabs{background-color:#FFF;}
 .tabs .tab-item{
   float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-right:2px;font-size: 16px;
   line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
 }
-.business-panel.unfold .tabs .tab-item{color:#000;border-top-color:#DCDCDC}
+.business-panel.unfold .tabs .tab-item{color:#000;border-top-color:#FFF}
 .tabs .tab-item:hover,
 .tabs .tab-item.selected{color: #FFDE00!important;border-top-color: #FFDE00!important;background:#222121;}
 .tabs .arrow-item{position: relative;float: left;width: 40px;height: 40px;}

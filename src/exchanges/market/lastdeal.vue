@@ -126,7 +126,7 @@ export default {
 </script>
 
 <style scoped>
-.lastdeal{height:334px;padding:10px;background-color:#DCDCDC;margin-top:10px;}
+.lastdeal{height:334px;padding:10px;background-color:#FFF;margin-top:10px;}
 .title{height:24px;line-height:24px;font-size:16px;margin-bottom:10px;color:#333;text-indent:10px;}
 .container{height:calc(100% - 54px);overflow:hidden;}
 .list{height:100%;margin-right:-17px;overflow-x:hidden;overflow-y:scroll;}

@@ -65,7 +65,7 @@ export default {
 .nickname-dialog-form{padding: 30px;}
 .nickname-dialog-row:last-of-type{padding-top: 10px;font-size: 0;line-height: 0;text-align: center;}
 .nickname-dialog-label{display: block;min-height: 24px;margin-bottom: 10px;line-height: 24px;color: #becbe8;}
-.nickname-dialog-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #e53f3f;}
+.nickname-dialog-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
 .nickname-dialog-input{
   display: block;width: 330px;height: 28px;color:#261003;background-color: transparent;border: 1px solid #54616c;
   background:#FFF;

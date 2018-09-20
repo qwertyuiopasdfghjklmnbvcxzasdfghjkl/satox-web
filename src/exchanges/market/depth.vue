@@ -310,10 +310,10 @@ export default {
 </script>
 
 <style scoped>
-.depth{flex:1;display:flex;flex-flow:column;min-height:0;padding:10px 10px 10px 0;background-color:#DCDCDC;}
+.depth{flex:1;display:flex;flex-flow:column;min-height:0;padding:10px 10px 10px 0;background-color:#FFF;}
 .top{display:flex;justify-content:space-between;min-height:24px;height:24px;margin-bottom:10px;}
 .top-layout{display:flex;justify-content:space-between;width:90px;margin-left:20px;}
-.top-stats-dots{width:22px;height:22px;border:1px solid #DCDCDC;cursor:pointer;}
+.top-stats-dots{width:22px;height:22px;border:1px solid #FFF;cursor:pointer;}
 .top-stats-dots.ask-color{background-color:#ff7342;}
 .top-stats-dots.bid-color{background-color:#0ee7a5;}
 .top-stats-dots.askbid-color{background-color:#cbd4ec;}
