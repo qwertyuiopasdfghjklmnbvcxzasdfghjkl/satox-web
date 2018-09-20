@@ -539,7 +539,7 @@ export default {
 .form-item .icon-alipay{color:#1cc5e4;}
 .form-item .icon-paypal{color:#2a74d3;}
 .form-label{width: 152px;height: 30px;line-height: 30px;padding-left: 48px;color: #261003;}
-.form-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#e53f3f;}
+.form-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#fdb902;}
 .form-input{width: 270px;height: 28px;color: #cbd4ec;background-color: #261003;border: 1px solid #505e83;}
 .form-input[readonly='readonly']{cursor: not-allowed}
 .form-input.error{border-color: #e53f3f;}
