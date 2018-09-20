@@ -209,7 +209,7 @@ export default {
 .keypoint-cont p.type > span .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
 .keypoint-cont p.type > span .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .keypoint-cont p.type > span .tips-icon:hover + .tips-text{display: block;}
-.keypoint-cont p.type select{height: 24px;padding-right: 20px;color: #11a8fe;font-size: 16px;background-position: right 4px center;cursor: pointer;max-width:100px;}
+.keypoint-cont p.type select{height: 24px;padding-right: 20px;color: #fdb902;font-size: 16px;background-position: right 4px center;cursor: pointer;max-width:100px;}
 .keypoint-cont p.type select option{font-size: 14px;}
 .keypoint-cont p.newest{justify-content: flex-start;align-items: baseline;height: 32px;line-height: 32px;}
 .keypoint-cont p.newest strong{font-weight: bold;font-size: 18px;}

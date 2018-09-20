@@ -147,7 +147,7 @@ export default {
   width: 100% !important;height: 40px;margin: 0;padding: 0;font-size: 16px;line-height: normal;
   color: #d6dff9;background-color: transparent;border-width: 0;border-bottom: 1px solid #54616c;outline: none;
 }
-.login-right-item /deep/ .input:focus{background-color: transparent;border-bottom-color:#E3CB2B!important;}
+.login-right-item /deep/ .input:focus{background-color: transparent;border-bottom-color:#fdb902!important;}
 .login-right-item /deep/ .input.error{background-color: transparent;border-bottom-color: #e53f3f;}
 .login-right-item /deep/ .errorinfo{position: absolute;bottom: 0;left: 0;width: auto;height: 24px;padding-top: 0;color: #e53f3f;font-style: normal;line-height: 24px;white-space: nowrap;}
 
@@ -156,25 +156,25 @@ export default {
 .login-right-item .captcha img{float: right;margin-top: 34px;cursor: pointer;}
 
 .login-right-item .checkbox-group{overflow: auto;}
-.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #11a8fe;text-indent: 1px;cursor: pointer;}
-.login-right-item .checkbox-group i:hover{color: #15c9ff;}
+.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #fdb902;text-indent: 1px;cursor: pointer;}
+.login-right-item .checkbox-group i:hover{color: #fdb902;}
 .login-right-item .checkbox-group span{float: left;width: 406px;min-height: 30px;padding-left: 8px;line-height: 30px;}
 .login-right-item .checkbox-group span em{color: #d6dff9;}
-.login-right-item .checkbox-group span a{color: #11a8fe;text-decoration: underline;}
-.login-right-item .checkbox-group span a:hover{color: #15c9ff;}
+.login-right-item .checkbox-group span a{color: #fdb902;text-decoration: underline;}
+.login-right-item .checkbox-group span a:hover{color: #fdb902;}
 
 .login-right-item .button-group{position: absolute;bottom: 40px;left: 60px;width: 428px;}
 .login-right-item .button-group /deep/ .button{
   display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;
-  font-weight: bold;font-size: 18px;color: #fff;background-color: #E3CB2B;border: none;border-radius: 0;cursor: pointer;
+  font-weight: bold;font-size: 18px;color: #261003;background-color: #fdb902;border: none;border-radius: 0;cursor: pointer;
 }
-.login-right-item .button-group /deep/ .button:hover{background-color: #E3CB2B;}
+.login-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
 .login-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .login-right-item .button-group .link{padding-top: 6px;overflow: auto;}
-.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
+.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #fdb902;text-decoration: underline;}
 .login-right-item .button-group .link a:first-of-type{float: left;}
 .login-right-item .button-group .link a:last-of-type{float: right;}
-.login-right-item .button-group .link a:hover{color: #15c9ff;}
+.login-right-item .button-group .link a:hover{color: #fdb902;}
 
 .login-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #8a96b2;}
@@ -182,5 +182,5 @@ export default {
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 /*设置chrome浏览器自动填写用户名/密码的input样式*/
 .login-right-item /deep/ input:-webkit-autofill{-webkit-text-fill-color: #d6dff9;border-width: 0 !important;border-bottom: 1px solid #404b69 !important;box-shadow: 0 0 0 1000px #181b2a inset;}
-.login-right-item /deep/ input:-webkit-autofill:focus{border-bottom-color: #11a8fe !important;}
+.login-right-item /deep/ input:-webkit-autofill:focus{border-bottom-color: #fdb902 !important;}
 </style>

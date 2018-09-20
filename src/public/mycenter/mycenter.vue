@@ -56,7 +56,7 @@
       </div>
       <div class="distribution">
         <h3>{{$t('account.user_center_distribution_h')}}<!--分发记录--></h3>
-        <ul v-if="!distributeLoading && distributeHistory.length > 0">
+        <ul class="header" v-if="!distributeLoading && distributeHistory.length > 0">
           <li>
             <span class="time">
               {{$t('account.user_center_history_date')}}<!--时间-->
@@ -71,6 +71,8 @@
               {{$t('account.user_center_history_note')}}<!--备注-->
             </span>
           </li>
+        </ul>
+        <ul v-if="!distributeLoading && distributeHistory.length > 0">
           <li v-for="(data, index) in distributeHistory" :key="index">
             <span class="time">{{new Date(Number(data.createdAt)).format()}}</span>
             <span class="species">{{data.symbol }}</span>
@@ -280,7 +282,7 @@ export default {
 
 <style scoped>
 .mycenter h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.mycenter .top{background-color: #222121;}
+.mycenter .top{background-color: #FFF;}
 .mycenter .top .info{display: flex;height: 150px;padding-top: 30px;}
 .mycenter .top .info .info-pic{position: relative;}
 .mycenter .top .info .info-pic form{display: flex;justify-content: center;position: absolute;top: 4px;left: 30px;width: 70px;height: 70px;}
@@ -288,27 +290,29 @@ export default {
 .mycenter .top .info .info-pic .tips{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
 .mycenter .top .info .info-pic .tips:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .mycenter .top .info .info-pic .file:hover + .tips{display: block;}
-.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 1px solid #11a8fe;border-radius: 50%;overflow: hidden;}
+.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 1px solid #fdb902;border-radius: 50%;overflow: hidden;}
 .mycenter .top .info .info-pic .image img{width: 100%;height: 100%;}
 .mycenter .top .info .info-message{margin-left: 30px;}
-.mycenter .top .info .info-message p{height: 26px;line-height: 26px;color: #d6dff9;}
-.mycenter .top .info .info-message span{color: #d6dff9;}
+.mycenter .top .info .info-message p{height: 26px;line-height: 26px;color: #261003;}
+.mycenter .top .info .info-message span{color: #261003;}
 .mycenter .top .info .info-message span.attestation-state{display: inline-block;height: 24px;padding-left: 8px;padding-right: 8px;margin-top: 1px;margin-left: 8px;line-height: 24px;color: #fff;vertical-align: top;border-radius: 4px;}
 .mycenter .top .info .info-message span.entrance{background: url(../../assets/images/btn-bg-blue.png) repeat-x left center;cursor: pointer;}
 .mycenter .top .info .info-message span.entrance:hover{background-image: url(../../assets/images/btn-bg-blue-highlight.png);}
-.mycenter .top .info .info-message span.wait{background-color: #11a8fe;}
-.mycenter .top .info .info-message span.success{background-color: #03c087;}
+.mycenter .top .info .info-message span.wait{background-color: #fdb902;}
+.mycenter .top .info .info-message span.success{background-color: #fdb902;color:#261003;}
 .mycenter .top .info .info-message span.fail{background-color: #e76d42;}
-.mycenter .top .info .info-message span.nickname-modify{color: #11a8fe;cursor: pointer;}
-.mycenter .top .info .info-message span.nickname-modify:hover{color: #15c9ff;}
-.mycenter .top .info .info-message span a{color: #11a8fe;vertical-align: -1px;}
-.mycenter .top .info .info-message label /deep/ a{color: #11a8fe;text-decoration: underline;}
+.mycenter .top .info .info-message span.nickname-modify{color: #fdb902;cursor: pointer;}
+.mycenter .top .info .info-message span.nickname-modify:hover{color: #fdb902;}
+.mycenter .top .info .info-message span a{color: #fdb902;vertical-align: -1px;}
+.mycenter .top .info .info-message label /deep/ a{color: #fdb902;text-decoration: underline;}
 .mycenter .top .info .info-message span a:hover,
-.mycenter .top .info .info-message label /deep/ a:hover{color: #15c9ff;}
+.mycenter .top .info .info-message label /deep/ a:hover{color: #fdb902;}
 
 .distribution{margin-top: 8px;background-color: #222121;}
 .distribution ul{padding-left: 8px;padding-right: 8px;}
+.distribution ul.header{background:#dedede;}
 .distribution ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
+.distribution ul.header li{border-bottom:none;}
 .distribution ul li span{color: #8b94a9;}
 .distribution ul li span.time{width:160px;}
 .distribution ul li span.species{width: 100px;}

@@ -20,8 +20,8 @@
                         </div>
                     </div>
                 </div>
-                <ul class="accountInfo-lists">
-                    <li class="th">
+                <ul class="accountInfo-lists header">
+                  <li class="th">
                         <div class="items">
                             <div class="coin ng-binding" @click="sortAssets('symbol')">
                                 {{$t('account.estimated_value_coin')}}<!--币种-->
@@ -69,6 +69,8 @@
                             </div>
                         </div>
                     </li>
+                </ul>
+                <ul class="accountInfo-lists">
                     <li v-for="(data, index) in filterDatas" :key="data.accountId">
                         <div class="items">
                             <div class="coin ng-binding">{{data.symbol}}</div>
@@ -230,17 +232,17 @@ export default {
 </script>
 
 <style scoped>
-.icon-checkbox em{color: #11a8fe;cursor: pointer;}
-.icon-checkbox:hover em{color: #15c9ff;}
+.icon-checkbox em{color: #fdb902;cursor: pointer;}
+.icon-checkbox:hover em{color: #fdb902;}
 .icon-checkbox label{cursor: pointer;}
 
 .digassets{background-color: #222121;}
 .digassets h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.balance_search {display: flex;justify-content: space-between;position: relative;padding-left: 8px;padding-right: 8px;border-bottom: 1px solid #404b69;}
-.balance_search .total{color: #d6dff9;height: 40px;line-height: 40px;}
-.balance_search i{position: absolute;right: 24px;top: 13px;color: #404b69;}
-.balance_search input{width: 124px;height: 22px;padding-left: 4px;padding-right: 20px;color: #d6dff9;background-color: transparent;border: 1px solid #404b69;}
-.balance_search input{}
+.balance_search {display: flex;justify-content: space-between;position: relative;padding-left: 8px;padding-right: 8px;border-bottom: 1px solid #404b69;background:#fdb902;}
+.balance_search .total{color: #261003;height: 40px;line-height: 40px;}
+.balance_search i{position: absolute;right: 24px;top: 13px;color: #d6dff9;}
+.balance_search input{width: 124px;height: 22px;padding-left: 4px;padding-right: 20px;color: #d6dff9;background-color: #261003;border: 1px solid #404b69;}
+.balance_search input{border-color:#261003!important;}
 .balance_search .checkbox{position: relative;margin-left: 24px;color: #d6dff9;}
 .balance_search .checkbox label{color: #d6dff9;margin-left: 8px;}
 .balance_search .checkbox em{display: inline-block;width: 14px;height: 14px;}
@@ -249,9 +251,10 @@ export default {
 .balance_search .f-fr .search_input{position: relative;padding-top: 8px;padding-right: 20px;}
 .balance_search .f-fr .total{color: #333;font-size: 18px;font-weight: bold;}
 .balance_search .f-fr .limit{height: 40px;line-height: 40px;}
-.balance_search .f-fr .limit span{color: #11a8fe;text-decoration: underline;cursor: pointer;}
-.balance_search .f-fr .limit span:hover{color: #15c9ff;}
+.balance_search .f-fr .limit span{color: #261003;text-decoration: underline;cursor: pointer;}
+.balance_search .f-fr .limit span:hover{color: #261003;}
 .accountInfo-lists{padding: 0 8px 40px 8px;}
+.accountInfo-lists.header{padding-bottom:0px;background:#dedede;}
 .accountInfo-lists li.th > .items > div{align-items:center;}
 .accountInfo-lists li.th > .items > div > em{position:relative;display:inline-block;width:8px;height:26px;line-height:0px;flex:initial;display:flex;margin-left:2px;}
 .accountInfo-lists li.th > .items > div > em i{position:absolute;top:0px;left:0px;}
@@ -266,12 +269,14 @@ export default {
   font-size: 14px;color: #d6dff9;text-align: left;box-sizing: border-box;min-height: 40px;line-height:22px;
   display: flex;align-items: center;white-space:normal;word-break:break-all;padding:0 4px;
 }
-.accountInfo-lists li .items>div .btn{display: inline-block;height: 22px;padding: 0;line-height: 22px;font-size: 24px;color: #11a8fe;text-align: left;cursor: pointer;}
-.accountInfo-lists li .items>div .btn:hover{color: #15c9ff;}
+.accountInfo-lists.header li{border-bottom:none;}
+.accountInfo-lists.header li .items>div{color:#261003;}
+.accountInfo-lists li .items>div .btn{display: inline-block;height: 22px;padding: 0;line-height: 22px;font-size: 24px;color: #fdb902;text-align: left;cursor: pointer;}
+.accountInfo-lists li .items>div .btn:hover{color: #fdb902;}
 .accountInfo-lists li .items>div .cur{background-color: #e8b342;border-color: #e8b342;color: #fff;}
 .accountInfo-lists li .items>div .disabled{cursor: not-allowed;color: #ababab;}
 .accountInfo-lists li .items>div .disabled:hover{color: #ababab;}
-.accountInfo-lists li .items>div .active{border: none;color: #11a8fe;}
+.accountInfo-lists li .items>div .active{border: none;color: #fdb902;}
 .accountInfo-lists li .items>div.coin{flex:1;text-align: left;}
 .accountInfo-lists li .items>div.coin .icon-checkbox{margin-left: 14px;}
 .accountInfo-lists li .items>div.coin img{vertical-align: middle;height: 16px;margin-right: 6px;}
@@ -283,6 +288,6 @@ export default {
 .accountInfo-lists li .items>div.useable{width: 180px;}
 .accountInfo-lists li .items>div.locked{width: 180px;}
 .accountInfo-lists li .items>div.opreat{width: 80px;}
-.accountInfo-lists li .items>div.action{width: 80px;color: #11a8fe;}
+.accountInfo-lists li .items>div.action{width: 80px;color: #fdb902;}
 </style>
 

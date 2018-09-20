@@ -65,17 +65,17 @@ export default {
 .nickname-dialog-form{padding: 30px;}
 .nickname-dialog-row:last-of-type{padding-top: 10px;font-size: 0;line-height: 0;text-align: center;}
 .nickname-dialog-label{display: block;min-height: 24px;margin-bottom: 10px;line-height: 24px;color: #becbe8;}
-.nickname-dialog-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.nickname-dialog-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
 .nickname-dialog-input{
-  display: block;width: 330px;height: 28px;color:#becbe8;background-color: transparent;border: 1px solid #54616c;
-  background:#100E0E;
+  display: block;width: 330px;height: 28px;color:#261003;background-color: transparent;border: 1px solid #54616c;
+  background:#FFF;
 }
 .nickname-dialog-input.error{border-color: #e53f3f;}
 .nickname-dialog-prompt{display: block;height: 30px;line-height: 30px;color: #e53f3f;}
 .nickname-dialog-confirm,
 .nickname-dialog-cancel{min-width: 80px;height: 30px;padding-left: 24px;padding-right: 24px;border-radius: 4px;cursor: pointer;}
-.nickname-dialog-confirm{color: #fff;background-color: #11a8fe;}
-.nickname-dialog-confirm:hover{background-color: #15c9ff;}
-.nickname-dialog-cancel{margin-right: 24px;color: #11a8fe;background-color: transparent;border:1px solid #11a8fe;}
-.nickname-dialog-cancel:hover{color: #15c9ff;border-color: #15c9ff;}
+.nickname-dialog-confirm{color: #261003;background-color: #fdb902;}
+.nickname-dialog-confirm:hover{background-color: #fdb902;}
+.nickname-dialog-cancel{margin-right: 24px;color: #fdb902;background-color: transparent;border:1px solid #fdb902;}
+.nickname-dialog-cancel:hover{color: #fdb902;border-color: #fdb902;}
 </style>

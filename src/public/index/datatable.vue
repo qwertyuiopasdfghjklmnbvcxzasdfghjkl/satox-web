@@ -322,7 +322,7 @@
 .last-span{margin-left: 28px;}
 .layui-table .icon_solid{cursor: pointer;display: inline-block;height: 16px;width: 16px;background-image: url("../../assets/images/icon-start-s.png")}
 .layui-table .icon_hollow{cursor: pointer;display: inline-block;height: 16px;width: 16px;background-image: url("../../assets/images/icon-start-k.png")}
-.layui-table .font-white{color: #becbe8;}
+.layui-table .font-white{color: #4d3c1a;}
 .layui-table .font-red{color: #e65353;}
 .layui-table .font-green{color: #48d417;}
 .bk-wrap{width: 100%; position: relative; overflow: hidden;}
@@ -335,13 +335,13 @@
 .slider-nav ul li span.slider-this{background: #48bcff;}
 .layui-tab{margin: 0 0; text-align: left!important;}
 .layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
-.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #586687;}
-.layui-tab-title li:nth-child(-n+5){border: 1px solid #404b69; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
+.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #FFF;}
+.layui-tab-title li:nth-child(-n+5){border: 1px solid #8f9090; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
 .layui-tab-title li:nth-child(-n+4){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
-.layui-tab-title li:nth-child(6){text-align: left;border: 0;border-left: 1px solid #404b69;}
-.layui-tab-title li.layuithis{border-bottom-color: #100E0E; background-color: #100E0E;}
-.layui-tab-title li:nth-child(6)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #404b69; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
+.layui-tab-title li:nth-child(6){text-align: left;border: 0;border-left: 1px solid #8f9090;}
+.layui-tab-title li.layuithis{border-bottom-color: #FFF; background-color: #FFF;color:#becbe8!important;}
+.layui-tab-title li:nth-child(6)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
 .layui-tab-title li:nth-child(n+7){padding: 0;}
 .layui-tab-title li:nth-child(n+7)>span{color: #becbe8;}
 .layui-tab-title li.last-li{float: right;color:#FFFFFF;}
@@ -356,11 +356,12 @@ table{border-collapse: collapse; border-spacing: 0;}
 .layui-table th em i.icon-arrow-down{top:10px;}
 .layui-table th em i.active{color:#FFDE00;}
 .layui-table tbody tr:hover{background-color: #202226;}
+.layui-table tbody tr:hover .font-white{color:#becbe8;}
 .layui-table[lay-skin=nob] td,
 .layui-table[lay-skin=nob] th{border: none;}
 .layui-table td,
 .layui-table th{margin: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); position: relative; padding: 9px 15px; min-height: 20px; line-height: 20px; font-size: 14px; border-width: 1px; border-style: solid; border-color: #404b69;}
-.layui-table[lay-skin=line]{border-width: 1px; border-style: solid; border-color: #404b69;}
+.layui-table[lay-skin=line]{border-width: 1px; border-style: solid; border-color: #404b69;background:#FFF;}
 .layui-table[lay-skin=line] td,
 .layui-table[lay-skin=line] th{border-width: 0 0 1px;}
 .layui-table[lay-size=sm] td,

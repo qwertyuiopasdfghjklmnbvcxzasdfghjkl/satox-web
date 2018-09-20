@@ -5,7 +5,7 @@
               <span>{{$t('account.user_center_history_deposit')}}<!--充值记录--></span>
               <a href="javascript:;" @click="switch_tab('digassets')">{{$t('public0.public11')}}<!--返回--></a>
             </h3>
-            <ul v-if="!rechargeLoading && rechargeHistory.length > 0">
+            <ul class="header" v-if="!rechargeLoading && rechargeHistory.length > 0">
                 <li>
                     <span class="id">{{$t('account.user_center_history_tradeID')}}<!--交易ID--></span>
                     <span class="currency">{{$t('account.user_center_history_coin')}}<!--币种--></span>
@@ -15,6 +15,8 @@
                     <span class="status">{{$t('account.user_center_history_status')}}<!--状态--></span>
                     <span class="time">{{$t('account.user_center_history_receiveTime')}}<!--到账时间--></span>
                 </li>
+            </ul>
+            <ul v-if="!rechargeLoading && rechargeHistory.length > 0">
                 <li v-for="(item, index) in rechargeHistory" :key="index">
                     <span class="id" :title="item.txId">{{item.txId}}</span>
                     <span class="currency">{{item.symbol}}</span>
@@ -34,15 +36,17 @@
         </div>
         <div class="withdrawal">
             <h3>{{$t('account.user_center_history_withdrawal')}}<!--提现记录--></h3>
+            <ul class="header" v-if="!withdrawalLoading && withdrawalHistory.length > 0">
+              <li>
+                <span class="id">{{$t('account.user_center_history_tradeID')}}<!--交易ID--></span>
+                <span class="currency">{{$t('account.user_center_history_coin')}}<!--币种--></span>
+                <span class="quantity">{{$t('account.user_center_history_amount')}}<!--数量--></span>
+                <span class="address">{{$t('account.user_center_history_address')}}<!--转入地址--></span>
+                <span class="status">{{$t('account.user_center_history_status')}}<!--状态--></span>
+                <span class="time">{{$t('account.user_center_history_sendTime')}}<!--发送时间--></span>
+              </li>
+            </ul>
             <ul v-if="!withdrawalLoading && withdrawalHistory.length > 0">
-                <li>
-                    <span class="id">{{$t('account.user_center_history_tradeID')}}<!--交易ID--></span>
-                    <span class="currency">{{$t('account.user_center_history_coin')}}<!--币种--></span>
-                    <span class="quantity">{{$t('account.user_center_history_amount')}}<!--数量--></span>
-                    <span class="address">{{$t('account.user_center_history_address')}}<!--转入地址--></span>
-                    <span class="status">{{$t('account.user_center_history_status')}}<!--状态--></span>
-                    <span class="time">{{$t('account.user_center_history_sendTime')}}<!--发送时间--></span>
-                </li>
                 <li v-for="(item, index) in withdrawalHistory" :key="index">
                     <span class="id" :title="item.txId">{{item.txId || '--'}}</span>
                     <span class="currency">{{item.symbol}}</span>
@@ -130,6 +134,7 @@ export default {
         this.params.total = res.total
         this.rechargeLoading = false
       }, (msg) => {
+        this.rechargeLoading = false
         console.error(msg)
         Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
       })
@@ -141,6 +146,7 @@ export default {
         this.params2.total = res.total
         this.withdrawalLoading = false
       }, (msg) => {
+        this.withdrawalLoading = false
         console.error(msg)
         Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
       })
@@ -215,10 +221,12 @@ export default {
 .recharge{background-color: #222121;}
 .recharge h3{position: relative;height: 24px;line-height: 24px;background-color: #333232;}
 .recharge h3 span{margin-left: 8px;font-weight: normal;font-size: 14px;color: #cbd4ec;}
-.recharge h3 a{position: absolute;top: 0;right: 8px;height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
-.recharge h3 a:hover{color: #15c9ff;}
+.recharge h3 a{position: absolute;top: 0;right: 8px;height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #fdb902;text-decoration: underline;}
+.recharge h3 a:hover{color: #fdb902;}
 .recharge ul{padding-left: 8px;padding-right: 8px;}
+.recharge ul.header{background:#dedede;}
 .recharge ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
+.recharge ul.header li{border-bottom:none;}
 .recharge ul li span{color: #8b94a9;}
 .recharge ul li span.id{width: 170px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .recharge ul li span.currency{width: 80px;}
@@ -227,13 +235,15 @@ export default {
 .recharge ul li span.progress{width: 120px;}
 .recharge ul li span.status{width: 100px;}
 .recharge ul li span.time{width: 140px;}
-.recharge ul li span.status.underway{color: #11a8fe;}
+.recharge ul li span.status.underway{color: #fdb902;}
 .recharge ul li span.status.success{color: #03c087;}
 
 .withdrawal{margin-top: 8px;background-color: #222121;}
 .withdrawal h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .withdrawal ul{padding-left: 8px;padding-right: 8px;}
+.withdrawal ul.header{background:#dedede;}
 .withdrawal ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
+.withdrawal ul.header li{border-bottom:none;}
 .withdrawal ul li span{color: #8b94a9;}
 .withdrawal ul li span.id{width: 230px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .withdrawal ul li span.currency{width: 80px;}
@@ -241,11 +251,11 @@ export default {
 .withdrawal ul li span.address{width: 250px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .withdrawal ul li span.status{width: 100px;}
 .withdrawal ul li span.time{width: 140px;}
-.withdrawal ul li span.status.underway{color: #11a8fe;}
+.withdrawal ul li span.status.underway{color: #fdb902;}
 .withdrawal ul li span.status.fail{color: #e76d42;}
 .withdrawal ul li span.status.success{color: #03c087;}
 
-.nodata{text-align: center;}
+.nodata{text-align: center;background:#FFF;}
 .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
 .nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>

@@ -69,7 +69,7 @@
   }
 
   .slider-container /deep/ div.slider-pagination-bullets .slider-pagination-bullet-active{
-    background: #FFDE00 none repeat scroll 0 0;
+    background: #fdb902 none repeat scroll 0 0;
     opacity: 1;
   }
   .slider-nav{position:absolute;bottom:22px;left:45%;}

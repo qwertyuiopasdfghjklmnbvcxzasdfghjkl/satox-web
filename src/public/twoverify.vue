@@ -223,7 +223,7 @@ export default {
 .twoverify-right-item .caption{height: 40px;font-size: 20px;line-height: 40px;color: #fff;}
 .twoverify-right-item .tabs{display:flex;height:45px;margin:60px 0;}
 .twoverify-right-item .tabs label{display:flex;flex:1;align-items:center;justify-content:center;font-size:16px;color:#A1A8BB;border:1px solid #3F4D6E;cursor:pointer;}
-.twoverify-right-item .tabs label.checked{border-color:#11A8FE;color:#11A8FE;}
+.twoverify-right-item .tabs label.checked{border-color:#fdb902;color:#fdb902;}
 .twoverify-right-item .tabs label input{display:none;}
 .twoverify-right-item .prompt{padding-bottom: 24px;overflow: auto;}
 .twoverify-right-item .prompt i{float: left;width: 16px;height: 16px;margin-top: 12px;font-weight: bold;font-size: 16px;line-height: 16px;color: #181b2a;text-align: center;background-color: #e53f3f;border-radius: 50%;}
@@ -242,25 +242,25 @@ export default {
 .twoverify-right-item .captcha img{float: right;margin-top: 34px;cursor: pointer;}
 
 .twoverify-right-item .checkbox-group{overflow: auto;}
-.twoverify-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #11a8fe;text-indent: 1px;cursor: pointer;}
-.twoverify-right-item .checkbox-group i:hover{color: #15c9ff;}
+.twoverify-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #fdb902;text-indent: 1px;cursor: pointer;}
+.twoverify-right-item .checkbox-group i:hover{color: #fdb902;}
 .twoverify-right-item .checkbox-group span{float: left;width: 406px;min-height: 30px;padding-left: 8px;line-height: 30px;}
 .twoverify-right-item .checkbox-group span em{color: #d6dff9;}
-.twoverify-right-item .checkbox-group span a{color: #11a8fe;text-decoration: underline;}
-.twoverify-right-item .checkbox-group span a:hover{color: #15c9ff;}
+.twoverify-right-item .checkbox-group span a{color: #fdb902;text-decoration: underline;}
+.twoverify-right-item .checkbox-group span a:hover{color: #fdb902;}
 
 .twoverify-right-item .button-group{position: absolute;bottom: 40px;left: 60px;width: 428px;}
 .twoverify-right-item .button-group /deep/ .button{
   display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;
-  font-weight: bold;font-size: 18px;color: #fff;background-color: #E3CB2B;border: none;border-radius: 0;cursor: pointer;
+  font-weight: bold;font-size: 18px;color: #261003;background-color: #fdb902;border: none;border-radius: 0;cursor: pointer;
 }
-.twoverify-right-item .button-group /deep/ .button:hover{background-color: #E3CB2B;}
+.twoverify-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
 .twoverify-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .twoverify-right-item .button-group .link{padding-top: 6px;overflow: auto;}
-.twoverify-right-item .button-group .link a{height: 24px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
+.twoverify-right-item .button-group .link a{height: 24px;line-height: 24px;color: #fdb902;text-decoration: underline;}
 .twoverify-right-item .button-group .link a:first-of-type{float: left;}
 .twoverify-right-item .button-group .link a:last-of-type{float: right;}
-.twoverify-right-item .button-group .link a:hover{color: #15c9ff;}
+.twoverify-right-item .button-group .link a:hover{color: #fdb902;}
 
 .twoverify-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #404b69;}
 .twoverify-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #404b69;}
@@ -270,9 +270,9 @@ export default {
 .verifyCode{position: relative;}
 .verifyCode /deep/ ul{display:flex;width:100%;height:41px;position:absolute;top:34px;left:0px;justify-content:space-between;}
 .verifyCode /deep/ ul li{display:flex;margin-right:8px;border-bottom:1px solid #54616c;height:100%;flex:1;font-size:24px;font-weight:bold;color:#CBD4EC;align-items:center;justify-content:center;}
-.verifyCode /deep/ ul li.active{border-bottom-color:#E3CB2B;}
+.verifyCode /deep/ ul li.active{border-bottom-color:#fdb902;}
 .verifyCode /deep/ ul li:last-child{margin-right:0;}
-.sendVerifyCode{height:34px;line-height:34px;cursor:pointer;position:absolute;z-index:10;right:0;top:0;color:#11a8fe;}
-.sendVerifyCode:hover{color:#15c9ff;}
+.sendVerifyCode{height:34px;line-height:34px;cursor:pointer;position:absolute;z-index:10;right:0;top:0;color:#fdb902;}
+.sendVerifyCode:hover{color:#fdb902;}
 .sendVerifyCode.disabled,.sendVerifyCode.disabled:hover{color:#999;cursor:not-allowed;}
 </style>

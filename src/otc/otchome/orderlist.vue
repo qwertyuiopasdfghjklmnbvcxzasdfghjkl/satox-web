@@ -391,10 +391,10 @@ export default {
 
 <style scoped>
 .order-list{margin-bottom:8px;background-color:#222121;}
-.order-list-title{height: 24px;padding: 0 20px;border-bottom:1px solid #404b69;}
-.order-list-title li{float: left;height: 24px;margin: 0 40px -1px 0;line-height: 24px;color: #8b94a9;border-bottom:1px solid #404b69;cursor: pointer;}
+.order-list-title{height: 24px;padding: 0 20px;border-bottom:1px solid #dedede;background:#dedede;}
+.order-list-title li{float: left;height: 24px;margin: 0 40px -1px 0;line-height: 24px;color: #6b6b6b;border-bottom:1px solid #dedede;cursor: pointer;}
 .order-list-title li:hover,
-.order-list-title li.active{color: #ffde00;border-bottom-color: #ffde00;}
+.order-list-title li.active{color: #4554f8;border-bottom-color: #FFDE00;}
 
 .uncompleted-list{padding: 8px 8px 0 8px;}
 .uncompleted-item{position: relative;margin-top: 8px;}
@@ -405,8 +405,8 @@ export default {
 .uncompleted-title span.numer{width:250px;}
 .uncompleted-title span.second{margin-left: 206px;margin-right: auto;}
 .uncompleted-title span.last{justify-content: flex-end;width: 230px;margin-left: 18px;}
-.uncompleted-title span em{color: #11a8fe;padding-left: 10px;cursor: pointer;}
-.uncompleted-title span em:hover{color: #15c9ff;}
+.uncompleted-title span em{color: #fdb902;padding-left: 10px;cursor: pointer;}
+.uncompleted-title span em:hover{color: #fdb902;}
 .uncompleted-title span em.disabled{color: #afb9ce;cursor: not-allowed;}
 .uncompleted-title span.second em{height: 24px;line-height: 24px;}
 .uncompleted-title span.second em.username,
@@ -440,10 +440,10 @@ export default {
 .completed-item span.time,
 .cancelled-item span.time{width: 130px;}
 .completed-item span.action{width: 130px;}
-.completed-item span.action .action-botton{height: 24px;padding: 0 8px;line-height: 24px;text-align: center;color: #11a8fe;background-color: transparent;border: 1px solid #11a8fe;border-radius: 4px;cursor: pointer;}
-.completed-item span.action .action-botton:hover{color: #15c9ff;border-color: #15c9ff;}
-.completed-item span.action em.icon-chat{font-size: 20px;color: #11a8fe;vertical-align: middle;}
-.completed-item span.action em.icon-chat:hover{color: #15c9ff;}
+.completed-item span.action .action-botton{height: 24px;padding: 0 8px;line-height: 24px;text-align: center;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;border-radius: 4px;cursor: pointer;}
+.completed-item span.action .action-botton:hover{color: #fdb902;border-color: #fdb902;}
+.completed-item span.action em.icon-chat{font-size: 20px;color: #fdb902;vertical-align: middle;}
+.completed-item span.action em.icon-chat:hover{color: #fdb902;}
 
 .nodata{text-align: center;}
 .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}

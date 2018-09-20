@@ -142,7 +142,7 @@ export default {
 .appeal{width: 400px;background-color: #222121;}
 .appeal h3{position: relative;height: 30px;font-weight: normal;font-size: 14px;line-height: 30px;color: #cbd4ec;text-align: center;background-color: #333232;}
 .appeal h3 a{position: absolute;right: 8px;top: 8px;color: #becbe8;}
-.appeal h3 a:hover{color: #11a8fe;}
+.appeal h3 a:hover{color: #fdb902;}
 
 .appeal-cont{padding: 10px 10px 20px 10px;}
 .explain{padding: 10px;background-color: #333232;border-radius: 4px;}
@@ -150,7 +150,7 @@ export default {
 .explain p:last-of-type{padding-bottom: 0;}
 .question{padding-top: 10px;}
 .question-row label{display: block;height: 24px;line-height: 24px;color: #becbe8;}
-.question-row label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.question-row label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
 .question-row select{width: 100%;height: 30px;padding-left: 4px;padding-right: 20px;color: #becbe8;background-position: right 4px center;border:1px solid #54616c;cursor: pointer;}
 .question-row select.error{border-color: #e53f3f;}
 .question-row textarea{box-sizing: border-box;width: 100%;height: 72px;padding: 5px;font: 12px/20px serif;color: #becbe8;vertical-align: top;background-color: transparent;border:1px solid #54616c;resize: none;}
@@ -162,9 +162,9 @@ export default {
 .question-row span{display: block;height: 24px;line-height: 24px;color: #e53f3f;}
 .question-button{padding-top: 10px;font-size: 0;line-height: 0;text-align: center;}
 .question-button input{min-width: 80px;height: 30px;padding-left: 24px;padding-right: 24px;border-radius: 4px;cursor: pointer;}
-.question-button input.cancel{margin-right: 30px;color: #11a8fe;background-color: transparent;border: 1px solid #11a8fe;}
-.question-button input.cancel:hover{color: #15c9ff;border-color: #15c9ff;}
-.question-button input.confirm{color: #fff;background-color: #11a8fe;}
-.question-button input.confirm:hover{background-color: #15c9ff;}
+.question-button input.cancel{margin-right: 30px;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;}
+.question-button input.cancel:hover{color: #fdb902;border-color: #fdb902;}
+.question-button input.confirm{color: #261003;background-color: #fdb902;}
+.question-button input.confirm:hover{background-color: #fdb902;}
 </style>
 

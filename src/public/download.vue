@@ -1,41 +1,60 @@
 <template>
     <div class="download">
-        <p class="title">{{$t('public0.public212')}}</p>
-        <div><img src="../assets/images/download/mobile.png"/></div>
-        <template v-if="isWeiXi">
-            <a class="button mtb" @click="showTip">
-                <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
-                <span>iPhone</span>
-            </a>
-            <a class="button" @click="showTip">
-                <img width="20px" height="25px" src="../assets/images/download/android.png"/>
-                <span>Android</span>
-            </a>
-        </template>
-        <template v-if="!isWeiXi">
-            <a class="button mtb" href="https://www.pgyer.com/nCfg">
-                <img width="24px" height="28px" src="../assets/images/download/iphone.png"/>
-                <span>iPhone</span>
-            </a>
-            <a href="/static/newton-pro-0918.apk" class="button" download="newton-pro-0918.apk">
-                <img width="20px" height="25px" src="../assets/images/download/android.png"/>
-                <span>Android</span>
-            </a>
-        </template>
-        <p class="wechat">
-            <!--微信内请点击右上角“...”按钮，使用浏览器打开。-->
-            {{$t('public0.public213')}}
-        </p>
+        <div class="banner1">
+            <div class="content">
+                <div>
+                    <img src="../assets/images/download/logo2.png"/>
+                </div>
+                <div class="title1">Stay Connected</div>
+                <div class="title2">
+                    <!--保持链接 实时掌握-->
+                    {{$t('public0.public228')}}
+                </div>
+                <div class="title3">We have created the mobile tools you need for trading on the go.</div>
+                <div class="buttons" v-if="isWeiXi">
+                    <a class="button" @click="showTip">
+                        <!--安卓下载-->
+                        {{$t('public0.public226')}}
+                    </a>
+                    <a class="button" @click="showTip">
+                        <!--IOS下载-->
+                        {{$t('public0.public227')}}
+                    </a>
+                </div>
+                <div class="buttons" v-if="!isWeiXi">
+                    <a class="button" :class="{en:getLang=='en'}" href="/static/newton-pro-0918.apk" download="newton-pro-0918.apk">
+                        <!--安卓下载-->
+                        {{$t('public0.public226')}}
+                    </a>
+                    <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/nCfg">
+                        <!--IOS下载-->
+                        {{$t('public0.public227')}}
+                    </a>
+                </div>
+                <div class="title4">Discover the mobile apps</div>
+            </div>
+        </div>
+        <div class="tips">
+            <img src="../assets/images/download/bg2.png"/>
+            <p>
+              <!--微信内请点击右上角“...”按钮，使用浏览器打开。-->
+              {{$t('public0.public213')}}
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
       isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent)
     }
+  },
+  computed: {
+    ...mapGetters(['getLang'])
   },
   methods: {
     showTip () {
@@ -49,17 +68,28 @@ export default {
 </script>
 
 <style scoped>
-.download{width:828px;min-height:556px;height:fit-content;margin:91px auto 0 auto;padding-top: 10px;display:flex;flex-direction:column;align-items:center;background:#1B1B1B;}
-.download .title{color:#FCDA00;font-size:16px;margin:31px 0 15px 0;}
-.download .button{display:flex;width:260px;height:50px;border:1px solid #FCDA00;color:#FCDA00;align-items:center;}
-.download .button.mtb{margin:41px 0 26px 0;}
-.download .button img{margin-left:70px}
-.download .button span{margin-left:18px;}
-.download .wechat{color:#CCC;font-size:14px;margin-top:21px;margin-top:10px;padding:0 20px;}
-
-@media screen and (max-width: 868px){
-    .download{width:calc(100% - 40px);min-height:500px;margin-top:30px;margin-bottom:30px;}
-    .download .title{margin:15px 0;}
-    .download .button.mtb{margin:20px 0 15px 0;}
+.download{min-width:1200px;width:100%;min-height:556px;height:fit-content;margin:15px auto 0 auto;display:flex;flex-direction:column;align-items:center;}
+.download .banner1{
+    min-width:1200px;width:100%;position: relative;display:flex;align-items:center;justify-content:center;
+    background:url(../assets/images/download/bg.png) no-repeat center;background-size:100%;
+}
+.download .banner1 > img{width:100%;}
+.download .banner1 .content{min-width:1200px;margin-top:30px;}
+.download .banner1 .content div img{width:300px;}
+.download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#4EECFF;}
+.download .banner1 .content .title2{font-size:36px;font-weight:bold;color:#FFF;line-height:73px;}
+.download .banner1 .content .title3{width:572px;font-size:30px;font-weight:bold;color:#FFFEFE;line-height:50px;}
+.download .banner1 .content .buttons{display:flex;width:448px;justify-content:space-between;}
+.download .banner1 .content .buttons .button{
+    display:flex;width:200px;height:121px;line-height:140px;background:url(../assets/images/download/btn.png) no-repeat center;
+    cursor: pointer;justify-content:center;color:#FFF;font-size:24px;font-weight:bold;
+}
+.download .banner1 .content .buttons .button.en{font-size:18px;}
+.download .banner1 .content .title4{font-size:20px;font-weight:bold;color:#BAB9B9;line-height:70px;}
+.download .tips{position: relative;display:flex;justify-content:center;}
+.download .tips img{width:100%;}
+.download .tips p{
+    height:100%;position:absolute;display:flex;align-items:center;top:0px;width:1200px;
+    font-size:27px;color:#010101;font-weight:bold;
 }
 </style>

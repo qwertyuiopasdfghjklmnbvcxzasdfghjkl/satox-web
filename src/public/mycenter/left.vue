@@ -31,7 +31,7 @@
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
             </li>
-            <li :class="{'active': active === 'message'}" @click="switch_like">
+            <li @click="switch_like">
                 <i class="icon-like"></i>
                 <span>{{$t('message.my_referral_center')}}</span>
                 <!--我的推荐中心-->
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     switch_like () {
-        this.$router.push({name: 'invite'})
+      this.$router.push({name: 'invite'})
     },
     switch_tab (tab) {
       this.$emit('switchTab', tab)

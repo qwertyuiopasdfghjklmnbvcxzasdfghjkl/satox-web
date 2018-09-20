@@ -269,10 +269,10 @@ export default {
 
 <style scoped>
 .ad-container{position:relative;background-color:#222121;}
-.ad-tabs{display:flex;padding:0 20px;border-bottom:1px solid #404b69;}
-.ad-tabs-item{height:24px;line-height:24px;margin-right:40px;margin-bottom:-1px;color:#8b94a9;border-bottom:1px solid #404b69;cursor:pointer;}
+.ad-tabs{display:flex;padding:0 20px;border-bottom:1px solid #dedede;background:#dedede;}
+.ad-tabs-item{height:24px;line-height:24px;margin-right:40px;margin-bottom:-1px;color:#6b6b6b;border-bottom:1px solid #dedede;cursor:pointer;}
 .ad-tabs-item:hover,
-.ad-tabs-item.active{border-bottom-color: #FFDE00;color:#FFDE00;}
+.ad-tabs-item.active{border-bottom-color: #FFDE00;color:#4554f8;}
 .ad-list{display:flex;flex-flow:column;padding: 0 20px 24px 20px;}
 .ad-list-history{padding-bottom: 0;}
 .ad-list-item{display:flex;justify-content:space-between;border-bottom:1px solid #404b69;}
@@ -287,8 +287,8 @@ export default {
 .ad-list-item-operate{width:80px;}
 .ad-list-item-type.buy{color:#0ee7a5;}
 .ad-list-item-type.sell{color:#ff7342;}
-.ad-list-item-btn{height:20px;margin-top:5px;color:#11a8fe;vertical-align:top;background-color:transparent;border:1px solid #11a8fe;border-radius:4px;cursor:pointer;}
-.ad-list-item-btn:hover{color:#15c9ff;border-color:#15c9ff}
+.ad-list-item-btn{height:20px;margin-top:5px;color:#fdb902;vertical-align:top;background-color:transparent;border:1px solid #fdb902;border-radius:4px;cursor:pointer;}
+.ad-list-item-btn:hover{color:#fdb902;border-color:#fdb902}
 .ad-nodata{text-align: center;}
 .ad-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
 .ad-nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}

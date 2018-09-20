@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .ad-confirm{width: 560px;}
-.title{height: 34px;font-weight: bold;font-size: 16px;line-height: 34px;color: #11a8fe;border-bottom: 1px solid #333232;}
+.title{height: 34px;font-weight: bold;font-size: 16px;line-height: 34px;color: #fdb902;border-bottom: 1px solid #333232;}
 .ad-row{overflow: auto}
 .ad-row-header{color: #8a93a8;}
 .ad-row /deep/ span{float: left;min-height: 30px;line-height: 30px;padding-right: 10px;}
