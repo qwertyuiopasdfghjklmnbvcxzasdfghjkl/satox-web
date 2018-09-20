@@ -147,7 +147,7 @@ export default {
 </script>
 
 <style scoped>
-.coininfo{position:absolute;z-index:10;top:0;left:0;width:100%;height:0;background-color:rgba(222,222,222,0.95);transition:300ms;overflow:hidden;display:flex;flex-flow:column;}
+.coininfo{position:absolute;z-index:10;top:0;left:0;width:100%;height:0;background-color:rgba(255,255,255,0.95);transition:300ms;overflow:hidden;display:flex;flex-flow:column;}
 .coininfo.show{height:100%;}
 .coininfo-top{height:80px;margin:40px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;}
 .coininfo-top-left,.coininfo-top-right{display:flex;align-items:center;}

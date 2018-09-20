@@ -582,9 +582,9 @@ export default {
 .panel.sell /deep/ .buttons span{background-color: #e76d42;}
 .panel.buy /deep/ .buttons span:hover{background-color: #0ee7a5;}
 .panel.sell /deep/ .buttons span:hover{background-color: #ff7342;}
-.buttons /deep/ div{width:calc(100% - 92px);border:1px solid #11a8fe;margin-left:90px;display:flex;justify-content:center;align-items:center;}
-.buttons /deep/ div a{font-size:18px;color:#11a8fe;cursor: pointer;font-weight:normal;}
-.buttons /deep/ div a:hover{color:#15c9ff;}
+.buttons /deep/ div{width:calc(100% - 92px);border:1px solid #fdb902;margin-left:90px;display:flex;justify-content:center;align-items:center;}
+.buttons /deep/ div a{font-size:18px;color:#fdb902;cursor: pointer;font-weight:normal;}
+.buttons /deep/ div a:hover{color:#fdb902;}
 .buttons /deep/ div font{padding:0 8px;font-size:16px;}
 .error-tip{position:absolute;z-index:999;top:-30px;left:50px;height:24px;line-height:24px;background:#fff;padding:0 20px;font-size:12px;color: #e53f3f;border-radius:4px;}
 .error-tip::before{left:calc(50% - 6px);bottom:-15px;position:absolute;color:#fff;}
