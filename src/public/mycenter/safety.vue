@@ -428,50 +428,50 @@ export default {
 .secretkey-tips .tips-icon:hover + .tips-text,
 .cellphone-tips .tips-icon:hover + .tips-text{display: block;}
 .secretkey{display: flex;align-items: center;}
-.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #404b69;}
+.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #fdb902;}
 .secretkey .secretkey-tips{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;margin-left: 6px;}
 .secretkey .secretkey-tips .tips-icon{background-color: #e53f3f;}
 
-.password{background-color: #222121;}
+.password{background-color: #FFFFFF;}
 .password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px;}
 .password-level-left{font-size: 0;line-height: 0;}
 .password-level-left img{margin-right: 50px;vertical-align: middle;}
-.password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #becbe8;vertical-align: middle;}
+.password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
 .password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #100E0E;border-radius: 8px;}
 .password-level-left .state span{display: block;height: 16px;font-size: 14px;line-height: 16px;color: #fff;text-align: center;border-radius: 8px;}
 .password-level-left .state span.low{width: 70px;background-color: #e76d42;}
 .password-level-left .state span.middle{width: 140px;background-color: #e76d42;}
 .password-level-left .state span.high{width: 210px;background-color: #03c087;}
-.password-level-right input{min-width: 140px;height: 30px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
-.password-level-right input:hover{background-color: #15c9ff;}
+.password-level-right input{min-width: 140px;height: 30px;padding: 0 30px;color: #261003;text-align: center;vertical-align: top;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
+.password-level-right input:hover{background-color: #fdb902;}
 
-.google{margin-top: 8px;background-color: #222121;}
+.google{margin-top: 8px;background-color: #FFFFFF;}
 .google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px;}
 .google-content-left{font-size: 0;line-height: 0;}
 .google-content-left img{margin-right: 50px;vertical-align: middle;}
-.google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #becbe8;vertical-align: middle;}
-.google-content-center .state{color: #becbe8;}
+.google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
+.google-content-center .state{color: #261003;}
 .google-content-center .bind-qrcode{float: left;width: 150px;height: 150px;padding: 10px;background-color: #ccc;}
 .google-content-center .bind-form{float: left;width: 200px;padding-left: 24px;}
 .cellphone .google-content-center .bind-form{padding-left: 0;}
 .google-content-center .bind-form p,
-.google-content-center .unbind-form p{min-height: 24px;line-height: 24px;color: #becbe8;}
+.google-content-center .unbind-form p{min-height: 24px;line-height: 24px;color: #261003;}
 .google-content-center .bind-form input,
-.google-content-center .unbind-form input{width: 190px;height: 22px;color: #becbe8;vertical-align: top;background-color: transparent;border: 1px solid #becbe8;}
+.google-content-center .unbind-form input{width: 190px;height: 22px;color: #cbd4ec;vertical-align: top;background-color: #261003;border: 1px solid #becbe8;}
 .google-content-center .bind-form input.error,
 .google-content-center .unbind-form input.error{border-color: #e53f3f;}
 .google-content-center .bind-form em.asterisk,
-.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #e53f3f;}
 .google-content-center .bind-form em.error,
 .google-content-center .unbind-form em.error{display: block;height: 24px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
-.google-content-center button{width:120px;height:24px;padding: 0;color:#fff;background-color:#11a8fe;border-radius:4px;cursor:pointer;}
-.google-content-center button:hover{background-color: #15c9ff;}
+.google-content-center button{width:120px;height:24px;padding: 0;color:#261003;background-color:#fdb902;border-radius:4px;cursor:pointer;}
+.google-content-center button:hover{background-color: #fdb902;}
 .google-content-center button.disabled,
-.google-content-center button.disabled:hover{background-color:#999;cursor:not-allowed;}
-.google-content-right input{min-width: 140px;height: 30px;padding: 0px 30px;color: #fff;text-align: center;vertical-align: top;border-radius: 4px;background-color: #11a8fe;cursor: pointer;}
-.google-content-right input:hover{background-color: #15c9ff;}
-.google-content-right input.cancel{margin-top:4px;color:#11a8fe;background-color:transparent;border:1px solid #11a8fe;}
-.google-content-right input.cancel:hover{color:#15c9ff;border-color:#15c9ff;}
+.google-content-center button.disabled:hover{background-color:#999;color:#FFF;cursor:not-allowed;}
+.google-content-right input{min-width: 140px;height: 30px;padding: 0px 30px;color: #261003;text-align: center;vertical-align: top;border-radius: 4px;background-color: #fdb902;cursor: pointer;}
+.google-content-right input:hover{background-color: #fdb902;}
+.google-content-right input.cancel{margin-top:4px;color:#261003;background-color:transparent;border:1px solid #fdb902;}
+.google-content-right input.cancel:hover{color:#261003;border-color:#fdb902;}
 
 .mobile{position:relative;}
 .mobile /deep/ select{

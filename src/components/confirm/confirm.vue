@@ -45,7 +45,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#becbe8'
+      default: '#261003'
     },
     content: null,
     autoClose: {
@@ -133,15 +133,15 @@ export default {
 </script>
 
 <style scoped>
-.dialog{display:flex;flex-flow:column;background-color:#222121;}
-.top{width:100%;height:30px;position:relative;background-color:#333232;justify-content:center;align-items:center;display:flex;color:#becbe8;}
+.dialog{display:flex;flex-flow:column;background-color:#FFF;}
+.top{width:100%;height:30px;position:relative;background-color:#323232;justify-content:center;align-items:center;display:flex;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;padding:30px;}
-.content{color:#becbe8;font-size:16px;word-wrap:break-word;word-break:normal;}
+.content{color:#261003;font-size:16px;word-wrap:break-word;word-break:normal;}
 .buttons{margin-top:20px;display:flex;align-items:center;}
 .buttons-center{align-self:center;}
 .buttons-right{align-self:flex-end;}
-.button{display:flex;justify-content:center;align-items:center;min-width:80px;height:30px;line-height:30px;color:#fff;background-color:#11a8fe;border-radius:4px;cursor:pointer;}
-.button:hover{background-color:#15c9ff;}
-.button.cancel{margin-right:10px;color:#11a8fe;background-color:transparent;border:1px solid #11a8fe;}
-.button.cancel:hover{color:#15c9ff;border-color:#15c9ff;}
+.button{display:flex;justify-content:center;align-items:center;min-width:80px;height:30px;line-height:30px;color:#261003;background-color:#fdb902;border-radius:4px;cursor:pointer;}
+.button:hover{background-color:#fdb902;}
+.button.cancel{margin-right:10px;color:#261003;background-color:transparent;border:1px solid #fdb902;}
+.button.cancel:hover{color:#261003;border-color:#fdb902;}
 </style>

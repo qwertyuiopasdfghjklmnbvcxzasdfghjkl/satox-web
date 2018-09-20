@@ -513,41 +513,45 @@ export default {
 
 <style scoped>
 .form-list{display: flex;flex-flow: column;}
-.form-item{margin-top: 8px;background-color: #222121;}
+.form-item{margin-top: 8px;background-color: #FFFFFF;}
 .form-item:first-of-type{margin-top: 0;}
 .form-item h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
 .form-flex{display: flex;justify-content: space-between;align-items: center;height: 120px;padding-left: 30px;padding-right: 30px;}
 .form-flex-left{font-size: 0;line-height: 0;}
 .form-flex-left i{display: inline-block;margin-right: 20px;font-size: 20px;color: #11a8fe;vertical-align: middle;}
-.form-flex-left em{display: inline-block;width: 160px;min-height: 20px;font-size: 14px;line-height: 20px;vertical-align: middle;color: #d6dff9;}
+.form-flex-left em{display: inline-block;width: 160px;min-height: 20px;font-size: 14px;line-height: 20px;vertical-align: middle;color: #261003;}
 .form-flex-center{width:300px;}
-.form-flex-center p{line-height: 24px;color: #d6dff9;}
+.form-flex-center p{line-height: 24px;color: #261003;}
 .form-flex-center .not-set p{min-height: 24px;}
 .form-flex-center .have-set p{height: 24px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .form-flex-right{width: 200px;text-align: right;}
-.form-flex-right span{display: inline-block;min-width: 52px;height: 30px;padding-left: 24px;padding-right: 24px;line-height: 30px;color: #fff;text-align: center;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
-.form-flex-right span:hover{background-color: #15c9ff;}
+.form-flex-right span{display: inline-block;min-width: 52px;height: 30px;padding-left: 24px;padding-right: 24px;line-height: 30px;color: #261003;text-align: center;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
+.form-flex-right span:hover{background-color: #fdb902;}
 
 .form-table{padding: 30px;}
 .form-row{display: flex;padding-bottom: 10px}
 .form-row-top{position: relative}
 .form-row-bottom{justify-content: flex-end;padding-bottom: 0;font-size: 0;line-height: 0;}
-.form-icon{position: absolute;top: 3px;font-size: 24px;color: #11a8fe;}
-.form-label{width: 152px;height: 30px;line-height: 30px;padding-left: 48px;color: #d6dff9;}
-.form-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#11a8fe;}
-.form-input{width: 270px;height: 28px;color: #d6dff9;background-color: transparent;border: 1px solid #505e83;}
+.form-icon{position: absolute;top: 3px;font-size: 24px;}
+.form-item .icon-bank{color:#ea1416;}
+.form-item .icon-wechat{color:#69c03e;}
+.form-item .icon-alipay{color:#1cc5e4;}
+.form-item .icon-paypal{color:#2a74d3;}
+.form-label{width: 152px;height: 30px;line-height: 30px;padding-left: 48px;color: #261003;}
+.form-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#e53f3f;}
+.form-input{width: 270px;height: 28px;color: #cbd4ec;background-color: #261003;border: 1px solid #505e83;}
 .form-input[readonly='readonly']{cursor: not-allowed}
 .form-input.error{border-color: #e53f3f;}
 .form-upload{display: flex;align-items: center;justify-content: center;position: relative;width: 138px;height: 138px;border: 1px solid #505e83;}
 .form-upload.error{border-color: #e53f3f;}
-.form-upload-span{color: #becbe8;text-align: center;}
+.form-upload-span{color: #261003;text-align: center;}
 .form-upload-img{width: 100%;height: 100%;}
 .form-upload-file{position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0;cursor: pointer;}
 .form-error{height: 30px;line-height: 30px;color: #e53f3f;text-indent: 10px;}
 .form-upload + .form-error{align-self: flex-end;}
-.form-cancel{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;margin-right: 30px;color: #11a8fe;text-align: center;background-color: transparent;border: 1px solid #11a8fe;border-radius: 4px;cursor: pointer;}
-.form-cancel:hover{color: #15c9ff;border-color: #15c9ff;}
-.form-save{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;color: #fff;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
-.form-save:hover{background-color: #15c9ff;}
+.form-cancel{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;margin-right: 30px;color: #261003;text-align: center;background-color: transparent;border: 1px solid #fdb902;border-radius: 4px;cursor: pointer;}
+.form-cancel:hover{color: #261003;border-color: #fdb902;}
+.form-save{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;color: #261003;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
+.form-save:hover{background-color: #fdb902;}
 </style>

@@ -141,7 +141,7 @@ export default {
 .export-record-title{display: flex;justify-content: center;align-items: center;height: 30px;padding-left: 18px;padding-right: 18px;background-color: #333232;}
 .export-record-title h3{margin-left: auto;margin-right: -12px;font-size: 14px;color: #becbe8;}
 .export-record-title i{margin-left: auto;font-size: 12px;color: #becbe8;cursor: pointer;}
-.export-record-title i:hover{color: #11a8fe;}
+.export-record-title i:hover{color: #fdb902;}
 .export-record-cont{padding: 24px 35px 30px 35px;}
 .export-record-cont .label{display: block;height: 24px;line-height: 24px;color: #becbe8;}
 .export-record-cont .list{padding-top: 10px;overflow: auto;}
@@ -149,9 +149,9 @@ export default {
 .export-record-cont .list label{cursor: pointer;}
 .export-record-cont .list label input{display: none;}
 .export-record-cont .list label em{font-size: 12px;color: #becbe8;}
-.export-record-cont .list label em::before{content: "";display: inline-block;width: 10px;height: 10px;margin-right: 12px;vertical-align: -1px;border: 1px solid #11a8fe;}
-.export-record-cont .list label input:checked + em::before{background-color: #11a8fe;}
-.export-record-cont .prompt{height: 34px;line-height: 34px;font-size: 12px;color: #11a8fe;}
-.export-record-cont .button button{width: 100%;height: 30px;font-size: 14px;color: #fff;background-color: #11a8fe;border-radius: 4px;cursor: pointer;}
-.export-record-cont .button button:hover{background-color: #15c9ff;}
+.export-record-cont .list label em::before{content: "";display: inline-block;width: 10px;height: 10px;margin-right: 12px;vertical-align: -1px;border: 1px solid #fdb902;}
+.export-record-cont .list label input:checked + em::before{background-color: #fdb902;}
+.export-record-cont .prompt{height: 34px;line-height: 34px;font-size: 12px;color: #fdb902;}
+.export-record-cont .button button{width: 100%;height: 30px;font-size: 14px;color: #261003;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
+.export-record-cont .button button:hover{background-color: #fdb902;}
 </style>

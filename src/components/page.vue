@@ -93,15 +93,15 @@ export default {
 <style scoped>
 .page-list{padding-top: 24px;padding-bottom: 24px;line-height: 0;font-size: 0;text-align: center;}
 .page-item{display: inline-block;height: 20px;line-height: 20px;padding-left: 4px;padding-right: 4px;font-weight: bold;font-size: 16px;color: #959eb7;cursor: pointer;}
-.page-item:hover{color: #11a8fe;}
+.page-item:hover{color: #fdb902;}
 .page-item.more{cursor: default;}
 .page-item.more:hover{color: #959eb7;}
-.page-item.prev{padding-left: 0;padding-right: 0;margin-right: 20px;color: #11a8fe;}
-.page-item.next{padding-left: 0;padding-right: 0;margin-left: 20px;color: #11a8fe;}
-.page-item.active{color: #11a8fe;}
+.page-item.prev{padding-left: 0;padding-right: 0;margin-right: 20px;color: #fdb902;}
+.page-item.next{padding-left: 0;padding-right: 0;margin-left: 20px;color: #fdb902;}
+.page-item.active{color: #fdb902;}
 .page-item.prev:hover,
 .page-item.next:hover,
-.page-item.active:hover{color: #15c9ff;}
+.page-item.active:hover{color: #fdb902;}
 .page-item.disabled{color: #959eb7;cursor: not-allowed;}
 .page-item.disabled:hover{color: #959eb7;}
 </style>

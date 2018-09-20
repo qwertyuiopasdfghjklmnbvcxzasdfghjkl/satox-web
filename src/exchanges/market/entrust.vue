@@ -358,19 +358,23 @@ export default {
 .entrust{background-color: #222121;}
 .entrust.unfold{height: 200px;}
 .title{position: relative;background-color: #333232;overflow: auto;}
+.entrust.unfold .title{background:#dcdcdc;}
 .menu-arrow{position: absolute;top: 50%;left: 10px;width: 16px;height: 16px;margin-top: -8px;overflow: hidden;cursor: pointer;}
 .menu-arrow i{position: absolute;left: 0;font-size: 16px;color: #FFF;}
 .menu-arrow i:first-of-type{top: -3px;}
 .menu-arrow i:last-of-type{top: 3px;}
 .menu-arrow:hover i,
 .menu-arrow.unfold i{color: #FFDE00;}
+.entrust.unfold .menu-arrow:hover i,
+.entrust.unfold .menu-arrow.unfold i{color:#000;}
 .menu-title{
   float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-left: 2px;font-size: 16px;
   line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
 }
+.entrust.unfold .menu-title{color:#000;border-top-color:#dcdcdc;}
 .menu-title:first-of-type{margin-left:40px;}
 .menu-title:hover,
-.menu-title.menu-selected{color: #FFDE00;border-top-color: #FFDE00;background:#222121;}
+.menu-title.menu-selected{color: #FFDE00!important;border-top-color: #FFDE00!important;background:#222121;}
 .menu-allrepeal{display: flex;align-items: center;float: right;height: 24px;margin-top: 8px;margin-right: 10px;cursor: pointer;}
 .menu-allrepeal a{color:#FFDE00;}
 .menu-allrepeal i{padding-left: 8px;margin-top: 1px;font-size: 14px;color: #FFDE00;}

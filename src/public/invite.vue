@@ -86,13 +86,15 @@
                 </div>
                 <div class="invite_code_list">
                     <div class="title">{{$t('referral.invitation_rank')}}<!--邀请排行--></div>
-                    <ul>
+                    <ul class="header">
                         <li>
                             <span>Top</span>
                             <span class="list-username">ID</span>
                             <span class="list-totalMx">{{$t('referral.referral_friends_count')}}<!--好友数--></span>
                             <span class="list-rewrard">{{$t('referral.commission')}}<!--奖励--></span>
                         </li>
+                    </ul>
+                    <ul>
                         <li v-for="(data,index) in inviteData" :key="data.id">
                             <span :class="'number' + index" class="list_top">{{index+1}}</span>
                             <span class="list-username">{{data.username}}</span>
@@ -233,13 +235,13 @@ export default {
 </script>
 <style scoped>
 .invite{position: relative;overflow: hidden;margin: 0 auto;}
-.banner{background:  #0d1426;}
-.banner-img{width: 1200px;margin: 0 auto;}
+.banner{background:transparent;}
+.banner-img{width: 100%;margin: 0 auto;}
 .banner img{width: 100%;}
-.invite_code{background: #181b2a;margin-top: 30px; }
-.invite_code .title{background: #1b1e2e;height: 40px;line-height: 40px;color: #cbd4ec;font-size: 16px;padding-left: 30px;}
+.invite_code{background: #313131;margin-top: 30px; }
+.invite_code .title{background: #dfdfdf;height: 40px;line-height: 40px;color: #261003;font-size: 16px;padding-left: 30px;}
 .content{width: 1200px;margin:  0 auto;}
-.invite_list{display: flex;justify-content: space-between; background: #181b2a;color: #cbd4ec;padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px;}
+.invite_list{display: flex;justify-content: space-between; background: #313131;color: #c3c3c3;padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px;}
 .my_code{border-bottom: 1px solid #262a42;justify-content: start;}
 .my_code .invite_caption{padding-right: 90px;}
 .invite_caption{width: 100px}
@@ -264,26 +266,29 @@ export default {
 .invite_caption>div{line-height: 30px;position: relative;}
 .invite_caption{line-height: 60px;text-align: center;}
 .invite_caption>div img{vertical-align: middle;position: absolute;top: 2px;left: -5px;}
-.invite_caption>div span{display: inline-block;height: 20px;line-height: 20px; width: 75px;background: #e4ac46;text-align: center;color: #fff;}
+.invite_caption>div span{display: inline-block;height: 20px;line-height: 20px; width: 75px;background: #fdb902;text-align: center;color: #fff;}
 .invite_caption>div.m2 span{background: #9e9fb9;}
 .invite_caption>div.m3 span{background: #b8a481;}
-.invite_list_content{width: 430px;background: #262a42;padding: 10px;margin-right: 20px;}
-.invite_span{background: #11a8fe;color: #fff;height: 30px;line-height: 30px;cursor: pointer;padding-left: 5px;padding-right: 5px;}
+.invite_list_content{width: 430px;background: #dfdfdf;padding: 10px;margin-right: 20px;color:#000;}
+.invite_span{background: #fdb902;color: #261003;height: 30px;line-height: 30px;cursor: pointer;padding-left: 5px;padding-right: 5px;}
 .witer{justify-content: start;margin-bottom: 10px;align-items: center;}
 .witer .invite_caption{margin-right: 40px;}
-.invite_code_list .title{background: #1b1e2e;height: 40px;line-height: 40px;color: #cbd4ec;font-size: 16px;padding-left: 30px;}
+.invite_code_list .title{background: #dfdfdf;height: 40px;line-height: 40px;color: #261003;font-size: 16px;padding-left: 30px;}
+.invite_code_list ul.header{background:#fdb902;}
 .invite_code_list ul li span.number0{display: inline-block;width: 20px;height:20px;line-height: 20px;text-align: center;color: #fff; border-radius: 50%;background: #ffbc31;}
 .invite_code_list ul li span.number1{display: inline-block;width: 20px;height:20px;line-height: 20px;text-align: center;color: #fff; border-radius: 50%;background: #8ea4c1;}
 .invite_code_list ul li span.number2{display: inline-block;width: 20px;height:20px;line-height: 20px;text-align: center;color: #fff; border-radius: 50%;background: #9e8663;}
 .invite_code_list ul li span.list_top{display: inline-block;width: 20px;height:20px;line-height: 20px;text-align: center;color: #fff; border-radius: 50%;}
-.invite_code_list ul li{display: flex;justify-content: space-between;align-items: center; border-bottom: 1px solid #262a42;color: #cbd4ec;font-size: 14px;line-height: 60px;}
+.invite_code_list ul li{display: flex;justify-content: space-between;align-items: center; border-bottom: 1px solid #262a42;color: #c3c3c3;font-size: 14px;line-height: 60px;}
+.invite_code_list ul.header li{border-bottom:none;color:#261003;}
 .invite_code_list ul li span>em{display: block;line-height: 30px;}
 .invite_code_list ul {padding-left: 30px;padding-right: 30px;}
-.rule .title{background: #1b1e2e;height: 40px;line-height: 40px;color: #cbd4ec;font-size: 16px;}
-.rule {margin-top: 30px; color: #becbe8;background: #181b2a;padding-left: 40px;padding-right: 40px;padding-bottom: 40px;margin-bottom: 30px;}
+.rule .title{background: #dfdfdf;height: 40px;line-height: 40px;color: #000;font-size: 16px;}
+.rule {margin-top: 30px; color: #c3c3c3;background: #313131;padding-bottom: 40px;margin-bottom: 30px;}
 .rule p{line-height: 40px;}
-.remark_title {font-size: 14px;color: #becbe8;line-height: 40px;}
-.remark_title span{color: #11a8fe;margin-right: 20px;}
+.rule > *{padding:0 40px;}
+.remark_title {font-size: 14px;color: #c3c3c3;line-height: 40px;}
+.remark_title span{color: #c3c3c3;margin-right: 20px;}
 .detail{margin-left: 20px;}
 .bottom{background: #090f1f;margin-top: 30px;}
 .bottom-center{display:flex;margin:0 auto;width:1172px;height:50px;border-bottom:1px solid #404b69;color:#586687;justify-content:space-between;align-items:center;}
@@ -312,15 +317,17 @@ a.icon-weixin:hover .wechat{display: block;}
 .footer > p{line-height: 80px;}
 .foot{width: 100%;background: #060b1b;height: 130px;margin-top: 30px;}
 .foot-cont{width: 1200px;margin: 0 auto;}
-.invite_code_list{background: #181b2a;margin-top: 30px;}
-.share{margin-left: 30px;cursor: pointer;color: #7077a0;}
-.invite_caption_code{color: #11a8fe;line-height: 60px;}
-.invite_info{height: 502px;background: #181b2a;text-align: center;align-items: center;display: flex;}
-.invite_info_login{width: 396px;height: 230px;background: #262a42;margin: 0 auto;}
-.info-btn-login{background: #11a8fe;color: #fff;width: 76px;height: 30px;margin-right: 30px;}
-.info-btn span{display: inline-block;line-height: 30px;text-align: center;cursor: pointer;}
-.info-btn-reg{display: inline-block;width: 74px;height: 28px;line-height: 30px;text-align: center;border:1px solid #11a8fe;color: #11a8fe;}
-.invite_info_login p{font-size: 16xp;color: #becbe8;line-height: 108px;}
+.invite_code_list{background: #313131;margin-top: 30px;}
+.share{margin-left: 30px;cursor: pointer;color: #c3c3c3;}
+.invite_caption_code{color: #c3c3c3;line-height: 60px;}
+.invite_info{height: 502px;background:url(../assets/images/invite/banner-login.png) no-repeat center;background-size:100% 100%;text-align: center;align-items: center;display: flex;}
+.invite_info_login{width: 435px;height: 230px;background:transparent;margin: 0 auto;margin-top:283px;}
+.info-btn-login{color: #000;height:60px;}
+.info-btn{display:flex;width:100%;align-items:center;justify-content:center;font-size:16px;}
+.info-btn span{flex:1;line-height:60px;text-align: center;cursor: pointer;}
+.info-btn span:first-child{margin-right:50px;margin-left:60px;}
+.info-btn span:last-child{margin-right:70px;}
+.invite_info_login p{font-size: 16xp;color: #FFF;line-height: 80px;}
 .list-totalMx{width: 180px;text-align: center;}
 .list-username{width: 180px;text-align: center;}
 .list-rewrard{width: 180px;text-align: center;}

@@ -20,7 +20,7 @@ a{ text-decoration:none; color:#d6dff9;}
 input,button,select,textarea{outline:none; border:none;box-shadow:none;}
 input[type='number']::-webkit-outer-spin-button,input[type='number']::-webkit-inner-spin-button {appearance:none!important;margin: 0;}
 input[type='number']{-moz-appearance:textfield!important;}
-select{appearance:none;background: url(/static/images/arrow-down.png) no-repeat scroll right center transparent;background-size:12px;padding-right:12px;}
+select{appearance:none;background: url(../images/arrow-down.png) no-repeat scroll right center transparent;background-size:12px;padding-right:12px;}
 option{background-color:#CCC;color:#333;}
 .width1200{margin:0 auto;width:1024px;background-color:#fff;height: calc(100% - 70px)}
 .width1050{width:984px;margin:0 auto;}
@@ -35,7 +35,7 @@ input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;border: 1
 .clearfix{*zoom: 1;}
 .height100{height: 100vh;}
 input[type='text'],input[type='number'],input[type='password']{padding:0 4px;}
-input[type='text']:focus,input[type='number']:focus,input[type='password']:focus,textarea:focus,input[type='search']:focus{border-color:#11a8fe!important;}
+input[type='text']:focus,input[type='number']:focus,input[type='password']:focus,textarea:focus,input[type='search']:focus{border-color:#fdb902!important;}
 /* 向上的箭头 */
 .arrow-top{border-width:10px;border-color:#182138;border-top-width:0;border-style:dashed;border-bottom-style:solid;border-left-color: transparent;border-right-color:transparent;}
 div.hopscotch-bubble{background-color:#404b69;border-color:#6d7da4;}

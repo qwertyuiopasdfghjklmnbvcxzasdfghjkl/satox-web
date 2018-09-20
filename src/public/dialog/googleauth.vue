@@ -105,10 +105,12 @@ export default {
 .dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
 .top{width:100%;height:30px;position:relative;background-color:#333232;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #11a8fe;}
+.icon-close:hover{color: #fdb902;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .input{background-color:#100E0E;border-color:#54616c;}
+.form /deep/ .title{color:#becbe8;}
+.form /deep/ .input,.form /deep/ .input.error{background-color:#FFF;border-color:#54616c;color:#261003;}
+.form /deep/ .input:focus{background-color:#FFF;}
 .warm-prompt{width: 272px;padding-top: 20px;}
 .warm-prompt p{min-height: 20px;line-height: 20px;color: #becbe8;}
 </style>

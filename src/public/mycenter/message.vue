@@ -145,8 +145,8 @@ export default {
 .message-title{display: flex;justify-content: space-between;align-items: center;height: 24px;padding-left: 8px;padding-right: 8px;background-color: #333232;}
 .message-title span{font-weight: bold;font-size: 14px;color: #becbe8;}
 .message-title select{height: 18px;padding-left: 12px;padding-right: 20px;margin-left: 20px;margin-right: auto;font: 12px/normal "Microsoft YaHei";color: #8b94a9;background-position: right 4px center;border: 1px solid #8b94a9;cursor: pointer;}
-.message-title a{font-weight: normal;font-size: 12px;color: #11a8fe;}
-.message-title a:hover{color: #15c9ff;}
+.message-title a{font-weight: normal;font-size: 12px;color: #fdb902;}
+.message-title a:hover{color: #fdb902;}
 .message-title a.disabled{color: #999;cursor: not-allowed;}
 .message-title a.disabled:hover{color: #999;}
 .message-list{padding-left: 8px;padding-right: 8px;}
@@ -160,7 +160,7 @@ export default {
 .message-item-title .time{font-size: 12px;color: #8b94a9;}
 .message-item-cont{padding: 8px 6px 0 6px;}
 .message-item-cont .inner{padding: 12px 16px;line-height: 20px;font-size: 12px;color: #becbe8;word-wrap: break-word;background-color: #333232;}
-.message-nodata{text-align: center;}
+.message-nodata{text-align: center;background:#FFF;}
 .message-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
 .message-nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>
