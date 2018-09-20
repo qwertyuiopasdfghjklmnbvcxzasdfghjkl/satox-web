@@ -65,7 +65,7 @@ export default {
       marketApi.rateSysparams((res) => {
         res.forEach((item) => {
           if (item.code === 'transactionRate') {
-            this.rateData = item.value
+            this.rateData = item.value * 100
           }
         })
       })
