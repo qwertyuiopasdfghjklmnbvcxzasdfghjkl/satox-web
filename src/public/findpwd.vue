@@ -246,7 +246,7 @@ export default {
 .login-right-item .captcha img{float: right;margin-top: 34px;cursor: pointer;}
 
 .login-right-item .checkbox-group{overflow: auto;}
-.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #11a8fe;text-indent: 1px;cursor: pointer;}
+.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #fdb902;text-indent: 1px;cursor: pointer;}
 .login-right-item .checkbox-group i:hover{color: #fdb902;}
 .login-right-item .checkbox-group span{float: left;width: 406px;min-height: 30px;padding-left: 8px;line-height: 30px;}
 .login-right-item .checkbox-group span em{color: #d6dff9;}
@@ -262,10 +262,10 @@ export default {
 .login-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
 .login-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .login-right-item .button-group .link{padding-top: 6px;overflow: auto;}
-.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #11a8fe;text-decoration: underline;}
+.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #fdb902;text-decoration: underline;}
 .login-right-item .button-group .link a:first-of-type{float: left;}
 .login-right-item .button-group .link a:last-of-type{float: right;}
-.login-right-item .button-group .link a:hover{color: #15c9ff;}
+.login-right-item .button-group .link a:hover{color: #fdb902;}
 
 .login-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #8a96b2;}

@@ -54,7 +54,7 @@ export default {
 .dialog{display:flex;justify-content:center;flex-flow:column;background-color:#404b69;}
 .top{width:100%;height:30px;position:relative;background-color:#283149;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #11a8fe;}
+.icon-close:hover{color: #fdb902;}
 .title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
 </style>

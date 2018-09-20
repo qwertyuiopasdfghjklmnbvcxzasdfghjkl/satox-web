@@ -288,6 +288,6 @@ export default {
 .accountInfo-lists li .items>div.useable{width: 180px;}
 .accountInfo-lists li .items>div.locked{width: 180px;}
 .accountInfo-lists li .items>div.opreat{width: 80px;}
-.accountInfo-lists li .items>div.action{width: 80px;color: #11a8fe;}
+.accountInfo-lists li .items>div.action{width: 80px;color: #fdb902;}
 </style>
 

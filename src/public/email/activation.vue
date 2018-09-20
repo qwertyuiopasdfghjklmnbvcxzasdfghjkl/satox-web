@@ -33,8 +33,8 @@ export default {
 .mailbox{width: 1000px;margin-left: auto;margin-right: auto;padding-top: 10px;}
 .mailbox-title{height: 24px;line-height: 24px;color:#becbe8;text-indent: 8px;background-color: #1e2233;}
 .mailbox-cont{display: flex;flex-flow: column;justify-content: center;align-items: center;height: 320px;background-color: #181b2a;}
-.mailbox-p{margin: 30px 0 20px 0;font-size: 16px;color: #11a8fe;}
-.mailbox-a{display: inline-block;min-width: 110px;height: 30px;padding:0 20px;line-height: 30px;color: #fff;text-align: center;background-color: #11a8fe;border-radius: 4px;}
-.mailbox-a:hover{background-color: #15c9ff;}
+.mailbox-p{margin: 30px 0 20px 0;font-size: 16px;color: #fdb902;}
+.mailbox-a{display: inline-block;min-width: 110px;height: 30px;padding:0 20px;line-height: 30px;color: #fff;text-align: center;background-color: #fdb902;border-radius: 4px;}
+.mailbox-a:hover{background-color: #fdb902;}
 </style>
 

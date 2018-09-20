@@ -125,8 +125,8 @@ export default {
 .wallet-transfer-input,.wallet-transfer-select{width:calc(100% - 10px);height:26px;line-height:26px;border:1px solid #333;padding:0 4px;}
 .wallet-transfer-select{width:100%;}
 .wallet-transfer-input.error,.wallet-transfer-select.error{border-color:#ff0000;}
-.wallet-transfer-all{cursor:pointer;color:#11a8fe;font-size:14px;}
-.wallet-transfer-button{width:104px;height:30px;background-color:#11a8fe;color:#fff;font-weight:bold;margin-top:10px;}
+.wallet-transfer-all{cursor:pointer;color:#fdb902;font-size:14px;}
+.wallet-transfer-button{width:104px;height:30px;background-color:#fdb902;color:#fff;font-weight:bold;margin-top:10px;}
 .wallet-transfer-button:hover{opacity:0.8;}
 em.error{position:absolute;left:0;bottom:-18px;font-size:12px;color:#ff0000;}
 </style>

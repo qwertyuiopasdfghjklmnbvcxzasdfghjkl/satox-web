@@ -225,20 +225,20 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {appearance:no
 .buy-cont p{display: flex;justify-content: space-between;line-height: 30px;position: relative;}
 .buy-cont p input{display: block;width: 100%;height: 30px;background-color: transparent;border: 1px solid #54616c;color: #aeb7d0;}
 .buy-cont p input.error{border-color: #e53f3f;}
-.buy-cont p em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#11a8fe;}
-.buy-cont p em.unit{font-size: 12px;color: #11a8fe}
-.buy-cont p a{position: absolute;z-index: 10;top: 1px;right: 5px;color: #11a8fe;}
-.buy-cont p a:hover{color: #15c9ff;}
+.buy-cont p em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:#fdb902;}
+.buy-cont p em.unit{font-size: 12px;color: #fdb902}
+.buy-cont p a{position: absolute;z-index: 10;top: 1px;right: 5px;color: #fdb902;}
+.buy-cont p a:hover{color: #fdb902;}
 .buy-cont p .label-left{min-width:60px;}
 .buy-cont p .trade-limit{padding-top: 5px;padding-bottom: 5px;line-height: 0;}
 .buy-cont p .trade-limit em{display: inline-block;line-height: 20px;vertical-align: top;}
 .buy-cont p .trade-limit em:first-of-type{max-width: 168px;text-align: right;}
 .btn {text-align: right;}
 .btn span{display: inline-block;vertical-align: top;width: 74px;height: 30px;line-height: 30px;text-align: center;border-radius: 4px;cursor: pointer;}
-.cancel{box-sizing: border-box;color: #11a8fe;border: 1px solid #11a8fe;}
-.cancel:hover{color: #15c9ff;border-color: #15c9ff;}
-.cimfir{color: #fff;background-color: #11a8fe;}
-.cimfir:hover{background-color: #15c9ff;}
+.cancel{box-sizing: border-box;color: #fdb902;border: 1px solid #fdb902;}
+.cancel:hover{color: #fdb902;border-color: #fdb902;}
+.cimfir{color: #fff;background-color: #fdb902;}
+.cimfir:hover{background-color: #fdb902;}
 .cimfir.disabled{background-color: #999;cursor:not-allowed;}
 .cimfir.disabled:hover{background-color: #999;}
 .msg{height: 30px;color: #e53f3f;}

@@ -80,7 +80,7 @@ export default {
 .shareImg img{margin: 0 auto;width: 333px;}
 .shareImg .code_p .qrcode>img{width: 88px;}
 .shareBtn {width: 333px; margin: 20px auto;text-align: center;display: flex;justify-content: space-between; }
-.shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #11a8fe;color: #fff;cursor: pointer;border-radius: 5px;}
+.shareBtn span{display: inline-block;width: 135px;height: 30px;line-height: 30px;text-align: center;background: #fdb902;color: #fff;cursor: pointer;border-radius: 5px;}
 .qrcode{width: 100px;height: 100px;background-color: #fff;position: absolute;top: -223px;left: 26px;border-radius: 4px;padding: 5px;}
 .qrcode >img {width: 88px;height: 88px; }
 .code_p{position: relative;}

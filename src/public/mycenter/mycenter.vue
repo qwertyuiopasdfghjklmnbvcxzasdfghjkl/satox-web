@@ -290,7 +290,7 @@ export default {
 .mycenter .top .info .info-pic .tips{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
 .mycenter .top .info .info-pic .tips:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .mycenter .top .info .info-pic .file:hover + .tips{display: block;}
-.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 1px solid #11a8fe;border-radius: 50%;overflow: hidden;}
+.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 1px solid #fdb902;border-radius: 50%;overflow: hidden;}
 .mycenter .top .info .info-pic .image img{width: 100%;height: 100%;}
 .mycenter .top .info .info-message{margin-left: 30px;}
 .mycenter .top .info .info-message p{height: 26px;line-height: 26px;color: #261003;}
@@ -298,7 +298,7 @@ export default {
 .mycenter .top .info .info-message span.attestation-state{display: inline-block;height: 24px;padding-left: 8px;padding-right: 8px;margin-top: 1px;margin-left: 8px;line-height: 24px;color: #fff;vertical-align: top;border-radius: 4px;}
 .mycenter .top .info .info-message span.entrance{background: url(../../assets/images/btn-bg-blue.png) repeat-x left center;cursor: pointer;}
 .mycenter .top .info .info-message span.entrance:hover{background-image: url(../../assets/images/btn-bg-blue-highlight.png);}
-.mycenter .top .info .info-message span.wait{background-color: #11a8fe;}
+.mycenter .top .info .info-message span.wait{background-color: #fdb902;}
 .mycenter .top .info .info-message span.success{background-color: #fdb902;color:#261003;}
 .mycenter .top .info .info-message span.fail{background-color: #e76d42;}
 .mycenter .top .info .info-message span.nickname-modify{color: #fdb902;cursor: pointer;}

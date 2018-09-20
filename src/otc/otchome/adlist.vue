@@ -287,8 +287,8 @@ export default {
 .ad-list-item-operate{width:80px;}
 .ad-list-item-type.buy{color:#0ee7a5;}
 .ad-list-item-type.sell{color:#ff7342;}
-.ad-list-item-btn{height:20px;margin-top:5px;color:#11a8fe;vertical-align:top;background-color:transparent;border:1px solid #11a8fe;border-radius:4px;cursor:pointer;}
-.ad-list-item-btn:hover{color:#15c9ff;border-color:#15c9ff}
+.ad-list-item-btn{height:20px;margin-top:5px;color:#fdb902;vertical-align:top;background-color:transparent;border:1px solid #fdb902;border-radius:4px;cursor:pointer;}
+.ad-list-item-btn:hover{color:#fdb902;border-color:#fdb902}
 .ad-nodata{text-align: center;}
 .ad-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
 .ad-nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}

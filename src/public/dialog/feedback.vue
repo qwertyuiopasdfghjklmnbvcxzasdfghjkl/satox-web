@@ -62,7 +62,7 @@ export default {
 </script>
 <style scoped>
 textarea{border:1px solid #eee;}
-textarea:focus{border-color:#11a8fe;}
+textarea:focus{border-color:#fdb902;}
 textarea.error{border-color:#ff0000!important;}
 em.error{position:absolute;color:#ff0000;left:0;bottom:-16px;}
 .feed{width: 400px;min-height: 520px;background-color: #fff;}

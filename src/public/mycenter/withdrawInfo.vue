@@ -296,7 +296,7 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
 .withdrawBox .filed{margin-bottom: 20px;position: relative;margin-left: 22px;height: 30px;height: auto;}
 .withdrawBox .filed .joint{color: #283149;}
 .withdrawBox .filed em{font-size: 14px;color: #becbe8;display: inline-block;height: 30px;line-height: 30px;}
-.withdrawBox .filed em i.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #11a8fe;}
+.withdrawBox .filed em i.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
 .withdrawBox .filed label{display: inline-block;font-size: 12px;color: #818fae; width: 150px;height: 30px;line-height: 30px;text-align: right;position: absolute;left: -25px;top: 0;}
 .withdrawBox .filed .withdraw-info{
   display: inline-block;box-sizing: border-box; padding: 0px;width: 100%;height: 30px;line-height: 30px;

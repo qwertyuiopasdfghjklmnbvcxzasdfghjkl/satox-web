@@ -154,7 +154,7 @@ a.icon-weixin:hover .wechat{display: block;}
 .center-btn-en,
 .center-btn-cn{display: inline-block;margin-right: 36px;width: 180px;height: 56px;line-height: 56px;border-radius: 10px;border: 2px solid #fff;font-size: 18px;text-align: center;color: #f0f0f0;font-weight: bold;}
 .center-btn-en:hover,
-.center-btn-cn:hover{color: #11a8fe;border-color: #11a8fe;}
+.center-btn-cn:hover{color: #fdb902;border-color: #fdb902;}
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
   .bottom-center{width: auto;margin: 0px 50px;}
 }

@@ -406,8 +406,8 @@ export default {
 
 .delegate /deep/ .record ul li.list span.buy{color: #03c087;}
 .delegate /deep/ .record ul li.list span.sell{color: #e76d42;}
-.delegate /deep/ .record ul li.list span.operation a{color: #11a8fe;}
-.delegate /deep/ .record ul li.list span.operation a:hover{color: #15c9ff;}
+.delegate /deep/ .record ul li.list span.operation a{color: #fdb902;}
+.delegate /deep/ .record ul li.list span.operation a:hover{color: #fdb902;}
 
 .delegate /deep/ .record .nodata{text-align: center;}
 .delegate /deep/ .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}

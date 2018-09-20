@@ -436,8 +436,8 @@ export default {
 .depth{display:flex;flex:1;position:relative;overflow:hidden;}
 .drawtools{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin-top:4px;}
 .drawicon{display:flex;justify-content:center;align-items:center;height:30px;font-size:24px;color:#758696;}
-.drawicon:hover{color:#11a8fe;}
-.drawicon.selected{color:#11a8fe;}
+.drawicon:hover{color:#fdb902;}
+.drawicon.selected{color:#fdb902;}
 .icon-delete{font-size:18px;width:24px;}
 .loading{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:absolute;top:0;left:0;z-index:4;flex-flow:column;}
 .loading /deep/ font{font-size:20px;color:#fff;}
