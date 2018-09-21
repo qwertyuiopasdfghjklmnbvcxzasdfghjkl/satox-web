@@ -440,14 +440,42 @@ utils.getCheckedTimeRange = getCheckedTimeRange
  * @param {*} okCallback
  */
 let isGtDialogOpen = false
+let gtCaptcha = null
 const gtValidate = function (okCallback, endCallback) {
   if (isGtDialogOpen) {
     return
   }
   isGtDialogOpen = true
+  if (gtCaptcha) {
+    gtCaptcha.onSuccess(() => {
+      isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
+      let gtParams = gtCaptcha.getValidate()
+      if (typeof okCallback === 'function') {
+        okCallback({
+          geetestChallenge: gtParams.geetest_challenge,
+          geetestValidate: gtParams.geetest_validate,
+          geetestSeccode: gtParams.geetest_seccode
+        })
+      }
+    })
+    gtCaptcha.onClose && gtCaptcha.onClose(() => {
+      isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
+    })
+    gtCaptcha.onError(() => {
+      isGtDialogOpen = false
+      typeof endCallback === 'function' && endCallback()
+    })
+    gtCaptcha.verify()
+    return
+  }
   const handler = function (captcha) {
     captcha.onReady(() => {
-      captcha.verify()
+      if (!gtCaptcha) {
+        isGtDialogOpen = false
+        gtCaptcha = captcha
+      }
     })
     captcha.onSuccess(() => {
       isGtDialogOpen = false
@@ -500,6 +528,7 @@ const gtValidate = function (okCallback, endCallback) {
   })
 }
 utils.gtValidate = gtValidate
+gtValidate()
 
 /**
  * 加密密码
