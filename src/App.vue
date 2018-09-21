@@ -35,13 +35,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getOtcSocketEvents']),
+    ...mapGetters(['getApiToken', 'getOtcSocketEvents', 'getLang']),
     isIE () {
       // (true = IE9) || true >= IE10
       return (document.all && document.addEventListener && !window.atob) || (document.body.style.msTouchAction !== undefined)
     }
   },
   watch: {
+    getLang () {
+      utils.gtValidate()
+    },
     getApiToken (val) {
       if (val) {
         this.getUserInfoMethod()
