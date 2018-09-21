@@ -148,6 +148,7 @@ export default {
         formData.username = formData.mobile
         delete formData.email
       }
+      formData.lang = this.getLang === 'zh-CN' || this.getLang === 'cht' ? 'cn' : 'en'
       this.$validator.validateAll(formData).then((validResult) => {
         if (!validResult) {
           return

@@ -49,6 +49,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import userApi from '@/api/user'
 import myApi from '@/api/individual'
 import inputbox from '@/components/formel/inputbox'
@@ -81,6 +82,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getLang']),
     msgs () {
       return {
         phoneNumber: {required: this.$t('public0.public6')}, // 请输入手机号
@@ -133,6 +135,7 @@ export default {
           for (let i in gtParams) {
             formData[i] = gtParams[i]
           }
+          formData.lang = this.getLang === 'zh-CN' || this.getLang === 'cht' ? 'cn' : 'en'
           userApi.forgetPwdSendEmail(formData, () => {
             Vue.$koallTipBox({icon: 'success', message: this.$t('login_register.Mail_sent_successfully')}) // 邮件发送成功
             setTimeout(() => {

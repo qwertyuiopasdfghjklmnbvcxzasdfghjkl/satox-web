@@ -440,34 +440,49 @@ utils.getCheckedTimeRange = getCheckedTimeRange
  * @param {*} okCallback
  */
 let isGtDialogOpen = false
+let gtCaptcha = null
+let gtOkCallback = null
+let gtEndCallback = null
 const gtValidate = function (okCallback, endCallback) {
   if (isGtDialogOpen) {
     return
   }
+  gtOkCallback = okCallback
+  gtEndCallback = endCallback
   isGtDialogOpen = true
+  if (okCallback && gtCaptcha) {
+    gtCaptcha.verify()
+    return
+  }
   const handler = function (captcha) {
-    captcha.onReady(() => {
-      captcha.verify()
-    })
-    captcha.onSuccess(() => {
+    typeof captcha.onReady === 'function' && captcha.onReady(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      utils.gtCaptcha = gtCaptcha = captcha
+      if (gtOkCallback) {
+        gtCaptcha.verify()
+      } else {
+        typeof gtEndCallback === 'function' && gtEndCallback()
+      }
+    })
+    typeof captcha.onSuccess === 'function' && captcha.onSuccess(() => {
+      isGtDialogOpen = false
+      typeof gtEndCallback === 'function' && gtEndCallback()
       let gtParams = captcha.getValidate()
-      if (typeof okCallback === 'function') {
-        okCallback({
+      if (typeof gtOkCallback === 'function') {
+        gtOkCallback({
           geetestChallenge: gtParams.geetest_challenge,
           geetestValidate: gtParams.geetest_validate,
           geetestSeccode: gtParams.geetest_seccode
         })
       }
     })
-    captcha.onClose && captcha.onClose(() => {
+    typeof captcha.onClose === 'function' && captcha.onClose(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      typeof gtEndCallback === 'function' && gtEndCallback()
     })
-    captcha.onError(() => {
+    typeof captcha.onError === 'function' && captcha.onError(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      typeof gtEndCallback === 'function' && gtEndCallback()
     })
   }
   // 调用 initGeetest 初始化参数
@@ -484,6 +499,7 @@ const gtValidate = function (okCallback, endCallback) {
   userApi.getGtInfo((res) => {
     res = JSON.parse(res.data)
     window.initGeetest({
+      protocol: config.http, // config.http
       gt: res.gt,
       challenge: res.challenge,
       offline: !res.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
@@ -495,11 +511,12 @@ const gtValidate = function (okCallback, endCallback) {
     }, handler)
   }, (msg) => {
     isGtDialogOpen = false
-    typeof endCallback === 'function' && endCallback()
+    typeof gtEndCallback === 'function' && gtEndCallback()
     Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t(`error_code.${msg}`)})
   })
 }
 utils.gtValidate = gtValidate
+gtValidate()
 
 /**
  * 加密密码
