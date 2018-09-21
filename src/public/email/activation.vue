@@ -11,12 +11,17 @@
 
 <script>
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import userApi from '@/api/user'
 export default {
+  computed: {
+    ...mapGetters(['getLang'])
+  },
   methods: {
     sendEmail () {
       let email = this.$route.params.email
       userApi.reSendEmail({
+        lang: this.getLang === 'zh-CN' || this.getLang === 'cht' ? 'cn' : 'en',
         email: email,
         username: email
       }, (msg) => {
