@@ -441,62 +441,48 @@ utils.getCheckedTimeRange = getCheckedTimeRange
  */
 let isGtDialogOpen = false
 let gtCaptcha = null
+let gtOkCallback = null
+let gtEndCallback = null
 const gtValidate = function (okCallback, endCallback) {
   if (isGtDialogOpen) {
     return
   }
+  gtOkCallback = okCallback
+  gtEndCallback = endCallback
   isGtDialogOpen = true
-  if (gtCaptcha) {
-    gtCaptcha.onSuccess(() => {
-      isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
-      let gtParams = gtCaptcha.getValidate()
-      if (typeof okCallback === 'function') {
-        okCallback({
-          geetestChallenge: gtParams.geetest_challenge,
-          geetestValidate: gtParams.geetest_validate,
-          geetestSeccode: gtParams.geetest_seccode
-        })
-      }
-    })
-    gtCaptcha.onClose && gtCaptcha.onClose(() => {
-      isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
-    })
-    gtCaptcha.onError(() => {
-      isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
-    })
+  if (okCallback && gtCaptcha) {
     gtCaptcha.verify()
     return
   }
   const handler = function (captcha) {
-    captcha.onReady(() => {
-      if (!gtCaptcha) {
-        isGtDialogOpen = false
-        gtCaptcha = captcha
-        typeof endCallback === 'function' && endCallback()
+    typeof captcha.onReady === 'function' && captcha.onReady(() => {
+      isGtDialogOpen = false
+      utils.gtCaptcha = gtCaptcha = captcha
+      if (gtOkCallback) {
+        gtCaptcha.verify()
+      } else {
+        typeof gtEndCallback === 'function' && gtEndCallback()
       }
     })
-    captcha.onSuccess(() => {
+    typeof captcha.onSuccess === 'function' && captcha.onSuccess(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      typeof gtEndCallback === 'function' && gtEndCallback()
       let gtParams = captcha.getValidate()
-      if (typeof okCallback === 'function') {
-        okCallback({
+      if (typeof gtOkCallback === 'function') {
+        gtOkCallback({
           geetestChallenge: gtParams.geetest_challenge,
           geetestValidate: gtParams.geetest_validate,
           geetestSeccode: gtParams.geetest_seccode
         })
       }
     })
-    captcha.onClose && captcha.onClose(() => {
+    typeof captcha.onClose === 'function' && captcha.onClose(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      typeof gtEndCallback === 'function' && gtEndCallback()
     })
-    captcha.onError(() => {
+    typeof captcha.onError === 'function' && captcha.onError(() => {
       isGtDialogOpen = false
-      typeof endCallback === 'function' && endCallback()
+      typeof gtEndCallback === 'function' && gtEndCallback()
     })
   }
   // 调用 initGeetest 初始化参数
@@ -513,6 +499,7 @@ const gtValidate = function (okCallback, endCallback) {
   userApi.getGtInfo((res) => {
     res = JSON.parse(res.data)
     window.initGeetest({
+      protocol: config.http, // config.http
       gt: res.gt,
       challenge: res.challenge,
       offline: !res.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
@@ -524,7 +511,7 @@ const gtValidate = function (okCallback, endCallback) {
     }, handler)
   }, (msg) => {
     isGtDialogOpen = false
-    typeof endCallback === 'function' && endCallback()
+    typeof gtEndCallback === 'function' && gtEndCallback()
     Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t(`error_code.${msg}`)})
   })
 }
