@@ -12,13 +12,13 @@
                 <FormItem label="保留金额" prop="coinReserve">
                     <Input type="text" v-model="formValidate.coinReserve"></Input>
                 </FormItem>
-                <FormItem label="旷工费" prop="minerFee">
+                <FormItem label="旷工费" prop="minerFee" v-if="formValidate.symbolType !== '2'">
                     <Input type="text" v-model="formValidate.minerFee" style="width:100%;"></Input>
                 </FormItem>
-                <FormItem label="GASPrice" prop="gasPrice" >
+                <FormItem label="GASPrice" prop="gasPrice" v-if="formValidate.symbolType === '2'">
                     <InputNumber style="width:100%;" :min="0.1" name="gasPrice" v-model="formValidate.gasPrice"></InputNumber>
                 </FormItem>
-                <FormItem label="GASNumber" prop="gasLimit" >
+                <FormItem label="GASNumber" prop="gasLimit" v-if="formValidate.symbolType === '2'">
                     <InputNumber style="width:100%;" :min="0.1" name="gasLimit" v-model="formValidate.gasLimit"></InputNumber>
                 </FormItem>
                 <FormItem label="是否可用" prop="enable">
@@ -133,6 +133,7 @@ export default {
                     }, (msg) => {
                         this.$Message.error({content: msg})
                     })
+
                 }
             })
 

@@ -45,7 +45,25 @@ export default {
           },
           {
               title: '状态',
-              key: 'status'
+              key: 'status',
+              render: (h, params) => {
+                let status = params.row.status
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.status == 1 ? '上线' : '下线'),
+                ])
+                //   return h('div', params.row.state == 1 ? '上线' : '下线')
+              }
           },
           {
               title: '最新价格',
@@ -94,7 +112,22 @@ export default {
               title: '状态',
               key: 'state',
               render: (h, params) => {
-                  return h('div', params.row.state == 1 ? '上线' : '下线')
+                let status = params.row.state
+                let color = ''
+                switch(status){
+                    case 1:
+                        color = 'green'
+                        break;
+                    case 2:
+                        color = '#ff8041'
+                        break;
+                }
+                return h('div', [
+                    h('div', {
+                        style: { color: color}
+                    }, params.row.state == 1 ? '上线' : '下线'),
+                ])
+                //   return h('div', params.row.state == 1 ? '上线' : '下线')
               }
           },
           {
@@ -149,9 +182,9 @@ export default {
         this.getMarketList()
     },
     findMarket () {
-        currenyApi.findMarketExchangeInfoList({
+        currenyApi.findMarketExchangeInfoList(this.curPage1,{
              market: this.symbol 
-        }, this.curPage, (res, total) => {
+        }, (res, total) => {
             this.total1 = total
             this.data1 = res
         }, (msg) => {
@@ -174,9 +207,9 @@ export default {
       })
     },
     findMarketList() { // 市场交易信息
-        currenyApi.findMarketExchangeInfoList({
+        currenyApi.findMarketExchangeInfoList(this.curPage1, {
              market: this.symbol || null
-        }, this.curPage, (res, total) => {
+        },  (res, total) => {
             this.total1 = total
             this.data1 = res
         })
