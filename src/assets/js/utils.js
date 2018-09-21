@@ -475,6 +475,7 @@ const gtValidate = function (okCallback, endCallback) {
       if (!gtCaptcha) {
         isGtDialogOpen = false
         gtCaptcha = captcha
+        typeof endCallback === 'function' && endCallback()
       }
     })
     captcha.onSuccess(() => {
