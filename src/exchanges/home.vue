@@ -18,7 +18,7 @@
                   <li class="last-item">
                     <span class="last-price market-symbol" :class="[(getLast24h.direction===1  || getLast24h.direction===0) ? 'font-green':'font-red']">
                       {{toFixed(getLast24h.close)}}
-                      <font class="last-valuation-price"> ≈ {{getCoinSign}} {{curPrice}}</font>
+                      <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font>
                     </span>
                   </li>
                   <li class="last-item last-change">
@@ -67,6 +67,7 @@ import marketApi from '@/api/market'
 import numUtils from '@/assets/js/numberUtils'
 import { mapGetters, mapActions } from 'vuex'
 import config from '@/assets/js/config'
+import valuation from '@/components/valuation'
 let chartSettings = window.localStorage.getItem('chartSettings')
 chartSettings && (chartSettings = JSON.parse(chartSettings))
 
@@ -77,6 +78,7 @@ export default {
     depth,
     lastdeal,
     entrust,
+    valuation,
     businesspanel
   },
   data () {
@@ -95,7 +97,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getLast24h', 'getCoinSign', 'getUSDCNY', 'getBtcValues', 'getMarketConfig', 'getUsdRate', 'getLang']),
+    ...mapGetters(['getApiToken', 'getLast24h', 'getMarketConfig']),
     baseSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
@@ -116,26 +118,6 @@ export default {
     },
     symbol () {
       return `${this.currentSymbol}${this.baseSymbol}`
-    },
-    curPrice () {
-      if (this.getUSDCNY && this.getLast24h.close) {
-        if (this.baseSymbol === 'USDT') {
-          if (this.getLang === 'en') {
-            return numUtils.BN(this.getLast24h.close).toFixed(2).toMoney()
-          }
-          return numUtils.div(this.getLast24h.close, this.getUsdRate).toFixed(2).toMoney()
-        } else if (this.baseSymbol === 'ATN') {
-          if (this.getLang === 'en') {
-            return numUtils.mul(this.getLast24h.close, '0.1').toFixed(2).toMoney()
-          }
-          return numUtils.div(numUtils.mul(this.getLast24h.close, '0.1'), this.getUsdRate).toFixed(2).toMoney()
-        }
-        let curMarketBtc = this.getBtcValues[this.baseSymbol]
-        let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-        return numUtils.mul(this.getLast24h.close, curMarketPrice).toFixed(2).toMoney()
-      } else {
-        return '0.00'
-      }
     },
     iconUrl () {
       if (!this.getMarketConfig) {
