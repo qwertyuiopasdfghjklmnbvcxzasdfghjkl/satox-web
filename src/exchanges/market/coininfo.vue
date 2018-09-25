@@ -6,7 +6,7 @@
                 <span class="coin-title">
                     <span>{{currentSymbol}}<font>({{currentSymbol}})</font></span>
                     <span>
-                        {{getCoinSign}} {{curPrice}}
+                        <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/>
                         <i :class="[!isRed ? 'green':'red']">
                             {{getLast24h.percent}}%
                         </i>
@@ -44,40 +44,24 @@
 import { mapGetters, mapActions } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import marketApi from '@/api/market'
+import valuation from '@/components/valuation'
 export default {
   props: ['baseSymbol', 'currentSymbol', 'isShow', 'iconUrl'],
+  components: {
+    valuation
+  },
   data () {
     return {
       symbolInfo: {}
     }
   },
   computed: {
-    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang', 'getBtcValues']),
+    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
     isRed () {
       return numUtils.BN(this.getLast24h.percent).lt(0)
     },
     symbolDescription () {
       return this.$t(`symbol_desc.${this.currentSymbol}`)
-    },
-    curPrice () { // 当前价格
-      if (this.getUSDCNY && this.getLast24h.close) {
-        if (this.baseSymbol === 'USDT') {
-          if (this.getLang === 'en') {
-            return numUtils.BN(this.getLast24h.close).toFixed(2).toMoney()
-          }
-          return numUtils.div(this.getLast24h.close, this.getUsdRate).toFixed(2).toMoney()
-        } else if (this.baseSymbol === 'ATN') {
-          if (this.getLang === 'en') {
-            return numUtils.mul(this.getLast24h.close, '0.1').toFixed(2).toMoney()
-          }
-          return numUtils.div(numUtils.mul(this.getLast24h.close, '0.1'), this.getUsdRate).toFixed(2).toMoney()
-        }
-        let curMarketBtc = this.getBtcValues[this.baseSymbol]
-        let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-        return numUtils.mul(this.getLast24h.close, curMarketPrice).toFixed(2).toMoney()
-      } else {
-        return '0.00'
-      }
     },
     marketCapitalisation () { // 市值 = 当前价格 * 流通总量
       if (this.symbolInfo && this.symbolInfo.totalCirculation) {

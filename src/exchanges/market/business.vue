@@ -15,7 +15,7 @@
                         <em class="tip-title" ref="tipBaseSymbol">{{baseSymbol}}</em>
                         <arrows :disabled="isMarket" :fixedNumber="fixedNumber" v-model="formData.price"/>
                         <em v-show="isShowPrice" class="error-tip icon-arrow-down">
-                          <i>{{limitPrice}}</i>
+                          <i><valuation :lastPrice="formData.price" :baseSymbol="baseSymbol"/></i>
                         </em>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <em class="tip-title">{{baseSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.total"/>
                         <em v-show="isShowTotal" class="error-tip icon-arrow-down">
-                          <i>{{totalPrice}}</i>
+                          <i><valuation :lastPrice="formData.total" :baseSymbol="baseSymbol"/></i>
                         </em>
                     </div>
                 </div>
@@ -98,6 +98,7 @@ import regUtils from '@/assets/js/regex'
 import utils from '@/assets/js/utils'
 import numberbox from '@/components/formel/numberbox'
 import arrows from './arrows'
+import valuation from '@/components/valuation'
 export default {
   props: {
     tradeType: {
@@ -131,6 +132,7 @@ export default {
   },
   components: {
     numberbox,
+    valuation,
     arrows
   },
   data () {
@@ -155,7 +157,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getApiToken', 'getMarketConfig', 'getLast24h', 'getEntrustNewPrice', 'getUSDCNY', 'getCoinSign', 'getBtcValues']),
+    ...mapGetters(['getApiToken', 'getMarketConfig', 'getLast24h', 'getEntrustNewPrice']),
     symbol () {
       return `${this.currentSymbol}${this.baseSymbol}`
     },
@@ -196,16 +198,6 @@ export default {
     },
     curPercent () {
       return Math.max(this.hoverPercent, this.percent)
-    },
-    limitPrice () {
-      let curMarketBtc = this.getBtcValues[this.baseSymbol]
-      let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-      return this.getCoinSign + ' ' + numUtils.mul(this.formData.price, curMarketPrice).toFixed(2).toMoney()
-    },
-    totalPrice () {
-      let curMarketBtc = this.getBtcValues[this.baseSymbol]
-      let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-      return this.getCoinSign + ' ' + numUtils.mul(this.formData.total, curMarketPrice).toFixed(2).toMoney()
     }
   },
   watch: {
