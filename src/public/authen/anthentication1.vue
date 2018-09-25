@@ -62,7 +62,7 @@
             </div>
             <div class="form-button">
                 <input class="cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="switch_tab('mycenter')"><!--取消-->
-                <input class="confirm" :class="{disabled: isSubmit}" type="button" :value="$t('exchange.exchange_determine')" @click="isSubmit ? false : identity1()"><!--确定-->
+                <input class="confirm" :class="{disabled: isUploading}" type="button" :value="$t('exchange.exchange_determine')" @click="identity1"><!--确定-->
             </div>
         </form>
         <uploading v-if="isUploading"/>
@@ -101,8 +101,7 @@ export default {
         back: true,
         hand: true
       },
-      isUploading: false,
-      isSubmit: false
+      isUploading: false
     }
   },
   computed: {
@@ -164,13 +163,15 @@ export default {
         if (!res) {
           return
         }
+        if (this.isUploading) {
+          return
+        }
         this.isUploading = true
         setTimeout(() => {
           var formData = new FormData(this.$refs.form)
           formData.append('countryClass', '1')
           myApi.submitIdentityInfo(formData, (msg) => {
             this.isUploading = false
-            this.isSubmit = true
             Vue.$confirmDialog({
               id: 'verify_submit_success',
               width: 400,
