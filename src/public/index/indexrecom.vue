@@ -8,7 +8,7 @@
               {{item.currencySymbol}}/{{item.baseSymbol}} <i :class="[{infotip:true}, (getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']" v-html="percent(item)"></i>
             </div>
             <div  class="ticker-list">
-              <p><span :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice)}} </span> <span class="t-right">{{getCoinSign}} {{getCurPrice(item)}}</span></p>
+              <p><span :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice)}} </span> <span class="t-right"><valuation :lastPrice="item.lastPrice" :baseSymbol="item.baseSymbol"/></span></p>
               <span class="volume">Volume: {{toFixed(item.dealAmount,2)}}BTC</span>
             </div>
           </li>
@@ -19,18 +19,18 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
   import marketApi from '@/api/market'
   import numUtils from '@/assets/js/numberUtils'
+  import valuation from '@/components/valuation'
   export default {
+    components: {
+      valuation
+    },
     data () {
       return {
         fixedNumber: 8,
         products: []
       }
-    },
-    computed: {
-      ...mapGetters(['getUSDCNY', 'getCoinSign', 'getBtcValues', 'getUsdRate', 'getLang'])
     },
     created () {
       this.getMarketCom()
@@ -57,26 +57,6 @@
           return `<font color="${percent < 0 ? '#990000' : '#009933'}">` + percent.toFixed(2) + '%</font>'
         } else {
           return '0.00%'
-        }
-      },
-      getCurPrice (data) {
-        if (data.lastPrice && this.getUSDCNY) {
-          if (data.baseSymbol === 'USDT') {
-            if (this.getLang === 'en') {
-              return numUtils.BN(data.lastPrice).toFixed(2).toMoney()
-            }
-            return numUtils.div(data.lastPrice, this.getUsdRate).toFixed(2).toMoney()
-          } else if (data.baseSymbol === 'ATN') {
-            if (this.getLang === 'en') {
-              return numUtils.mul(data.lastPrice, '0.1').toFixed(2).toMoney()
-            }
-            return numUtils.div(numUtils.mul(data.lastPrice, '0.1'), this.getUsdRate).toFixed(2).toMoney()
-          }
-          let curMarketBtc = this.getBtcValues[data.baseSymbol]
-          let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
-          return numUtils.mul(data.lastPrice, curMarketPrice).toFixed(2).toMoney()
-        } else {
-          return '0.00'
         }
       }
     }

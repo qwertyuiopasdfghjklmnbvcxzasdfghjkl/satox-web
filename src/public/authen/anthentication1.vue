@@ -62,7 +62,7 @@
             </div>
             <div class="form-button">
                 <input class="cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="switch_tab('mycenter')"><!--取消-->
-                <input class="confirm" :class="{disabled: isSubmit}" type="button" :value="$t('exchange.exchange_determine')" @click="isSubmit ? false : identity1()"><!--确定-->
+                <input class="confirm" :class="{disabled: isUploading || isSubmit}" type="button" :value="$t('exchange.exchange_determine')" @click="isSubmit ? false : identity1()"><!--确定-->
             </div>
         </form>
         <uploading v-if="isUploading"/>
@@ -162,6 +162,9 @@ export default {
     identity1 () {
       this.$validator.validateAll().then((res) => {
         if (!res) {
+          return
+        }
+        if (this.isUploading) {
           return
         }
         this.isUploading = true
