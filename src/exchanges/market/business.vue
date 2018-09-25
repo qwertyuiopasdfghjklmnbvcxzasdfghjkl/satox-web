@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <span v-if="getApiToken" @click="buyOrSell()">
+                    <span v-if="getApiToken" :class="{disabled:lockExtrust}" @click="buyOrSell()">
                       {{$t(isBuy?'exchange.exchange_buy':'exchange.exchange_sell')}} {{currentSymbol}}
                     </span>
                     <div v-if="!getApiToken" class="not-login">
@@ -582,6 +582,7 @@ export default {
 .panel.sell /deep/ .buttons span{background-color: #e76d42;}
 .panel.buy /deep/ .buttons span:hover{background-color: #0ee7a5;}
 .panel.sell /deep/ .buttons span:hover{background-color: #ff7342;}
+.buttons /deep/ span.disabled{background-color:#999!important;;color:#FFF!important;cursor:not-allowed;}
 .buttons /deep/ div{width:calc(100% - 92px);border:1px solid #fdb902;margin-left:90px;display:flex;justify-content:center;align-items:center;}
 .buttons /deep/ div a{font-size:18px;color:#fdb902;cursor: pointer;font-weight:normal;}
 .buttons /deep/ div a:hover{color:#fdb902;}
