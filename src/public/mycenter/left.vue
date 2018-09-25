@@ -67,11 +67,11 @@ export default {
 }
 .myassets-left ul li:first-of-type{margin-top: 0;}
 .myassets-left ul li:hover,
-.myassets-left ul li.active{color: #FFDE00;border-left-color: #FFDE00;}
+.myassets-left ul li.active{color: #fdb902;border-left-color: #fdb902;}
 .myassets-left ul li i,
 .myassets-left ul li span{display: inline-block;vertical-align: middle;}
 .myassets-left ul li i{font-size: 16px;}
 .myassets-left ul li span{height: 50px;line-height: 50px;font-size: 14px;text-indent: 10px;}
 .myassets-left ul li i.icon-like:before{color: #cbd4ec}
-.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #FFDE00;border-left-color: #FFDE00;}
+.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #fdb902;border-left-color: #fdb902;}
 </style>
