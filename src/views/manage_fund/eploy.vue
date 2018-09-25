@@ -14,7 +14,7 @@
                 </FormItem>
             </Row>
             <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="coinReserve" label="保留金额币种">
+                <FormItem prop="coinReserve" label="保留金额">
                     <Input v-model="formLeft.coinReserve" style="width:200px;" ></Input>
                 </FormItem>
             </Row>

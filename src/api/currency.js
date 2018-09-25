@@ -438,7 +438,7 @@ const getfindChartDataList = function (data, success, error) {
 curreny.getfindChartDataList = getfindChartDataList
 
 // 市场管理--市场交易信息
-const findMarketExchangeInfoList = function (data, curPage, success, error) {
+const findMarketExchangeInfoList = function (curPage, data, success, error) {
   api.post(`api/bm/bbManage/marketManage/findMarketExchangeInfoList/10/${curPage}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)

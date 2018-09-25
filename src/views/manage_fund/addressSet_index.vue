@@ -148,9 +148,9 @@ export default {
             this.getTransferConfig()
         },
         getAdminCoinPool () {
-            fundApi.getAdminCoinPool(this.curPage1, (res, total) => {
+            fundApi.getAdminCoinPool(this.curPage1, {}, (res, total) => {
                 this.total1= total
-                this.data2 = res.data
+                this.data2 = res
             })
         },
         changePage1 (page) {

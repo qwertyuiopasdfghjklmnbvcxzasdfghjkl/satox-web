@@ -2,7 +2,7 @@
 <template>
   <Card style="width:440px">
     <p slot="title">
-      <span>{{isEdit ? '修改' : '添加'}}手续费账户2</span>
+      <span>{{isEdit ? '修改' : '添加'}}手续费账户</span>
       <a class="ivu-icon ivu-icon-close" href="javascript:;" style="float:right;margin-top:3px;color:#1c2438;" @click="closeDialog"></a>
     </p>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">

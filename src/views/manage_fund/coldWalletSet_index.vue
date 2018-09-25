@@ -86,6 +86,7 @@ import addAddress from './addAddress'
                                                 enable: o.valueAll.enable === 1 ? 0 : 1
                                             }, (res) => {
                                                 this.$Message.success({content: '启用成功'})
+                                                 this.getAllColdWallet()
                                             }) 
                                              
                                         }
