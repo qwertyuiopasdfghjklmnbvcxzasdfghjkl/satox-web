@@ -52,7 +52,7 @@ export default {
       params: {
         ad_type: otcParams.ad_type || 2,
         symbol: otcParams.symbol || otcConfig.symbol,
-        currency: /* (otcParams.symbol || otcConfig.symbol) === otcConfig.additional[0].symbol ? 'USD' : */'CNY',
+        currency: /* (otcParams.symbol || otcConfig.symbol) === otcConfig.additional[0].symbol ? 'USD' : */ 'CNY',
         current_price: 100000,
         pay_type: null,
         sort_mode: 1,
