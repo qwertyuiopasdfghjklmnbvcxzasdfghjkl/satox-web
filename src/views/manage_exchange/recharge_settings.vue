@@ -6,7 +6,7 @@
         </p>
         <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
             <Col span="8">代号</Col>
-            <Col span="8">{{this.item.symbol}}</Col>
+            <Col span="8">{{item.symbol}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
@@ -16,14 +16,14 @@
         </Row>
         <Row style="margin-top:10px;border-top:1px solid #e9eaec;line-height:50px;">
             <Col span="8">权限状态</Col>
-            <Col span="8">{{this.item.rechargeFlag===1?'正常': '暂停'}}</Col>
+            <Col span="8">{{item.rechargeFlag===1?'正常': '暂停'}}</Col>
             <Col span="8" style="text-align:right;margin-left:-14px;">
-                <Button type="primary" @click="competence()">{{this.item.rechargeFlag===2?'正常': '暂停'}}</Button>
+                <Button type="primary" @click="competence()">{{item.rechargeFlag===2?'正常': '暂停'}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-top:1px solid #e9eaec;line-height:50px;">
             <Col span="8">等待区块数</Col>
-            <Col span="8">{{this.item.confirmBlock || 0}}</Col>
+            <Col span="8">{{item.confirmBlock || 0}}</Col>
             <Col span="8">
                 <InputNumber :max="999" :min="1" v-model="confirmBlock"></InputNumber>
                 <Button type="primary" @click="tabs()">保存</Button>

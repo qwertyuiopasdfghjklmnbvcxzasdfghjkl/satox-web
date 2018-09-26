@@ -11,7 +11,6 @@
 </template>
 <script>
 import addWallet from './addWallet'
-import upWallet from './upWallet'
 import util from '../../libs/util'
 import fundApi from '../../api/fund'
 import updataWaletAddress from './updataWaletAddress'

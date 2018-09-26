@@ -14,12 +14,12 @@
     </Card>
     <Card style="margin-top:20px;">
         <p slot="title">基本资料</p>
-        <Table :columns="columns1" :data="data1"></Table>
+        <Table ref="test" :columns="columns1" :data="data1"  @on-sort-change="custom"></Table>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
     </Card>
     <Card style="margin-top:20px;">
         <p slot="title">交易情况</p>
-        <Table :columns="columns2" :data="data2"></Table>
+        <Table ref="test1" :columns="columns2" :data="data2" @on-sort-change="custom1"></Table>
         <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
     </Card>
   </Row>
@@ -35,6 +35,8 @@ import updata from './users/updata'
 export default {
  data () {
    return {
+     flag: 1,
+     flag1: 1,
      curPage: 1,
      total: 0,
      curPage1: 1,
@@ -43,7 +45,7 @@ export default {
      columns1: [
           {
               title: '代号',
-              key: 'symbol'
+              key: 'symbol', sortable: 'custom', sortType: 'asc'
           },
           {
               title: '中文名',
@@ -56,18 +58,10 @@ export default {
                   return h('div', this.switchStaus(params.row.symbolType))
               }
           },
-        //   {
-        //       title: 'ICON',
-        //       key: 'iconUrl'
-        //   },
           {
               title: '市场',
               key: 'market'
           },
-        //   {
-        //       title: '钱包服务器',
-        //       key: 'symbolServer'
-        //   },
           {
               title: 'ERC20合约地址',
               key: 'contractAddr'
@@ -95,7 +89,6 @@ export default {
                         style: { color: color}
                     }, params.row.rechargeFlag == 1 ? '正常' : '暂停'),
                 ])
-                //   return h('div', params.row.rechargeFlag == 1 ? '正常' : '暂停')
               }
           },
           {
@@ -238,7 +231,7 @@ export default {
       columns2: [
           {
               title: '代号',
-              key: 'symbol'
+              key: 'symbol', sortable: 'custom', sortType: 'asc'
           },
           {
               title: '用户数量',
@@ -309,17 +302,39 @@ export default {
    getchangeList () {
        currenyApi.findSymbolExchangeInfoList({
            symbol: this.symbol || null
-       }, this.curPage1, (res, total1) => {
-           this.total = total1
+       }, this.curPage1, this.flag1, (res, total1) => {
+           this.total1 = total1
            this.data2 = res
        }, (msg) => {
            this.$Message.error({content: msg})
        })
    },
+   custom1 (o) {
+      this.curPage1 = 1
+      if (o.order === 'desc') {
+        this.flag1 = 0
+        this.getchangeList()
+      } else {
+        this.$refs.test1.cloneColumns[0]._sortType = 'asc'
+        this.flag1 = 1
+        this.getchangeList()
+      }
+    },
+   custom (o) {
+      this.curPage = 1
+      if (o.order === 'desc') {
+        this.flag = 0
+        this.findSymbolList()
+      } else {
+        this.$refs.test.cloneColumns[0]._sortType = 'asc'
+        this.flag = 1
+        this.findSymbolList()
+      }
+    },
    findSymbolList() {
        currenyApi.findSymbolList({
          symbol: this.symbol || null
-       }, this.curPage, (res, total) => {
+       }, this.curPage, this.flag, (res, total) => {
            this.total = total
            this.data1 = res
     }, (msg) => {

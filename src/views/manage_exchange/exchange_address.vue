@@ -15,18 +15,18 @@
                      <Button type="primary" @click="getAddress">查询</Button>
                 </Col>
             </Row>
-            <Row style="margin-bottom: 20px;">
+            <Row style="margin-bottom: 20px;border-bottom: 1px solid #e9eaec;">
                 <Col span="6">账号</Col>
                 <Col span="6">币种</Col>
                 <Col span="6">地址</Col>
             </Row>
-            <!-- <Row style="margin-bottom: 20px;" v-if="this.data1 === null">
-                <Col span="24">暂无数据{{this.data1 === null}}</Col>
-            </Row> -->
-            <Row style="margin-bottom: 20px;">
-                <Col span="6">{{this.data1.username}}</Col>
-                <Col span="6">{{this.data1.symbol}}</Col>
-                <Col span="6">{{this.data1.address}}</Col>
+            <Row style="margin-bottom: 20px;text-align: center;" v-if="this.data1 == ''">
+                <Col span="24">暂无数据</Col>
+            </Row>
+            <Row style="margin-bottom: 20px;" v-if="this.data1 != ''">
+                <Col span="6">{{data1.username}}</Col>
+                <Col span="6">{{data1.symbol}}</Col>
+                <Col span="6">{{data1.address}}</Col>
             </Row>
         </Card>
     </div>
@@ -49,9 +49,9 @@ export default {
                         symbol: this.symbol,
                         address: this.address
                     }, (res) => {
-                        if (res) {
+                        // if (res) {
                             this.data1 = res
-                        }
+                        // }
                     })
                 } else {
                      this.$Message.error({content: '地址不能为空'})

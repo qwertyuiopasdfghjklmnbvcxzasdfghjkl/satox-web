@@ -43,7 +43,7 @@
       <Row style="margin-top:10px;">
         <Card>
           <p slot="title">用户总资产数据</p>
-          <Table ref="test2" :columns="columns7" :data="data7" @on-sort-change="custom2"></Table>
+          <Table ref="test3" :columns="columns7" :data="data7" @on-sort-change="custom3"></Table>
           <Page :current="curPage6" :total="total6" @on-change="changePage6" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
@@ -158,7 +158,7 @@ export default {
       ],
       data6: [],
       columns7: [
-        {title: '币种', key: 'symbol'},
+        {title: '币种', key: 'symbol', sortable: 'custom', sortType: 'asc'},
         {title: '当前数量', key: 'currentAssetAmount'},
         {title: '上一交易日数量', key: 'closingAssetYesterdayQuantity'},
         {title: '日净增', key: 'increaseDailyQuantity'}
@@ -201,14 +201,25 @@ export default {
       this.getfindRechargeRecords()
     },
     getfindUserAssetList () {
-      financeApi.findUserAssetList(this.curPage6, this.flag2, (res, total) => {
+      financeApi.findUserAssetList(this.curPage6, this.flag3, (res, total) => {
         this.total6 = total
         this.data7 = res
       })
     },
     changePage6 (page) {
-      this.curPage = page
+      this.curPage6 = page
       this.getfindUserAssetList()
+    },
+    custom3 (o) {
+      this.curPage6 = 1
+      if (o.order === 'desc') {
+        this.flag3 = 0
+        this.getfindUserAssetList()
+      } else {
+        this.$refs.test3.cloneColumns[0]._sortType = 'asc'
+        this.flag3 = 1
+        this.getfindUserAssetList()
+      }
     },
     custom2 (o) {
       this.curPage6 = 1

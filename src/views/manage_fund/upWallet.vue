@@ -6,14 +6,14 @@
                 <Row>
                     <Col span="24">
                         <FormItem label="币种" prop="symbol">
-                            <Input v-model="this.symbol" name="symbol"></Input>
+                            <Input v-model="symbol" name="symbol"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="24">
                         <FormItem label="地址" prop="address">
-                            <Input v-model="this.address" name="address"></Input>
+                            <Input v-model="address" name="address"></Input>
                         </FormItem>
                     </Col>
                 </Row>
