@@ -2,7 +2,7 @@
 <template>
   <Row>
     <Card>
-      <p slot="title">数据统计1
+      <p slot="title">数据统计
          <span class="refresh" @click="refreshAll"></span>
       </p>
       <Row>

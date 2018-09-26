@@ -76,7 +76,6 @@ import addAddress from './addAddress'
                                                     }
                                                 }
                                             }
-                                            
                                             if (!sel && list.length) {
                                                 sel = list[0]
                                             }
