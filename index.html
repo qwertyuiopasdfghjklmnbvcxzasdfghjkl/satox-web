@@ -17,6 +17,10 @@
         if (host === 'pre.newtonxchange.com' || host === 'test.newtonxchange.com') {
           return
         }
+        if (host.indexOf('newtonxchange.com') !== -1 && /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent)) {
+          location.href = 'https://m.newtonxchange.com';
+          return
+        }
         if (host.indexOf('newtonxchange.com') !== -1 && (protocol !== 'https:' || host !== 'www.newtonxchange.com')) {
           location.href = 'https://www.newtonxchange.com';
         }
