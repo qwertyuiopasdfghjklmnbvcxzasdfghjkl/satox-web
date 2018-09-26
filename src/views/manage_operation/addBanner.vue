@@ -145,4 +145,5 @@ export default {
 </script>
 <style>
 .addBanner{width: 500px;}
+.ivu-form-label-left .ivu-form-item-label{width: 100% !important;}
 </style>
