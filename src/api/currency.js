@@ -330,8 +330,8 @@ const updateSymbolWithdrawFees = function (data, success, error) {
 curreny.updateSymbolWithdrawFees = updateSymbolWithdrawFees
 
 // 币种管理--市场管理交易信息
-const findSymbolExchangeInfoList = function (data, curPage1, success, error) {
-  api.post(`api/bm/bbManage/symbolManage/findSymbolExchangeInfoList/10/${curPage1}`, data, (res) => {
+const findSymbolExchangeInfoList = function (data, curPage, flag, success, error) {
+  api.post(`api/bm/bbManage/symbolManage/findSymbolExchangeInfoList/10/${curPage}/${flag}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -342,8 +342,8 @@ const findSymbolExchangeInfoList = function (data, curPage1, success, error) {
 curreny.findSymbolExchangeInfoList = findSymbolExchangeInfoList
 
 // 币种管理--查询币种
-const findSymbolList = function (data, curPage, success, error) {
-  api.post(`api/bm/bbManage/symbolManage/findSymbolList/10/${curPage}`, data, (res) => {
+const findSymbolList = function (data, curPage, flag, success, error) {
+  api.post(`api/bm/bbManage/symbolManage/findSymbolList/10/${curPage}/${flag}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {

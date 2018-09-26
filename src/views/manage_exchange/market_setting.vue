@@ -6,7 +6,7 @@
       </p>
       <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
           <Col span="6">市场名称</Col>
-          <Col span="6">{{this.item.market}}</Col>
+          <Col span="6">{{item.market}}</Col>
           <Col span="12"></Col>
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
@@ -16,7 +16,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">上线状态</Col>
-        <Col span="6">{{this.item.state === 1 ? '上线': '下线'}}</Col>
+        <Col span="6">{{item.state === 1 ? '上线': '下线'}}</Col>
         <Col span="12" style="text-align:right;">
           <Button type="primary"  @click="update">{{this.item.state === 1 ? '下线': '上线'}}</Button>
         </Col>
@@ -24,7 +24,7 @@
 
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">标的币种</Col>
-        <Col span="6">{{this.item.currencySymbol}}</Col>
+        <Col span="6">{{item.currencySymbol}}</Col>
         <Col span="6">
           <Input v-model="currencySymbol"></Input>
         </Col>
@@ -34,7 +34,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">基本币种</Col>
-        <Col span="6">{{this.item.baseSymbol}}</Col>
+        <Col span="6">{{item.baseSymbol}}</Col>
         <Col span="6">
           <Input v-model="baseSymbol"></Input>
         </Col>
@@ -44,7 +44,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">开盘价格</Col>
-        <Col span="6">{{this.item.openingPrice}}</Col>
+        <Col span="6">{{item.openingPrice}}</Col>
         <Col span="6">
           <InputNumber style="width:113px;" :min="0.1" v-model="openingPrice"></InputNumber>
         </Col>
@@ -55,7 +55,7 @@
 
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">价格精度</Col>
-        <Col span="6">{{this.item.accuracy}}</Col>
+        <Col span="6">{{item.accuracy}}</Col>
         <Col span="6">
           <InputNumber style="width:113px;" :min="0.1" v-model="accuracy"></InputNumber>
         </Col>
@@ -65,7 +65,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">深度合并精度</Col>
-        <Col span="6">{{this.item.digit}}</Col>
+        <Col span="6">{{item.digit}}</Col>
         <Col span="6">
           <InputNumber style="width:113px;" :min="0.1" v-model="digit"></InputNumber>
         </Col>
@@ -75,7 +75,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">最小下单金额</Col>
-        <Col span="6">{{this.item.minPlaceOrderAmount || 0}}</Col>
+        <Col span="6">{{item.minPlaceOrderAmount || 0}}</Col>
         <Col span="6">
           <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderAmount"></InputNumber>
         </Col>
@@ -85,7 +85,7 @@
       </Row>
       <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
         <Col span="6">最小交易数量</Col>
-        <Col span="6">{{this.item.minPlaceOrderQuantity || 0}}</Col>
+        <Col span="6">{{item.minPlaceOrderQuantity || 0}}</Col>
         <Col span="6">
           <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderQuantity"></InputNumber>
         </Col>
