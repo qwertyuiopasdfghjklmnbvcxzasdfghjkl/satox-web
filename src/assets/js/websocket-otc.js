@@ -1,5 +1,6 @@
 import JsCookies from 'js-cookie'
-import Config from './config'
+import Config from '@/assets/js/config'
+
 (function (OtcWebSocket) {
   if (typeof module === 'object') {
     module.exports = OtcWebSocket
@@ -71,7 +72,9 @@ import Config from './config'
     }
     return ws
   }
-  websocket = new createWebSocket()
+  if (JsCookies.get('api_token')) {
+    websocket = new createWebSocket()
+  }
 
   return {
     open () {
