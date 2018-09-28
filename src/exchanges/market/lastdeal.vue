@@ -106,9 +106,14 @@ export default {
     },
     changeLogin () {
       this.showLoading = true
+      let tempSymbol = this.symbol
       // 最近交易记录
       market.getNearestTradeRecords(this.symbol, (res) => {
         this.showLoading = false
+        if (tempSymbol !== this.symbol) {
+          console.log(`lastdeal-symbol不匹配${tempSymbol}-${this.symbol}`)
+          return
+        }
         this.datas = res
       }, (msg) => {
         console.log(msg)

@@ -257,10 +257,15 @@ export default {
   methods: {
     ...mapActions(['setLast24h', 'tiggerEvents']),
     get24hPrice () {
+      let tempSymbol = this.symbol
       // 获取24小时最新价格
       marketApi.get24hPrice({
         symbol: this.symbol
       }, (res) => {
+        if (tempSymbol !== this.symbol) {
+          console.log(`24h-symbol不匹配${tempSymbol}-${this.symbol}`)
+          return
+        }
         // 24小时最新信息
         this.setLast24h(res)
       })
