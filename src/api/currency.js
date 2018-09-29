@@ -509,4 +509,16 @@ const updateIconFile = function (data, success, error) {
 }
 curreny.updateIconFile = updateIconFile
 
+// 邀请活动信息
+const findUserInviteInfo = function (data, success, error) {
+  api.post('api/bm/bbManage/userManage/findUserInviteInfo', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+curreny.findUserInviteInfo = findUserInviteInfo
+
 export default curreny

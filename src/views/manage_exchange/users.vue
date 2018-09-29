@@ -5,10 +5,18 @@
             <span class="refresh" @click="getList"></span>
         </p>
         <Row>
-            <span>账号</span>
-            <Input v-model="username" placeholder="账号" style="width: 150px;"></Input>
-            <span style="margin-left:10px;">昵称</span>
-            <Input v-model="nickname" placeholder="昵称" style="width: 150px"></Input>
+            <Select v-model="formData.type" style="width:200px;">
+                <Option value="username">账号</Option>
+                <Option value="userRealName">姓名</Option>
+                <Option value="nickname">昵称</Option>
+                <Option value="mobile">手机号</Option>
+                <Option value="myInvitationCode">邀请码</Option>
+            </Select>
+            <Input v-model="formData.text" clearable style="width: 200px"></Input>
+            <!-- <span>账号</span>
+            <Input v-model="username" placeholder="账号" style="width: 150px;"></Input> -->
+            <!-- <span style="margin-left:10px;">昵称</span>
+            <Input v-model="nickname" placeholder="昵称" style="width: 150px"></Input> -->
             <Button type="primary" @click="getList('1')">查询</Button>
             <Checkbox v-model="single" @on-change="curPage=1;getList('1')">显示在线</Checkbox>
         </Row>
@@ -20,7 +28,7 @@
 <script>
 import util from '../../libs/util'
 import login_record from './users/login_record'
-import collect_market from './users/collect_market'
+import invite_info from './users/invite_info'
 import msg_record from './users/msg_record'
 import send_msg from './users/send_msg'
 import trade_record from './users/trade_record'
@@ -32,11 +40,16 @@ import Cookies from 'js-cookie'
 export default {
   data () {
     return {
+      formData: {
+        type: 'username',
+        text: ''
+      },
       single: false,
       curPage: 1,
       total: 0,
       username: '',
       nickname: '',
+      online: 'online',
       columns1: [
           {
               title: '账号',
@@ -108,13 +121,13 @@ export default {
                         style: {marginRight: '10px'},
                         on: {
                             click: () => {
-                                util.setDialog(collect_market, {
+                                util.setDialog(invite_info, {
                                     id: params.row.id,
                                     userId: params.row.userId
                                 })
                             }
                         }
-                    }, '收藏市场'),
+                    }, '邀请信息'),
                      h('Button', {
                         props: {type: 'primary', size: 'small'},
                         style: {marginRight: '10px'},
@@ -202,21 +215,20 @@ export default {
             this.curPage = this.curPage
         }
         if (this.single) {
-            currenyApi.getfindUserList(this.curPage, {
-                username: this.username || null,
-                nickname: this.nickname || null,
-                online: true
-            }, (res, total) => {
+            let data = {}
+            data[this.formData.type] = this.formData.text
+            data[this.online] = true
+            currenyApi.getfindUserList(this.curPage, data, (res, total) => {
                 this.total = total
                 this.data1 = res
             }, (msg) => {
                 this.$Message.error({content: msg})
             })
         } else {
-            currenyApi.getfindUserList(this.curPage, {
-                username: this.username || null,
-                nickname: this.nickname || null
-            }, (res, total) => {
+            let data = {}
+            data[this.formData.type] = this.formData.text
+            data[this.online] = false
+            currenyApi.getfindUserList(this.curPage, data, (res, total) => {
                 this.total = total
                 this.data1 = res
             }, (msg) => {
