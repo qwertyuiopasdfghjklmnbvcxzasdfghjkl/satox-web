@@ -7,9 +7,10 @@
         <Row style="border-bottom:1px solid #ccc;height:36px;line-height:36px;">
             <Col span="3">本人邀请码</Col>
             <Col span="3">推荐人邀请码</Col>
-            <Col span="2">M1</Col>
-            <Col span="2">M2</Col>
-            <Col span="2">M1</Col>
+            <Col span="3">推荐人账号</Col>
+            <Col span="1">M1</Col>
+            <Col span="1">M2</Col>
+            <Col span="1">M1</Col>
             <Col span="2">TotalM1</Col>
             <Col span="2">TotalM2</Col>
             <Col span="2">TotalM3</Col>
@@ -19,9 +20,10 @@
         <Row style="height:36px;line-height:36px;">
             <Col span="3">{{data1.myInvitationCode || '-'}}</Col>
             <Col span="3">{{data1.invitedCode  || '无'}}</Col>
-            <Col span="2">{{data1.m1}}</Col>
-            <Col span="2">{{data1.m2}}</Col>
-            <Col span="2">{{data1.m3}}</Col>
+            <Col span="3">{{data1.invitedUsername  || '无' }}</Col>
+            <Col span="1">{{data1.m1}}</Col>
+            <Col span="1">{{data1.m2}}</Col>
+            <Col span="1">{{data1.m3}}</Col>
             <Col span="2">{{data1.totalM1}}</Col>
             <Col span="2">{{data1.totalM2 }}</Col>
             <Col span="2">{{data1.totalM3}}</Col>
