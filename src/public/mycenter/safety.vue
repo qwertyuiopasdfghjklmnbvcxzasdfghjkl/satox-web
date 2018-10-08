@@ -182,7 +182,7 @@ export default {
       showUnbindGoogleForm: false,
       areaCodeList: commonConfig.areaCodeList,
       mobileFormData: {
-        countryCode: '+86',
+        countryCode: commonConfig.defaultCode,
         phoneNumber: '',
         phonepassword: '',
         smsCode: ''

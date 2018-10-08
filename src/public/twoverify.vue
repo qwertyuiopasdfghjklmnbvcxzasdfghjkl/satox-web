@@ -47,7 +47,7 @@ export default {
   data () {
     return {
       locked: false,
-      countryCode: '+86',
+      countryCode: commonConfig.defaultCode,
       formData: {
         verifyType: 0,
         username: '',
