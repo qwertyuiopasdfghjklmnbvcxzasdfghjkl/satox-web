@@ -516,7 +516,7 @@ const gtValidate = function (okCallback, endCallback) {
   gtCaptcha = null
   gtIsInitTip = false
   userApi.getGtInfo((res) => {
-    res = JSON.parse(res.data)
+    res = JSON.parse(res)
     window.initGeetest({
       protocol: config.http, // config.http
       gt: res.gt,
