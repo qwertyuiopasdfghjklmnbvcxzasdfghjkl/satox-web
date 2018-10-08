@@ -132,7 +132,8 @@ export default {
       },
       isShowNotice: false,
       avatarUrl: avatar,
-      matchPayType: null
+      matchPayType: null,
+      isAdParamsChange: false
     }
   },
   computed: {
@@ -179,6 +180,10 @@ export default {
   },
   watch: {
     adParams () {
+      if (this.params.page !== 1) {
+        this.isAdParamsChange = true
+        this.params.page = 1
+      }
       this.init()
     },
     getApiToken () {
@@ -186,6 +191,12 @@ export default {
     },
     'params.newAdCount' () {
       this.init()
+    },
+    'params.page' () {
+      if (!this.isAdParamsChange) {
+        this.getList()
+      }
+      this.isAdParamsChange = false
     }
   },
   created () {
@@ -394,7 +405,7 @@ export default {
 .pendorder-title span.operate .werben{width: 84px;height: 22px;line-height: 22px;font-size: 12px;text-align: center;color: #fdb902;border: 1px solid #fdb902;border-radius: 4px;}
 .pendorder-title span.operate .werben:hover{color: #fdb902;border-color: #fdb902;}
 
-.notice-dialog{position: absolute;top: 58px;left: 0;display: flex;justify-content: center;align-items: center;width: 892px;height: 540px;background-color: rgba(0, 0, 0, 0.5);}
+.notice-dialog{position: absolute;top: 58px;right: 0;bottom: 0;left: 0;z-index: 2;display: flex;justify-content: center;align-items: center;background-color: rgba(0, 0, 0, 0.5);}
 .notice-dialog-container{position: relative;width: 732px;padding: 12px 24px;background-color: #222121;border-radius: 4px;}
 .notice-dialog-close{position: absolute;top: 10px;right: 10px;}
 .notice-dialog-close:hover{color: #fdb902;}
