@@ -443,8 +443,15 @@ let isGtDialogOpen = false
 let gtCaptcha = null
 let gtOkCallback = null
 let gtEndCallback = null
+let gtIsInitTip = false
 const gtValidate = function (okCallback, endCallback) {
   if (isGtDialogOpen) {
+    if (!gtCaptcha) {
+      gtIsInitTip = true
+      // 请耐心等待滑块初始化完成。
+      Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t('public0.public277')})
+    }
+    typeof endCallback === 'function' && endCallback()
     return
   }
   gtOkCallback = okCallback
@@ -463,6 +470,11 @@ const gtValidate = function (okCallback, endCallback) {
       } else {
         typeof gtEndCallback === 'function' && gtEndCallback()
       }
+      if (gtIsInitTip) {
+        gtIsInitTip = false
+        // 滑块初始化完成，请点击重试。
+        Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t('public0.public277')})
+      }
     })
     typeof captcha.onSuccess === 'function' && captcha.onSuccess(() => {
       isGtDialogOpen = false
@@ -480,9 +492,14 @@ const gtValidate = function (okCallback, endCallback) {
       isGtDialogOpen = false
       typeof gtEndCallback === 'function' && gtEndCallback()
     })
-    typeof captcha.onError === 'function' && captcha.onError(() => {
+    typeof captcha.onError === 'function' && captcha.onError((error) => {
       isGtDialogOpen = false
-      typeof gtEndCallback === 'function' && gtEndCallback()
+      if (error && error.code === 'error_21') {
+        gtCaptcha = null
+        gtValidate(gtOkCallback, gtEndCallback)
+      } else {
+        typeof gtEndCallback === 'function' && gtEndCallback()
+      }
     })
   }
   // 调用 initGeetest 初始化参数
@@ -496,6 +513,8 @@ const gtValidate = function (okCallback, endCallback) {
   } else {
     lang = 'en'
   }
+  gtCaptcha = null
+  gtIsInitTip = false
   userApi.getGtInfo((res) => {
     res = JSON.parse(res.data)
     window.initGeetest({
@@ -509,7 +528,7 @@ const gtValidate = function (okCallback, endCallback) {
       height: '44px',
       lang: lang
     }, handler)
-  }, (msg) => {
+  }, () => {
     isGtDialogOpen = false
     typeof gtEndCallback === 'function' && gtEndCallback()
     Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t(`error_code.${msg}`)})
