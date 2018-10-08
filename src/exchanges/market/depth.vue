@@ -29,7 +29,7 @@
                 </li>
                 <li class="list-item ask" :class="{'icon-arrow-right2':checkEntrustPrice(item)}" :style="listItemStyle(item, 'ask')" v-for="item in filterAsks" :key="item.orderBookId">
                     <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-ask ask-color">{{toFixed(item.price)}}</span>
-                    <span @click="clickChangeValue(toFixed(item.avaliableAmount), 'amount')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 2)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.avaliableAmount), 'amount')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 4)}}</span>
                     <span @click="clickChangeValue(item, 'total')" class="list-col sum">{{muldepth(item.price, item.avaliableAmount)}}</span>
                 </li>
             </ul>
@@ -42,7 +42,7 @@
             <ul class="list" :class="{'list-overflow': active === 'bid'}">
                 <li class="list-item bid" :class="{'icon-arrow-right2':checkEntrustPrice(item)}" :style="listItemStyle(item, 'bid')" v-for="item in filterBids" :key="item.orderBookId" @click="clickChangeValue(item)">
                     <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-bid bid-color">{{toFixed(item.price)}}</span>
-                    <span @click="clickChangeValue(toFixed(item.avaliableAmount), 'amount')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 2)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.avaliableAmount), 'amount')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 4)}}</span>
                     <span @click="clickChangeValue(item, 'total')" class="list-col sum">{{muldepth(item.price, item.avaliableAmount)}}</span>
                 </li>
                 <li class="list-item bid" v-for="n in bidLength" :key="n">
