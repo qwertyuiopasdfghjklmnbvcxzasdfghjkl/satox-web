@@ -271,7 +271,7 @@
       },
       markets () {
         // 收藏
-        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'ATN', 'USDT']
+        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'ATN', 'USDT', 'MECoin']
       },
       /* 选中数据的集合 */
       mytotalList: function () {
@@ -320,14 +320,14 @@
 .layui-tab{margin: 0 0; text-align: left!important;}
 .layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #FFF;}
-.layui-tab-title li:nth-child(-n+5){border: 1px solid #8f9090; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
-.layui-tab-title li:nth-child(-n+4){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
+.layui-tab-title li:nth-child(-n+6){border: 1px solid #8f9090; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
+.layui-tab-title li:nth-child(-n+5){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
-.layui-tab-title li:nth-child(6){text-align: left;border: 0;border-left: 1px solid #8f9090;}
+.layui-tab-title li:nth-child(7){text-align: left;border: 0;border-left: 1px solid #8f9090;}
 .layui-tab-title li.layuithis{border-bottom-color: #FFF; background-color: #FFF;color:#becbe8!important;}
-.layui-tab-title li:nth-child(6)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
-.layui-tab-title li:nth-child(n+7){padding: 0;}
-.layui-tab-title li:nth-child(n+7)>span{color: #becbe8;}
+.layui-tab-title li:nth-child(7)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
+.layui-tab-title li:nth-child(n+8){padding: 0;}
+.layui-tab-title li:nth-child(n+8)>span{color: #becbe8;}
 .layui-tab-title li.last-li{float: right;color:#FFFFFF;}
 .layui-tab-title li.last-li span{color:#FFFFFF;}
 

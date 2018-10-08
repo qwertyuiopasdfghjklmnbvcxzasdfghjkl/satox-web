@@ -83,5 +83,6 @@ export default {
 .resetpwd-title{height: 24px;line-height: 24px;color: #becbe8;text-indent: 8px;background-color: #1e2233;}
 .resetpwd-cont{display: flex;flex-flow: column;align-items: center;justify-content: center;height: 320px;background-color: #181b2a;}
 .resetpwd-cont /deep/ .button{margin-top: 12px;}
+.resetpwd-cont /deep/ .title{color:#cbd4ec;}
 </style>
 

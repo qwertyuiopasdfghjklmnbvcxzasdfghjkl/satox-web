@@ -24,6 +24,9 @@ export default {
           return numUtils.div(numUtils.mul(lastPrice, '0.1'), this.getUsdRate).toFixed(2).toMoney()
         }
         let curMarketBtc = this.getBtcValues[this.baseSymbol]
+        if (!curMarketBtc && this.baseSymbol !== 'BTC') {
+          return '--'
+        }
         let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
         return numUtils.mul(lastPrice, curMarketPrice).toFixed(2).toMoney()
       } else {

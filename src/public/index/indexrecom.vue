@@ -9,7 +9,7 @@
             </div>
             <div  class="ticker-list">
               <p><span :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice)}} </span> <span class="t-right"><valuation :lastPrice="item.lastPrice" :baseSymbol="item.baseSymbol"/></span></p>
-              <span class="volume">Volume: {{toFixed(item.dealAmount,2)}}BTC</span>
+              <span class="volume">Volume: {{toFixed(item.dealAmount,2)}}{{item.baseSymbol}}</span>
             </div>
           </li>
         </ul>

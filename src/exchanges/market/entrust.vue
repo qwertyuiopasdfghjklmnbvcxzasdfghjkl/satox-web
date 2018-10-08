@@ -272,17 +272,26 @@ export default {
       if (this.getApiToken) {
         // 根据symbol获取当前委托
         this.cshowLoading = true
+        let tempSymbol = this.symbol
         market.getCurrentEntrustBySymbol(0, this.symbol, (res) => {
-          this.cdatas = res
           this.cshowLoading = false
+          if (tempSymbol !== this.symbol) {
+            console.log(`extrust-current-symbol不匹配${tempSymbol}-${this.symbol}`)
+            return
+          }
+          this.cdatas = res
         }, () => {
           this.cshowLoading = false
         })
         // 历史成交
         this.hshowLoading = true
         market.getHistoryDeal(1, this.symbol, (res) => {
-          this.hdatas = res
           this.hshowLoading = false
+          if (tempSymbol !== this.symbol) {
+            console.log(`extrust-history-symbol不匹配${tempSymbol}-${this.symbol}`)
+            return
+          }
+          this.hdatas = res
         }, () => {
           this.hshowLoading = false
         })

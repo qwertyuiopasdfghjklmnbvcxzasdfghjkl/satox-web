@@ -130,8 +130,14 @@ const reSendEmail = function (data, success, error) {
 user.reSendEmail = reSendEmail
 
 // 获取极速验证信息
-const getGtInfo = function (data, success, error) {
-  api.get(`${domain}api/v2/user/gtCaptcha`, data, success, error)
+const getGtInfo = function (success, error) {
+  api.get(`${domain}api/v2/user/gtCaptcha`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error()
+    }
+  }, error)
 }
 user.getGtInfo = getGtInfo
 
