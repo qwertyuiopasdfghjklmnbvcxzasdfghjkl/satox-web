@@ -306,7 +306,7 @@ export default {
 /* 红涨绿跌 */
 .home{min-width:1200px;min-height:500px;height:calc(100% - 60px);}
 .center{display:flex;justify-content:space-between;height:100%;}
-.home-left{display:flex;width:15.7%;margin:10px 0 10px 10px;}
+.home-left{display:flex;min-width:290px;width:15.7%;margin:10px 0 10px 10px;}
 .home-center{flex:1;display:flex;flex-flow:column;min-width:500px;margin:10px;}
 .home-center-top{flex:1;display:flex;flex-flow:column;min-height:0;}
 .home-center-bottom{margin-top:10px;}
