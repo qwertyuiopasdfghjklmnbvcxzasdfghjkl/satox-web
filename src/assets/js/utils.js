@@ -473,7 +473,7 @@ const gtValidate = function (okCallback, endCallback) {
       if (gtIsInitTip) {
         gtIsInitTip = false
         // 滑块初始化完成，请点击重试。
-        Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t('public0.public277')})
+        Vue.$koallTipBox({icon: 'success', message: window.$i18n.t('public0.public278')})
       }
     })
     typeof captcha.onSuccess === 'function' && captcha.onSuccess(() => {
