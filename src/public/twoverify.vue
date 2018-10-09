@@ -39,6 +39,7 @@ import { mapActions } from 'vuex'
 import myApi from '@/api/individual'
 import inputbox from '@/components/formel/inputbox'
 import buttonbox from '@/components/formel/buttonbox'
+import commonConfig from '@/assets/js/commonConfig'
 export default {
   components: {
     inputbox,
