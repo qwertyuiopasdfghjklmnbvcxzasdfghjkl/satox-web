@@ -63,7 +63,7 @@ Validator.extend('passport', {
 Validator.extend('telphone', {
   getMessage: (field, args) => 'public0.public128', // 手机号码需要是9~11为数字
   validate: (value, args) => {
-    return /^\d{9,11}$/.test(value)
+    return /^\d{8,11}$/.test(value)
   }
 })
 
