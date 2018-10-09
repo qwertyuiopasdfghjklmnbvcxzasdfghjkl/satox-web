@@ -10,7 +10,7 @@
             <Col span="3">推荐人账号</Col>
             <Col span="1">M1</Col>
             <Col span="1">M2</Col>
-            <Col span="1">M1</Col>
+            <Col span="1">M3</Col>
             <Col span="2">TotalM1</Col>
             <Col span="2">TotalM2</Col>
             <Col span="2">TotalM3</Col>
