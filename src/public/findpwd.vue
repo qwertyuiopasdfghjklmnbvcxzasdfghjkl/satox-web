@@ -67,7 +67,7 @@ export default {
       gtLocked: false,
       registerType: 1,
       areaCodeList: commonConfig.areaCodeList,
-      countryCode: '+86',
+      countryCode: commonConfig.defaultCode,
       mobileFormData: {
         phoneNumber: '',
         smsCode: '',

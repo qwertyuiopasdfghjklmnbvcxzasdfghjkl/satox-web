@@ -80,7 +80,7 @@ export default {
       areaCodeList: commonConfig.areaCodeList,
       formData: {
         registerType: 1,
-        countryCode: '+86',
+        countryCode: commonConfig.defaultCode,
         mobile: '',
         smsCode: '',
         username: '',
