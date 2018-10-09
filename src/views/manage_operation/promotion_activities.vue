@@ -4,9 +4,11 @@
     <p slot="title">推广活动</p>
     <Table :columns="columns1" :data="data1"></Table> 
     <Row style="margin-top:10px;">
-        <Col span="24" style="text-align:center;">
+        <Col span="24" style="text-align:center;margin: 0 auto;">
             添加BANNER页
-            <Icon type="plus-round" style="cursor:pointer; color: #2d8cf0;font-size:24px;verticalAlign:middle;margin-left:10px;" @click="addBanner"></Icon>
+            <div @click="addBanner" style="display:inline-block;">
+                 <Icon type="plus-round" style="cursor:pointer; color: #2d8cf0;font-size:24px;verticalAlign:middle;margin-left:10px;" ></Icon>
+            </div>
         </Col>
     </Row>
     <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page> 
