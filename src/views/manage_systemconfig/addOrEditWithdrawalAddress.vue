@@ -40,13 +40,13 @@
 <script>
   import system from '../../api/systemparam'
   export default {
-    props: ['isEdit', 'symbol', 'username'],
+    props: ['isEdit', 'symbol', 'username', 'symbolType'],
     data () {
       return {
         formValidate: {
           symbol: this.isEdit ? this.symbol : null,
           username: this.isEdit ? this.username : null,
-          symbolType: this.isEdit ? this.symbolType : '1'
+          symbolType: this.isEdit ? this.symbolType.toString() : '1'
         },
         ruleValidate: {
           symbol: [

@@ -41,7 +41,7 @@
           </Col>
           <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);min-height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
             <CheckboxGroup v-model="data.$value"  @on-change="updataSystem(data)">
-              <Checkbox :label="`${da.symbol}-${da.symbolType}`" v-for="da in dataSymbol" :key="data.id">{{da.symbol}}</Checkbox>
+              <Checkbox :label="`${da.symbol}-${da.symbolType}`" v-for="da in dataSymbol" :key="da.id">{{da.symbol}}</Checkbox>
             </CheckboxGroup>
           </Row>
         </Row>
@@ -210,6 +210,7 @@ export default {
                   isEdit: true,
                   symbol: params.row.symbol,
                   username: params.row.username,
+                  symbolType: params.row.symbolType,
                   okCallback: () => {
                     this.fnFindAdminAccounts()
                   }
@@ -241,6 +242,7 @@ export default {
                   isEdit: true,
                   symbol: params.row.symbol,
                   username: params.row.username,
+                  symbolType: params.row.symbolType,
                   okCallback: () => {
                     this.fnFindAdminCoinPools()
                   }
