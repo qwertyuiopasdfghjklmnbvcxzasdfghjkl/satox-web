@@ -11,6 +11,7 @@
             <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].atnTransactionAmount : 0}}ATN</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].usdtTransactionAmount : 0}}USDT</span>
+            <span style="margin-right:15px;">合计：{{datas.length ? datas[0].btcPriceOfNewton : 0}}BTC = {{datas.length ? datas[0].usdPriceOfNewton : 0}}USD</span>
           </p>
         </Col>
         <Col span="7">

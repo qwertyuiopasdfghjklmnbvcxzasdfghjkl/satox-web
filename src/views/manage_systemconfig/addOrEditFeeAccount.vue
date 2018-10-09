@@ -6,8 +6,8 @@
       <a class="ivu-icon ivu-icon-close" href="javascript:;" style="float:right;margin-top:3px;color:#1c2438;" @click="closeDialog"></a>
     </p>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">
-      <FormItem label="主链类型" prop="symbolType">
-          <RadioGroup ref="symbolType" v-model="formValidate.symbolType">
+      <FormItem label="主链类型" prop="symbolType" v-if="!isEdit">
+          <RadioGroup ref="symbolType" v-model="formValidate.symbolType" >
               <Radio label="2">
                   <span>ETH</span>
               </Radio>
@@ -21,6 +21,9 @@
                   <span>MBT</span>
               </Radio>
           </RadioGroup>
+      </FormItem>
+      <FormItem label="主链类型" prop="symbolType" v-if="isEdit">
+         {{this.switchStaus(formValidate.symbolType)}}
       </FormItem>
       <FormItem label="币种" prop="symbol">
         <b v-if="isEdit">{{formValidate.symbol}}</b>
@@ -40,13 +43,13 @@
 <script>
 import system from '../../api/systemparam'
 export default {
-  props: ['isEdit', 'symbol', 'username'],
+  props: ['isEdit', 'symbol', 'username', 'symbolType'],
   data () {
     return {
       formValidate: {
         symbol: this.isEdit ? this.symbol : null,
         username: this.isEdit ? this.username : null,
-        symbolType: this.isEdit ? this.symbolType : '1'
+        symbolType: this.isEdit ? this.symbolType.toString() : '1'
       },
       ruleValidate: {
         symbol: [
@@ -59,6 +62,22 @@ export default {
     }
   },
   methods: {
+    switchStaus(state) {
+        switch(state){
+            case '1':
+                return 'BTC'
+                break;
+            case '2':
+                return 'ETH'
+                break;
+            case '3':
+                return 'OMNI'
+                break;
+            case '4':
+                return 'MBT'
+                break;
+        }
+    },
     save () {
       this.$refs.formValidate.validate((valid) => {
         if (valid) {
