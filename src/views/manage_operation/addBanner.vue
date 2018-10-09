@@ -24,14 +24,10 @@
                     <FormItem label="繁体图片跳转地址" prop="jumpAddressCht">
                         <Input v-model="formLeft.jumpAddressCht" name="jumpAddressCht"></Input>
                     </FormItem>
-                    <Row>
-                        <Col span="12">
-                            <Button type="primary" @click="addCurreny()">添加</Button>
-                        </Col>
-                        <Col span="12">
-                            <Button  @click="closeDialog()">取消</Button>
-                        </Col>
-                    </Row>
+                    <div class="bannerBtn">
+                        <Button type="primary" @click="addCurreny()">添加</Button>
+                         <Button  @click="closeDialog()">取消</Button>
+                    </div>
             </Form>
         </Card>
     </div>
@@ -145,5 +141,5 @@ export default {
 </script>
 <style>
 .addBanner{width: 500px;}
-.ivu-form-label-left .ivu-form-item-label{width: 100% !important;}
+.bannerBtn{text-align: center;}
 </style>

@@ -46,7 +46,7 @@
         <Col span="6">开盘价格</Col>
         <Col span="6">{{item.openingPrice}}</Col>
         <Col span="6">
-          <InputNumber style="width:113px;" :min="0.1" v-model="openingPrice"></InputNumber>
+          <InputNumber style="width:113px;" :min="0" v-model="openingPrice"></InputNumber>
         </Col>
         <Col span="6" style="text-align:right;">
           <Button type="primary"  @click="tabs('openingPrice')">保存</Button>
