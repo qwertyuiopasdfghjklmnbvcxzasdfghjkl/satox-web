@@ -1,55 +1,53 @@
 <template>
     <div class="undone-detail">
         <div class="undone-left">
-            <span :class="{active:step>=0}">
+            <span :class="{active: step >= 0}">
                 1.{{$t('public0.public143')}}
                 <!--新建交易-->
             </span>
-            <span :class="{active:step>=1}">
+            <span :class="{active: step >= 1}">
                 2.{{$t('public0.public144')}}
                 <!--请先付款-->
             </span>
-            <span :class="{active:step>=2}">
+            <span :class="{active: step >= 2}">
                 3.{{$t('public0.public145')}}
                 <!--等待放币-->
             </span>
-            <span :class="{active:step>=3}">
+            <span :class="{active: step >= 3}">
                 4.{{$t('public0.public146')}}
                 <!--完成交易-->
             </span>
         </div>
         <div class="undone-center" v-if="item.state === 1">
             <div class="undone-center-buys">
-                <p>{{$t('otc_exchange.otc_exchange_buy')}}</p>
+                <p>{{$t('otc_exchange.otc_exchange_buy')}}<!--购买--></p>
                 <p>{{item.symbol}}</p>
             </div>
             <div class="undone-center-number">
                 <p class="undone-center-number-font">{{item.total_price}} {{item.currency}}</p>
-                <p>{{$t(params.ad_type==2?'otc_exchange.otc_exchange_ask':'otc_exchange.otc_exchange_bid')}}
-                    <!--单价-->{{item.cur_price}} {{item.currency}}</p>
-                <p>{{$t('exchange.exchange_amount')}} {{item.symbol_count}} {{item.symbol}}</p>
+                <p>{{$t('otc_exchange.otc_exchange_ask')}}<!--单价--> {{item.cur_price}} {{item.currency}}</p>
+                <p>{{$t('exchange.exchange_amount')}}<!--数量--> {{item.symbol_count}} {{item.symbol}}</p>
             </div>
             <div class="undone-center-type">
                 <select v-model="formData.pay_type" :disabled="isDisabled">
                     <option v-for="item in paylist" :value="item.id" :key="item.id">{{$t(item.key)}}</option>
                 </select>
             </div>
-            <div class="undone-center-adress" v-if="formData.pay_type === 1">
+            <div class="undone-center-adress">
                 <p>{{$t('public0.public65')}}<!--收款人-->：{{payInfo.name}}</p>
-                <p>{{$t('otc_legal.otc_legal_Bank')}}<!--开户行-->：{{payInfo.bank}}</p>
-                <p>{{$t('otc_legal.otc_legal_Bank_number')}}<!--银行卡号-->：{{payInfo.number}}</p>
+                <p v-if="formData.pay_type === 1">{{$t('otc_legal.otc_legal_Bank')}}：<!--开户行-->{{payInfo.bank}}</p>
+                <p v-if="formData.pay_type === 1">{{$t('otc_legal.otc_legal_Bank_number')}}：<!--银行卡号-->{{payInfo.number}}</p>
+                <p v-if="formData.pay_type === 2">{{$t('otc_legal.otc_legal_Alipay_number')}}：<!--支付宝账号-->{{payInfo.number}}</p>
+                <p v-if="formData.pay_type === 3">{{$t('otc_legal.otc_legal_Wechat_number')}}：<!--微信账号-->{{payInfo.number}}</p>
+                <p v-if="formData.pay_type === 4">{{$t('public0.public221')}}：<!--PayPal账号-->{{payInfo.number}}</p>
             </div>
-            <div class="undone-center-adress" v-if="formData.pay_type !== 1">
-                <p>{{$t('public0.public65')}}<!--收款人-->：{{payInfo.name}}</p>
-                <p>{{formData.pay_type === 2 ? $t('otc_legal.otc_legal_Alipay_number') : $t('otc_legal.otc_legal_Wechat_number')}}：{{payInfo.number}}</p><!--支付宝账号||微信账号-->
-            </div>
-            <div class="undoneimg" v-if="formData.pay_type !== 1">
+            <div class="undoneimg" v-if="formData.pay_type === 2 || formData.pay_type === 3">
                 <img :src="payInfo.url" @click="openQrCode"/>
             </div>
         </div>
         <div class="undone-center" v-if="item.state === 2">
             <div class="undone-center-buys">
-                <p>{{$t('otc_exchange.otc_exchange_buy')}}</p>
+                <p>{{$t('otc_exchange.otc_exchange_buy')}}<!--购买--></p>
                 <p>{{item.symbol}}</p>
             </div>
             <div class="undone-center-type" v-if="!item.from_user_comment">
@@ -58,16 +56,16 @@
             <div class="undone-center-adress">
                 <div class="evaluate" >
                     <ul>
-                        <li @click="commentType=1" v-if="!item.from_user_comment || item.from_user_comment === 1">
-                            <em class="icon-praise" :class="{active:commentType===1}"></em>
+                        <li @click="commentType = 1" v-if="!item.from_user_comment || item.from_user_comment === 1">
+                            <em class="icon-praise" :class="{active: commentType === 1}"></em>
                             <p>{{$t('otc_ad.otc_ad_Praise')}}<!--好评--></p>
                         </li>
-                        <li @click="commentType=2" v-if="!item.from_user_comment || item.from_user_comment === 2">
-                            <em class="icon-average" :class="{active:commentType===2}"></em>
+                        <li @click="commentType = 2" v-if="!item.from_user_comment || item.from_user_comment === 2">
+                            <em class="icon-average" :class="{active: commentType === 2}"></em>
                             <p>{{$t('otc_ad.otc_ad_Average')}}<!--中评--></p>
                         </li>
-                        <li @click="commentType=3" v-if="!item.from_user_comment || item.from_user_comment === 3">
-                            <em class="icon-bad-review" :class="{active:commentType===3}"></em>
+                        <li @click="commentType = 3" v-if="!item.from_user_comment || item.from_user_comment === 3">
+                            <em class="icon-bad-review" :class="{active: commentType === 3}"></em>
                             <p>{{$t('otc_ad.otc_ad_Bad_review')}}<!--差评--></p>
                         </li>
                     </ul>
@@ -76,8 +74,8 @@
         </div>
         <div class="undone-right">
             <p>{{stateTitle}}</p>
-            <a href="javascript:;" v-if="item.state === 1" :class="{disabled:item.pay_state !== 0}" @click="confirm">{{$t('public0.public154')}}<!--已支付--></a>
-            <a href="javascript:;" v-if="item.state === 2" :class="{disabled:item.from_user_comment}" @click="evaluation">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></a>
+            <a href="javascript:;" v-if="item.state === 1" :class="{disabled: item.pay_state !== 0}" @click="confirm">{{$t('public0.public154')}}<!--已支付--></a>
+            <a href="javascript:;" v-if="item.state === 2" :class="{disabled: item.from_user_comment}" @click="evaluation">{{$t('otc_ad.otc_ad_confirm')}}<!--确认--></a>
         </div>
     </div>
 </template>
@@ -88,8 +86,8 @@ import { mapGetters } from 'vuex'
 import otcApi from '@/api/otc'
 import otcConfig from '@/assets/js/otcconfig'
 import utils from '@/assets/js/utils'
-import qrcode from './qrcode'
-import warnDialog from '../dialog/warnDialog'
+import qrcode from '@/otc/otchome/list/qrcode'
+import warnDialog from '@/otc/otchome/dialog/warnDialog'
 export default {
   props: ['item'],
   data () {
