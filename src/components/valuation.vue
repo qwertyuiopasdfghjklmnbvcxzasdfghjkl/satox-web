@@ -22,6 +22,11 @@ export default {
             return numUtils.mul(lastPrice, '0.1').toFixed(2).toMoney()
           }
           return numUtils.div(numUtils.mul(lastPrice, '0.1'), this.getUsdRate).toFixed(2).toMoney()
+        } else if (this.baseSymbol === 'MECoin') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(lastPrice, '0.25').toFixed(2).toMoney()
+          }
+          return numUtils.div(numUtils.mul(lastPrice, '0.25'), this.getUsdRate).toFixed(2).toMoney()
         }
         let curMarketBtc = this.getBtcValues[this.baseSymbol]
         if (!curMarketBtc && this.baseSymbol !== 'BTC') {
