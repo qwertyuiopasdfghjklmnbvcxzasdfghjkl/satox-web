@@ -148,26 +148,32 @@ export default {
       return datas
     },
     payInfo () {
-      if (this.formData.pay_type === 1) {
-        return {
-          name: this.payTypes.real_name,
-          bank: this.payTypes.data.card_bank,
-          number: this.payTypes.data.card_number
-        }
-      } else if (this.formData.pay_type === 2) {
-        return {
-          name: this.payTypes.real_name,
-          number: this.payTypes.data.alipay_number,
-          url: this.payTypes.data.alipay_image_path
-        }
-      } else if (this.formData.pay_type === 3) {
-        return {
-          name: this.payTypes.real_name,
-          number: this.payTypes.data.wechat_number,
-          url: this.payTypes.data.wechat_image_path
-        }
-      } else {
-        return {}
+      switch (this.formData.pay_type) {
+        case 1:
+          return { // 银行卡
+            name: this.payTypes.real_name,
+            bank: this.payTypes.data.card_bank,
+            number: this.payTypes.data.card_number
+          }
+        case 2:
+          return { // 支付宝
+            name: this.payTypes.real_name,
+            number: this.payTypes.data.alipay_number,
+            url: this.payTypes.data.alipay_image_path
+          }
+        case 3:
+          return { // 微信
+            name: this.payTypes.real_name,
+            number: this.payTypes.data.wechat_number,
+            url: this.payTypes.data.wechat_image_path
+          }
+        case 4:
+          return { // PayPal
+            name: this.payTypes.real_name,
+            number: this.payTypes.data.paypal_number
+          }
+        default:
+          return {}
       }
     },
     stateTitle () {
