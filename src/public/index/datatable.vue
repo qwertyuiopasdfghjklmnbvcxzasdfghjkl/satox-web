@@ -6,8 +6,10 @@
           <ul class="layui-tab-title">
             <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item" :key="item" >{{item}}</li>
             <li><input v-model="filterValue" /></li>
-            <li class="last-li">Volume:
-              <template v-for="item in symbolVolumes"><span class="countli">&nbsp;{{Math.ceil(item.volumes)}}&nbsp;</span>{{item.symbol}}</template>
+            <li class="last-li" :title="valumeTip">Volume:
+              <div class="last-li-volume">
+                {{valumeTip}}
+              </div>
               <span class="last-span" style="position:relative;padding-right:34px;">
                 <i>{{$t('home.home_connected')}}</i>
                 <em class="network-signal" :class="['signal-' + getNetworkSignal]"></em>
@@ -277,6 +279,13 @@
       mytotalList: function () {
         let checkedArry = []
         this.optionalList = checkedArry
+      },
+      valumeTip () {
+        let valumes = []
+        this.symbolVolumes.forEach((item) => {
+          valumes.push(` ${Math.ceil(item.volumes)} ${item.symbol}`)
+        })
+        return valumes.join('')
       }
     },
     watch: {
@@ -319,16 +328,17 @@
 .slider-nav ul li span.slider-this{background: #48bcff;}
 .layui-tab{margin: 0 0; text-align: left!important;}
 .layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
-.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 15px; text-align: center; cursor: pointer; color: #FFF;}
+.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 10px; text-align: center; cursor: pointer; color: #FFF;}
 .layui-tab-title li:nth-child(-n+6){border: 1px solid #8f9090; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
 .layui-tab-title li:nth-child(-n+5){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
 .layui-tab-title li.hover:hover{color: #becbe8;}
 .layui-tab-title li:nth-child(7){text-align: left;border: 0;border-left: 1px solid #8f9090;}
 .layui-tab-title li.layuithis{border-bottom-color: #FFF; background-color: #FFF;color:#becbe8!important;}
-.layui-tab-title li:nth-child(7)>input{width: 150px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 19px; background: url("../../assets/images/chazao.png") no-repeat 139px center;}
+.layui-tab-title li:nth-child(7)>input{width:120px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 8px; background: url("../../assets/images/chazao.png") no-repeat 104px center;}
 .layui-tab-title li:nth-child(n+8){padding: 0;}
 .layui-tab-title li:nth-child(n+8)>span{color: #becbe8;}
 .layui-tab-title li.last-li{float: right;color:#FFFFFF;}
+.layui-tab-title li.last-li div{display:inline-block;max-width:360px;overflow:hidden;white-space:nowrap;vertical-align:middle;text-overflow:ellipsis;}
 .layui-tab-title li.last-li span{color:#FFFFFF;}
 
 table{border-collapse: collapse; border-spacing: 0;}
