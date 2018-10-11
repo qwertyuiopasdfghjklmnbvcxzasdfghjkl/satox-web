@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
-                    <a class="button" :class="{en:getLang=='en'}" href="/static/newton-pro-1009.apk" download="newton-pro-1009.apk">
+                    <a class="button" :class="{en:getLang=='en'}" href="/static/newton-pro-1011.apk" download="newton-pro-1011.apk">
                         <!--安卓下载-->
                         {{$t('public0.public226')}}
                     </a>

@@ -102,7 +102,7 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol ? symbol.toUpperCase() : 'BTC'
+        return symbol || 'BTC'
       } else {
         return 'BTC'
       }
@@ -111,7 +111,7 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol ? symbol.toUpperCase() : 'ETH'
+        return symbol || 'ETH'
       } else {
         return 'ETH'
       }
