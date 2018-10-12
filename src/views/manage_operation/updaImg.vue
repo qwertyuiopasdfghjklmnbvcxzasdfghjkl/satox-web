@@ -184,7 +184,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .updaImge{width: 1000px;background: #fff;padding: 20px;}
 .allUpdata{ display: flex;padding-bottom: 20px;border-bottom: 1px solid #ccc;padding-top: 10px;}
 .updaBtn{display: flex;justify-content: space-around;}

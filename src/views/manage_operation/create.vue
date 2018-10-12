@@ -12,7 +12,7 @@
                 <DatePicker type="date" placeholder="请选择时间" name="creatTime" v-model="formValidate.creatTime" width="100%"></DatePicker>
             </FormItem> -->
             <FormItem label="币种" prop="symbol">
-                <Select v-model="formValidate.symbol" name="symbol">
+                <Select v-model="formValidate.symbol" name="symbol" @on-change="changSelect">
                     <Option :value="data.symbol" v-for="data in symbolData" :key="data.id">{{data.symbol}}</Option>
                 </Select>
             </FormItem>
@@ -47,6 +47,7 @@ export default {
                 serialNumber: null,
                 creatTime: '',
                 symbol: '',
+                symbolType: '',
                 quantity: null,
                 userId: null,
                 accountId: null,
@@ -86,6 +87,15 @@ export default {
        this.findSymbolInfo()
    },
    methods: {
+       changSelect (data) {
+           let type = []
+           this.symbolData.forEach((item) => {
+               if (item.symbol == data) {
+                   type.push(item)
+               }
+           })
+           this.formValidate.symbolType = type[0].symbolType
+       },
        findSymbolInfo () {
            extendApi.findSymbolInfo((res) => {
                this.symbolData = res
@@ -98,11 +108,14 @@ export default {
            this.$refs.formValidate.validate((valid) => {
                 if (valid) {
                     let formData = new FormData(this.$refs.formValidate.$el);
+                    formData.append('symbolType', this.formValidate.symbolType)
                     extendApi.createSingleDistribute(formData, (res) => {
                         this.$Message.success({content: '创建成功'})
                         // this.findSymbolInfo()
                         this.$emit('okCallback')
                         this.$emit('removeDialog')
+                    }, (msg) => {
+                        this.$Message.error({content: msg})
                     })
                 }
             })

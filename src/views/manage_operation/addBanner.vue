@@ -51,28 +51,28 @@ export default {
                 return callback()
             }
         }
-        let self = this
-        const xxx1 = (rule, value, callback) => {
-            let isTrue = util.limitUploadImage(self.$refs.img)
-                if (!isTrue) {
-                    return callback(new Error())
-                }
-                return callback()
-        }
-        const xxx2 = (rule, value, callback) => {
-            let isTrue = util.limitUploadImage(self.$refs.imgEn)
-                if (!isTrue) {
-                    return callback(new Error())
-                }
-                return callback()
-        }
-        const xxx3 = (rule, value, callback) => {
-            let isTrue = util.limitUploadImage(self.$refs.imgCht)
-                if (!isTrue) {
-                    return callback(new Error())
-                }
-                return callback()
-        }
+        // let self = this
+        // const xxx1 = (rule, value, callback) => {
+        //     let isTrue = util.limitUploadImage(self.$refs.img)
+        //         if (!isTrue) {
+        //             return callback(new Error())
+        //         }
+        //         return callback()
+        // }
+        // const xxx2 = (rule, value, callback) => {
+        //     let isTrue = util.limitUploadImage(self.$refs.imgEn)
+        //         if (!isTrue) {
+        //             return callback(new Error())
+        //         }
+        //         return callback()
+        // }
+        // const xxx3 = (rule, value, callback) => {
+        //     let isTrue = util.limitUploadImage(self.$refs.imgCht)
+        //         if (!isTrue) {
+        //             return callback(new Error())
+        //         }
+        //         return callback()
+        // }
         return {
             formLeft: {
                 adPosition: '',
@@ -89,8 +89,8 @@ export default {
                 ],
                 img: [
                     { required: true, message: '请输入中文图片', trigger: 'blur' },
-                    { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' },
-                    { validator: xxx1, message: '图片不能超过2M', trigger: 'blur' }
+                    // { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' },
+                    // { validator: xxx1, message: '图片不能超过2M', trigger: 'blur' }
                 ],
                 jumpAddress: [
                     { required: true, message: '请输入中文图片跳转地址', trigger: 'blur' }
@@ -98,7 +98,7 @@ export default {
                 imgEn: [
                     { required: true, message: '请输入英文图片', trigger: 'blur' },
                     { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' },
-                    { validator: xxx2, message: '图片不能超过2M', trigger: 'blur' }
+                    // { validator: xxx2, message: '图片不能超过2M', trigger: 'blur' }
                 ],
                 jumpAddressEn: [
                     { required: true, message: '请输入英文图片跳转地址', trigger: 'blur' }
@@ -106,7 +106,7 @@ export default {
                 imgCht: [
                     { required: true, message: '请输入繁体图片', trigger: 'blur' },
                     { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' },
-                    { validator: xxx3, message: '图片不能超过2M', trigger: 'blur' }
+                    // { validator: xxx3, message: '图片不能超过2M', trigger: 'blur' }
                 ],
                 jumpAddressCht: [
                     { required: true, message: '请输入繁体图片跳转地址', trigger: 'blur' }
