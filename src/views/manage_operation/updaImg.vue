@@ -12,23 +12,29 @@
                         <img :src="image" /> 
                     </div>
                 </Col>
-                <Col span="20">
-                    <Form ref="formItem" :model="formLeft"  label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                <Form ref="formItem" :model="formLeft"  label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                    <Col span="5">
                         <FormItem label="" prop="img">
                             <input type="file" ref="img" name="img" @change="iconValidator('img', $event)"/>
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" >
                             {{this.item.activityImgName}}
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" >
                             跳转到地址
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" prop="jumpAddress">
                             <Input v-model="formLeft.jumpAddress" name="jumpAddress"></Input>
                         </FormItem>
-                        <Button type="primary" @click="updaImg">确定</Button>
-                    </Form>
-                </Col>
+                    </Col>
+                    <Button type="primary" @click="updaImg">确定</Button>
+                </Form>
             </Row>
         </div>
         <div class="allUpdata">
@@ -39,23 +45,29 @@
                         <img :src="image" /> 
                     </div>
                 </Col>
-                <Col span="20">
                     <Form ref="formItem1" :model="formLeft1" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
-                        <FormItem label="" prop="imgEn">
-                            <input type="file" ref="imgEn" name="imgEn" @change="iconValidator1('imgEn', $event)"/>
-                        </FormItem>
-                        <FormItem label="" >
-                            {{this.item.activityImgNameEn}}
-                        </FormItem>
-                        <FormItem label="" >
-                            跳转到地址
-                        </FormItem>
-                        <FormItem label="" prop="jumpAddressEn">
-                            <Input v-model="formLeft1.jumpAddressEn" name="jumpAddressEn"></Input>
-                        </FormItem>
+                       <Col span="5">
+                           <FormItem label="" prop="imgEn">
+                                <input type="file" ref="imgEn" name="imgEn" @change="iconValidator1('imgEn', $event)"/>
+                            </FormItem>
+                       </Col>
+                        <Col span="5">
+                           <FormItem label="" >
+                                {{this.item.activityImgNameEn}}
+                            </FormItem>
+                       </Col>
+                       <Col span="5">
+                           <FormItem label="" >
+                                跳转到地址
+                            </FormItem>
+                       </Col>
+                       <Col span="5">
+                           <FormItem label="" prop="jumpAddressEn">
+                                <Input v-model="formLeft1.jumpAddressEn" name="jumpAddressEn"></Input>
+                            </FormItem>
+                       </Col>
                         <Button type="primary" @click="updaImgEn">确定</Button>
                     </Form>
-                </Col>
             </Row>
         </div>
         <div class="allUpdata">
@@ -66,23 +78,29 @@
                         <img :src="image" /> 
                     </div>
                 </Col>
-                <Col span="20">
-                    <Form ref="formItem2" :model="formLeft2" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                <Form ref="formItem2" :model="formLeft2" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                    <Col span="5">
                         <FormItem label="" prop="imgCht">
                             <input type="file" ref="imgCht" name="imgCht" @change="iconValidator2('imgCht', $event)"/>
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" >
                             {{this.item.activityImgNameCht}}
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" >
                             跳转到地址
                         </FormItem>
+                    </Col>
+                    <Col span="5">
                         <FormItem label="" prop="jumpAddressCht">
                             <Input v-model="formLeft2.jumpAddressCht" name="jumpAddressCht"></Input>
                         </FormItem>
-                        <Button type="primary" @click="updaImgCht">确定</Button>
-                    </Form>
-                </Col>
+                    </Col>
+                    <Button type="primary" @click="updaImgCht">确定</Button>
+                </Form>
             </Row>
         </div>
       </Card>
@@ -165,6 +183,7 @@ export default {
             })
         },
         updaImgCht () {
+            debugger
             let form = this.$refs.formItem2
             if (this.formLeft2.imgCht == '' && this.formLeft2.jumpAddressCht == '') {
                 this.$Message.error({content:　'请输入繁体banner修改的值'})
@@ -190,5 +209,6 @@ export default {
 .updaBtn{display: flex;justify-content: space-around;}
 .allUpdata-left img{width: 150px;height: 150px;}
 .ivu-form-item-content{margin-left: 0px !important; }
+Button{height: 30px !important;}
 </style>
 
