@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from '@/vuex'
 import Vtip from '@/assets/js/vtip.min'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import '@/components/dialog'
 import '@/components/confirm'
 import '@/components/messageTipBox'
@@ -15,11 +16,13 @@ import '../node_modules/hopscotch/dist/css/hopscotch.min.css'
 import 'vtip/lib/index.min.css'
 import '@/assets/css/style.css'
 import '@/assets/css/mian.css'
+import 'swiper/dist/css/swiper.css'
 import langApi from '@/api/language'
 
 Vue.use(VeeValidate)
 Vue.use(VueI18n)
 Vue.use(Vtip.directive)
+Vue.use(VueAwesomeSwiper)
 let i18n = window.$i18n = new VueI18n({
   locale: 'en',
   messages: {
