@@ -39,7 +39,7 @@
                 {{$t('public0.public40')}}<!--修改昵称-->
               </span>
             </p>
-            <p class="sale" v-if="false">
+            <p class="sale">
               <span>
                 {{$t('account.user_center_pay_fees').format('NEWTON', '50%')}}<!--使用NEWTON支付交易手续费（50% 折扣）-->
                 <a class="icon-checkbox" href="javascript:;" :class="isUseNewtonPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
