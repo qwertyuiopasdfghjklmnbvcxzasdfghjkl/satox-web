@@ -56,9 +56,17 @@
           } else {
             datas.push({
               imgUrl: `${this.origin}${item.activityImgUrlEn}`,
-              url: `${item.jumpAddressCn}`
+              url: `${item.jumpAddressEn}`
             })
           }
+        })
+        datas.sort((item1, item2) => {
+          let n1 = Number(item1.adPosition)
+          let n2 = Number(item2.adPosition)
+          if (n1 === n2) {
+            return 0
+          }
+          return n1 < n2 ? -1 : 1
         })
         return datas
       }
