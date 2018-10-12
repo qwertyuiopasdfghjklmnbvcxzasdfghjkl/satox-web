@@ -56,7 +56,7 @@
           } else {
             datas.push({
               imgUrl: `${this.origin}${item.activityImgUrlEn}`,
-              url: `${item.jumpAddressCn}`
+              url: `${item.jumpAddressEn}`
             })
           }
         })
