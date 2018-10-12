@@ -528,7 +528,7 @@ const gtValidate = function (okCallback, endCallback) {
       height: '44px',
       lang: lang
     }, handler)
-  }, () => {
+  }, (msg) => {
     isGtDialogOpen = false
     typeof gtEndCallback === 'function' && gtEndCallback()
     Vue.$koallTipBox({icon: 'notification', message: window.$i18n.t(`error_code.${msg}`)})

@@ -313,4 +313,16 @@ const invitedAwardRank = function (success, error) {
 }
 individual.invitedAwardRank = invitedAwardRank
 
+// 获取首页banner数据
+const getBannersList = function (success, error) {
+  api.get(`${domain}api/v2/individual/promotionActivity`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+individual.getBannersList = getBannersList
+
 export default individual

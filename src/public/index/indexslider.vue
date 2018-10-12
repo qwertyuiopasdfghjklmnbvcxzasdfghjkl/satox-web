@@ -1,45 +1,72 @@
 <template>
   <div class="bk-wrap index-slider">
      <div class="bk-main index-content">
-      <slider :pages="pages" :sliderinit="sliderinit"  >
-        &lt;!&ndash; slot  &ndash;&gt;
-      </slider>
+      <swiper v-if="banners.length" :options="swiperOption">
+        <swiper-slide v-for="item in banners">
+          <a :href="item.url">
+              <img :src="item.imgUrl" />
+          </a>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-pagination"></div>
      </div>
   </div>
 </template>
 
 <script>
-  import banner01 from './banner01'
-  import banner03 from './banner03'
-  import slider from 'vue-concise-slider'// 引入slider组件
+  import { mapGetters } from 'vuex'
+  import userApi from '@/api/individual'
+  import config from '@/assets/js/config'
   export default {
     data () {
       return {
-        pages: [
-          {
-            component: banner01
+        datas: [],
+        origin: config.origin,
+        swiperOption: {
+          loop: true,
+          autoplay: {
+            delay: 3000, // 自动切换的时间间隔，单位ms
+            stopOnLastSlide: false, // 当切换到最后一个slide时停止自动切换
+            disableOnInteraction: false, // 用户操作swiper之后，是否禁止autoplay。
+            waitForTransition: true // 等待过渡完毕。自动切换会在slide过渡完毕后才开始计时。
           },
-          {
-            component: banner03
+          speed: 500,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
           }
-        ],
-        // 滑动配置[obj]
-        sliderinit: {
-          currentPage: 0, // 当前页码
-          thresholdDistance: 500, // 滑动判定距离
-          thresholdTime: 100, // 滑动判定时间
-          autoplay: 15000, // 自动滚动[ms]
-          loop: true, // 循环滚动
-          direction: 'horizontal', // 方向设置，垂直滚动
-          infinite: 1, // 无限滚动前后遍历数
-          slidesToScroll: 1, // 每次滑动项数
-          timingFunction: 'ease', // 滑动方式
-          duration: 0 // 滑动时间
         }
       }
     },
-    components: {
-      slider
+    computed: {
+      ...mapGetters(['getLang']),
+      banners () {
+        let datas = []
+        this.datas.forEach((item) => {
+          if (this.getLang === 'zh-CN') {
+            datas.push({
+              imgUrl: `${this.origin}${item.activityImgUrl}`,
+              url: `${item.jumpAddress}`
+            })
+          } else if (this.getLang === 'zh-CN') {
+            datas.push({
+              imgUrl: `${this.origin}${item.activityImgUrlCht}`,
+              url: `${item.jumpAddressCht}`
+            })
+          } else {
+            datas.push({
+              imgUrl: `${this.origin}${item.activityImgUrlEn}`,
+              url: `${item.jumpAddressCn}`
+            })
+          }
+        })
+        return datas
+      }
+    },
+    created () {
+      userApi.getBannersList((res) => {
+        this.datas = res
+      })
     }
   }
 </script>
@@ -50,6 +77,7 @@
   .index-slider{background: #100E0E;min-width:1200px;}
   .index-slider .index-content{
     height: auto;
+    position: relative;
   }
   .index-content .slider-item{
      background-size: initial;
@@ -77,4 +105,10 @@
   .slider-nav ul li{display:inline-block;width:35px;}
   .slider-nav ul li span{display:inline-block;width:30px;height:4px;border-radius:2px;background:#47577f;}
   .slider-nav ul li span.slider-this{background:#48bcff;}
+  .swiper-slide /deep/ a{display:block;width:100%;height:100%;}
+  .swiper-slide /deep/ img{width:100%;}
+  .swiper-pagination{position: absolute;bottom:19px;width:100%;display:flex;align-items:center;justify-content:center;z-index:10;}
+  .swiper-pagination /deep/ .swiper-pagination-bullet{width:35px;height:4px;border-radius:5px;background:#CCC;margin:0 5px;opacity:1;}
+  .swiper-pagination /deep/ .swiper-pagination-bullet:focus{border:none;outline:none;}
+  .swiper-pagination /deep/ .swiper-pagination-bullet-active{background:#fdb902;}
 </style>
