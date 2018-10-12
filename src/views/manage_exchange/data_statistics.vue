@@ -45,7 +45,7 @@
       <Table :columns="columns4" :data="data4"></Table>
     </Card> -->
     <Card style="margin-top:10px;">
-      <p slot="title">图表展示</p>
+      <p slot="title">图表展示1</p>
       <Form ref="formItem" :model="formItem" :label-width="80" inline>
         <FormItem prop="user" label="币种">
             <Select v-model="formItem.symbol" style="width:100px">
