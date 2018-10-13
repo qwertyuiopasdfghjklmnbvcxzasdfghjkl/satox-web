@@ -42,7 +42,7 @@
             <Row style="width:100%;">
                 <Col span="4">
                     <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-                        <img :src="image" /> 
+                        <img :src="image2" /> 
                     </div>
                 </Col>
                     <Form ref="formItem1" :model="formLeft1" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
@@ -75,7 +75,7 @@
             <Row style="width:100%;">
                 <Col span="4">
                     <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-                        <img :src="image" /> 
+                        <img :src="image2" /> 
                     </div>
                 </Col>
                 <Form ref="formItem2" :model="formLeft2" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
@@ -130,6 +130,12 @@ export default {
     computed: {
         image () {
             return this.item.activityImgUrl
+        },
+        image1 () {
+            return this.item.activityImgUrlEn
+        },
+        image2 () {
+            return this.item.activityImgUrlCht
         }
     },
     methods: {

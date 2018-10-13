@@ -108,10 +108,11 @@ export default {
                         props: {type: 'primary', size: 'small'},
                         on: {
                             click: () => {
+                                debugger
                                 extendApi.deleteBannerPage({
                                     promotionActivityId: params.row.promotionActivityId
                                 }, (res) => {
-                                    this.$Message.success({contnet: '删除成功'})
+                                    this.$Message.success({content: '删除成功'})
                                     this.getfindAllActivity()
                                 }, (msg) => {
                                     this.$Message.error({contnet: msg})
