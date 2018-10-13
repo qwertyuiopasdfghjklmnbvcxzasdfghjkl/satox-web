@@ -172,4 +172,64 @@ const addBannerPage = function (data, success, error) {
 };
 extend.addBannerPage = addBannerPage
 
+//查询公告
+const findAllAnnouncement = function (curPage, data, success, error) {
+    api.post(`api/bm/promotionManage/announcement/findAllAnnouncement/10/${curPage}`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data)
+        } else {
+            error && error(res.msg)
+        }
+    }, error)
+};
+extend.findAllAnnouncement = findAllAnnouncement
+
+//查询详情
+const findDetail = function (data, success, error) {
+    api.post(`api/bm/promotionManage/announcement/findAllAnnouncement/10/1`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data)
+        } else {
+            error && error(res.msg)
+        }
+    }, error)
+};
+extend.findDetail = findDetail
+
+// 新增公告
+const addAnnouncement = function (data, success, error) {
+    api.post(`/api/bm/promotionManage/announcement/addAnnouncement`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data)
+        } else {
+            error && error(res.msg)
+        }
+    }, error)
+};
+extend.addAnnouncement = addAnnouncement
+
+// 删除公告
+const deleteAnnouncement = function (data, success, error) {
+    api.post(`/api/bm/promotionManage/announcement/deleteAnnouncement`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data)
+        } else {
+            error && error(res.msg)
+        }
+    }, error)
+};
+extend.deleteAnnouncement = deleteAnnouncement
+
+// 修改公告
+const updateAnnouncement = function (data, success, error) {
+    api.post(`/api/bm/promotionManage/announcement/updateAnnouncement`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data)
+        } else {
+            error && error(res.msg)
+        }
+    }, error)
+};
+extend.updateAnnouncement = updateAnnouncement
+
 export default extend;
