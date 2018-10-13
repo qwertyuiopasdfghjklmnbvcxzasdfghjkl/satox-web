@@ -381,6 +381,18 @@ export const operationRouter = [
         children: [
             { path: 'index', title: '推荐市场', name: 'operation_market_index', component: resolve => { require(['./views/manage_operation/operation_market.vue'], resolve); } }
         ]
+    },
+    {
+        path: '/operation_placard',
+        name: 'operation_placard',
+        title: '公告',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            { path: 'index', title: '推荐市场', name: 'operation_placard_index', component: resolve => { require(['./views/manage_operation/operation_placard.vue'], resolve); } }
+        ]
     }
 ];
 
