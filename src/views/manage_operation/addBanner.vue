@@ -54,7 +54,7 @@ export default {
         }
         let self = this
         const xxx1 = (rule, value, callback) => {
-            var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/
+            var reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
             if (reg.test(value) === false) {
                 return callback(new Error())
             } else {
