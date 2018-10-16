@@ -125,7 +125,6 @@ export default {
                 }
             })
         } else if (this.type == 0) {
-            debugger
             this.$refs.formItem.validate((valid) => {
                 if (valid) {
                     currenyApi.insertMarket({
