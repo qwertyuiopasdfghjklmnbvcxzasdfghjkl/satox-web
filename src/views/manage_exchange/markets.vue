@@ -1,8 +1,8 @@
 <!-- 交易市场管理 -->
 <template>
   <div>
-    <!-- <Tabs>
-      <TabPane label="真实市场管理"> -->
+    <Tabs>
+      <TabPane label="真实市场管理">
            <Card>
                 <p slot="title">交易市场管理
                     <span class="refresh" @click="reshAll"></span>
@@ -25,7 +25,7 @@
                 <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
             </Card>
       </TabPane>
-      <!-- <TabPane label="虚拟市场管理">
+      <TabPane label="虚拟市场管理">
            <Card>
                 <p slot="title">虚拟市场管理
                     <span class="refresh" @click="reshAll"></span>
@@ -42,9 +42,8 @@
                 <Table :columns="columns3" :data="data3"></Table>
                 <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>
             </Card>
-            
       </TabPane>
-    </Tabs> -->
+    </Tabs>
   </div>
 </template>
 
@@ -60,8 +59,8 @@ export default {
       total: 0,
       curPage1: 1,
       total1: 0,
-    //   curPage3: 1,
-    //   total3: 0,
+      curPage3: 1,
+      total3: 0,
       symbol: '',
       columns1: [
           {
@@ -196,57 +195,57 @@ export default {
       ],
       data2: [],
 
-    //   columns3: [
-    //       {
-    //           title: '市场名称',
-    //           key: 'market'
-    //       },
-    //       {
-    //           title: '价格精度',
-    //           key: 'accuracy'
-    //       },
-    //       {
-    //           title: '深度合并精度',
-    //           key: 'digit'
-    //       },
-    //       {
-    //           title: '最小下单金额',
-    //           key: 'minPlaceOrderAmount2'
-    //       },
-    //       {
-    //           title: '最小交易数量',
-    //           key: 'minPlaceOrderQuantity2'
-    //       },
-    //       {
-    //           title: '操作',
-    //           key: 'address',
-    //           render: (h, params) => {
-    //             return h('div', [
-    //                 h('Button', {
-    //                     props: {type: 'primary', size: 'small'},
-    //                     style: {marginRight: '10px'},
-    //                     on: {
-    //                         click: () => {
-    //                             util.setDialog(market_setting,{
-    //                                 item: params.row,
-    //                                 okCallback: () => {
-    //                                     this.getMarketList()
-    //                                 }
-    //                             })
-    //                         }
-    //                     }
-    //                 }, '市场设置')
-    //             ]);
-    //         }
-    //       }
-    //   ],
-    //   data3: []
+      columns3: [
+          {
+              title: '市场名称',
+              key: 'market'
+          },
+          {
+              title: '价格精度',
+              key: 'accuracy'
+          },
+          {
+              title: '深度合并精度',
+              key: 'digit'
+          },
+          {
+              title: '最小下单金额',
+              key: 'minPlaceOrderAmount2'
+          },
+          {
+              title: '最小交易数量',
+              key: 'minPlaceOrderQuantity2'
+          },
+          {
+              title: '操作',
+              key: 'address',
+              render: (h, params) => {
+                return h('div', [
+                    h('Button', {
+                        props: {type: 'primary', size: 'small'},
+                        style: {marginRight: '10px'},
+                        on: {
+                            click: () => {
+                                util.setDialog(market_setting,{
+                                    item: params.row,
+                                    okCallback: () => {
+                                        this.getMarketList()
+                                    }
+                                })
+                            }
+                        }
+                    }, '市场设置')
+                ]);
+            }
+          }
+      ],
+      data3: []
     }
   },
   created() {
     this.findMarketList()
     this.getMarketList()
-    // this.getMarketList1()
+    this.getMarketList1()
   },
   methods: {
     reshAll () {
@@ -279,14 +278,14 @@ export default {
           }
       })
     },
-    // add_market1 () {
-    //   util.setDialog(add_market, {
-    //       type: 0,
-    //       okCallback: () => {
-    //         this.getMarketList1()
-    //       }
-    //   })
-    // },
+    add_market1 () {
+      util.setDialog(add_market, {
+          type: 0,
+          okCallback: () => {
+            this.getMarketList1()
+          }
+      })
+    },
     findMarketList() { // 市场交易信息
         currenyApi.findMarketExchangeInfoList(this.curPage1, {
              market: this.symbol || null,
@@ -296,17 +295,17 @@ export default {
             this.data1 = res
         })
     },
-    // getMarketList1 () { // 查询市场
-    //     currenyApi.findMarketList({
-    //         market: this.symbol || null,
-    //         marketType: 0
-    //     }, this.curPage3, (res, total) => {
-    //         this.total3 = total
-    //         this.data3 = res
-    //     }, (msg) => {
-    //         this.$Messags.error({content: msg})
-    //     })
-    // },
+    getMarketList1 () { // 查询市场
+        currenyApi.findMarketList({
+            market: this.symbol || null,
+            marketType: 0
+        }, this.curPage3, (res, total) => {
+            this.total3 = total
+            this.data3 = res
+        }, (msg) => {
+            this.$Messags.error({content: msg})
+        })
+    },
     getMarketList () { // 查询市场
         currenyApi.findMarketList({}, this.curPage, (res, total) => {
             this.total = total
@@ -323,10 +322,10 @@ export default {
         this.curPage1 = page
         this.findMarketList()
     },
-    // changePage3 (page) {
-    //     this.curPage3 = page
-    //     this.getMarketList1()
-    // }
+    changePage3 (page) {
+        this.curPage3 = page
+        this.getMarketList1()
+    }
   }
 }
 </script>
