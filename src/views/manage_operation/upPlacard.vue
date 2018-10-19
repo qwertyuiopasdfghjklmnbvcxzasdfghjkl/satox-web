@@ -32,7 +32,7 @@
                 <Input v-model="link" style="width: 200px" />
               </Col>
               <Col span="3">
-                <Button @click="tabs2('link')">修改</Button>
+                <Button @click="tabsLink('link')">修改</Button>
               </Col>
           </Row>
           <Row style="margin-bottom:20px;">
@@ -52,7 +52,7 @@
                 <Input v-model="linkEn" style="width: 200px" />
               </Col>
               <Col span="3">
-                <Button @click="tabs2('linkEn')">修改</Button>
+                <Button @click="tabsLink('linkEn')">修改</Button>
               </Col>
           </Row>
           <Row style="margin-bottom:20px;">
@@ -120,7 +120,7 @@ export default {
     },
     tabs2 (propName) {
         if (!this[propName]) {
-            this.$Message.error({content: '不能为空'})
+            this.$Message.error({content: this.swithType(propName) + '不能为空'})
             return
         }
         let data = {
@@ -137,9 +137,8 @@ export default {
         }) 
     },
     tabsLink (propName) {
-
         if (!this[propName]) {
-            this.$Message.error({content: '不能为空'})
+            this.$Message.error({content: this.swithType(propName) + '不能为空'})
             return
         }
         let reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/
@@ -158,6 +157,31 @@ export default {
             }, (msg) => {
                 this.$Message.error({content: msg})
             })   
+        }
+    },
+    swithType (type) {
+        switch(type){
+            case 'sequence':
+                return '展示顺序'
+                break;
+            case 'title':
+                return '简体公告标题'
+                break;
+            case 'link':
+                return '简体公告链接'
+                break;
+            case 'titleEn':
+                return '英文公告标题'
+                break;
+            case 'linkEn':
+                return '英文公告链接'
+                break;
+            case 'titleCht':
+                return '繁体公告标题'
+                break;
+            case 'linkCht':
+                return '繁体公告链接'
+                break;
         }
     }
   }
