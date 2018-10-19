@@ -6,6 +6,18 @@
         <span class="refresh" @click="getList"></span>
       </p>
       <Row>
+        <Col span="24">
+          <Select v-model="formData.type" style="width:200px;">
+            <Option value="account">账号</Option>
+            <Option value="verifyName">姓名</Option>
+            <Option value="verifyIdCard">证件号</Option>
+            <Option value="cn">地区</Option>
+          </Select>
+          <Input v-model="formData.text" clearable style="width: 200px"></Input>
+          <Button type="primary" @click="getList">查询</Button>
+        </Col>
+      </Row>
+      <Row style="margin-top:10px;">
         <Col span="8">待审核用户数量：{{data2.verifyWaitFirstCheck || 0}}个</Col>
         <Col span="8">待复核用户数量：{{data2.verifyWaitSecondCheck || 0}}个</Col>
         <Col span="8">已通过用户数量：{{data2.verifyPass || 0}}个</Col>
@@ -28,6 +40,10 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      formData: {
+        type: 'account',
+        text: ''
+      },
       columns1: [
         {title: '账号', key: 'account'},
         {title: '地区', key: 'cn'},
@@ -144,7 +160,11 @@ export default {
       })
     },
     getList () {
-      kycAPI.listPageUserVerifys(this.pageSize, this.curPage, {}, (res, total) => {
+      let data = {}
+      if (this.formData.text) {
+        data[this.formData.type] = this.formData.text
+      }
+      kycAPI.listPageUserVerifys(this.pageSize, this.curPage, data, (res, total) => {
         this.total = total
         this.data1 = res
       });

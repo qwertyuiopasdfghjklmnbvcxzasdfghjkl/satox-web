@@ -5,6 +5,18 @@
       <p slot="title">KYC复核
         <span class="refresh" @click="getCheckVerifys"></span>
       </p>
+      <Row>
+        <Col span="24">
+          <Select v-model="formData.type" style="width:200px;">
+            <Option value="account">账号</Option>
+            <Option value="verifyName">姓名</Option>
+            <Option value="verifyIdCard">证件号</Option>
+            <Option value="cn">地区</Option>
+          </Select>
+          <Input v-model="formData.text" clearable style="width: 200px"></Input>
+          <Button type="primary" @click="getCheckVerifys">查询</Button>
+        </Col>
+      </Row>
       <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
@@ -22,6 +34,10 @@ export default {
     return {
       curPage: 1,
       total: 0,
+      formData: {
+        type: 'account',
+        text: ''
+      },
       columns1: [
         {title: '账号', key: 'account'},
         {title: '地区', key: 'cn'},
@@ -91,9 +107,11 @@ export default {
         }
     },
     getCheckVerifys () {
-      kycAPI.listPageReCheckVerifys(this.curPage, {
-        userId: this.userId
-      }, (res, total) => {
+      let data = {userId: this.userId }
+      if (this.formData.text) {
+        data[this.formData.type] = this.formData.text
+      }
+      kycAPI.listPageReCheckVerifys(this.curPage, data, (res, total) => {
         this.total = total
         this.data1 = res
       }, (msg) => {
