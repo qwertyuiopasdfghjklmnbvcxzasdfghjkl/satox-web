@@ -14,7 +14,7 @@
             <Option value="cn">地区</Option>
           </Select>
           <Input v-model="formData.text" clearable style="width: 200px"></Input>
-          <Button type="primary" @click="getCheckVerifys">查询</Button>
+          <Button type="primary" @click="getCheckVerifys(true)">查询</Button>
         </Col>
       </Row>
       <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -106,7 +106,10 @@ export default {
                 break;
         }
     },
-    getCheckVerifys () {
+    getCheckVerifys (key) {
+      if(key){
+        this.curPage = 1
+      }
       let data = {userId: this.userId }
       if (this.formData.text) {
         data[this.formData.type] = this.formData.text

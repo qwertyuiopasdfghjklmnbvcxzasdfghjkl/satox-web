@@ -15,7 +15,7 @@
             <Option value="cn">地区</Option>
           </Select>
           <Input v-model="formData.text" clearable style="width: 200px"></Input>
-          <Button type="primary" @click="getList">查询</Button>
+          <Button type="primary" @click="getList(true)">查询</Button>
         </Col>
         <Col span="8">
           <Button type="primary" style="float:right;" @click="addDialog">添加</Button>
@@ -180,7 +180,10 @@ export default {
                 break;
         }
     },
-    getList () {
+    getList (key) {
+      if(key){
+        this.curPage = 1
+      }
       let data = {}
       if (this.formData.text) {
         data[this.formData.type] = this.formData.text
