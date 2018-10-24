@@ -13,11 +13,11 @@
     </Row>
     <Tabs style="margin-top:10px;" @on-click="changeTab">
         <TabPane label="卖币广告" name="2">
-          <Table :columns="columns1" :data="data1"></Table>
+          <Table :columns="columns1" :data="data1" @on-sort-change="setAdsSaleSort"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page> 
         </TabPane>
         <TabPane label="买币广告" name="1">
-          <Table :columns="columns1" :data="data1"></Table>
+          <Table :columns="columns1" :data="data1" @on-sort-change="setAdsBuySort"></Table>
           <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page> 
         </TabPane>
     </Tabs>
@@ -38,12 +38,12 @@ export default {
       total1: 0,
       columns1: [
             {title: '发布者', key: 'username'},
-            {title: '总数量', key: 'symbolCount',
+            {title: '总数量', key: 'symbolCount', sortable: 'custom',
                 render: (h, params) => {
                     return h('div', [params.row.symbolCount, '', params.row.symbol]);
                 }
             },
-            {title: '余额', key: 'remainCount',
+            {title: '余额', key: 'remainCount', sortable: 'custom',
                 render: (h, params) => {
                     return h('div', [params.row.remainCount, params.row.symbol]);
                 }
@@ -53,19 +53,19 @@ export default {
                     return h('div', [params.row.priceRate, '%']);
                 }
             },
-            {title: '最高(低)接受价', key: 'acceptPrice',
+            {title: '最高(低)接受价', key: 'acceptPrice', sortable: 'custom',
                 render: (h, params) => {
                     return h('div', [params.row.acceptPrice, params.row.currency]);
                 }
             },
-            {title: '限额', key: 'minAmount -maxAmount',
+            {title: '限额', key: 'minAmount', sortable: 'custom',
                 render: (h, params) => {
                     return h('div', [params.row.minAmount, params.row.adType === 2 ? params.row.currency : params.row.symbol, ' - ', params.row.maxAmount, params.row.adType === 2 ? params.row.currency : params.row.symbol]);
                 }
             },
             {title: '限时', key: 'payLimitTime'},
             {title: '订单限制数', key: 'maxProcessNum'},
-            {title: '创建时间', key: 'createdAt'},
+            {title: '创建时间', key: 'createdAt', sortable: 'custom'},
             {title: '操作', key: 'action', width: 200, render: (h, params) => {
                 return h('div', [
                     h('Button', {
@@ -117,17 +117,44 @@ export default {
       this.getAdsList();
   },
   methods: {
+    setAdsSaleSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.AdsSaleSortKey = column.key
+        this.AdsSaleSortVal = column.order
+      } else {
+        this.AdsSaleSortKey = null
+      }
+      this.getAdsList()
+    },
+    setAdsBuySort(column){
+      this.curPage1 = 1
+      if(column.order!=='normal'){
+        this.AdsBuySortKey = column.key
+        this.AdsBuySortVal = column.order
+      } else {
+        this.AdsBuySortKey = null
+      }
+      this.getAdsList()
+    },
       changeTab (name) {
           this.ad_type = name
           this.symbol = this.symbol
           this.getAdsList()
       },
       getAdsList () {
-          otcApi.findAdInfoOtc(this.curPage,
-            {
+        let data = {
                 symbol: this.symbol,
                 adType: this.ad_type
-            }, (res, total) => { 
+            }
+        if(Number(this.ad_type)===1 && this.AdsBuySortKey){
+            data.sortKey = `${this.AdsBuySortKey} ${this.AdsBuySortVal}`
+        }
+        if(Number(this.ad_type)===2 && this.AdsSaleSortKey){
+            data.sortKey = `${this.AdsSaleSortKey} ${this.AdsSaleSortVal}`
+        }
+          otcApi.findAdInfoOtc(this.curPage, data,
+            (res, total) => { 
                 this.total = total
                 this.data1 = res
             }, (msg) => {
