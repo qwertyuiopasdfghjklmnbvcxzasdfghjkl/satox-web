@@ -20,7 +20,7 @@
             <Button type="primary" @click="getList('1')">查询</Button>
             <Checkbox v-model="single" @on-change="curPage=1;getList('1')">显示在线</Checkbox>
         </Row>
-        <Table :columns="columns1" :data="data1" style="margin-top:20px;"></Table>
+        <Table :columns="columns1" :data="data1" style="margin-top:20px;" @on-sort-change="setUserSort"></Table>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
      </Card>
 </template>
@@ -91,7 +91,8 @@ export default {
           },
           {
               title: '注册时间',
-              key: 'createdTime'
+              key: 'createdTime',
+              sortable: 'custom'
           },
           {
               title: '操作',
@@ -208,17 +209,28 @@ export default {
     this.getList ()
   },
   methods: {
+    setUserSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.UserSortKey = column.key
+        this.UserSortVal = column.order
+      } else {
+        this.UserSortKey = null
+      }
+      this.getList()
+    },
     getList (code) {
         if (code == 1) {
             this.curPage = 1
         } else {
             this.curPage = this.curPage
         }
+        let sortStr = this.UserSortKey?`${this.UserSortKey}%20${this.UserSortVal}`:'null'
         if (this.single) {
             let data = {}
             data[this.formData.type] = this.formData.text
             data[this.online] = true
-            currenyApi.getfindUserList(this.curPage, data, (res, total) => {
+            currenyApi.getfindUserList(this.curPage, sortStr, data, (res, total) => {
                 this.total = total
                 this.data1 = res
             }, (msg) => {
@@ -228,7 +240,7 @@ export default {
             let data = {}
             data[this.formData.type] = this.formData.text
             data[this.online] = false
-            currenyApi.getfindUserList(this.curPage, data, (res, total) => {
+            currenyApi.getfindUserList(this.curPage, sortStr, data, (res, total) => {
                 this.total = total
                 this.data1 = res
             }, (msg) => {

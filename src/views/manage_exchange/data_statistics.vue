@@ -28,7 +28,7 @@
     </Card>
     <Card style="margin:10px 0;">
       <p slot="title">市场交易情况</p>
-      <Table :columns="columns1" :data="data1"></Table>
+      <Table :columns="columns1" :data="data1" @on-sort-change="setMarketSort"></Table>
        <Page :current="curPage1" :total="total1" :page-size="pageSize" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
     </Card>
     <Card>
@@ -37,7 +37,7 @@
     </Card>
     <Card style="margin:10px 0;">
       <p slot="title">财务情况</p>
-      <Table :columns="columns3" :data="data3"></Table>
+      <Table :columns="columns3" :data="data3" @on-sort-change="setFinanceSort"></Table>
       <Page :current="curPage" :total="total" :page-size="pageSize1" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
     <!-- <Card>
@@ -110,10 +110,11 @@ export default {
       columns1: [
         {title: '市场', key: 'market'},
         {title: '最新价格', key: 'currentPrice'},
-        {title: '日跌涨', key: 'highLowDaily'},
-        {title: '日交易量', key: 'exchangeQuantityDaily'},
-        {title: '日用户量', key: 'userCountDaily'},
-        {title: '日交易比例', key: 'ratioExchangeDaily'}
+        {title: '日跌涨', key: 'highLowDaily', sortable: 'custom'},
+        {title: '日交易量', key: 'exchangeQuantityDaily', sortable: 'custom'},
+        {title: '日交易笔数', key: 'exchangeAmountDaily', sortable: 'custom'},
+        {title: '日用户量', key: 'userCountDaily', sortable: 'custom'},
+        {title: '日交易比例', key: 'ratioExchangeDaily', sortable: 'custom'}
       ],
       data1: [],
       columns2: [
@@ -125,11 +126,13 @@ export default {
       data2: [],
       columns3: [
         {title: '币种', key: 'symbol'},
-        {title: '日充值数量', key: 'rechargeAmountDaily'},
-        {title: '日提现数量', key: 'withdrawAmountDaily'},
-        {title: '日新增净额', key: 'increaseAmountDaily'},
-        {title: '待审核提现', key: 'waitCheckWithdraw'},
-        {title: '待审核提现请求数量', key: 'waitCheckWithdrawAmount'}
+        {title: '日充值数量', key: 'rechargeAmountDaily', sortable: 'custom'},
+        {title: '日充值笔数', key: 'rechargeCountDaily', sortable: 'custom'},
+        {title: '日提现数量', key: 'withdrawAmountDaily', sortable: 'custom'},
+        {title: '日提现笔数', key: 'withdrawCountDaily', sortable: 'custom'},
+        {title: '日新增净额', key: 'increaseAmountDaily', sortable: 'custom'},
+        {title: '待审核提现', key: 'waitCheckWithdraw', sortable: 'custom'},
+        {title: '待审核提现请求数量', key: 'waitCheckWithdrawAmount', sortable: 'custom'}
       ],
       data3: [],
       columns4: [
@@ -181,6 +184,26 @@ export default {
     })
   },
   methods: {
+    setMarketSort(column){
+      this.curPage1 = 1
+      if(column.order!=='normal'){
+        this.marketSortKey = column.key
+        this.marketSortVal = column.order
+      } else {
+        this.marketSortKey = null
+      }
+      this.getfindMarketExchangeList()
+    },
+    setFinanceSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.financeSortKey = column.key
+        this.financeSortVal = column.order
+      } else {
+        this.financeSortKey = null
+      }
+      this.getDataList()
+    },
     exportBBExcel () {
       let paramStr = []
       for (var i in this.params) {
@@ -264,7 +287,8 @@ export default {
       myChart.setOption(option);
     },
     getDataList () {
-      currenyApi.findFinancialDataList(this.pageSize1, this.curPage, {}, (res, total) => {
+      let sortStr = this.financeSortKey?`${this.financeSortKey}%20${this.financeSortVal}`:'null'
+      currenyApi.findFinancialDataList(this.pageSize1, this.curPage, sortStr, {}, (res, total) => {
         this.total = total
         this.data3 = res
       })
@@ -284,7 +308,8 @@ export default {
       })
     },
     getfindMarketExchangeList () {
-      currenyApi.findMarketExchangeList(this.curPage1, (res, total) => {
+      let sortStr = this.marketSortKey?`${this.marketSortKey}%20${this.marketSortVal}`:'null'
+      currenyApi.findMarketExchangeList(this.curPage1, sortStr, (res, total) => {
         this.total1 = total
         this.data1 = res
       })

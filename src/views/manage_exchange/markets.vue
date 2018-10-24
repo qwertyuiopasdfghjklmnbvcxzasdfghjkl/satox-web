@@ -307,7 +307,7 @@ export default {
         })
     },
     getMarketList () { // 查询市场
-        currenyApi.findMarketList({}, this.curPage, (res, total) => {
+        currenyApi.findMarketList({marketType:1}, this.curPage, (res, total) => {
             this.total = total
             this.data2 = res
         }, (msg) => {

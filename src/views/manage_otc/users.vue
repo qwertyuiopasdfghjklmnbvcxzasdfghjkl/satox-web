@@ -9,7 +9,7 @@
         <Button type="primary" @click="curPage=1;getfindUserManage()">查询</Button>
         <Checkbox v-model="single" @on-change="curPage=1;getfindUserManage('1')">显示在线</Checkbox>
     </Row>
-    <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
+    <Table :columns="columns1" :data="data1" style="margin-top:10px;" @on-sort-change="setUserSort"></Table>
     <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
   </Card>
 </template>
@@ -71,11 +71,13 @@ export default {
                             style: { color: color}
                         }, params.row.frozenState === 0 ? '正常' : '冻结'),
                     ])
-                }
+                },
+                sortable: 'custom'
             },
             {
                 title: '注册时间',
-                key: 'createdTime'
+                key: 'createdTime',
+                sortable: 'custom'
             },
             {title: '操作', key: 'action', render: (h, params) => {
                 return h('div', [
@@ -162,21 +164,39 @@ export default {
       this.getfindUserManage()
   },
   methods: {
+    setUserSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.UserSortKey = column.key
+        this.UserSortVal = column.order
+      } else {
+        this.UserSortKey = null
+      }
+      this.getfindUserManage()
+    },
       getfindUserManage () {
           if (this.single) {
-                otcApi.findUserManage(this.curPage, {
+            let data = {
                     username: this.userSearh || null,
                     online: true
-                }, (res, total) => {
+                }
+                if(this.UserSortKey){
+                    data.sortKey = `${this.UserSortKey} ${this.UserSortVal}`
+                }
+                otcApi.findUserManage(this.curPage, data, (res, total) => {
                     this.total = total
                     this.data1 = res
                 }, (msg) => {
                     this.$Message.error({content: msg})
                 })
           } else {
-                otcApi.findUserManage(this.curPage, {
+            let data = {
                     username: this.userSearh || null
-                }, (res, total) => {
+                }
+                if(this.UserSortKey){
+                    data.sortKey = `${this.UserSortKey} ${this.UserSortVal}`
+                }
+                otcApi.findUserManage(this.curPage, data, (res, total) => {
                     this.total = total
                     this.data1 = res
                 }, (msg) => {
