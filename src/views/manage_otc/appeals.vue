@@ -5,7 +5,25 @@
           <p slot="title">申诉管理
             <span class="refresh" @click="unprocessed"></span>
           </p>
-          申诉管理：<Checkbox v-model="single" @on-change = "curPage=1;unprocessed()">只显示待处理</Checkbox>
+          <Row>
+            <Col span="6">
+              申诉管理：<Checkbox v-model="single" @on-change = "curPage=1;unprocessed()">只显示待处理</Checkbox>
+            </Col>
+            <Col span="6">申诉编号排序：
+              <RadioGroup v-model="orderNumber" @on-change="setOrderNumberSort">
+                  <Radio label="">默认</Radio>
+                  <Radio label="asc">升序</Radio>
+                  <Radio label="desc">降序</Radio>
+              </RadioGroup>
+            </Col>
+            <Col span="6">申诉时间排序：
+              <RadioGroup v-model="createdAt" @on-change="setCreatedAtSort">
+                  <Radio label="">默认</Radio>
+                  <Radio label="asc">升序</Radio>
+                  <Radio label="desc">降序</Radio>
+              </RadioGroup>
+            </Col>
+          </Row>
       </Card>
       <Card v-for="(data, index) in datas" :key="index" style="margin-top:10px;">
           <p slot="title" style="height:32px;line-height:32px;">
@@ -32,6 +50,8 @@ export default {
       pageSize: 5,
       total: 0,
       single: false,
+      orderNumber:'',
+      createdAt:'',
       columns1: [
         {title: '订单编号', key: 'orderNumber'},
         {title: '问题类型', key: 'appealTypeName'},
@@ -83,6 +103,15 @@ export default {
     this.unprocessed()
   },
   methods: {
+    setCreatedAtSort(){
+      this.curPage = 1
+      this.orderNumber = ''
+      this.unprocessed()
+    },
+    setOrderNumberSort(){
+      this.createdAt = ''
+      this.unprocessed()
+    },
     switchStaus(state) { 
         switch(state){// 0: 未处理  1:已处理  2：已取消  3：已审核
           case 0:
@@ -109,15 +138,21 @@ export default {
       this.unprocessed()
     },
     unprocessed () {
+      let data = {}
+      if(this.orderNumber){
+          data.sortKey = `orderNumber ${this.orderNumber}`
+      }
+      if(this.createdAt){
+          data.sortKey = `createdAt ${this.createdAt}`
+      }
       if (this.single) {
-        otcApi.listAppealRequest(this.pageSize, this.curPage, {
-          state: 0
-        }, (res, total) => {
+        data.state = 0
+        otcApi.listAppealRequest(this.pageSize, this.curPage, data, (res, total) => {
           this.total = total
           this.datas = res
         })
       } else {
-        otcApi.listAppealRequest(this.pageSize, this.curPage, {}, (res, total) => {
+        otcApi.listAppealRequest(this.pageSize, this.curPage, data, (res, total) => {
           this.total = total
           this.datas = res
         })

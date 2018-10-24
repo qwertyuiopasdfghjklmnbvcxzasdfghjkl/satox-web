@@ -3,8 +3,8 @@ import api from './api'
 let curreny = {}
 
 // 用户管理列表
-const getfindUserList = function (curPage, data, success, error) {
-  api.post(`api/bm/bbManage/userManage/findUserList/10/${curPage}`, data, (res) => {
+const getfindUserList = function (curPage, sortStr, data, success, error) {
+  api.post(`api/bm/bbManage/userManage/findUserList/10/${curPage}/${sortStr}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -366,8 +366,8 @@ const findSymbolWithdrawFees = function (data, success, error) {
 curreny.findSymbolWithdrawFees = findSymbolWithdrawFees
 
 // 数据统计--分页查找财务情况信息
-const findFinancialDataList = function (pageSize, curPage, data,success, error) {
-  api.get(`api/bm/bbManage/DataStatistic/findFinancialDataList/${pageSize}/${curPage}`, data, (res) => {
+const findFinancialDataList = function (pageSize, curPage, sortStr, data,success, error) {
+  api.get(`api/bm/bbManage/DataStatistic/findFinancialDataList/${pageSize}/${curPage}/${sortStr}`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -402,8 +402,8 @@ const findUserDataList = function (success, error) {
 curreny.findUserDataList = findUserDataList
 
 // 数据统计--分页查找市场交易信息
-const findMarketExchangeList = function (curPage, success, error) {
-  api.get(`api/bm/bbManage/DataStatistic/findMarketExchangeList/3/${curPage}`, (res) => {
+const findMarketExchangeList = function (curPage, sortStr, success, error) {
+  api.get(`api/bm/bbManage/DataStatistic/findMarketExchangeList/3/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {

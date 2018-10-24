@@ -40,7 +40,7 @@
             </Row>
             <Row style="margin-bottom:10px;">
                 <Col span="12">KYC状态</Col>
-                <Col span="8">{{data2.kycStatus === 1? '已认证':'未认证'}}</Col>
+                <Col span="8">{{data2.kycStatus === 2? '已认证':'未认证'}}</Col>
                 <!-- <Col span="4">
                     <Button type="primary" style="float:right;" @click="tabs('kycStatus')">{{data2.kycStatus === 1? '解冻':'正常'}}</Button>
                 </Col> -->
