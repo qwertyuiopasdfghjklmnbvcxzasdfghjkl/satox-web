@@ -2,7 +2,7 @@
   <div class="bk-wrap index-slider">
      <div class="bk-main index-content">
       <swiper v-if="banners.length" :options="swiperOption">
-        <swiper-slide v-for="item in banners">
+        <swiper-slide v-for="(item,index) in banners" :key="index">
           <a :href="item.url">
               <img :src="item.imgUrl" />
           </a>

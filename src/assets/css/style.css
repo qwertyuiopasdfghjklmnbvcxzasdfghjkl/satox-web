@@ -292,3 +292,8 @@
 .icon-weixin:before {
   content: "\e957";
 }
+.icon-mecoin {
+  background: url('./svg/MECoin.svg') no-repeat center;
+  background-size: contain;
+  margin-right: 10px;
+}
