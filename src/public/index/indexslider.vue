@@ -2,7 +2,7 @@
   <div class="bk-wrap index-slider">
      <div class="bk-main index-content">
       <swiper v-if="banners.length" :options="swiperOption">
-        <swiper-slide v-for="item in banners">
+        <swiper-slide v-for="(item,index) in banners" :key="index">
           <a :href="item.url">
               <img :src="item.imgUrl" />
           </a>
@@ -25,7 +25,7 @@
         swiperOption: {
           loop: true,
           autoplay: {
-            delay: 3000, // 自动切换的时间间隔，单位ms
+            delay: 15000, // 自动切换的时间间隔，单位ms
             stopOnLastSlide: false, // 当切换到最后一个slide时停止自动切换
             disableOnInteraction: false, // 用户操作swiper之后，是否禁止autoplay。
             waitForTransition: true // 等待过渡完毕。自动切换会在slide过渡完毕后才开始计时。
@@ -48,7 +48,7 @@
               imgUrl: `${this.origin}${item.activityImgUrl}`,
               url: `${item.jumpAddress}`
             })
-          } else if (this.getLang === 'zh-CN') {
+          } else if (this.getLang === 'cht') {
             datas.push({
               imgUrl: `${this.origin}${item.activityImgUrlCht}`,
               url: `${item.jumpAddressCht}`
