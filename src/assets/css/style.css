@@ -297,3 +297,9 @@
   background-size: contain;
   margin-right: 10px;
 }
+.type .icon-mecoin {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 0;
+}
