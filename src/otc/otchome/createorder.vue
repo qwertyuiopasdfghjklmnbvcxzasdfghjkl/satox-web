@@ -179,7 +179,7 @@ import numberbox from '@/components/formel/numberInput'
 import adconfirm from '@/otc/otchome/adconfirm'
 
 let additional = []
-otcConfig.additional.forEach(item=>{
+otcConfig.additional.forEach(function (item) {
   additional.push(item.symbol)
 })
 export default {
