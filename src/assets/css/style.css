@@ -297,7 +297,13 @@
   background-size: contain;
   margin-right: 10px;
 }
-.type .icon-mecoin {
+.pendorder .icon-mecoin {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+.exponent .icon-mecoin {
   display: inline-block;
   width: 32px;
   height: 32px;

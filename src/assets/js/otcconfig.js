@@ -15,7 +15,7 @@ let config = {
     {id: 4, key: 'public0.public219', name: 'PayPal支付', css: 'icon-paypal', checked: false}
   ],
   additional: [
-    {symbol: 'ATN', price: 0.1}
+    {symbol: 'ATN', price: 0.1},{symbol: 'MECoin', price: 0.25},
   ]
 }
 otcApi.getCoinsList((res) => {
