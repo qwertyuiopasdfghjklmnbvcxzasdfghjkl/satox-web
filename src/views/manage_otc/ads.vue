@@ -9,6 +9,7 @@
           <Option value="BTC">BTC</Option>
           <Option value="ETH">ETH</Option>
           <Option value="ATN">ATN</Option>
+          <Option value="MECoin">MECoin</Option>
       </Select>
     </Row>
     <Tabs style="margin-top:10px;" @on-click="changeTab">
