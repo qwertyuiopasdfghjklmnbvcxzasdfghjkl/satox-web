@@ -177,6 +177,11 @@ import numUtils from '@/assets/js/numberUtils'
 import utils from '@/assets/js/utils'
 import numberbox from '@/components/formel/numberInput'
 import adconfirm from '@/otc/otchome/adconfirm'
+
+let additional = []
+otcConfig.additional.forEach(item=>{
+  additional.push(item.symbol)
+})
 export default {
   props: ['params', 'ad_id', 'myPayType'],
   components: {
@@ -212,7 +217,7 @@ export default {
         lowestPrice: null
       },
       benchDatas: [], // 对标交易所
-      isATN: this.params.symbol === otcConfig.additional[0].symbol
+      isATN: additional.includes(this.params.symbol)
     }
   },
   computed: {
