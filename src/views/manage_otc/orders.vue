@@ -9,6 +9,7 @@
           <Option value="BTC">BTC</Option>
           <Option value="ETH">ETH</Option>
           <Option value="ATN">ATN</Option>
+          <Option value="MECoin">MECoin</Option>
       </Select>
       <Input v-model="formData.orderNumber" clearable style="width: 300px;" placeholder="OTC45941545316384768"></Input>
       <Button type="primary" @click="curPage=1;getOrdersList()">查询</Button>
