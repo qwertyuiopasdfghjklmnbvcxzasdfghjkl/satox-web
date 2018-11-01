@@ -106,10 +106,10 @@
                     <div class="bind clearfix" v-if="showBindMobile">
                       <div class="bind-form">
                           <p><span>{{$t('account.user_center_phone')}}：<!--手机号--></span><em class="asterisk">&nbsp;*</em></p>
-                          <p v-if="mobileState == 1">
+                          <p v-if="mobileState == 1 || readonly">
                             {{mobileFormData.phoneNumber}}
                           </p>
-                          <p v-if="mobileState == 0">
+                          <p v-if="mobileState == 0 && !readonly">
                               <span class="mobile">
                                 <select v-model="mobileFormData.countryCode">
                                   <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
