@@ -154,6 +154,12 @@
               {{$t('public.navigation_logout')}}<!--退出-->
             </a>
           </li>
+          <li class="sepline" style="margin-top: 5px; margin-bottom: 5px;"></li>          
+          <li v-for="item in languages" :key="item.id">
+            <a href="javascript:;" @click="setLanguage(item.id)">
+              {{item.name}}
+            </a>
+          </li>
         </ul>
     </div>
 </template>
@@ -438,6 +444,7 @@ export default {
 .header .minWidthList{position:absolute;z-index:1000;left:-100%;top:60px;width:100%;background:#222121;display:none;flex-direction:column;height:fit-content;transition:0.3s;}
 .header .minWidthList li{display:flex;}
 .header .minWidthList li a{display:flex;flex:1;height:24px;line-height:24px;cursor:pointer;padding:0 10px;}
+.header .minWidthList li.sepline {border-bottom: 1px solid #484848;}
 
 @media screen and (max-width: 1600px) {
     .header,.header-center{height:50px;}
@@ -455,4 +462,7 @@ export default {
   .header .minWidthList{top:50px;}
   .header .minWidthList.show{display:flex;left:0px;}
 }
+.language-icon {position: relative;}
+.language-icon::after{content:"";position: absolute;top: 50%;right: 15px;width: 0;height: 0;margin-top: -2px;border-width: 5px 5px 0 5px;border-style: solid;border-color: #999 transparent transparent transparent;}
+.language-icon.unfold::after{border-width: 0 5px 5px 5px;border-color: transparent transparent #999 transparent;}
 </style>
