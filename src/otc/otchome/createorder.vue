@@ -217,7 +217,7 @@ export default {
         lowestPrice: null
       },
       benchDatas: [], // 对标交易所
-      isATN: additional.includes(this.params.symbol)
+      isATN: false
     }
   },
   computed: {
@@ -313,6 +313,7 @@ export default {
     }
   },
   created () {
+    this.isATN = additional.includes(this.params.symbol)
     Validator.extend('minAmountValid', {
       getMessage: (field, args) => {
         if (this.formData.ad_type === 1) {
