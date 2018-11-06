@@ -398,12 +398,10 @@ export default {
           this.formData.min_amount = utils.removeEndZero(numUtils.BN(res.min_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
           this.formData.max_amount = utils.removeEndZero(numUtils.BN(res.max_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
           // 当前广告币种为ATN时的处理
-          if (res.symbol === otcConfig.additional[0].symbol) {
+          if (this.isATN) {
             this.formData.price_type = 2
-            this.isATN = true
           } else {
             this.formData.price_type = res.price_type
-            this.isATN = false
           }
           // 获取Symbol或Currency的最小交易限额
           this.fnGetSymbolAndCurrency(false, res.ad_type)
