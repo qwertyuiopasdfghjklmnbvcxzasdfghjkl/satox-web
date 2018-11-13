@@ -146,6 +146,19 @@ const findEthNodeList = function (curPage, data, success, error) {
 }
 monitoring.findEthNodeList = findEthNodeList
 
+//分页查询OMNIN节点信息
+const findOMNINNodeList = function (curPage, data, success, error) {
+  api.get(`api/bm/monitor/node/findOmniNodeList/10/${curPage}`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+monitoring.findOMNINNodeList = findOMNINNodeList
+
+
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {
   api.post(`api/bm/monitor/errorLog/findErrorLogList/10/${curPage}`, data, (res) => {
