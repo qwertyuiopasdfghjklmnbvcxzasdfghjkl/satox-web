@@ -10,6 +10,11 @@
             <Table :columns="columns2" :data="data2"></Table>
             <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title" >OMNI同步区块数</p>
+            <Table :columns="columns1" :data="data3"></Table>
+            <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>  
+        </Card>
     </div>
 </template>
 <script>
@@ -21,6 +26,8 @@ import monitApi from '../../api/monitoring'
                 total: 0,
                 curPage1: 1,
                 total1: 0,
+                curPage3: 1,
+                total3: 0,
                 columns1: [
                     {
                         title: '服务名',
@@ -44,6 +51,7 @@ import monitApi from '../../api/monitoring'
                     }
                 ],
                 data1: [],
+                data3: [],
                 columns2: [
                     {
                         title: '服务名',
@@ -80,6 +88,7 @@ import monitApi from '../../api/monitoring'
         created () {
             this.getfindBtcNodeList()
             this.getfindEthNodeList()
+            this.getfindOMNINodeList()
         },
         methods: {
             getfindBtcNodeList () {
@@ -94,6 +103,12 @@ import monitApi from '../../api/monitoring'
                     this.data2 = res.data
                 })
             },
+            getfindOMNINodeList () {
+                monitApi.findOMNINNodeList(this.curPage1, (res, total) => {
+                    this.total3 = total
+                    this.data3 = res.data
+                })
+            },
             changePage (page) {
                 this.curPage = page
                 this.getfindBtcNodeList()
@@ -101,6 +116,10 @@ import monitApi from '../../api/monitoring'
             changePage1 (page) {
                 this.curPage1 = page
                 this.getfindEthNodeList()
+            },
+            changePage3 (page) {
+                this.curPage3 = page
+                this.getfindOMNINodeList()
             }
         }
     }
