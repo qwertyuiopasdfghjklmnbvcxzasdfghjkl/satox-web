@@ -13,7 +13,10 @@
         <Card style="margin-top:30px;">
             <p slot="title" >OMNI同步区块数</p>
             <Table :columns="columns1" :data="data3"></Table>
-            <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>  
+        </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title" >MBT同步区块数</p>
+            <Table :columns="columns1" :data="data4"></Table>
         </Card>
     </div>
 </template>
@@ -26,8 +29,6 @@ import monitApi from '../../api/monitoring'
                 total: 0,
                 curPage1: 1,
                 total1: 0,
-                curPage3: 1,
-                total3: 0,
                 columns1: [
                     {
                         title: '服务名',
@@ -52,6 +53,7 @@ import monitApi from '../../api/monitoring'
                 ],
                 data1: [],
                 data3: [],
+                data4: [],
                 columns2: [
                     {
                         title: '服务名',
@@ -89,6 +91,7 @@ import monitApi from '../../api/monitoring'
             this.getfindBtcNodeList()
             this.getfindEthNodeList()
             this.getfindOMNINodeList()
+            this.getfindMBTNodeList()
         },
         methods: {
             getfindBtcNodeList () {
@@ -104,9 +107,15 @@ import monitApi from '../../api/monitoring'
                 })
             },
             getfindOMNINodeList () {
-                monitApi.findOMNINNodeList(this.curPage1, (res, total) => {
-                    this.total3 = total
-                    this.data3 = res.data
+                monitApi.findOMNINNodeList((res, total) => {
+                    this.data3.push(res)
+
+                })
+            },
+            getfindMBTNodeList () {
+                monitApi.findMBTNNodeList((res, total) => {
+                    this.data4.push(res)
+
                 })
             },
             changePage (page) {
@@ -117,10 +126,6 @@ import monitApi from '../../api/monitoring'
                 this.curPage1 = page
                 this.getfindEthNodeList()
             },
-            changePage3 (page) {
-                this.curPage3 = page
-                this.getfindOMNINodeList()
-            }
         }
     }
 </script>

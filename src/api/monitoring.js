@@ -146,9 +146,9 @@ const findEthNodeList = function (curPage, data, success, error) {
 }
 monitoring.findEthNodeList = findEthNodeList
 
-//分页查询OMNIN节点信息
-const findOMNINNodeList = function (curPage, data, success, error) {
-  api.get(`api/bm/monitor/node/findOmniNodeList/10/${curPage}`, data, (res) => {
+//查询OMNIN节点信息
+const findOMNINNodeList = function (success, error) {
+  api.get(`/api/bm/monitor/node/findOmniNode`,(res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -157,6 +157,18 @@ const findOMNINNodeList = function (curPage, data, success, error) {
   }, error)
 }
 monitoring.findOMNINNodeList = findOMNINNodeList
+
+//查询MBT节点信息
+const findMBTNNodeList = function (success, error) {
+  api.get(`/api/bm/monitor/node/findMbtNode`,(res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+monitoring.findMBTNNodeList = findMBTNNodeList
 
 
 //分页查询错误日志
