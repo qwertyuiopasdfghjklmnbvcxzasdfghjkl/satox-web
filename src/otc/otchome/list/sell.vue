@@ -138,29 +138,37 @@ export default {
         return
       }
       Vue.$confirmDialog({
-        fontWeight: 'bold',
         color: '#e53f3f',
-        content: [this.$t('error_code.RELEASE_CURRENCY_WARN'), this.$t('error_code.RELEASE_CURRENCY_CONFIRM')],
+        title:this.$t('otc_ad.otc_ad_confirm'),
+        content: '是否已检查账户并确实<strong>“收到款项”</strong>？',
         autoClose: true,
         okCallback: () => {
-          otcApi.finishOrder(this.item.order_id, (msg) => {
-            this.item.state = 2
-            this.tiggerEvents({
-              name: 'chatEvent',
-              params: {
-                type: 'markReadOnly',
-                orderNumber: this.item.order_number
-              }
-            })
-            this.tiggerEvents({
-              name: 'updateWallet'
-            })
-            this.tiggerEvents({
-              name: 'updateMyAds'
-            })
-            Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
-          }, (msg) => {
-            Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+          Vue.$confirmDialog({
+            color: '#e53f3f',
+            title:this.$t('otc_ad.otc_ad_confirm'),
+            content: '<span style="color:rgb(255,147,0);">警告：</span>一旦确认放币代币将转入他人账户，“代币将<strong>无法找回</strong>”。是否放币？',
+            autoClose: true,
+            okCallback: () => {
+              otcApi.finishOrder(this.item.order_id, (msg) => {
+                this.item.state = 2
+                this.tiggerEvents({
+                  name: 'chatEvent',
+                  params: {
+                    type: 'markReadOnly',
+                    orderNumber: this.item.order_number
+                  }
+                })
+                this.tiggerEvents({
+                  name: 'updateWallet'
+                })
+                this.tiggerEvents({
+                  name: 'updateMyAds'
+                })
+                Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.${msg}`)})
+              }, (msg) => {
+                Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+              })
+            }
           })
         }
       })
