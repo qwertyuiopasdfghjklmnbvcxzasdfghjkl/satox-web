@@ -4,10 +4,10 @@
       <div class="form">
         <div class="content" v-if="!isComponent" :style="`font-weight:${fontWeight};color:${color};`">
             <template v-if="(content||'').constructor !== Array">
-              {{content}}
+              <p v-html="content"></p>
             </template>
             <template v-for="item in content" v-if="(content||'').constructor === Array">
-              {{item}}<br/>
+              <p v-html="item"></p>
             </template>
         </div>
         <div class="content" v-if="isComponent">
