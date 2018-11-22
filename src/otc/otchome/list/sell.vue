@@ -140,13 +140,13 @@ export default {
       Vue.$confirmDialog({
         color: '#e53f3f',
         title:this.$t('otc_ad.otc_ad_confirm'),
-        content: '是否已检查账户并确实<strong>“收到款项”</strong>？',
+        content: this.$t('public0.public283'),
         autoClose: true,
         okCallback: () => {
           Vue.$confirmDialog({
             color: '#e53f3f',
             title:this.$t('otc_ad.otc_ad_confirm'),
-            content: '<span style="color:rgb(255,147,0);">警告：</span>一旦确认放币代币将转入他人账户，“代币将<strong>无法找回</strong>”。是否放币？',
+            content: this.$t('public0.public284'),
             autoClose: true,
             okCallback: () => {
               otcApi.finishOrder(this.item.order_id, (msg) => {
