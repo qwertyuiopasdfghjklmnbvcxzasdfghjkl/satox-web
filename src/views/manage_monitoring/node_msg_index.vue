@@ -2,7 +2,7 @@
     <div>
         <Card>
             <p slot="title" >比特币同步区块数</p>
-            <Table :columns="columns1" :data="data1"></Table>
+            <Table :columns="columns2" :data="data1"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
          <Card style="margin-top:30px;">
@@ -12,11 +12,11 @@
         </Card>
         <Card style="margin-top:30px;">
             <p slot="title" >OMNI同步区块数</p>
-            <Table :columns="columns1" :data="data3"></Table>
+            <Table :columns="columns2" :data="data3"></Table>
         </Card>
         <Card style="margin-top:30px;">
             <p slot="title" >MBT同步区块数</p>
-            <Table :columns="columns1" :data="data4"></Table>
+            <Table :columns="columns2" :data="data4"></Table>
         </Card>
     </div>
 </template>
