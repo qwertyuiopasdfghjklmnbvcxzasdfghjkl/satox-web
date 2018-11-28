@@ -52,6 +52,8 @@
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
                 <Option value="ATN">ATN</Option>
+                <Option value="MECoin">MECoin</Option>
+                <Option value="USDT">USDT</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目">
