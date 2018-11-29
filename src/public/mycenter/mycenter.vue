@@ -2,7 +2,7 @@
     <div class="mycenter">
       <div class="top">
         <h3>{{$t('account.userPersonalCenter')}}<!--我的个人中心--></h3>
-        <div class="info">
+        <div class="info" :class="{active:!vsloaded}">
           <div class="info-pic">
             <div class="image">
               <img :src="avatarUrl"/>
@@ -127,6 +127,7 @@ export default {
   },
   data () {
     return {
+      vsloaded:false, //认证信息加载完毕状态
       avatarUrl: avatar,
       userState: { // 用户状态信息
         coinState: 0,
@@ -214,6 +215,7 @@ export default {
           verifyTimes: data.verifyTimes
         }
         this.isUseNewtonPay = data.coinState === 1
+        this.vsloaded = true
       }, (msg) => {
         console.error(msg)
       })
@@ -283,7 +285,8 @@ export default {
 <style scoped>
 .mycenter h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 .mycenter .top{background-color: #FFF;}
-.mycenter .top .info{display: flex;height: 150px;padding-top: 30px;}
+.mycenter .top .info{display: flex;height: 150px;padding-top: 30px; position: relative;}
+.mycenter .top .info.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .mycenter .top .info .info-pic{position: relative;}
 .mycenter .top .info .info-pic form{display: flex;justify-content: center;position: absolute;top: 4px;left: 30px;width: 70px;height: 70px;}
 .mycenter .top .info .info-pic .file{width: 100%;height: 100%;border-radius: 50%;opacity: 0;cursor: pointer;}
