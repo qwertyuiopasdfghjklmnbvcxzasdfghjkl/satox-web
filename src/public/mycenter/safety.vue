@@ -3,7 +3,7 @@
         <!--登录密码 begin-->
         <div class="password">
             <h3>{{$t('account.user_center_login_password')}}<!--登录密码--></h3>
-            <div class="password-level">
+            <div class="password-level" :class="{active:!infoLoaded}">
                 <div class="password-level-left">
                     <img src="../../assets/images/lock_icon.png" />
                     <span class="label">{{$t('public0.public193')}}<!--安全级别--></span>
@@ -21,7 +21,7 @@
         <!--谷歌验证 begin-->
         <div class="google" v-show="delayedShow">
             <h3>{{$t('auth_warning.warning_google_auth')}}<!--谷歌验证--></h3>
-            <div class="google-content">
+            <div class="google-content"  :class="{active:!infoLoaded}">
                 <div class="google-content-left">
                     <img src="../../assets/images/google_icon.png"/>
                     <span class="label">{{googleState === 0 ? $t('public0.public195') : $t('account.user_Google_verified_binding')}}<!--扫二维码绑定谷歌验证||已绑定谷歌验证--></span>
@@ -92,7 +92,7 @@
                 </span>
               </span>
             </h3>
-            <div class="google-content">
+            <div class="google-content"  :class="{active:!infoLoaded}">
                 <div class="google-content-left">
                     <img src="../../assets/images/cellphone_icon.png"/>
                     <span class="label">
@@ -165,6 +165,7 @@ import commonConfig from '@/assets/js/commonConfig'
 export default {
   data () {
     return {
+      infoLoaded:false,
       delayedShow: false,
       googleState: 0,
       mobileState: 0,
@@ -256,6 +257,7 @@ export default {
           })
         }
         this.delayedShow = true
+        this.infoLoaded = true
       }, (msg) => {
         console.error(msg)
       })
@@ -433,7 +435,8 @@ export default {
 .secretkey .secretkey-tips .tips-icon{background-color: #e53f3f;}
 
 .password{background-color: #FFFFFF;}
-.password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px;}
+.password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px; position: relative;}
+.password-level.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .password-level-left{font-size: 0;line-height: 0;}
 .password-level-left img{margin-right: 50px;vertical-align: middle;}
 .password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
@@ -446,7 +449,8 @@ export default {
 .password-level-right input:hover{background-color: #fdb902;}
 
 .google{margin-top: 8px;background-color: #FFFFFF;}
-.google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px;}
+.google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px; position: relative;}
+.google-content.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .google-content-left{font-size: 0;line-height: 0;}
 .google-content-left img{margin-right: 50px;vertical-align: middle;}
 .google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}

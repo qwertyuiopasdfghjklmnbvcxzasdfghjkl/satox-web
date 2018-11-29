@@ -201,7 +201,7 @@ export default {
         currency: this.params.currency,
         bench_marking_id: null,
         price_rate: null,
-        price_type: this.params.symbol === otcConfig.additional[0].symbol ? 2 : 1,
+        price_type: 1,
         lowest_price: null,
         symbol_count: null,
         min_amount: null,
@@ -399,7 +399,7 @@ export default {
           this.formData.max_amount = utils.removeEndZero(numUtils.BN(res.max_amount).toFixed(parseInt(res.ad_type) === 1 ? 5 : 2))
           // 当前广告币种为ATN时的处理
           if (this.isATN) {
-            this.formData.price_type = 2
+            this.formData.price_type = 1
           } else {
             this.formData.price_type = res.price_type
           }
