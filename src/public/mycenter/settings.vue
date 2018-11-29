@@ -216,7 +216,7 @@ import config from '@/assets/js/config'
 export default {
   data () {
     return {
-      infoLoaded:false,
+      infoLoaded: false,
       bankReadOnly: true,
       bankData: {
         card_name: '',

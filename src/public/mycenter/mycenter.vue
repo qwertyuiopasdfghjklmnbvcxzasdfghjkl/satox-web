@@ -127,7 +127,7 @@ export default {
   },
   data () {
     return {
-      vsloaded:false, //认证信息加载完毕状态
+      vsloaded: false, // 认证信息加载完毕状态
       avatarUrl: avatar,
       userState: { // 用户状态信息
         coinState: 0,

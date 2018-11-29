@@ -165,7 +165,7 @@ import commonConfig from '@/assets/js/commonConfig'
 export default {
   data () {
     return {
-      infoLoaded:false,
+      infoLoaded: false,
       delayedShow: false,
       googleState: 0,
       mobileState: 0,
