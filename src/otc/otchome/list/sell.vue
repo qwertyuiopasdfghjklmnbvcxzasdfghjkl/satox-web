@@ -139,13 +139,13 @@ export default {
       }
       Vue.$confirmDialog({
         color: '#e53f3f',
-        title:this.$t('otc_ad.otc_ad_confirm'),
+        title: this.$t('otc_ad.otc_ad_confirm'),
         content: this.$t('public0.public283'),
         autoClose: true,
         okCallback: () => {
           Vue.$confirmDialog({
             color: '#e53f3f',
-            title:this.$t('otc_ad.otc_ad_confirm'),
+            title: this.$t('otc_ad.otc_ad_confirm'),
             content: this.$t('public0.public284'),
             autoClose: true,
             okCallback: () => {

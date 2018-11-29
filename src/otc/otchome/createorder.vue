@@ -203,7 +203,6 @@ export default {
         price_rate: null,
         price_type: 1,
         lowest_price: null,
-        cur_price:null,
         symbol_count: null,
         min_amount: null,
         max_amount: Number(this.params.ad_type) === 2 ? null : 20000,

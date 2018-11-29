@@ -4,7 +4,7 @@
           <!-- 银行卡 -->
           <li class="form-item">
               <h3> {{$t('otc_legal.otc_legal_Bank_Transfer')}}<!--银行转账--></h3>
-              <div class="form-flex" v-if="bankReadOnly">
+              <div class="form-flex" v-if="bankReadOnly" :class="{active:!infoLoaded}">
                 <div class="form-flex-left">
                   <i class="icon-bank"></i>
                   <em>{{$t('otc_legal.oyc_legal_Bank_card')}}<!--银行卡--></em>
@@ -54,7 +54,7 @@
           <!-- 微信 -->
           <li class="form-item">
               <h3>{{$t('otc_legal.otc_legal_WeChat_receivables')}}<!--微信收款--></h3>
-              <div class="form-flex" v-if="wechatReadOnly">
+              <div class="form-flex" v-if="wechatReadOnly"  :class="{active:!infoLoaded}">
                 <div class="form-flex-left">
                   <i class="icon-wechat"></i>
                   <em>{{$t('public0.public198')}}<!--微信--></em>
@@ -109,7 +109,7 @@
           <!-- 支付宝 -->
           <li class="form-item">
               <h3>{{$t('otc_legal.otc_legal_Alipay_receivables')}}<!--支付宝收款--></h3>
-              <div class="form-flex" v-if="alipayReadOnly">
+              <div class="form-flex" v-if="alipayReadOnly"  :class="{active:!infoLoaded}">
                 <div class="form-flex-left">
                   <i class="icon-alipay"></i>
                   <em>{{$t('public0.public199')}}<!--支付宝--></em>
@@ -164,7 +164,7 @@
           <!-- PayPal -->
           <li class="form-item">
               <h3>{{$t('public0.public218')}}<!--PayPal收款--></h3>
-              <div class="form-flex" v-if="paypalReadOnly">
+              <div class="form-flex" v-if="paypalReadOnly"  :class="{active:!infoLoaded}">
                 <div class="form-flex-left">
                   <i class="icon-paypal"></i>
                   <em>{{$t('public0.public219')}}<!--PayPal--></em>
@@ -216,6 +216,7 @@ import config from '@/assets/js/config'
 export default {
   data () {
     return {
+      infoLoaded:false,
       bankReadOnly: true,
       bankData: {
         card_name: '',
@@ -370,6 +371,7 @@ export default {
           paypal_name: res.real_name,
           paypal_number: res.data.paypal_number
         }
+        this.infoLoaded = true
       }, (res) => {
         if (res.msg === 'NO_PAY_TYPE') {
           // 银行卡
@@ -387,6 +389,7 @@ export default {
         } else {
           console.error(res.msg)
         }
+        this.infoLoaded = true
       })
     },
     saveSettings (type) {
@@ -517,7 +520,8 @@ export default {
 .form-item:first-of-type{margin-top: 0;}
 .form-item h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
 
-.form-flex{display: flex;justify-content: space-between;align-items: center;height: 120px;padding-left: 30px;padding-right: 30px;}
+.form-flex{display: flex;justify-content: space-between;align-items: center;height: 120px;padding-left: 30px;padding-right: 30px; position: relative;}
+.form-flex.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .form-flex-left{font-size: 0;line-height: 0;}
 .form-flex-left i{display: inline-block;margin-right: 20px;font-size: 20px;color: #fdb902;vertical-align: middle;}
 .form-flex-left em{display: inline-block;width: 160px;min-height: 20px;font-size: 14px;line-height: 20px;vertical-align: middle;color: #261003;}
