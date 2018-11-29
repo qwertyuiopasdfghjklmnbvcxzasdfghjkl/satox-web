@@ -29,7 +29,7 @@
                 <span class="ad-list-item-status">{{$t(item.status===1?'public0.public51':'public0.public52')}}</span>
                 <span class="ad-list-item-operate">
                   <input class="ad-list-item-btn" v-if="item.status===1" type="button" :value="$t('otc_ad.otc_cancel_ad')" @click="deleteAd(item.ad_id)"/>
-                  <input class="ad-list-item-btn" v-if="item.status===0" type="button" :value="$t('otc_ad.otc_edit_ad')" @click="updateAd(item.ad_id)"/>
+                  <input class="ad-list-item-btn" v-if="item.status===0" type="button" :value="$t('otc_ad.otc_edit_ad')" @click="updateAd(item)"/>
                 </span>
             </li>
         </ul>
@@ -221,14 +221,15 @@ export default {
         Vue.$confirmDialog({showCancel: false, content: this.$t(`error_code.${msg}`)})
       })
     },
-    updateAd (id) { // 修改广告
+    updateAd (obj) { // 修改广告
       otcApi.getVerifyState((msg) => {
         otcApi.getPaySettings((res) => {
+          this.params.symbol = obj.symbol
           utils.setDialog(createorder, {
             id: 'dialog_createorder',
             myPayType: res.data.pay_type,
             params: this.params,
-            ad_id: id,
+            ad_id: obj.ad_id,
             okCallback: () => {
               this.$emit('goToSettings')
             }
