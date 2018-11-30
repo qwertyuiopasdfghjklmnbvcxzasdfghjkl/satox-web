@@ -365,8 +365,6 @@ export default {
         this.benchItem.lowestPrice = numUtils.BN(res.market_price || 0).toFixed(2)
         if (this.isATN) {
           this.formData.lowest_price = this.benchItem.lowestPrice
-        } else {
-          this.formData.lowest_price = null
         }
       })
     },
@@ -392,6 +390,7 @@ export default {
             }
             this.formData[i] = res[i]
           }
+          console.log(this.formData)
           this.formData.ad_type = res.ad_type
           this.formData.bench_marking_id = parseInt(res.bench_marking_id)
           this.formData.symbol_count = utils.removeEndZero(numUtils.BN(res.symbol_count).toFixed(5))
