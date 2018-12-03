@@ -8,7 +8,7 @@
                 <Option value="appealUsername">申诉人账号</Option>
                 <Option value="oppositeUsername">被申诉人账号</Option>
                 <Option value="orderNumber">申诉订单编号</Option>
-                <Option value="symbol">代币币种</Option>
+                <!-- <Option value="symbol">代币币种</Option> -->
             </Select>
             <Input v-model="searchContent" clearable style="width: 300px;" placeholder="查询内容"></Input>
             <Button type="primary" @click="curPage=1;unprocessed()">查询</Button>
