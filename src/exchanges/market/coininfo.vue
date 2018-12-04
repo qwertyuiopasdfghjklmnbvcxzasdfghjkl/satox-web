@@ -56,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
+    ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getBtcValues', 'getLang']),
     curPrice () {
       let lastPrice = this.getLast24h.close
       if (lastPrice && this.getUSDCNY) {
