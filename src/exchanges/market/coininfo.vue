@@ -65,11 +65,11 @@ export default {
     },
     marketCapitalisation () { // 市值 = 当前价格 * 流通总量
       if (this.symbolInfo && this.symbolInfo.totalCirculation) {
-        let currentPrice = numUtils.mul(this.getLast24h.close, this.getUSDCNY).toFixed(2)
-        let tempMarketValue = numUtils.mul(currentPrice, this.symbolInfo.totalCirculation)
+        let tempMarketValue = numUtils.mul(this.getLast24h.close, this.symbolInfo.totalCirculation)
         if (this.getLang === 'en') {
-          return numUtils.mul(tempMarketValue, this.getUsdRate).toFixed(2).toMoney()
+          return tempMarketValue.toFixed(2).toMoney()
         } else {
+          tempMarketValue = numUtils.div(tempMarketValue, this.getUsdRate)
           return tempMarketValue.toFixed(2).toMoney()
         }
       } else {
