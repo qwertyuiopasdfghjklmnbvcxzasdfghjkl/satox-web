@@ -57,6 +57,35 @@ export default {
   },
   computed: {
     ...mapGetters(['getCoinSign', 'getLast24h', 'getUSDCNY', 'getUsdRate', 'getLang']),
+    curPrice () {
+      let lastPrice = this.getLast24h.close
+      if (lastPrice && this.getUSDCNY) {
+        if (this.baseSymbol === 'USDT') {
+          if (this.getLang === 'en') {
+            return numUtils.BN(lastPrice)
+          }
+          return numUtils.div(lastPrice, this.getUsdRate)
+        } else if (this.baseSymbol === 'ATN') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(lastPrice, '0.1')
+          }
+          return numUtils.div(numUtils.mul(lastPrice, '0.1'), this.getUsdRate)
+        } else if (this.baseSymbol === 'MECoin') {
+          if (this.getLang === 'en') {
+            return numUtils.mul(lastPrice, '0.25')
+          }
+          return numUtils.div(numUtils.mul(lastPrice, '0.25'), this.getUsdRate)
+        }
+        let curMarketBtc = this.getBtcValues[this.baseSymbol]
+        if (!curMarketBtc && this.baseSymbol !== 'BTC') {
+          return '--'
+        }
+        let curMarketPrice = curMarketBtc ? numUtils.mul(curMarketBtc, this.getUSDCNY).toFixed(2) : this.getUSDCNY
+        return numUtils.mul(lastPrice, curMarketPrice)
+      } else {
+        return '0.00'
+      }
+    },
     isRed () {
       return numUtils.BN(this.getLast24h.percent).lt(0)
     },
@@ -65,13 +94,8 @@ export default {
     },
     marketCapitalisation () { // 市值 = 当前价格 * 流通总量
       if (this.symbolInfo && this.symbolInfo.totalCirculation) {
-        let currentPrice = numUtils.mul(this.getLast24h.close, this.getUSDCNY).toFixed(2)
-        let tempMarketValue = numUtils.mul(currentPrice, this.symbolInfo.totalCirculation)
-        if (this.getLang === 'en') {
-          return numUtils.mul(tempMarketValue, this.getUsdRate).toFixed(2).toMoney()
-        } else {
-          return tempMarketValue.toFixed(2).toMoney()
-        }
+        let tempMarketValue = numUtils.mul(this.curPrice, this.symbolInfo.totalCirculation)
+        return tempMarketValue.toFixed(2).toMoney()
       } else {
         return '--'
       }
