@@ -5,7 +5,6 @@
             </div>
             <div class="login-right">
                 <div class="login-right-item item-findpwd">
-                    <div class="caption">{{$t('login_register.Retrieve_password')}}</div>
                     <div class="item-registerType">
                       <label :class="{checked:registerType==1}">
                         <span>
@@ -33,7 +32,7 @@
                         <inputbox name="smsCode" :maxLength="6" v-model="mobileFormData.smsCode" v-validate="'required'" :msgs="msgs.smsCode" :errs="errors" :title="$t('account.user_center_SMS_code')" :placeholder="$t('login_register.verify_code')"/><!--短信验证码-->
                         <a href="javascript:;" :class="{disabled:btnDisabled}" @click="sendSMSCode">{{$t('account.user_center_send_SMS')}}<!--发送验证码-->{{disabled ? `（${time}s）` : ''}}</a>
                       </div>
-                      <inputbox id="newton-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="mobileFormData.password" :title="$t('account.user_center_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--新密码-->
+                      <inputbox id="CDCC-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="mobileFormData.password" :title="$t('account.user_center_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--新密码-->
                       <inputbox v-validate="'required|passwordAgain'" type="password" name="passwordConfirm" :msgs="msgs.passwordConfirm" :errs="errors" v-model="mobileFormData.passwordConfirm" :title="$t('login_register.confirm_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--确认新密码-->
                     </template>
                     <inputbox name="username" ref="email" v-show="registerType==0" :maxLength="255" v-model="formData.username" v-validate="'required|email'" :msgs="msgs.username" :errs="errors" :title="$t('otc_exchange.otc_exchange_Email')" :placeholder="$t('login_register.email')"/>
@@ -52,7 +51,7 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import userApi from '@/api/user'
 import myApi from '@/api/individual'
-import inputbox from '@/components/formel/inputbox'
+import inputbox from '@/components/formel/inputbox_horizontal'
 import buttonbox from '@/components/formel/buttonbox'
 import utils from '@/assets/js/utils'
 import commonConfig from '@/assets/js/commonConfig'
@@ -221,86 +220,77 @@ export default {
 </script>
 
 <style scoped>
-.login{display: flex;justify-content: center;align-items: center;width: 1200px;height: calc(100% - 60px);min-height: 800px;margin-left: auto;margin-right: auto;}
-.login-container{width: 1096px;height: 600px;background-color: #222121;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
-.login-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.jpg) no-repeat center center;}
+.login{display: flex;justify-content: center;align-items: center;height: calc(100% - 70px);min-height: 800px;margin-left: auto;margin-right: auto; background: url('../assets/images/login_bg.jpg') no-repeat center; background-size: cover;}
+@media screen and (max-width: 1600px) {
+  .login {height: calc(100% - 60px);}
+}
+.login-container{width: 1096px;height: 600px;background-color: #fff;box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .2); border-radius: 15px;}
+.login-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.png) no-repeat center center;}
 .login-left img{margin-top: 282px;}
 
 .login-right{position: relative;float: right;width: 50%;height: 100%;}
-.login-right-item{position: relative;height: 520px;padding: 40px 60px;}
-.login-right-item .caption{height: 40px;font-size: 20px;line-height: 40px;color: #fff;}
+.login-right-item{position: relative;height: 600px;padding:80px 60px 40px; box-sizing: border-box;}
+.login-right-item .caption{height: 40px;font-size: 38px;line-height: 40px;color: #3A76E7;}
 .login-right-item .prompt{padding-bottom: 24px;overflow: auto;}
-.login-right-item .prompt i{float: left;width: 16px;height: 16px;margin-top: 12px;font-weight: bold;font-size: 16px;line-height: 16px;color: #181b2a;text-align: center;background-color: #e53f3f;border-radius: 50%;}
-.login-right-item .prompt span{float: left;width: 404px;min-height: 24px;padding: 8px 0 8px 8px;font-size: 16px;line-height: 24px;color: #8b94a9;}
+.login-right-item .prompt i{float: left;width: 24px;height: 24px;margin-top: 12px;font-weight: bold;font-size: 16px;line-height: 24px;color: #fff;text-align: center;background-color: #FF4022;border-radius: 50%;}
+.login-right-item .prompt span{float: left;min-height: 24px;padding: 11px 0 8px 8px;font-size: 18px;line-height: 24px;color: #3A76E7;}
 
 .login-right-item /deep/ .inputbox{width: auto !important;min-height: auto !important;}
-.login-right-item /deep/ .title{height: 26px;line-height: 26px;font-size: 16px;color: #d6dff9;text-align: left;}
+.login-right-item /deep/ .title{height: 34px;line-height: 34px;font-size: 16px;color: #000;text-align: left;}
 .login-right-item /deep/ .inputdiv{position: relative;display: block;padding-bottom: 24px;}
 .login-right-item /deep/ .input{
-  width: 100% !important;height: 40px;margin: 0;padding: 0;font-size: 16px;line-height: normal;color: #d6dff9;
-  background-color: transparent;border-width: 0;border-bottom: 1px solid #404b69;outline: none;
+  width: 100% !important; box-sizing: border-box; height: 40px;margin: 0;font-size: 16px;line-height: normal;
+  color: #555;background-color: #F5F5F5; border: 1px solid #F5F5F5;outline: none; padding-left: 15px; padding-right: 15px; border-radius: 4px;
 }
-.login-right-item /deep/ .input:focus{background-color: transparent;border-bottom-color:#fdb902!important;}
-.login-right-item /deep/ .input.error{background-color: transparent;border-bottom-color: #e53f3f;}
+.login-right-item /deep/ .input:focus{background-color: #F5F5F5; border-color:#3A76E7!important;}
+.login-right-item /deep/ .input.error{background-color: #F5F5F5;border-bottom-color: #e53f3f;}
 .login-right-item /deep/ .errorinfo{position: absolute;bottom: 0;left: 0;width: auto;height: 24px;padding-top: 0;color: #e53f3f;font-style: normal;line-height: 24px;white-space: nowrap;}
 
 .login-right-item .captcha{overflow: auto;}
 .login-right-item .captcha /deep/ .inputbox{float: left;width: 280px !important;}
 .login-right-item .captcha img{float: right;margin-top: 34px;cursor: pointer;}
 
+
 .login-right-item .checkbox-group{overflow: auto;}
-.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #fdb902;text-indent: 1px;cursor: pointer;}
+.login-right-item .checkbox-group i{float: left;width: 14px;height: 14px;margin-top: 8px;color: #3A76E7;text-indent: 1px;cursor: pointer;}
 .login-right-item .checkbox-group i:hover{color: #fdb902;}
 .login-right-item .checkbox-group span{float: left;width: 406px;min-height: 30px;padding-left: 8px;line-height: 30px;}
-.login-right-item .checkbox-group span em{color: #d6dff9;}
-.login-right-item .checkbox-group span a{color: #fdb902;text-decoration: underline;}
-.login-right-item .checkbox-group span a:hover{color: #fdb902;}
+.login-right-item .checkbox-group span em{color: #999999;}
+.login-right-item .checkbox-group span a{color: #3A76E7;text-decoration: underline;}
+.login-right-item .checkbox-group span a:hover{color: #3A76E7;}
 
-.login-right-item .button-group{position: absolute;bottom:30px;left: 60px;width: 428px;}
+
+.login-right-item .button-group{position: absolute;bottom: 80px;left: 60px;width: 428px;}
 .login-right-item .button-group /deep/ .button{
-  display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;
-  margin-top: 0;font-weight: bold;font-size: 18px;color: #261003;background-color: #fdb902;border: none;
-  border-radius: 0;cursor: pointer;
+  display: block;justify-content: center;align-items: center;width: 100% !important;height: 55px !important;padding: 0;margin-top: 0;
+  font-weight: bold;font-size: 18px;color: #fff;border: none;border-radius: 4px;cursor: pointer; background: -webkit-linear-gradient(left, #0589F6, #0240CF);  background: linear-gradient(left, #0589F6, #0240CF);
 }
-.login-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
-.login-right-item .button-group /deep/ .button.disabled{background-color: #999;}
-.login-right-item .button-group .link{padding-top: 6px;overflow: auto;}
-.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #fdb902;text-decoration: underline;}
-.login-right-item .button-group .link a:first-of-type{float: left;}
-.login-right-item .button-group .link a:last-of-type{float: right;}
-.login-right-item .button-group .link a:hover{color: #fdb902;}
+.login-right-item .button-group /deep/ .button.disabled{background: -webkit-linear-gradient(left, #999, #666);  background: linear-gradient(left, #999, #666);}
+.login-right-item .button-group .link{padding-top: 10px;overflow: auto; text-align: center;}
+.login-right-item .button-group .link a{height: 24px;line-height: 24px;color: #999;}
+.login-right-item .button-group .link a:hover{color: #999;}
 
 .login-right-item /deep/ input::-webkit-input-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input::-moz-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input:-moz-placeholder{font-size: 14px;color: #8a96b2;}
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 
-.item-registerType{font-size:16px;color:#d6dff9;margin:20px 0;}
-.item-registerType /deep/ label{cursor: pointer}
-.item-registerType /deep/ label:last-of-type{margin-left:20px;}
-.item-registerType /deep/ label.checked{color:#fdb902;}
-.item-registerType /deep/ span{position:relative;vertical-align:middle;padding-right:8px;}
+.item-registerType{width: 320px; margin: auto; display: flex; color: #0472E9; font-size: 18px; padding-bottom: 30px;}
+.item-registerType /deep/ label{cursor: pointer; border: 1px solid #0472E9;  flex: 1; height: 54px; box-sizing: border-box; text-align: center; line-height: 54px;}
+.item-registerType /deep/ label:first-child {border-top-left-radius: 6px; border-bottom-left-radius: 6px;}
+.item-registerType /deep/ label:last-child {border-top-right-radius: 6px; border-bottom-right-radius: 6px;}
+.item-registerType /deep/ label.checked{color:#fff; background-color: #0472E9;}
 .item-registerType /deep/ input{width:0;height:0;opacity:0;}
-.item-registerType /deep/ input + i::before{
-  position:absolute;content:"";display:block;width:12px;height:12px;top:0;left:0;border:2px solid #d6dff9;border-radius:50%;
-}
-.item-registerType /deep/ input:checked + i::before {
-  border-color:#fdb902;
-}
-.item-registerType /deep/ input:checked + i::after {
-  position:absolute;content:"";display:block;width:8px;height:8px;top:4px;left:4px;border-radius:50%;
-  background:#fdb902;
-}
+
+.ref /deep/ .inputdiv{padding-bottom:10px;}
 .mobile{position:relative;}
 .mobile /deep/ select{
-  position: absolute;top: 0;left: 0;z-index: 1;width: 120px;height: 38px;padding-right: 20px;color: #d6dff9;
-  background-position: right 4px center;
+  position: absolute;top: 0;left: 0;z-index: 1;width: 35%;height: 38px;padding-right: 20px;color: #000;
+  background-position: right 4px center; font-size: 16px;
 }
-.mobile /deep/ .inputdiv{position: relative;}
-.mobile /deep/ .inputdiv:before{position: absolute;top: 7px;left: 122px;content: "";width: 1px;height: 24px;background-color: #404b69;}
-.mobile /deep/ .input{width: 296px !important;padding-left: 132px;}
-.smsCode{position:relative;}
-.smsCode /deep/ a{position:absolute;height:22px;line-height:22px;color:#fdb902;right:0;top:34px;}
-.smsCode /deep/ a.disabled{color:#999;cursor:not-allowed;}
+.mobile /deep/ .inputdiv{position: relative; width: 60%; margin-left: 40%;}
+.smsCode{position: relative; }
+.smsCode /deep/ a{position: absolute;top: 5px;right: 5px; padding:5px; height: 22px;line-height: 22px;color: #0472E9; background-color: #F5F5F5;}
+.smsCode /deep/ a.disabled{color: #999;cursor: not-allowed;}
 </style>
 

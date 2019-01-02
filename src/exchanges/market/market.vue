@@ -4,19 +4,21 @@
           <em class="market-tip-icon icon-arrow-up"></em>
           <valuation :lastPrice="tipPrice.lastPrice" :baseSymbol="tipPrice.baseSymbol"/>
         </div>
-        <em class="market-icon" :class="[isList1?'icon-market-list1':'icon-market-list2']" @click="isList1=!isList1"></em>
-        <ul class="tabs">
-            <li class="tabs-item" :class="{active:active===item, 'icon-star-full': item === 'collection'}" v-for="item in markets" :key="item" @click="active=item">{{item !== 'collection' ? item : ''}}</li>
-        </ul>
+
         <div class="top-search">
           <em class="icon-search"></em>
-          <input v-model="filterValue" maxlength="20" class="top-input-box" type="text"/>
+          <input v-model="filterValue" maxlength="20" class="top-input-box" type="text" :placeholder="$t('public0.public284')" />
         </div>
+        <em class="market-icon" :class="[isList1?'icon-market-list1':'icon-market-list2']" @click="isList1=!isList1"></em>
+        <ul class="tabs">
+            <li class="tabs-item" :class="{active:active===item, 'icon-star': item === 'collection'}" v-for="item in markets" :key="item" @click="active=item">{{item !== 'collection' ? item : ''}}</li>
+        </ul>
         <template v-if="isList1">
           <div class="list-panel">
               <ul class="list1">
                   <li v-for="data in curProducts" :key="data.marketId" class="list1-item" :class="{'list1-item-active':data.market === symbol}" @click="changeSymbol(data)">
-                      <em class="list1-collection icon-star-full" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
+                      <em class="list1-collection icon-star" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
+                      <span class="list1-percent" :class="getUpOrDown(data)"><font v-html="percent(data)"></font></span>
                       <span class="list1-col list1-currency">
                           <em class="list1-currency-icon">
                             <img :src="data.iconBase64?`data:image/png;base64,${data.iconBase64}`:`${origin}${data.iconUrl}`"/>
@@ -24,12 +26,14 @@
                           <font>{{data.currencySymbol}}</font>
                       </span>
                       <span class="list1-col list1-right">
-                        <font class="list1-percent" v-html="percent(data)"></font>
                         <font class="list1-price">
                           {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
                         </font>
                         <font class="list1-amount">
-                          <i><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
+                          <i><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i>
+                        </font>
+                        <font class="list1-amount">
+                          vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
                         </font>
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
@@ -243,12 +247,20 @@ export default {
         this.showLoading = false
       })
     },
+    getUpOrDown(item){
+      if (item.openingPrice && item.lastPrice) {
+        var percent = numUtils.BN(item.change24h).div(item.openingPrice).mul(100)
+        return percent < 0 ? 'down' : 'up'
+      } else {
+        return 'up'
+      }
+    },
     percent (item) {
       if (numUtils.BN(item.openingPrice).equals(0)) {
         return '0.00%'
       } else if (item.openingPrice && item.lastPrice) {
         var percent = numUtils.BN(item.change24h).div(item.openingPrice).mul(100)
-        return `<font color="${percent < 0 ? '#e76d42' : '#03c087'}">` + percent.toFixed(2) + '%</font>'
+        return `<font color="${percent < 0 ? '#F34246' : '#23CD09'}">` + percent.toFixed(2) + '%</font>'
       } else {
         return '0.00%'
       }
@@ -299,26 +311,26 @@ export default {
 <style scoped>
 .list-header,
 .list-item .font-green { /* 绿 跌 deriction1 */
-  color: #03c087;
+  color: #23CD09;
 }
 .list-header,
 .list-item .font-red { /* 红 卖  deriction 2 */
-  color: #e76d42;
+  color: #F34246;
 }
-.market{display:flex;flex-flow:column;position:relative;width:calc(100% - 20px);padding:30px 10px 10px 10px;background-color:#222121;}
-.market-icon{position: absolute;color:#fff;font-size:24px;top:2px;right:2px;cursor: pointer;}
+.market{display:flex;flex-flow:column;position:relative;width:calc(100% - 20px);padding:10px;background-color:#fff;}
+.market-icon{position: absolute;color:#0054E2;font-size:36px;top:7px;right:0;cursor: pointer;}
 .market-tip{position:absolute;padding:0 20px;top:50px;left:calc(100%);height:24px;line-height:24px;background-color:#fff;border-radius:4px;font-weight:bold;z-index:1200;white-space: nowrap;}
 .market-tip-icon{position:relative;float:left;}
 .market-tip-icon::before{position:absolute;left:-32px!important;top:4px!important;color:#fff;transform:rotate(-90deg);}
 .top{display:flex;align-items:center;}
-.top-search{display:flex;height:36px;max-height:32px;}
-.icon-search{width:20px;height:30px;margin-right:-20px;line-height:30px;color:#E7E7E7;text-align:center;}
-.top-input-box{width:100%;height:30px;padding:0;color:#fff;text-indent:20px;background-color:transparent;border-bottom:2px solid #333232;}
+.top-search{display:flex;height:30px;border: 1px solid #7F7F7F; border-radius: 3px; margin-right: 40px;}
+.icon-search{width:20px;height:30px; margin-left: 5px; line-height:30px;color:#333;text-align:center;}
+.top-input-box{width:100%;height:30px;padding:0;color:#333;text-indent:10px;background-color:transparent;}
 .top-input-box:focus{border-bottom-color:#333232 !important;}
-.tabs{display:flex;justify-content:space-between;height:26px;max-height:22px;padding:0 10px;border-bottom:2px solid #333232;}
-.tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#fff;text-align:center;border-bottom:2px solid #333232;cursor:pointer;}
+.tabs{margin-top:6px;display:flex;justify-content:space-between;height:26px;max-height:22px;padding:0 10px 10px;border-bottom:1px solid #7E7E7E;}
+.tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#666;text-align:center; padding-bottom:10px; border-bottom:1px solid #7E7E7E;cursor:pointer;}
 .tabs-item:hover,
-.tabs-item.active{color:#FFDE00;border-bottom-color:#FFDE00;}
+.tabs-item.active{color:#0557E2;border-bottom-color:#0557E2;}
 
 .list1,
 .list{height:calc(100% - 10px);margin-top:10px;margin-right:-17px;overflow-x:hidden;overflow-y: scroll;}
@@ -327,39 +339,40 @@ export default {
 .list-panel{height:100%;overflow:hidden;}
 /* list1 */
 .list1-item{height:80px;display:flex;position:relative;margin-bottom:5px;cursor:pointer;}
-.list1-item::after{content: "";display:inline-block;height:1px;width:100%;background-color:#545353;position:absolute;bottom:-3px;left:0;}
-.list1-item:hover{background-color:#333232;}
+.list1-item::after{content: "";display:inline-block;height:1px;width:100%;background-color:#EEEEEE;position:absolute;bottom:-3px;left:0;}
+.list1-item:hover{background-color:#e6e6e6;}
 .list1-item-active,
-.list1-item-active:hover{background-color:#333232;}
-.list1-collection{position:absolute;top:10px;right:10px;color:#a1a8bb;cursor:pointer;}
-.list1-collection.collection{color:#FFDE00;}
-.list1-currency{display:flex;color:#fff;flex-flow:column;align-items:flex-start;justify-content:center;width:80px;margin-left:10px;}
+.list1-item-active:hover{background-color:#e6e6e6;}
+.list1-collection{position:absolute;top:50px;right:10px;color:#a1a8bb;cursor:pointer; font-size: 20px;}
+.list1-collection.collection{color:#0557E2;}
+.list1-percent{position:absolute;top:10px;right:0; width: 55px; height: 30px; border-radius: 3px; text-align: center; line-height: 30px;}
+.list1-percent.up {background-color: rgba(35, 205, 9,0.3)}
+.list1-percent.down {background-color: rgba(243, 66, 70,0.3)}
+.list1-currency{display:flex;color:#333;flex-flow:column;align-items:flex-start;justify-content:center;width:80px;margin-left:10px;}
 /*.list1-currency-icon{font-size:18px;width:22px;height:22px;background-color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .list1-currency-icon::before{color:#181b2a;}*/
 .list1-currency-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
-.list1-currency-icon img{width:100%;height:100%;border-radius:50%;}
+.list1-currency-icon img{width:100%;height:100%;border-radius:50%; border: 1px solid #e2e2e2;}
 .list1-currency /deep/ font{margin-top:8px;display:block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;width:calc(100% - 4px);padding-right:4px;font-weight:bold;}
 .list1-right{flex:1;display:flex;color:#fff;flex-flow:column;align-items:flex-start;justify-content:center;}
-.list1-percent{font-weight:bold;}
-.list1-price{margin:2px 0;color:#cbd4ec;}
-.list1-amount /deep/ i{color:#cbd4ec;font-size:12px;}
-.list1-amount{font-size:12px;color:#a1a8ab;}
-.list1-item /deep/ .font-green{color:#03c087;}
-.list1-item /deep/ .font-red{color:#e76d42;}
+.list1-price{margin:2px 0;color:#1259DF;}
+.list1-amount /deep/ i{color:#1259DF;font-size:12px;}
+.list1-amount{font-size:12px;color:#666;}
+.list1-item /deep/ .font-green{color:#23CD09;}
+.list1-item /deep/ .font-red{color:#F34246;}
 /* list2 */
 .list-header,
 .list-item{height:20px;line-height:20px;cursor:pointer;display:flex;justify-content:space-between;}
 .list-header{color:#a1a8bb;}
-.list-item{height:30px;line-height:30px;color:#cbd4ec;margin-bottom:2px;font-size:12px;}
-.list-item:hover{background-color:#333232;}
+.list-item{height:30px;line-height:30px;color:#333;margin-bottom:2px;font-size:12px;}
+.list-item:hover{background-color:#e6e6e6;}
 .list-item-active,
-.list-item-active:hover{background-color:#333232;}
-.list-item-active /deep/ .currency{color:#fff;}
+.list-item-active:hover{background-color:#e6e6e6;}
 .list-item-active /deep/ .price,
 .list-item-active /deep/ .fall{font-weight:bold;}
 .list-col{font-size:12px;position:relative;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
 .list-collection{color:#a1a8bb;}
-.list-collection.collection{color:#FFDE00;}
+.list-collection.collection{color:#0557E2;}
 .icon-arrow-down,
 .icon-arrow-up{position:relative;margin-left:4px;}
 .icon-arrow-down::before,

@@ -14,7 +14,6 @@
           </label>
         </li>
       </ul>
-      <div class="prompt"><!--{{$t('trade_record.export_choose')}}--><!--请选择时间范围--></div>
       <div class="button">
         <button @click="fnExport">{{$t('trade_record.export_onexport')}}<!--导出--></button>
       </div>
@@ -137,21 +136,21 @@ export default {
 </script>
 
 <style scoped>
-.export-record{width: 370px;background-color: #222121;}
-.export-record-title{display: flex;justify-content: center;align-items: center;height: 30px;padding-left: 18px;padding-right: 18px;background-color: #333232;}
-.export-record-title h3{margin-left: auto;margin-right: -12px;font-size: 14px;color: #becbe8;}
-.export-record-title i{margin-left: auto;font-size: 12px;color: #becbe8;cursor: pointer;}
-.export-record-title i:hover{color: #fdb902;}
+.export-record{width: 370px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
+.export-record-title{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.export-record-title h3{font-weight: normal;}
+.export-record-title i{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:calc(50% - 7px);right:15px; opacity: 0.8; cursor: pointer;}
+.export-record-title i:hover{opacity: 1;}
 .export-record-cont{padding: 24px 35px 30px 35px;}
-.export-record-cont .label{display: block;height: 24px;line-height: 24px;color: #becbe8;}
+.export-record-cont .label{display: block;height: 24px;line-height: 24px;color: #333;}
 .export-record-cont .list{padding-top: 10px;overflow: auto;}
 .export-record-cont .list li{float: left;width: 100px;height: 24px;margin-top: 10px;line-height: 24px;}
 .export-record-cont .list label{cursor: pointer;}
 .export-record-cont .list label input{display: none;}
-.export-record-cont .list label em{font-size: 12px;color: #becbe8;}
-.export-record-cont .list label em::before{content: "";display: inline-block;width: 10px;height: 10px;margin-right: 12px;vertical-align: -1px;border: 1px solid #fdb902;}
-.export-record-cont .list label input:checked + em::before{background-color: #fdb902;}
-.export-record-cont .prompt{height: 34px;line-height: 34px;font-size: 12px;color: #fdb902;}
-.export-record-cont .button button{width: 100%;height: 30px;font-size: 14px;color: #261003;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
-.export-record-cont .button button:hover{background-color: #fdb902;}
+.export-record-cont .list label em{font-size: 12px;color: #333;}
+.export-record-cont .list label em::before{content: "";display: inline-block;width: 10px;height: 10px;margin-right: 12px;vertical-align: -1px;border: 1px solid #4182e6;}
+.export-record-cont .list label input:checked + em::before{background-color: #4182e6;}
+.export-record-cont .button {margin-top: 20px;}
+.export-record-cont .button button{width: 100%;height: 35px;font-size: 14px; color: #fff;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
+.export-record-cont .button button:hover{background-color: #0b4cb1;}
 </style>

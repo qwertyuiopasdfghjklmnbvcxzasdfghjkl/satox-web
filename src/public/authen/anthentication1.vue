@@ -58,7 +58,7 @@
                     </div>
                     <div class="row-file-prompt" :class="{error: getError('hand')['isError']}">{{getError('hand')['value']}}</div>
                 </div>
-                <div class="row-description">{{$t('public0.public86').format('NEWTON')}}<!--请您上传一张手持身份证及写有“NEWTON”和当天日期的卡片的照片。请确保头像、身份证信息、卡片上NEWTON和当天日期内容清晰可见。--></div>
+                <div class="row-description">{{$t('public0.public86').format('CDCC')}}<!--请您上传一张手持身份证及写有“CDCC”和当天日期的卡片的照片。请确保头像、身份证信息、卡片上CDCC和当天日期内容清晰可见。--></div>
             </div>
             <div class="form-button">
                 <input class="cancel" type="button" :value="$t('otc_legal.otc_legal_cancel')" @click="switch_tab('mycenter')"><!--取消-->
@@ -196,30 +196,31 @@ export default {
 </script>
 
 <style scoped>
-.authencation1{padding: 10px 8px 40px 8px;}
+.authencation1{padding: 20px 30px 40px;}
 .form-summary{padding-bottom: 10px}
-.form-summary p{min-height: 30px;line-height: 30px;color: #becbe8;}
-.form-row{padding-bottom: 10px;overflow: auto;}
-.form-row .row-label{float: left;width: 150px;min-height: 30px;padding-right: 10px;line-height: 30px;color: #becbe8;}
-.form-row .row-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
-.form-row .row-text{float: left;width: 290px;height: 28px;color: #261003;background-color: #FFF;border: 1px solid #505e83;}
+.form-summary p{min-height: 30px;line-height: 30px;color: #333;}
+.form-row{padding-bottom: 20px;overflow: auto;}
+.form-row::after {content: ''; display: block; clear: both; zoom:1;}
+.form-row .row-label{float: left;width: 150px;min-height: 30px;padding-right: 10px;line-height: 30px;color: #111;}
+.form-row .row-label em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: red;}
+.form-row .row-text{float: left;width: 290px;height: 28px;color: #111;background-color: #FFF;border: 1px solid #9EC2F9;}
 .form-row .row-text.error{border-color: #e53f3f;}
 .form-row .row-error{float: left;height: 30px;line-height: 30px;color: #e53f3f;text-indent: 10px;}
-.form-row .row-file{position: relative;float: left;width: 140px;}
-.form-row .row-file-img{width: 138px;height: 138px;border: 1px solid #505e83;}
+.form-row .row-file{position: relative;float: left;width: 180px;}
+.form-row .row-file-img{width: 180px;height: 130px; background-color: #F6F6F6;}
 .form-row .row-file-img.error{border-color: #e53f3f;}
 .form-row .row-file-img /deep/ img{width: 100%;height: 100%;}
-.form-row .row-file-input{position: absolute;top: 0;left: 0;width: 140px;height: 140px;}
+.form-row .row-file-input{position: absolute;top: 0;left: 0;width: 180px;height: 130px;}
 .form-row .row-file-input input{width: 100%;height: 100%;opacity: 0;cursor: pointer;}
-.form-row .row-file-prompt{height: 30px;line-height: 30px;color: #becbe8;white-space: nowrap;}
+.form-row .row-file-prompt{height: 30px;line-height: 30px;color: #333;white-space: nowrap; text-align: center;}
 .form-row .row-file-prompt.error{color: #e53f3f;}
-.form-row .row-description{float: left;width: 674px;min-height: 30px;padding-left: 10px;line-height: 30px;color: #becbe8;}
+.form-row .row-description{float: right;width: 550px;min-height: 30px;padding-left: 10px;line-height: 30px;color: #333;}
 .form-button{font-size: 0;line-height: 0;padding-left: 160px;}
-.form-button input{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;border-radius: 4px;cursor: pointer;}
-.form-button input.cancel{margin-right: 30px;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;}
-.form-button input.cancel:hover{color: #fdb902;border-color: #fdb902;}
-.form-button input.confirm{color: #261003;background-color: #fdb902;}
-.form-button input.confirm:hover{background-color: #fdb902;}
+.form-button input{min-width: 120px;height: 40px;padding-left: 24px;padding-right: 24px;border-radius: 4px;cursor: pointer; font-size: 14px;}
+.form-button input.cancel{margin-right: 30px;color: #9EC2F9;background-color: transparent;border: 1px solid #9EC2F9;}
+.form-button input.cancel:hover{color: #3890F9;border-color: #3890F9;}
+.form-button input.confirm{color: #fff;background-color: #3890F9;}
+.form-button input.confirm:hover{background-color: #206cc7;}
 .form-button input.confirm.disabled{background-color: #999;cursor: not-allowed}
 .form-button input.confirm.disabled:hover{background-color: #999;}
 </style>

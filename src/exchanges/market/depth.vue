@@ -297,26 +297,15 @@ export default {
 .depth{flex:1;display:flex;flex-flow:column;min-height:0;padding:10px 10px 10px 0;background-color:#FFF;}
 .top{display:flex;justify-content:space-between;min-height:24px;height:24px;margin-bottom:10px;}
 .top-layout{display:flex;justify-content:space-between;width:90px;margin-left:20px;}
-.top-stats-dots{width:22px;height:22px;border:1px solid #FFF;cursor:pointer;}
-.top-stats-dots.ask-color{background-color:#ff7342;}
-.top-stats-dots.bid-color{background-color:#0ee7a5;}
-.top-stats-dots.askbid-color{background-color:#cbd4ec;}
-.top-stats-dots:hover,
-.top-stats-dots.active{border-color:#cbd4ec;}
-.top-stats-dots.ask-color::after,
-.top-stats-dots.bid-color::after,
-.top-stats-dots.askbid-color::after{content:"";display:block;width:20px;height:20px;background-color:transparent;border:1px solid transparent;}
-.top-stats-dots.askbid-color::before{content:"";display:block;width:0;height:0;margin-bottom:-22px;font-size:0;line-height:0;border-width:11px;border-style:solid;border-color:#0ee7a5 #ff7342 #ff7342 #0ee7a5;overflow:hidden;}
-.top-stats-dots.ask-color:hover::after,
-.top-stats-dots.bid-color:hover::after,
-.top-stats-dots.askbid-color:hover::after,
-.top-stats-dots.ask-color.active::after,
-.top-stats-dots.bid-color.active::after,
-.top-stats-dots.askbid-color.active::after{border-color:#cbd4ec #181b2a #181b2a #cbd4ec;}
+.top-stats-dots{width:22px;height:22px;cursor:pointer;}
+.top-stats-dots.ask-color{background: url('../../assets/images/icon-sale.png') no-repeat center;}
+.top-stats-dots.bid-color{background: url('../../assets/images/icon-buy.png') no-repeat center;}
+.top-stats-dots.askbid-color{background: url('../../assets/images/icon-buy&sale.png') no-repeat center;}
 
-.top-right{color:#333333;display:flex;}
+
+.top-right{color:#3A76E7;display:flex;}
 .top-right /deep/ span{display:inline-block;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:14px;}
-.top-select{height:18px;line-height:18px;border-bottom:1px solid #333333;color:#333333;cursor: pointer;}
+.top-select{height:18px;line-height:18px;color:#3A76E7;cursor: pointer; background-image: url('../../assets/images/arrow-down-blue.png');}
 
 .list-bid,.list-ask{width:100%;height:calc((100% - 104px) / 2);overflow-x:visible;overflow-y:hidden;display:flex;flex-flow:column;}
 .list-ask{justify-content:flex-end;}
@@ -326,12 +315,12 @@ export default {
   display:flex;height:20px;line-height:20px;font-size:12px;color:#333333;cursor:pointer;
   background-size:0 98%;background-repeat:no-repeat;background-position:center right;
 }
-.list-header{color:#333333!important;}
-.list-item.bid:hover,.list-item.ask:hover{background-color:#FFFFFF;font-weight:bold;}
-.list-item .ask-color{color:#e76d42;}
-.list-item .bid-color{color:#03c087;}
-.list-item:hover .ask-color{color:#ff7342;}
-.list-item:hover .bid-color{color:#0ee7a5;}
+.list-header{color:#A1A1A1!important;}
+.list-item.bid:hover,.list-item.ask:hover{font-weight:bold;}
+.list-item .ask-color{color:#4A4A4A;}
+.list-item .bid-color{color:#4A4A4A;}
+.list-item:hover .ask-color{color:#313131;}
+.list-item:hover .bid-color{color:#313131;}
 .list-item.bid:hover /deep/ .amount,.list-item.ask:hover /deep/ .amount{color:#333333;}
 .list-item.bid:hover /deep/ .sum,.list-item.ask:hover /deep/ .sum{color:#333333;}
 .list-item.ask{background-image:url(../../assets/images/depth-bid-bg.png);}
@@ -344,14 +333,14 @@ export default {
 /*.sum{text-align:right;}*/
 .lastprice{
   position:relative;width:calc(100% + 10px);height:30px;margin:10px 0 10px 10px;font-weight:bold;font-size:18px;line-height:30px;
-  color:#FFFFFF;text-align:center;background-color:#172026;margin-left:0px;
+  color:#FFFFFF;text-align:center;background-color:#fff;margin-left:0px;
 }
-.lastprice-ask{color:#ff7342;}
-.lastprice-bid{color:#0ee7a5;}
+.lastprice-ask{color:#F34246;}
+.lastprice-bid{color:#23CD09;}
 .lastprice-aob{margin-bottom:0px;}
 .lastprice-cny{display:none;font-weight:normal;font-size:16px;}
 /*网络信号*/
-.network-signal{border-right:4px solid #03c087;height:20px;display:flex;flex:initial;position:absolute;right:10px;top:calc(50% - 10px);align-items:flex-end;cursor: pointer;}
+.network-signal{border-right:4px solid #23CD09;height:20px;display:flex;flex:initial;position:absolute;right:10px;top:calc(50% - 10px);align-items:flex-end;cursor: pointer;}
 .network-signal::before,.network-signal::after{content:"";display:flex;width:4px;height:8px;background-color:#03c087;margin-right:2px;}
 .network-signal::after{height:14px;margin-right:2px;}
 /*信号中*/

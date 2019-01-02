@@ -32,7 +32,7 @@ export default {
   },
   created () {
     userUtils.getUserState((data) => {
-      data.verifyState === 0 ? void 0 : this.$emit('switchTab', 'mycenter')
+      // data.verifyState === 0 ? void 0 : this.$emit('switchTab', 'mycenter')
     }, (msg) => {
       console.error(msg)
     })
@@ -49,12 +49,12 @@ export default {
 </script>
 
 <style scoped>
-.authentication{background-color: #222121;}
-.authentication h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.authentication .tab{padding: 16px 8px 0 8px;}
-.authentication .tab-list{font-size: 0;line-height: 0;border-bottom: 1px solid #404b69;}
-.authentication .tab-item{display: inline-block;height: 24px;margin-right: 20px;margin-bottom: -1px;font-size: 16px;line-height: 24px;color: #becbe8;border-bottom: 1px solid #404b69;cursor: pointer;}
-.authentication .tab-item:hover,
-.authentication .tab-item.active{color: #fdb902;border-bottom-color: #fdb902;}
+.authentication{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.authentication h3{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7;}
+.authentication .tab{border-bottom: 1px solid #e7e7e7; padding-left: 30px; height: 60px; line-height: 60px;}
+.authentication .tab-item{display: inline-block;margin-right: 20px; height: 61px; line-height: 62px; box-sizing: border-box; border-bottom: -1px; font-size: 16px;color: #666;border-bottom: 2px solid transparent;cursor: pointer;}
+.authentication .tab-item.active{color: #3283FF;border-bottom-color: #3283FF;}
+.authentication .tab-item:hover {color: #3283FF;}
+
 </style>
 

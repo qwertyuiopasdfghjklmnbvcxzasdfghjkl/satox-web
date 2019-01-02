@@ -131,7 +131,7 @@ export default {
           boundaryGap: false,
           axisLine: true,
           axisLabel: {
-            color: '#fff',
+            color: '#666',
             align: 'center',
             padding: [0, 8],
             formatter: (value, index) => value.substring(11, 16)
@@ -152,8 +152,8 @@ export default {
             itemStyle: {
               normal: {
                 lineStyle: {
-                  color: '#DDCF6F',
-                  width: 1.2
+                  color: '#2982EC',
+                  width: 2
                 }
               }
             },
@@ -167,19 +167,10 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: '#DDCF6F'
-                  }, {
-                    offset: 0.25,
-                    color: '#DDCF6F'
-                  }, {
-                    offset: 0.5,
-                    color: '#DDCF6F'
-                  }, {
-                    offset: 0.75,
-                    color: '#DDCF6F'
-                  }, {
+                    color: '#EAF0FD'
+                  },{
                     offset: 1,
-                    color: '#222121'
+                    color: '#fff'
                   }
                 ],
                 globalCoord: false
@@ -190,39 +181,39 @@ export default {
         ]
       }
       // 生成图表
-      echarts.init(this.$refs.canvas).setOption(option)
+      echarts.init(this.$refs.canvas,null,{height:200}).setOption(option)
     }
   }
 }
 </script>
 
 <style scoped>
-.exponent{background-color: #222121;}
+.exponent{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2; }
 .exponent-top{padding: 8px 8px 0 8px;}
 .keypoint-cont p{display: flex;justify-content: space-between;align-items: center;padding-left: 6px;padding-right: 6px;}
 .keypoint-cont p.type{height: 42px;padding-left: 0;padding-right: 0;}
-.keypoint-cont p.type > span{display: flex;align-items: flex-end;}
-.keypoint-cont p.type > span .icon{font-size: 32px;color: #ececec;}
-.keypoint-cont p.type > span .label{padding-left: 8px;padding-right: 8px;font-weight: bold;font-size: 18px;color: #aeb7d0;}
-.keypoint-cont p.type > span .tips{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;margin-bottom: 6px;}
-.keypoint-cont p.type > span .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}
-.keypoint-cont p.type > span .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
-.keypoint-cont p.type > span .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
+.keypoint-cont p.type > span{display: flex;align-items: flex-end; line-height: 32px;}
+.keypoint-cont p.type > span .icon{font-size: 32px;color: #3182FF;}
+.keypoint-cont p.type > span .label{padding-left: 8px;padding-right: 8px;font-weight: bold;font-size: 18px;color: #666;}
+.keypoint-cont p.type > span .tips{display: flex;justify-content: center;position: relative;width: 18px;height: 18px; margin-bottom: 6px;}
+.keypoint-cont p.type > span .tips-icon{width: 18px;height: 18px;font-weight: bold;font-size: 12px;line-height: 18px;color: #fff;text-align: center;background-color: #ccc;border-radius: 50%;cursor: help;}
+.keypoint-cont p.type > span .tips-text{display: none;position: absolute;top: -32px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #fff;white-space: nowrap;background-color: #3182FF;border-radius: 4px;}
+.keypoint-cont p.type > span .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #3182FF transparent transparent transparent;}
 .keypoint-cont p.type > span .tips-icon:hover + .tips-text{display: block;}
-.keypoint-cont p.type select{height: 24px;padding-right: 20px;color: #fdb902;font-size: 16px;background-position: right 4px center;cursor: pointer;max-width:100px;}
+.keypoint-cont p.type select{height: 24px;padding-right: 20px;color: #3182FF;font-size: 16px;background-position: right 4px center;cursor: pointer;max-width:100px; background-image: url('../../assets/images/arrow-down-blue.png');}
 .keypoint-cont p.type select option{font-size: 14px;}
-.keypoint-cont p.newest{justify-content: flex-start;align-items: baseline;height: 32px;line-height: 32px;}
+.keypoint-cont p.newest{justify-content: flex-start;align-items: baseline;height: 32px;line-height: 32px; margin-top: 15px;}
 .keypoint-cont p.newest strong{font-weight: bold;font-size: 18px;}
 .keypoint-cont p.newest small{padding-left: 6px;font-size: 12px;}
 .keypoint-cont p.up strong,
-.keypoint-cont p.up small{color: #03c087;}
+.keypoint-cont p.up small{color: #23CD09;}
 .keypoint-cont p.down strong,
-.keypoint-cont p.down small{color: #ff7342;}
+.keypoint-cont p.down small{color: #F34246;}
 .keypoint-cont p.low,
 .keypoint-cont p.high{height: 24px;}
 .keypoint-cont p.low span,
-.keypoint-cont p.high span{font-size: 12px;color: #ececec;}
+.keypoint-cont p.high span{font-size: 14px;color: #333; margin-top: 15px;}
 .kline-cont{padding-bottom: 10px;}
-.kline-cont-canvas{height: 300px;}
+.kline-cont-canvas{height: 200px;}
 </style>
 

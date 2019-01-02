@@ -269,15 +269,16 @@ export default {
 </script>
 
 <style scoped>
-.ad-container{position:relative;background-color:#222121;}
-.ad-tabs{display:flex;padding:0 20px;border-bottom:1px solid #dedede;background:#dedede;}
-.ad-tabs-item{height:24px;line-height:24px;margin-right:40px;margin-bottom:-1px;color:#6b6b6b;border-bottom:1px solid #dedede;cursor:pointer;}
-.ad-tabs-item:hover,
-.ad-tabs-item.active{border-bottom-color: #FFDE00;color:#4554f8;}
+.ad-container{position:relative;background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.ad-tabs{display:flex;height: 49px;padding: 0 20px;border-bottom:1px solid #eee;}
+.ad-tabs-item{height:48px;line-height:48px;margin-right:40px;margin-bottom:-1px;color:#666;border-bottom:2px solid transparent;cursor:pointer;}
+.ad-tabs-item.active{color: #3283FF;border-bottom-color: #3283FF;}
+.ad-tabs-item:hover {color: #3283FF;}
 .ad-list{display:flex;flex-flow:column;padding: 0 20px 24px 20px;}
 .ad-list-history{padding-bottom: 0;}
-.ad-list-item{display:flex;justify-content:space-between;border-bottom:1px solid #404b69;}
-.ad-list-item span{height:30px;line-height:30px;font-size:12px;color:#8b94a9;}
+.ad-list-item{display:flex;justify-content:space-between;height: 40px;line-height: 40px;color: #333;border-bottom: 1px solid #eee;cursor: pointer;}
+.ad-list-item span{font-size:12px;color:#333;}
+.ad-list-item:first-of-type span{color:#999;}
 .ad-list-item-coin{width:60px;}
 .ad-list-item-type{width:60px;}
 .ad-list-item-limit{width:260px;}
@@ -286,11 +287,11 @@ export default {
 .ad-list-item-amount{width:160px;}
 .ad-list-item-status{width:100px;}
 .ad-list-item-operate{width:80px;}
-.ad-list-item-type.buy{color:#0ee7a5;}
-.ad-list-item-type.sell{color:#ff7342;}
-.ad-list-item-btn{height:20px;margin-top:5px;color:#fdb902;vertical-align:top;background-color:transparent;border:1px solid #fdb902;border-radius:4px;cursor:pointer;}
-.ad-list-item-btn:hover{color:#fdb902;border-color:#fdb902}
+.ad-list-item-type.buy{color:#23CD09;}
+.ad-list-item-type.sell{color:#F34246;}
+.ad-list-item-btn{height:25px;margin-top:8px;color:#fff;vertical-align:top;background-color:transparent;border: 1px solid #3283FF; border-radius:4px;cursor:pointer; color: #3283FF;}
+.ad-list-item-btn:hover{border-color:#2565c5; color: #2565c5;}
 .ad-nodata{text-align: center;}
-.ad-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
+.ad-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
 .ad-nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>

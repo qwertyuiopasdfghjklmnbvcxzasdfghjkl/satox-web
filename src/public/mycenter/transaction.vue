@@ -33,9 +33,10 @@ export default {
 }
 </script>
 <style scoped>
-.transaction .tabcontrol {font-size: 0;line-height: 0;border-bottom: 1px solid #b1bedb;}
-.transaction .tabcontrol li{display: inline-block;height: 24px;margin-right: 40px;margin-bottom: -1px;line-height: 24px;font-size: 16px;color: #becbe8;border-bottom: 1px solid #b1bedb;cursor: pointer;}
-.transaction .tabcontrol li:hover,
-.transaction .tabcontrol li.active{color: #E3CB2B;border-bottom-color: #E3CB2B;}
+.transaction {background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.transaction .tabcontrol {border-bottom: 1px solid #e7e7e7; padding: 0 40px; height: 65px;}
+.transaction .tabcontrol li{display: inline-block;height: 64px;  margin-right: 40px; line-height: 65px;font-size: 16px;color: #666;border-bottom: 2px solid transparent;cursor: pointer;}
+.transaction .tabcontrol li.active{color: #0D66EF;border-bottom-color: #0D66EF;}
+.transaction .tabcontrol li:hover {color: #0D66EF;}
 </style>
 

@@ -17,6 +17,8 @@ import settings from '@/public/mycenter/settings'
 import safety from '@/public/mycenter/safety'
 import transaction from '@/public/mycenter/transaction'
 import message from '@/public/mycenter/message'
+import agency from '@/public/mycenter/agency'
+import agencyApply from '@/public/mycenter/agencyApply'
 export default {
   props: ['adsSymbol', 'adsType', 'linkItem'],
   data () {
@@ -33,7 +35,9 @@ export default {
     safety,
     transaction,
     historyrecord,
-    message
+    message,
+    agency,
+    agencyApply
   },
   watch: {
     '$route' (to, from) {
@@ -59,6 +63,7 @@ export default {
 
 <style scoped>
 .myassets{width: 1200px;margin-left: auto;margin-right: auto;padding-top: 8px;padding-bottom: 60px;}
+.myassets::before {content: ''; position: fixed; left: 0; top: 0; right: 0; bottom: 0; background-color: #F2F3F8; z-index: -1;}
 .myassets-right{float: right;width: 1000px;}
 </style>
 

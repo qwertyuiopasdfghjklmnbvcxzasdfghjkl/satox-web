@@ -43,12 +43,12 @@
                               <em class="tips-text">{{$t('public0.public240')}}<!--强烈建议备份此密钥！--></em>
                             </span>
                           </p>
-                          <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span></p>
                           <p>
                               <input :class="{error: errors.has('password')}" type="password" v-model="bindGoogleFormData.password" v-validate="'required'" data-vv-name="password"/>
                               <em class="error">{{errorsInfo.password}}</em>
                           </p>
-                          <p><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span></p>
                           <p>
                               <input :class="{error: errors.has('verifyCode')}" type="text" maxlength="6" v-model="bindGoogleFormData.verifyCode" v-validate="'required|pInteger'" data-vv-name="verifyCode"/>
                               <em class="error">{{errorsInfo.code}}</em>
@@ -58,12 +58,12 @@
                     <div class="unbind" v-if="showUnbindGoogleForm">
                         <div class="unbind-form">
                             <p><span>{{$t('account.user_unbind_google_authentication')}}<!--解除谷歌验证--></span></p>
-                            <p><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span><em class="asterisk">&nbsp;*</em></p>
+                            <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_login_password')}}：<!--登录密码--></span></p>
                             <p>
                                 <input :class="{error: errors.has('password')}" type="password" v-model="unbindGoogleFormData.password" v-validate="'required'" data-vv-name="password"/>
                                 <em class="error">{{errorsInfo.password}}</em>
                             </p>
-                            <p><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                            <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_Google_verification_code')}}：<!--谷歌验证码--></span></p>
                             <p>
                                 <input :class="{error: errors.has('verifyCode')}" type="text" maxlength="6" v-model="unbindGoogleFormData.verifyCode" v-validate="'required|pInteger'" data-vv-name="verifyCode"/>
                                 <em class="error">{{errorsInfo.code}}</em>
@@ -83,8 +83,7 @@
           <!--谷歌验证 end-->
           <!--短信验证 begin-->
           <div class="cellphone google" v-show="delayedShow">
-            <h3>
-              <span class="text">{{$t('auth_warning.warning_SMS_auth')}}<!--短信验证--></span>
+            <h3>{{$t('auth_warning.warning_SMS_auth')}}<!--短信验证-->
               <span class="cellphone-tips">
                 <span class="tips-container">
                   <i class="tips-icon">?</i>
@@ -105,7 +104,7 @@
                     </div>
                     <div class="bind clearfix" v-if="showBindMobile">
                       <div class="bind-form">
-                          <p><span>{{$t('account.user_center_phone')}}：<!--手机号--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_phone')}}：<!--手机号--></span></p>
                           <p v-if="mobileState == 1">
                             {{mobileFormData.phoneNumber}}
                           </p>
@@ -128,7 +127,7 @@
                                 <template v-if="errors.firstRule('phonepassword')==='required'">{{$t('login_register.password')}}</template>
                               </em>
                           </p>
-                          <p><span>{{$t('account.user_center_SMS_code')}}：<!--短信验证码--></span><em class="asterisk">&nbsp;*</em></p>
+                          <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_SMS_code')}}：<!--短信验证码--></span></p>
                           <p>
                               <input :class="{error: errors.has('smsCode')}" type="text" maxlength="6" v-model="mobileFormData.smsCode" v-validate="'required|pInteger'" data-vv-name="smsCode" style="width:64px;"/>
                               <button :class="{disabled:btnDisabled}" @click="sendSMSCode">{{$t('account.user_center_send_SMS')}}<!--发送验证码-->{{disabled ? `（${time}s）` : ''}}</button>
@@ -416,66 +415,65 @@ export default {
 }
 </script>
 <style scoped>
-.safety h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.safety .cellphone h3{font-size: 0;line-height: 0;text-indent: 0;}
+
+.safety h3{height: 55px; padding-left: 28px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333; border-bottom: 1px solid #e7e7e7;}
 .safety .cellphone h3 .text{display: inline-block;height: 24px;font-size: 14px;line-height: 24px;text-indent: 8px;}
-.cellphone-tips{display: inline-block;margin-top: 6px;margin-left: 6px;}
-.cellphone-tips .tips-container{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;}
+.cellphone-tips{display: inline-block;}
+.cellphone-tips .tips-container{display: flex;justify-content: center;position: relative;}
 .secretkey-tips .tips-icon,
-.cellphone-tips .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}
+.cellphone-tips .tips-icon{display: inline-block; width: 20px;height: 20px;font-weight: bold;font-size: 12px;line-height: 20px;color: #fff;text-align: center;background-color: #FA4D4D;border-radius: 50%;cursor: help;}
 .secretkey-tips .tips-text,
-.cellphone-tips .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
+.cellphone-tips .tips-text{display: none; position: absolute;top: -2px;height: 24px;padding-left: 6px;padding-right: 6px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px; left: 25px;}
 .secretkey-tips .tips-text:before,
 .cellphone-tips .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .secretkey-tips .tips-icon:hover + .tips-text,
 .cellphone-tips .tips-icon:hover + .tips-text{display: block;}
 .secretkey{display: flex;align-items: center;}
-.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #fdb902;}
-.secretkey .secretkey-tips{display: flex;justify-content: center;position: relative;width: 12px;height: 12px;margin-left: 6px;}
-.secretkey .secretkey-tips .tips-icon{background-color: #e53f3f;}
+.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #E6EFFD; color: #333；}
+.secretkey .secretkey-tips{display: flex;justify-content: center;position: relative; margin-left: 6px;}
 
-.password{background-color: #FFFFFF;}
+.password, .google{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
 .password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px; position: relative;}
 .password-level.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .password-level-left{font-size: 0;line-height: 0;}
 .password-level-left img{margin-right: 50px;vertical-align: middle;}
 .password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
-.password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #100E0E;border-radius: 8px;}
+.password-level-left .state{display: inline-block;width: 210px;height: 16px;vertical-align: middle;background-color: #F5F5F5;border-radius: 8px;}
 .password-level-left .state span{display: block;height: 16px;font-size: 14px;line-height: 16px;color: #fff;text-align: center;border-radius: 8px;}
-.password-level-left .state span.low{width: 70px;background-color: #e76d42;}
-.password-level-left .state span.middle{width: 140px;background-color: #e76d42;}
-.password-level-left .state span.high{width: 210px;background-color: #03c087;}
-.password-level-right input{min-width: 140px;height: 30px;padding: 0 30px;color: #261003;text-align: center;vertical-align: top;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
-.password-level-right input:hover{background-color: #fdb902;}
+.password-level-left .state span.low{width: 70px;background-color: #FA4D4D;}
+.password-level-left .state span.middle{width: 140px;background-color: #22AC38;}
+.password-level-left .state span.high{width: 210px;background-color: #22AC38;}
+.password-level-right input{min-width: 140px;height: 50px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
+.password-level-right input:hover{background-color: #0a47a5;}
 
-.google{margin-top: 8px;background-color: #FFFFFF;}
+.google{margin-top: 8px;}
 .google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px; position: relative;}
 .google-content.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .google-content-left{font-size: 0;line-height: 0;}
 .google-content-left img{margin-right: 50px;vertical-align: middle;}
 .google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
 .google-content-center .state{color: #261003;}
-.google-content-center .bind-qrcode{float: left;width: 150px;height: 150px;padding: 10px;background-color: #ccc;}
+.google-content-center .bind-qrcode{float: left;width: 150px;height: 150px;padding: 10px;}
 .google-content-center .bind-form{float: left;width: 200px;padding-left: 24px;}
 .cellphone .google-content-center .bind-form{padding-left: 0;}
 .google-content-center .bind-form p,
 .google-content-center .unbind-form p{min-height: 24px;line-height: 24px;color: #261003;}
 .google-content-center .bind-form input,
-.google-content-center .unbind-form input{width: 190px;height: 22px;color: #cbd4ec;vertical-align: top;background-color: #261003;border: 1px solid #becbe8;}
+.google-content-center .unbind-form input{width: 190px;height: 22px;color: #333;vertical-align: top;background-color: transparent;border: 1px solid #9EC2F9;}
 .google-content-center .bind-form input.error,
 .google-content-center .unbind-form input.error{border-color: #e53f3f;}
 .google-content-center .bind-form em.asterisk,
-.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
+.google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #FA4D4D;}
 .google-content-center .bind-form em.error,
 .google-content-center .unbind-form em.error{display: block;height: 24px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
-.google-content-center button{width:120px;height:24px;padding: 0;color:#261003;background-color:#fdb902;border-radius:4px;cursor:pointer;}
-.google-content-center button:hover{background-color: #fdb902;}
+.google-content-center button{width:120px;height:24px;padding: 0;color:#fff;background-color:#0D66EF;border-radius:3px;cursor:pointer;}
+.google-content-center button:hover{background-color: #0a47a5;}
 .google-content-center button.disabled,
 .google-content-center button.disabled:hover{background-color:#999;color:#FFF;cursor:not-allowed;}
-.google-content-right input{min-width: 140px;height: 30px;padding: 0px 30px;color: #261003;text-align: center;vertical-align: top;border-radius: 4px;background-color: #fdb902;cursor: pointer;}
-.google-content-right input:hover{background-color: #fdb902;}
-.google-content-right input.cancel{margin-top:4px;color:#261003;background-color:transparent;border:1px solid #fdb902;}
-.google-content-right input.cancel:hover{color:#261003;border-color:#fdb902;}
+.google-content-right input{min-width: 140px;height: 50px;padding: 0px 30px;color: #fff;text-align: center;vertical-align: top;border-radius: 4px;background-color: #0D66EF;cursor: pointer;}
+.google-content-right input:hover{background-color: #0a47a5;}
+.google-content-right input.cancel{margin-top:4px;color:#666;background-color:transparent;border:1px solid #ccc;}
+.google-content-right input.cancel:hover{color:#333;border-color:#bbb;}
 
 .mobile{position:relative;}
 .mobile /deep/ select{

@@ -6,13 +6,13 @@
       </div>
       <div class="form">
         <inputbox v-validate="'required'" type="password" name="passwordOld" :msgs="msgs.passwordOld" :errs="errors" v-model="formData.passwordOld" :title="$t('account.user_center_old_password')"/><!--原密码-->
-        <inputbox id="newton-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
+        <inputbox id="CDCC-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
         <inputbox v-validate="'required|passwordAgain'" type="password" name="passwordAgain" :msgs="msgs.passwordAgain" :errs="errors" v-model="formData.passwordConfirm" :title="$t('login_register.confirm_new_password')"/><!--确认新密码-->
         <div class="row">
           <p>{{$t('public0.public242')}}:</p>
           <p>{{$t('error_code.CHANGE_PASSWORD_SUCCESS')}}</p>
         </div>
-        <buttonbox :text="$t('exchange.exchange_determine')" @click="changePwd"/><!--确定-->
+        <buttonbox :height="35" :text="$t('exchange.exchange_determine')" @click="changePwd"/><!--确定-->
       </div>
   </div>
 </template>
@@ -94,19 +94,18 @@ export default {
 </script>
 
 <style scoped>
-.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
-.top{width:100%;height:30px;position:relative;background-color:#333232;}
-.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #fdb902;}
-.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
+.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
+.top{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:calc(50% - 7px);right:15px; opacity: 0.8;}
+.icon-close:hover{opacity: 1;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .title{color:#becbe8;}
-.form /deep/ .input,.form /deep/ .input.error{background-color:#FFF;border-color:#54616c;color:#261003;}
-.form /deep/ .input:focus{background-color:#FFF;}
+.form /deep/ .title{margin-bottom: 10px;}
+.form /deep/ .input {height: 35px;color:#333;background-color: #fff;border: 1px solid #ccc; border-radius: 4px; font-size: 16px;}
+.form /deep/ .input.error{border-color:#e53f3f;}
 .captcha /deep/ em.errorinfo{white-space:nowrap!important;}
 .captcha,.bottom{display:flex;justify-content:space-between;width:272px;}
 .code-image{width:100px;height:32px;cursor:pointer;}
 .bottom{margin-top:5px;}
-.row{display:flex;flex-direction:column;width:272px;padding-bottom:20px;color:#becbe8;}
+.row{display:flex;flex-direction:column;width:272px;padding-bottom:20px;color:#666;}
 .row p:last-child{line-height:24px;}
 </style>

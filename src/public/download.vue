@@ -2,15 +2,9 @@
     <div class="download">
         <div class="banner1">
             <div class="content">
-                <div>
-                    <img src="../assets/images/download/logo2.png"/>
-                </div>
-                <div class="title1">Stay Connected</div>
-                <div class="title2">
-                    <!--保持链接 实时掌握-->
-                    {{$t('public0.public228')}}
-                </div>
-                <div class="title3">We have created the mobile tools you need for trading on the go.</div>
+                <div style="height: 240px;"></div>
+                <h1 class="title1">{{$t('public0.public285')}}</h1>
+                <h3 class="title2">{{$t('public0.public286')}}</h3>
                 <div class="buttons" v-if="isWeiXi">
                     <a class="button" @click="showTip">
                         <!--安卓下载-->
@@ -22,25 +16,18 @@
                     </a>
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
-                    <a class="button" :class="{en:getLang=='en'}" href="/static/newton-pro-1128.apk" download="newton-pro-1128.apk">
+                    <a class="button" :class="{en:getLang=='en'}" href="/static/CDCC-pro-1128.apk" download="CDCC-pro-1128.apk">
                         <!--安卓下载-->
-                        {{$t('public0.public226')}}
+                        <img src="../assets/images/download/android.png">{{$t('public0.public226')}}
                     </a>
                     <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/nCfg">
                         <!--IOS下载-->
-                        {{$t('public0.public227')}}
+                        <img src="../assets/images/download/iphone.png">{{$t('public0.public227')}}
                     </a>
                 </div>
-                <div class="title4">Discover the mobile apps</div>
             </div>
         </div>
-        <div class="tips">
-            <img src="../assets/images/download/bg2.png"/>
-            <p>
-              <!--微信内请点击右上角“...”按钮，使用浏览器打开。-->
-              {{$t('public0.public213')}}
-            </p>
-        </div>
+
     </div>
 </template>
 
@@ -68,24 +55,22 @@ export default {
 </script>
 
 <style scoped>
-.download{min-width:1200px;width:100%;min-height:556px;height:fit-content;margin:15px auto 0 auto;display:flex;flex-direction:column;align-items:center;}
+.download{min-width:1200px;width:100%; height: calc(100% - 70px);display:flex;flex-direction:column;align-items:center; background:url(../assets/images/download/bg.jpg) #010A1E no-repeat center;background-size:cover;}
+@media screen and (max-width: 1600px) {
+  .download {height: calc(100% - 60px);}
+}
 .download .banner1{
     min-width:1200px;width:100%;position: relative;display:flex;align-items:center;justify-content:center;
-    background:url(../assets/images/download/bg.png) no-repeat center;background-size:100%;
+    
 }
-.download .banner1 > img{width:100%;}
-.download .banner1 .content{min-width:1200px;margin-top:30px;}
-.download .banner1 .content div img{width:300px;}
-.download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#4EECFF;}
-.download .banner1 .content .title2{font-size:36px;font-weight:bold;color:#FFF;line-height:73px;}
-.download .banner1 .content .title3{width:572px;font-size:30px;font-weight:bold;color:#FFFEFE;line-height:50px;}
-.download .banner1 .content .buttons{display:flex;width:448px;justify-content:space-between;}
+.download .banner1 .content{min-width:1200px;}
+.download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#fff;}
+.download .banner1 .content .title2{font-size:28px;font-weight:normal;color:#CCCCCC;line-height:73px;}
 .download .banner1 .content .buttons .button{
-    display:flex;width:200px;height:121px;line-height:140px;background:url(../assets/images/download/btn.png) no-repeat center;
-    cursor: pointer;justify-content:center;color:#FFF;font-size:24px;font-weight:bold;
+    display: block; text-align: center; width:320px;height:70px; line-height: 70px; cursor: pointer; color:#FFF;font-size:24px; background-color: rgba(4,114,233,0.6); border-radius: 4px; margin-top: 30px;
 }
+.download .banner1 .content .buttons .button img{ vertical-align: middle; margin-right: 20px; }
 .download .banner1 .content .buttons .button.en{font-size:18px;}
-.download .banner1 .content .title4{font-size:20px;font-weight:bold;color:#BAB9B9;line-height:70px;}
 .download .tips{position: relative;display:flex;justify-content:center;}
 .download .tips img{width:100%;}
 .download .tips p{

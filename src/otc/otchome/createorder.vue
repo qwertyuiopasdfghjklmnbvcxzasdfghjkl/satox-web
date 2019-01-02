@@ -532,32 +532,31 @@ export default {
 </script>
 
 <style scoped>
-.createorder{width: 340px;max-height: calc(100% - 20px);background-color: #222121;overflow-x: hidden;overflow-y: auto;}
+.createorder{width: 340px;max-height: calc(100% - 20px); overflow-x: hidden;overflow-y: auto; background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; box-shadow: 0 2px 8px #5d5d5d;}
 .createorder.englishsize{width: 360px;}
-.createorder .title{height: 30px;line-height: 30px;text-align: center;color: #becbe8;background-color: #333232;}
+.createorder .title{padding-top: 10px;padding-bottom: 10px;background-color:#0D66EF;color:#fff;font-size: 16px; text-align: center;}
 .createorder .cont{padding: 20px 30px 20px 30px;}
 .cont-item .row{display: flex;justify-content: space-between;align-items: center;}
-.cont-item label{display: block;height: 24px;line-height: 24px;font-size: 12px;color: #becbe8;}
-.cont-item label em.asterisk{position: relative;top: 6px;line-height: 0;font-size: 18px;color: #fdb902;}
+.cont-item label{display: block;height: 24px;line-height: 24px;font-size: 12px;color: #333;}
+.cont-item label em.asterisk{position: relative;top: 6px;line-height: 0;font-size: 18px;color: red;}
 .cont-item label.label-tips{font-size: 0;}
 .cont-item label.label-tips > span{font-size: 12px;}
 .cont-item label.label-tips .tips{display: inline-block;margin-top: 6px;margin-left: 6px;vertical-align: top;}
-.cont-item label.label-tips .tips-container{display: flex;justify-content: center;position: relative;z-index: 1;width: 12px;height: 12px;}
-.cont-item label.label-tips .tips-icon{width: 12px;height: 12px;font-weight: bold;font-size: 12px;line-height: 12px;color: #181b2a;text-align: center;background-color: #fff;border-radius: 50%;cursor: help;}
-.cont-item label.label-tips .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
-.cont-item label.label-tips .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
-.cont-item label.label-tips .tips-icon:hover + .tips-text{display: block;}
+.cont-item label.label-tips .tips-container{display: flex;justify-content: center;position: relative;z-index: 1;width: 14px;height: 14px;}
+.cont-item label.label-tips .tips-icon{width: 14px;height: 14px;font-weight: bold;font-size: 12px;line-height: 14px;color: #fff;text-align: center;background-color: #ccc;border-radius: 50%;cursor: help;}
+
+
 .cont-item .value{position: relative;}
 .cont-item.tradetype .value{display: flex; justify-content: space-between;align-items: center;height: 24px;}
-.cont-item .value select{height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #becbe8;background-position: right 4px center;border: 1px solid #54616c;cursor: pointer;}
+.cont-item .value select{height: 24px;padding-left: 12px;padding-right: 16px;font-size: 12px;color: #333;background-position: right 4px center;border: 1px solid #ccc;cursor: pointer;}
 .cont-item.currency .value select{width: 80px;}
 .cont-item.exchange .value select{width: 124px;}
 .cont-item.timelimit .value select{position: relative; z-index: 1;width: 80px;}
-.cont-item .value span{font-size: 12px;color: #becbe8;}
+.cont-item .value span{font-size: 12px;color: #999;}
 .cont-item.tradetype .value span{cursor: pointer;}
-.cont-item.tradetype .value span i{padding-right: 4px;color: #fdb902;}
-.cont-item.tradetype .value span i:hover{color: #fdb902;}
-.cont-item .value input{box-sizing: border-box;width: 100%;height: 30px;padding-left: 12px;padding-right: 12px;font: 12px/normal 'Microsoft YaHei';color: #becbe8;background-color: transparent;border: 1px solid #54616c;}
+.cont-item.tradetype .value span i{padding-right: 4px;color: #3283FF;}
+.cont-item.tradetype .value span i:hover{color: #2565c5;}
+.cont-item .value input{box-sizing: border-box;width: 100%;height: 30px;padding-left: 12px;padding-right: 12px;font: 12px/normal 'Microsoft YaHei';color: #333;background-color: transparent;border: 1px solid #ccc;}
 .cont-item .value input.error{border-color: #e53f3f;}
 .cont-item.premium .value input,
 .cont-item.dispose .value input,
@@ -565,15 +564,15 @@ export default {
 .cont-item.good .value input{width: 80px;}
 .cont-item.acceptable .value input,
 .cont-item.quantity .value input{width: 124px;}
-.cont-item .value em{position: absolute;top: 0;right: 13px;height: 30px;line-height: 30px;font-size: 12px;color: #7b87aa;}
+.cont-item .value em{position: absolute;top: 0;right: 13px;height: 30px;line-height: 30px;font-size: 12px;color: #999;}
 .cont-item.timelimit .value em{right: 21px;height: 24px;line-height: 24px;}
 .cont-item .prompt{height: 20px;line-height: 20px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
 .cont-item.button{line-height: 0;font-size: 0;text-align: right;}
 .cont-item.button button{width: 74px;height: 30px;font-size: 12px;border-radius: 4px;cursor: pointer;}
-.cont-item.button button.cancel{margin-right: 10px;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;}
-.cont-item.button button.cancel:hover{color: #fdb902;border-color: #fdb902;}
-.cont-item.button button.comfirm{color: #261003;background-color: #fdb902;}
-.cont-item.button button.comfirm:hover{background-color: #fdb902;}
+.cont-item.button button.cancel{margin-right: 10px;color: #333;background-color: transparent;border: 1px solid #ccc;}
+.cont-item.button button.cancel:hover{color: #111;border-color: #bbb;}
+.cont-item.button button.comfirm{color: #fff;background-color: #3283FF;}
+.cont-item.button button.comfirm:hover{background-color: #2565c5;}
 .cont-item.button button.comfirm.disabled{background-color: #999;cursor:not-allowed;}
 .cont-item.button button.comfirm.disabled:hover{background-color: #999;}
 </style>

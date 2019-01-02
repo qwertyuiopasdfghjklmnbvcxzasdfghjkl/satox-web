@@ -195,7 +195,7 @@ export default {
 <style scoped>
 .important-tips{position:absolute;bottom:-18px;left:0px;font-size:12px;line-height:22px;background-color:#343d53;color:#666;padding:0 4px;}
 .moreinfo{padding: 8px;}
-.depositBox{background-color: #333232;border-radius: 4px;}
+.depositBox{background-color: #F5F5F5;border-radius: 4px;}
 .depositBox .filed{width: 100%;}
 .depositBox .filed span{display: inline-block;width: 25px;height: 25px;margin-right: 5px;background: none no-repeat left center;}
 .depositBox .filed span.icon_copy{background-image: url(../../assets/images/icon_copy.png);}
@@ -221,8 +221,8 @@ export default {
 .depositBox .filed ul li  span.yue{width:169px;text-align: left;}
 .depositBox .filed ul li  span.xiadan{width:172px;text-align: left;}
 .depositBox .filed ul li  span.guzhi{width:180px;text-align: left;}
-.depositBox .filed label{display: inline-block;font-size: 14px;color:#d6dff9;width: 168px;text-align: center;}
-.depositBox .filed label.active{width: 350px;text-align: left;color: #becbe8;}
+.depositBox .filed label{display: inline-block;font-size: 14px;color:#333;width: 168px;text-align: center;}
+.depositBox .filed label.active{width: 350px;text-align: left;color: #333;}
 .depositBox .filed label.sum{width:164px;text-align: left;}
 .depositBox .filed label.yue{width:164px;text-align: left;}
 .depositBox .filed label.xiadan{width:172px;text-align: left;}
@@ -249,14 +249,14 @@ export default {
 .addBNB .add,  .addBNB.space{background-color: #fdb902;color: #fff;margin-left: 44px; vertical-align: top; cursor: pointer; border:none;text-align: center;box-sizing: border-box;margin-top: 10px;height: 24px;line-height: 24px;padding: 0 10px;width: 170px;margin-bottom: 10px;display: inline-block;font-size: 14px;}
 .addBNB .space{background-color: #464c5c;cursor:not-allowed;}
 .depositBox .filed input{box-sizing: border-box;height: 28px;line-height: 28px; padding: 0px 7px 0px 0px;border: 1px solid #d4d4d4;color: #333;width: 250px;}
-.depositBox .filed input.adressName{width:470px;height: 30px;line-height: 30px;text-indent: 8px; margin-left: 10px; border:1px solid #3e4966; margin-right:8px;display: inline-block;padding: 0px;color: #78839a;font-size: 14px;vertical-align: top;background-color:transparent;}
+.depositBox .filed input.adressName{width:470px;height: 30px;line-height: 30px;text-indent: 8px; margin-left: 10px; border:1px solid #8CB4F2; margin-right:8px;display: inline-block;padding: 0px;color: #666;font-size: 14px;vertical-align: top;background-color:#D3E2FA;}
 .depositBox .filed input.adressName:disabled{cursor: not-allowed;}
 .depositBox .filed span{height: 30px;display: inline-block;font-size: 28px; color: #fdb902;cursor: pointer;text-align: center;line-height: 28px;box-sizing: border-box;vertical-align: text-bottom;position: relative;}
 .depositBox:after{content:".";display:block;clear:both;visibility:hidden;height:0;}
 .depositBox .ewm{height: 95px;}
 .depositBox .ewm canvas{width:100%!important;height:100%!important;}
 .moreinfo .tips{margin-bottom: 15px;display: inline-block;margin-left:10px;margin-top:15px;}
-.moreinfo .tips li{height: 21px; line-height:21px;list-style-type:square;font-size:12px;color:#78839a;border:none;}
+.moreinfo .tips li{height: 21px; line-height:21px;list-style-type:square;font-size:12px;color:#666;border:none;}
 .moreinfo .tips li .recoreds{font-size:12px;color:#d6dff9;font-weight:bold;text-decoration: underline;}
 .moreinfo .tips li a{color:#fdb902!important;}
 .moreinfo form .filed{margin-bottom:20px;position:relative;padding-left:130px;height:30px;}
