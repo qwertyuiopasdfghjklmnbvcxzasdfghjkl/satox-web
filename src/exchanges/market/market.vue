@@ -109,7 +109,7 @@ export default {
     ...mapGetters(['getApiToken']),
     markets () {
       // 收藏
-      return ['collection', 'BTC', 'ETH', 'ATN', 'USDT', 'MECoin']
+      return ['collection', 'BTC', 'ETH', 'CDCC', 'USDT']
     },
     tipPrice () {
       return this.hoverItem || {}
