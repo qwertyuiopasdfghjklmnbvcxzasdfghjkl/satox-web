@@ -216,7 +216,7 @@ export default {
 <style scoped>
 .twoverify{display: flex;justify-content: center;align-items: center;width: 1200px;height: calc(100% - 60px);min-height: 800px;margin-left: auto;margin-right: auto;}
 .twoverify-container{width: 1096px;height: 600px;background-color: #222121;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
-.twoverify-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.jpg) no-repeat center center;}
+.twoverify-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.png) no-repeat center center;}
 .twoverify-left img{margin-top: 282px;}
 
 .twoverify-right{position: relative;float: right;width: 50%;height: 100%;}

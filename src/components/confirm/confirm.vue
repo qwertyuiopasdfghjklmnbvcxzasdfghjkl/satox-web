@@ -133,15 +133,15 @@ export default {
 </script>
 
 <style scoped>
-.dialog{display:flex;flex-flow:column;background-color:#FFF;}
-.top{width:100%;height:30px;position:relative;background-color:#323232;justify-content:center;align-items:center;display:flex;color:#becbe8;}
+.dialog{display:flex;flex-flow:column;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
+.top{width:100%;padding-top: 15px;padding-bottom: 15px;position:relative;background-color:#0D66EF;justify-content:center;align-items:center;display:flex;color:#fff;font-size: 18px;}
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;padding:30px;}
 .content{color:#261003;font-size:16px;word-wrap:break-word;word-break:normal;}
 .buttons{margin-top:20px;display:flex;align-items:center;}
 .buttons-center{align-self:center;}
 .buttons-right{align-self:flex-end;}
-.button{display:flex;justify-content:center;align-items:center;min-width:80px;height:30px;line-height:30px;color:#261003;background-color:#fdb902;border-radius:4px;cursor:pointer;}
-.button:hover{background-color:#fdb902;}
-.button.cancel{margin-right:10px;color:#261003;background-color:transparent;border:1px solid #fdb902;}
-.button.cancel:hover{color:#261003;border-color:#fdb902;}
+.button{display:flex;justify-content:center;align-items:center;min-width:90px;height:35px;line-height:35px;color:#fff;background-color:#0D66EF;border-radius:4px;cursor:pointer; font-size: 14px;}
+.button:hover{background-color:#094fbb;}
+.button.cancel{margin-right:10px;color:#261003;background-color:transparent;border:1px solid #ccc;}
+.button.cancel:hover{color:#261003;border-color:#bbb;}
 </style>

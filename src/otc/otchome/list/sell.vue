@@ -191,31 +191,35 @@ export default {
 </script>
 
 <style scoped>
-.undone-detail{display: flex;justify-content:space-between;padding: 16px;background-color: #333232;position: relative;}
+.undone-detail{display: flex;justify-content:space-between;padding:16px;background-color: #f5f5f5;position: relative;}
 .undone-center{display: flex;width: 560px;align-items:center;}
 .undone-center > *{padding:0 8px;}
 .undone-left{width:464px;display:flex;align-items:center;}
-.undone-left span{color:#8a93a8;height:40px;line-height:16px;position:relative;flex:1;text-align:center;}
-.undone-left span::after{content:" ";display:flex;position:absolute;width:100%;height:4px;background-color:#222121;left:0;bottom:-2px;}
-.undone-left span::before{content:" ";display:flex;position:absolute;z-index:1;width:10px;height:10px;background-color:#222121;left:calc(50% - 5px);bottom:-5px;border-radius:50%;}
-.undone-left span.active{color:#FFDE00;}
-.undone-left span.active::after,.undone-left span.active::before{background-color:#FFDE00;}
-.undone-center-sells{color:#ff7342;font-size:14px;font-weight:bold;}
+.undone-left span{color:#999;height:40px;line-height:16px;position:relative;flex:1;text-align:center;}
+.undone-left span::after{content:" ";display:flex;position:absolute;width:100%;height:4px;background-color:#ccc;left:0;bottom:-2px;}
+.undone-left span::before{content:" ";display:flex;position:absolute;z-index:1;width:10px;height:10px;background-color:#ccc;left:calc(50% - 5px);bottom:-5px;border-radius:50%;}
+.undone-left span.active{color:#3283FF;}
+.undone-left span.active::after,.undone-left span.active::before{background-color:#3283FF;}
+.undone-center-sells{color:#F34246;font-size:14px;font-weight:bold;}
 .undone-center-sells p{line-height:32px;width:46px;}
-.undone-center-number p{color: #aeb7d0;font-size: 12px;line-height:24px;width:140px;}
+
+.undone-center-number p{color: #666;font-size: 12px;line-height:24px;width:140px;}
 .undone-center-number-font{font-size: 16px;font-weight: bold;color:#aeb7d0;}
 .undone-center-buys p{line-height:32px;}
-.undone-center-adress{font-size:12px;color: #aeb7d0;line-height: 22px;}
-.undone-right{width:170px;display:flex;flex-flow:column;align-items:center;justify-content:center;}
-.undone-right p{color: #ff7342;font-size: 14px;font-weight: bold;line-height:16px;text-align: center;margin-bottom:10px;}
-.undone-right a{display: inline-block;min-width: 80px;height: 24px;line-height: 24px;color: #261003;text-align: center;background-color: #fdb902;border-radius: 4px;padding:0 10px;}
-.undone-right a:hover{background-color: #fdb902;}
-.undone-right a.disabled{color: #afb9ce;background-color: #6e778c;cursor: not-allowed;}
+.undone-center-adress{font-size:12px;color: #666;line-height: 22px;}
+.undone-right{width:145px;display:flex;flex-flow:column;align-items:center;justify-content:center;}
+.undone-right p{color: #F34246;font-size: 14px;font-weight: bold;line-height:16px;text-align: center;margin-bottom:10px;}
+.undone-right a{display: inline-block;min-width: 80px;height: 30px;line-height: 30px;color: #fff;text-align: center;background-color: #3283FF;border-radius: 4px;}
+.undone-right a:hover{background-color: #2565c5;}
+.undone-right a.disabled{color: #999;background-color: #ccc;cursor: not-allowed;}
+
 .undone-center-type{line-height:22px;color:#aeb7d0;}
 .undone-center-type p{width:100px;}
 .evaluate ul{display: flex;text-align: center;justify-content: space-around;}
-.evaluate ul li{cursor:pointer;width:70px;}
-.evaluate ul li em{cursor: pointer;font-size:24px;}
+.evaluate ul li{width: 70px;cursor: pointer;}
+.evaluate ul li em{font-size: 24px;cursor: pointer;}
 .evaluate ul li em:hover,
-.evaluate ul li em.active{color:#fdb902;}
+.evaluate ul li em.active{color: #fdb902;}
+
+
 </style>

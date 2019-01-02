@@ -78,7 +78,7 @@
                     <span v-if="getApiToken" :class="{disabled:lockExtrust}" @click="buyOrSell()">
                       {{$t(isBuy?'exchange.exchange_buy':'exchange.exchange_sell')}} {{currentSymbol}}
                     </span>
-                    <div v-if="!getApiToken" class="not-login">
+                    <div v-if="!getApiToken" class="not-login " :class="{sell:tradeType=='sell'}">
                       <a @click="loginDialog">{{$t('public.navigation_login')}}</a>
                       <font>or</font>
                       <a @click="registerDialog">{{$t('public.navigation_register')}}</a>
@@ -535,25 +535,25 @@ export default {
 .b-content{padding:5px;}
 .select{width:100%;height:24px;line-height:24px;border:1px solid #636e87;font-size:14px;color:#d6dff9;}
 .formel{width:100%;display:flex;position:relative;height:36px;margin-bottom:10px;}
-.price-balance{height:44px;line-height:44px;justify-content:flex-end;color:#d6dff9;font-size:16px;margin-bottom:0;}
-.formel-label{width:70px;line-height:36px;text-align:right;color:#a1a8bb;overflow: hidden;text-overflow: ellipsis;padding-right:20px;}
-.formel-text{width:calc(100% - 90px);position:relative;color:#d6dff9;}
-.formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #100E0E;padding:0 8px;background:#100E0E;color:#d6dff9;font-size:16px;}
+.price-balance{height:44px;line-height:44px;justify-content:flex-end;color:#333;font-size:16px;margin-bottom:0;}
+.formel-label{width:70px;line-height:36px;text-align:right;color:#333;overflow: hidden;text-overflow: ellipsis;padding-right:20px;}
+.formel-text{width:calc(100% - 90px);position:relative;color:#333;}
+.formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #ccc;padding:0 8px;background:transparent;color:#333;font-size:16px;}
 .formel-textbox[readonly='readonly']{cursor:not-allowed;}
-.formel-textbox:focus{border-color:#FFDE00!important;}
-.tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:#100E0E;}
-.percent{width:calc(100% - 104px);height:4px;display:flex;background:#100E0E;margin:18px 0 18px 97px;position:relative;}
+.formel-textbox:focus{border-color:#3A76E7!important;}
+.tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:transparent;}
+.percent{width:calc(100% - 104px);height:4px;display:flex;background:#eee;margin:18px 0 18px 97px;position:relative;}
 .percent-line{width:100%;height:100%;display:flex;}
-.percent-light-line{height:100%;background:#FFDE00;position:absolute;z-index:1;}
+.percent-light-line{height:100%;background:#3A76E7;position:absolute;z-index:1;}
 .percent-circle{flex:1;position:relative;}
 .percent-circle::before,.percent-circle:last-child::after{
   display:block;content:"";position:absolute;width:10px;height:10px;border-radius:50%;
-  background:#100E0E;top:-3px;left:-5px;z-index:4;
+  background:#eee;top:-3px;left:-5px;z-index:4;
 }
-.percent-circle-light::before{background:#FFDE00;}
+.percent-circle-light::before{background:#3A76E7;}
 .percent-circle:last-child::after{left:initial;right:-5px;}
 .percent-item,.drag-circle{width:14px;height:14px;position:absolute;background:#fff;border-radius:50%;top:-6px;left:-7px;z-index:10;cursor: pointer;display:flex;align-items:center;justify-content:center;}
-.percent-item::before,.drag-circle::before{display:block;content:"";width:10px;height:10px;border-radius:50%;background:#FFDE00;}
+.percent-item::before,.drag-circle::before{display:block;content:"";width:10px;height:10px;border-radius:50%;background:#3A76E7;}
 .drag-circle /deep/ em{position:relative;}
 .drag-circle /deep/ em i{display:flex;width:42px;height:27px;line-height:27px;text-align:center;background:#2F3D45;color:#fff;font-size:12px;border-radius:4px;position:absolute;top:-45px;left:-26px;justify-content:center;}
 .drag-circle /deep/ em i::before{color:#2F3D45;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
@@ -569,18 +569,19 @@ export default {
 .percent-item /deep/ em i::before{color:#2F3D45;position:absolute;bottom:-15px;left:calc(50% - 10px);font-size:20px;}
 .sum{width:100%;height:25px;line-height:25px;}
 .buttons{width:100%;height:36px;display:flex;text-align:center;color:#fff;font-size:16px;font-weight:bold;}
-.buttons /deep/ span{flex:1;height:36px;line-height:36px;cursor:pointer;margin-left:90px;}
-.panel.buy /deep/ .buttons span{background-color: #03c087;}
-.panel.sell /deep/ .buttons span{background-color: #e76d42;}
-.panel.buy /deep/ .buttons span:hover{background-color: #0ee7a5;}
-.panel.sell /deep/ .buttons span:hover{background-color: #ff7342;}
+.buttons /deep/ span{flex:1;height:36px;line-height:36px;cursor:pointer;margin-left:90px; border-radius: 3px;}
+.panel.buy /deep/ .buttons span{background-color: #24C08A;}
+.panel.sell /deep/ .buttons span{background-color: #F1595C;}
+.panel.buy /deep/ .buttons span:hover{background-color: #13a271;}
+.panel.sell /deep/ .buttons span:hover{background-color: #d43f42;}
 .buttons /deep/ span.disabled{background-color:#999!important;;color:#FFF!important;cursor:not-allowed;}
-.buttons /deep/ div{width:calc(100% - 92px);border:1px solid #fdb902;margin-left:90px;display:flex;justify-content:center;align-items:center;}
-.buttons /deep/ div a{font-size:18px;color:#fdb902;cursor: pointer;font-weight:normal;}
-.buttons /deep/ div a:hover{color:#fdb902;}
+.buttons /deep/ div{width:calc(100% - 92px); margin-left:90px;display:flex;justify-content:center;align-items:center; background-color: #24C08A; border-radius: 3px;}
+.buttons /deep/ div.sell {background-color: #F1595C;}
+.buttons /deep/ div.redbtn {background-color: #F1595C;}
+.buttons /deep/ div a{font-size:18px;color:#fff;cursor: pointer;font-weight:normal;}
 .buttons /deep/ div font{padding:0 8px;font-size:16px;}
-.error-tip{position:absolute;z-index:999;top:-30px;left:50px;height:24px;line-height:24px;background:#fff;padding:0 20px;font-size:12px;color: #e53f3f;border-radius:4px;}
-.error-tip::before{left:calc(50% - 6px);bottom:-15px;position:absolute;color:#fff;}
+.error-tip{position:absolute;z-index:999;top:-30px;left:50px;height:24px;line-height:24px;background:#3A76E7;padding:0 20px;font-size:12px;color: #fff;border-radius:4px;}
+.error-tip::before{left:calc(50% - 6px);bottom:-15px;position:absolute;color:#3A76E7;}
 .error-tip i{display:block;max-width:100px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {
   .tip-title{right:31px;}

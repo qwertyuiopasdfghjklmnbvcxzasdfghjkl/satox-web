@@ -167,7 +167,7 @@
 
         <section class="bk-wrap footer-main"style="display:none;">
             <section class="bk-main footer">
-                <p>© 2017-2018 www.newtonXchange.com All Rights Reserved</p>
+                <p>© 2017-2018 www.cdcc.ink All Rights Reserved</p>
             </section>
         </section>
     </div>

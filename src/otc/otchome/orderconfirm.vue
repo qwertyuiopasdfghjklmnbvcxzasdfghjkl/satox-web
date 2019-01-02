@@ -41,9 +41,9 @@ export default {
 
 <style scoped>
 .order-confirm{width:560px;}
-.title{height:34px;line-height:34px;font-weight:bold;font-size:16px;color:#fdb902;border-bottom:1px solid #333232;}
+.title{height: 34px;font-weight: bold;font-size: 16px;line-height: 34px;color: #3283FF;border-bottom: 1px solid #ccc;}
 .order-row{overflow: auto}
-.order-row-header{color:#8a93a8;}
+.order-row-header{color:#999;}
 .order-row /deep/ span{float: left;min-height: 30px;line-height: 30px;padding-right: 10px;}
 .order-row /deep/ span:last-of-type{padding-right:0;}
 .order-price{width:150px;}

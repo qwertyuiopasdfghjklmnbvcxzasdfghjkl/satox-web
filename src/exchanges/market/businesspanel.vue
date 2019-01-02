@@ -4,7 +4,6 @@
             <li class="arrow-item">
               <em :class="{unfold:isShow}" @click="switchTab('limit', isShow)">
                 <i :class="[!isShow?'icon-arrow-up3':'icon-arrow-down2']"></i>
-                <i :class="[!isShow?'icon-arrow-up3':'icon-arrow-down2']"></i>
               </em>
             </li>
             <li class="tab-item" :class="{selected:isShow && active==='limit'}" @click="switchTab('limit')">
@@ -75,27 +74,26 @@ export default {
 </script>
 
 <style scoped>
-.business-panel{margin-bottom: 10px;background-color: #222121;}
+.business-panel{margin-bottom: 10px;background-color: #fff;}
 .business-panel.unfold{height: 304px;}
-.tabs{background-color: #333232;overflow: auto;}
-.business-panel.unfold .tabs{background-color:#FFF;}
+.tabs{background-color: #fff;overflow: auto;}
+.business-panel.unfold .tabs{background-color:#FFF; border: 1px solid #e7e7e7;}
 .tabs .tab-item{
   float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-right:2px;font-size: 16px;
-  line-height: 38px;color: #FFF;text-align: center;border-top: 2px solid #333232;cursor: pointer;
+  line-height: 38px;color: #666;text-align: center;cursor: pointer; border-bottom: 2px solid transparent;
 }
-.business-panel.unfold .tabs .tab-item{color:#000;border-top-color:#FFF}
+.business-panel.unfold .tabs .tab-item{color:#666;}
 .tabs .tab-item:hover,
-.tabs .tab-item.selected{color: #FFDE00!important;border-top-color: #FFDE00!important;background:#222121;}
-.tabs .arrow-item{position: relative;float: left;width: 40px;height: 40px;}
-.tabs .arrow-item em{position: absolute;top: 50%;left: 10px;width: 16px;height: 16px;margin-top: -8px;overflow: hidden;cursor: pointer;}
-.tabs .arrow-item em i{position: absolute;left: 0;font-size: 16px;color: #FFF;}
-.tabs .arrow-item em i:first-of-type{top: -3px;}
-.tabs .arrow-item em i:last-of-type{top: 3px;}
+.tabs .tab-item.selected{color: #3A76E7!important;}
+.tabs .tab-item.selected {border-color: #3A76E7;}
+.tabs .arrow-item{position: relative;float: left;width: 50px;height: 40px;}
+.tabs .arrow-item em{position: absolute;top: 50%;left: 50%; width: 20px;height: 20px; margin-left:-8px; margin-top: -8px;overflow: hidden;cursor: pointer;}
+.tabs .arrow-item em i{position: absolute;left: 0;font-size: 16px;color: #3A76E7;}
 .tabs .arrow-item em:hover i,
-.tabs .arrow-item em.unfold i{color: #FFDE00;}
+.tabs .arrow-item em.unfold i{color: #3A76E7;}
 .business-panel.unfold .tabs .arrow-item em:hover i,
-.business-panel.unfold .tabs .arrow-item em.unfold i{color: #000;}
-.tabs .procedure-item{float: right;height: 24px;margin-top: 8px;margin-right: 30px;line-height: 24px;color: #4d3c1a;}
+.business-panel.unfold .tabs .arrow-item em.unfold i{color: #3A76E7;}
+.tabs .procedure-item{float: right;height: 24px;margin-top: 8px;margin-right: 30px;line-height: 24px;color: #3A76E7;}
 
 .business-panel-form{display: flex;}
 .business-panel-left,
@@ -104,7 +102,7 @@ export default {
 @media screen and (max-width: 1600px) {
   .business-panel.unfold{height: 290px;}
   .tabs .tab-item{height: 28px;margin-right: 30px;font-size: 14px;line-height: 28px;}
-  .tabs .arrow-item{width: 30px;height: 30px;}
+  .tabs .arrow-item{width: 50px;height: 30px;}
   .tabs .procedure-item{margin-top: 3px;margin-right: 20px;font-size: 12px;}
   .business-panel-left,
   .business-panel-right{margin: 0 15px;}

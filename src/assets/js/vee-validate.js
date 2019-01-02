@@ -23,7 +23,7 @@ Validator.extend('password', {
 Validator.extend('passwordAgain', {
   getMessage: (field, args) => 'public0.public124', // 密码不匹配，请重新输入
   validate: (value, args) => {
-    return value === document.querySelector('input[uid="newton-password"]').value
+    return value === document.querySelector('input[uid="CDCC-password"]').value
   }
 })
 

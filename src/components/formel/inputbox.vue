@@ -113,12 +113,10 @@ export default {
 
 <style scoped>
 .inputbox{display:flex;flex-flow:column;font-size:14px;}
-.title{color:#261003;text-align:left;height:20px;line-height:20px;}
+.title{color:#333;text-align:left;height:20px;line-height:20px;}
 .title em{font-size: 18px;color: #e53f3f;vertical-align:middle;margin-right: 5px;}
 .inputdiv{position:relative;display:flex;flex-flow:column;}
-.input{height:30px;line-height:30px;margin:0;padding:0 4px;border:1px solid #283149;outline:none;color:#becbe8;background-color:#261003;}
-.input:focus{background-color:#261003;}
-.input.error{border-color: #e53f3f;background-color:#261003;}
+.input{height:30px;line-height:30px;margin:0;padding:0 15px;outline:none; border:none;}
 .errorinfo{color: #e53f3f;font-style:normal;line-height:18px;white-space:normal;width:100%;padding-top:4px;}
 </style>
 

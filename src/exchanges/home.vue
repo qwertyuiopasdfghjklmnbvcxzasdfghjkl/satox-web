@@ -304,25 +304,25 @@ export default {
 </script>
 <style scoped>
 /* 红涨绿跌 */
-.home{min-width:1200px;min-height:500px;height:calc(100% - 60px);}
+.home{min-width:1200px;min-height:500px;height:calc(100% - 70px); background-color: #F2F3F8;}
 .center{display:flex;justify-content:space-between;height:100%;}
 .home-left{display:flex;min-width:290px;width:15.7%;margin:10px 0 10px 10px;}
 .home-center{flex:1;display:flex;flex-flow:column;min-width:500px;margin:10px;}
 .home-center-top{flex:1;display:flex;flex-flow:column;min-height:0;}
 .home-center-bottom{margin-top:10px;}
-.top-left-header{display:flex;font-size:18px;color:#fff;height:50px;margin-bottom: 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-items:center;background-color:#333232;justify-content:space-between;}
+.top-left-header{display:flex;font-size:18px;color:#333;height:50px;margin-bottom: 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-items:center;background-color:#fff;justify-content:space-between;}
 .top-left-header > ul{display:flex;align-items:center;height:100%;}
 .top-left-header-right{flex:1;justify-content:space-between;}
 /*.symbol-icon{background-color:#fff;width:32px;height:32px;border-radius:50%;color:#181b2a;display:flex;justify-content:center;align-items:center;font-size:26px;margin-right:10px;}*/
-.symbol-icon{width:32px;height:32px;margin-right:10px;border-radius:50%;}
+.symbol-icon{width:32px;height:32px;margin-right:10px;border-radius:50%; border: 1px solid #e2e2e2}
 .market-symbol{font-size:18px;}
 .last-item{display:flex;padding-right:10px;flex-flow:column;}
 .last-item:not(:first-child){margin-left:40px;justify-self:flex-end;}
 .top-left-header > ul:first-child .last-item:first-child{flex-flow:initial;margin-left:10px;font-weight:bold;align-items:center;font-size:20px;}
-.last-title{font-size:12px;color:#a1a8bb;}
-.last-price{font-size:16px;font-weight:bold;color:#cbd4ec;}
-.last-valuation-price{font-size:16px;font-weight:normal;color:#cbd4ec;}
-.last-number,.font-green{color:#0ee7a5;}
+.last-title{font-size:12px;color:#333;}
+.last-price{font-size:16px;font-weight:bold;color:#333;}
+.last-valuation-price{font-size:16px;font-weight:normal;color:#333;}
+.last-number,.font-green{color:#23CD09;}
 .last-number-down,.font-red{color:#ff7342;}
 .market-container{width:100%;display:flex;flex:1;min-height:0;overflow:hidden;}
 .top-right{height:100%;margin-right:10px;}
@@ -333,7 +333,7 @@ export default {
 .icon-introduction{width: 24px;height: 24px;margin-left: 4px;background: url(../assets/images/tips_icon.png) no-repeat center center / 18px 18px;cursor: pointer;}
 
 @media screen and (max-width: 1600px) and (max-height: 900px) {
-  .home{height:calc(100% - 54px)}
+  .home{height:calc(100% - 60px)}
   .top-left-header{height:40px;}
   .symbol-icon{width:26px;height:26px;font-size:22px;}
   .top-left-header > ul:first-child .last-item:first-child{font-size:16px;}

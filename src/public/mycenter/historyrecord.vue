@@ -2,7 +2,7 @@
     <div class="history-record">
         <div class="recharge">
             <h3>
-              <span>{{$t('account.user_center_history_deposit')}}<!--充值记录--></span>
+              {{$t('account.user_center_history_deposit')}}<!--充值记录-->
               <a href="javascript:;" @click="switch_tab('digassets')">{{$t('public0.public11')}}<!--返回--></a>
             </h3>
             <ul class="header" v-if="!rechargeLoading && rechargeHistory.length > 0">
@@ -34,7 +34,7 @@
             </div>
             <loading v-if="rechargeLoading"/>
         </div>
-        <div class="withdrawal">
+        <div class="recharge withdrawal">
             <h3>{{$t('account.user_center_history_withdrawal')}}<!--提现记录--></h3>
             <ul class="header" v-if="!withdrawalLoading && withdrawalHistory.length > 0">
               <li>
@@ -218,45 +218,31 @@ export default {
 </script>
 
 <style scoped>
-.recharge{background-color: #222121;}
-.recharge h3{position: relative;height: 24px;line-height: 24px;background-color: #333232;}
-.recharge h3 span{margin-left: 8px;font-weight: normal;font-size: 14px;color: #cbd4ec;}
-.recharge h3 a{position: absolute;top: 0;right: 8px;height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #fdb902;text-decoration: underline;}
-.recharge h3 a:hover{color: #fdb902;}
-.recharge ul{padding-left: 8px;padding-right: 8px;}
-.recharge ul.header{background:#dedede;}
-.recharge ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
+.recharge, .withdrawal{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.recharge h3, .withdrawal h3{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7; position: relative;}
+.recharge h3 a{position: absolute;top: 0;right: 25px;bottom: 0;font-weight: normal;font-size: 14px;line-height: 55px;color: #5A8DF2;}
+.recharge h3 a:hover{color: #1c55c5;}
+.recharge ul{padding-left: 20px;padding-right: 20px;}
+.recharge ul.header{background:#F5F5F5;}
+.recharge ul li{display: flex;justify-content: space-between;min-height: 40px;line-height: 40px;border-bottom: 1px solid #F0F0F0;}
 .recharge ul.header li{border-bottom:none;}
-.recharge ul li span{color: #8b94a9;}
+.recharge ul li span{color: #666;}
 .recharge ul li span.id{width: 170px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .recharge ul li span.currency{width: 80px;}
 .recharge ul li span.quantity{width: 160px;}
 .recharge ul li span.address{width: 190px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .recharge ul li span.progress{width: 120px;}
-.recharge ul li span.status{width: 100px;}
+.recharge ul li span.status{width: 80px;}
 .recharge ul li span.time{width: 140px;}
-.recharge ul li span.status.underway{color: #fdb902;}
-.recharge ul li span.status.success{color: #03c087;}
+.recharge ul li span.status.underway{color: #F49651;}
+.recharge ul li span.status.fail{color: #FF5F5F;}
+.recharge ul li span.status.success{color: #6FD477;}
 
-.withdrawal{margin-top: 8px;background-color: #222121;}
-.withdrawal h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.withdrawal ul{padding-left: 8px;padding-right: 8px;}
-.withdrawal ul.header{background:#dedede;}
-.withdrawal ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
-.withdrawal ul.header li{border-bottom:none;}
-.withdrawal ul li span{color: #8b94a9;}
-.withdrawal ul li span.id{width: 230px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
-.withdrawal ul li span.currency{width: 80px;}
-.withdrawal ul li span.quantity{width: 160px;}
-.withdrawal ul li span.address{width: 250px;padding-right: 12px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
-.withdrawal ul li span.status{width: 100px;}
-.withdrawal ul li span.time{width: 140px;}
-.withdrawal ul li span.status.underway{color: #fdb902;}
-.withdrawal ul li span.status.fail{color: #e76d42;}
-.withdrawal ul li span.status.success{color: #03c087;}
+.withdrawal{margin-top: 8px;}
+
 
 .nodata{text-align: center;background:#FFF;}
-.nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
-.nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
+.nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
+.nodata .nodata-text{height: 40px;line-height: 20px;color: #A1A1A1;}
 </style>
 
