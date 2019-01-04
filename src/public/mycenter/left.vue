@@ -41,11 +41,11 @@
                 <span>{{$t('business.MERCHANT_MANAGE')}}</span>
                 <!--商家管理-->
             </li>
-            <li @click="switch_like">
+            <!--我的推荐中心-->
+            <!-- <li @click="switch_like">
                 <i class="icon-like"></i>
                 <span>{{$t('message.my_referral_center')}}</span>
-                <!--我的推荐中心-->
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>
