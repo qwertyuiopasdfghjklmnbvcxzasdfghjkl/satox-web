@@ -108,7 +108,7 @@
                           <p v-if="mobileState == 1">
                             {{mobileFormData.phoneNumber}}
                           </p>
-                          <p v-if="mobileState == 0">
+                          <p v-if="mobileState == 0 && !readonly">
                               <span class="mobile">
                                 <select v-model="mobileFormData.countryCode">
                                   <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
