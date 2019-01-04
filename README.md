@@ -1,4 +1,4 @@
-# newton-web
+# CDCC-web
 
 > A Vue.js project
 

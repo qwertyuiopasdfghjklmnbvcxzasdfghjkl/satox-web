@@ -188,57 +188,59 @@ export default {
 <style scoped>
 .otccurreny /deep/ .filtrate,
 .otccurreny /deep/ .filtrate > div{display: flex;align-items: center;}
-.otccurreny /deep/ .filtrate{height: 54px;background-color: #FFF;}
+.otccurreny /deep/ .filtrate{height: 54px;background-color: #FFF; margin-left: 40px; margin-right: 40px;}
 .otccurreny /deep/ .filtrate > div{margin-right: 14px;}
 .otccurreny /deep/ .filtrate .operation{margin-right: 0;cursor: pointer;}
 .otccurreny /deep/ .filtrate .allrepeal,
 .otccurreny /deep/ .filtrate .export{margin-left: auto;}
-.otccurreny /deep/ .filtrate label{font-size: 12px;color: #261003;}
-.otccurreny /deep/ .filtrate input{height: 22px;font: 12px/normal "Microsoft YaHei";color: #becbe8;background-color: transparent;border: 1px solid #777f96;}
+.otccurreny /deep/ .filtrate label{font-size: 14px;color: #333;}
+.otccurreny /deep/ .filtrate input{height: 22px;font: 12px/normal "Microsoft YaHei";color: #666;border: 1px solid #5699FF; border-radius: 3px;}
 .otccurreny /deep/ .filtrate .joint{width: 12px;font-size: 12px;color: #becbe8;text-align: center;}
-.otccurreny /deep/ .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #becbe8;background: url(../../../assets/images/icon_arrowdown.png) #261003 no-repeat right 4px center;border: 1px solid #777f96;cursor: pointer;}
+.otccurreny /deep/ .filtrate select{width: 100px;height: 24px;padding-left: 4px;padding-right: 20px;font-size: 12px;color: #666;background: url(../../../assets/images/icon_arrowdown.png) no-repeat right 4px center;border: 1px solid #5699FF;cursor: pointer; border-radius: 3px;}
 .otccurreny /deep/ .filtrate button{float: left;min-width: 38px;height: 24px;font-size: 12px;background-color: transparent;cursor: pointer;}
-.otccurreny /deep/ .filtrate .time input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png) #261003 no-repeat right 4px center;cursor: pointer;}
-.otccurreny /deep/ .filtrate .market input{width: 50px;border: 1px solid #777f96;}
-.otccurreny /deep/ .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #fdb902;}
-.otccurreny /deep/ .filtrate .button .search:hover{background-color: #fdb902;}
-.otccurreny /deep/ .filtrate .button .reset{color: #fdb902;border: 1px solid #fdb902;}
-.otccurreny /deep/ .filtrate .button .reset:hover{color: #fdb902;border-color: #fdb902;}
+.otccurreny /deep/ .filtrate .time /deep/ input{width: 100px;padding-right: 24px;background: url(../../../assets/images/icon_calendar.png)  no-repeat right 4px center;cursor: pointer;}
+.otccurreny /deep/ .filtrate .market input{width: 50px;}
+.otccurreny /deep/ .filtrate .button button {min-width: 60px; border-radius: 3px;}
+.otccurreny /deep/ .filtrate .button .search{margin-right: 14px;color: #fff;background-color: #3283FF;}
+.otccurreny /deep/ .filtrate .button .search:hover{background-color: #1a64d4;}
+.otccurreny /deep/ .filtrate .button .reset{color: #999;border: 1px solid #ccc;}
+.otccurreny /deep/ .filtrate .button .reset:hover{color: #666;border-color: #bbb;}
 .otccurreny /deep/ .filtrate .operation a,
-.otccurreny /deep/ .filtrate .operation i{font-size: 12px;color: #fdb902;}
+.otccurreny /deep/ .filtrate .operation i{font-size: 12px;color: #3283FF;}
 .otccurreny /deep/ .filtrate .operation i{padding-left: 8px;margin-top: 1px;}
 .otccurreny /deep/ .filtrate .allrepeal i,
 .otccurreny /deep/ .filtrate .export i{font-size: 14px;}
 .otccurreny /deep/ .filtrate .operation:hover a,
-.otccurreny /deep/ .filtrate .operation:hover i{color: #fdb902;}
-.otccurreny /deep/ .filtrate .operation:hover i{color: #fdb902;}
+.otccurreny /deep/ .filtrate .operation:hover i{color: #1a64d4;}
+.otccurreny /deep/ .filtrate .hide a,.otccurreny /deep/ .filtrate .hide:hover a{color:#333;}
 .otccurreny /deep/ .filtrate .disabled a,
 .otccurreny /deep/ .filtrate .disabled i{color: #999;cursor: not-allowed;}
 .otccurreny /deep/ .filtrate .disabled:hover a,
 .otccurreny /deep/ .filtrate .disabled:hover i{color: #999;}
 
-.otccurreny /deep/ h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
+.otccurreny /deep/ h3{height: 35px;font-weight: normal;font-size: 14px;line-height: 35px;color: #333;padding: 0 20px; border-top: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7;}
 
-.otccurreny /deep/ .record{background-color: #222121;}
-.otccurreny /deep/ .record ul{padding-left: 8px;padding-right: 8px;}
-.otccurreny /deep/ .record ul.header{background:#dedede;}
-.otccurreny /deep/ .record ul li{border-bottom: 1px solid #404b69;}
+.otccurreny /deep/ .record{background-color: #fff;}
+.otccurreny /deep/ .record ul{padding-left: 20px;padding-right: 20px;}
+.otccurreny /deep/ .record ul.header{background:#F5F5F5;}
+.otccurreny /deep/ .record ul li{border-bottom: 1px solid #eee;}
 .otccurreny /deep/ .record ul.header li{border-bottom:none;}
-.otccurreny /deep/ .record ul li span{display: inline-block;height: 32px;line-height: 32px;font-size: 12px;color: #8b94a9;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
+.otccurreny /deep/ .record ul li span{display: inline-block;height: 40px;line-height: 40px;font-size: 12px;color: #555;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
+
 .otccurreny /deep/ .record ul li span.number{width: 160px;}
-.otccurreny /deep/ .record ul li span.type{width: 60px;}
+.otccurreny /deep/ .record ul li span.type{width: 50px;}
 .otccurreny /deep/ .record ul li span.status{width: 80px;}
-.otccurreny /deep/ .record ul li span.currency{width: 60px;}
+.otccurreny /deep/ .record ul li span.currency{width: 50px;}
 .otccurreny /deep/ .record ul li span.price{width: 120px;}
 .otccurreny /deep/ .record ul li span.volume{width: 120px;}
 .otccurreny /deep/ .record ul li span.sum{width: 120px;}
 .otccurreny /deep/ .record ul li span.charge{width: 100px;}
 .otccurreny /deep/ .record ul li span.ordersTime{width: 120px;}
-.otccurreny /deep/ .record ul li.list span.buy{color: #03c087;}
-.otccurreny /deep/ .record ul li.list span.sell{color: #e76d42;}
+.otccurreny /deep/ .record ul li.list span.buy{color: #23CD09;}
+.otccurreny /deep/ .record ul li.list span.sell{color: #F34246;}
 
 .otccurreny /deep/ .record .nodata{text-align: center;}
-.otccurreny /deep/ .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
-.otccurreny /deep/ .record .nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
+.otccurreny /deep/ .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
+.otccurreny /deep/ .record .nodata .nodata-text{height: 40px;line-height: 20px;color: #A1A1A1;}
 </style>
 

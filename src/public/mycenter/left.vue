@@ -31,11 +31,21 @@
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
             </li>
-            <li @click="switch_like">
+            <li :class="{'active': active === 'agencyApply'}" @click="switch_tab('agencyApply')">
+                <i class="icon-shield"></i>
+                <span>{{$t('business.MERCHANT_APPLICATION')}}</span>
+                <!--商家申请-->
+            </li>
+            <li :class="{'active': active === 'agency'}" @click="switch_tab('agency')">
+                <i class="icon-shop"></i>
+                <span>{{$t('business.MERCHANT_MANAGE')}}</span>
+                <!--商家管理-->
+            </li>
+            <!--我的推荐中心-->
+            <!-- <li @click="switch_like">
                 <i class="icon-like"></i>
                 <span>{{$t('message.my_referral_center')}}</span>
-                <!--我的推荐中心-->
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>
@@ -60,18 +70,17 @@ export default {
 
 <style scoped>
 .myassets-left{float: left;width: 192px;}
-.myassets-left ul{background-color: #333232;}
+.myassets-left ul{background-color: #fff; box-shadow: 0 1px 3px #e2e2e2; border-radius: 4px; overflow: hidden;}
 .myassets-left ul li{
-    padding-left: 20px;margin-top: 1px;font-size: 0;line-height: 0;color: #cbd4ec;text-align: left;
-    background-color: #222121;border-left: 5px solid #333232;cursor: pointer;
+    padding-left: 20px;padding-right: 20px;margin-top: 1px;font-size: 0;line-height: 0;color: #666;text-align: left;cursor: pointer;     text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
 }
 .myassets-left ul li:first-of-type{margin-top: 0;}
 .myassets-left ul li:hover,
-.myassets-left ul li.active{color: #fdb902;border-left-color: #fdb902;}
+.myassets-left ul li.active{color: #fff; background-color: #0D66EF;}
 .myassets-left ul li i,
 .myassets-left ul li span{display: inline-block;vertical-align: middle;}
-.myassets-left ul li i{font-size: 16px;}
-.myassets-left ul li span{height: 50px;line-height: 50px;font-size: 14px;text-indent: 10px;}
-.myassets-left ul li i.icon-like:before{color: #cbd4ec}
-.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #fdb902;border-left-color: #fdb902;}
+.myassets-left ul li i{font-size: 20px;}
+.myassets-left ul li span{height: 50px;line-height: 50px;font-size: 16px;text-indent: 10px;}
+.myassets-left ul li i.icon-like:before{color: #666}
+.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #fff;}
 </style>

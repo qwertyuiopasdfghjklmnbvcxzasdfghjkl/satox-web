@@ -5,7 +5,7 @@
         <div class="info" :class="{active:!vsloaded}">
           <div class="info-pic">
             <div class="image">
-              <img :src="avatarUrl"/>
+              <img :src="avatarUrl" @error="setDefaultAvatar($event)" />
             </div>
             <form ref="form" v-if="!isExistUserAvatar">
               <input class="file" type="file" @change="uploadImage" name="source" title=" "/>
@@ -41,8 +41,8 @@
             </p>
             <p class="sale" v-if="false">
               <span>
-                {{$t('account.user_center_pay_fees').format('NEWTON', '50%')}}<!--使用NEWTON支付交易手续费（50% 折扣）-->
-                <a class="icon-checkbox" href="javascript:;" :class="isUseNewtonPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
+                {{$t('account.user_center_pay_fees').format('CDCC', '50%')}}<!--使用CDCC支付交易手续费（50% 折扣）-->
+                <a class="icon-checkbox" href="javascript:;" :class="isUseCDCCPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
               </span>
             </p>
             <p class="limit">
@@ -136,7 +136,7 @@ export default {
         verifyState: 0,
         verifyTimes: 0
       },
-      isUseNewtonPay: false,
+      isUseCDCCPay: false,
       distributeHistory: [], // 分发记录
       distributeParam: {
         page: 1, // 当前页
@@ -160,7 +160,7 @@ export default {
       return this.userState.nickname
     },
     contactHtml () {
-      let alink = `<a href="${this.getLang === 'en' ? 'https://newtonexchange.zendesk.com/hc/en-us/requests/new' : 'https://newtonexchange.zendesk.com/hc/zh-cn/requests/new'}" target="_blank">${this.$t('public0.public241')}</a>`
+      let alink = `<a href="${this.getLang === 'en' ? 'https://CDCCexchange.zendesk.com/hc/en-us/requests/new' : 'https://CDCCexchange.zendesk.com/hc/zh-cn/requests/new'}" target="_blank">${this.$t('public0.public241')}</a>`
       return `（${this.$t('account.user_prompt5').format(alink)}）`
     }
   },
@@ -176,6 +176,10 @@ export default {
     this.fnLoginHistory()
   },
   methods: {
+    setDefaultAvatar(e){ //图片加载失败用默认头像
+      let tar = e.currentTarget
+      tar.src = avatar
+    },
     switchTab (tab) {
       this.$emit('switchTab', tab)
     },
@@ -214,7 +218,7 @@ export default {
           verifyState: data.verifyState,
           verifyTimes: data.verifyTimes
         }
-        this.isUseNewtonPay = data.coinState === 1
+        this.isUseCDCCPay = data.coinState === 1
         this.vsloaded = true
       }, (msg) => {
         console.error(msg)
@@ -236,9 +240,9 @@ export default {
       }
     },
     switchCoinState () {
-      // 切换使用Newton支付交易手续费（50% 折扣）
-      userUtils.switchNewtonChargeState((msg) => {
-        this.isUseNewtonPay = !this.isUseNewtonPay
+      // 切换使用CDCC支付交易手续费（50% 折扣）
+      userUtils.switchCDCCChargeState((msg) => {
+        this.isUseCDCCPay = !this.isUseCDCCPay
       }, (msg) => {
         console.error(msg)
       })
@@ -283,8 +287,8 @@ export default {
 </script>
 
 <style scoped>
-.mycenter h3{height: 24px;font-weight: normal;font-size: 14px;line-height: 24px;color: #cbd4ec;text-indent: 8px;background-color: #333232;}
-.mycenter .top{background-color: #FFF;}
+.mycenter h3{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7;}
+.mycenter .top{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
 .mycenter .top .info{display: flex;height: 150px;padding-top: 30px; position: relative;}
 .mycenter .top .info.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
 .mycenter .top .info .info-pic{position: relative;}
@@ -293,45 +297,45 @@ export default {
 .mycenter .top .info .info-pic .tips{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
 .mycenter .top .info .info-pic .tips:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .mycenter .top .info .info-pic .file:hover + .tips{display: block;}
-.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 1px solid #fdb902;border-radius: 50%;overflow: hidden;}
+.mycenter .top .info .info-pic .image{width: 68px;height: 68px;margin-top: 4px;margin-left: 30px;border: 2px solid #348EFB;border-radius: 50%;overflow: hidden;}
 .mycenter .top .info .info-pic .image img{width: 100%;height: 100%;}
 .mycenter .top .info .info-message{margin-left: 30px;}
-.mycenter .top .info .info-message p{height: 26px;line-height: 26px;color: #261003;}
-.mycenter .top .info .info-message span{color: #261003;}
+.mycenter .top .info .info-message p{height: 26px;line-height: 26px;color: #333;}
+.mycenter .top .info .info-message span{color: #333;}
 .mycenter .top .info .info-message span.attestation-state{display: inline-block;height: 24px;padding-left: 8px;padding-right: 8px;margin-top: 1px;margin-left: 8px;line-height: 24px;color: #fff;vertical-align: top;border-radius: 4px;}
 .mycenter .top .info .info-message span.entrance{background: url(../../assets/images/btn-bg-blue.png) repeat-x left center;cursor: pointer;}
 .mycenter .top .info .info-message span.entrance:hover{background-image: url(../../assets/images/btn-bg-blue-highlight.png);}
-.mycenter .top .info .info-message span.wait{background-color: #fdb902;}
-.mycenter .top .info .info-message span.success{background-color: #fdb902;color:#261003;}
-.mycenter .top .info .info-message span.fail{background-color: #e76d42;}
-.mycenter .top .info .info-message span.nickname-modify{color: #fdb902;cursor: pointer;}
-.mycenter .top .info .info-message span.nickname-modify:hover{color: #fdb902;}
-.mycenter .top .info .info-message span a{color: #fdb902;vertical-align: -1px;}
-.mycenter .top .info .info-message label /deep/ a{color: #fdb902;text-decoration: underline;}
+.mycenter .top .info .info-message span.wait{background-color: #3283FF;}
+.mycenter .top .info .info-message span.success{background-color: #24C08A;}
+.mycenter .top .info .info-message span.fail{background-color: #F34246;}
+.mycenter .top .info .info-message span.nickname-modify{color: #3283FF;cursor: pointer;}
+.mycenter .top .info .info-message span.nickname-modify:hover{color: #3283FF;}
+.mycenter .top .info .info-message span a{color: #3283FF;vertical-align: -1px;}
+.mycenter .top .info .info-message label /deep/ a{color: #3283FF;text-decoration: underline;}
 .mycenter .top .info .info-message span a:hover,
-.mycenter .top .info .info-message label /deep/ a:hover{color: #fdb902;}
+.mycenter .top .info .info-message label /deep/ a:hover{color: #3283FF;}
 
-.distribution{margin-top: 8px;background-color: #222121;}
-.distribution ul{padding-left: 8px;padding-right: 8px;}
-.distribution ul.header{background:#dedede;}
-.distribution ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
+.distribution{margin-top: 10px;background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.distribution ul{padding-left: 20px;padding-right: 20px;}
+.distribution ul.header li span {color: #A1A1A1;}
+.distribution ul li{display: flex;justify-content: space-between;min-height: 40px;line-height: 40px;border-bottom: 1px solid #e7e7e7;}
 .distribution ul.header li{border-bottom:none;}
-.distribution ul li span{color: #8b94a9;}
+.distribution ul li span{color: #333;}
 .distribution ul li span.time{width:160px;}
 .distribution ul li span.species{width: 100px;}
 .distribution ul li span.number{width: 160px;}
 .distribution ul li span.remark{width: 180px;}
 
-.dist-record{margin-top: 8px;background-color: #181b2a;}
-.dist-record ul{padding-bottom: 30px;padding-left: 8px;padding-right: 8px;}
-.dist-record ul li{display: flex;justify-content: space-between;min-height: 30px;line-height: 30px;border-bottom: 1px solid #404b69;}
-.dist-record ul li span{color: #8b94a9;}
+.dist-record{margin-top: 10px;background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.dist-record ul{padding-bottom: 30px;padding-left: 20px;padding-right: 20px;}
+.dist-record ul li{display: flex;justify-content: space-between;min-height: 40px;line-height: 40px;border-bottom: 1px solid #e7e7e7;}
+.dist-record ul li span{color: #333;}
 .dist-record ul li span.time{width: 160px;}
 .dist-record ul li span.ip{width: 120px;}
 .dist-record ul li span.adress{width: 280px;text-align: right;}
 
 .nodata{text-align: center;}
 .nodata .nodata-icon{height: 80px;font-size: 40px;line-height: 80px;color: #8b94a9;}
-.nodata .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
+.nodata .nodata-text{height: 40px;line-height: 20px;color: #A1A1A1;}
 </style>
 

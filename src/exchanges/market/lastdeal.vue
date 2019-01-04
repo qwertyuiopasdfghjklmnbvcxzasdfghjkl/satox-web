@@ -138,13 +138,11 @@ export default {
 .list::-webkit-scrollbar{width:17px;}
 .list-header-item,
 .list-item{height:20px;line-height:20px;display:flex;font-size:12px;}
-.list-header-item{color:#333;}
-.list-item{color:#333;cursor:default;}
-.price.bid{color:#e76d42;}
-.price.ask{color:#03c087;}
-.list-item:hover{background-color:#FFF;font-weight:bold;color:#333;}
-.list-item:hover .price.bid{color:#ff7342;}
-.list-item:hover .price.ask{color:#0ee7a5;}
+.list-header-item{color:#A1A1A1;}
+.list-item{color:#4A4A4A;cursor:default;}
+.price.bid{color:#F34246;}
+.price.ask{color:#23CD09;}
+.list-item:hover{font-weight:bold;color:#333;}
 .list-col{flex: 1 1 auto;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
 .time{text-align:left;padding:0 10px 0 10px;width:110px;}
 .price{width:110px;padding-right:10px;text-align:center;}

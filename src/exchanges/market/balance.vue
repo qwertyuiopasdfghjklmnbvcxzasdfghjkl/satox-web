@@ -247,21 +247,21 @@ export default {
 
 <style scoped>
 .balance{height: 150px;}
-.title{height: 36px;line-height: 36px;color: #cbd4ec;font-size: 16px;}
+.title{height: 36px;line-height: 36px;color: #333;font-size: 16px;}
 .list{height: 94px;overflow-x: hidden;overflow-y: auto;}
 .list-header-item,
 .list-item{display: flex;font-size: 12px;line-height: 20px;}
-.list-header-item{color: #a1a8bb;}
-.list-item{color: #cbd4ec;}
-.list-item:hover{background-color: #333232;}
+.list-header-item{color: #A1A1A1;}
+.list-item{color: #333;}
+.list-item:hover{background-color: #e7e7e7;}
 .list-col{flex: 1 1 auto;padding-right: 10px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .col-currency{width: 140px;}
 .col-sum,
 .col-balance,
 .col-fsum{width: 240px;text-align: right;}
 .col-operate{width: 240px;text-align: right;}
-.col-operate a{margin-left: 10px;font-size: 12px;color: #FFDE00;}
-.col-operate a:hover{color: #FFDE00;}
+.col-operate a{margin-left: 10px;font-size: 12px;color: #3A76E7;}
+.col-operate a:hover{color: #3A76E7;}
 .col-operate a.disabled{color: #ababab;cursor: not-allowed;}
 .col-operate a.disabled:hover{color: #ababab;}
 @media screen and (max-width: 1600px) and (max-height: 900px) {

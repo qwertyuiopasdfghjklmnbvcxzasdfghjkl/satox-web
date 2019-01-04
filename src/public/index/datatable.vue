@@ -1,20 +1,18 @@
 <template>
   <div class="symbol-list">
+    <div class="holdplace"></div>
     <section class="wrap">
       <section class="xmain beijing002-content">
         <div class="layui-tab layui-tab-card">
           <ul class="layui-tab-title">
             <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item" :key="item" >{{item}}</li>
-            <li><input v-model="filterValue" /></li>
-            <li class="last-li" :title="valumeTip">Volume:
-              <div class="last-li-volume">
-                {{valumeTip}}
-              </div>
-              <span class="last-span" style="position:relative;padding-right:34px;">
+            <li class="volume" :title="valumeTip" v-html="'Volume:&nbsp;&nbsp;'+valumeTip">
+              <!-- <span class="last-span" style="position:relative;padding-right:34px;">
                 <i>{{$t('home.home_connected')}}</i>
                 <em class="network-signal" :class="['signal-' + getNetworkSignal]"></em>
-              </span><!--是否连接-->
+              </span> --><!--是否连接-->
             </li>
+            <li><input v-model="filterValue" :placeholder="$t('public0.public284')" /></li>
           </ul>
           <div class="layui-tab-content">
             <!--2、btc市场、eth市场-->
@@ -106,7 +104,7 @@
         </div>
       </section>
     </section>
-
+    <div class="holdplace"></div>
   </div>
 </template>
 <script>
@@ -273,7 +271,7 @@
       },
       markets () {
         // 收藏
-        return [this.$t('exchange.exchange_collection'), 'BTC', 'ETH', 'ATN', 'USDT', 'MECoin']
+        return ['BTC', 'ETH', 'CDCC', 'USDT', this.$t('public0.public283')]
       },
       /* 选中数据的集合 */
       mytotalList: function () {
@@ -283,7 +281,7 @@
       valumeTip () {
         let valumes = []
         this.symbolVolumes.forEach((item) => {
-          valumes.push(` ${Math.ceil(item.volumes)} ${item.symbol}`)
+          valumes.push(` ${Math.ceil(item.volumes)} ${item.symbol}&nbsp;&nbsp;`)
         })
         return valumes.join('')
       }
@@ -306,8 +304,9 @@
   }
 </script>
 <style scoped>
-.symbol-list{min-height: 530px;background: #100E0E;display:flex;margin-bottom:20px;flex:1;height:fit-content;}
-.wrap{width: 100%; background: #100E0E;}
+.symbol-list{min-height: 530px;background: #fff;margin-bottom:20px;height:fit-content; min-width:1190px;}
+.wrap { min-width:1190px; max-width:1360px; margin: 0 auto;}
+.holdplace {height: 50px;}
 .icondown{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-up.png") no-repeat -4px -3px}
 .iconup{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-down.png") no-repeat -4px -3px}
 .idefault{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/moren.png") no-repeat -4px -3px}
@@ -323,23 +322,20 @@
 
 .slider-nav{position: absolute; bottom: 22px; left: 45%;}
 .slider-nav ul{width: 170px; margin: 0 auto;}
+.slider-nav ul::after {content: ''; display: block; clear: both;}
 .slider-nav ul li{width: 35px; display: inline-block;}
 .slider-nav ul li span{width: 30px; height: 4px; background: #47577f; display: inline-block; border-radius: 2px;}
 .slider-nav ul li span.slider-this{background: #48bcff;}
 .layui-tab{margin: 0 0; text-align: left!important;}
-.layui-tab-title{border-color: #e6e6e6; position: relative; left: 0; height: 40px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
-.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 14px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 40px; min-width: 65px; padding: 0 10px; text-align: center; cursor: pointer; color: #FFF;}
-.layui-tab-title li:nth-child(-n+6){border: 1px solid #8f9090; border-bottom: 0; transition: all .2s; -webkit-transition: all .2s;border-right: 0;}
-.layui-tab-title li:nth-child(-n+5){border-right: 0; transition: all .2s; -webkit-transition: all .2s;}
-.layui-tab-title li.hover:hover{color: #becbe8;}
-.layui-tab-title li:nth-child(7){text-align: left;border: 0;border-left: 1px solid #8f9090;}
-.layui-tab-title li.layuithis{border-bottom-color: #FFF; background-color: #FFF;color:#becbe8!important;}
-.layui-tab-title li:nth-child(7)>input{width:120px;color: #becbe8;background-color: #ffffff00; border: 1px solid #8f9090; line-height: 35px; height: 25px; padding-left: 8px; background: url("../../assets/images/chazao.png") no-repeat 104px center;}
-.layui-tab-title li:nth-child(n+8){padding: 0;}
-.layui-tab-title li:nth-child(n+8)>span{color: #becbe8;}
-.layui-tab-title li.last-li{float: right;color:#FFFFFF;}
-.layui-tab-title li.last-li div{display:inline-block;max-width:360px;overflow:hidden;white-space:nowrap;vertical-align:middle;text-overflow:ellipsis;}
-.layui-tab-title li.last-li span{color:#FFFFFF;}
+.layui-tab-title{ position: relative; left: 0; height: 54px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
+.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 16px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 54px; min-width: 140px; padding: 0 10px; text-align: center; cursor: pointer; color: #5a5a5a; box-sizing: border-box;}
+.layui-tab-title li.hover {background-color: #f5f5f5;}
+.layui-tab-title li.hover:hover{color: #467daa;}
+.layui-tab-title li:last-child{float: right; padding-right: 0;}
+.layui-tab-title li.volume{margin-left: 45px;}
+.layui-tab-title li.layuithis{background-color: #FFF; color:#467daa!important;}
+.layui-tab-title li.layuithis::before {content: '';position: absolute;left: 0;right: 0;top: 0; height: 4px; background-color: #467dda;}
+.layui-tab-title li:last-child>input{width:220px; color: #5a5a5a;  border: 1px solid #8f9090; line-height: 40px; height: 38px; padding-left: 8px; background: url("../../assets/images/chazao.png") no-repeat 190px center; box-sizing: border-box;}
 
 table{border-collapse: collapse; border-spacing: 0;}
 .layui-table{width: 100%;color: #586687;}
@@ -349,18 +345,15 @@ table{border-collapse: collapse; border-spacing: 0;}
 .layui-table th em i{position:absolute;top:0px;}
 .layui-table th em i.icon-arrow-down{top:10px;}
 .layui-table th em i.active{color:#FFDE00;}
-.layui-table tbody tr:hover{background-color: #202226;}
-.layui-table tbody tr:hover .font-white{color:#becbe8;}
+.layui-table tbody tr:hover{background-color: #ddd;}
+.layui-table tbody tr:hover .font-white{color:#467dda;}
 .layui-table[lay-skin=nob] td,
 .layui-table[lay-skin=nob] th{border: none;}
 .layui-table td,
-.layui-table th{margin: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); position: relative; padding: 9px 15px; min-height: 20px; line-height: 20px; font-size: 14px; border-width: 1px; border-style: solid; border-color: #404b69;}
-.layui-table[lay-skin=line]{border-width: 1px; border-style: solid; border-color: #404b69;background:#FFF;}
+.layui-table th{margin: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); position: relative; padding: 0 15px; height: 45px; line-height: 45px; font-size: 14px; border-width: 1px; border-style: solid; border-color: #CCCCCC; }
+.layui-table[lay-skin=line]{border-width: 1px; border-style: solid; border-color: #CCCCCC;background:#FFF;}
 .layui-table[lay-skin=line] td,
 .layui-table[lay-skin=line] th{border-width: 0 0 1px;}
-.layui-table[lay-size=sm] td,
-.layui-table[lay-size=sm] th{font-size: 12px; padding: 5px 10px;}
-.xmain{margin: 0 auto; width: 1200px;}
 
 /*网络信号*/
 .network-signal{border-right:4px solid #03c087;height:20px;display:flex;flex:initial;position:absolute;right:10px;top:calc(50% - 14px);align-items:flex-end;}

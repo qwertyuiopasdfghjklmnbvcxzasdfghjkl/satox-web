@@ -1,7 +1,7 @@
 <template>
   <div class="message">
     <h3 class="message-title">
-      <span>{{$t('message.my_message')}}<!--我的站内消息--></span>
+      {{$t('message.my_message')}}<!--我的站内消息-->
       <select v-model="formData.timeRange">
         <option v-for="(item, index) in timeRangeList" :value="item.value" :key="index">{{$t(item.text)}}</option>
       </select>
@@ -141,26 +141,24 @@ export default {
 </script>
 
 <style scoped>
-.message{background-color: #222121;}
-.message-title{display: flex;justify-content: space-between;align-items: center;height: 24px;padding-left: 8px;padding-right: 8px;background-color: #333232;}
-.message-title span{font-weight: bold;font-size: 14px;color: #becbe8;}
-.message-title select{height: 18px;padding-left: 12px;padding-right: 20px;margin-left: 20px;margin-right: auto;font: 12px/normal "Microsoft YaHei";color: #8b94a9;background-position: right 4px center;border: 1px solid #8b94a9;cursor: pointer;}
-.message-title a{font-weight: normal;font-size: 12px;color: #fdb902;}
-.message-title a:hover{color: #fdb902;}
+.message{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2; overflow: hidden;}
+.message-title{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7; position: relative;}
+.message-title select{height: 18px;padding-left: 12px;padding-right: 20px;margin-left: 20px;margin-right: auto;font: 14px/normal "Microsoft YaHei";color: #578AF2;background-position: right 4px center;cursor: pointer; background-image: url('../../assets/images/arrow-down-blue.png');}
+.message-title a{position: absolute; right: 20px; font-weight: normal;font-size: 14px;color: #578AF2;}
+.message-title a:hover{color: #0D66EF;}
 .message-title a.disabled{color: #999;cursor: not-allowed;}
 .message-title a.disabled:hover{color: #999;}
-.message-list{padding-left: 8px;padding-right: 8px;}
-.message-item{padding-top: 20px;}
-.message-item-title{display: flex;justify-content: space-between;align-items: center;height: 28px;border-bottom: 1px solid #404b69;cursor: pointer;}
-.message-item-title .main{max-width: 800px;height: 28px;line-height: 28px;font-weight: bold;color: #becbe8;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
-.message-item-title .main::before{content: "";float: left;width: 8px;height: 8px;margin: 10px 12px 10px 2px;background-color: #becbe8;border-radius: 50%;}
-.message-item.markread .message-item-title .main{font-weight: normal;color: #8b94a9;}
-.message-item.markread .message-item-title .main::before{background-color: #8b94a9;}
+.message-list{padding-left: 20px;padding-right: 20px;}
+.message-item{min-height: 45px; line-height: 45px;}
+.message-item-title{display: flex;justify-content: space-between;align-items: center;cursor: pointer; border-bottom: 1px solid #eee;}
+.message-item-title .main{max-width: 800px;font-weight: bold;color: #333;white-space: nowrap;text-overflow: ellipsis;overflow: hidden; position: relative; padding-left: 15px;}
+.message-item-title .main::before{content: "";position: absolute; left: 0; top: 50%; margin-top: -4px; width: 8px;height: 8px;margin-right: 15px; background-color: #3283FF;border-radius: 50%;}
+.message-item.markread .message-item-title .main{font-weight: normal;color: #666;}
+.message-item.markread .message-item-title .main::before{background-color: #3283FF;}
 .message-item-title .main em{padding-left: 4px; padding-right: 4px;}
-.message-item-title .time{font-size: 12px;color: #8b94a9;}
-.message-item-cont{padding: 8px 6px 0 6px;}
-.message-item-cont .inner{padding: 12px 16px;line-height: 20px;font-size: 12px;color: #becbe8;word-wrap: break-word;background-color: #333232;}
+.message-item-title .time{font-size: 12px;color: #999;}
+.message-item-cont .inner{padding: 12px 16px;line-height: 20px;font-size: 12px;color: #555;word-wrap: break-word;background-color: #F5F5F5;}
 .message-nodata{text-align: center;background:#FFF;}
-.message-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
+.message-nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
 .message-nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>

@@ -142,6 +142,7 @@ export default {
 </script>
 <style scoped>
 .otchome{width: 1200px;padding-top: 8px;padding-bottom: 60px;margin: 0 auto;}
+.otchome::before {content: ''; position: fixed; left: 0; top: 0; right: 0; bottom: 0; background-color: #F2F3F8; z-index: -1;}
 .home-bottom{display: flex;justify-content: space-between;margin-bottom: 8px;}
 .home-bottom-left{width:300px;}
 .home-bottom-right{width:892px;display:flex;flex:1;margin-left:8px;}

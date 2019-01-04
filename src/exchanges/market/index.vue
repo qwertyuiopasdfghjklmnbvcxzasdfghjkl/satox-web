@@ -321,9 +321,18 @@ export default {
         scale: 3,
         fixedNumber: 8,
         ThemeColor: {
-          Background: '#333232',
-          Grid0: '#54616c',
-          Grid1: '#54616c'
+          Positive: '#11BA80',
+          TextPositive: '#11BA80',
+          Negative: '#F04A4D',
+          TextNegative: '#F04A4D',
+          Background: '#FFFFFF',
+          Grid0: '#F0F0F0',
+          Grid1: '#F0F0F0',
+          Text2: '#666666',
+          Text3: '#666666',
+          Text4: '#666666',
+          Indicator1: '#f48745',
+          RangeMark: '#f48745'
         },
         onToolCallback: () => {
           this.drawtoolsActive = 'CrossCursor'
@@ -336,8 +345,15 @@ export default {
 
       // 深度图
       this.depthChart = DepthChart({
-        gridLineColor: '#54616c',
-        tpFillStyle: '#333232',
+        riseColor: '#11BA80',
+        fallColor: '#F04A4D',
+        fontColor: '#666',
+        gridLineColor: '#F0F0F0',
+        middleLineColor: '#CCC',
+        tpFillStyle: '#F0F0F0',
+        tpStrokeStyle: '#CCC',
+        tpTextColor: '#333',
+        tpTextPriceColor: '#333',
         container: this.$refs.depth
       })
     })
@@ -399,7 +415,7 @@ export default {
 </script>
 
 <style scoped>
-.market{display:flex;flex:1;justify-content:center;align-items:center;width:100%;background:#333232;position:relative;}
+.market{display:flex;flex:1;justify-content:center;align-items:center;width:100%;background:#fff;position:relative;}
 .market.marketfull{position:absolute;width:100%;height:100vh;z-index:9999;top:0;left:0;}
 .left{width:44px;height:100%;margin-right:6px;overflow:hidden;}
 .right{display:flex;flex-flow:column;flex:1;height:100%;}
@@ -407,29 +423,29 @@ export default {
 .tools{width:100%;height:36px;display:flex;align-items:center;font-size:18px;}
 .menus{display:flex;}
 .dropdown{
-  min-width:60px;line-height:24px;height:24px;border:1px solid #636e87;margin-right:4px;background:transparent;font-size:14px;
+  min-width:60px;line-height:24px;height:24px;border:1px solid #EEE;margin-right:4px;background:transparent;font-size:14px;
   display:flex;text-align:center;position:relative;text-transform:none;cursor:pointer;
 }
-.dropdown-txt{width:calc(100% - 14px);color:#d6dff9;border-right:1px solid #636e87;padding:0 4px;}
+.dropdown-txt{width:calc(100% - 14px);color:#999;border-right:1px solid #EEE;padding:0 4px;}
 .dropdown-icon{
-  width:13px;display:flex;justify-content:center;align-items:center;
-  color:#d6dff9;font-size:12px;transition:transform .35s ease;-webkit-transition:transform .35s ease;
+  width:20px;display:flex;justify-content:center;align-items:center; background-color: #CCC;
+  color:#fff;font-size:12px;transition:transform .35s ease;-webkit-transition:transform .35s ease;
 }
 .dropdown-icon-active{
    transform:rotate(-180deg);-ms-transform:rotate(-180deg);-moz-transform:rotate(-180deg);
    -webkit-transform:rotate(-180deg);-o-transform:rotate(-180deg);
 }
 .dropdown-list{
-  position:absolute;z-index:10;top:26px;left:-1px;background:#333232;width:150px;border:1px solid #636e87;
+  position:absolute;z-index:10;top:26px;left:-1px;background:#fff;width:150px;border:1px solid #EEE;
   display:flex;flex-flow:column;
 }
 .dropdown-item{
-  width:100%;height:24px;line-height:24px;text-align:left;text-indent:10px;text-transform:none;color:#d6dff9;
+  width:100%;height:24px;line-height:24px;text-align:left;text-indent:10px;text-transform:none;color:#999;
 }
-.dropdown-item.selected,.dropdown-item:hover{background:#222121;}
-.fullscreen{display:flex;justify-content:center;align-items:center;cursor:pointer;color:#d6dff9;background:transparent;width:24px;height:24px;border:1px solid #636e87;}
+.dropdown-item.selected,.dropdown-item:hover{background:#ccc; color: #fff;}
+.fullscreen{display:flex;justify-content:center;align-items:center;cursor:pointer;color:#999;background:transparent;width:24px;height:24px;border:1px solid #999;}
 .fullscreen:hover,.dropdown:hover,.dropdown.active{}
-.container{width:calc(100% - 12px);height:calc(100% - 46px);overflow:hidden;border:1px solid #54616c;}
+.container{width:calc(100% - 12px);height:calc(100% - 46px);overflow:hidden;border:1px solid #A8AFB6;}
 .container-transform{width:200%;height:100%;display:flex;transition:300ms;}
 .container-transform.depth{margin-left:-100%;}
 .canvas{display:flex;flex:1;position:relative;overflow:hidden;}

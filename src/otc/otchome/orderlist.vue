@@ -390,39 +390,41 @@ export default {
 </script>
 
 <style scoped>
-.order-list{margin-bottom:8px;background-color:#222121;}
-.order-list-title{height: 24px;padding: 0 20px;border-bottom:1px solid #dedede;background:#dedede;}
-.order-list-title li{float: left;height: 24px;margin: 0 40px -1px 0;line-height: 24px;color: #6b6b6b;border-bottom:1px solid #dedede;cursor: pointer;}
-.order-list-title li:hover,
-.order-list-title li.active{color: #4554f8;border-bottom-color: #FFDE00;}
+.order-list{margin-bottom:8px;background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
+.order-list-title{height: 49px;padding: 0 20px;border-bottom:1px solid #eee;}
+.order-list-title li{float: left;height: 48px;margin: 0 40px -2px 0;line-height: 49px;color: #666;border-bottom:2px solid transparent;cursor: pointer;}
+.order-list-title li.active{color: #3283FF;border-bottom-color: #3283FF;}
+.order-list-title li:hover{color: #3283FF;}
 
 .uncompleted-list{padding: 8px 8px 0 8px;}
-.uncompleted-item{position: relative;margin-top: 8px;}
+.uncompleted-item{position: relative;margin-top: 8px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; overflow: hidden;}
 .uncompleted-item:first-of-type{margin-top: 0;}
-.uncompleted-garniture{position: absolute;top: 0;left: 0;z-index: 1;width: 8px;height: 100%;background-color: #ffde00;}
-.uncompleted-title{display: flex;justify-content: space-between;height: 24px;line-height: 24px;padding-left: 16px;border-bottom:1px solid #222121;padding-right: 16px;background-color: #333232;}
-.uncompleted-title span{display: flex;align-items: center;font-size: 12px;color: #8a93a8;}
+.uncompleted-garniture{position: absolute;top: 0;left: 0;z-index: 1;width: 8px;height: 100%;background-color: #3283FF; border-top-left-radius: 6px; border-bottom-left-radius: 6px;}
+.uncompleted-title{display: flex;justify-content: space-between;height: 30px;line-height: 30px;padding-left: 16px;border-bottom:1px solid #e6e6e6;padding-right: 16px;background-color: #f5f5f5;}
+.uncompleted-title span{display: flex;align-items: center;font-size: 12px;color: #333;}
 .uncompleted-title span.numer{width:250px;}
 .uncompleted-title span.second{margin-left: 206px;margin-right: auto;}
 .uncompleted-title span.last{justify-content: flex-end;width: 230px;margin-left: 18px;}
-.uncompleted-title span em{color: #fdb902;padding-left: 10px;cursor: pointer;}
-.uncompleted-title span em:hover{color: #fdb902;}
-.uncompleted-title span em.disabled{color: #afb9ce;cursor: not-allowed;}
+.uncompleted-title span em{color: #3283FF;padding-left: 10px;cursor: pointer;}
+.uncompleted-title span em:hover{color: #2565c5;}
+.uncompleted-title span em.disabled{color: #999;cursor: not-allowed;}
 .uncompleted-title span.second em{height: 24px;line-height: 24px;}
 .uncompleted-title span.second em.username,
 .uncompleted-title span.second em.realname{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
-.uncompleted-title span.second em.username{max-width: 170px;padding-left: 0;color: #8a93a8;}
-.uncompleted-title span.second em.realname{max-width: 216px;color: #aeb7d0;}
+.uncompleted-title span.second em.username{max-width: 170px;padding-left: 0;color: #333;}
+.uncompleted-title span.second em.realname{max-width: 216px;color: #333;}
 .uncompleted-title span.second em.icon-chat{font-size: 20px;}
-.uncompleted-title span.last i{color: #0ee7a5;}
+.uncompleted-title span.last i{color: #F34246;}
 .uncompleted-title span.last i.time-text{text-indent: 6px;}
 
 .completed-list,
 .cancelled-list{padding-left: 20px;padding-right: 20px;}
 .completed-item,
-.cancelled-item{display: flex;justify-content: space-between;height: 24px;line-height: 24px;color: #8b94a9;border-bottom: 1px solid #404b69;cursor: pointer;}
+.cancelled-item{display: flex;justify-content: space-between;height: 40px;line-height: 40px;color: #333;border-bottom: 1px solid #eee;cursor: pointer;}
 .completed-item span,
-.cancelled-item span{font-size: 12px;color: #8b94a9;}
+.cancelled-item span{font-size: 12px;color: #333;}
+.completed-item:first-of-type span,
+.cancelled-item:first-of-type span{font-size: 12px;color: #999;}
 .completed-item span.ordernumber,
 .cancelled-item span.ordernumber{width: 160px}
 .completed-item span.type,
@@ -440,12 +442,12 @@ export default {
 .completed-item span.time,
 .cancelled-item span.time{width: 130px;}
 .completed-item span.action{width: 130px;}
-.completed-item span.action .action-botton{height: 24px;padding: 0 8px;line-height: 24px;text-align: center;color: #fdb902;background-color: transparent;border: 1px solid #fdb902;border-radius: 4px;cursor: pointer;}
-.completed-item span.action .action-botton:hover{color: #fdb902;border-color: #fdb902;}
-.completed-item span.action em.icon-chat{font-size: 20px;color: #fdb902;vertical-align: middle;}
-.completed-item span.action em.icon-chat:hover{color: #fdb902;}
+.completed-item span.action .action-botton{height: 24px;padding: 0 8px;line-height: 24px;text-align: center;color: #3283FF;background-color: transparent;border: 1px solid #3283FF;border-radius: 4px;cursor: pointer;}
+.completed-item span.action .action-botton:hover{color: #2565c5;border-color: #2565c5;}
+.completed-item span.action em.icon-chat{font-size: 20px;color: #3283FF;vertical-align: middle;}
+.completed-item span.action em.icon-chat:hover{color: #2565c5;}
 
 .nodata{text-align: center;}
-.nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #8b94a9;}
+.nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
 .nodata-text{height: 40px;line-height: 20px;color: #8b94a9;}
 </style>
