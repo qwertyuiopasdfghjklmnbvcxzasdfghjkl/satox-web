@@ -273,7 +273,7 @@ export default {
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 
 .item-registerType{width: 320px; margin: auto; display: flex; color: #0472E9; font-size: 18px; padding-bottom: 20px;}
-.item-registerType /deep/ label{cursor: pointer; border: 1px solid #0472E9;  flex: 1; height: 54px; box-sizing: border-box; text-align: center; line-height: 54px;}
+.item-registerType /deep/ label{cursor: pointer; border: 1px solid #0472E9;  flex: 1; height: 54px; box-sizing: border-box; text-align: center; line-height: 54px; overflow: hidden;}
 .item-registerType /deep/ label:first-child {border-top-left-radius: 6px; border-bottom-left-radius: 6px;}
 .item-registerType /deep/ label:last-child {border-top-right-radius: 6px; border-bottom-right-radius: 6px;}
 .item-registerType /deep/ label.checked{color:#fff; background-color: #0472E9;}

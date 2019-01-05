@@ -6,7 +6,9 @@ const config = {
     {code: '+886', key: 'countrys.TW', name: '中国台湾'},
     {code: '+65', key: 'countrys.SG', name: '新加坡'},
     {code: '+1', key: 'countrys.US', name: '美国'},
-    {code: '+60', key: 'countrys.MY', name: '马来西亚'}
+    {code: '+60', key: 'countrys.MY', name: '马来西亚'},
+    {code: '+44', key: 'countrys.UN', name: '英国'},
+    {code: '+91', key: 'countrys.INDIA', name: '印度'}
   ],
   defaultCode: '+86'
 }
