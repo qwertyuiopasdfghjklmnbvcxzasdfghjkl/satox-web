@@ -37,7 +37,7 @@
             <p><span>5.</span>{{$t('otc_ad.otc_trade_notice5')}}<!--已取消订单，如已付款，请及时申诉，上传付款证明等资料，说明情况。--></p>
             <p><span>6.</span>{{$t('otc_ad.otc_trade_notice6')}}<!--转账时请勿备注任何信息，以免付款被拦截。--></p>
             <p><span>7.</span>{{$t('otc_ad.otc_trade_notice7')}}<!--卖方一定要及时查看账户，并确保对方付款到账后再释放代币，否则将造成不可挽回的损失。--></p>
-            <p><span>8.</span>{{$t('otc_ad.otc_trade_notice8')}}<!--更详细的交易规范请查看：--><a href="https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015363071-OTC%E4%BA%A4%E6%98%93%E8%A7%84%E8%8C%83?tdsourcetag=s_pcqq_aiomsg" target="_blank">{{$t('otc_ad.otc_trade_specification')}}<!--OTC交易规范--></a></p>
+            <p><span>8.</span>{{$t('otc_ad.otc_trade_notice8')}}<!--更详细的交易规范请查看：--><a href="https://cdcc.kf5.com/hc/kb/article/1225857/" target="_blank">{{$t('otc_ad.otc_trade_specification')}}<!--OTC交易规范--></a></p>
           </div>
         </div>
       </div>

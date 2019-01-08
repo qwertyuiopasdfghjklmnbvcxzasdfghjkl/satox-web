@@ -31,12 +31,12 @@
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
             </li>
-            <li :class="{'active': active === 'agencyApply'}" @click="switch_tab('agencyApply')">
+            <li :class="{'active': active === 'agencyApply'}" @click="switch_tab('agencyApply')" v-if="!showShops">
                 <i class="icon-shield"></i>
                 <span>{{$t('business.MERCHANT_APPLICATION')}}</span>
                 <!--商家申请-->
             </li>
-            <li :class="{'active': active === 'agency'}" @click="switch_tab('agency')">
+            <li :class="{'active': active === 'agency'}" @click="switch_tab('agency')" v-if="showShops">
                 <i class="icon-shop"></i>
                 <span>{{$t('business.MERCHANT_MANAGE')}}</span>
                 <!--商家管理-->
@@ -51,11 +51,21 @@
 </template>
 
 <script>
+import shopsApi from '@/api/shops'
+
 export default {
   props: {
     active: {
       type: String
     }
+  },
+  data(){
+    return {
+        showShops:false
+    }
+  },
+  created(){
+    this.getShopsApply()
   },
   methods: {
     switch_like () {
@@ -63,7 +73,12 @@ export default {
     },
     switch_tab (tab) {
       this.$emit('switchTab', tab)
-    }
+    },
+    getShopsApply(){
+      shopsApi.getShopsApply(res=>{
+        this.showShops = (res.data && res.data.state===3) || false
+      })
+    },
   }
 }
 </script>

@@ -112,9 +112,9 @@ export default {
     },
     getAgreementUrl () {
       if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-        return 'https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015235052-%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE'
+        return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
       } else {
-        return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
+        return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
       }
     }
   },
@@ -273,7 +273,7 @@ export default {
 .login-right-item /deep/ input:-ms-input-placeholder{font-size: 14px;color: #8a96b2;}
 
 .item-registerType{width: 320px; margin: auto; display: flex; color: #0472E9; font-size: 18px; padding-bottom: 20px;}
-.item-registerType /deep/ label{cursor: pointer; border: 1px solid #0472E9;  flex: 1; height: 54px; box-sizing: border-box; text-align: center; line-height: 54px;}
+.item-registerType /deep/ label{cursor: pointer; border: 1px solid #0472E9;  flex: 1; height: 54px; box-sizing: border-box; text-align: center; line-height: 54px; overflow: hidden;}
 .item-registerType /deep/ label:first-child {border-top-left-radius: 6px; border-bottom-left-radius: 6px;}
 .item-registerType /deep/ label:last-child {border-top-right-radius: 6px; border-bottom-right-radius: 6px;}
 .item-registerType /deep/ label.checked{color:#fff; background-color: #0472E9;}

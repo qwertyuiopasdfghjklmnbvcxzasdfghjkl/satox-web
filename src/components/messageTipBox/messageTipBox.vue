@@ -56,8 +56,8 @@ export default {
 .message-tip-box{display:flex;min-width:300px;max-width:400px;min-height:16px;background-color:#fff;border-radius:4px;overflow:hidden;}
 .message-tip-icon{width:54px;font-size:32px;display:flex;justify-content:center;align-items:center;color:#fff;}
 .message-tip-content{flex:1;font-size:16px;line-height:22px;display:flex;align-items:center;padding:20px;}
-.icon-success{background-color:#fdb902;}
-.success{color:#fdb902;}
+.icon-success{background-color:rgb(25, 190, 107);}
+.success{color:rgb(25, 190, 107);}
 .icon-notification{background-color:#e65353;}
 .notification{color:#e65353;}
 </style>
