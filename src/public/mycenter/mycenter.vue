@@ -7,7 +7,7 @@
             <div class="image">
               <img :src="avatarUrl" @error="setDefaultAvatar($event)" />
             </div>
-            <form ref="form" v-if="!isExistUserAvatar">
+            <form ref="form" >
               <input class="file" type="file" @change="uploadImage" name="source" title=" "/>
               <span class="tips">{{$t('account.user_center_set_photo')}}<!--头像只能设置一次--></span>
             </form>
