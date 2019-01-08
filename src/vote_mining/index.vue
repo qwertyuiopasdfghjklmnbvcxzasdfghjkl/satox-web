@@ -7,9 +7,9 @@
     			<div class="form-item flex">
     				<p><span>*</span>{{$t('business.CHOOSE_COMMUNITY')}}：</p>
     				<p>
-    					<input type="text" name="community" readonly="" v-model="formData.community[1]" :placeholder="$t('business.CHOOSE_YOUR_COMMUNITY')" @click="showCommunities=!showCommunities">
+    					<input type="text" name="community" readonly="" v-model="formData.communityId" :placeholder="$t('business.CHOOSE_YOUR_COMMUNITY')" @click="showCommunities=!showCommunities">
     					<ul class="communities" v-show="showCommunities">
-    					  <li v-for="item of voteInfo.communities" @click="formData.community=item.communityId;showCommunities=false">{{merchant_name(item.levelIndex)}}</li>
+    					  <li v-for="item in voteInfo.communities" @click="formData.communityId=item.communityName;showCommunities=false">{{item.communityName}}</li>
     					</ul>
     				</p>
     			</div>
@@ -104,9 +104,10 @@
           return this.$t(`business.MERCHANT_LEVEL_${level}`)
         },
         getVoteInfo(){
+
           voteMiningApi.getVoteInfo(res=>{
-            console.log(res)
-            this.voteInfo = res.data
+            this.voteInfo = res
+            console.log(this.voteInfo)
           })
         },
     }
