@@ -111,7 +111,7 @@ import userUtils from '@/api/individual'
 import nickName from '@/public/dialog/nickname'
 import otcApi from '@/api/otc'
 import exportRecord from '@/public/dialog/exportrecord'
-import numberUtils from '@/assets/js/numberUtils'
+import numUtils from '@/assets/js/numberUtils'
 
 export default {
   components: {
@@ -145,7 +145,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getLang', 'getApiToken']),
+    ...mapGetters(['getLang', 'getApiToken','getUserInfo']),
     curLang () {
       return this.getLang === 'en' ? en : zh
     },
@@ -159,7 +159,7 @@ export default {
     total(){
       let total = 0
       this.tradeData.forEach(v=>{
-        total = numberUtils.add(total, v.currency_count)
+        total = numUtils.add(total, v.currency_count)
       })
       return total.toFixed(2).toMoney()
     }
@@ -330,16 +330,17 @@ section  .info .detail .edit {display: inline-block; width: 20px; height: 20px; 
 .curreny /deep/ .record ul.header li{border-bottom:none;}
 .curreny /deep/ .record ul li span{display: inline-block;height: 40px;line-height: 40px;font-size: 12px;color: #555;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
 
-.curreny /deep/ .record ul li span.time{width: 160px;}
-.curreny /deep/ .record ul li span.market{width: 100px;}
+.curreny /deep/ .record ul li span.time{width: 140px;}
+.curreny /deep/ .record ul li span.market{width: 60px;}
 .curreny /deep/ .record ul li span.orderNum{width: 150px;}
 .curreny /deep/ .record ul li span.type{width: 60px;}
-.curreny /deep/ .record ul li span.price{width: 120px;}
-.curreny /deep/ .record ul li span.amount{width: 60px;}
+.curreny /deep/ .record ul li span.price{width: 100px;}
+.curreny /deep/ .record ul li span.amount{width: 120px;}
 .curreny /deep/ .record ul li span.sum{width: 120px;}
 .curreny /deep/ .record ul li span.charge{width: 130px;}
 .curreny /deep/ .record ul li.list span.buy{color: #23CD09;}
 .curreny /deep/ .record ul li.list span.sell{color: #F34246;}
+.curreny /deep/ .record ul li span.status{color: #8DB9FF;}
 
 .curreny /deep/ .record .nodata{text-align: center;}
 .curreny /deep/ .record .nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}

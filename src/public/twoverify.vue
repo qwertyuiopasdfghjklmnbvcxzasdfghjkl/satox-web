@@ -214,14 +214,18 @@ export default {
 </script>
 
 <style scoped>
-.twoverify{display: flex;justify-content: center;align-items: center;width: 1200px;height: calc(100% - 60px);min-height: 800px;margin-left: auto;margin-right: auto;}
-.twoverify-container{width: 1096px;height: 600px;background-color: #222121;box-shadow: -10px 10px 40px 0 rgba(0, 0, 0, .5);}
+
+.twoverify{display: flex;justify-content: center;align-items: center;height: calc(100% - 70px);min-height: 800px;margin-left: auto;margin-right: auto; background: url('../assets/images/login_bg.jpg') no-repeat center; background-size: cover;}
+@media screen and (max-width: 1600px) {
+  .twoverify {height: calc(100% - 60px);}
+}
+.twoverify-container{width: 1096px;height: 600px;background-color: #fff;box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .2); border-radius: 15px;}
 .twoverify-left{float: left;width: 50%;height: 100%;text-align: center;background: url(../assets/images/bg-login.png) no-repeat center center;}
 .twoverify-left img{margin-top: 282px;}
 
 .twoverify-right{position: relative;float: right;width: 50%;height: 100%;}
 .twoverify-right-item{position: relative;height: 520px;padding: 40px 60px;}
-.twoverify-right-item .caption{height: 40px;font-size: 20px;line-height: 40px;color: #fff;}
+.twoverify-right-item .caption{height: 40px;font-size: 20px;line-height: 40px;color: #3A76E7;}
 .twoverify-right-item .tabs{display:flex;height:45px;margin:60px 0;}
 .twoverify-right-item .tabs label{display:flex;flex:1;align-items:center;justify-content:center;font-size:16px;color:#A1A8BB;border:1px solid #3F4D6E;cursor:pointer;}
 .twoverify-right-item .tabs label.checked{border-color:#fdb902;color:#fdb902;}
@@ -231,7 +235,7 @@ export default {
 .twoverify-right-item .prompt span{float: left;width: 404px;min-height: 24px;padding: 8px 0 8px 8px;font-size: 16px;line-height: 24px;color: #8b94a9;}
 
 .twoverify-right-item /deep/ .inputbox{width: auto !important;min-height: auto !important;}
-.twoverify-right-item /deep/ .title{height: 34px;line-height: 34px;font-size: 16px;color: #d6dff9;text-align: left;}
+.twoverify-right-item /deep/ .title{height: 34px;line-height: 34px;font-size: 16px;color: #333;text-align: left;}
 .twoverify-right-item /deep/ .inputdiv{position: relative;display: block;padding-bottom: 24px;}
 .twoverify-right-item /deep/ .input{width:100% !important;height: 40px;margin: 0;padding: 0;font-size:26px;line-height:normal;color: #d6dff9;background-color: transparent;border-width: 0;border-bottom: 1px solid #404b69;outline:none;font-weight:bold;opacity:0;}
 .twoverify-right-item /deep/ .input:focus{background-color: transparent;}
@@ -252,8 +256,8 @@ export default {
 
 .twoverify-right-item .button-group{position: absolute;bottom: 40px;left: 60px;width: 428px;}
 .twoverify-right-item .button-group /deep/ .button{
-  display: block;justify-content: center;align-items: center;width: 100% !important;height: 40px !important;padding: 0;margin-top: 0;
-  font-weight: bold;font-size: 18px;color: #261003;background-color: #fdb902;border: none;border-radius: 0;cursor: pointer;
+  display: block;justify-content: center;align-items: center;width: 100% !important;height: 55px !important;padding: 0;margin-top: 0;
+  font-weight: bold;font-size: 18px;color: #fff;border: none;border-radius: 4px;cursor: pointer; background: -webkit-linear-gradient(left, #0589F6, #0240CF);  background: linear-gradient(left, #0589F6, #0240CF);
 }
 .twoverify-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
 .twoverify-right-item .button-group /deep/ .button.disabled{background-color: #999;}
@@ -270,10 +274,9 @@ export default {
 
 .verifyCode{position: relative;}
 .verifyCode /deep/ ul{display:flex;width:100%;height:41px;position:absolute;top:34px;left:0px;justify-content:space-between;}
-.verifyCode /deep/ ul li{display:flex;margin-right:8px;border-bottom:1px solid #54616c;height:100%;flex:1;font-size:24px;font-weight:bold;color:#CBD4EC;align-items:center;justify-content:center;}
-.verifyCode /deep/ ul li.active{border-bottom-color:#fdb902;}
+.verifyCode /deep/ ul li{display:flex;margin-right:8px;border-bottom:1px solid #ccc;height:100%;flex:1;font-size:24px;font-weight:bold;color:#3A76E7;align-items:center;justify-content:center;}
+.verifyCode /deep/ ul li.active{border-bottom-color:#3A76E7;}
 .verifyCode /deep/ ul li:last-child{margin-right:0;}
-.sendVerifyCode{height:34px;line-height:34px;cursor:pointer;position:absolute;z-index:10;right:0;top:0;color:#fdb902;}
-.sendVerifyCode:hover{color:#fdb902;}
+.sendVerifyCode{height:34px;line-height:34px;cursor:pointer;position:absolute;z-index:10;right:0;top:0;color:#3368DA;}
 .sendVerifyCode.disabled,.sendVerifyCode.disabled:hover{color:#999;cursor:not-allowed;}
 </style>
