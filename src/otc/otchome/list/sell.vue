@@ -140,13 +140,13 @@ export default {
       Vue.$confirmDialog({
         color: '#e53f3f',
         title: this.$t('otc_ad.otc_ad_confirm'),
-        content: this.$t('public0.public283'),
+        content: this.$t('public0.public288'),
         autoClose: true,
         okCallback: () => {
           Vue.$confirmDialog({
             color: '#e53f3f',
             title: this.$t('otc_ad.otc_ad_confirm'),
-            content: this.$t('public0.public284'),
+            content: this.$t('public0.public289'),
             autoClose: true,
             okCallback: () => {
               otcApi.finishOrder(this.item.order_id, (msg) => {

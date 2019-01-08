@@ -9,7 +9,7 @@
     				<p>
     					<input type="text" name="community" readonly="" v-model="formData.community[1]" :placeholder="$t('business.CHOOSE_YOUR_COMMUNITY')" @click="showCommunities=!showCommunities">
     					<ul class="communities" v-show="showCommunities">
-    					  <li v-for="item of communities" @click="formData.community=item;showCommunities=false">{{item[1]}}</li>
+    					  <li v-for="item of voteInfo.communities" @click="formData.community=item.communityId;showCommunities=false">{{merchant_name(item.levelIndex)}}</li>
     					</ul>
     				</p>
     			</div>
@@ -66,6 +66,9 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import voteMiningApi from '@/api/voteMining'
+
+
   export default {
     name: 'vote_mining_index',
     components: {
@@ -74,28 +77,39 @@
     data(){
     	return {
     		formData:{
-    			community:['',''],
-    			votes:''
+                symbol:'',
+    			communityId:'',
+                invitePhone:'',
+                periodId:'',
+                amount:''
     		},
     		showCommunities:false,
-    		communities:[
-    		  ['1',this.$t('business.QILIN_VILLA')],
-    		  ['2',this.$t('business.QINGFU_COMMUNITY')],
-    		  ['3',this.$t('business.ASIA_PACIFIC_COMMUNITY')],
-    		  ['4',this.$t('business.PHANTOM_COMMUNITY')],
-    		  ['5',this.$t('business.ZILONG_COMMUNITY')],
-    		]
+    		voteInfo:{
+                communities:[],
+                periods:[],
+                invitePhone:'',
+                phone:'',
+                symbols:''
+            },
     	}
     },
     computed: {
       ...mapGetters(['getApiToken', 'getLang']),
     },
-    watch: {
-      
-    },
     created () {
-      
+      this.getVoteInfo()
     },
+    methods:{
+        merchant_name(level){
+          return this.$t(`business.MERCHANT_LEVEL_${level}`)
+        },
+        getVoteInfo(){
+          voteMiningApi.getVoteInfo(res=>{
+            console.log(res)
+            this.voteInfo = res.data
+          })
+        },
+    }
   }
 </script>
 

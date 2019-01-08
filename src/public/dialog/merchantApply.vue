@@ -159,7 +159,7 @@ export default {
   color: #555;background-color: #F5F5F5; border: 1px solid #F5F5F5;outline: none; padding-left: 15px; padding-right: 15px; border-radius: 4px;
 }
 .form /deep/ .input:focus{background-color: #F5F5F5; border-color:#3A76E7!important;}
-.form /deep/ .input.error{background-color: #F5F5F5;border-bottom-color: #e53f3f;}
+.form /deep/ .input.error{background-color: #F5F5F5;border-color: #e53f3f;}
 .form /deep/ .errorinfo{position: absolute;bottom: 0;left: 0;width: auto;height: 24px;padding-top: 0;color: #e53f3f;font-style: normal;line-height: 24px;white-space: nowrap;}
 .form /deep/ .select {
     width: 100%;
