@@ -227,7 +227,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {appearance:no
 .buy-cont p input.error{border-color: #e53f3f;}
 .buy-cont p em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color:red;}
 .buy-cont p em.unit{font-size: 12px;color: #999;}
-.buy-cont p a{position: absolute;z-index: 10;top: 1px;right: 5px;color: #999;}
+.buy-cont p a{position: absolute;z-index: 10;top: 1px;right: 5px;color: #3368DA;}
 .buy-cont p a:hover{color: #666;}
 .buy-cont p .label-left{min-width:60px;}
 .buy-cont p .trade-limit{padding-top: 5px;padding-bottom: 5px;line-height: 0;}

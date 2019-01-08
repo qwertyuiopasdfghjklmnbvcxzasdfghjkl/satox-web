@@ -562,8 +562,8 @@ export default {
 
 .chat-body{display:flex;flex:1;overflow:hidden;}
 .chat-body-left{width:90px;margin-bottom:-1px;border-right:1px solid #69A4FF;overflow:auto;}
-.chat-body-left-order{display:flex;flex:1;min-height:50px;font-size:12px;color:#fff;border-bottom:2px solid #2565c5;cursor:pointer;}
-.chat-body-left-order:hover,.current{background-color:#348efb;}
+.chat-body-left-order{display:flex;flex:1;min-height:50px;font-size:12px;color:#333;border-bottom:2px solid #ccc;cursor:pointer;}
+.chat-body-left-order:hover,.current{background-color:#348efb; color:#fff; border-color: #2565c5;}
 .order-left{display:flex;color:#fff;padding:0 3px;line-height:25px;font-weight:bold;font-size:20px;}
 .new-info{color:#fdb902;}
 .order-right{line-height:25px;}
