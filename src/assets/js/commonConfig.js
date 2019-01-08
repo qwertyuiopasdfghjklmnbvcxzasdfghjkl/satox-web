@@ -7,8 +7,8 @@ const config = {
     {code: '+65', key: 'countrys.SG', name: '新加坡'},
     {code: '+1', key: 'countrys.US', name: '美国'},
     {code: '+60', key: 'countrys.MY', name: '马来西亚'},
-    {code: '+44', key: 'countrys.UN', name: '英国'},
-    {code: '+91', key: 'countrys.INDIA', name: '印度'}
+    {code: '+44', key: 'countrys.GB', name: '英国'},
+    {code: '+91', key: 'countrys.IN', name: '印度'}
   ],
   defaultCode: '+86'
 }

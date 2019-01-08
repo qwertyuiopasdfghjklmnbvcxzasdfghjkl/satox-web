@@ -68,30 +68,30 @@
       ...mapGetters(['getApiToken', 'getLang']),
       aboutUrl () {
         if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015426231-%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
         } else {
-          return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015426231-About-Us'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
         }
       },
       serviceAgreementUrl () {
         if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://cdcc.zendesk.com/hc/zh-cn/articles/360015342433'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
         } else {
-          return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
         }
       },
       privacyNoticeUrl () {
         if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015235072-%E9%9A%90%E7%A7%81%E5%A3%B0%E6%98%8E'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
         } else {
-          return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015235072-Privacy-Policy'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
         }
       },
       rateStandardUrl () {
         if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015426331-%E8%B4%B9%E7%8E%87%E6%A0%87%E5%87%86'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
         } else {
-          return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015426331-Fee'
+          return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
         }
       }
     },

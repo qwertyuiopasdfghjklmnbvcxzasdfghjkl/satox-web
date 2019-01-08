@@ -223,20 +223,20 @@ export default {
     },
     noticeUrl () {
       if (this.getLang === 'zh-CN') {
-        return `https://CDCCexchange.zendesk.com/hc/zh-cn/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83`
+        return `https://cdcc.kf5.com/hc/kb/section/1085796/`
       } else if (this.getLang === 'cht') {
-        return `https://CDCCexchange.zendesk.com/hc/zh-tw/categories/360000905872-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83 `
+        return `https://cdcc.kf5.com/hc/kb/section/1085796/`
       } else if (this.getLang === 'en') {
-        return `https://CDCCexchange.zendesk.com/hc/en-us/categories/360000905872-Announcement`
+        return `https://cdcc.kf5.com/hc/kb/section/1085796/`
       }
     },
     helperUrl () {
       if (this.getLang === 'zh-CN') {
-        return `https://CDCCexchange.zendesk.com/hc/zh-cn/categories/360000871252`
+        return `https://cdcc.kf5.com/hc/kb/category/1021867/`
       } else if (this.getLang === 'cht') {
-        return `https://CDCCexchange.zendesk.com/hc/zh-tw/categories/360000871252-%E5%B9%AB%E5%8A%A9%E4%B8%AD%E5%BF%83`
+        return `https://cdcc.kf5.com/hc/kb/category/1021867/`
       } else if (this.getLang === 'en') {
-        return `https://CDCCexchange.zendesk.com/hc/en-us/categories/360000871252-Help-Center`
+        return `https://cdcc.kf5.com/hc/kb/category/1021867/`
       }
     }
   },

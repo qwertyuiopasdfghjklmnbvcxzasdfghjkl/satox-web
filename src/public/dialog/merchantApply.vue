@@ -5,15 +5,15 @@
         <a class="icon-close" href="javascript:;" @click="closeDialog"></a>
       </div>
       <div class="form">
-        <inputbox v-validate="'required|telphone'" type="text" name="mobile" :maxLength="11" :msgs="msgs.mobile" :errs="errors" v-model="formData.mobile" :title="$t('business.MOBILE')+'：'" :placeholder="$t('public0.public287')+$t('business.MOBILE')" /><!--手机号-->
-        <inputbox v-validate="'required'" type="text" name="wxacount" :msgs="msgs.wxacount" :errs="errors" v-model="formData.wxacount" :title="$t('business.WECHAT')+'：'" :placeholder="$t('public0.public287')+$t('business.WECHAT')" /><!--微信号码-->
-        <inputbox v-validate="'required'" type="text" name="qqacount" :msgs="msgs.qqacount" :errs="errors" v-model="formData.qqacount" :title="$t('business.QQ')+'：'" :placeholder="$t('public0.public287')+$t('business.QQ')" /><!--QQ号码-->
+        <inputbox v-validate="'required|telphone'" type="number" name="mobile" :maxLength="11" :msgs="msgs.mobile" :errs="errors" v-model="formData.mobile" :title="$t('business.MOBILE')+'：'" :placeholder="$t('public0.public287')+$t('business.MOBILE')" /><!--手机号-->
+        <inputbox v-validate="'required'" type="text" name="wxacount" :msgs="msgs.wxacount" :errs="errors" v-model="formData.wechat" :title="$t('business.WECHAT')+'：'" :placeholder="$t('public0.public287')+$t('business.WECHAT')" /><!--微信号码-->
+        <inputbox v-validate="'required'" type="number" name="qqacount" :msgs="msgs.qqacount" :errs="errors" v-model="formData.qq" :title="$t('business.QQ')+'：'" :placeholder="$t('public0.public287')+$t('business.QQ')" /><!--QQ号码-->
         <inputbox v-validate="'required|email'" type="text" name="email" :msgs="msgs.email" :errs="errors" v-model="formData.email" :title="$t('business.EMAIL')+'：'" :placeholder="$t('public0.public287')+$t('business.EMAIL')" /><!--EMAIL地址-->
         <div class="choose_community">
           <div class="title">{{$t('business.CHOOSE_COMMUNITY')+'：'}}</div>
           <div class="inputdiv">
             <select v-validate="'required'" name="community" class="select" :class="{error:hasSub&&formData.community===''}" v-model="formData.community">
-              <option v-for="item of communities" :value="item[0]">{{item[1]}}</option>
+              <option v-for="item of communities" :value="item.communityId">{{item.communityName}}</option>
             </select>
             <em class="errorinfo" v-if="hasSub&&formData.community===''">{{msgs.community}}</em>
           </div>
@@ -33,14 +33,13 @@
 <script>
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import pdialog from '@/public/dialog/dialog'
 import inputbox from '@/components/formel/inputbox_horizontal'
 import buttonbox from '@/components/formel/buttonbox'
-import userApi from '@/api/user'
+import otcApi from '@/api/otc'
+import shopsApi from '@/api/shops'
 import utils from '@/assets/js/utils'
 export default {
   components: {
-    pdialog,
     inputbox,
     buttonbox
   },
@@ -51,18 +50,13 @@ export default {
       hasSub:false,
       formData: {
         mobile: '',
-        wxacount: '',
-        qqacount: '',
+        wechat: '',
+        qq: '',
         email: '',
         community:''
       },
       communities:[
-        ['',this.$t('business.CHOOSE_YOUR_COMMUNITY')],
-        ['1',this.$t('business.QILIN_VILLA')],
-        ['2',this.$t('business.QINGFU_COMMUNITY')],
-        ['3',this.$t('business.ASIA_PACIFIC_COMMUNITY')],
-        ['4',this.$t('business.PHANTOM_COMMUNITY')],
-        ['5',this.$t('business.ZILONG_COMMUNITY')],
+        {communityId:'', communityName:this.$t('business.CHOOSE_YOUR_COMMUNITY')}
       ]
     }
   },
@@ -85,8 +79,14 @@ export default {
       }
     }
   },
+  created(){
+    shopsApi.getShopsCommunity(res=>{
+      this.communities = this.communities.concat(res.data)
+    })
+  },
   methods: {
     apply () {
+      let self = this
       this.hasSub = true
       this.$validator.validateAll().then((validResult) => {
         if (!validResult) {
@@ -102,7 +102,36 @@ export default {
         if (this.locked) {
           return
         }
-        
+        this.locked = true
+        for(let item of this.communities){
+          if(this.formData.community===item.communityId){
+            this.formData.community = item.communityName
+            break
+          }
+        }
+        shopsApi.postShopsApply(this.formData, res=>{
+          this.locked = false
+          Vue.$koallTipBox({icon: 'success', message: this.$t('business.APPLY_SUCCESSFUL')})
+          self.$emit('okCallback')
+          self.$emit('removeDialog')
+        },msg=>{
+          this.locked = false
+          Vue.$confirmDialog({
+            id:msg,
+            title:this.$t(`business.APPLY_FAILED`),
+            content:this.$t(`error_code.${msg}`),
+            okCallback(){
+              self.$emit('removeDialog')
+              if(msg==='MOBILE_AUTH_FIRST'){
+                location.href='/#/mycenter/safety'
+              } else if(msg==='KYC_AUTH_FIRST'){
+                location.href='/#/mycenter/authentication'
+              } else if(msg==='NO_PAY_TYPE'){
+                location.href='/#/mycenter/settings'
+              } 
+            }
+          })
+        })
       })
     },
     closeDialog () {

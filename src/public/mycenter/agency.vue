@@ -5,14 +5,18 @@
       <h3 class="">{{$t('business.MERCHANT_MANAGE')}}</h3>
       <div class="info">
         <div class="avatar">
-          <img :src="'aaa'" @error="setDefaultAvatar($event)" />
-          <i></i>
+          <img :src="shopsInfo.headerImage" @error="setDefaultAvatar($event)" />
+          <template v-if="!shopsInfo.headerImage">
+            <i ></i>
+            <input class="file" type="file" @change="uploadImage" name="source" />
+          </template>
         </div>
+        <span class="tips" v-if="!shopsInfo.headerImage">{{$t('account.user_center_set_photo')}}</span>
         <div class="detail">
-          <p>昵称：<span class="gray">用户12315123123</span> <span class="ml20"><i class="edit"></i> <span class="blue">修改昵称</span></span></p>
-          <p class="mt18">等级：<span class="gray">普通商家</span><span class="ml50">手续费率：<span class="gray">1%</span></span></p>
-          <p class="mt18">归属社区：<span class="gray">麒麟山庄</span></p>
-          <p class="mt18">总成交量：<span class="blue">231,245.12 CNY</span><span class="ml50">总成交笔数：<span class="blue">231</span></span></p>
+          <p>{{$t('public0.public190')}}：<span class="gray" v-if="shopsInfo.nickname">{{shopsInfo.nickname}}</span> <span class="pointer" @click="nicknameDialog" v-else><i class="edit"></i> <span class="blue">{{$t('public0.public40')}}</span></span></p>
+          <p class="mt18">{{$t('business.LEVEL')}}：<span class="gray">{{shopsInfo.levelName}}</span><span class="ml50">{{$t('public.fee_rate')}}：<span class="gray">{{shopsInfo.feeRate*100}}%</span></span></p>
+          <p class="mt18">{{$t('business.ATTRIBUTION_COMMUNITY')}}：<span class="gray">{{shopsInfo.community}}</span></p>
+          <p class="mt18">{{$t('business.TOTAL_VOLUME')}}：<span class="blue">{{(shopsInfo.totalCurrency+'').toMoney()}} CNY</span><span class="ml50">{{$t('business.TOTAL_TRANSACTIONS')}}：<span class="blue">{{shopsInfo.totalNumber}}</span></span></p>
         </div>
       </div>
     </section>
@@ -20,29 +24,38 @@
       <div class="filtrate" >
         <div class="time">
           <label>{{$t('trade_record.trade_record_time')}}：<!--时间--></label>
-          <datepicker :language="curLang" v-model="coinsParams.start" format="yyyy-MM-dd"></datepicker>
+          <datepicker :language="curLang" format="yyyy-MM-dd" v-model="dateTimeBegin"></datepicker>
           <span class="joint">-</span>
-          <datepicker :language="curLang" v-model="coinsParams.end" format="yyyy-MM-dd"></datepicker>
+          <datepicker :language="curLang" format="yyyy-MM-dd" v-model="dateTimeEnd"></datepicker>
         </div>
-        <div class="market ml50">
-          <label>{{$t('trade_record.trade_record_market')}}：<!--市场--></label>
-          <select v-model="coinsParams.market">
+        <div class="market">
+          <label>{{$t('trade_record.trade_record_currency')}}：<!--币种--></label>
+          <select v-model="symbol">
             <option value="">{{$t('trade_record.trade_record_all')}}<!--全部--></option>
-            <option v-for="m in marketArry" :value="m.market">{{m.currencySymbol}}/{{m.baseSymbol}}</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+          </select>
+        </div>
+        <div class="direction">
+          <label>{{$t('trade_record.trade_record_type')}}：<!--方向--></label>
+          <select v-model="trade_type">
+            <option value="">{{$t('trade_record.trade_record_all')}}<!--全部--></option>
+            <option value="1">{{$t('trade_record.trade_record_buy')}}<!--买--></option>
+            <option value="2">{{$t('trade_record.trade_record_sell')}}<!--卖--></option>
           </select>
         </div>
         <div class="button">
-          <button class="search" @click="searchCur()">{{$t('trade_record.trade_record_search')}}<!--搜索--></button>
-          <button class="reset" @click="clearSearchCur()">{{$t('trade_record.trade_record_reset')}}<!--重置--></button>
+          <button class="search" @click="getTrade">{{$t('trade_record.trade_record_search')}}<!--搜索--></button>
+          <button class="reset" @click="clearTrade">{{$t('trade_record.trade_record_reset')}}<!--重置--></button>
         </div>
-        <div class="operation export" :class="{disabled: coinsEntrust.length === 0}">
-          <a href="javascript:;" @click="coinsEntrust.length === 0 ? false : onExportRecord()">{{$t('trade_record.trade_record_export')}}<!--导出报表--></a>
+        <div class="operation export" :class="{disabled: tradeData.length === 0}">
+          <a href="javascript:;" @click="tradeData.length === 0 ? false : onExportRecord()">{{$t('trade_record.trade_record_export')}}<!--导出报表--></a>
           <i class="icon-reports"></i>
         </div>
       </div>
       <div class="statistics">
-        <span>成交量：231,245.12 CNY</span>
-        <span class="ml50">成交笔数：231</span>
+        <span>成交量：{{total}} CNY</span>
+        <span class="ml50">成交笔数：{{tradeData.length}}</span>
       </div>
       <div class="record">
         <ul class="header">
@@ -58,29 +71,32 @@
             <span class="status">{{$t('business.STATUS')}}<!--手续费--></span>
           </li>
         </ul>
-        <ul v-if="!coinsLoading && coinsEntrust.length > 0">
-          <li class="list" v-for="(item, index) in coinsEntrust" :key="item.id">
-            <span class="time">{{new Date(Number(item.createdAt)).format()}}</span><!--时间-->
-            <span class="market">{{getMarketByType(item.direction, item.toSymbol, item.fromSymbol)}}</span><!--市场-->
-            <span class="type" :class="item.direction === 1 ? 'buy' : 'sell'">{{getType(item.direction)}}</span><!--方向-->
-            <span class="avgPrice">{{getPrice(item.averagePrice)}}</span><!--成交均价-->
-            <span class="tradeVolume">{{toFixed(item.finishedAmount)}}</span><!--成交量-->
-            <span class="tradeSum">{{toFixed(item.dealCurrency)}} {{item.direction === 1 ? item.fromSymbol : item.toSymbol}}</span><!--成交金额-->
-            <span class="charge">{{toFixed(item.fee)}} {{item.toSymbol}}</span><!--手续费-->
+        <ul v-if="!tradeLoading && tradeData.length > 0">
+          <li class="list" v-for="data in tradeData" :key="data.id">
+            <span class="market">{{data.symbol}} <!--交易类别--></span>
+            <span class="time">{{data.updated_at}}<!--下单时间--></span>
+            <span class="orderNum">{{data.order_number}}<!--订单号--></span>
+            <span class="type" :class="data.to_user_name === getUserInfo.username ? 'buy' : 'sell'">{{data.to_user_name === getUserInfo.username ? $t('otc_exchange.otc_exchange_buy') : $t('otc_exchange.otc_exchange_sell')}}<!--类型--></span>
+            <span class="price">{{toFixed(data.cur_price, 2)}} {{data.currency}} <!--单价--></span>
+            <span class="amount">{{toFixed(data.symbol_count)}} {{data.symbol}} <!--数量--></span>
+            <span class="sum">{{toFixed(data.currency_count, 2)}} {{data.currency}} <!--总额--></span>
+            <span class="charge">{{toFixed(data.order_fee, 8)}} {{data.symbol}} <!--手续费--></span>
+            <span class="status">{{getOrderState(data.state)}}<!--状态--></span>
           </li>
         </ul>
-        <page v-if="!coinsLoading && coinsEntrust.length > 0" :pageIndex="coinsParams.current" :pageSize="coinsParams.limit" :total="coinsTotal" @changePageIndex="coinsPageChange"/>
-        <div v-if="!coinsLoading && coinsEntrust.length === 0" class="nodata">
+        <page v-if="!tradeLoading && tradeData.length > 0" :pageIndex="params.page" :pageSize="params.show" :total="params.total" @changePageIndex="pageChange"/>
+        <div class="nodata" v-if="!tradeLoading && tradeData.length === 0">
           <div class="nodata-icon icon-no-order"></div>
-          <div class="nodata-text">{{$t('trade_record.not_exchange_record')}}<!--暂无交易记录--></div>
+          <div class="nodata-text">{{$t('trade_record.not_otc_record')}}<!--暂无OTC交易记录--></div>
         </div>
-        <loading v-if="coinsLoading"/>
+        <loading v-if="tradeLoading"/>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import utils from '@/assets/js/utils'
 import merchantApply from '@/public/dialog/merchantApply'
@@ -89,6 +105,13 @@ import Datepicker from 'vuejs-datepicker'
 import { en, zh } from 'vuejs-datepicker/dist/locale'
 import page from '@/components/page'
 import loading from '@/components/loading'
+import shopsApi from '@/api/shops'
+import Config from '@/assets/js/config'
+import userUtils from '@/api/individual'
+import nickName from '@/public/dialog/nickname'
+import otcApi from '@/api/otc'
+import exportRecord from '@/public/dialog/exportrecord'
+import numberUtils from '@/assets/js/numberUtils'
 
 export default {
   components: {
@@ -98,37 +121,148 @@ export default {
   },
   data () {
     return {
-      merchantInfo:{},
-      marketArry: [], // 市场列表
-      coinsTotal: 0, // 总数
-      coinsEntrust: [],
-      coinsParams: {
-        history: '1', // 0 当前，1 历史
-        start: '', // 开始时间
-        end: '', // 结束时间
-        market: '', // 市场
-        hideCancelled: 0, // 1是, 0否显示
-        tp: 1, // 0 委托记录 1 币币成交记录
-        current: 1, // 当前第几页 默认为"" 为第一页
-        limit: 6 // limit每页记录数，“”默认20条
+      shopsInfo:{headerImage:''},
+      fixedNumber: 8,
+      order_number: '',
+      trade_type: '', // 交易类型 1 购买 2 出售
+      state: '',
+      cur_price: '',
+      currency: '',
+      symbol_count: '',
+      currency_count: '',
+      updated_at: '',
+      dateTimeEnd: null,
+      dateTimeBegin: null,
+      symbol: '', // 币种
+      ad_id: '',
+      tradeData: [],
+      params: {
+        page: 1,
+        show: 6,
+        total: 0
       },
-      coinsLoading: false
+      tradeLoading: true
     }
   },
   computed: {
     ...mapGetters(['getLang', 'getApiToken']),
     curLang () {
       return this.getLang === 'en' ? en : zh
+    },
+    paramsChange () {
+      return {
+        direction: 2,
+        page: this.params.page,
+        pageSize: this.params.show
+      }
+    },
+    total(){
+      let total = 0
+      this.tradeData.forEach(v=>{
+        total = numberUtils.add(total, v.currency_count)
+      })
+      return total.toFixed(2).toMoney()
     }
   },
-  watch: {
-    
+  created() {
+    this.getShopsApply()
+    this.chooseTrade()
   },
   methods: {
+    getShopsApply(){
+      shopsApi.getShopsApply(res=>{
+        if(res.data){
+          this.shopsInfo = res.data
+        }
+      })
+    },
     setDefaultAvatar(e){ //图片加载失败用默认头像
       let tar = e.currentTarget
       tar.src = defaultAvatar
     },
+    uploadImage (e) {
+      // 上传头像
+      var target = e.target
+      if (Config.imageType.test(target.files.item(0).name) === false) {
+        return Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public43')}) // 请上传JPG、PNG、JPEG、BMP格式的图片
+      }
+      let isTrue = utils.limitUploadImage(target, (msg) => {
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(msg)}) // 图片不能超过1M
+      }, 1)
+      if (!isTrue) {
+        target.value = ''
+        return
+      }
+      this.shopsInfo.headerImage = window.URL.createObjectURL(target.files[0])
+      var formData = new FormData()
+      formData.append('source',target.files[0])
+      userUtils.uploadHeader(formData, (msg) => {}, (msg) => {
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+      })
+    },
+    nicknameDialog () {
+      // 修改呢称
+      utils.setDialog(nickName, {
+        nickname: this.nickname,
+        okCallback: (aNickName) => {
+          this.shopsInfo.nickname = aNickName
+        }
+      })
+    },
+    toFixed (value, fixed) {
+      return numUtils.BN(value || 0).toFixed(fixed === undefined ? this.fixedNumber : fixed, 1)
+    },
+    clearTrade () {
+      this.dateTimeBegin = null
+      this.dateTimeEnd = null
+      this.trade_type = ''
+      this.symbol = ''
+      this.params.page = 1
+      this.chooseTrade()
+    },
+    pageChange (currentIndex) {
+      this.params.page = currentIndex
+      this.chooseTrade()
+    },
+    onExportRecord () {
+      utils.setDialog(exportRecord, {
+        exportMarket: 'OTC',
+        lang: this.getLang === 'zh-CN' ? 'chs' : this.getLang
+      })
+    },
+    getTrade () {
+      this.params.page = 1
+      this.chooseTrade()
+    },
+    chooseTrade () {
+      this.tradeLoading = true
+      otcApi.getOrdersList({
+        state: 2, // 已完成
+        begin_date: this.dateTimeBegin ? this.dateTimeBegin.format('yyyy-MM-dd') : null,
+        end_date: this.dateTimeEnd ? this.dateTimeEnd.format('yyyy-MM-dd') : null,
+        trade_type: this.trade_type ? this.trade_type : null, // 买 卖
+        symbol: this.symbol ? this.symbol : null, // 市场
+        page: this.params.page,
+        show: this.params.show
+      }, (data, time, total) => {
+        this.params.total = total
+        this.tradeData = data
+        this.tradeLoading = false
+      }, (msg) => {
+        console.error(msg)
+      })
+    },
+    getOrderState (state) { // 获取订单状态
+      if (parseInt(state) === 1) {
+        return this.$t('public0.public14') // 交易中
+      } else if (parseInt(state) === 2) {
+        return this.$t('otc_ad.otc_ad_completed') // 已完成
+      } else if (parseInt(state) === 3) {
+        return this.$t('public0.public25') // 已取消
+      } else {
+        return ''
+      }
+    }
   }
 }
 </script>
@@ -138,10 +272,14 @@ export default {
 .mt18 {margin-top: 18px;}
 .ml20 {margin-left: 20px;}
 .ml50 {margin-left: 50px;}
+.pointer {cursor: pointer;}
 .container section{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
 section > h3{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7;}
-section  .info {padding: 25px 35px 40px; color: #333; display: flex;}
-section  .info .avatar { width: 130px; height: 130px; background-color: #F5F5F5; position: relative;}
+section  .info {padding: 25px 35px 40px; color: #333; display: flex; position: relative;}
+section  .info .avatar { width: 130px; height: 130px; background-color: #F5F5F5; position: relative; overflow: hidden;}
+section  .info .avatar input {font-size: 95px; position: absolute; z-index: 1; left: 0;top: 0; opacity: 0; }
+section  .info .avatar + .tips{position: absolute; z-index: 1; left: 0; width: 200px; text-align: center; top: 4px; display: none;}
+section  .info .avatar:hover + .tips{display: block;}
 section  .info .avatar img {width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 section  .info .avatar i {position: absolute; z-index: 1; width: 28px; height: 28px; bottom: 0; right: 0; background: url('../../assets/images/avatar_upload.png') no-repeat center;}
 section  .info .detail { flex: 1; margin-left: 35px; color: #333;}

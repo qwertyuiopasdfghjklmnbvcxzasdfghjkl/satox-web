@@ -112,9 +112,9 @@ export default {
     },
     getAgreementUrl () {
       if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-        return 'https://CDCCexchange.zendesk.com/hc/zh-cn/articles/360015235052-%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE'
+        return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
       } else {
-        return 'https://CDCCexchange.zendesk.com/hc/en-us/articles/360015235052-Terms-of-Use'
+        return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
       }
     }
   },
