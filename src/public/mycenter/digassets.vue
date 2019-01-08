@@ -76,7 +76,7 @@
                     </li>
                 </ul>
                 <ul class="accountInfo-lists">
-                    <li v-for="(data, index) in filterDatas" :key="data.accountId">
+                    <li v-for="(data, index) in filterDatas(1)" :key="data.accountId">
                         <div class="items">
                             <div class="coin ng-binding">{{data.symbol}}</div>
                             <div class="fullName ng-binding">{{$t(`symbol.${data.symbol}`)}}</div>
@@ -124,7 +124,35 @@ export default {
   },
   computed: {
     ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign']),
-    filterDatas () {
+    USDCNY () {
+      return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2).toMoney()
+    }
+  },
+  watch: {
+    filterTitle (newVal, oldVal) {
+      if (!newVal) {
+        return
+      }
+      if (/[^0-9a-z]/i.test(newVal)) {
+        this.$nextTick(() => {
+          this.filterTitle = oldVal
+        })
+      }
+    }
+  },
+  created () {
+    this.getList()
+    // 获取当前用户状态信息
+    userApi.getUserState((data) => {
+      this.googleState = data.googleState
+      this.verifyState = data.verifyState
+      this.mobileState = data.mobileAuthState
+    }, (msg) => {
+      console.error(msg)
+    })
+  },
+  methods: {
+    filterDatas (type) {
       let ndatas = this.myAssets.filter((item) => {
         if (this.hideZero) {
           if (this.filterTitle) {
@@ -137,6 +165,9 @@ export default {
           }
           return true
         }
+      })
+      ndatas = ndatas.filter(item=>{
+        return item.type===type
       })
       ndatas.sort((item1, item2) => {
         if (this.sortActive === 'symbol') {
@@ -175,34 +206,6 @@ export default {
       })
       return ndatas
     },
-    USDCNY () {
-      return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2).toMoney()
-    }
-  },
-  watch: {
-    filterTitle (newVal, oldVal) {
-      if (!newVal) {
-        return
-      }
-      if (/[^0-9a-z]/i.test(newVal)) {
-        this.$nextTick(() => {
-          this.filterTitle = oldVal
-        })
-      }
-    }
-  },
-  created () {
-    this.getList()
-    // 获取当前用户状态信息
-    userApi.getUserState((data) => {
-      this.googleState = data.googleState
-      this.verifyState = data.verifyState
-      this.mobileState = data.mobileAuthState
-    }, (msg) => {
-      console.error(msg)
-    })
-  },
-  methods: {
     sortAssets (active) {
       if (active === this.sortActive) {
         this.sort = this.sort === 'asc' ? 'desc' : 'asc'
