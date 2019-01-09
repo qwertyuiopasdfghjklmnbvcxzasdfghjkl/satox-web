@@ -4,6 +4,10 @@ import QRCode from '@/assets/js/qrcode'
 import config from '@/assets/js/config'
 import userApi from '@/api/user'
 
+String.prototype.trim = function(){  
+  return this.replace(/(^\s*)|(\s*$)/g, "");  
+} 
+
 String.prototype.format = function () {
   var args = arguments
   return this.replace(/{(\d+)}/g, function (m, i) {

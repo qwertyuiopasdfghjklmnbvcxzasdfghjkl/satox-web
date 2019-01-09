@@ -10,7 +10,8 @@ const routes = [
   {
     path: '/vote_mining/profit',
     name: voteMiningProfit.name,
-    component: voteMiningProfit
+    component: voteMiningProfit,
+    meta: {login: true}
   },
 ]
 
