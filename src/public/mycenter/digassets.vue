@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <div class="acount_tab">
-                  <div class="active">主账户</div>
-                  <div>投票挖矿账户</div>
+                  <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">主账户</div>
+                  <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">投票挖矿账户</div>
                   <span>资金划转</span>
                 </div>
                 <ul class="accountInfo-lists header">
@@ -76,7 +76,7 @@
                     </li>
                 </ul>
                 <ul class="accountInfo-lists">
-                    <li v-for="(data, index) in filterDatas(1)" :key="data.accountId">
+                    <li v-for="(data, index) in filterDatas()" :key="data.accountId">
                         <div class="items">
                             <div class="coin ng-binding">{{data.symbol}}</div>
                             <div class="fullName ng-binding">{{$t(`symbol.${data.symbol}`)}}</div>
@@ -115,7 +115,9 @@ export default {
       googleState: 0,
       verifyState: 0,
       mobileState: 0,
-      myAssets: []
+      myAssets: [],
+      active:"main",
+      accountType:1
     }
   },
   components: {
@@ -152,7 +154,7 @@ export default {
     })
   },
   methods: {
-    filterDatas (type) {
+    filterDatas () {
       let ndatas = this.myAssets.filter((item) => {
         if (this.hideZero) {
           if (this.filterTitle) {
@@ -167,7 +169,7 @@ export default {
         }
       })
       ndatas = ndatas.filter(item=>{
-        return item.type===type
+        return item.type===this.accountType
       })
       ndatas.sort((item1, item2) => {
         if (this.sortActive === 'symbol') {
@@ -212,6 +214,14 @@ export default {
       } else {
         this.sortActive = active
         this.sort = 'asc'
+      }
+    },
+    switchHeadTab(tab){
+      this.active=tab
+      if(tab=="main"){
+        this.accountType=1
+      }else{
+        this.accountType=2
       }
     },
     switchTab (tab) {
