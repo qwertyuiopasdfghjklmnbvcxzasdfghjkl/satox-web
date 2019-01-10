@@ -21,9 +21,9 @@
                     </div>
                 </div>
                 <div class="acount_tab">
-                  <div class="active">主账户</div>
-                  <div>投票挖矿账户</div>
-                  <span>资金划转</span>
+                  <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">主账户</div>
+                  <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">投票挖矿账户</div>
+                  <span @click="tansferDialog">资金划转</span>
                 </div>
                 <ul class="accountInfo-lists header">
                   <li class="th">
@@ -76,7 +76,7 @@
                     </li>
                 </ul>
                 <ul class="accountInfo-lists">
-                    <li v-for="(data, index) in filterDatas(1)" :key="data.accountId">
+                    <li v-for="(data, index) in filterDatas()" :key="data.accountId">
                         <div class="items">
                             <div class="coin ng-binding">{{data.symbol}}</div>
                             <div class="fullName ng-binding">{{$t(`symbol.${data.symbol}`)}}</div>
@@ -84,7 +84,7 @@
                             <div class="useable f-right ng-binding">{{toFixed(data.availableBalance)}}</div>
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
                             <div class="action f-right">
-                                <span class="btn btn-deposit ng-binding ng-scope1" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"><!--充值与提现--></span>
+                                <span class="btn btn-deposit ng-binding ng-scope1" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')" v-show="accountType===1"><!--充值与提现--></span>
                             </div>
                         </div>
                         <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/>
@@ -101,8 +101,11 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import userUtils from '@/api/wallet'
+import utils from '@/assets/js/utils'
 import userApi from '@/api/individual'
 import moreinfo from '@/public/mycenter/moreinfo'
+import TansferDialog from '@/vote_mining/dialog/transfer'
+import voteMiningApi from '@/api/voteMining'
 import loading from '@/components/loading'
 export default {
   data () {
@@ -115,7 +118,9 @@ export default {
       googleState: 0,
       verifyState: 0,
       mobileState: 0,
-      myAssets: []
+      myAssets: [],
+      active:"main",
+      accountType:1
     }
   },
   components: {
@@ -142,17 +147,28 @@ export default {
   },
   created () {
     this.getList()
-    // 获取当前用户状态信息
-    userApi.getUserState((data) => {
-      this.googleState = data.googleState
-      this.verifyState = data.verifyState
-      this.mobileState = data.mobileAuthState
-    }, (msg) => {
-      console.error(msg)
-    })
+    this.getUserState()
   },
   methods: {
-    filterDatas (type) {
+    tansferDialog () {
+      // 修改呢称
+      utils.setDialog(TansferDialog, {
+        okCallback:()=>{
+          this.getList()
+        }
+      })
+    },
+    getUserState(){
+      // 获取当前用户状态信息
+      userApi.getUserState((data) => {
+        this.googleState = data.googleState
+        this.verifyState = data.verifyState
+        this.mobileState = data.mobileAuthState
+      }, (msg) => {
+        console.error(msg)
+      })
+    },
+    filterDatas () {
       let ndatas = this.myAssets.filter((item) => {
         if (this.hideZero) {
           if (this.filterTitle) {
@@ -167,7 +183,7 @@ export default {
         }
       })
       ndatas = ndatas.filter(item=>{
-        return item.type===type
+        return item.type===this.accountType
       })
       ndatas.sort((item1, item2) => {
         if (this.sortActive === 'symbol') {
@@ -212,6 +228,14 @@ export default {
       } else {
         this.sortActive = active
         this.sort = 'asc'
+      }
+    },
+    switchHeadTab(tab){
+      this.active=tab
+      if(tab=="main"){
+        this.accountType=1
+      }else{
+        this.accountType=2
       }
     },
     switchTab (tab) {

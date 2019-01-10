@@ -15,38 +15,26 @@
     			</div>
     			<div class="form-item flex">
     				<p>{{$t('business.INVITE_MOBILE')}}：</p>
-    				<p><input type="text" name="mobile"  v-model="formData.mobile" :placeholder="$t('business.INVITE_MOBILE_PLACEHOLDER')"></p>
+    				<p><input type="number" name="mobile" v-model="formData.invitePhone" :readonly="voteInfo.invitePhone" :placeholder="$t('business.INVITE_MOBILE_PLACEHOLDER')"></p>
     			</div>
     			<div class="form-item">
     				<p><span>*</span>{{$t('business.TICKET_PERIOD')}}：</p>
     				<ul class="period">
-    					<li class="active">
+    					<li v-for="period in voteInfo.periods" :class="{active:period.votePeriodId===formData.periodId}" @click="formData.periodId=period.votePeriodId">
     						<i></i>
-    						<span>{{$t('business.TICKET_PERIOD_1')}}</span>
+    						<span>{{period.name+$t('business.TICKET_PERIOD_1')}}</span>
     						<span></span>
-    						<span>{{$t('business.TICKET_PERIOD_1_INCOME')}}</span>
-    					</li>
-    					<li>
-    						<i></i>
-    						<span>{{$t('business.TICKET_PERIOD_2')}}</span>
-    						<span></span>
-    						<span>{{$t('business.TICKET_PERIOD_2_INCOME')}}</span>
-    					</li>
-    					<li>
-    						<i></i>
-    						<span>{{$t('business.TICKET_PERIOD_3')}}</span>
-    						<span></span>
-    						<span>{{$t('business.TICKET_PERIOD_3_INCOME')}}</span>
+    						<span>{{$t('business.TICKET_PERIOD_1_INCOME')+period.rate}}%</span>
     					</li>
     				</ul>
     			</div>
     			<div class="form-item flex">
     				<p><span>*</span>{{$t('business.VOTE_NUM')}}：</p>
-    				<p><input type="text" name="votes"  v-model="formData.votes" :placeholder="$t('business.VOTE_NUM_PLACEHOLDER')"></p>
+    				<p><input type="number" name="amount"  v-model="formData.amount" :placeholder="votesPlaceholder"></p>
     			</div>
-    			<div class="mt50"><button type="button" class="btn-enjoy">{{$t('business.ENJOY')}}</button></div>
+    			<div class="mt50"><button type="button" class="btn-enjoy" @click="enjoyVote">{{$t('business.ENJOY')}}</button></div>
     			<div class="mt45 fs32 text-center gray">
-    				{{$t('business.NOT_VOTE')}}<span class="blue pointer">{{$t('business.VIEW_EARNINGS')}}</span>
+    				{{$t('business.NOT_VOTE')}}<router-link :to="{name:'vote_mining_profile'}" tag="span" class="blue pointer">{{$t('business.VIEW_EARNINGS')}}</router-link>
     			</div>
     		</div>
     		<div class="rules">
@@ -65,23 +53,38 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  import voteMiningApi from '@/api/voteMining'
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+import voteMiningApi from '@/api/voteMining'
+import userUtils from '@/api/wallet'
+import userApi from '@/api/individual'
+import utils from '@/assets/js/utils'
+import googleAuth from '@/public/dialog/googleauth'
+import smswithdraw from '@/public/dialog/smswithdraw'
+import myApi from '@/api/user'
 
-
-  export default {
+export default {
     name: 'vote_mining_index',
     components: {
       
     },
     data(){
     	return {
+            googleState: 0,
+            mobileState: 0,
     		formData:{
                 symbol:'',
     			communityId:'',
                 invitePhone:'',
                 periodId:'',
-                amount:''
+                amount:'',
+                secondaryValidateDTO:{
+                    type:1,
+                    password:'',
+                    smsCode:'',
+                    rsaPublicKey:'',
+                    googleCode:''
+                }
     		},
     		showCommunities:false,
     		voteInfo:{
@@ -91,27 +94,156 @@
                 phone:'',
                 symbols:''
             },
+            assets:[]
     	}
     },
     computed: {
-      ...mapGetters(['getApiToken', 'getLang']),
+      ...mapGetters(['getApiToken', 'getLang','getUserInfo']),
+      votesPlaceholder(){
+        return this.$t('business.VOTE_NUM_PLACEHOLDER')+'，'+this.voteInfo.symbols + this.$t('account.estimated_value_available')+' '+this.balance
+      },
+      balance(){
+        let balance = 0
+        for(let item of this.assets){
+            if(item.type===2 && item.symbol===this.voteInfo.symbols){
+                balance = item.availableBalance
+                break
+            }
+        }
+        return Number(balance)
+      },
     },
     created () {
       this.getVoteInfo()
+      if(this.getApiToken){
+        this.getList()
+        this.getUserState()
+      }
+      
+    },
+    watch:{
+        'formData.invitePhone'(_n, _o){
+            this.formData.invitePhone = _n.trim()
+        }
     },
     methods:{
+        enjoyVote(){
+            if(!this.getApiToken){
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('business.public293')})
+                return
+            }
+            if(!this.formData.communityId){
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('business.CHOOSE_YOUR_COMMUNITY')})
+                return
+            }
+            if(this.formData.invitePhone){
+                if(!/^\d{11}$/.test(this.formData.invitePhone)){
+                    Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public128')})
+                    return
+                }
+            }
+            if(Number(this.formData.amount)<10000){
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public290')})
+                return
+            }
+            if(Number(this.formData.amount)>this.balance){
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public292')})
+                return
+            }
+            if(!(Number(this.formData.amount)%1000===0)){
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public291')})
+                return
+            }
+
+            if (this.googleState !== 1 && this.mobileState !== 1) {
+              Vue.$confirmDialog({
+                id: 'GOOGLEAUTH_OR_SMSAUTH_FIRST',
+                showCancel: false,
+                content: this.$t('error_code.GOOGLE_CELLPHONE_AUTH_FIRST'), // 请先进行谷歌验证或短信验证
+                okCallback: () => {
+                  this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+                }
+              })
+              return
+            }
+            if (!this.getUserInfo.email && this.mobileState !== 1) {
+              Vue.$confirmDialog({
+                id: 'SMS_AUTH_FIRST',
+                showCancel: false,
+                content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
+                okCallback: () => {
+                  this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+                }
+              })
+              return
+            }
+
+            // 二次验证
+            utils.setDialog(this.mobileState === 1 ? smswithdraw : googleAuth, {
+              authType: 'getCode',
+              isWithdrawal: true,
+              okCallback: (code) => {
+                if (typeof code === 'string') {
+                  // 谷歌验证提现
+                  this.formData.secondaryValidateDTO.googleCode = code
+                  this.formData.secondaryValidateDTO.type = 0
+                  this.postVote()
+                } else {
+                  // 手机短信验证提现
+                  for (let i in code) {
+                    this.formData.secondaryValidateDTO[i] = code[i]
+                  }
+                  myApi.getRsaPublicKey((rsaPublicKey) => {
+                    this.formData.secondaryValidateDTO.password = utils.encryptPwd(rsaPublicKey, this.formData.secondaryValidateDTO.password)
+                    this.formData.secondaryValidateDTO.rsaPublicKey = rsaPublicKey
+                    this.postVote()
+                  })
+                }
+              }
+            })
+
+        },
+        postVote(){
+            let _data = JSON.parse(JSON.stringify(this.formData))
+            for(let item of this.voteInfo.communities){
+              if(_data.communityId===item.communityName){
+                _data.communityId = item.communityId
+                break
+              }
+            }
+            voteMiningApi.postVote(_data, res=>{
+              this.$router.push({name:'vote_mining_profile'})
+            }, msg=>{
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('error_code.'+msg)})
+            })
+        },
         merchant_name(level){
           return this.$t(`business.MERCHANT_LEVEL_${level}`)
         },
         getVoteInfo(){
-
           voteMiningApi.getVoteInfo(res=>{
             this.voteInfo = res
-            console.log(this.voteInfo)
+            this.formData.invitePhone = res.invitePhone?res.invitePhone:''
+            this.formData.symbol = res.symbols
+            this.formData.periodId = res.periods[0].votePeriodId
           })
         },
+        getList () {
+          userUtils.myAssets({}, (data) => {
+            this.assets = data
+          })
+        },
+        getUserState(){
+            // 获取当前用户状态信息
+            userApi.getUserState((data) => {
+              this.googleState = data.googleState
+              this.mobileState = data.mobileAuthState
+            }, (msg) => {
+              console.error(msg)
+            })
+        }
     }
-  }
+}
 </script>
 
 <style scoped>
