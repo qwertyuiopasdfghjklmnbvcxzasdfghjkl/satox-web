@@ -42,5 +42,76 @@ const postVote = function (data, success, error) {
 }
 voteMining.postVote = postVote
 
+// 投票收益统计
+const getVoteStatistics = function (success, error) {
+  api.get(`${domain}api/v2/account2/vote/statistics`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getVoteStatistics = getVoteStatistics
+
+// 投票列表
+const getVoteRecord = function (data, success, error) {
+  api.get(`${domain}api/v2/account2/vote/record?page=${data.page}&size=${data.size}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getVoteRecord = getVoteRecord
+
+// 挖矿收益统计
+const getMiningStatistics = function (success, error) {
+  api.get(`${domain}api/v2/account2/mining/statistics`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getMiningStatistics = getMiningStatistics
+
+// 挖矿收益列表
+const getMiningRecord = function (success, error) {
+  api.get(`${domain}api/v2/account2/mining/record`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getMiningRecord = getMiningRecord
+
+// 社区收益统计
+const getCommunityStatistics = function (success, error) {
+  api.get(`${domain}api/v2/account2/community/statistics`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getCommunityStatistics = getCommunityStatistics
+
+// 我的矿池
+const getMiningPool = function (data, success, error) {
+  api.get(`${domain}api/v2/account2/mining/pool?page=${data.page}&size=${data.size}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+voteMining.getMiningPool = getMiningPool
 
 export default voteMining
