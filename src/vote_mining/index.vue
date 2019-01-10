@@ -34,7 +34,7 @@
     			</div>
     			<div class="mt50"><button type="button" class="btn-enjoy" @click="enjoyVote">{{$t('business.ENJOY')}}</button></div>
     			<div class="mt45 fs32 text-center gray">
-    				{{$t('business.NOT_VOTE')}}<span class="blue pointer">{{$t('business.VIEW_EARNINGS')}}</span>
+    				{{$t('business.NOT_VOTE')}}<router-link :to="{name:'vote_mining_profile'}" tag="span" class="blue pointer">{{$t('business.VIEW_EARNINGS')}}</router-link>
     			</div>
     		</div>
     		<div class="rules">
