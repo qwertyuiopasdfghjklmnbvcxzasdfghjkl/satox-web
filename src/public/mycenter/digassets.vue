@@ -23,7 +23,7 @@
                 <div class="acount_tab">
                   <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">主账户</div>
                   <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">投票挖矿账户</div>
-                  <span>资金划转</span>
+                  <span @click="tansferDialog">资金划转</span>
                 </div>
                 <ul class="accountInfo-lists header">
                   <li class="th">
@@ -101,8 +101,11 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import userUtils from '@/api/wallet'
+import utils from '@/assets/js/utils'
 import userApi from '@/api/individual'
 import moreinfo from '@/public/mycenter/moreinfo'
+import TansferDialog from '@/vote_mining/dialog/transfer'
+import voteMiningApi from '@/api/voteMining'
 import loading from '@/components/loading'
 export default {
   data () {
@@ -144,16 +147,27 @@ export default {
   },
   created () {
     this.getList()
-    // 获取当前用户状态信息
-    userApi.getUserState((data) => {
-      this.googleState = data.googleState
-      this.verifyState = data.verifyState
-      this.mobileState = data.mobileAuthState
-    }, (msg) => {
-      console.error(msg)
-    })
+    this.getUserState()
   },
   methods: {
+    tansferDialog () {
+      // 修改呢称
+      utils.setDialog(TansferDialog, {
+        okCallback:()=>{
+          this.getList()
+        }
+      })
+    },
+    getUserState(){
+      // 获取当前用户状态信息
+      userApi.getUserState((data) => {
+        this.googleState = data.googleState
+        this.verifyState = data.verifyState
+        this.mobileState = data.mobileAuthState
+      }, (msg) => {
+        console.error(msg)
+      })
+    },
     filterDatas () {
       let ndatas = this.myAssets.filter((item) => {
         if (this.hideZero) {
