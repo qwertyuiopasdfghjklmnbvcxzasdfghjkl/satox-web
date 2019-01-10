@@ -2,76 +2,58 @@
   <div class="container">
     <div class="block banner">
     	<div class="control">
-    		<span>资金划转</span>
-    		<span>投票挖矿</span>
+    		<span @click="tansferDialog">{{$t('vote_mining.funds_transfer')}}</span>
+    		<router-link :to="{name:'vote_mining_index'}" tag="span">{{$t('business.MINING_TITLE')}}</router-link>
     	</div>
     </div>
     <div class="block main">
     	<div class="content">
     		<div class="tabs">
-    			<span :class="{active:tab==='vote'}" @click="tab='vote'">投票收益</span>
-    			<span :class="{active:tab==='mining'}" @click="tab='mining'">挖矿收益</span>
-    			<span :class="{active:tab==='community'}" @click="tab='community'">社区收益</span>
-    			<button type="button" v-show="tab==='mining'">我的矿池</button>
+    			<span :class="{active:tab==='vote'}" @click="tab='vote'">{{$t('vote_mining.vote_profit')}}<!-- 投票收益 --></span>
+    			<span :class="{active:tab==='mining'}" @click="tab='mining'">{{$t('vote_mining.mining_profit')}}<!-- 挖矿收益 --></span>
+    			<span :class="{active:tab==='community'}" @click="tab='community'" v-if="community.display">{{$t('vote_mining.community_profit')}}<!-- 社区收益 --></span>
+    			<button type="button" v-show="tab==='mining'" @click="miningPoolDialog">{{$t('vote_mining.mine_pool')}}<!-- 我的矿池 --></button>
     		</div>
     		<div class="tabpane-vote" v-show="tab==='vote'">
     			<div class="statistics">
     				<div>
-    					挖矿账户
+    					{{$t('vote_mining.mining_account')}}<!-- 挖矿账户 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.mining_account_tip')}}<!--包含投票冻结状态和已获得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(vote.statistics.amount)+'').toMoney()}} CDCC
     				</div>
     				<div>
-    					累计收益
+    					{{$t('vote_mining.total_profit')}}<!-- 累计收益 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.vote_profit_tips')}} CDCC<!--投票已经获得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(vote.statistics.totalProfit)+'').toMoney()}} CDCC
     				</div>
     				<div>
-    					预估收益
+    					{{$t('vote_mining.estimate_profit')}}<!-- 预估收益 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.estimate_profit_tips')}} CDCC<!--投票未来预估会获得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(vote.statistics.estimateProfit)+'').toMoney()}} CDCC
     				</div>
     				
     			</div>
     			<div class="records">
     				<div class="item header">
-    					<span>投票期</span>
-    					<span>投入票数(CDCC)</span>
-    					<span>预估收益(CDCC)</span>
-    					<span>结算日</span>
+    					<span>{{$t('vote_mining.vote_period')}}<!-- 投票期 --></span>
+    					<span>{{$t('vote_mining.vote_number')}}(CDCC)<!-- 投入票数(CDCC) --></span>
+    					<span>{{$t('vote_mining.estimate_profit')}}(CDCC)<!-- 预估收益(CDCC) --></span>
+    					<span>{{$t('vote_mining.settlement_date')}}<!-- 结算日 --></span>
     				</div>
-    				<div class="item">
-    					<span>3个月</span>
-    					<span>30,000.00</span>
-    					<span>30,000.00</span>
-    					<span>2019-01-05</span>
-    				</div>
-    				<div class="item">
-    					<span>3个月</span>
-    					<span>30,000.00</span>
-    					<span>30,000.00</span>
-    					<span>2019-01-05</span>
-    				</div>
-    				<div class="item">
-    					<span>3个月</span>
-    					<span>30,000.00</span>
-    					<span>30,000.00</span>
-    					<span>2019-01-05</span>
-    				</div>
-    				<div class="item">
-    					<span>3个月</span>
-    					<span>30,000.00</span>
-    					<span>30,000.00</span>
-    					<span>2019-01-05</span>
+    				<div class="item" v-for="item in vote.data" :key="item.voteId">
+    					<span>{{item.voteTime}} {{$t('business.TICKET_PERIOD_1')}}</span>
+    					<span>{{(Number(item.amount)+'').toMoney()}}</span>
+    					<span>{{(Number(item.estimateAmount)+'').toMoney()}}</span>
+    					<span>{{new Date(item.completeTime).format('yyyy-MM-dd')}}</span>
     				</div>
     			</div>
     			<page v-if="!vote.loading && vote.data.length > 0" :pageIndex="vote.page" :pageSize="vote.size" :total="vote.total" @changePageIndex="vote.pageChange"/>
@@ -84,51 +66,41 @@
     		<div class="tabpane-mining" v-show="tab==='mining'">
     			<div class="statistics">
     				<div>
-    					每日收益
+    					{{$t('vote_mining.daily_profit')}}<!-- 每日收益 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.daily_profit_tips')}} CDCC<!--每天挖礦可獲得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(mining.statistics.dailyProfit)+'').toMoney()}} CDCC
     				</div>
     				<div>
-    					累计收益
+    					{{$t('vote_mining.total_profit')}}<!-- 累计收益 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.mining_profit_tips')}} CDCC<!--挖礦已經獲得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(mining.statistics.totalProfit)+'').toMoney()}} CDCC
     				</div>
     				<div>
-    					预估收益
+    					{{$t('vote_mining.estimate_profit')}}<!-- 预估收益 -->
     					<span class="tips">
     					  <i class="tips-icon">?</i>
-    					  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    					  <em class="tips-text">{{$t('vote_mining.mining_estimate_profit_tips')}} CDCC<!--挖礦未來預估會獲得的CDCC--></em>
     					</span>
-    					: 12,345.23 CDCC
+    					: {{(Number(mining.statistics.estimateProfit)+'').toMoney()}} CDCC
     				</div>
     				
     			</div>
     			<div class="records">
     				<div class="item header">
-    					<span>投票期</span>
-    					<span>投票笔数</span>
-    					<span>挖矿收益(CDCC)</span>
+    					<span>{{$t('vote_mining.vote_period')}}<!-- 投票期 --></span>
+    					<span>{{$t('vote_mining.vote_pens')}}<!-- 投票笔数 --></span>
+    					<span>{{$t('vote_mining.mining_profit')}}(CDCC)<!-- 挖矿收益(CDCC) --></span>
     				</div>
-    				<div class="item">
-    					<span>3个月</span>
-    					<span>3</span>
-    					<span>30,000.00</span>
-    				</div>
-    				<div class="item">
-    					<span>6个月</span>
-    					<span>4</span>
-    					<span>30,000.00</span>
-    				</div>
-    				<div class="item">
-    					<span>12个月</span>
-    					<span>5</span>
-    					<span>30,000.00</span>
+    				<div class="item" v-for="(item,index) in mining.data" :key="index">
+    					<span>{{item.voteTime}} {{$t('business.TICKET_PERIOD_1')}}</span>
+    					<span>{{item.voteCount}}</span>
+    					<span>{{(Number(item.minerProfit)+'').toMoney()}}</span>
     				</div>
     			</div>
     		</div>
@@ -136,61 +108,57 @@
     			<div class="overview">
     				<div class="row">
     					<div>
-    						每日收益
+    						{{$t('vote_mining.daily_profit')}}<!-- 每日收益 -->
     						<span class="tips">
     						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    						  <em class="tips-text">{{$t('vote_mining.community_daily_profit_tips')}} CDCC<!--每天社區可獲得的CDCC--></em>
     						</span>
     						: 
-    						<p>12,345.23 CDCC</p>
+    						<p>{{(Number(community.statistics.dailyProfit)+'').toMoney()}} CDCC</p>
     					</div>
     					<div>
-    						累计收益
+    						{{$t('vote_mining.total_profit')}}<!-- 累计收益 -->
     						<span class="tips">
     						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    						  <em class="tips-text">{{$t('vote_mining.community_profit_tips')}} CDCC<!--社區已經獲得的CDCC--></em>
     						</span>
     						: 
-    						<p>12,345.23 CDCC</p>
+    						<p>{{(Number(community.statistics.totalProfit)+'').toMoney()}} CDCC</p>
     					</div>
     					<div>
-    						预估收益
+    						{{$t('vote_mining.estimate_profit')}}<!-- 预估收益 -->
     						<span class="tips">
     						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    						  <em class="tips-text">{{$t('vote_mining.community_estimate_profit_tips')}} CDCC<!--社區未來預估會獲得的CDCC--></em>
     						</span>
     						: 
-    						<p>12,345.23 CDCC</p>
+    						<p>{{(Number(community.statistics.estimateProfit)+'').toMoney()}} CDCC</p>
     					</div>
     				</div>
     				<div class="sepline"></div>
     				<div class="row mt50">
     					<div>
-    						每日收益
-    						<span class="tips">
-    						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
-    						</span>
-    						: 
-    						<p>12,345.23 CDCC</p>
+    						{{$t('vote_mining.community_members')}}<!-- 社区成员数量 -->
+                            :
+    						<p>{{community.statistics.membersNumber}}</p>
     					</div>
     					<div>
-    						累计收益
+    						{{$t('vote_mining.my_community_profit')}}<!-- 我的社区收益总额 -->
     						<span class="tips">
     						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    						  <em class="tips-text">{{$t('vote_mining.community_member_profit_tips')}} 20%<!--社區成員收益總額的20%--></em>
     						</span>
     						: 
-    						<p>12,345.23 CDCC</p>
+    						<p>{{(Number(community.statistics.myProfit)+'').toMoney()}} CDCC</p>
     					</div>
     					<div>
-    						预估收益
+    						{{$t('vote_mining.community_member_profit')}}<!-- 社区成员收益总额 -->
     						<span class="tips">
     						  <i class="tips-icon">?</i>
-    						  <em class="tips-text">包含投票冻结状态和已获得的CDCC<!--包含投票冻结状态和已获得的CDCC--></em>
+    						  <em class="tips-text">{{($t('vote_mining.community_member_total_profit_tips')).format('CDCC')}}<!--社區所有成員未來預估和已經獲得的CDCC總額--></em>
     						</span>
     						: 
-    						<p>12,345.23 CDCC</p>
+    						<p>{{(Number(community.statistics.memberProfit)+'').toMoney()}} CDCC</p>
     					</div>
     				</div>
     			</div>
@@ -201,11 +169,16 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  import page from '@/components/page'
-  import loading from '@/components/loading'
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+import utils from '@/assets/js/utils'
+import page from '@/components/page'
+import loading from '@/components/loading'
+import TansferDialog from './dialog/transfer'
+import MiningPool from './dialog/mine_pool'
+import voteMiningApi from '@/api/voteMining'
 
-  export default {
+export default {
     name: 'vote_mining_profile',
     components: {
       page,
@@ -215,27 +188,93 @@
     	return {
     		tab:'vote',
     		vote:{
+                statistics:{},
     			data:[],
     			loading:false,
     			page:1,
     			size:20,
-    			total:100,
-    			pageChange(){
-
+    			total:0,
+    			pageChange(page){
+                    window.gvue.vote.page = page
+                    window.gvue.getVoteRecord()
     			}
     		},
+            mining:{
+                statistics:{},
+                data:[],
+                loading:false,
+            },
+            community:{
+                display:false,
+                statistics:{}
+            }
     	}
     },
     computed: {
       ...mapGetters(['getApiToken', 'getLang']),
     },
-    watch: {
-      
+    watch:{
+        tab(_n, _o){
+            switch(_n){
+                case 'vote':
+                    this.getVoteStatistics()
+                    this.vote.page =1
+                    this.getVoteRecord()
+                    break
+                case 'mining':
+                    this.getMiningStatistics()
+                    this.getMiningRecord()
+                    break
+            }
+        }
     },
     created () {
-      
+        this.getVoteStatistics()
+        this.getVoteRecord()
+        this.getCommunityStatistics()
+        window.gvue = this
     },
-  }
+    methods:{
+        getVoteStatistics(){
+            voteMiningApi.getVoteStatistics(data=>{
+                this.vote.statistics = data
+            })
+        },
+        getVoteRecord(){
+            this.vote.loading = true
+            voteMiningApi.getVoteRecord({page:this.vote.page, size:this.vote.size},data=>{
+                this.vote.loading = false
+                this.vote.total = data.total
+                this.vote.data = data.list
+            })
+        },
+        getMiningStatistics(){
+            voteMiningApi.getMiningStatistics(data=>{
+                this.mining.statistics = data
+            })
+        },
+        getMiningRecord(){
+            this.mining.loading = true
+            voteMiningApi.getMiningRecord(data=>{
+                this.mining.loading = false
+                this.mining.data = data
+            })
+        },
+        getCommunityStatistics(){
+            voteMiningApi.getCommunityStatistics(data=>{
+                this.community = data
+            })
+        },
+        tansferDialog () {
+          // 修改呢称
+          utils.setDialog(TansferDialog, {})
+        },
+        miningPoolDialog () {
+          // 我的矿池
+          utils.setDialog(MiningPool, {})
+        },
+    },
+}
 </script>
 
 <style scoped>
@@ -261,7 +300,8 @@
 .banner .control {position: absolute; left: 0; right: 0; bottom: 14%; width: 1200px; margin-left: auto; margin-right: auto; z-index: 1; text-align: right;}
 .banner .control span {
 	display: inline-block;
-	width: 180px;
+	min-width: 180px;
+    padding: 0 15px;
 	height: 50px;
 	line-height: 50px;
 	border: 2px solid #0064FE;
@@ -305,17 +345,17 @@
 .tabs span:nth-of-type(2){z-index: 2;}
 .tabs span:nth-of-type(3){z-index: 1;}
 .tabs span.active {background-color: #0D66EF; color: #fff; font-size: 24px; border-color: #0D66EF;}
-.tabs button {position: absolute; right: 25px; top: 15px; height: 40px; background-color: #3283FF; border: none; border-radius: 20px; font-size: 16px; color: #fff; width: 120px; cursor: pointer;}
+.tabs button {position: absolute; right: 25px; top: 15px; height: 40px; background-color: #3283FF; border: none; border-radius: 20px; font-size: 16px; color: #fff; padding: 0 20px; cursor: pointer;}
 .tabs button:hover {background-color: #0044ad;}
 
-.statistics {height: 100px; line-height: 100px; font-size: 24px; padding-left: 55px; padding-right: 55px; display: flex; justify-content: space-between;}
+.statistics {height: 100px; line-height: 100px; font-size: 22px; padding-left: 55px; padding-right: 55px; display: flex; justify-content: space-between;}
 .statistics > div {display: flex;}
 
 .records {padding-bottom: 50px;}
 .records .item{display: flex; justify-content: space-between; line-height: 55px; border-bottom: 1px solid #ccc; font-size: 16px; color: #666; line-height: 55px; margin-left: 55px; margin-right: 55px;}
 .records .item.header {margin-left: 0; margin-right: 0; box-shadow: 0 0 5px rgba(0,0,0,.2); padding: 0 55px; border-bottom: none; color: #333; font-size: 18px;}
 .records .item span {width: 300px;}
-.records .item span:last-of-type {width: 120px;}
+.records .item span:last-of-type {width: 150px;}
 
 .tabpane-mining .records .item span:last-of-type {width: 200px;}
 
