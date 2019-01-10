@@ -292,29 +292,29 @@ export default {
 <style scoped>
 div.error,input.error{border-color: #e53f3f !important;}
 em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;height:18px!important;line-height:18px;font-size:12px!important;}
-.withdrawBox { width: 802px;height: auto;background-color: #222121;}
-.withdrawBox .filed{margin-bottom: 20px;position: relative;margin-left: 22px;height: 30px;height: auto;}
+.withdrawBox { width: 802px; background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d; position: relative;}
+.withdrawBox .filed{margin-bottom: 20px;position: relative;margin-left: 22px;height: 40px;height: auto;}
 .withdrawBox .filed .joint{color: #283149;}
-.withdrawBox .filed em{font-size: 14px;color: #becbe8;display: inline-block;height: 30px;line-height: 30px;}
-.withdrawBox .filed em i.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #fdb902;}
-.withdrawBox .filed label{display: inline-block;font-size: 12px;color: #818fae; width: 150px;height: 30px;line-height: 30px;text-align: right;position: absolute;left: -25px;top: 0;}
+.withdrawBox .filed em{font-size: 14px; display: inline-block;height: 40px;line-height: 40px;}
+.withdrawBox .filed em i.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: red;}
+.withdrawBox .filed label{display: inline-block;font-size: 12px;color: #999; width: 150px;height: 30px;line-height: 30px;text-align: right;position: absolute;left: -25px;top: 0;}
 .withdrawBox .filed .withdraw-info{
   display: inline-block;box-sizing: border-box; padding: 0px;width: 100%;height: 30px;line-height: 30px;
   background-color: transparent;font-size: 14px;color: #0b0c0e;
 }
 .withdrawBox .filed .withdraw-info>div{color: #818fae;}
-.withdrawBox .filed .BNB-subbtn{display: inline-block;box-sizing: border-box;vertical-align: middle;width: 180px;height: 30px;line-height: 30px;font-size: 14px;text-align: center;color: #261003;background-color: #fdb902;border-radius: 4px;cursor: pointer;}
-.withdrawBox .filed .BNB-subbtn:hover{background-color: #fdb902;}
+.withdrawBox .filed .BNB-subbtn{display: inline-block;box-sizing: border-box;vertical-align: middle;width: 180px;height: 40px;line-height: 40px;font-size: 14px;text-align: center;color: #fff;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
+.withdrawBox .filed .BNB-subbtn:hover{background-color: #0D66EF;}
 .withdrawBox .filed .withAdress{
   position: relative; color:#999;font-size: 0; width: 500px;height:30px;
-  background-color: #FFF;border:1px solid #54616c;
+  background-color: #FFF;border:1px solid #ccc;
 }
 .withAdress span.dowml{position: relative;cursor: pointer; vertical-align: top; width: 29px;height: 30px;border-left: 1px solid transparent; display: inline-block;float:right;}
 .withAdress span.dowml:before{content:"";display: inline-block; width: 0px;height: 0px;border-left: 9px solid transparent;border-bottom:9px solid transparent;border-right:9px solid transparent;border-top: 9px solid #aeb7d0;position: absolute;top:10px;left:5px;}
-.withAdress span.dowml:hover:before{border-top-color: #fdb902;}
-.withAdress input{color: #8e8fae; width: 452px;padding-left: 12px;padding-right: 6px;background-color: transparent;height: 30px;}
+.withAdress span.dowml:hover:before{border-top-color: #0D66EF;}
+.withAdress input{color: #333; width: 452px;padding-left: 12px;padding-right: 6px;background-color: transparent;height: 30px;}
 .withAdress ul{position: absolute;z-index: 22;width: 500px;top: 30px;left: -1px;border: 1px solid #283149;}
-.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fdb902;text-indent: 12px;background-color: #404b69;cursor: pointer;}
+.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #0D66EF;cursor: pointer;}
 .withAdress ul li:hover{background-color: #283149;}
 .withAdress ul li span{font-size: 16px;position: absolute; right: 7px;top: 8px;cursor: pointer;}
 .withAdress ul li img{width: 16px;height: 16px;vertical-align: middle;}
@@ -327,25 +327,24 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   border: 1px solid #54616c;color: #aeb7d0;margin-top: 0px;text-align: right;line-height: 30px;
   background:#FFF;
 }
-.number a{color: #fdb902;}
-.number a:hover{color: #fdb902;}
+.number a{color: #0D66EF;}
+.number a:hover{color: #0D66EF;}
 .number .numberAll{
   position: absolute;left: 0;width: 408px;height: 28px;padding-left: 12px;padding-right: 12px;line-height: 28px;
   color: #261003;background-color:transparent;
 }
 .withdrawBox:after{content:".";display:block;clear:both;visibility:hidden;height:0;}
 .withdrawBox .tips{width: 226px;margin-top:18px;}
-.withdrawBox .tips li{line-height:1.5;list-style-type:square;font-size:14px;color:#becbe8;padding:5px 0;border:none;width: 190px;}
+.withdrawBox .tips li{line-height:1.5;list-style-type:square;font-size:14px;color:#666;padding:5px 0;border:none;width: 190px;}
 .withdrawBox .tips li a{color: #aeb7d0;text-decoration: underline;font-size: 14px;}
 /* .koall-verify-title{width: 100%;height: 16px;line-height: 16px;margin-top: 2px;} */
 .koall-verify-title{position: relative;}
-.koall-verify-title p{width: 100%;height: 30px;line-height: 30px;background-color: #333232; font-size: 16px;color: #aeb7d0;text-align: center;}
-.koall-verify-title span{width: 24px;float:right;cursor: pointer; height: 24px;margin-top:8px; display: inline-block;color: #aeb7d0;position: absolute;right: 8px;top: -5px;}
-.koall-verify-title span.icon-close:before{vertical-align: -webkit-baseline-middle;}
-.koall-verify-title span.icon-close:hover{color: #fdb902;}
+.koall-verify-title p{height: 50px;line-height: 50px;color: #fff;font-size: 20px;  text-align: center;background-color: #0D66EF;}
+.koall-verify-title span{position:absolute;text-decoration:none;font-size:16px;color:#fff;top:17px;right:15px; opacity: 0.8; cursor: pointer;}
+.koall-verify-title span:hover{opacity: 1;}
 .koall-verify-all{display: block;width: 100%;}
 .filed-number{display: flex;justify-content: space-between;}
-.filed-number span{line-height: 30px;color: #818fae;}
+.filed-number span{line-height: 30px;color: #999;}
 input::-webkit-input-placeholder { /* WebKit browsers */color:#818fae;}
 input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color:#818fae;}
 input::-moz-placeholder { /* Mozilla Firefox 19+ */color:#818fae;}

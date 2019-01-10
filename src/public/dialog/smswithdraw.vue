@@ -7,8 +7,8 @@
       <div class="form">
         <inputbox ref="box" type="password" v-validate="'required'" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_login_password') + '：'"  @keyupEnter="auth"/><!--登录密码-->
         <div class="smsCode">
-          <inputbox v-validate="'required|pInteger'" :maxLength="6" name="smsCode" :msgs="msgs.smsCode" :errs="errors" v-model="formData.smsCode" :title="$t('account.user_center_SMS_code') + '：'"  @keyupEnter="auth"/><!--短信验证码-->
-          <buttonbox :class="{disabled:disabled}" :text="sendTitle" @click="sendSMSCode"/><!--确定-->
+          <inputbox v-validate="'required|pInteger'" :maxLength="6"  name="smsCode" :msgs="msgs.smsCode" :errs="errors" v-model="formData.smsCode" :title="$t('account.user_center_SMS_code') + '：'"  @keyupEnter="auth"/><!--短信验证码-->
+          <buttonbox :height="32" :class="{disabled:disabled}" :text="sendTitle" @click="sendSMSCode"/><!--确定-->
         </div>
         <div class="buttons">
           <buttonbox :text="$t('exchange.exchange_determine')" @click="auth"/><!--确定-->
@@ -113,22 +113,22 @@ export default {
 </script>
 
 <style scoped>
-.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
-.top{width:100%;height:30px;position:relative;background-color:#333232;}
-.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #fdb902;}
-.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
+.dialog{width:370px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
+.top{height: 40px;line-height: 40px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:13px;right:13px; opacity: 0.8;}
+.icon-close:hover{opacity: 1;}
+/*.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}*/
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .title{color:#becbe8;}
-.form /deep/ .input,.form /deep/ .input.error{background-color:#FFF;border-color:#54616c;color:#261003;}
+.form /deep/ .input,.form /deep/ .input.error{color:#333; background-color: transparent; border: 1px solid #ccc; height: 32px; box-sizing: border-box;}
 .form /deep/ .input:focus{background-color:#FFF;}
 .smsCode{position: relative;}
-.smsCode /deep/ input{width:120px!important;}
+.smsCode /deep/ input[type='text']{width:120px!important;}
+.smsCode /deep/ input[type='button']{width:150px!important;}
 .smsCode /deep/ .button{position:absolute;top:20px;right:0;}
 .smsCode /deep/ .disabled{background:#999;color:#FFF;cursor:not-allowed;}
-.buttons{display:flex;justify-content:space-between;align-items:center;width:272px;}
+.buttons{display:flex;justify-content:space-between;align-items:center; min-width:272px;}
 .buttons input{width:100px !important;}
 .buttons input:first-child{margin-right:20px;}
-.buttons input:last-child{border:1px solid #fdb902;color:#fdb902;;background:transparent;}
-.buttons input:last-child:hover{border-color:#fdb902;color:#fdb902;}
+.buttons input:last-child{border:1px solid #ccc;color:#666;;background:transparent;}
+.buttons input:last-child:hover{color:#333;}
 </style>

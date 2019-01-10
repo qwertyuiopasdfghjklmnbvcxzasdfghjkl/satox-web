@@ -102,15 +102,14 @@ export default {
 </script>
 
 <style scoped>
-.dialog{width:370px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color:#222121;}
-.top{width:100%;height:30px;position:relative;background-color:#333232;}
-.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#becbe8;top:calc(50% - 7px);right:10px;}
-.icon-close:hover{color: #fdb902;}
-.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}
+.dialog{width:370px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
+.top{height: 40px;line-height: 40px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.icon-close{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:13px;right:13px; opacity: 0.8;}
+.icon-close:hover{opacity: 1;}
+/*.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}*/
 .form{display:flex;justify-content:center;align-items:center;flex-flow:column;width:100%;margin:30px 0;}
-.form /deep/ .title{color:#becbe8;}
-.form /deep/ .input,.form /deep/ .input.error{background-color:#FFF;border-color:#54616c;color:#261003;}
+.form /deep/ .input,.form /deep/ .input.error{color:#333; background-color: transparent; border: 1px solid #ccc; height: 32px; box-sizing: border-box;}
 .form /deep/ .input:focus{background-color:#FFF;}
 .warm-prompt{width: 272px;padding-top: 20px;}
-.warm-prompt p{min-height: 20px;line-height: 20px;color: #becbe8;}
+.warm-prompt p{min-height: 20px;line-height: 20px;color: #666;}
 </style>
