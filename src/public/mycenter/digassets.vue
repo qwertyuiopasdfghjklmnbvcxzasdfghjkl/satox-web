@@ -69,7 +69,7 @@
                                 <i class="icon-arrow-down" :class="{active:sort==='asc'}"></i>
                               </em>
                             </div>
-                            <div class="opreat f-right ng-binding">
+                            <div class="opreat f-right ng-binding" v-if="accountType===1">
                               {{$t('otc_exchange.otc_exchange_operating')}}<!--操作-->
                             </div>
                         </div>
@@ -83,8 +83,8 @@
                             <div class="total f-right ng-binding">{{toFixed(data.totalBalance)}}</div>
                             <div class="useable f-right ng-binding">{{toFixed(data.availableBalance)}}</div>
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
-                            <div class="action f-right">
-                                <span class="btn btn-deposit ng-binding ng-scope1" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')" v-show="accountType===1"><!--充值与提现--></span>
+                            <div class="action f-right"  v-if="accountType===1">
+                                <span class="btn btn-deposit ng-binding ng-scope1" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"><!--充值与提现--></span>
                             </div>
                         </div>
                         <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/>
