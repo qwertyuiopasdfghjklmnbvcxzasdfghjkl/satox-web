@@ -66,4 +66,16 @@ const listDepositHistory = function (data, success, error) {
 }
 wallet.listDepositHistory = listDepositHistory
 
+// 查询EOS钱包地址
+const getEosAddress = function (success, error) {
+  api.get(`${domain}api/v2/account2/eos_main`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+wallet.getEosAddress = getEosAddress
+
 export default wallet

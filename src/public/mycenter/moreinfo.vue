@@ -19,7 +19,7 @@
                 <div class="lists active">
                     <div class="name2">
                         <div class="name">
-                            <input type="text" class="adressName" readonly="readonly" :disabled="Number(item.rechargeFlag) !== 1" v-model="Number(item.rechargeFlag) !== 1 ? null : item.address"/>
+                            <input type="text" class="adressName" readonly="readonly" :disabled="Number(item.rechargeFlag) !== 1" :value="Number(item.rechargeFlag) !== 1 ? null : getAddress"/>
                             <span class="copy icon_copy" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : copy()" :title="$t('account.user_Copy_address')">
                                 <!--复制地址-->
                             </span>
@@ -32,6 +32,31 @@
                         </div>
                     </div>
                 </div>
+                <template v-if="item.symbol==='EOS'">
+                  <div class="adr-list">
+                      <label class="active" style="position:relative;">
+                          {{symbol}} {{$t('account.recharge_memo')}}<!--EOS充值备注-->：
+                      </label>
+                  </div>
+                  <div class="lists active">
+                      <div class="name2">
+                          <div class="name">
+                              <input type="text" class="adressName" readonly="readonly" :disabled="Number(item.rechargeFlag) !== 1" :value="Number(item.rechargeFlag) !== 1 ? null : item.address"/>
+                              <span class="copy icon_copy" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : copy_memo()" :title="$t('account.user_Copy_address')">
+                                  <!--复制地址-->
+                              </span>
+                              <span class="ewm icon-qrcode" style="color: #4A91FD;" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanMEMO()" >
+                                  <!--充值-->
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="adr-list">
+                      <label class="active" style="position:relative;">
+                          <i style="color: red;">{{$t('public0.public242')}}：{{$t('account.eos_recharge_warn')}}</i><!--备注和地址同时使用才能充值EOS成功-->
+                      </label>
+                  </div>
+                </template>
                 <div class="addBNB">
                     <ul class="tips">
                         <li style="display:none;">
@@ -59,6 +84,7 @@
 import userUtils from '@/api/wallet'
 import utils from '@/assets/js/utils'
 import adressCava from './adresscava'
+import memoCava from './memocava'
 import withdrawInfo from './withdrawInfo'
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
@@ -99,7 +125,8 @@ export default {
     return {
       disabled: false,
       dataWallet: [],
-      show: false
+      show: false,
+      EOS_MEMO:''
     }
   },
   computed: {
@@ -109,10 +136,27 @@ export default {
         return this.item.blockConfirm
       }
       return this.item.symbol === 'BTC' ? 6 : 30
+    },
+    getAddress(){
+      return this.symbol==='EOS'?this.EOS_MEMO:this.item.address
+    }
+  },
+  created(){
+    if(this.symbol==='EOS' && !this.EOS_MEMO){
+      this.getEosAddress()
     }
   },
   methods: {
+    getEosAddress(){
+      userUtils.getEosAddress(data=>{
+        this.EOS_MEMO = data
+      })
+    },
     copy () {
+      Vue.$koallTipBox({icon: 'success', message: this.$t('public0.public33')}) // 复制成功
+      copyText(this.getAddress)
+    },
+    copy_memo () {
       Vue.$koallTipBox({icon: 'success', message: this.$t('public0.public33')}) // 复制成功
       copyText(this.item.address)
     },
@@ -174,7 +218,7 @@ export default {
         symbol: this.item.symbol,
         symbolType: this.item.symbolType,
         available: this.item.availableBalance,
-        fromAddress: this.item.address,
+        fromAddress: this.getAddress,
         procedure: this.item.procedureFee,
         minWithdraw: this.item.minWithdraw,
         fromAccount: this.item.accountId,
@@ -185,10 +229,16 @@ export default {
     },
     scanEWM () {
       utils.setDialog(adressCava, {
+        addr: this.getAddress,
+        symbol: this.item.symbol
+      })
+    },
+    scanMEMO() {
+      utils.setDialog(memoCava, {
         addr: this.item.address,
         symbol: this.item.symbol
       })
-    }
+    },
   }
 }
 </script>
