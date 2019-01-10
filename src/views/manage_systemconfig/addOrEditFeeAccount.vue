@@ -20,6 +20,9 @@
               <Radio label="4">
                   <span>MBT</span>
               </Radio>
+              <Radio label="5">
+                  <span>EOS</span>
+              </Radio>
           </RadioGroup>
       </FormItem>
       <FormItem label="主链类型" prop="symbolType" v-if="isEdit">
@@ -75,6 +78,9 @@ export default {
                 break;
             case '4':
                 return 'MBT'
+                break;
+            case 5:
+                return 'EOS'
                 break;
         }
     },

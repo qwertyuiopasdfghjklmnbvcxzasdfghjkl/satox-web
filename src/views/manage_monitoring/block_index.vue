@@ -233,6 +233,9 @@ import util from '../../libs/util';
                     case '4':
                         return 'MBT'
                         break;
+                    case 5:
+                        return 'EOS'
+                        break;
                 }
             },
             getconfirmList () {
