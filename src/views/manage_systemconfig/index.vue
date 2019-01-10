@@ -15,12 +15,12 @@
           <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value}}次</Col>
           <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value2}}分钟</Col>
           <Col span="12" v-if="data.code === 'loginLockCount'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;"/>
-            <numberbox ref="price" type="text" v-model="data.$value2" style="width:80px;border:1px solid #dddee1;"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
+            <Input ref="price" type="text" v-model="data.$value2" style="width:80px;"/>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">修改</Button>
           </Col>
           <Col span="12" v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !== 'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
           </Col>
         </Row>
@@ -35,13 +35,13 @@
           <Col span="6">{{data.codeDesc}}</Col>
           <Col span="6" v-if="data.code !== 'otcCoinType'">{{data.value}}</Col>
           <Col span="12" v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency' && data.code !== 'adCountLimit' && data.code !== 'priceBasePlatform'">
-            <numberbox ref="price" type="text" v-model="data.$value" style="width:80px;border:1px solid #dddee1;" v-if="data.code !== 'priceBasePlatform'"/>
+            <Input ref="price" type="text" v-model="data.$value" style="width:80px;" v-if="data.code !== 'priceBasePlatform'"/>
             <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'" style="width:80px;"></Input>
             <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
           </Col>
-          <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
+          <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);min-height:30px;line-height:30px;" v-if="data.code === 'otcCoinType'">
             <CheckboxGroup v-model="data.$value"  @on-change="updataSystem(data)">
-              <Checkbox :label="da.symbol" v-for="da in dataSymbol" :key="data.id">{{da.symbol}}</Checkbox>
+              <Checkbox :label="`${da.symbol}-${da.symbolType}`" v-for="da in dataSymbol" :key="da.id">{{da.symbol}}</Checkbox>
             </CheckboxGroup>
           </Row>
         </Row>
@@ -50,9 +50,11 @@
         <Card>
           <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
             <span style="height:32px;font-weight:normal;line-height:32px;">交易所手续费账户</span>
-            <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
-            <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
-            <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+            <span>
+              <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+            </span>
             <Button type="primary" style="float:right;" @click="addOrEditFeeAccountDialog">添加手续费账户</Button>
           </p>
           <Table :columns="accountsColumns" :data="accountsData" style="margin-top:10px;"></Table>
@@ -61,9 +63,11 @@
         <Card style="margin-top:16px;">
           <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
             <span style="height:32px;font-weight:normal;line-height:32px;">提币主地址设置</span>
-            <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
-            <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
-            <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+            <span>
+              <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字" style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+            </span>
             <Button type="primary" style="float:right;" @click="addOrEditWithdrawalAddressDialog">添加提币主地址</Button>
           </p>
           <Table :columns="coinPoolsColumns" :data="coinPoolsData" style="margin-top:10px;"></Table>
@@ -73,7 +77,7 @@
       <TabPane label="币池钱包整理参数">
         <Card>
           <p slot="title">币池钱包整理参数
-            <Button type="ghost" @click="addCion()">添加</Button>
+            <Button type="primary" @click="addCion()">添加</Button>
           </p>
           <Table :columns="columnsSymbol" :data="columnsSymbolData"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
@@ -91,6 +95,7 @@ import numberbox from '../components/dialog/numberbox'
 import addOrEditFeeAccount from './addOrEditFeeAccount'
 import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress'
 import addConfig from './addConfig'
+import upAddress from './upAddress'
 export default {
   data () {
     return {
@@ -128,28 +133,28 @@ export default {
                         return h('div', params.row.enable === 0 ? '不可用' : '可用')
                     }
                 },
-                // {
-                //     title: ' ',
-                //     key: 'address',
-                //     render: (h, params) => {
-                //         return h('div', [
-                //             h('Button', {
-                //                 props: {type: 'primary', size: 'small'},
-                //                 style: {marginRight: '10px'},
-                //                 on: {
-                //                     click: () => {
-                //                         util.setDialog(upAddress, {
-                //                             item: params.row,
-                //                             okCallback: () => {
-                //                                 this.getTransferConfig()
-                //                             }
-                //                         })
-                //                     }
-                //                 }
-                //             }, '修改')
-                //         ]);
-                //     }
-                // }
+                {
+                    title: ' ',
+                    key: 'address',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {type: 'primary', size: 'small'},
+                                style: {marginRight: '10px'},
+                                on: {
+                                    click: () => {
+                                        util.setDialog(upAddress, {
+                                            item: params.row,
+                                            okCallback: () => {
+                                                this.getfindCollectConfig()
+                                            }
+                                        })
+                                    }
+                                }
+                            }, '修改')
+                        ]);
+                    }
+                }
       ],
       columnsSymbolData: [],
       dataSymbol: [],
@@ -205,6 +210,7 @@ export default {
                   isEdit: true,
                   symbol: params.row.symbol,
                   username: params.row.username,
+                  symbolType: params.row.symbolType,
                   okCallback: () => {
                     this.fnFindAdminAccounts()
                   }
@@ -236,6 +242,7 @@ export default {
                   isEdit: true,
                   symbol: params.row.symbol,
                   username: params.row.username,
+                  symbolType: params.row.symbolType,
                   okCallback: () => {
                     this.fnFindAdminCoinPools()
                   }
@@ -261,6 +268,15 @@ export default {
   },
   components: {
     numberbox
+  },
+  computed: {
+    symbolMap () {
+      let m = {}
+      this.dataSymbol.forEach((item) => {
+        m[item.symbol+'-'+item.symbolType] = item
+      })
+      return m
+    }
   },
   watch: {
     accountsPage () {
@@ -306,9 +322,9 @@ export default {
           if (d.code === 'otcCoinType') {
             d.$value = d.value.split(',')
           } else {
-            d.$value = 0
+            d.$value = ''
           }
-          d.$valu2 = 0
+          d.$valu2 = ''
         })
         this.exchangeItem = res
       }, (msg) => {
@@ -346,11 +362,21 @@ export default {
     updataSystem (data) {
       let code = data.code;
       let value = data.$value
+      let nValues = []
       if (!value || (code === 'otcCoinType' && value.length === 0)) {
         this.$Message.error({content: '请输入内容'})
         return
+      } else {
+        if (code === 'otcCoinType') {
+          value.forEach((symbol) => {
+            if (this.symbolMap[symbol]) {
+              nValues.push(symbol)
+            }
+          })
+        }
+        
       }
-      value = code === 'otcCoinType' ? value.join(',') : value
+      value = code === 'otcCoinType' ? nValues.join(',') : value
       system.saveSysParam({
         value: value,
         sysParamId: this.tempItem[code].sysParamId,

@@ -23,10 +23,10 @@ export default {
                     title: '交易id',
                     key: 'txId'
                 },
-                {
-                    title: '用户账号',
-                    key: 'userName'
-                },
+                // {
+                //     title: '用户账号',
+                //     key: 'userName'
+                // },
                 {
                     title: '币种',
                     key: 'symbol'

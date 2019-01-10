@@ -2,71 +2,87 @@
     <div class="eploy">
         <Card>
             <p slot="title">添加配置</p>
-             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="symbol" label="币种">
-                    <Input v-model="formLeft.symbol" type="text" style="width:200px;"></Input>
-                </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="coinMin" label="最小金额">
-                    <Input v-model="formLeft.coinMin" type="text" style="width:200px;" ></Input>
-                </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="coinReserve" label="保留金额币种">
-                    <Input v-model="formLeft.coinReserve" style="width:200px;" ></Input>
-                </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="minerFee" label="BTC矿工费">
-                    <Input v-model="formLeft.minerFee" style="width:200px;" ></Input>
-                </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="gasPrice" label="ETH GAS单价">
-                    <Input v-model="formLeft.gasPrice" style="width:200px;" ></Input>
-                </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="gasLimit" label="ETH GAS上限">
-                    <Input v-model="formLeft.gasLimit" style="width:200px;" ></Input>
-                </FormItem>
-            </Row>
-            <FormItem label="主链类型" prop="symbolType">
-                <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
-                    <Radio label="2">
-                        <span>ETH</span>
-                    </Radio>
-                    <Radio label="1">
-                        <span>BTC</span>
-                    </Radio>
-                    <Radio label="3">
-                        <span>OMNI</span>
-                    </Radio>
-                    <Radio label="4">
-                        <span>MBT</span>
-                    </Radio>
-                </RadioGroup>
-            </FormItem>
-            <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
-                <FormItem prop="gasPrice" label="是否可用">
-                     <RadioGroup v-model="formLeft.enable" >
-                            <Radio label="1">
-                                <span>是</span>
-                            </Radio>
+            <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="symbol" label="币种">
+                            <Input v-model="formLeft.symbol" type="text" style="width:200px;"></Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="coinMin" label="最小金额">
+                            <Input v-model="formLeft.coinMin" type="text" style="width:200px;" ></Input>
+                        </FormItem>
+                     </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="coinReserve" label="保留金额">
+                            <Input v-model="formLeft.coinReserve" style="width:200px;" ></Input>
+                        </FormItem>
+                     </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="minerFee" label="BTC矿工费">
+                            <Input v-model="formLeft.minerFee" style="width:200px;" ></Input>
+                        </FormItem>
+                     </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="gasPrice" label="ETH GAS单价">
+                            <Input v-model="formLeft.gasPrice" style="width:200px;" ></Input>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
+                    <Col span="24">
+                        <FormItem prop="gasLimit" label="ETH GAS上限">
+                            <Input v-model="formLeft.gasLimit" style="width:200px;" ></Input>
+                        </FormItem>
+                     </Col>
+                </Row>
+                <FormItem label="主链类型" prop="symbolType">
+                    <Col span="24">
+                        <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
                             <Radio label="2">
-                                <span>否</span>
+                                <span>ETH</span>
+                            </Radio>
+                            <Radio label="1">
+                                <span>BTC</span>
+                            </Radio>
+                            <Radio label="3">
+                                <span>OMNI</span>
+                            </Radio>
+                            <Radio label="4">
+                                <span>MBT</span>
                             </Radio>
                         </RadioGroup>
+                     </Col>
                 </FormItem>
-            </Row>
-            <Row style="height:40px;line-height:40px;">
-                <Col span="24">
-                   <Button @click="addEploy">确定</Button>
-                   <Button @click="closeDialog">取消</Button>
-                </Col>
-            </Row>
+                <Row style="height:40px;line-height:40px;margin-bottom: 40px;">
+                    <Col span="24">
+                        <FormItem prop="enable" label="是否可用">
+                            <RadioGroup v-model="formLeft.enable" >
+                                    <Radio label="1">
+                                        <span>是</span>
+                                    </Radio>
+                                    <Radio label="2">
+                                        <span>否</span>
+                                    </Radio>
+                                </RadioGroup>
+                        </FormItem>
+                     </Col>
+                </Row>
+                <Row style="height:40px;line-height:40px;">
+                    <Col span="24">
+                        <Button @click="addEploy">确定</Button>
+                        <Button @click="closeDialog">取消</Button>
+                    </Col>
+                </Row>
             </Form>
         </Card>
     </div>
@@ -128,6 +144,7 @@ export default {
     }
 }
 </script>
-<style>
-.eploy{width: 500px;}
+<style scoped>
+.eploy{width: 400px;}
+.ivu-form-item-content{margin-left: 200px !important;}
 </style>

@@ -6,6 +6,18 @@
         <span class="refresh" @click="getList"></span>
       </p>
       <Row>
+        <Col span="24">
+          <Select v-model="formData.type" style="width:200px;">
+            <Option value="account">账号</Option>
+            <Option value="verifyName">姓名</Option>
+            <Option value="verifyIdCard">证件号</Option>
+            <Option value="cn">地区</Option>
+          </Select>
+          <Input v-model="formData.text" clearable style="width: 200px"></Input>
+          <Button type="primary" @click="getList(true)">查询</Button>
+        </Col>
+      </Row>
+      <Row style="margin-top:10px;">
         <Col span="8">待审核用户数量：{{data2.verifyWaitFirstCheck || 0}}个</Col>
         <Col span="8">待复核用户数量：{{data2.verifyWaitSecondCheck || 0}}个</Col>
         <Col span="8">已通过用户数量：{{data2.verifyPass || 0}}个</Col>
@@ -21,12 +33,17 @@ import util from '../../libs/util';
 import check from './auditing_check'
 import detail from './auditing_detail'
 import kycAPI from '../../api/kyc'
+import messageModel from './messageModel'
 export default {
   data () {
     return {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      formData: {
+        type: 'account',
+        text: ''
+      },
       columns1: [
         {title: '账号', key: 'account'},
         {title: '地区', key: 'cn'},
@@ -67,7 +84,28 @@ export default {
                           })
                         }
                     }
-                }, '查看详情并处理')
+                }, '查看详情并处理'),
+                h('i', {
+                    class: 'ivu-icon ivu-icon-volume-medium',
+                    style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', marginLeft:'10px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                    on: {
+                        click: () => {
+                          // kycAPI.firstSendSystemMessage((res) => {
+                          //   this.$Message.success({content: '发送成功'})
+                          // }, (msg) => {
+                          //   this.$Message.error({content: msg})
+                          // })
+                            // if (this.readOnly) {
+                            //     return
+                            // }
+                            util.setDialog(messageModel, {
+                                userId: params.row.verifyUserID,
+                                username: params.row.account,
+                                type: 1
+                            });
+                        }
+                    }
+                })
             ]);
         }}
       ],
@@ -121,8 +159,15 @@ export default {
         this.$Message.error({content: msg})
       })
     },
-    getList () {
-      kycAPI.listPageUserVerifys(this.pageSize, this.curPage, {}, (res, total) => {
+    getList (key) {
+      if(key){
+        this.curPage = 1
+      }
+      let data = {}
+      if (this.formData.text) {
+        data[this.formData.type] = this.formData.text
+      }
+      kycAPI.listPageUserVerifys(this.pageSize, this.curPage, data, (res, total) => {
         this.total = total
         this.data1 = res
       });

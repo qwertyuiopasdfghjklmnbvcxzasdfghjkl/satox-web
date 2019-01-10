@@ -148,7 +148,7 @@ kyc.showReviewStatusCount = showReviewStatusCount
 
 // KYC不通过原因
 const listVerifyFailReasons = function (data, success, error) {
-  api.get('/api/bm/kycManage/listVerifyFailReasons', data, (res) => {
+  api.get('api/bm/kycManage/listVerifyFailReasons', data, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -158,6 +158,42 @@ const listVerifyFailReasons = function (data, success, error) {
 }
 kyc.listVerifyFailReasons = listVerifyFailReasons
 
+// KYC -- 审核发消息
+const firstSendSystemMessage = function (data, success, error) {
+  api.post('api/bm/kycManage/firstVerify/sendSystemMessage', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+kyc.firstSendSystemMessage = firstSendSystemMessage
+
+// KYC -- 复核发消息
+const secondSendSystemMessage = function (data, success, error) {
+  api.post('api/bm/kycManage/secondVerify/sendSystemMessage', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+kyc.secondSendSystemMessage = secondSendSystemMessage
+
+
+// KYC -- 管理发消息
+const manageSendSystemMessage = function (data, success, error) {
+  api.post('api/bm/kycManage/sendSystemMessage ', data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+kyc.manageSendSystemMessage = manageSendSystemMessage
 
 // KYC详情
 // const kycReviewInfo = function (verifyId, success, error) {

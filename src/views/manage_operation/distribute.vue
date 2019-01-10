@@ -10,7 +10,7 @@
                 <Option value="1">已分发</Option>
                 <Option value="2">已取消</Option>
             </Select>
-             <Button type="primary" style="float:right" @click="this.curPage;getDistribute()">查询</Button>
+             <Button type="primary" style="float:right" @click="curPage=1;getDistribute()">查询</Button>
           </Col>
            <Col span="12">
                 <Button type="primary" style="float:right" @click="creates()">创建分发</Button>
@@ -38,7 +38,7 @@ export default {
                 },
                 {
                     title: '对象',
-                    key: 'userId'
+                    key: 'username'
                 },
                 {
                     title: '时间',

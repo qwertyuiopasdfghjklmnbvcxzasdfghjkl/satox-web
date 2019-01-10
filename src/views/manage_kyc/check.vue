@@ -5,6 +5,18 @@
       <p slot="title">KYC复核
         <span class="refresh" @click="getCheckVerifys"></span>
       </p>
+      <Row>
+        <Col span="24">
+          <Select v-model="formData.type" style="width:200px;">
+            <Option value="account">账号</Option>
+            <Option value="verifyName">姓名</Option>
+            <Option value="verifyIdCard">证件号</Option>
+            <Option value="cn">地区</Option>
+          </Select>
+          <Input v-model="formData.text" clearable style="width: 200px"></Input>
+          <Button type="primary" @click="getCheckVerifys(true)">查询</Button>
+        </Col>
+      </Row>
       <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
       <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
@@ -15,12 +27,17 @@
 import util from '../../libs/util';
 import detail from './auditing_detail'
 import kycAPI from '../../api/kyc'
+import messageModel from './messageModel'
 export default {
   props: ['userId'],
   data () {
     return {
       curPage: 1,
       total: 0,
+      formData: {
+        type: 'account',
+        text: ''
+      },
       columns1: [
         {title: '账号', key: 'account'},
         {title: '地区', key: 'cn'},
@@ -52,7 +69,20 @@ export default {
                           })
                         }
                     }
-                }, '查看详情并处理')
+                }, '查看详情并处理'),
+                h('i', {
+                    class: 'ivu-icon ivu-icon-volume-medium',
+                    style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', marginLeft:'10px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                    on: {
+                        click: () => {
+                            util.setDialog(messageModel, {
+                                userId: params.row.verifyUserID,
+                                username: params.row.account,
+                                type: 2
+                            });
+                        }
+                    }
+                })
             ]);
         }}
       ],
@@ -76,10 +106,15 @@ export default {
                 break;
         }
     },
-    getCheckVerifys () {
-      kycAPI.listPageReCheckVerifys(this.curPage, {
-        userId: this.userId
-      }, (res, total) => {
+    getCheckVerifys (key) {
+      if(key){
+        this.curPage = 1
+      }
+      let data = {userId: this.userId }
+      if (this.formData.text) {
+        data[this.formData.type] = this.formData.text
+      }
+      kycAPI.listPageReCheckVerifys(this.curPage, data, (res, total) => {
         this.total = total
         this.data1 = res
       }, (msg) => {

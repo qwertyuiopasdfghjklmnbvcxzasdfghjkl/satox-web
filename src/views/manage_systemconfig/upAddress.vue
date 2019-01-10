@@ -7,7 +7,7 @@
             <Form ref="formItem"  label-position="left" :label-width="100">
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">币种</Col>
-                    <Col span="6">{{item.symbol}}</Col>
+                    <Col span="6">{{this.item.symbol}}</Col>
                     <Col span="6">
                     <Input v-model="symbol"></Input>
                     </Col>
@@ -17,7 +17,7 @@
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">最小金额</Col>
-                    <Col span="6">{{item.coinMin}}</Col>
+                    <Col span="6">{{this.item.coinMin}}</Col>
                     <Col span="6">
                     <InputNumber style="width:100%;" :min="0.1" name="coinMin" v-model="coinMin"></InputNumber>
                     <!-- <Input v-model="coinMin"></Input> -->
@@ -28,7 +28,7 @@
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">保留金额</Col>
-                    <Col span="6">{{item.coinReserve}}</Col>
+                    <Col span="6">{{this.item.coinReserve}}</Col>
                     <Col span="6">
                     <Input v-model="coinReserve"></Input>
                     </Col>
@@ -38,7 +38,7 @@
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">BTC矿工费</Col>
-                    <Col span="6">{{item.minerFee}}</Col>
+                    <Col span="6">{{this.item.minerFee}}</Col>
                     <Col span="6">
                     <Input v-model="minerFee"></Input>
                     </Col>
@@ -48,7 +48,7 @@
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
                     <Col span="6">ETH GAS单价</Col>
-                    <Col span="6">{{item.gasPrice}}</Col>
+                    <Col span="6">{{this.item.gasPrice}}</Col>
                     <Col span="6">
                     <Input v-model="gasPrice"></Input>
                     </Col>
@@ -67,7 +67,7 @@
                     </Col>
                 </Row>
                 <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-                    <Col span="6">是否可用{{item.enable}}</Col>
+                    <Col span="6">是否可用</Col>
                     <Col span="6"> 
                     </Col>
                     <Col span="6">
@@ -153,7 +153,6 @@ export default {
                 this.item[propName] = this[propName]
                 this.$Message.success({content: '修改成功'})
                 this.$emit('okCallback')
-                this.$emit('removeDialog')
             }, (msg) => {
                 this.$Message.error({content: msg})
             })

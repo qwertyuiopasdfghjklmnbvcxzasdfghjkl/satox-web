@@ -40,7 +40,7 @@
             </Row>
             <Row style="margin-bottom:10px;">
                 <Col span="12">KYC状态</Col>
-                <Col span="8">{{data2.kycStatus === 1? '已认证':'未认证'}}</Col>
+                <Col span="8">{{data2.kycStatus === 2? '已认证':'未认证'}}</Col>
                 <!-- <Col span="4">
                     <Button type="primary" style="float:right;" @click="tabs('kycStatus')">{{data2.kycStatus === 1? '解冻':'正常'}}</Button>
                 </Col> -->
@@ -70,12 +70,11 @@
                     <Button type="primary" style="float:right;" @click="tabs('usbKeyStatus')">{{data2.usbKeyStatus === 1? '解冻':'正常'}}</Button>
                 </Col>
             </Row>
-            <Row style="margin-bottom:10px;">
+            <!-- <Row style="margin-bottom:10px;">
                 <Col span="6">提现额度</Col>
                 <Col span="6">{{data2.withdrawLimitAmount}}BTC</Col>
                 <Col span="6">
-                     <!--<Input v-model="withdrawLimitAmount"></Input> -->
-                    <InputNumber v-model="withdrawLimitAmount"></InputNumber>
+                    <InputNumber v-model="withdrawLimitAmount" max="10000"></InputNumber>
                 </Col>
                 <Col span="6">
                     <Button type="primary" style="float:right;" @click="tabs('withdrawLimitAmount', true)">保存</Button>
@@ -85,13 +84,12 @@
                 <Col span="6">人工审核额度</Col>
                 <Col span="6">{{data2.artificialAuditingAmount}}BTC</Col>
                 <Col span="6">
-                    <!-- <Input v-model="artificialAuditingAmount"></Input> -->
                      <InputNumber v-model="artificialAuditingAmount"></InputNumber>
                 </Col>
                 <Col span="6">
                     <Button type="primary" style="float:right;" @click="tabs('artificialAuditingAmount', true)">保存</Button>
                 </Col>
-            </Row>
+            </Row> -->
             <Row>
                 <span style="font-size:18px;font-weight:bold;">API</span>
             </Row>

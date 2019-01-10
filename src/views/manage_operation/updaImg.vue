@@ -1,35 +1,114 @@
 <template>
   <div class="updaImge">
-      <div class="allUpdata">
-          <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-              <img :src="image" /> 
-          </div>
-          <div class="allUpdata-left">
-                <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;">
-                    <FormItem label="" prop="img">
-                        <input type="file" ref="img" name="img" @change="iconValidator('img', $event)"/>
-                    </FormItem>
-                    <FormItem label="" >
-                        {{this.item.activityImgName}}
-                    </FormItem>
-                    <FormItem label="" >
-                        跳转到地址
-                    </FormItem>
-                    <FormItem label="" prop="jumpAddress">
-                        <Input v-model="formLeft.jumpAddress" name="jumpAddress"></Input>
-                    </FormItem>
+      <Card>
+          <p slot="title">banner修改
+              <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+          </p>
+          <div class="allUpdata">
+            <span>中文banner</span>
+            <Row style="width:100%;">
+                <Col span="4">
+                    <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
+                        <img :src="image" /> 
+                    </div>
+                </Col>
+                <Form ref="formItem" :model="formLeft"  label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                    <Col span="5">
+                        <FormItem label="" prop="img">
+                            <input type="file" ref="img" name="img" @change="iconValidator('img', $event)"/>
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" >
+                            {{this.item.activityImgName}}
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" >
+                            跳转到地址
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" prop="jumpAddress">
+                            <Input v-model="formLeft.jumpAddress" name="jumpAddress"></Input>
+                        </FormItem>
+                    </Col>
+                    <Button type="primary" @click="updaImg">确定</Button>
                 </Form>
-               
-          </div>
-      </div>
-      <div class="updaBtn">
-            <Button @click="closeDialog">取消</Button>
-            <Button type="primary" @click="updaAddress">确定</Button>
-      </div>
+            </Row>
+        </div>
+        <div class="allUpdata">
+            <span>英文banner</span>
+            <Row style="width:100%;">
+                <Col span="4">
+                    <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
+                        <img :src="image1" /> 
+                    </div>
+                </Col>
+                    <Form ref="formItem1" :model="formLeft1" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                       <Col span="5">
+                           <FormItem label="" prop="imgEn">
+                                <input type="file" ref="imgEn" name="imgEn" @change="iconValidator1('imgEn', $event)"/>
+                            </FormItem>
+                       </Col>
+                        <Col span="5">
+                           <FormItem label="" >
+                                {{this.item.activityImgNameEn}}
+                            </FormItem>
+                       </Col>
+                       <Col span="5">
+                           <FormItem label="" >
+                                跳转到地址
+                            </FormItem>
+                       </Col>
+                       <Col span="5">
+                           <FormItem label="" prop="jumpAddressEn">
+                                <Input v-model="formLeft1.jumpAddressEn" name="jumpAddressEn"></Input>
+                            </FormItem>
+                       </Col>
+                        <Button type="primary" @click="updaImgEn">确定</Button>
+                    </Form>
+            </Row>
+        </div>
+        <div class="allUpdata">
+            <span>繁体banner</span>
+            <Row style="width:100%;">
+                <Col span="4">
+                    <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
+                        <img :src="image2" /> 
+                    </div>
+                </Col>
+                <Form ref="formItem2" :model="formLeft2" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
+                    <Col span="5">
+                        <FormItem label="" prop="imgCht">
+                            <input type="file" ref="imgCht" name="imgCht" @change="iconValidator2('imgCht', $event)"/>
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" >
+                            {{this.item.activityImgNameCht}}
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" >
+                            跳转到地址
+                        </FormItem>
+                    </Col>
+                    <Col span="5">
+                        <FormItem label="" prop="jumpAddressCht">
+                            <Input v-model="formLeft2.jumpAddressCht" name="jumpAddressCht"></Input>
+                        </FormItem>
+                    </Col>
+                    <Button type="primary" @click="updaImgCht">确定</Button>
+                </Form>
+            </Row>
+        </div>
+      </Card>
   </div>  
 </template>
 <script>
 import extendApi from '../../api/extend'
+import until from '../../libs/util'
 export default {
     props: ['item'],
     data () {
@@ -38,51 +117,104 @@ export default {
                 img: '',
                 jumpAddress: ''
             },
-            ruleInline: {
-                img: [
-                    { required: true, message: '请输入路径', trigger: 'blur' }
-                ],
-                jumpAddress: [
-                    { required: true, message: '请输入地址', trigger: 'blur' }
-                ]
-            }
+            formLeft1: {
+                imgEn: '',
+                jumpAddressEn: ''
+            },
+            formLeft2: {
+                imgCht: '',
+                jumpAddressCht: ''
+            },
         }
     },
     computed: {
         image () {
             return this.item.activityImgUrl
+        },
+        image1 () {
+            return this.item.activityImgUrlEn
+        },
+        image2 () {
+            return this.item.activityImgUrlCht
         }
     },
     methods: {
+        closeDialog () {
+            this.$emit('removeDialog')
+        },
         iconValidator (prop, e) {
             this.formLeft[prop] = e.target.value
+        },
+        iconValidator1 (prop, e) {
+            this.formLeft1[prop] = e.target.value
+        },
+        iconValidator2 (prop, e) {
+            this.formLeft2[prop] = e.target.value
         },
         closeDialog () {
             this.$emit('removeDialog')
         },
-        updaAddress () {
+        updaImg () {
             let form = this.$refs.formItem;
-            form.validate((valid) => {
-            if (valid) {
-                var formData = new FormData(form.$el)
-                formData.append('adPosition', this.item.adPosition)
-                extendApi.updatePromotionActivity(formData, (res) => {
-                    this.$Message.success({content:　'修改成功'})
-                    this.$emit('removeDialog')
-                    this.$emit('okCallback')
-                }, (msg) => {
-                    this.$Message.error({content:　msg})
-                })
+            if (this.formLeft.img == '' && this.formLeft.jumpAddress == '') {
+                this.$Message.error({content:　'请输入中文banner修改的值'})
+                return
             }
+            var formData = new FormData(form.$el)
+            formData.append('adPosition', this.item.adPosition)
+            formData.append('version', this.item.version)
+            extendApi.updatePromotionActivity(formData, (res) => {
+                this.$Message.success({content:　'修改成功'})
+                this.$emit('removeDialog')
+                this.$emit('okCallback')
+            }, (msg) => {
+                this.$Message.error({content:　msg})
+            })
+        },
+        updaImgEn () {
+            let form = this.$refs.formItem1
+            if (this.formLeft1.imgEn == '' && this.formLeft1.jumpAddressEn == '') {
+                this.$Message.error({content:　'请输入英文banner修改的值'})
+                return
+            }
+            var formData = new FormData(form.$el)
+            formData.append('adPosition', this.item.adPosition)
+            formData.append('version', this.item.version)
+            extendApi.updatePromotionActivity(formData, (res) => {
+                this.$Message.success({content:　'修改成功'})
+                this.$emit('removeDialog')
+                this.$emit('okCallback')
+            }, (msg) => {
+                this.$Message.error({content:　msg})
+            })
+        },
+        updaImgCht () {
+            debugger
+            let form = this.$refs.formItem2
+            if (this.formLeft2.imgCht == '' && this.formLeft2.jumpAddressCht == '') {
+                this.$Message.error({content:　'请输入繁体banner修改的值'})
+                return
+            }
+            var formData = new FormData(form.$el)
+            formData.append('adPosition', this.item.adPosition)
+            formData.append('version', this.item.version)
+            extendApi.updatePromotionActivity(formData, (res) => {
+                this.$Message.success({content:　'修改成功'})
+                this.$emit('removeDialog')
+                this.$emit('okCallback')
+            }, (msg) => {
+                this.$Message.error({content:　msg})
             })
         }
     }
 }
 </script>
-<style>
-.updaImge{width: 500px;height: 300px;background: #fff;padding: 10px;}
-.allUpdata{ display: flex;justify-content: space-between;}
+<style scoped>
+.updaImge{width: 1000px;background: #fff;padding: 20px;}
+.allUpdata{ display: flex;padding-bottom: 20px;border-bottom: 1px solid #ccc;padding-top: 10px;}
 .updaBtn{display: flex;justify-content: space-around;}
 .allUpdata-left img{width: 150px;height: 150px;}
+.ivu-form-item-content{margin-left: 0px !important; }
+Button{height: 30px !important;}
 </style>
 

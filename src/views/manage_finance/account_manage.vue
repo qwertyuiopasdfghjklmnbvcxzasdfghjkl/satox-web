@@ -40,7 +40,7 @@
                     </FormItem>
                     <FormItem >
                         <Button type="primary" @click="ledgerAdd">确定</Button>
-                        <Button type="primary">取消</Button>
+                        <Button type="primary" @click="reset()">取消</Button>
                     </FormItem>
                 </Form>
             </TabPane>
@@ -61,7 +61,7 @@
                     </FormItem>
                     <FormItem >
                         <Button type="primary" @click="reduceAdd">确定</Button>
-                        <Button type="primary">取消</Button>
+                        <Button type="primary" @click="reset1()">取消</Button>
                     </FormItem>
                  </Form>
             </TabPane>
@@ -136,7 +136,7 @@
                  <Card>
                      <p slot="title" style="height:40px;line-height:40px;">第三步:执行
                         <Button type="primary" @click="fixAdd">执行</Button>
-                        <Button type="primary">取消</Button>
+                        <Button type="primary" @click="reset2()">取消</Button>
                      </p>
                  </Card>
             </TabPane>
@@ -163,7 +163,7 @@
                     </FormItem>
                     <FormItem >
                         <Button type="primary" @click="balanceAdd">确定</Button>
-                        <Button type="primary">取消</Button>
+                        <Button type="primary" @click="reset3()">取消</Button>
                     </FormItem>
                  </Form>
             </TabPane>
@@ -261,6 +261,36 @@ export default {
         }
     },
     methods: {
+        reset3 () {
+            this.balanceData.amount =  '',
+            this.balanceData.related = '',
+            this.balanceData.subject =  '',
+            this.balanceData.type =  '1'
+        },
+        reset2 () {
+            this.fixData.amount = '',
+            this.fixData.balance = '',
+            this.fixData.detailId = '',
+            this.fixData.ledgerid = '',
+            this.fixData.related = '',
+            this.fixData.subject = '',
+            this.fixData.type = '1',
+            this.fixData.updateAccountByOne =  '1',
+            this.fixData.updateAccountByTwo = '1'
+        },
+        reset1  () {
+            this.reduceData.updateAccount = '1',
+            this.reduceData.detailId = ''
+        },
+        reset () {
+            this.addFormData.ledgerId =  '',
+            this.addFormData.subject =  '',
+            this.addFormData.amount =  '',
+            this.addFormData.type =  '1',
+            this.addFormData.balance =  '',
+            this.addFormData.related =  ''
+            this.addFormData.updateAccount =  '1'
+        },
         ledgerAdd () {
             let form = this.$refs.formItem;
             form.validate((valid) => {

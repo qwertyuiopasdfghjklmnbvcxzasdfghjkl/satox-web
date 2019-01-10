@@ -12,7 +12,7 @@
          <Tabs value="name1">
             <TabPane label="当前资产" name="name1">
                 <Card>
-                    <p slot="title">总资产：{{this.totalAssets.totalAmountByBTC}}BTC   {{this.totalAssets.totalAmountByCNY}}CNY</p>
+                    <p slot="title">总资产：{{totalAssets.totalAmountByBTC}}BTC   {{totalAssets.totalAmountByCNY}}CNY</p>
                 </Card>
                 <Table :columns="columns1" :data="data1"></Table>
                 <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
@@ -213,6 +213,15 @@ export default {
       this.allRecord()
   },
   methods: {
+    reshAll () {
+        this.getAssetsList()
+        this.getRecordList()
+        this.getWithdraw()
+        this.getRecharge()
+        this.getWithdrawAddrList()
+        this.getDistribute()
+        this.allRecord()
+    },
     switchStaus(state) {
         switch(state){
             case 1:

@@ -2,7 +2,7 @@
   <div class="coin_setting">
     <Card style="width:500px;">
         <p slot="title">
-        新增市场
+        新增{{type == 1 ? '真实' : '虚拟'}}市场
         <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
       </p>
      <Form ref="formItem" :model="formLeft" :rules="ruleInline"  label-position="left" :label-width="100">
@@ -48,6 +48,7 @@
 <script>
 import currenyApi from '../../api/currency'
 export default {
+  props: ['type'],
   data () {
     const customValidator = (rule, value, callback) => {
         if (this.formLeft[rule.field] === null) {
@@ -111,17 +112,42 @@ export default {
         this.$emit('removeDialog')
     },
     getAddMarket() {
-        this.$refs.formItem.validate((valid) => {
-            if (valid) {
-                currenyApi.insertMarket(this.formLeft, (res) => {
-                    this.$Message.success({content: '添加成功'})
-                    this.$emit('okCallback')
-                    this.$emit('removeDialog')
-                }, (msg) => {
-                    this.$Message.error({content: msg})
-                })
-            }
-        })
+        if (this.type == 1) {
+            this.$refs.formItem.validate((valid) => {
+                if (valid) {
+                    currenyApi.insertMarket(this.formLeft, (res) => {
+                        this.$Message.success({content: '添加成功'})
+                        this.$emit('okCallback')
+                        this.$emit('removeDialog')
+                    }, (msg) => {
+                        this.$Message.error({content: msg})
+                    })
+                }
+            })
+        } else if (this.type == 0) {
+            this.$refs.formItem.validate((valid) => {
+                if (valid) {
+                    currenyApi.insertMarket({
+                        market: this.formLeft.market,
+                        currencySymbol: this.formLeft.currencySymbol,
+                        baseSymbol: this.formLeft.baseSymbol,
+                        openingPrice: this.formLeft.openingPrice,
+                        accuracy: this.formLeft.accuracy,
+                        digit: this.formLeft.digit,
+                        minPlaceOrderAmount: this.formLeft.minPlaceOrderAmount,
+                        minPlaceOrderQuantity: this.formLeft.minPlaceOrderQuantity,
+                        state:  '2',
+                        marketType: 0
+                    }, (res) => {
+                        this.$Message.success({content: '添加成功'})
+                        this.$emit('okCallback')
+                        this.$emit('removeDialog')
+                    }, (msg) => {
+                        this.$Message.error({content: msg})
+                    })
+                }
+            })
+        }
     }
   }
 }

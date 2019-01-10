@@ -27,7 +27,7 @@
 <script>
 import currenyApi from '../../../api/currency'
 export default {
-    props: ['userId'],
+    props: ['userId', 'username'],
     data () {
         return {
             domain: '',
@@ -62,7 +62,7 @@ export default {
         },
         getChangeRecord() {
             currenyApi.findUserOperateLogList(this.pageSize, this.curPage, {
-                operateUser: this.userId,
+                operateUser: this.username,
                 operate: this.operate || '',
                 domain: this.domain || ''
             }, (res, total) => {

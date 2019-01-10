@@ -9,8 +9,9 @@
             日全站交易量：
             <span style="margin-right:15px;">{{datas.length ? datas[0].btcTransactionAmount : 0}}BTC</span>
             <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
-            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}ATN</span>
-            <span>{{datas.length ? datas[0].barkTransactionAmount : 0}}USDT</span>
+            <span style="margin-right:15px;">{{datas.length ? datas[0].atnTransactionAmount : 0}}ATN</span>
+            <span style="margin-right:15px;">{{datas.length ? datas[0].usdtTransactionAmount : 0}}USDT</span>
+            <span style="margin-right:15px;">合计：{{datas.length ? datas[0].btcPriceOfNewton : 0}}BTC = {{datas.length ? datas[0].usdPriceOfNewton : 0}}USD</span>
           </p>
         </Col>
         <Col span="7">
@@ -27,7 +28,7 @@
     </Card>
     <Card style="margin:10px 0;">
       <p slot="title">市场交易情况</p>
-      <Table :columns="columns1" :data="data1"></Table>
+      <Table :columns="columns1" :data="data1" @on-sort-change="setMarketSort"></Table>
        <Page :current="curPage1" :total="total1" :page-size="pageSize" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
     </Card>
     <Card>
@@ -36,29 +37,38 @@
     </Card>
     <Card style="margin:10px 0;">
       <p slot="title">财务情况</p>
-      <Table :columns="columns3" :data="data3"></Table>
-      <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+      <Table :columns="columns3" :data="data3" @on-sort-change="setFinanceSort"></Table>
+      <Page :current="curPage" :total="total" :page-size="pageSize1" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
-    <Card>
+    <!-- <Card>
       <p slot="title">风控情况</p>
       <Table :columns="columns4" :data="data4"></Table>
-    </Card>
+    </Card> -->
     <Card style="margin-top:10px;">
-      <p slot="title">图表展示</p>
+      <p slot="title">图表展示1</p>
       <Form ref="formItem" :model="formItem" :label-width="80" inline>
         <FormItem prop="user" label="币种">
             <Select v-model="formItem.symbol" style="width:100px">
                 <Option value="BTC">BTC</Option>
                 <Option value="ETH">ETH</Option>
                 <Option value="ATN">ATN</Option>
+                <Option value="MECoin">MECoin</Option>
+                <Option value="USDT">USDT</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="项目">
             <Select v-model="formItem.project" style="width:150px">
                 <Option value="1">在线用户数量</Option>
-                <Option value="2">上架广告数量</Option>
-                <Option value="3">正在交易订单数量</Option>
-                <Option value="4">当天完成订单数量</Option>
+                <Option value="2">全站交易量</Option>
+                <Option value="3">新注册用户数</Option>
+                <Option value="4">总用户数</Option>
+                <Option value="5">交易用户数</Option>
+                <Option value="6">登录用户</Option>
+                <Option value="7">异常预警数</Option>
+                <Option value="8">提现数量</Option>
+                <Option value="9">充值数量</Option>
+                <Option value="10">待审核提现笔数</Option>
+                <Option value="11">待审核提现数量</Option>
             </Select>
         </FormItem>
         <FormItem prop="password" label="时间段">
@@ -98,13 +108,15 @@ export default {
       curPage1: 1,
       total1: 0,
       pageSize: 3,
+      pageSize1: 3,
       columns1: [
         {title: '市场', key: 'market'},
         {title: '最新价格', key: 'currentPrice'},
-        {title: '日跌涨', key: 'highLowDaily'},
-        {title: '日交易量', key: 'exchangeQuantityDaily'},
-        {title: '日用户量', key: 'userCountDaily'},
-        {title: '日交易比例', key: 'ratioExchangeDaily'}
+        {title: '日跌涨', key: 'highLowDaily', sortable: 'custom'},
+        {title: '日交易量', key: 'exchangeQuantityDaily', sortable: 'custom'},
+        {title: '日交易笔数', key: 'exchangeAmountDaily', sortable: 'custom'},
+        {title: '日用户量', key: 'userCountDaily', sortable: 'custom'},
+        {title: '日交易比例', key: 'ratioExchangeDaily', sortable: 'custom'}
       ],
       data1: [],
       columns2: [
@@ -116,11 +128,13 @@ export default {
       data2: [],
       columns3: [
         {title: '币种', key: 'symbol'},
-        {title: '日充值数量', key: 'rechargeAmountDaily'},
-        {title: '日提现数量', key: 'withdrawAmountDaily'},
-        {title: '日新增净额', key: 'increaseAmountDaily'},
-        {title: '待审核提现', key: 'waitCheckWithdraw'},
-        {title: '待审核提现请求数量', key: 'waitCheckWithdrawAmount'}
+        {title: '日充值数量', key: 'rechargeAmountDaily', sortable: 'custom'},
+        {title: '日充值笔数', key: 'rechargeCountDaily', sortable: 'custom'},
+        {title: '日提现数量', key: 'withdrawAmountDaily', sortable: 'custom'},
+        {title: '日提现笔数', key: 'withdrawCountDaily', sortable: 'custom'},
+        {title: '日新增净额', key: 'increaseAmountDaily', sortable: 'custom'},
+        {title: '待审核提现', key: 'waitCheckWithdraw', sortable: 'custom'},
+        {title: '待审核提现请求数量', key: 'waitCheckWithdrawAmount', sortable: 'custom'}
       ],
       data3: [],
       columns4: [
@@ -172,6 +186,26 @@ export default {
     })
   },
   methods: {
+    setMarketSort(column){
+      this.curPage1 = 1
+      if(column.order!=='normal'){
+        this.marketSortKey = column.key
+        this.marketSortVal = column.order
+      } else {
+        this.marketSortKey = null
+      }
+      this.getfindMarketExchangeList()
+    },
+    setFinanceSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.financeSortKey = column.key
+        this.financeSortVal = column.order
+      } else {
+        this.financeSortKey = null
+      }
+      this.getDataList()
+    },
     exportBBExcel () {
       let paramStr = []
       for (var i in this.params) {
@@ -185,20 +219,28 @@ export default {
         let data2 = []
         res.forEach((item) => {
           data1.push(item.createdAt)
-          if (this.formItem.project === '1') {
+           if (this.formItem.project === '1') {
             data2.push(item.onlineUserAmount)
           } else if (this.formItem.project === '2') {
-            data2.push(item.listAdvertisementAmount)
+            data2.push(item.dailyTransactionAmount)
           } else if (this.formItem.project === '3') {
-            data2.push(item.transcationingOrderAmount)
+            data2.push(item.newRegisterUserAmount)
           } else if (this.formItem.project === '4') {
-            data2.push(item.completedOrderAmount)
+            data2.push(item.allUserAmount)
           } else if (this.formItem.project === '5') {
-            data2.push(item.transactionSum)
+            data2.push(item.transactionUserAmount)
           } else if (this.formItem.project === '6') {
-            data2.push(item.waitHandleAppealAmount)
+            data2.push(item.loginUserAmount)
           } else if (this.formItem.project === '7') {
-            data2.push(item.abnormalWarningAmount )
+            data2.push(item.abnormalWarningAmount)
+          } else if (this.formItem.project === '8') {
+            data2.push(item.withdrawAmount)
+          } else if (this.formItem.project === '9') {
+            data2.push(item.rechargeAmount)
+          } else if (this.formItem.project === '10') {
+            data2.push(item.waitCheckWithdrawCount)
+          } else if (this.formItem.project === '11') {
+            data2.push(item.waitCheckWithdrawAmount)
           }
         })
         this.initCanvas(data1, data2);
@@ -247,7 +289,8 @@ export default {
       myChart.setOption(option);
     },
     getDataList () {
-      currenyApi.findFinancialDataList({}, this.curPage, (res, total) => {
+      let sortStr = this.financeSortKey?`${this.financeSortKey}%20${this.financeSortVal}`:'null'
+      currenyApi.findFinancialDataList(this.pageSize1, this.curPage, sortStr, {}, (res, total) => {
         this.total = total
         this.data3 = res
       })
@@ -267,7 +310,8 @@ export default {
       })
     },
     getfindMarketExchangeList () {
-      currenyApi.findMarketExchangeList(this.curPage1, (res, total) => {
+      let sortStr = this.marketSortKey?`${this.marketSortKey}%20${this.marketSortVal}`:'null'
+      currenyApi.findMarketExchangeList(this.curPage1, sortStr, (res, total) => {
         this.total1 = total
         this.data1 = res
       })

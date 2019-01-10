@@ -7,14 +7,14 @@
           <p slot="title">充值监控
             <span class="refresh" @click="reshAll"></span>
           </p>
-          <Table :columns="columns1" :data="data1"></Table>
+          <Table :columns="columns1" :data="data1" @on-sort-change="setRechargeSort"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
       <Row>
         <Card>
           <p slot="title">日提币统计</p>
-          <Table :columns="columns2" :data="data2"></Table>
+          <Table :columns="columns2" :data="data2" @on-sort-change="setWithdrawSort"></Table>
           <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
@@ -29,28 +29,28 @@
       <Row>
         <Card>
           <p slot="title">资金池情况</p>
-          <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="custom"></Table>
+          <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="setCapitalPoolSort"></Table>
           <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
       <Row style="margin-top:10px;">
         <Card>
           <p slot="title">手续费账户</p>
-          <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="custom1"></Table>
+          <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="setChargeSort"></Table>
           <Page :current="curPage4" :total="total4" @on-change="changePage4" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
       <Row style="margin-top:10px;">
         <Card>
           <p slot="title">用户总资产数据</p>
-          <Table ref="test2" :columns="columns7" :data="data7" @on-sort-change="custom2"></Table>
+          <Table ref="test3" :columns="columns7" :data="data7" @on-sort-change="setAssetSort"></Table>
           <Page :current="curPage6" :total="total6" @on-change="changePage6" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
       <Row style="margin-top:10px;">
         <Card>
           <p slot="title">充币列表</p>
-          <Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="custom2"></Table>
+          <Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="setChargeTokenSort"></Table>
           <Page :current="curPage7" :total="total7" @on-change="changePage7" style="text-align:center;margin-top:20px;"></Page>  
         </Card>
       </Row>
@@ -96,17 +96,17 @@ export default {
       columns1: [
         {title: '公链币种', key: 'symbol'},
         {title: '监控地址数量', key: 'currentMonitorAddrCount'},
-        {title: '日充值待确认笔数', key: 'dailyRechargeWaitComfirmCount'},
+        {title: '日充值待确认笔数', key: 'dailyRechargeWaitComfirmCount', sortable: 'custom'},
         // {title: '日充值待确认总量', key: 'dailyRechargeWaitComfirmAmount'},
-        {title: '日充值完成笔数', key: 'dailyRechargeFinishCount'},
+        {title: '日充值完成笔数', key: 'dailyRechargeFinishCount', sortable: 'custom'},
         // {title: '日充值完成总量', key: 'dailyRechargeWaitComfirmAmount'}
       ],
       data1: [],
       columns2: [
         {title: '公链币种', key: 'symbol'},
-        {title: '日待提币笔数', key: 'withdrawDailyToBeConfirmedCount'},
+        {title: '日待提币笔数', key: 'withdrawDailyToBeConfirmedCount', sortable: 'custom'},
         // {title: '日待提币总量', key: 'withdrawDailyToBeConfirmedAmount'},
-        {title: '日已提币笔数', key: 'withdrawDailyFinishCount'},
+        {title: '日已提币笔数', key: 'withdrawDailyFinishCount', sortable: 'custom'},
         // {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
       ],
       data2: [],
@@ -133,17 +133,17 @@ export default {
       ],
       data3: [],
       columns4: [
-        {title: '币种', key: 'symbol', sortable: 'custom', sortType: 'asc'},
-        {title: '当前数量', key: 'currentCapitalPoolQuantity'},
-        {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity'},
-        {title: '日净增', key: 'increaseDailyQuantity'}
+        {title: '币种', key: 'symbol', sortable: 'custom'},
+        {title: '当前数量', key: 'currentCapitalPoolQuantity', sortable: 'custom'},
+        {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity', sortable: 'custom'},
+        {title: '日净增', key: 'increaseDailyQuantity', sortable: 'custom'}
       ],
       data4: [],
       columns5: [
-        {title: '币种', key: 'symbol', sortable: 'custom', sortType: 'asc'},
-        {title: '当前数量', key: 'currentCapitalPoolQuantity'},
-        {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity'},
-        {title: '日收取', key: 'collectfeeDailyQuantity'}
+        {title: '币种', key: 'symbol', sortable: 'custom'},
+        {title: '当前数量', key: 'currentCapitalPoolQuantity', sortable: 'custom'},
+        {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity', sortable: 'custom'},
+        {title: '日收取', key: 'collectfeeDailyQuantity', sortable: 'custom'}
       ],
       data5: [],
       columns6: [
@@ -158,21 +158,22 @@ export default {
       ],
       data6: [],
       columns7: [
-        {title: '币种', key: 'symbol'},
-        {title: '当前数量', key: 'currentAssetAmount'},
-        {title: '上一交易日数量', key: 'closingAssetYesterdayQuantity'},
-        {title: '日净增', key: 'increaseDailyQuantity'}
+        {title: '币种', key: 'symbol', sortable: 'custom'},
+        {title: '当前数量', key: 'currentAssetAmount', sortable: 'custom'},
+        {title: '上一交易日数量', key: 'closingAssetYesterdayQuantity', sortable: 'custom'},
+        {title: '日净增', key: 'increaseDailyQuantity', sortable: 'custom'}
       ],
       data7: [],
       columns8: [
-        {title: '创建时间', key: 'createdTime'},
+        {title: '创建时间', key: 'createdTime', sortable: 'custom'},
         {title: '用户账号', key: 'userName'},
-        {title: '币种', key: 'symbol'},
-        {title: '充值数量', key: 'amount'},
+        {title: '币种', key: 'symbol', sortable: 'custom'},
+        {title: '充值数量', key: 'amount', sortable: 'custom'},
         {title: '状态', key: 'status',
           render: (h, params) => {
             return h('div', params.row.status === 1 ? '等待' : '完成')
-          }
+          },
+          sortable: 'custom'
         },
         {title: '确认块数', key: 'confirmation'}
       ],
@@ -190,8 +191,69 @@ export default {
     this.getfindRechargeRecords()
   },
   methods: {
+    setChargeTokenSort(column){
+      this.curPage7 = 1
+      if(column.order!=='normal'){
+        this.ChargeTokenSortKey = column.key
+        this.ChargeTokenSortVal = column.order
+      } else {
+        this.ChargeTokenSortKey = null
+      }
+      this.getfindRechargeRecords()
+    },
+    setAssetSort(column){
+      this.curPage6 = 1
+      if(column.order!=='normal'){
+        this.assetSortKey = column.key
+        this.assetSortVal = column.order
+      } else {
+        this.assetSortKey = null
+      }
+      this.getfindUserAssetList()
+    },
+    setChargeSort(column){
+      this.curPage4 = 1
+      if(column.order!=='normal'){
+        this.chargeSortKey = column.key
+        this.chargeSortVal = column.order
+      } else {
+        this.chargeSortKey = null
+      }
+      this.getAccountList()
+    },
+    setCapitalPoolSort(column){
+      this.curPage3 = 1
+      if(column.order!=='normal'){
+        this.capitalPoolSortKey = column.key
+        this.capitalPoolSortVal = column.order
+      } else {
+        this.capitalPoolSortKey = null
+      }
+      this.getPoolList()
+    },
+    setWithdrawSort(column){
+      this.curPage1 = 1
+      if(column.order!=='normal'){
+        this.withdrawSortKey = column.key
+        this.withdrawSortVal = column.order
+      } else {
+        this.withdrawSortKey = null
+      }
+      this.getStatisticsList()
+    },
+    setRechargeSort(column){
+      this.curPage = 1
+      if(column.order!=='normal'){
+        this.rechargeSortKey = column.key
+        this.rechargeSortVal = column.order
+      } else {
+        this.rechargeSortKey = null
+      }
+      this.getMonitorList()
+    },
     getfindRechargeRecords () {
-      financeApi.findRechargeRecords(this.curPage7, (res, total) => {
+      let sortStr = this.ChargeTokenSortKey?`${this.ChargeTokenSortKey}%20${this.ChargeTokenSortVal}`:'null'
+      financeApi.findRechargeRecords(this.curPage7, sortStr, (res, total) => {
         this.total7 = total
         this.data8 = res
       })
@@ -201,14 +263,26 @@ export default {
       this.getfindRechargeRecords()
     },
     getfindUserAssetList () {
-      financeApi.findUserAssetList(this.curPage6, this.flag2, (res, total) => {
+      let sortStr = this.assetSortKey?`${this.assetSortKey}%20${this.assetSortVal}`:'null'
+      financeApi.findUserAssetList(this.curPage6, sortStr, (res, total) => {
         this.total6 = total
         this.data7 = res
       })
     },
     changePage6 (page) {
-      this.curPage = page
+      this.curPage6 = page
       this.getfindUserAssetList()
+    },
+    custom3 (o) {
+      this.curPage6 = 1
+      if (o.order === 'desc') {
+        this.flag3 = 0
+        this.getfindUserAssetList()
+      } else {
+        this.$refs.test3.cloneColumns[0]._sortType = 'asc'
+        this.flag3 = 1
+        this.getfindUserAssetList()
+      }
     },
     custom2 (o) {
       this.curPage6 = 1
@@ -254,7 +328,8 @@ export default {
       this.getfindRechargeRecords()
     },
     getMonitorList() {
-      financeApi.findRechargeMonitorList( this.curPage, (res, total) => {
+      let sortStr = this.rechargeSortKey?`${this.rechargeSortKey}%20${this.rechargeSortVal}`:'null'
+      financeApi.findRechargeMonitorList( this.curPage, sortStr, (res, total) => {
         this.total = total
         this.data1 = res
       })
@@ -264,7 +339,8 @@ export default {
       this.getMonitorList()
     },
     getStatisticsList() {
-      financeApi.findWithdrawStatisticsList(this.curPage1, (res, total) => {
+      let sortStr = this.withdrawSortKey?`${this.withdrawSortKey}%20${this.withdrawSortVal}`:'null'
+      financeApi.findWithdrawStatisticsList(this.curPage1, sortStr, (res, total) => {
         this.total = total
         this.data2 = res
       })
@@ -284,7 +360,8 @@ export default {
       this.getCheckingList()
     },
     getPoolList() {
-      financeApi.findCapitalPoolList(this.curPage3, this.flag, (res, total) => {
+      let sortStr = this.capitalPoolSortKey?`${this.capitalPoolSortKey}%20${this.capitalPoolSortVal}`:'null'
+      financeApi.findCapitalPoolList(this.curPage3, sortStr, (res, total) => {
         this.total3 = total
         this.data4 = res
       })
@@ -294,7 +371,8 @@ export default {
       this.getPoolList()
     },
     getAccountList() {
-      financeApi.findServiceFeeAccountList(this.curPage4, this.flag1,  (res, total) => {
+      let sortStr = this.chargeSortKey?`${this.chargeSortKey}%20${this.chargeSortVal}`:'null'
+      financeApi.findServiceFeeAccountList(this.curPage4, sortStr,  (res, total) => {
         this.total4 = total
         this.data5 = res
       })

@@ -15,7 +15,7 @@
             <Option value="cn">地区</Option>
           </Select>
           <Input v-model="formData.text" clearable style="width: 200px"></Input>
-          <Button type="primary" @click="getList">查询</Button>
+          <Button type="primary" @click="getList(true)">查询</Button>
         </Col>
         <Col span="8">
           <Button type="primary" style="float:right;" @click="addDialog">添加</Button>
@@ -32,6 +32,7 @@ import util from '../../libs/util'
 import detail from './auditing_detail'
 import add from './add'
 import kyc from '../../api/kyc'
+import messageModel from './messageModel'
 export default {
   data () {
     return {
@@ -60,7 +61,6 @@ export default {
           render: (h, params) => { // 0：未验证  蓝色、1：待审核 蓝色、2：已通过 绿色、3：未通过 红色、4 : 待复核 紫色
               let status = Number(params.row.verifyStatus)
               let color = ''
-
               switch(status){
                   case 0:
                       color = 'blue'
@@ -124,7 +124,20 @@ export default {
                             });
                         }
                     }
-                }, '删除')
+                }, '删除'),
+                h('i', {
+                    class: 'ivu-icon ivu-icon-volume-medium',
+                    style: {verticalAlign: 'middle', cursor: 'pointer', fontSize: '30px', marginLeft:'10px', cursor: this.readOnly ? 'not-allowed' : 'pointer', color: this.readOnly ? '#CCC' : null}, 
+                    on: {
+                        click: () => {
+                            util.setDialog(messageModel, {
+                                userId: params.row.verifyUserID,
+                                username: params.row.account,
+                                type: 3
+                            });
+                        }
+                    }
+                })
             ]);
         }}
       ],
@@ -167,7 +180,10 @@ export default {
                 break;
         }
     },
-    getList () {
+    getList (key) {
+      if(key){
+        this.curPage = 1
+      }
       let data = {}
       if (this.formData.text) {
         data[this.formData.type] = this.formData.text

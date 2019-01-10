@@ -6,7 +6,7 @@
             <Card style="width:500px;">
                 <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
                   <Col span="8">代号</Col>
-                  <Col span="8">{{this.data1.symbol}}</Col>
+                  <Col span="8">{{data1.symbol}}</Col>
                   <Col span="8"></Col>
                 </Row>
                 <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
@@ -16,9 +16,9 @@
                 </Row>
                 <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
                   <Col span="8">权限状态</Col>
-                  <Col span="8">{{this.item.withdrawFlag===1?'正常':'暂停'}}</Col>
+                  <Col span="8">{{item.withdrawFlag===1?'正常':'暂停'}}</Col>
                   <Col span="8" style="text-align:right;margin-left:-15px;">
-                    <Button type="primary" @click="updataInsertSymbol">{{this.item.withdrawFlag===2?'正常':'暂停'}}</Button>
+                    <Button type="primary" @click="updataInsertSymbol">{{item.withdrawFlag===2?'正常':'暂停'}}</Button>
                   </Col>
                 </Row>
                 <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
@@ -62,7 +62,7 @@
                   </Col>
                 </Row>
 
-                <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;" v-if="this.item.symbolType === 1">
+               <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;" v-if="this.item.symbolType !== 2">
                   <Col span="8">矿工费</Col>
                   <Col span="8">{{data1.minerFee || 0}}</Col>
                   <Col span="8">
@@ -92,7 +92,7 @@
              <Card class="recharge_settings" style="width:500px;">
                 <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
                     <Col span="8">代号</Col>
-                    <Col span="8">{{this.item.symbol}}</Col>
+                    <Col span="8">{{item.symbol}}</Col>
                     <Col span="8"></Col>
                 </Row>
                 <Row style="margin-top:10px;border-top:1px solid #e9eaec;line-height:50px;">
@@ -102,14 +102,14 @@
                 </Row>
                 <Row style="margin-top:10px;border-top:1px solid #e9eaec;line-height:50px;">
                     <Col span="8">权限状态</Col>
-                    <Col span="8">{{this.item.rechargeFlag===1?'正常': '暂停'}}</Col>
+                    <Col span="8">{{item.rechargeFlag===1?'正常': '暂停'}}</Col>
                     <Col span="8" style="text-align:right;margin-left:-14px;">
-                        <Button type="primary" @click="competence()">{{this.item.rechargeFlag===2?'正常': '暂停'}}</Button>
+                        <Button type="primary" @click="competence()">{{item.rechargeFlag===2?'正常': '暂停'}}</Button>
                     </Col>
                 </Row>
                 <Row style="margin-top:10px;border-top:1px solid #e9eaec;line-height:50px;">
                     <Col span="8">等待区块数</Col>
-                    <Col span="8">{{this.item.confirmBlock || 0}}</Col>
+                    <Col span="8">{{item.confirmBlock || 0}}</Col>
                     <Col span="8">
                         <InputNumber :max="999" :min="1" v-model="confirmBlock"></InputNumber>
                         <Button type="primary" @click="tabs1()">保存</Button>
@@ -151,17 +151,6 @@ export default {
     this.getchangeInfoList()
   },
   methods: {
-    // getchangeInfoList() {
-    //   console.log(this.item)
-    //   currenyApi.findSymbolWithdrawFees({
-    //        id: this.id,
-    //        symbolId: this.symbolId
-    //   }, (res) => {
-    //        this.data1 = res || 0
-    //   }, (msg) => {
-    //       this.$Message.error({content: msg})
-    //   })
-    // },
     tabs(propName) {
       if (!this[propName]) {
         this.$Message.error({content: '不能为空'})

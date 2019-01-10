@@ -39,8 +39,8 @@ const updateWithdrawAuditing = function (data, success, error) {
 finance.updateWithdrawAuditing = updateWithdrawAuditing
 
 // 财务管理--充值监控数据
-const findRechargeMonitorList = function (curPage, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findRechargeMonitorList/10/${curPage}`, (res) => {
+const findRechargeMonitorList = function (curPage, sortStr, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findRechargeMonitorList/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -51,8 +51,8 @@ const findRechargeMonitorList = function (curPage, success, error) {
 finance.findRechargeMonitorList = findRechargeMonitorList
 
 // 财务管理--日提币统计数据
-const findWithdrawStatisticsList = function (curPage, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findWithdrawStatisticsList/10/${curPage}`, (res) => {
+const findWithdrawStatisticsList = function (curPage, sortStr, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findWithdrawStatisticsList/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -75,8 +75,8 @@ const findRealTimeCheckingList = function (curPage, success, error) {
 finance.findRealTimeCheckingList = findRealTimeCheckingList
 
 // 财务管理--资金池情况
-const findCapitalPoolList = function (curPage, ase, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}/${ase}`, (res) => {
+const findCapitalPoolList = function (curPage, sortStr, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -87,8 +87,8 @@ const findCapitalPoolList = function (curPage, ase, success, error) {
 finance.findCapitalPoolList = findCapitalPoolList
 
 // 财务管理--手续费转账
-const findServiceFeeAccountList = function (curPage, ase, success, error) {
-  api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}/${ase}`, (res) => {
+const findServiceFeeAccountList = function (curPage, sortStr, success, error) {
+  api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -188,8 +188,8 @@ finance.getAdminWithdrawAccountInfo = getAdminWithdrawAccountInfo
 
 
 // 财务管理--用户总资产数据
-const findUserAssetList = function (curPage, ase, success, error) {
-  api.get(`/api/bm/financialManage/financialStatistics/findUserAssetList/10/${curPage}/${ase}`, (res) => {
+const findUserAssetList = function (curPage, sortStr, success, error) {
+  api.get(`/api/bm/financialManage/financialStatistics/findUserAssetList/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -201,8 +201,8 @@ finance.findUserAssetList = findUserAssetList
 
 
 // 财务管理--用户充值记录
-const findRechargeRecords = function (curPage, success, error) {
-  api.get(`/api/bm/financialManage/financialStatistics/findRechargeRecords/10/${curPage}`, (res) => {
+const findRechargeRecords = function (curPage, sortStr, success, error) {
+  api.get(`/api/bm/financialManage/financialStatistics/findRechargeRecords/10/${curPage}/${sortStr}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
