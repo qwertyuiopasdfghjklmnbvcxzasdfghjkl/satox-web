@@ -227,6 +227,9 @@ import util from '../../libs/util'
                     case '4':
                         return 'MBT'
                         break;
+                    case 5:
+                        return 'EOS'
+                        break;
                 }
             },
             statusSwicth(state) { //1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6对账完成 7提现失败资金返还
