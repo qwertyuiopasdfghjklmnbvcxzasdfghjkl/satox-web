@@ -20,6 +20,9 @@
               <Radio label="4">
                   <span>MBT</span>
               </Radio>
+              <Radio label="5">
+                  <span>EOS</span>
+              </Radio>
           </RadioGroup>
       </FormItem>
       <FormItem label="币种" prop="symbol">

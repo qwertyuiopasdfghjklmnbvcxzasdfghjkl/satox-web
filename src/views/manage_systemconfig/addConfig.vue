@@ -45,6 +45,9 @@
                         <Radio label="4">
                             <span>MBT</span>
                         </Radio>
+                        <Radio label="5">
+                            <span>EOS</span>
+                        </Radio>
                     </RadioGroup>
                 </FormItem>
                 <FormItem style="line-height:0;text-align:center;">

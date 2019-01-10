@@ -108,6 +108,9 @@ export default {
                 case 4:
                     return 'MBT'
                     break;
+                case 5:
+                    return 'EOS'
+                    break;
             }
         },
         gettransactionConfirmList () {

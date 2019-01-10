@@ -194,6 +194,9 @@ import monitorApi from '../../api/monitoring'
                     case '4':
                         return 'MBT'
                         break;
+                    case 5:
+                        return 'EOS'
+                        break;
                 }
             },
             statusSwicth(state) { //0 未审核  1 审核不通过  2 审核通过
