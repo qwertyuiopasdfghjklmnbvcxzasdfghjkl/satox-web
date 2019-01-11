@@ -15,7 +15,7 @@
     			</div>
     			<div class="form-item flex">
     				<p>{{$t('business.INVITE_MOBILE')}}：</p>
-    				<p><input type="number" name="mobile" v-model="formData.invitePhone" :readonly="voteInfo.invitePhone" :placeholder="$t('business.INVITE_MOBILE_PLACEHOLDER')"></p>
+    				<p><input type="number" name="mobile" v-model="formData.invitePhone" :readonly="voteInfo.invitePhone?true:false" :placeholder="$t('business.INVITE_MOBILE_PLACEHOLDER')"></p>
     			</div>
     			<div class="form-item">
     				<p><span>*</span>{{$t('business.TICKET_PERIOD')}}：</p>
