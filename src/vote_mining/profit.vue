@@ -104,7 +104,7 @@
     				</div>
     			</div>
     		</div>
-    		<div class="tabpane-community" v-show="tab==='community'">
+    		<div class="tabpane-community" v-show="tab==='community'" v-if="community.display">
     			<div class="overview">
     				<div class="row">
     					<div>
@@ -213,24 +213,11 @@ export default {
     computed: {
       ...mapGetters(['getApiToken', 'getLang']),
     },
-    watch:{
-        tab(_n, _o){
-            switch(_n){
-                case 'vote':
-                    this.getVoteStatistics()
-                    this.vote.page =1
-                    this.getVoteRecord()
-                    break
-                case 'mining':
-                    this.getMiningStatistics()
-                    this.getMiningRecord()
-                    break
-            }
-        }
-    },
     created () {
         this.getVoteStatistics()
         this.getVoteRecord()
+        this.getMiningStatistics()
+        this.getMiningRecord()
         this.getCommunityStatistics()
         window.gvue = this
     },
