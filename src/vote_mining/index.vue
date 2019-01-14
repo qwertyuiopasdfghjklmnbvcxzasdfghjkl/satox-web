@@ -129,7 +129,7 @@ export default {
     methods:{
         enjoyVote(){
             if(!this.getApiToken){
-                Vue.$koallTipBox({icon: 'notification', message: this.$t('business.public293')})
+                Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public293')})
                 return
             }
             if(!this.formData.communityId){

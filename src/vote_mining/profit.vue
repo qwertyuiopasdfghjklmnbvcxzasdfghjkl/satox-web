@@ -210,9 +210,6 @@ export default {
             }
     	}
     },
-    computed: {
-      ...mapGetters(['getApiToken', 'getLang']),
-    },
     created () {
         this.getVoteStatistics()
         this.getVoteRecord()
@@ -253,7 +250,7 @@ export default {
             })
         },
         tansferDialog () {
-          // 修改呢称
+          // 资金划转
           utils.setDialog(TansferDialog, {})
         },
         miningPoolDialog () {

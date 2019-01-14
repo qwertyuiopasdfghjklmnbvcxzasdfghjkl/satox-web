@@ -4,7 +4,11 @@
       <div class="keypoint-cont">
         <p class="type">
           <span>
-            <i class="icon" :class="[`icon-${params.symbol.toLowerCase()}`]"></i>
+            <i class="icon" :class="[`icon-${params.symbol.toLowerCase()}`]">
+              <template v-if="params.symbol.toLowerCase()==='cdcc'">
+                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+              </template>
+            </i>
             <em class="label">{{params.symbol}} {{$t('public0.public158')}}<!--指数--></em>
             <span class="tips">
               <i class="tips-icon">?</i>

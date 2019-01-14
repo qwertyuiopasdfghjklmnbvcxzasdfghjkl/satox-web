@@ -7,7 +7,7 @@
       <div class="form">
         <inputbox ref="box" v-validate="'required|pInteger'" :maxLength="6" name="verifyCode" :msgs="msgs.verifyCode" :errs="errors" v-model="formData.verifyCode" :title="$t('account.user_center_Google_verification_code')"  @keyupEnter="auth"/><!--谷歌验证码-->
         <buttonbox :text="$t('exchange.exchange_determine')" @click="auth"/><!--确定-->
-        <div class="warm-prompt" v-if="isWithdrawal">
+        <div class="warm-prompt" v-if="false">
           <p>{{$t('public0.public243')}}：<!--温馨提示--></p>
           <p>{{$t('account.user_prompt8')}}<!--提现请求申请成功后，请去邮箱点击链接确认本次提现请求。--></p>
         </div>

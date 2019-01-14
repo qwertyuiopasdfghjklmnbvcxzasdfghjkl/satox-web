@@ -6,7 +6,11 @@
             <div class="bus-ul-li-div">
                 <span v-for="coin in coins" :key="coin.symbol">
                     <a :class="{active: params.ad_type === 2 && params.symbol === coin.symbol}" href="javascript:;" @click="switchSymbol(2, coin.symbol)">
-                      <i :class="[`icon-${coin.symbol.toLowerCase()}`]"></i>{{coin.symbol}}
+                      <i :class="[`icon-${coin.symbol.toLowerCase()}`]">
+                        <template v-if="coin.symbol.toLowerCase()==='cdcc'">
+                          <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                        </template>
+                      </i>{{coin.symbol}}
                     </a>
                 </span>
             </div>
@@ -16,7 +20,11 @@
             <div class="bus-ul-li-div">
                 <span v-for="coin in coins" :key="coin.symbol">
                     <a :class="{active: params.ad_type === 1 && params.symbol === coin.symbol}" href="javascript:;" @click="switchSymbol(1, coin.symbol)">
-                      <i :class="[`icon-${coin.symbol.toLowerCase()}`]"></i>{{coin.symbol}}
+                      <i :class="[`icon-${coin.symbol.toLowerCase()}`]">
+                        <template v-if="coin.symbol.toLowerCase()==='cdcc'">
+                          <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                        </template>
+                      </i>{{coin.symbol}}
                     </a>
                 </span>
             </div>
@@ -53,7 +61,7 @@ export default {
 .bus ul li > a{display: block;height: 70px;line-height: 70px;color: #666;background-color: #fff; font-size: 18px; border-bottom: 1px solid #eee;}
 .bus ul li.buy > a.current{color: #fff;background-color: #3283FF;}
 .bus ul li.sell > a.current{color: #fff;background-color: #3283FF;}
-.bus-ul-li-div span{display: block;}
+.bus-ul-li-div > span{display: block;}
 .bus-ul-li-div span a{display: block;height: 65px;line-height: 65px;font-weight: bold;font-size: 16px;color: #666;font-weight:bold;}
 .buy .bus-ul-li-div span a:hover,
 .buy .bus-ul-li-div span a.active{color: #3182FF;}
