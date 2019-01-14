@@ -21,9 +21,9 @@
                     </div>
                 </div>
                 <div class="acount_tab">
-                  <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">主账户</div>
-                  <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">投票挖矿账户</div>
-                  <span @click="tansferDialog">资金划转</span>
+                  <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">{{$t('public.main_account')}}</div>
+                  <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">{{$t('public.vote_miner_account')}}</div>
+                  <span @click="tansferDialog">{{$t('vote_mining.funds_transfer')}}</span>
                 </div>
                 <ul class="accountInfo-lists header">
                   <li class="th">

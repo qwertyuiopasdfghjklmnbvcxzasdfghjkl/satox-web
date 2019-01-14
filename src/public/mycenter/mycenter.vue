@@ -7,7 +7,7 @@
             <div class="image">
               <img :src="avatarUrl" @error="setDefaultAvatar($event)" />
             </div>
-            <form ref="form" >
+            <form ref="form" v-if="!isExistUserAvatar">
               <input class="file" type="file" @change="uploadImage" name="source" title=" "/>
               <span class="tips">{{$t('account.user_center_set_photo')}}<!--头像只能设置一次--></span>
             </form>
@@ -160,7 +160,7 @@ export default {
       return this.userState.nickname
     },
     contactHtml () {
-      let alink = `<a href="${this.getLang === 'en' ? 'https://CDCCexchange.zendesk.com/hc/en-us/requests/new' : 'https://CDCCexchange.zendesk.com/hc/zh-cn/requests/new'}" target="_blank">${this.$t('public0.public241')}</a>`
+      let alink = `<a href="${this.getLang === 'en' ? 'https://cdcc.kf5.com/hc/request/guest/?lang=en' : 'https://cdcc.kf5.com/hc/request/guest/'}" target="_blank">${this.$t('public0.public241')}</a>`
       return `（${this.$t('account.user_prompt5').format(alink)}）`
     }
   },

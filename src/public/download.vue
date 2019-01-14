@@ -16,11 +16,11 @@
                     </a>
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
-                    <a class="button" :class="{en:getLang=='en'}" href="/static/CDCC-pro-1128.apk" download="CDCC-pro-1128.apk">
+                    <a class="button" :class="{en:getLang=='en'}" href="/static/CDCC-2019-01-14.apk" download="CDCC-2019-01-14.apk">
                         <!--安卓下载-->
                         <img src="../assets/images/download/android.png">{{$t('public0.public226')}}
                     </a>
-                    <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/nCfg">
+                    <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/68kt">
                         <!--IOS下载-->
                         <img src="../assets/images/download/iphone.png">{{$t('public0.public227')}}
                     </a>

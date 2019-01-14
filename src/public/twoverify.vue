@@ -259,7 +259,7 @@ export default {
   display: block;justify-content: center;align-items: center;width: 100% !important;height: 55px !important;padding: 0;margin-top: 0;
   font-weight: bold;font-size: 18px;color: #fff;border: none;border-radius: 4px;cursor: pointer; background: -webkit-linear-gradient(left, #0589F6, #0240CF);  background: linear-gradient(left, #0589F6, #0240CF);
 }
-.twoverify-right-item .button-group /deep/ .button:hover{background-color: #fdb902;}
+
 .twoverify-right-item .button-group /deep/ .button.disabled{background-color: #999;}
 .twoverify-right-item .button-group .link{padding-top: 6px;overflow: auto;}
 .twoverify-right-item .button-group .link a{height: 24px;line-height: 24px;color: #fdb902;text-decoration: underline;}
