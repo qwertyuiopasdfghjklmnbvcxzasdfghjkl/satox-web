@@ -10,7 +10,11 @@
             <em>{{Math.floor(baseInfo.praiseRate)}}%</em>
           </span>
           <span class="type">
-            <i :class="[`icon-${params.symbol.toLowerCase()}`]"></i>
+            <i :class="[`icon-${params.symbol.toLowerCase()}`]">
+              <template v-if="params.symbol.toLowerCase()==='cdcc'">
+                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+              </template>
+            </i>
             <em>{{params.symbol}}</em>
           </span>
           <span class="available">
