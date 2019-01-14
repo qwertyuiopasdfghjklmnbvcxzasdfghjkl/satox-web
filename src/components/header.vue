@@ -127,6 +127,11 @@
             </a>
           </li>
           <li>
+            <a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">
+              {{$t('business.MINING_TITLE')}}<!--投票挖矿-->
+            </a>
+          </li>
+          <li>
             <a :href="noticeUrl" target="_blank">
               {{$t('public.navigation_news')}}<!--公告中心-->
             </a>
