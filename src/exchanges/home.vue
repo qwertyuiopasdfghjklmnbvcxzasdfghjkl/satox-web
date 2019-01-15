@@ -285,6 +285,8 @@ export default {
     },
     changeSymbol (baseSymbol, currentSymbol) {
       this.klineData = []
+      this.$refs.businesspanel.$refs.business_buy.formData.amount = ''
+      this.$refs.businesspanel.$refs.business_sell.formData.amount = ''
       this.$router.push({name: 'exchange_index', params: {symbol: `${currentSymbol}_${baseSymbol}`}})
     },
     showCoinInfo () {
