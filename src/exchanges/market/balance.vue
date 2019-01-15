@@ -166,6 +166,9 @@ export default {
       if (this.getApiToken) {
         this.showLoading = true
         walletApi.myAssets({}, (data) => {
+          data = data.filter(item=>{
+            return data.type===1
+          })
           data.forEach((item) => {
             item.frozenBalance = numUtils.add(item.frozenBalance, item.adFrozenBalance).add(item.loanBalance).toFixed(8)
           })
