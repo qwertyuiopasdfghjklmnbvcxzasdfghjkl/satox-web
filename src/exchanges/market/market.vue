@@ -348,7 +348,7 @@ export default {
 .list1-percent{position:absolute;top:10px;right:0; width: 55px; height: 30px; border-radius: 3px; text-align: center; line-height: 30px;}
 .list1-percent.up {background-color: rgba(35, 205, 9,0.3)}
 .list1-percent.down {background-color: rgba(243, 66, 70,0.3)}
-.list1-currency{display:flex;color:#333;flex-flow:column;align-items:flex-start;justify-content:center;width:80px;margin-left:10px;}
+.list1-currency{display:flex;color:#333;flex-flow:column;align-items:flex-start;justify-content:center;width:60px;margin-left:10px;}
 /*.list1-currency-icon{font-size:18px;width:22px;height:22px;background-color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .list1-currency-icon::before{color:#181b2a;}*/
 .list1-currency-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
@@ -384,7 +384,7 @@ export default {
 .volume{width:60px;}
 .disabled-icon-star{color:#999;cursor:not-allowed;}
 @media screen and (max-width: 1600px) {
-  .list1-currency{width:60px;}
+  .list1-currency{width:50px;}
 }
 @media screen and (max-width: 1400px) {
   .market{width:calc(100% - 8px);padding:30px 4px 10px 4px;}
