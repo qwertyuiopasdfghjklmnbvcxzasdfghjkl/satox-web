@@ -358,7 +358,7 @@ export default {
       if (Number(item.msgType) === 3) {
         this.$router.push({name: 'otc_index'})
       } else {
-        this.$router.push({name: 'mycenter'})
+        this.$router.push({to: '/mycenter/message'})
       }
     },
     goMessagePage () {

@@ -2,7 +2,7 @@
     <div class="download">
         <div class="banner1">
             <div class="content">
-                <div style="height: 240px;"></div>
+                <div style="height: 50px;"></div>
                 <h1 class="title1">{{$t('public0.public285')}}</h1>
                 <h3 class="title2">{{$t('public0.public286')}}</h3>
                 <div class="buttons" v-if="isWeiXi">
@@ -16,11 +16,13 @@
                     </a>
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
-                    <a class="button" :class="{en:getLang=='en'}" href="/static/CDCC-2019-01-14.apk" download="CDCC-2019-01-14.apk">
+                    <div class="qrcode" ref="qrcode_apk"></div>
+                    <a class="button" :class="{en:getLang=='en'}" :href="apk" download="CDCC-2019-01-14.apk">
                         <!--安卓下载-->
                         <img src="../assets/images/download/android.png">{{$t('public0.public226')}}
                     </a>
-                    <a class="button" :class="{en:getLang=='en'}" href="https://www.pgyer.com/68kt">
+                    <div class="qrcode" ref="qrcode_ios"></div>
+                    <a class="button" :class="{en:getLang=='en'}" :href="ios">
                         <!--IOS下载-->
                         <img src="../assets/images/download/iphone.png">{{$t('public0.public227')}}
                     </a>
@@ -34,14 +36,29 @@
 <script>
 import Vue from 'vue'
 import {mapGetters} from 'vuex'
+import utils from '@/assets/js/utils'
 export default {
   data () {
     return {
-      isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent)
+      isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent),
+      apk:'https://www.cdcc.ink/static/CDCC-2019-01-14.apk',
+      ios:'https://www.pgyer.com/68kt'
     }
   },
   computed: {
     ...mapGetters(['getLang'])
+  },
+  mounted(){
+    utils.qrcode(this.$refs.qrcode_apk, {
+      text: this.apk,
+      width: 150,
+      height: 150
+    })
+    utils.qrcode(this.$refs.qrcode_ios, {
+      text: this.ios,
+      width: 150,
+      height: 150
+    })
   },
   methods: {
     showTip () {
@@ -55,6 +72,8 @@ export default {
 </script>
 
 <style scoped>
+.qrcode {width: 320px; margin-top: 20px;}
+.qrcode /deep/ img {margin-left: auto; margin-right: auto; border: 10px solid #fff;}
 .download{min-width:1200px;width:100%; height: calc(100% - 70px);display:flex;flex-direction:column;align-items:center; background:url(../assets/images/download/bg.jpg) #010A1E no-repeat center;background-size:cover;}
 @media screen and (max-width: 1600px) {
   .download {height: calc(100% - 60px);}

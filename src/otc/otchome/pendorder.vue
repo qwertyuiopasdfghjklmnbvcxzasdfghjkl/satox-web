@@ -118,6 +118,7 @@ import loading from '@/components/loading'
 import createorder from '@/otc/otchome/createorder'
 import buy from '@/otc/otchome/buy'
 import avatar from '@/assets/images/touxiang.png'
+import shopsApi from '@/api/shops'
 export default {
   props: ['params'],
   components: {
@@ -127,6 +128,7 @@ export default {
   data () {
     return {
       loading: true,
+      isShop:false,
       datas: [],
       baseInfo: {
         tradeCount: 0,
@@ -205,6 +207,7 @@ export default {
   },
   created () {
     this.init()
+    this.getShopsApply()
     this.$nextTick(() => {
       this.addEvents({
         name: 'updateWallet',
@@ -219,6 +222,13 @@ export default {
   },
   methods: {
     ...mapActions(['addOtcSocketEvent', 'removeOtcSocketEvent', 'addEvents', 'removeEvents']),
+    getShopsApply(){
+      if(this.getApiToken){
+        shopsApi.getShopsApply(res=>{
+          this.isShop = (res.data && res.data.state===3) || false
+        })
+      }
+    },
     init () {
       this.getList()
       this.getBaseInfo()
@@ -266,7 +276,18 @@ export default {
                 }
               })
             } else {
-              successCallback && successCallback(res.data.pay_type)
+              if(this.isShop){
+                successCallback && successCallback(res.data.pay_type)
+              } else {
+                let lang = this.getLang==="zh-CN"?'非商家无法发布广告，是否立即申请？':(this.getLang==="cht"?'非商戶無法發布廣告，是否立即申請？':'Non-merchase can\'t post ads, do you apply now?')
+                Vue.$confirmDialog({
+                  id: 'goShopsApply',
+                  content: lang,
+                  okCallback: () => {
+                    this.$router.push({to:'/mycenter/agencyApply'})
+                  }
+                })
+              }
             }
           }, (res) => {
             if (res.msg === 'NO_PAY_TYPE') {
