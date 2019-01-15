@@ -85,7 +85,7 @@ export default {
       otcApi.getCoinMarket(this.paramsChange, (res) => {
         let priceArray = []
         let timeArray = []
-        this.curPrice = numUtils.BN(res[0].price).toFixed(2)
+        this.curPrice = numUtils.BN(res[0].price).toFixed(6)
         this.percent = res[0].percent_change_24h || 0
         res.reverse()
         res.forEach((item) => {
