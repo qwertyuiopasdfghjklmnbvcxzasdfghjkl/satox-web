@@ -96,8 +96,8 @@ export default {
         if (this.isATN) {
           this.maxPrice = this.minPrice = this.curPrice
         } else {
-          this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(2)
-          this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(2)
+          this.minPrice = numUtils.BN(Math.min.apply(null, priceArray)).toFixed(6)
+          this.maxPrice = numUtils.BN(Math.max.apply(null, priceArray)).toFixed(6)
         }
         this.createCanvas(priceArray, timeArray)
       }, (msg) => {
