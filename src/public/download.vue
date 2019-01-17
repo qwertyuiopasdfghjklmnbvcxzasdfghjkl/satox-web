@@ -17,12 +17,12 @@
                 </div>
                 <div class="buttons" v-if="!isWeiXi">
                     <div class="qrcode" ref="qrcode_apk"></div>
-                    <a class="button" :class="{en:getLang=='en'}" :href="apk" download="CDCC-2019-01-14.apk">
+                    <a class="button" :class="{en:getLang=='en'}" :href="apk" target="_blank">
                         <!--安卓下载-->
                         <img src="../assets/images/download/android.png">{{$t('public0.public226')}}
                     </a>
                     <div class="qrcode" ref="qrcode_ios"></div>
-                    <a class="button" :class="{en:getLang=='en'}" :href="ios">
+                    <a class="button" :class="{en:getLang=='en'}" :href="ios" target="_blank">
                         <!--IOS下载-->
                         <img src="../assets/images/download/iphone.png">{{$t('public0.public227')}}
                     </a>
@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent),
-      apk:'https://www.cdcc.ink/static/CDCC-2019-01-14.apk',
+      apk:'https://www.cdcc.ink/static/cdcc-release-1.0.1.apk',
       ios:'https://www.pgyer.com/68kt'
     }
   },
