@@ -5,7 +5,7 @@
         <a class="icon-close" href="javascript:;" @click="closeDialog"></a>
       </div>
       <div class="form">
-        <inputbox ref="box" type="password" v-validate="'required'" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_login_password') + '：'"  @keyupEnter="auth"/><!--登录密码-->
+        <inputbox ref="box" type="password" v-validate="'required'" name="passwordVerify" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_login_password') + '：'"  @keyupEnter="auth"/><!--登录密码-->
         <div class="smsCode">
           <inputbox v-validate="'required|pInteger'" :maxLength="6"  name="smsCode" :msgs="msgs.smsCode" :errs="errors" v-model="formData.smsCode" :title="$t('account.user_center_SMS_code') + '：'"  @keyupEnter="auth"/><!--短信验证码-->
           <buttonbox :height="32" :class="{disabled:disabled}" :text="sendTitle" @click="sendSMSCode"/><!--确定-->
