@@ -74,6 +74,18 @@ export default {
                 },
                 sortable: 'custom'
             },
+            {title: '商家等级', key: 'levelName', render:(h, params) => {
+                return h('span', params.row.shopsInfoDTO && params.row.shopsInfoDTO.state===3?params.row.shopsInfoDTO.levelName:'-')
+            }},
+            {title: '手续费率', key: 'feeRate', render:(h, params) => {
+                return h('span', params.row.shopsInfoDTO && params.row.shopsInfoDTO.state===3?params.row.shopsInfoDTO.feeRate*100+'%':'-')
+            }},
+            {title: '总成交量(RMB)', key: 'totalCurrency', render:(h, params) => {
+                return h('span', params.row.shopsInfoDTO && params.row.shopsInfoDTO.state===3?(params.row.shopsInfoDTO.totalCurrency+'').toMoney():'-')
+            }},
+            {title: '归属社区', key: 'community', render:(h, params) => {
+                return h('span', params.row.shopsInfoDTO && params.row.shopsInfoDTO.state===3?params.row.shopsInfoDTO.community:'-')
+            }},
             {
                 title: '注册时间',
                 key: 'createdTime',
