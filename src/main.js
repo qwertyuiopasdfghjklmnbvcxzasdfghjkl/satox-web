@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
-import {routers, otherRouter, appRouter, kycRouter, otcRouter, exchangeRouter, financeRouter, riskRouter, operationRouter, adminRouter, systemConfigRouter, systemLogsRouter, monitoringRouter, fundRouter} from './router';
+import {routers, otherRouter, appRouter, kycRouter, otcRouter, exchangeRouter, communityRouter, financeRouter, riskRouter, operationRouter, adminRouter, systemConfigRouter, systemLogsRouter, monitoringRouter, fundRouter} from './router';
 import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
@@ -254,6 +254,7 @@ new Vue({
         routers = routers.concat(kycRouter);
         routers = routers.concat(otcRouter);
         routers = routers.concat(exchangeRouter);
+        routers = routers.concat(communityRouter);
         routers = routers.concat(financeRouter);
         routers = routers.concat(riskRouter);
         routers = routers.concat(operationRouter);
