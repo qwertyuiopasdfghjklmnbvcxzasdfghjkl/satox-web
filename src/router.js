@@ -113,6 +113,18 @@ export const otcRouter = [
         ]
     },
     {
+        path: '/otc_merchant_review',
+        name: 'otc_merchant_review',
+        title: '商家审核',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
+        },
+        children: [
+            { path: 'index', title: '商家审核', name: 'otc_merchant_review_index', component: resolve => { require(['./views/manage_otc/merchant_review.vue'], resolve); } }
+        ]
+    },
+    {
         path: '/otc_users',
         name: 'otc_users',
         title: '用户管理',
@@ -170,6 +182,21 @@ export const otcRouter = [
         },
         children: [
             { path: 'index', title: '审核管理', name: 'otc_auditing_index', component: resolve => { require(['./views/manage_otc/auditing.vue'], resolve); } }
+        ]
+    }
+];
+
+export const communityRouter = [
+    {
+        path: '/community_users',
+        name: 'community_users',
+        title: '社区用户管理',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            { path: 'index', title: '社区用户管理', name: 'community_users_index', component: resolve => { require(['./views/community/users.vue'], resolve); } }
         ]
     }
 ];
@@ -857,6 +884,7 @@ export const routers = [
     ...kycRouter,
     ...otcRouter,
     ...exchangeRouter,
+    ...communityRouter,
     ...financeRouter,
     ...riskRouter,
     ...operationRouter,
