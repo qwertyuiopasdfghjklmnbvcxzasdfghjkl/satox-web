@@ -5,31 +5,31 @@
             <div class="center-left">
                 <a href="javascript:;" @click="goHome"></a>
                 <ul class="maxWidth">
-                    <li>
-                      <a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">
-                        {{$t('otc_public.otc_navigation_trade')}}<!--OTC-->
-                      </a>
-                    </li>
+                    <!--<li>-->
+                      <!--<a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">-->
+                        <!--{{$t('otc_public.otc_navigation_trade')}}&lt;!&ndash;OTC&ndash;&gt;-->
+                      <!--</a>-->
+                    <!--</li>-->
                     <li>
                       <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
                         {{$t('public.navigation_exchange')}}<!--币币交易-->
                       </a>
                     </li>
-                    <li>
-                      <a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">
-                        {{$t('business.MINING_TITLE')}}<!--投票挖矿-->
-                      </a>
-                    </li>
-                    <li>
-                      <a :href="noticeUrl" target="_blank">
-                        {{$t('public.navigation_news')}}<!--公告中心-->
-                      </a>
-                    </li>
-                    <li>
-                      <a :href="helperUrl" target="_blank">
-                        {{$t('public.navigation_support')}}<!--帮助中心-->
-                      </a>
-                    </li>
+                    <!--<li>-->
+                      <!--<a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">-->
+                        <!--{{$t('business.MINING_TITLE')}}&lt;!&ndash;投票挖矿&ndash;&gt;-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a :href="noticeUrl" target="_blank">-->
+                        <!--{{$t('public.navigation_news')}}&lt;!&ndash;公告中心&ndash;&gt;-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a :href="helperUrl" target="_blank">-->
+                        <!--{{$t('public.navigation_support')}}&lt;!&ndash;帮助中心&ndash;&gt;-->
+                      <!--</a>-->
+                    <!--</li>-->
                     <li>
                       <router-link :to="{name:'download'}">
                         {{$t('public0.public212')}}<!--APP下载-->
@@ -164,7 +164,7 @@
               {{$t('public.navigation_logout')}}<!--退出-->
             </a>
           </li>
-          <li class="sepline" style="margin-top: 5px; margin-bottom: 5px;"></li>          
+          <li class="sepline" style="margin-top: 5px; margin-bottom: 5px;"></li>
           <li v-for="item in languages" :key="item.id">
             <a href="javascript:;" @click="setLanguage(item.id)">
               {{item.name}}
