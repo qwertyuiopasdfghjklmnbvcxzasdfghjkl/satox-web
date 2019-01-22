@@ -190,7 +190,7 @@ export const communityRouter = [
     {
         path: '/community_users',
         name: 'community_users',
-        title: '社区用户管理',
+        title: '社区管理',
         component: Main,
         meta:{
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
