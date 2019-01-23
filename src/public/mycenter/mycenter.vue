@@ -41,8 +41,8 @@
             </p>
             <p class="sale" v-if="false">
               <span>
-                {{$t('account.user_center_pay_fees').format('CDCC', '50%')}}<!--使用CDCC支付交易手续费（50% 折扣）-->
-                <a class="icon-checkbox" href="javascript:;" :class="isUseCDCCPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
+                {{$t('account.user_center_pay_fees').format('SATOX', '50%')}}<!--使用SATOX支付交易手续费（50% 折扣）-->
+                <a class="icon-checkbox" href="javascript:;" :class="isUseSATOXPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
               </span>
             </p>
             <p class="limit">
@@ -136,7 +136,7 @@ export default {
         verifyState: 0,
         verifyTimes: 0
       },
-      isUseCDCCPay: false,
+      isUseSATOXPay: false,
       distributeHistory: [], // 分发记录
       distributeParam: {
         page: 1, // 当前页
@@ -218,7 +218,7 @@ export default {
           verifyState: data.verifyState,
           verifyTimes: data.verifyTimes
         }
-        this.isUseCDCCPay = data.coinState === 1
+        this.isUseSATOXPay = data.coinState === 1
         this.vsloaded = true
       }, (msg) => {
         console.error(msg)
@@ -240,9 +240,9 @@ export default {
       }
     },
     switchCoinState () {
-      // 切换使用CDCC支付交易手续费（50% 折扣）
-      userUtils.switchCDCCChargeState((msg) => {
-        this.isUseCDCCPay = !this.isUseCDCCPay
+      // 切换使用SATOX支付交易手续费（50% 折扣）
+      userUtils.switchSATOXChargeState((msg) => {
+        this.isUseSATOXPay = !this.isUseSATOXPay
       }, (msg) => {
         console.error(msg)
       })

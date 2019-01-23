@@ -6,7 +6,7 @@
         <div class="cont">
             <div class="description">
                 <p>{{$t('feedback.feedback_text1')}}<!--欢迎反馈问题，您的意见与建议就是我们的动力！--></p>
-                <p>{{$t('feedback.feedback_text2').format(100, 'CDCC')}}<!--如果您的建议被采纳我们将奖励您100个CDCC币--></p>
+                <p>{{$t('feedback.feedback_text2').format(100, 'SATOX')}}<!--如果您的建议被采纳我们将奖励您100个SATOX币--></p>
             </div>
             <div class="description">
                 <span>{{$t('feedback.feedback_text3')}}<!--我们会认真查阅您反馈的每一个问题，并尽快给您答复。--></span>

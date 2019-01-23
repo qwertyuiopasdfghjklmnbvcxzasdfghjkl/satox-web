@@ -4,12 +4,12 @@
             <div class="login-left"></div>
             <div class="login-right">
                 <div class="login-right-item item-login">
-                    <div class="caption">{{$t('login_register.title_login').format('CDCC')}}<!--欢迎来到CDCC--></div>
+                    <div class="caption">{{$t('login_register.title_login').format('SATOX')}}<!--欢迎来到SATOX--></div>
                     <div class="prompt">
                         <i>!</i>
                         <span>{{$t('login_register.warm_prompt')}}<!--请确认您正在访问：-->www.satox.io</span>
                     </div>
-                    <inputbox name="email" ref="email" v-model="formData.username" v-validate="'required'" :msgs="msgs.username" :errs="errors" :title="`${$t('otc_exchange.otc_exchange_Email')}/${$t('account.user_center_phone')}`" :placeholder="$t('public0.public246')" :autocomplete="'on'" @keyupEnter="login"/><!--邮箱/手机号-->
+                    <inputbox name="email" ref="email" v-model="formData.username" v-validate="'required'" :msgs="msgs.username" :errs="errors" :title="`${$t('otc_exchange.otc_exchange_Email')}/${$t('account.user_center_phone')}/${$t('otc_exchange.otc_exchange_username')}`" :placeholder="usernamePlaceholder" :autocomplete="'on'" @keyupEnter="login"/><!--邮箱/手机号-->
                     <inputbox type="password" name="password" v-model="formData.password" v-validate="'required'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')" :autocomplete="'on'" @keyupEnter="login"/><!--密码-->
                     <div class="button-group">
                         <buttonbox :class="{disabled:locked||gtLocked}" :text="$t('login_register.login')" @click="login"/><!--登录-->
@@ -48,9 +48,12 @@ export default {
     }
   },
   computed: {
+    usernamePlaceholder(){
+      return `${this.$t('public0.public287')} ${this.$t('otc_exchange.otc_exchange_Email')}/${this.$t('account.user_center_phone')}/${this.$t('otc_exchange.otc_exchange_username')}`
+    },
     msgs () {
       return {
-        username: {required: this.$t('public0.public246')}, // 请输入邮箱或手机号
+        username: {required: this.usernamePlaceholder}, // 请输入邮箱或手机号
         password: {required: this.$t('login_register.password')} // 请输入密码
       }
     }

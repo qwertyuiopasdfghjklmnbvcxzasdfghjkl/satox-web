@@ -22,7 +22,7 @@
             <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
             <span>
               <em @click="checked=!checked">{{$t('login_register.agree_Service')}}<!--我已阅读并同意--></em>
-              <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('OTC')}}<!--CDCC服务条款--></a>
+              <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('OTC')}}<!--SATOX服务条款--></a>
             </span>
         </div>
         <div class="btn-apply"><buttonbox :height="40" :width="350" :text="$t('business.APPLY')" @click="apply"/><!--确定--></div>

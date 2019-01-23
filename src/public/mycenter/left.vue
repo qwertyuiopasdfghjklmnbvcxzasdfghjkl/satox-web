@@ -16,11 +16,11 @@
                 <span>{{$t('account.userDigitalAssets')}}</span>
                 <!--我的数字资产-->
             </li>
-            <li :class="{'active': active === 'settings'}" @click="switch_tab('settings')">
+            <!--收款方式设置-->
+            <!-- <li :class="{'active': active === 'settings'}" @click="switch_tab('settings')">
                 <i class="icon-curry"></i>
                 <span>{{$t('otc_legal.otc_legal_currency')}}</span>
-                <!--收款方式设置-->
-            </li>
+            </li> -->
             <li :class="{'active': active === 'transaction'}" @click="switch_tab('transaction')">
                 <i class="icon-reports"></i>
                 <span>{{$t('trade_record.my_trade_record')}}</span>
@@ -30,17 +30,7 @@
                 <i class="icon-message"></i>
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
-            </li>
-            <li :class="{'active': active === 'agencyApply'}" @click="switch_tab('agencyApply')" v-if="!showShops">
-                <i class="icon-shield"></i>
-                <span>{{$t('business.MERCHANT_APPLICATION')}}</span>
-                <!--商家申请-->
-            </li>
-            <li :class="{'active': active === 'agency'}" @click="switch_tab('agency')" v-if="showShops">
-                <i class="icon-shop"></i>
-                <span>{{$t('business.MERCHANT_MANAGE')}}</span>
-                <!--商家管理-->
-            </li>
+            </li>            
             <!--我的推荐中心-->
             <!-- <li @click="switch_like">
                 <i class="icon-like"></i>
@@ -65,7 +55,7 @@ export default {
     }
   },
   created(){
-    this.getShopsApply()
+    
   },
   methods: {
     switch_like () {
@@ -74,11 +64,7 @@ export default {
     switch_tab (tab) {
       this.$emit('switchTab', tab)
     },
-    getShopsApply(){
-      shopsApi.getShopsApply(res=>{
-        this.showShops = (res.data && res.data.state===3) || false
-      })
-    },
+    
   }
 }
 </script>

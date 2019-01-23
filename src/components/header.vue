@@ -95,7 +95,7 @@
                                 <div class="message-panel-nologin" v-if="!isLogin">
                                     <div class="nologin-icon icon-msg-hi"></div>
                                     <div class="nologin-text">
-                                        {{$t('message.msg_use_BITARK').format('CDCC')}}<!--欢迎使用CDCC!-->
+                                        {{$t('message.msg_use_BITARK').format('SATOX')}}<!--欢迎使用SATOX!-->
                                     </div>
                                     <div class="nologin-text">
                                         {{$t('message.msg_please')}}<!--请先-->
@@ -116,31 +116,35 @@
         </div>
         </div>
         <ul class="minWidthList" :class="{show:showMinMenu}" v-show="showMinMenu" @click="showMinMenu=false">
-          <li>
+          <!--OTC-->
+          <!-- <li>
             <a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">
-              {{$t('otc_public.otc_navigation_trade')}}<!--OTC-->
+              {{$t('otc_public.otc_navigation_trade')}}
             </a>
-          </li>
+          </li> -->
           <li>
             <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
               {{$t('public.navigation_exchange')}}<!--币币交易-->
             </a>
           </li>
-          <li>
+          <!--投票挖矿-->
+          <!-- <li>
             <a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">
-              {{$t('business.MINING_TITLE')}}<!--投票挖矿-->
+              {{$t('business.MINING_TITLE')}}
             </a>
-          </li>
-          <li>
+          </li> -->
+          <!--公告中心-->
+          <!-- <li>
             <a :href="noticeUrl" target="_blank">
-              {{$t('public.navigation_news')}}<!--公告中心-->
+              {{$t('public.navigation_news')}}
             </a>
-          </li>
-          <li>
+          </li> -->
+          <!--帮助中心-->
+          <!-- <li>
             <a :href="helperUrl" target="_blank">
-              {{$t('public.navigation_support')}}<!--帮助中心-->
+              {{$t('public.navigation_support')}}
             </a>
-          </li>
+          </li> -->
           <li>
             <router-link :to="{name:'download'}">
               {{$t('public0.public212')}}<!--APP下载-->
