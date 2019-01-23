@@ -128,7 +128,7 @@
         optionalList: [], /* 自选临时数据 */
         tableheadpars: { newprise1: 'idefault', newprise2: 'idefault', twhourstop: 'idefault', twhourslow: 'idefault', volume: 'idefault' },
         checked: false,
-        active: 'BTC',
+        active: 'USDS',
         marketArry: [], // 市场信息
         filterMarketAtty: [], // 前台过滤'BTCETH、ETHBTC、BTCMARKET'市场信息
         products: []
