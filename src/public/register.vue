@@ -111,11 +111,12 @@ export default {
       }
     },
     getAgreementUrl () {
-      if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-        return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
-      } else {
-        return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
-      }
+      // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+      //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
+      // } else {
+      //   return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
+      // }
+      return '#'
     }
   },
   watch: {
