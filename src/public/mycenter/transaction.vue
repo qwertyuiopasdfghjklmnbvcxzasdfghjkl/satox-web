@@ -3,8 +3,8 @@
     <ul class="tabcontrol">
       <li :class="{'active': active === 'delegate'}" @click="switch_tab('delegate')">{{$t('trade_record.entrust_record')}}<!--委讬纪录 --></li>
       <li :class="{'active': active === 'curreny'}" @click="switch_tab('curreny')">{{$t('trade_record.exchange_record')}}<!--币币成交记录--></li>
-      <li :class="{'active': active === 'otccurreny'}" @click="switch_tab('otccurreny')">{{$t('trade_record.otc_record')}}<!--OTC交易记录--></li>
-      <li :class="{'active': active === 'transfer'}" @click="switch_tab('transfer')">{{$t('trade_record.transfer_record')}}<!--资金划转记录--></li>
+      <!-- <li :class="{'active': active === 'otccurreny'}" @click="switch_tab('otccurreny')">{{$t('trade_record.otc_record')}}</li> --><!--OTC交易记录-->
+      <!-- <li :class="{'active': active === 'transfer'}" @click="switch_tab('transfer')">{{$t('trade_record.transfer_record')}}</li> --><!--资金划转记录-->
     </ul>
     <delegate v-show="active==='delegate'"/>
     <curreny v-show="active==='curreny'"/>

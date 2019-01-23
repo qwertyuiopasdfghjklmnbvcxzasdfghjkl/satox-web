@@ -102,9 +102,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'BTC'
+        return symbol || 'USDS'
       } else {
-        return 'BTC'
+        return 'USDS'
       }
     },
     currentSymbol () {

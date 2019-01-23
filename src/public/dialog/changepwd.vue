@@ -6,7 +6,7 @@
       </div>
       <div class="form">
         <inputbox v-validate="'required'" type="password" name="passwordOld" :msgs="msgs.passwordOld" :errs="errors" v-model="formData.passwordOld" :title="$t('account.user_center_old_password')"/><!--原密码-->
-        <inputbox id="CDCC-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
+        <inputbox id="SATOX-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
         <inputbox v-validate="'required|passwordAgain'" type="password" name="passwordAgain" :msgs="msgs.passwordAgain" :errs="errors" v-model="formData.passwordConfirm" :title="$t('login_register.confirm_new_password')"/><!--确认新密码-->
         <div class="row">
           <p>{{$t('public0.public242')}}:</p>
