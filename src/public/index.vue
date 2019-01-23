@@ -43,7 +43,7 @@
 
     <section class="bk-wrap footer-main">
       <section class="bk-main footer">
-        <p>© 2018-2019 www.cdcc.ink All Rights Reserved</p>
+        <p>© 2018-2019 www.satox.io All Rights Reserved</p>
       </section>
     </section>
   </div>
@@ -67,32 +67,36 @@
     computed: {
       ...mapGetters(['getApiToken', 'getLang']),
       aboutUrl () {
-        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
-        } else {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
-        }
+        // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
+        // } else {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
+        // }
+        return '#'
       },
       serviceAgreementUrl () {
-        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
-        } else {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
-        }
+        // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
+        // } else {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
+        // }
+        return '#'
       },
       privacyNoticeUrl () {
-        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
-        } else {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
-        }
+        // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
+        // } else {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
+        // }
+        return '#'
       },
       rateStandardUrl () {
-        if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
-        } else {
-          return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
-        }
+        // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
+        // } else {
+        //   return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
+        // }
+        return '#'
       }
     },
     watch: {
