@@ -34,20 +34,20 @@
                     <template v-if="formData.registerType==0">
                       <inputbox name="email" :maxLength="255" v-model="formData.email" v-validate="'required|email'" :msgs="msgs.email" :errs="errors" :title="$t('otc_exchange.otc_exchange_Email')" :placeholder="$t('login_register.email')"/><!--邮箱-->
                     </template>
-                    <inputbox id="CDCC-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
+                    <inputbox id="SATOX-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
                     <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
                           <em @click="checked=!checked">{{$t('login_register.agree_Service')}}<!--我已阅读并同意--></em>
-                          <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('CDCC')}}<!--CDCC服务条款--></a>
+                          <a :href="getAgreementUrl" target="_blank">{{$t('login_register.bitark_service').format('SATOX')}}<!--SATOX服务条款--></a>
                         </span>
                     </div>
                     <div class="button-group">
                         <buttonbox :class="{disabled:locked||gtLocked}" :text="$t('login_register.register')" @click="register"/><!--注册-->
                         <div class="link">
-                            <a href="javascript:;" @click="loginDialog" v-html="$t('login_register.Already_registered_Login').format(`<font color='#3A76E7'>CDCC</font>`)"><!--已有CDCC账号，请登录--></a>
+                            <a href="javascript:;" @click="loginDialog" v-html="$t('login_register.Already_registered_Login').format(`<font color='#3A76E7'>SATOX</font>`)"><!--已有SATOX账号，请登录--></a>
                         </div>
                     </div>
                 </div>

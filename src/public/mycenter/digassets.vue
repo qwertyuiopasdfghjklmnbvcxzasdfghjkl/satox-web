@@ -23,7 +23,7 @@
                 <div class="acount_tab">
                   <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">{{$t('public.main_account')}}</div>
                   <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">{{$t('public.vote_miner_account')}}</div>
-                  <span @click="tansferDialog">{{$t('vote_mining.funds_transfer')}}</span>
+                  <!-- <span @click="tansferDialog">{{$t('vote_mining.funds_transfer')}}</span> -->
                 </div>
                 <ul class="accountInfo-lists header">
                   <li class="th">
@@ -84,10 +84,12 @@
                             <div class="useable f-right ng-binding">{{toFixed(data.availableBalance)}}</div>
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
                             <div class="action f-right"  v-if="accountType===1">
-                                <span class="btn btn-deposit ng-binding ng-scope1" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"><!--充值与提现--></span>
+                              <!--充值与提现-->
+                              <!-- <span class="btn" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"></span> -->
+                              <span class="icon_withdraw" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
                             </div>
                         </div>
-                        <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/>
+                        <!-- <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/> -->
                     </li>
                 </ul>
             </div>
@@ -107,6 +109,8 @@ import moreinfo from '@/public/mycenter/moreinfo'
 import TansferDialog from '@/vote_mining/dialog/transfer'
 import voteMiningApi from '@/api/voteMining'
 import loading from '@/components/loading'
+import withdrawInfo from './withdrawInfo'
+
 export default {
   data () {
     return {
@@ -120,7 +124,8 @@ export default {
       mobileState: 0,
       myAssets: [],
       active:"main",
-      accountType:1
+      accountType:1,
+      EOS_MEMO:''
     }
   },
   components: {
@@ -128,7 +133,7 @@ export default {
     loading
   },
   computed: {
-    ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign']),
+    ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign','getUserInfo']),
     USDCNY () {
       return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2).toMoney()
     }
@@ -148,8 +153,61 @@ export default {
   created () {
     this.getList()
     this.getUserState()
+    this.getEosAddress()
   },
   methods: {
+    getEosAddress(){
+      userUtils.getEosAddress(data=>{
+        this.EOS_MEMO = data
+      })
+    },
+    withdrawDalog (data) {
+      if (this.verifyState !== 2) {
+        Vue.$confirmDialog({
+          id: 'KYC_AUTH_FIRST',
+          showCancel: false,
+          content: this.$t(`error_code.KYC_AUTH_FIRST`), // 请先完成实名认证
+          okCallback: () => {
+            this.$router.push({name: 'mycenter_menu', params: {menu: 'mycenter'}})
+          }
+        })
+        return
+      }
+      if (this.googleState !== 1 && this.mobileState !== 1) {
+        Vue.$confirmDialog({
+          id: 'GOOGLEAUTH_OR_SMSAUTH_FIRST',
+          showCancel: false,
+          content: this.$t('error_code.GOOGLE_CELLPHONE_AUTH_FIRST'), // 请先进行谷歌验证或短信验证
+          okCallback: () => {
+            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+          }
+        })
+        return
+      }
+      if (!this.getUserInfo.email && this.mobileState !== 1) {
+        Vue.$confirmDialog({
+          id: 'SMS_AUTH_FIRST',
+          showCancel: false,
+          content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
+          okCallback: () => {
+            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+          }
+        })
+        return
+      }
+      utils.setDialog(withdrawInfo, {
+        symbol: data.symbol,
+        symbolType: data.symbolType,
+        available: data.availableBalance,
+        fromAddress: data.symbol==='EOS'?this.EOS_MEMO:data.address,
+        procedure: data.procedureFee,
+        minWithdraw: data.minWithdraw,
+        fromAccount: data.accountId,
+        okCallback: () => {
+          this.$emit('updateMyAssets')
+        }
+      })
+    },
     tansferDialog () {
       // 修改呢称
       utils.setDialog(TansferDialog, {
@@ -326,5 +384,8 @@ export default {
 .acount_tab > div:hover {color: #333;}
 .acount_tab > div.active:hover {color: #fff;}
 .acount_tab > span {position: absolute; right: 20px; height: 50px; line-height: 50px; color: #1571FF; cursor: pointer;}
+
+.icon_withdraw{display: inline-block;width: 25px;height: 25px;margin-right: 5px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
+.icon_withdraw:hover{background-image: url(../../assets/images/icon_withdraw_hover.png);}
 </style>
 

@@ -32,7 +32,7 @@
                         <inputbox name="smsCode" :maxLength="6" v-model="mobileFormData.smsCode" v-validate="'required'" :msgs="msgs.smsCode" :errs="errors" :title="$t('account.user_center_SMS_code')" :placeholder="$t('login_register.verify_code')"/><!--短信验证码-->
                         <a href="javascript:;" :class="{disabled:btnDisabled}" @click="sendSMSCode">{{$t('account.user_center_send_SMS')}}<!--发送验证码-->{{disabled ? `（${time}s）` : ''}}</a>
                       </div>
-                      <inputbox id="CDCC-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="mobileFormData.password" :title="$t('account.user_center_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--新密码-->
+                      <inputbox id="SATOX-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="mobileFormData.password" :title="$t('account.user_center_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--新密码-->
                       <inputbox v-validate="'required|passwordAgain'" type="password" name="passwordConfirm" :msgs="msgs.passwordConfirm" :errs="errors" v-model="mobileFormData.passwordConfirm" :title="$t('login_register.confirm_new_password')" :placeholder="$t('account.user_center_Please_new_password')"/><!--确认新密码-->
                     </template>
                     <inputbox name="username" ref="email" v-show="registerType==0" :maxLength="255" v-model="formData.username" v-validate="'required|email'" :msgs="msgs.username" :errs="errors" :title="$t('otc_exchange.otc_exchange_Email')" :placeholder="$t('login_register.email')"/>

@@ -10,9 +10,10 @@
         <span class="menu-title" :class="{'menu-selected':isShow && active==='history'}" @click="switchTab('history')">
           {{$t('trade_record.history_entrust')}}<!--历史委托-->
         </span>
-        <span class="menu-title" :class="{'menu-selected':isShow && active==='myassets'}" @click="switchTab('myassets')">
-          {{$t('exchange.advanced_funds')}}<!--资产管理-->
-        </span>
+        <!--资产管理-->
+        <!-- <span class="menu-title" :class="{'menu-selected':isShow && active==='myassets'}" @click="switchTab('myassets')">
+          {{$t('exchange.advanced_funds')}}
+        </span> -->
         <span class="menu-allrepeal" :class="{'disabled':cdatas.length===0}" v-if="isShow && active==='current'">
           <a href="javascript:;" @click="cancelOrder('all')">{{$t('trade_record.trade_record_repeal')}}<!--全部撤销--></a>
           <i class="icon-repeal"></i>

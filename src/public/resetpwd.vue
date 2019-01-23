@@ -2,7 +2,7 @@
   <div class="container">
     <div class="resetpwd-title">{{$t('error_code.RESETCODE_FAIL')}}<!--重置密码--></div>
     <div class="resetpwd-cont">
-      <inputbox id="CDCC-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
+      <inputbox id="SATOX-password" v-validate="'required|password'" type="password" name="password" :msgs="msgs.password" :errs="errors" v-model="formData.password" :title="$t('account.user_center_new_password')"/><!--新密码-->
       <inputbox v-validate="'required|passwordAgain'" type="password" name="passwordAgain" :msgs="msgs.passwordAgain" :errs="errors" v-model="formData.passwordConfirm" :title="$t('account.user_center_confirm_password')"/><!--确认新密码-->
       <buttonbox :text="$t('exchange.exchange_determine')" @click="resetPwd"/>
     </div>

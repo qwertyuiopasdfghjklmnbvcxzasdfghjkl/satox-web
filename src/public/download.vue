@@ -41,8 +41,10 @@ export default {
   data () {
     return {
       isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent),
-      apk:'https://www.cdcc.ink/static/cdcc-release-1.0.1.apk',
-      ios:'https://www.pgyer.com/68kt'
+      apk:'#',
+      // apk:'https://www.cdcc.ink/static/cdcc-release-1.0.1.apk',
+      ios:'#'
+      // ios:'https://www.pgyer.com/68kt'
     }
   },
   computed: {
@@ -80,7 +82,7 @@ export default {
 }
 .download .banner1{
     min-width:1200px;width:100%;position: relative;display:flex;align-items:center;justify-content:center;
-    
+
 }
 .download .banner1 .content{min-width:1200px;}
 .download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#fff;}

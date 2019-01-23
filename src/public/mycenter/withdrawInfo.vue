@@ -315,13 +315,15 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
 .withAdress input{color: #333; width: 452px;padding-left: 12px;padding-right: 6px;background-color: transparent;height: 30px;}
 .withAdress ul{position: absolute;z-index: 22;width: 500px;top: 30px;left: -1px;border: 1px solid #283149;}
 .withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #0D66EF;cursor: pointer;}
-.withAdress ul li:hover{background-color: #283149;}
+.withAdress ul li:hover{background-color: #0D66EF;}
 .withAdress ul li span{font-size: 16px;position: absolute; right: 7px;top: 8px;cursor: pointer;}
 .withAdress ul li img{width: 16px;height: 16px;vertical-align: middle;}
 .withdrawBox .fee{margin-bottom: -10px;}
 .tixian{margin-bottom: 5px;height: 30px;}
-.isAddAddress{width:130px;box-sizing: border-box;height: 30px;padding: 0 12px;border: 1px solid #283149;color: #aeb7d0;background-color: #404b69;}
-.address{width: 357px;box-sizing: border-box;height: 30px;padding: 0 12px;border: 1px solid #283149;color: #aeb7d0;background-color: #404b69;}
+.isAddAddress{width:130px;box-sizing: border-box;height: 30px;padding-left: 12px;padding-right: 12px;line-height: 28px;
+  color: #261003;background-color:transparent; border: 1px solid #ccc;}
+.address{width: 357px;box-sizing: border-box;height: 30px;padding-left: 12px;padding-right: 12px;line-height: 28px;
+  color: #261003;background-color:transparent; border: 1px solid #ccc;}
 .number{
   position: relative; box-sizing: border-box;width: 502px;height: 30px;padding: 0 12px;
   border: 1px solid #54616c;color: #aeb7d0;margin-top: 0px;text-align: right;line-height: 30px;

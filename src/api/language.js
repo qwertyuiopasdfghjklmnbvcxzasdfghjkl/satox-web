@@ -7,7 +7,7 @@ let domain = ''
 let language = {}
 
 const getLanguage = function (lang, success, error) {
-  api.get(`${domain}api/v2/language/${lang}?domain=cdcc`, (res) => {
+  api.get(`${domain}api/v2/language/${lang}?domain=satox`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
