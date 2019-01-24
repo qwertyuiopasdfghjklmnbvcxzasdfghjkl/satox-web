@@ -2,8 +2,8 @@
 <template>
 	<Card>
 		<p slot="title">投票记录</p>
-			<Table border :columns="users.columns" :data="users.data"></Table>
-      <Page :current="users.page" :total="users.total" :page-size="users.size" style="text-align:center;margin-top:20px;"></Page>
+		<Table border :columns="users.columns" :data="users.data"></Table>
+        <Page :current="users.page" :total="users.total" :page-size="users.size" @on-change="votechangePage" style="text-align:center;margin-top:20px;"></Page>
 	</Card>
 </template>
 
@@ -36,9 +36,14 @@ export default {
 		this.getVoteRecord();
   },
   methods: {
+	//投票记录
+  	votechangePage(page){
+  		this.users.page = page
+  		this.getVoteRecord()
+  	},
   	getVoteRecord(){
   		voteApi.voteRecord({page:this.users.page, size:this.users.size},res=>{
-				this.users.data = [res.data]
+				this.users.data = res.data
 				this.users.total = res.total
   		})
 		},

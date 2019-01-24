@@ -20,11 +20,11 @@ export default {
 				total:0,
 				columns:[
 					{title:'矿池记录ID', key:'minerId'},
-					{title:'用户名', key:'dispenseId'},
-					{title:'投票记录ID', key: 'fromAccountId'},
-					{title:'预估数量', key: 'toAccountId'},
-					{title:'已发放数量', key: 'quantity'},
-					{title:'创建时间', key: 'createdAt'}
+					{title:'用户名', key:'username'},
+					{title:'投票记录ID', key: 'voteId'},
+					{title:'预估数量', key: 'amount'},
+					{title:'已发放数量', key: 'giveAmount'},
+					{title:'创建时间', key: 'createAt'}
 				],
 				data:[]
 			},

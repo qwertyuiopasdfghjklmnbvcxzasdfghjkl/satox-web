@@ -88,9 +88,6 @@ export default {
     		text:''
 		},
 		users:{
-			usersname: '',
-			mobile: '',
-			accountId: '',
 			page:1,
 			size:10,
 			total:0,
@@ -132,7 +129,7 @@ export default {
 										this.poolRecord(params.index)
 									}
 								}
-							}, '挖矿记录')
+							}, '矿池记录')
 						])
 					}
 				},
@@ -140,7 +137,7 @@ export default {
 			data:[],
 		},
 		voteRecordList:{
-			usersname: '',
+			userId: '',
 			page:1,
 			size:10,
 			total:0,
@@ -155,7 +152,7 @@ export default {
 			data:[]
 		},
 		poolRecordList:{
-			usersname: '',
+			userId: '',
 			page:1,
 			size:10,
 			total:0,
@@ -163,8 +160,8 @@ export default {
 			columns:[
 				{title:'昵称', key:'nickname'},
 				{title:'手机号', key:'mobile'},
-				{title:'投票时间', key: 'completeTime', width: 150},
-				{title:'矿池记录ID', key: 'string'},
+				{title:'投票时间', key: 'voteTime', width: 150},
+				{title:'矿池记录ID', key: 'voteId'},
 				{title:'预期数量', key: 'estimateAmount'},
 				{title:'已发放数量', key: 'giveAmount'},
 				{title:'创建时间', key: 'createdAt', width: 150}
@@ -188,13 +185,13 @@ export default {
   		this.getVoteMinerList()
   	},
   	getVoteMinerList(){
-		var ss = this.formData.type
-		console.log(this.formData.text,this.formData.type )
+		let serchData={}
+		serchData[this.formData.type] = this.formData.text
   		voteApi.voteMinerQuery(
 			{
 				page:this.users.page, 
 				size:this.users.size, 
-				usersname:this.formData.text, 
+				...serchData 
 			},
 			res=>{
   			this.users.total = res.total
@@ -211,17 +208,17 @@ export default {
 		this.voteRecordList.page = 1
 		this.modalType = 'vote'
 		this.showModal = true
-		this.voteRecordList.usersname = this.users.data[index].username
+		this.voteRecordList.userId = this.users.data[index].userId
 		this.getVoteRecordList()
 	},
   	getVoteRecordList(){
-  		voteApi.voteRecord({page:this.voteRecordList.page, size:this.voteRecordList.size, username:this.voteRecordList.usersname},res=>{
+  		voteApi.voteRecord({page:this.voteRecordList.page, size:this.voteRecordList.size, userId:this.voteRecordList.userId},res=>{
   			this.voteRecordList.total = res.total
   			this.voteRecordList.data = res.data
   		})
 	},
 
-	//挖矿记录
+	//矿池记录
   	poolchangePage(page){
   		this.voteRecordList.page = page
   		this.getPoolRecordList()
@@ -230,11 +227,11 @@ export default {
 		this.poolRecordList.page = 1
 		this.modalType = 'pool'
 		this.poolModal = true
-		this.poolRecordList.usersname = this.users.data[index].username
+		this.poolRecordList.userId = this.users.data[index].userId
 		this.getPoolRecordList()
 	},
   	getPoolRecordList(){
-  		voteApi.poolRecord({page:this.poolRecordList.page, size:this.poolRecordList.size, username:this.poolRecordList.usersname},res=>{
+  		voteApi.poolRecord({page:this.poolRecordList.page, size:this.poolRecordList.size, userId:this.poolRecordList.userId},res=>{
   			this.poolRecordList.total = res.total
 			this.poolRecordList.data = res.data.list
 			this.poolRecordList.count = res.data
