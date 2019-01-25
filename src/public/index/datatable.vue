@@ -6,11 +6,12 @@
         <div class="layui-tab layui-tab-card">
           <ul class="layui-tab-title">
             <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item" :key="item" >{{item}}</li>
-            <li class="volume" :title="valumeTip" v-html="'Volume:&nbsp;&nbsp;'+valumeTip">
+            <li class="volume" :title="valumeTip" v-html="'Volume:&nbsp;&nbsp;'+valumeTip" v-if="false">
               <!-- <span class="last-span" style="position:relative;padding-right:34px;">
                 <i>{{$t('home.home_connected')}}</i>
                 <em class="network-signal" :class="['signal-' + getNetworkSignal]"></em>
-              </span> --><!--是否连接-->
+              </span> -->
+              <!--是否连接-->
             </li>
             <li><input v-model="filterValue" :placeholder="$t('public0.public284')" /></li>
           </ul>
