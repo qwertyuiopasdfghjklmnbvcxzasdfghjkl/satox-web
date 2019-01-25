@@ -111,9 +111,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'ETH'
+        return symbol || 'STO'
       } else {
-        return 'ETH'
+        return 'STO'
       }
     },
     symbol () {
