@@ -3,7 +3,7 @@
         <h3>{{$t('account.userDigitalAssets')}}<!--我的数字资产--></h3>
         <div class="hcontainer">
             <div class="chargeWithdraw" v-if="!showLoaing">
-                <div class="balance_search">
+                <div class="balance_search" v-if="false">
                     <div class="total">
                         {{$t('exchange.exchange_valuation')}}：<!--总当前估值：-->
                         {{String(getBTCValuation).toMoney()}} BTC ≈ {{getCoinSign}} {{USDCNY}}
@@ -23,7 +23,7 @@
                 <div class="acount_tab">
                   <div  :class="{'active': active === 'main'}" @click="switchHeadTab('main')">{{$t('public.main_account')}}</div>
                   <div :class="{'active': active === 'vote'}" @click="switchHeadTab('vote')">{{$t('public.vote_miner_account')}}</div>
-                  <!-- <span @click="tansferDialog">{{$t('vote_mining.funds_transfer')}}</span> -->
+                  <span @click="switchTab('historyrecord')">{{$t('account.userViewTheHistory')}}<!--历史记录--></span>
                 </div>
                 <ul class="accountInfo-lists header">
                   <li class="th">
@@ -34,7 +34,7 @@
                                   <i class="icon-arrow-up" :class="{active:sort==='asc'}"></i>
                                   <i class="icon-arrow-down" :class="{active:sort==='desc'}"></i>
                                 </em>
-                                <div class="icon-checkbox f-fl" @click.stop="hideZero=!hideZero">
+                                <div class="icon-checkbox f-fl" @click.stop="hideZero=!hideZero" v-if="false">
                                     <em  :class="[hideZero?'icon-checkbox-checked':'icon-checkbox-unchecked']"></em>
                                     <label class="ng-binding">
                                       {{$t('account.estimated_value_hide')}}<!--隐藏-->&nbsp;0&nbsp;{{$t('account.estimated_value_balances')}}<!--金额-->

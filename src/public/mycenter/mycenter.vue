@@ -16,6 +16,7 @@
             <p class="attestation">
               <span class="email">{{$t('account.user_center_account')}}：<!--账号--></span>
               <span class="name">{{getUserInfo.username}}<!--用户名--></span>
+              <template v-if="false">
               <span v-if="showVerifyState(0)" class="attestation-state entrance" @click="switchTab('authentication')">
                 {{$t('account.user_Real_name_verification')}}<!--实名认证-->
               </span>
@@ -31,8 +32,9 @@
               <span v-if="showVerifyState(3)" class="attestation-state fail">
                 {{$t('public0.public39')}}<!--未通过-->
               </span>
+              </template>
             </p>
-            <p class="nickname">
+            <p class="nickname" v-if="false">
               <span>{{$t('public0.public190')}}：<!--昵称--></span>
               <span class="nickname-text">{{updateNickname}}</span>
               <span class="nickname-modify" v-if="!isAlreadyModifyNickname" @click="nicknameDialog">
@@ -45,7 +47,7 @@
                 <a class="icon-checkbox" href="javascript:;" :class="isUseSATOXPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
               </span>
             </p>
-            <p class="limit">
+            <p class="limit" v-if="false">
               {{$t('account.user_24_hours_cash_withdrawal')}}：<!--24小时提现额度-->
               <span>{{getUserInfo.withdrawAmount || 0}}&nbsp;BTC</span>
               <!--如需更大额度请联系我们-->
@@ -54,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="distribution">
+      <div class="distribution" v-if="false">
         <h3>{{$t('account.user_center_distribution_h')}}<!--分发记录--></h3>
         <ul class="header" v-if="!distributeLoading && distributeHistory.length > 0">
           <li>

@@ -10,10 +10,11 @@
                 <div class="formel price">
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
                     <div class="formel-text">
-                        <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="isMarket"/>
+                        <!-- <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="isMarket"/> -->
+                        <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="true"/>
                         <input v-if="isMarket" class="formel-textbox" :value="$t('exchange.exchange_market_price')" type="text" readonly="readonly"/>
                         <em class="tip-title" ref="tipBaseSymbol">{{baseSymbol}}</em>
-                        <arrows :disabled="isMarket" :fixedNumber="fixedNumber" v-model="formData.price"/>
+                        <arrows v-if="false" :disabled="isMarket" :fixedNumber="fixedNumber" v-model="formData.price"/>
                         <em v-show="isShowPrice" class="error-tip icon-arrow-down">
                           <i><valuation :lastPrice="formData.price" :baseSymbol="baseSymbol"/></i>
                         </em>
@@ -539,7 +540,7 @@ export default {
 .formel-label{width:70px;line-height:36px;text-align:right;color:#333;overflow: hidden;text-overflow: ellipsis;padding-right:20px;}
 .formel-text{width:calc(100% - 90px);position:relative;color:#333;}
 .formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #ccc;padding:0 8px;background:transparent;color:#333;font-size:16px;}
-.formel-textbox[readonly='readonly']{cursor:not-allowed;}
+.formel-textbox[readonly='readonly']{cursor:not-allowed; background-color: #eee;}
 .formel-textbox:focus{border-color:#3A76E7!important;}
 .tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:transparent;}
 .percent{width:calc(100% - 104px);height:4px;display:flex;background:#eee;margin:18px 0 18px 97px;position:relative;}
