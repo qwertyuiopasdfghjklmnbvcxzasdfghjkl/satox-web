@@ -70,7 +70,8 @@ export default {
       verifyState: 0,
       mobileState: 0,
       showLoading: true,
-      datas: []
+      datas: [],
+      tradeAct: []
     }
   },
   computed: {
@@ -89,7 +90,7 @@ export default {
     },
     fromWallet () {
       let w = null
-      this.datas.forEach((item) => {
+      this.tradeAct.forEach((item) => {
         if (item.symbol === this.currentSymbol) {
           w = item
         }
@@ -148,12 +149,24 @@ export default {
         return
       }
       if (res && res.type === 'updateData') {
-        let temp = {}
+        let temp = {}, temp2 = {}
         res.data.forEach((item) => {
           temp[item.accountName] = item
         })
         this.datas.forEach((item) => {
           let d = temp[item.accountName]
+          if (d) {
+            item.availableBalance = d.availableBalance
+            item.frozenBalance = numUtils.add(d.frozenBalance, d.adFrozenBalance).add(d.loanBalance).toFixed(8)
+            item.totalBalance = d.totalBalance
+          }
+        })
+        
+        res.tradeAct.forEach((item) => {
+          temp2[item.accountName] = item
+        })
+        this.tradeAct.forEach((item) => {
+          let d = temp2[item.accountName]
           if (d) {
             item.availableBalance = d.availableBalance
             item.frozenBalance = numUtils.add(d.frozenBalance, d.adFrozenBalance).add(d.loanBalance).toFixed(8)
@@ -166,13 +179,19 @@ export default {
       if (this.getApiToken) {
         this.showLoading = true
         walletApi.myAssets({}, (data) => {
-          data = data.filter(item=>{
-            return item.type===1
-          })
+          let datas = [], tradeAct = []
           data.forEach((item) => {
             item.frozenBalance = numUtils.add(item.frozenBalance, item.adFrozenBalance).add(item.loanBalance).toFixed(8)
           })
-          this.datas = data
+          for(let item of data){
+            if(item.type===1){
+              datas.push(item)
+            } else {
+              tradeAct.push(item)
+            }
+          }
+          this.datas = datas
+          this.tradeAct = tradeAct
           this.showLoading = false
         }, (data, msg) => {
           console.error(msg)

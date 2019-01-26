@@ -11,7 +11,7 @@
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
                     <div class="formel-text">
                         <!-- <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="isMarket"/> -->
-                        <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="true"/>
+                        <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="fixedPrice" :readonly="true"/>
                         <input v-if="isMarket" class="formel-textbox" :value="$t('exchange.exchange_market_price')" type="text" readonly="readonly"/>
                         <em class="tip-title" ref="tipBaseSymbol">{{baseSymbol}}</em>
                         <arrows v-if="false" :disabled="isMarket" :fixedNumber="fixedNumber" v-model="formData.price"/>
@@ -129,6 +129,10 @@ export default {
     },
     toWallet: {
       type: Object
+    },
+    marketList: {
+      type: Array,
+      default: []
     }
   },
   components: {
@@ -199,6 +203,16 @@ export default {
     },
     curPercent () {
       return Math.max(this.hoverPercent, this.percent)
+    },
+    fixedPrice(){
+      let fixedPrice = ''
+      for(let item of this.marketList){
+        if(item.market===this.currentSymbol+this.baseSymbol){
+          fixedPrice = item.fixedPrice
+          break
+        }
+      }
+      return fixedPrice
     }
   },
   watch: {
@@ -431,7 +445,7 @@ export default {
         }
       }
       let data = {
-        price: price, // 表示价格‘-1’表示市价
+        price: this.fixedPrice, // 表示价格‘-1’表示市价
         amount: amount, //
         fromAccountId: fromAccountId,
         toAccountId: toAccountId,
