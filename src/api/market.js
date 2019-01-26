@@ -9,7 +9,7 @@ let market = {}
 
 // 市场列表 获取所有产品
 const marketList = function (success, error) {
-  api.get(`${domain}api/v2/trade/market`, (res) => {
+  api.get(`${domain}api/v3/trade/market`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {

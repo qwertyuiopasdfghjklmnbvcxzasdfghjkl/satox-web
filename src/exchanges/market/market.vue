@@ -139,7 +139,7 @@ export default {
           return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
         }
       })
-      return datas.filter((item) => {
+      datas = datas.filter((item) => {
         let symbol = (item.market || '').toUpperCase()
         if (this.active !== 'collection') {
           return this.active === item.baseSymbol && (!val || symbol.indexOf(val) !== -1)
@@ -147,6 +147,8 @@ export default {
           return item.collection && (!val || symbol.indexOf(val) !== -1)
         }
       })
+      this.$parent.marketList = datas
+      return datas
     },
     getAccuracy () {
       var accuracy = 8

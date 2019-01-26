@@ -78,4 +78,16 @@ const getEosAddress = function (success, error) {
 }
 wallet.getEosAddress = getEosAddress
 
+// 查询交易钱包
+const getTransWallet = function (success, error) {
+  api.get(`${domain}api/v2/account/list?type=2 `, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+wallet.getTransWallet = getTransWallet
+
 export default wallet

@@ -2,7 +2,7 @@
     <div class="twoverify">
         <div class="twoverify-container">
             <div class="twoverify-left">
-                <img src="../assets/images/logo.png" alt="">
+                <!-- <img src="../assets/images/logo.png" alt=""> -->
             </div>
             <div class="twoverify-right">
                 <div class="twoverify-right-item item-login">
