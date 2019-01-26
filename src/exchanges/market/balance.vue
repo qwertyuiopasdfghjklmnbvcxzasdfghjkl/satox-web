@@ -106,6 +106,15 @@ export default {
       })
       return w
     },
+    buyToWallet () {
+      let w = null
+      this.datas.forEach((item) => {
+        if (item.symbol === this.currentSymbol) {
+          w = item
+        }
+      })
+      return w
+    },
     sortDatas () {
       let ndatas = this.datas.sort((item1, item2) => {
         let m1 = numUtils.BN(item1.totalBalance)
@@ -127,6 +136,9 @@ export default {
     },
     toWallet () {
       this.$parent.$parent.toWallet = this.toWallet
+    },
+    buyToWallet (){
+      this.$parent.$parent.buyToWallet = this.buyToWallet
     }
   },
   created () {
@@ -161,7 +173,7 @@ export default {
             item.totalBalance = d.totalBalance
           }
         })
-        
+
         res.tradeAct.forEach((item) => {
           temp2[item.accountName] = item
         })

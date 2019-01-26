@@ -44,7 +44,7 @@
               </div>
             </div>
             <div class="home-center-bottom">
-              <businesspanel ref="businesspanel" :accuracy="accuracy" :fixedNumber="fixedNumber" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :marketList="marketList"/>
+              <businesspanel ref="businesspanel" :accuracy="accuracy" :fixedNumber="fixedNumber" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
               <entrust ref="entrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
             </div>
           </div>
@@ -90,6 +90,7 @@ export default {
       socket: null,
       fromWallet: null,
       toWallet: null,
+      buyToWallet: null,
       changeEntrustData: {},
       closeMainLoading: false,
       valuationCout: 0, // 当前估值

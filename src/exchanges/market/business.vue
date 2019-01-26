@@ -130,6 +130,9 @@ export default {
     toWallet: {
       type: Object
     },
+    buyToWallet: {
+      type: Object
+    },
     marketList: {
       type: Array,
       default: []
@@ -182,6 +185,13 @@ export default {
     fromBalance () {
       if (this.fromWallet) {
         return this.fromWallet
+      } else {
+        return {}
+      }
+    },
+    buyToBalance () {
+      if (this.buyToWallet) {
+        return this.buyToWallet
       } else {
         return {}
       }
@@ -429,7 +439,7 @@ export default {
         direction = 1 // 买
         balance = this.toBalance.availableBalance // 金额
         fromAccountId = this.toBalance.accountId // baseSymbol帐号id
-        toAccountId = this.fromBalance.accountId // currentSymbol帐号id
+        toAccountId = this.buyToBalance.accountId // currentSymbol帐号id
         if (numUtils.BN(amount).mul(numUtils.BN((price === -1 ? this.getLast24h.close : price))).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
           return
