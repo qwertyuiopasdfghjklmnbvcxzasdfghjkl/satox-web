@@ -12,7 +12,7 @@
 <script>
 import Cookies from 'js-cookie';
 import util from '../libs/util.js';
-import {kycRouter, otcRouter, exchangeRouter, communityRouter, financeRouter, riskRouter, operationRouter, adminRouter, systemConfigRouter, systemLogsRouter, monitoringRouter, fundRouter } from '../router';
+import {kycRouter, otcRouter, exchangeRouter, communityRouter, voteRouter, financeRouter, riskRouter, operationRouter, adminRouter, systemConfigRouter, systemLogsRouter, monitoringRouter, fundRouter } from '../router';
 import breadcrumbNavVue from './main_components/breadcrumbNav.vue';
 export default {
   data () {
@@ -23,6 +23,7 @@ export default {
         {id: 'otc', path: 'otc_data_statistics_index', name: 'OTC管理', menus: otcRouter},
         {id: 'exchange', path: 'exchange_data_statistics_index', name: '币币管理', menus: exchangeRouter},
         {id: 'community', path: 'community_data_index', name: '社区管理', menus: communityRouter},
+        {id: 'vote', path: 'vote_data_count_index', name: '投票挖矿管理', menus: voteRouter},
         {id: 'finance', path: 'finance_finance_index', name: '财务管理', menus: financeRouter},
         {id: 'risk', path: 'risk_exchange_index', name: '风险控制管理', menus: riskRouter},
         {id: 'operation', path: 'operation_distribute_index', name: '运维推广管理', menus: operationRouter},

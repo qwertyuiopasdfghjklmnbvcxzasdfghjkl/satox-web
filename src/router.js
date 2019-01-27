@@ -190,7 +190,7 @@ export const communityRouter = [
     {
         path: '/community_users',
         name: 'community_users',
-        title: '社区用户管理',
+        title: '社区管理',
         component: Main,
         meta:{
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
@@ -199,6 +199,57 @@ export const communityRouter = [
             { path: 'index', title: '社区用户管理', name: 'community_users_index', component: resolve => { require(['./views/community/users.vue'], resolve); } }
         ]
     }
+];
+
+export const voteRouter = [
+    {
+        path: '/vote_data_count',
+        name: 'vote_data_count',
+        title: '数据统计',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            { path: 'index', title: '数据统计', name: 'vote_data_count_index', component: resolve => { require(['./views/vote/index.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/vote_miner_query',
+        name: 'vote_miner_query',
+        title: '用户投票挖矿查询',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
+        },
+        children: [
+            { path: 'index', title: '用户投票挖矿查询', name: 'vote_query_index', component: resolve => { require(['./views/vote/query.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/vote_record',
+        name: 'vote_record',
+        title: '投票记录',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
+        },
+        children: [
+            { path: 'index', title: '投票记录', name: 'vote_record_index', component: resolve => { require(['./views/vote/vote.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/vote_miner_dispense',
+        name: 'vote_miner_dispense',
+        title: '挖矿分发记录',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
+        },
+        children: [
+            { path: 'index', title: '挖矿分发记录', name: 'vote_dispense_index', component: resolve => { require(['./views/vote/dispense.vue'], resolve); } }
+        ]
+    },
 ];
 
 export const exchangeRouter = [
@@ -885,6 +936,7 @@ export const routers = [
     ...otcRouter,
     ...exchangeRouter,
     ...communityRouter,
+    ...voteRouter,
     ...financeRouter,
     ...riskRouter,
     ...operationRouter,
