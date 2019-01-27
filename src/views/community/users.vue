@@ -29,8 +29,8 @@
                 <FormItem label="社区名称" prop="communityName">
                     <Input v-model="modalData.communityName" placeholder="请输入社区名称"></Input>
                 </FormItem>
-                <FormItem label="控制用户名" prop="userId">
-                    <Input v-model="modalData.userId" placeholder="请输入控制用户名"></Input>
+                <FormItem label="控制用户名" prop="username">
+                    <Input v-model="modalData.username" placeholder="请输入控制用户名"></Input>
                 </FormItem>
             </Form>
 			<div slot="footer">
@@ -59,7 +59,7 @@ export default {
     	modalData:{
     		communityId:'',
     		communityName:'',
-    		userId:''
+    		username:''
     	},
     	users:{
     		page:1,
@@ -84,7 +84,7 @@ export default {
     					},
     					on:{
     						click: () => {
-								this.editShow(params.index)
+								this.editShow(params.row)
     						}
     					}
     				}, '修改')
@@ -96,7 +96,7 @@ export default {
            communityName: [
                { required: true, message: '社区名称不能为空', trigger: 'blur' }
            ],
-           userId: [
+           username: [
                { required: true, message: '控制用户名不能为空', trigger: 'blur' }
            ]
        }
@@ -131,7 +131,7 @@ export default {
 			this.getCommunityList()
 			this.modalData.communityId = ''
 			this.modalData.communityName = ''
-			this.modalData.userId = ''
+			this.modalData.username = ''
 			this.showModal=false
 		}, msg=>{
 			this.$Message.error(msg);
@@ -143,7 +143,7 @@ export default {
 			this.getCommunityList()
 			this.modalData.communityId = ''
 			this.modalData.communityName = ''
-			this.modalData.userId = ''
+			this.modalData.username = ''
 			this.showModal=false
 		}, msg=>{
 			this.$Message.error(msg);
@@ -159,11 +159,13 @@ export default {
 			this.users.data = res.data
   		})
 	},
-	editShow(index){
+	editShow(row){
+    console.log(row)
 		this.modalType = 'edt'
 		this.showModal = true
-		this.modalData.userId = this.users.data[index].username
-		this.modalData.communityName = this.users.data[index].communityName
+    this.modalData.communityId = row.communityId
+		this.modalData.username = row.username
+		this.modalData.communityName = row.communityName
 	}
   }
 }

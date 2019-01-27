@@ -3,7 +3,6 @@
 	<Card>
 		<p slot="title">数据统计</p>
 		<Table border :columns="users.columns" :data="users.data"></Table>
-        <Page :current="users.page" :total="users.total" :page-size="users.size" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
 	</Card>
 </template>
 
@@ -15,9 +14,6 @@ export default {
   data () {
     return {
 			users:{
-				page:1,
-				size:10,
-				total:0,
 				columns:[
 					{title:'总投票用户数', key:'userCount'},
 					{title:'总投票笔数', key:'voteCount'},
@@ -41,7 +37,6 @@ export default {
   	getStatisticsList(){
   		voteApi.statisticsList({page:this.users.page, size:this.users.size},res=>{
 				this.users.data = [res.data]
-				this.users.total = res.total
   		})
 		},
   }

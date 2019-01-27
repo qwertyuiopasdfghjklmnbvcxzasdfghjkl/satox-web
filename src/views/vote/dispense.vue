@@ -22,7 +22,7 @@ export default {
 					{title:'矿池记录ID', key:'minerId'},
 					{title:'用户名', key:'username'},
 					{title:'投票记录ID', key: 'voteId'},
-					{title:'预估数量', key: 'amount'},
+					{title:'预估数量', key: 'remainAmount'},
 					{title:'已发放数量', key: 'giveAmount'},
 					{title:'创建时间', key: 'createAt'}
 				],

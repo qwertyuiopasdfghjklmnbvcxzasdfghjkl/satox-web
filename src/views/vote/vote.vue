@@ -22,7 +22,7 @@ export default {
 					{title:'投票记录ID', key:'accountId'},
 					{title:'用户名', key:'userName'},
 					{title:'社区', key: 'community'},
-					{title:'投票数量', key: 'dailyUserCount'},
+					{title:'投票数量', key: 'amount'},
 					{title:'期限', key: 'voteTime'},
 					{title:'预估收益', key: 'estimateAmount'},
 					{title:'结算日', key: 'completeTime'},

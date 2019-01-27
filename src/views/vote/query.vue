@@ -144,7 +144,7 @@ export default {
 			columns:[
 				{title:'投票记录ID', key:'accountId'},
 				{title:'投票数量', key:'amount'},
-				{title:'期限', key: 'voteAmount'},
+				{title:'期限', key: 'voteTime'},
 				{title:'预估收益', key: 'estimateAmount'},
 				{title:'结算日', key: 'completeTime'},
 				{title:'创建时间', key: 'createdAt'}
