@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed">
+                <div class="filed" v-if="symbol!=='STO'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -59,7 +59,7 @@
             <div class="f-fr">
                 <ul class="tips">
                     <li>{{$t('account.user_minimum_number_of_cash').format(`：${minWithdraw} ${symbol}`)}}<!--最小提现数量为{0}。--></li>
-                    <li>{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
+                    <li v-if="false">{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
                     <li>{{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。--></li>
                 </ul>
             </div>
