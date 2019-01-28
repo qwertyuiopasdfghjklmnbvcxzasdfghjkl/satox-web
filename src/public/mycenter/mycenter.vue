@@ -16,7 +16,7 @@
             <p class="attestation">
               <span class="email">{{$t('account.user_center_account')}}：<!--账号--></span>
               <span class="name">{{getUserInfo.username}}<!--用户名--></span>
-              <template v-if="false">
+              <template>
               <span v-if="showVerifyState(0)" class="attestation-state entrance" @click="switchTab('authentication')">
                 {{$t('account.user_Real_name_verification')}}<!--实名认证-->
               </span>
