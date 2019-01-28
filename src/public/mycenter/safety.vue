@@ -105,7 +105,7 @@
                     <div class="bind clearfix" v-if="showBindMobile">
                       <div class="bind-form">
                           <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_phone')}}：<!--手机号--></span></p>
-                          <p v-if="mobileState == 1">
+                          <p v-if="mobileState == 1 || readonly">
                             {{mobileFormData.phoneNumber}}
                           </p>
                           <p v-if="mobileState == 0 && !readonly">

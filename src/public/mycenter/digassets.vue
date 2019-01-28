@@ -86,7 +86,7 @@
                             <div class="action f-right"  v-if="accountType===1">
                               <!--充值与提现-->
                               <!-- <span class="btn" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"></span> -->
-                              <span class="icon_withdraw" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
+                              <span class="icon_withdraw" :class="{disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
                             </div>
                         </div>
                         <!-- <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/> -->
@@ -387,5 +387,8 @@ export default {
 
 .icon_withdraw{display: inline-block;width: 25px;height: 25px;margin-right: 5px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
 .icon_withdraw:hover{background-image: url(../../assets/images/icon_withdraw_hover.png);}
+.icon_withdraw.disabled{cursor: not-allowed;}
+.icon_withdraw.disabled,
+.icon_withdraw.disabled:hover{background-image: url(../../assets/images/icon_withdraw_disabled.png);}
 </style>
 
