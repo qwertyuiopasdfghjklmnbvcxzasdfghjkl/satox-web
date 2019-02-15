@@ -143,7 +143,9 @@ user.getGtInfo = getGtInfo
 
 // 发送验证码（4位）
 const sendSMSCode = function (data, success, error) {
-  api.post(`${domain}api/v2/user/sendSms`, data, (res) => {
+  let lang = window.localStorage.getItem('lang') || 'en'
+  data.lang = lang === 'zh-CN'?'CN':(lang === 'cht'?'CNZH':(lang === 'jp'?'JP':(lang === 'kr'?'KR':'EN')))
+  api.post(`${domain}api/v3/user/sendSms`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
     } else {

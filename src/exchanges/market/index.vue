@@ -12,14 +12,14 @@
         <div class="tools">
           <ul class="menus">
             <!-- K线图和深度图切换 -->
-            <li class="dropdown" :class="{active: canvasStyles.show}" @click.stop="canvasStyles.show = !canvasStyles.show">
+            <!-- <li class="dropdown" :class="{active: canvasStyles.show}" @click.stop="canvasStyles.show = !canvasStyles.show">
               <span class="dropdown-txt">{{$t(`public.${canvasStyles.active}_title`)}}</span>
               <em class="dropdown-icon icon-arrow-down" :class="{'dropdown-icon-active':canvasStyles.show}"></em>
               <ul class="dropdown-list" v-show="canvasStyles.show" style="width:80px">
                 <li class="dropdown-item" :class="{selected:canvasStyles.active==='kline'}" @click="canvasStyles.active='kline'">{{$t('public.kline_title')}}</li>
                 <li class="dropdown-item" :class="{selected:canvasStyles.active==='depth'}" @click="canvasStyles.active='depth'">{{$t('public.depth_title')}}</li>
               </ul>
-            </li>
+            </li> -->
             <!-- 周期 -->
             <li class="dropdown" :class="{active: periods.show}" @click.stop="periods.show = !periods.show" v-show="canvasStyles.active==='kline'">
               <span class="dropdown-txt">{{curPeriod}}</span>
@@ -321,18 +321,21 @@ export default {
         scale: 3,
         fixedNumber: 8,
         ThemeColor: {
-          Positive: '#11BA80',
-          TextPositive: '#11BA80',
-          Negative: '#F04A4D',
-          TextNegative: '#F04A4D',
-          Background: '#FFFFFF',
-          Grid0: '#F0F0F0',
-          Grid1: '#F0F0F0',
-          Text2: '#666666',
-          Text3: '#666666',
-          Text4: '#666666',
+          Positive: '#00A55E',
+          TextPositive: '#00A55E',
+          Negative: '#C53231',
+          TextNegative: '#C53231',
+          Background: '#202020',
+          Cursor: '#EFC88F',
+          Grid0: '#383530',
+          Grid1: '#383530',
+          Grid3: '#EFC88F',
+          Grid4: '#EFC88F',
+          Text2: '#FFF',
+          Text3: '#B56C00',
+          Text4: '#9D7C45',
           Indicator1: '#f48745',
-          RangeMark: '#f48745'
+          RangeMark: '#B56C00'
         },
         onToolCallback: () => {
           this.drawtoolsActive = 'CrossCursor'

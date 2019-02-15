@@ -165,7 +165,7 @@ export default {
       if (this.verifyState !== 2) {
         Vue.$confirmDialog({
           id: 'KYC_AUTH_FIRST',
-          showCancel: false,
+          showCancel: true,
           content: this.$t(`error_code.KYC_AUTH_FIRST`), // 请先完成实名认证
           okCallback: () => {
             this.$router.push({name: 'mycenter_menu', params: {menu: 'mycenter'}})
@@ -176,7 +176,7 @@ export default {
       if (this.googleState !== 1 && this.mobileState !== 1) {
         Vue.$confirmDialog({
           id: 'GOOGLEAUTH_OR_SMSAUTH_FIRST',
-          showCancel: false,
+          showCancel: true,
           content: this.$t('error_code.GOOGLE_CELLPHONE_AUTH_FIRST'), // 请先进行谷歌验证或短信验证
           okCallback: () => {
             this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
@@ -187,7 +187,7 @@ export default {
       if (!this.getUserInfo.email && this.mobileState !== 1) {
         Vue.$confirmDialog({
           id: 'SMS_AUTH_FIRST',
-          showCancel: false,
+          showCancel: true,
           content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
           okCallback: () => {
             this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
@@ -322,15 +322,15 @@ export default {
 </script>
 
 <style scoped>
-.icon-checkbox em{color: #0D66EF;cursor: pointer;}
-.icon-checkbox:hover em{color: #0D66EF;}
+.icon-checkbox em{color: #BA8D35;cursor: pointer;}
+.icon-checkbox:hover em{color: #BA8D35;}
 .icon-checkbox label{cursor: pointer;}
 
 .digassets{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
 .digassets h3{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7;}
 .balance_search {display: flex;justify-content: space-between;position: relative;padding-left: 20px;padding-right: 20px;border-bottom: 1px solid #e7e7e7;}
 .balance_search .total{color: #333;height: 65px;line-height: 65px; font-size: 16px;}
-.balance_search i{position: absolute;right: 10px;top: 8px;color: #0D66EF; font-size: 20px;}
+.balance_search i{position: absolute;right: 10px;top: 8px;color: #BA8D35; font-size: 20px;}
 .balance_search input{width: 190px;height: 32px; box-sizing: border-box; padding-left: 5px;padding-right: 25px; border: 1px solid #9EC2F9;}
 .balance_search .checkbox{position: relative;margin-left: 24px;color: #d6dff9;}
 .balance_search .checkbox label{color: #d6dff9;margin-left: 8px;}
@@ -340,7 +340,7 @@ export default {
 .balance_search .f-fr .search_input{position: relative;}
 .balance_search .f-fr .total{color: #333;font-size: 18px;font-weight: bold;}
 .balance_search .f-fr .limit{height: 32px;line-height: 32px; margin-left: 20px;}
-.balance_search .f-fr .limit span{color: #0D66EF; cursor: pointer;}
+.balance_search .f-fr .limit span{color: #BA8D35; cursor: pointer;}
 .balance_search .f-fr .limit span:hover{color: #0a4fb9;}
 .accountInfo-lists{padding: 0 8px 50px 8px;}
 .accountInfo-lists.header{padding-bottom:0px;background:#fff; border-top: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7;}
@@ -360,7 +360,7 @@ export default {
 }
 .accountInfo-lists.header li{border-bottom:none;}
 .accountInfo-lists.header li .items>div{color:#261003;}
-.accountInfo-lists li .items>div .btn{display: inline-block;height: 22px;padding: 0;line-height: 22px;font-size: 24px;color: #0D66EF;text-align: left;cursor: pointer;}
+.accountInfo-lists li .items>div .btn{display: inline-block;height: 22px;padding: 0;line-height: 22px;font-size: 24px;color: #BA8D35;text-align: left;cursor: pointer;}
 .accountInfo-lists li .items>div .btn:hover{color: #0847a9;}
 .accountInfo-lists li .items>div .cur{background-color: #e8b342;border-color: #e8b342;color: #fff;}
 .accountInfo-lists li .items>div .disabled{cursor: not-allowed;color: #ababab;}

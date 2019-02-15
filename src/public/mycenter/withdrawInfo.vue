@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed" v-if="symbol!=='STO'">
+                <div class="filed" v-if="symbol!=='SAT'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -303,19 +303,19 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   background-color: transparent;font-size: 14px;color: #0b0c0e;
 }
 .withdrawBox .filed .withdraw-info>div{color: #818fae;}
-.withdrawBox .filed .BNB-subbtn{display: inline-block;box-sizing: border-box;vertical-align: middle;width: 180px;height: 40px;line-height: 40px;font-size: 14px;text-align: center;color: #fff;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
-.withdrawBox .filed .BNB-subbtn:hover{background-color: #0D66EF;}
+.withdrawBox .filed .BNB-subbtn{display: inline-block;box-sizing: border-box;vertical-align: middle;width: 180px;height: 40px;line-height: 40px;font-size: 14px;text-align: center;color: #fff;background-color: #BA8D35;border-radius: 4px;cursor: pointer;}
+.withdrawBox .filed .BNB-subbtn:hover{background-color: #BA8D35;}
 .withdrawBox .filed .withAdress{
   position: relative; color:#999;font-size: 0; width: 500px;height:30px;
   background-color: #FFF;border:1px solid #ccc;
 }
 .withAdress span.dowml{position: relative;cursor: pointer; vertical-align: top; width: 29px;height: 30px;border-left: 1px solid transparent; display: inline-block;float:right;}
 .withAdress span.dowml:before{content:"";display: inline-block; width: 0px;height: 0px;border-left: 9px solid transparent;border-bottom:9px solid transparent;border-right:9px solid transparent;border-top: 9px solid #aeb7d0;position: absolute;top:10px;left:5px;}
-.withAdress span.dowml:hover:before{border-top-color: #0D66EF;}
+.withAdress span.dowml:hover:before{border-top-color: #BA8D35;}
 .withAdress input{color: #333; width: 452px;padding-left: 12px;padding-right: 6px;background-color: transparent;height: 30px;}
 .withAdress ul{position: absolute;z-index: 22;width: 500px;top: 30px;left: -1px;border: 1px solid #283149;}
-.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #0D66EF;cursor: pointer;}
-.withAdress ul li:hover{background-color: #0D66EF;}
+.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #BA8D35;cursor: pointer;}
+.withAdress ul li:hover{background-color: #BA8D35;}
 .withAdress ul li span{font-size: 16px;position: absolute; right: 7px;top: 8px;cursor: pointer;}
 .withAdress ul li img{width: 16px;height: 16px;vertical-align: middle;}
 .withdrawBox .fee{margin-bottom: -10px;}
@@ -329,8 +329,8 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   border: 1px solid #54616c;color: #aeb7d0;margin-top: 0px;text-align: right;line-height: 30px;
   background:#FFF;
 }
-.number a{color: #0D66EF;}
-.number a:hover{color: #0D66EF;}
+.number a{color: #BA8D35;}
+.number a:hover{color: #BA8D35;}
 .number .numberAll{
   position: absolute;left: 0;width: 408px;height: 28px;padding-left: 12px;padding-right: 12px;line-height: 28px;
   color: #261003;background-color:transparent;
@@ -341,7 +341,7 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
 .withdrawBox .tips li a{color: #aeb7d0;text-decoration: underline;font-size: 14px;}
 /* .koall-verify-title{width: 100%;height: 16px;line-height: 16px;margin-top: 2px;} */
 .koall-verify-title{position: relative;}
-.koall-verify-title p{height: 50px;line-height: 50px;color: #fff;font-size: 20px;  text-align: center;background-color: #0D66EF;}
+.koall-verify-title p{height: 50px;line-height: 50px;color: #fff;font-size: 20px;  text-align: center;background-color: #BA8D35;}
 .koall-verify-title span{position:absolute;text-decoration:none;font-size:16px;color:#fff;top:17px;right:15px; opacity: 0.8; cursor: pointer;}
 .koall-verify-title span:hover{opacity: 1;}
 .koall-verify-all{display: block;width: 100%;}

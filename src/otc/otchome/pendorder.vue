@@ -479,7 +479,7 @@ export default {
 .list-item span.paytype em.icon-paypal {color: #2a74d3;}
 .list-item span.paytype em.icon-alipay {color: #1cc5e4;}
 .list-item span.paytype em.icon-wechat {color: #69c03e;}
-.list-item span.paytype em.icon-bank {color: #0D66EF;}
+.list-item span.paytype em.icon-bank {color: #BA8D35;}
 .list-item span.operation a{display: block;width: 80px;height: 35px;line-height: 35px;font-size: 14px;text-align: center; border-radius: 4px; color: #fff;}
 .list-item span.operation a.buy{background-color: #23CD09;}
 .list-item span.operation a.buy:hover{background-color: #1da907;}

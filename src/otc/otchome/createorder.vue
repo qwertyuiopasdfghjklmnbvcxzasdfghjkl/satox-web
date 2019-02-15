@@ -534,7 +534,7 @@ export default {
 <style scoped>
 .createorder{width: 340px;max-height: calc(100% - 20px); overflow-x: hidden;overflow-y: auto; background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; box-shadow: 0 2px 8px #5d5d5d;}
 .createorder.englishsize{width: 360px;}
-.createorder .title{padding-top: 10px;padding-bottom: 10px;background-color:#0D66EF;color:#fff;font-size: 16px; text-align: center;}
+.createorder .title{padding-top: 10px;padding-bottom: 10px;background-color:#BA8D35;color:#fff;font-size: 16px; text-align: center;}
 .createorder .cont{padding: 20px 30px 20px 30px;}
 .cont-item .row{display: flex;justify-content: space-between;align-items: center;}
 .cont-item label{display: block;height: 24px;line-height: 24px;font-size: 12px;color: #333;}

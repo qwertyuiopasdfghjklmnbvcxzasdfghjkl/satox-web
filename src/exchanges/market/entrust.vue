@@ -4,6 +4,9 @@
         <em class="menu-arrow" :class="{unfold:isShow}" @click="switchTab('current', isShow)">
           <i :class="[!isShow?'icon-arrow-up3':'icon-arrow-down2']"></i>
         </em>
+        <span class="menu-title" :class="{'menu-selected':isShow && active==='limit'}" @click="switchTab('limit')">
+          {{$t('exchange.exchange_limit')}}<!--限价委托-->
+        </span>
         <span class="menu-title" :class="{'menu-selected':isShow && active==='current'}" @click="switchTab('current')">
           {{$t('trade_record.current_entrust')}}<!--当前委托-->
         </span>
@@ -264,6 +267,11 @@ export default {
     switchTab (tab, isShow) {
       this.isShow = !isShow
       this.active = tab
+      if(tab==='limit'){
+        this.$parent.isEntrust = false
+        this.$parent.$refs.businesspanel.isShow = true
+        this.$parent.$refs.businesspanel.active = tab
+      }
     },
     getFinishedPercent (item) {
       return numUtils.div(item.finishedAmount, item.totalAmount).mul(100).toFixed(2)
@@ -375,12 +383,12 @@ export default {
 .entrust.unfold .menu-arrow:hover i,
 .entrust.unfold .menu-arrow.unfold i{color:#3A76E7;}
 .menu-title{
-  float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-left: 2px;font-size: 16px;
+  float: left;min-width: 76px;height: 38px;padding: 0 40px;margin-right:2px;font-size: 16px;
   line-height: 38px;color: #666;text-align: center;cursor: pointer; border-bottom: 2px solid transparent;
 }
-.menu-title:first-of-type{margin-left:40px;}
+.menu-title:first-of-type{margin-left:50px;}
 .menu-title:hover,
-.menu-title.menu-selected{color: #3A76E7!important; }
+.menu-title.menu-selected{color: #3A76E7; }
 .menu-title.menu-selected {border-color: #3A76E7;}
 .menu-allrepeal{display: flex;align-items: center;float: right;height: 24px;margin-top: 8px;margin-right: 10px;cursor: pointer;}
 .menu-allrepeal a{color:#FFDE00;}
@@ -426,9 +434,9 @@ export default {
 .list-header-item .col-etime .tips-text{display: none;position: absolute;top: -30px;height: 24px;padding-left: 12px;padding-right: 12px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px;}
 .list-header-item .col-etime .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .list-header-item .col-etime .tips-icon:hover + .tips-text{display: block;}
-@media screen and (max-width: 1600px) and (max-height: 900px) {
+@media screen and (max-width: 1600px){
   .entrust.unfold{height: 180px;}
-  .menu-title{height: 28px;margin-left: 30px;font-size: 14px;line-height: 28px;}
+  .menu-title{height: 28px;margin-right: 30px;font-size: 14px;line-height: 28px;}
   .menu-allrepeal{margin-top: 3px;}
   .list{height: 110px;}
   .col-market{display: none;}

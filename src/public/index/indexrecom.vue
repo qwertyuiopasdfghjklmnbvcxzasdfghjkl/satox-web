@@ -76,7 +76,7 @@
   .ticker-list .value {font-size: 24px; margin-top: 10px; color: #9ba6e6;}
   .ticker-list .volume {font-size: 20px; margin-top: 30px; color: #9ba6e6;}
   .ticker-list em{font-size: 14px;color: #727272;}
-  .type_symbol{width: 100%;background-color:#0c151d;overflow: hidden;min-height:20px; border-top: 1px solid #fff;}
+  .type_symbol{width: 100%;background-color:#202020;overflow: hidden;min-height:20px; border-top: 1px solid #fff;}
   .type_symbol ul{display:flex;text-align:center;justify-content:center;align-items: center;flex-flow: wrap}
   .type_symbol ul li{font-size: 14px; padding: 20px 10px 40px;width: 20%;text-align: left; border-right: 1px solid #fff;}
   .type_symbol ul li:last-child{border-right: none;}

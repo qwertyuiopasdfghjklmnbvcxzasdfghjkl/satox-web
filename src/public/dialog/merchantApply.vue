@@ -147,7 +147,7 @@ export default {
 .choose_community .select{flex: 5;}
 
 .dialog{width:450px;height:auto;min-height:200px;display:flex;justify-content:center;flex-flow:column;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
-.top{height: 45px;line-height: 45px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.top{height: 45px;line-height: 45px;color: #fff;font-size: 18px;  text-align: center;background-color: #BA8D35; position: relative;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:calc(50% - 7px);right:15px; opacity: 0.8;}
 .icon-close:hover{opacity: 1;}
 .form {padding: 20px 50px;}

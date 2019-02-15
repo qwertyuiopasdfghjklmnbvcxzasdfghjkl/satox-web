@@ -565,7 +565,7 @@ export default {
 .formel-text{width:calc(100% - 90px);position:relative;color:#333;}
 .formel-textbox{width:calc(100% - 18px);height:34px;line-height:34px;border:1px solid #ccc;padding:0 8px;background:transparent;color:#333;font-size:16px;}
 .formel-textbox[readonly='readonly']{cursor:not-allowed; background-color: #eee;}
-.formel-textbox:focus{border-color:#3A76E7!important;}
+.formel-textbox:focus{border-color:#3A76E7;}
 .tip-title{height:22px;line-height:22px;position:absolute;z-index:1;right:51px;top:calc(50% - 10px);padding:0 4px;background:transparent;}
 .percent{width:calc(100% - 104px);height:4px;display:flex;background:#eee;margin:18px 0 18px 97px;position:relative;}
 .percent-line{width:100%;height:100%;display:flex;}

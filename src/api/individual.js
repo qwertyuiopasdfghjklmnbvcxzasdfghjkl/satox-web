@@ -291,6 +291,8 @@ individual.unbindMobile = unbindMobile
 
 // 发送授权短信验证码（6位）
 const sendAuthSMSCode = function (data, success, error) {
+  let lang = window.localStorage.getItem('lang') || 'en'
+  data.lang = lang === 'zh-CN'?'CN':(lang === 'cht'?'CNZH':(lang === 'jp'?'JP':(lang === 'kr'?'KR':'EN')))
   api.post(`${domain}api/v2/individual/sendAuthSms`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
