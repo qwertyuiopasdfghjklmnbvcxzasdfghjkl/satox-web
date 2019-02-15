@@ -145,7 +145,7 @@ export default {
 .message-title{height: 55px; padding-left: 20px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333;text-indent: 8px;border-bottom: 1px solid #e7e7e7; position: relative;}
 .message-title select{height: 18px;padding-left: 12px;padding-right: 20px;margin-left: 20px;margin-right: auto;font: 14px/normal "Microsoft YaHei";color: #578AF2;background-position: right 4px center;cursor: pointer; background-image: url('../../assets/images/arrow-down-blue.png');}
 .message-title a{position: absolute; right: 20px; font-weight: normal;font-size: 14px;color: #578AF2;}
-.message-title a:hover{color: #0D66EF;}
+.message-title a:hover{color: #BA8D35;}
 .message-title a.disabled{color: #999;cursor: not-allowed;}
 .message-title a.disabled:hover{color: #999;}
 .message-list{padding-left: 20px;padding-right: 20px;}

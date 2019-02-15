@@ -307,7 +307,7 @@ export default {
 .top-right /deep/ span{display:inline-block;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:14px;}
 .top-select{height:18px;line-height:18px;color:#3A76E7;cursor: pointer; background-image: url('../../assets/images/arrow-down-blue.png');}
 
-.list-bid,.list-ask{width:100%;height:calc((100% - 104px) / 2);overflow-x:visible;overflow-y:hidden;display:flex;flex-flow:column;}
+.list-bid,.list-ask{width:100%;height:calc((100% - 104px) / 2);overflow-x:hidden;overflow-y:hidden;display:flex;flex-flow:column;}
 .list-ask{justify-content:flex-end;}
 .list{width:calc(100% - 10px);padding-left:10px;}
 .list-overflow{overflow:auto;max-height:100%;}

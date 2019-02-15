@@ -30,7 +30,7 @@
                           {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
                         </font>
                         <font class="list1-amount">
-                          <i><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i>
+                          <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i>
                         </font>
                         <font class="list1-amount">
                           vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
@@ -45,14 +45,14 @@
           </div>
         </template>
         <template v-if="!isList1">
-          <ul class="list" style="height:24px;max-height:20px;margin-right:0;overflow-y:hidden;">
-            <li class="list-header">
-              <span class="list-col currency" @click="sortMarket('market')">{{$t('exchange.exchange_pair')}}<!--市场--><em v-if="sortActive==='market'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']"></em></span>
-              <span class="list-col price" @click="sortMarket('price')">{{$t('exchange.exchange_price')}}<!--价格--><em v-if="sortActive==='price'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']"></em></span>
-              <span class="list-col fall" @click="sortMarket('fall')">{{$t('exchange.exchange_Fall_rise')}}<!--日涨跌--><em v-if="sortActive==='fall'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']" style="margin-right:12px;"></em></span>
-            </li>
-          </ul>
           <div class="list-panel" ref="tipList">
+              <ul class="list" style="height:24px;max-height:20px;margin-right:0;overflow-y:hidden;">
+                <li class="list-header">
+                  <span class="list-col currency" @click="sortMarket('market')">{{$t('exchange.exchange_pair')}}<!--市场--><em v-if="sortActive==='market'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']"></em></span>
+                  <span class="list-col price" @click="sortMarket('price')">{{$t('exchange.exchange_price')}}<!--价格--><em v-if="sortActive==='price'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']"></em></span>
+                  <span class="list-col fall" @click="sortMarket('fall')">{{$t('exchange.exchange_Fall_rise')}}<!--日涨跌--><em v-if="sortActive==='fall'" :class="[sort==='desc'?'icon-arrow-down':'icon-arrow-up']" style="margin-right:12px;"></em></span>
+                </li>
+              </ul>
               <ul class="list">
                   <li v-for="(data, index) in curProducts" :key="index" class="list-item" :class="{'list-item-active':data.market === symbol}" @click="changeSymbol(data)" @mouseover="tipMouseover($event, data)" @mouseout="tipMouseout($event, data)">
                       <span class="list-col currency">
@@ -262,7 +262,7 @@ export default {
         return '0.00%'
       } else if (item.openingPrice && item.lastPrice) {
         var percent = numUtils.BN(item.change24h).div(item.openingPrice).mul(100)
-        return `<font color="${percent < 0 ? '#F34246' : '#23CD09'}">` + percent.toFixed(2) + '%</font>'
+        return `<font color="${percent < 0 ? '#fff' : '#fff'}">` + percent.toFixed(2) + '%</font>'
       } else {
         return '0.00%'
       }
@@ -336,10 +336,11 @@ export default {
 .tabs-item.active{color:#0557E2;border-bottom-color:#0557E2;}
 
 .list1,
-.list{height:calc(100% - 10px);margin-top:10px;margin-right:-17px;overflow-x:hidden;overflow-y: scroll;}
+.list{height:100%;padding-top:10px;margin-right:-1px;overflow-x:hidden;overflow-y: auto;}
+.list li{padding-left: 5px; padding-right: 5px;}
 .list1::-webkit-scrollbar,
-.list::-webkit-scrollbar{width:17px;}
-.list-panel{height:100%;overflow:hidden;}
+.list::-webkit-scrollbar{width:1px;}
+.list-panel{height:100%;overflow:hidden; margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; margin-bottom: -10px;}
 /* list1 */
 .list1-item{height:80px;display:flex;position:relative;margin-bottom:5px;cursor:pointer;}
 .list1-item::after{content: "";display:inline-block;height:1px;width:100%;background-color:#EEEEEE;position:absolute;bottom:-3px;left:0;}
@@ -348,7 +349,7 @@ export default {
 .list1-item-active:hover{background-color:#e6e6e6;}
 .list1-collection{position:absolute;top:50px;right:10px;color:#a1a8bb;cursor:pointer; font-size: 20px;}
 .list1-collection.collection{color:#0557E2;}
-.list1-percent{position:absolute;top:10px;right:0; width: 55px; height: 30px; border-radius: 3px; text-align: center; line-height: 30px;}
+.list1-percent{position:absolute;top:10px;right:0; padding-left: 5px; padding-right: 5px; height: 30px; border-radius: 3px; text-align: center; line-height: 30px;}
 .list1-percent.up {background-color: rgba(35, 205, 9,0.3)}
 .list1-percent.down {background-color: rgba(243, 66, 70,0.3)}
 .list1-currency{display:flex;color:#333;flex-flow:column;align-items:flex-start;justify-content:center;width:60px;margin-left:10px;}

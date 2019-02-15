@@ -123,7 +123,7 @@ export default {
 .ml20 {margin-left: 20px;}
 .icon-two-way { margin-left: 20px; margin-right: 20px;}
 .transfer-dialog{width: 550px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
-.transfer-dialog-title{height: 60px;line-height: 60px;color: #fff;font-size: 22px;  text-align: center;background-color: #0D66EF;}
+.transfer-dialog-title{height: 60px;line-height: 60px;color: #fff;font-size: 22px;  text-align: center;background-color: #BA8D35;}
 .transfer-dialog-form{padding: 30px 30px 60px; position: relative; font-size: 16px;}
 .transfer-dialog-row {display: flex; justify-content: space-between; padding-bottom: 20px; line-height: 45px;}
 .transfer-dialog-label{color: #333; margin-right: 15px;}
@@ -135,7 +135,7 @@ export default {
 }
 .transfer-dialog-input.error{border-color: #e53f3f;}
 .transfer-dialog-prompt{display: block;height: 30px;line-height: 30px;color: #e53f3f;}
-.transfer-dialog-confirm{color: #fff;background-color: #0D66EF;}
+.transfer-dialog-confirm{color: #fff;background-color: #BA8D35;}
 .transfer-dialog-confirm:hover{background-color: #0b4cb1;}
 .transfer-dialog-cancel{color: #A3A3A3;background-color: #F5F5F5;border:none;}
 .transfer-dialog-cancel:hover{color: #666;}

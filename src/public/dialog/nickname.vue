@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 .nickname-dialog{width: 400px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
-.nickname-dialog-title{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF;}
+.nickname-dialog-title{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #BA8D35;}
 .nickname-dialog-form{padding: 30px 30px 60px; position: relative;}
 .nickname-dialog-row:last-of-type{padding-top: 10px;font-size: 0;line-height: 0;text-align: center;}
 .nickname-dialog-label{display: block;min-height: 24px;margin-bottom: 10px;line-height: 24px;color: #333;}
@@ -72,7 +72,7 @@ export default {
 }
 .nickname-dialog-input.error{border-color: #e53f3f;}
 .nickname-dialog-prompt{display: block;height: 30px;line-height: 30px;color: #e53f3f;}
-.nickname-dialog-confirm{color: #fff;background-color: #0D66EF;}
+.nickname-dialog-confirm{color: #fff;background-color: #BA8D35;}
 .nickname-dialog-confirm:hover{background-color: #0b4cb1;}
 .nickname-dialog-cancel{color: #A3A3A3;background-color: #F5F5F5;border:none;}
 .nickname-dialog-cancel:hover{color: #666;}

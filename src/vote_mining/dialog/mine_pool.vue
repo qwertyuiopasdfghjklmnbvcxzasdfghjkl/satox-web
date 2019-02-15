@@ -82,7 +82,7 @@ export default {
 .ml20 {margin-left: 20px;}
 .fs24 {font-size: 24px;}
 .dialog{width: 890px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d; position: relative;}
-.dialog-title{height: 50px;line-height: 50px;color: #fff;font-size: 22px;  text-align: center;background-color: #0D66EF;}
+.dialog-title{height: 50px;line-height: 50px;color: #fff;font-size: 22px;  text-align: center;background-color: #BA8D35;}
 .icon-close{position:absolute;text-decoration:none;font-size:16px;color:#fff;top:17px;right:15px; opacity: 0.8;}
 .icon-close:hover{opacity: 1;}
 .dialog-form{padding: 30px 30px 60px; position: relative; font-size: 16px;}

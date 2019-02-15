@@ -2,41 +2,8 @@
     <div class="header">
         <div class="header-fixed">
         <div class="header-center" :class="{'full-screen': $route.name === 'exchange_index2' || $route.name === 'exchange_index'}">
-            <div class="center-left">
-                <a href="javascript:;" @click="goHome"></a>
-                <ul class="maxWidth">
-                    <!--<li>-->
-                      <!--<a @click="reloadPage('otc_index')" :class="{'current':$route.name==='otc_index'}">-->
-                        <!--{{$t('otc_public.otc_navigation_trade')}}&lt;!&ndash;OTC&ndash;&gt;-->
-                      <!--</a>-->
-                    <!--</li>-->
-                    <li>
-                      <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
-                        {{$t('public.navigation_exchange')}}<!--币币交易-->
-                      </a>
-                    </li>
-                    <!--<li>-->
-                      <!--<a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">-->
-                        <!--{{$t('business.MINING_TITLE')}}&lt;!&ndash;投票挖矿&ndash;&gt;-->
-                      <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                      <!--<a :href="noticeUrl" target="_blank">-->
-                        <!--{{$t('public.navigation_news')}}&lt;!&ndash;公告中心&ndash;&gt;-->
-                      <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                      <!--<a :href="helperUrl" target="_blank">-->
-                        <!--{{$t('public.navigation_support')}}&lt;!&ndash;帮助中心&ndash;&gt;-->
-                      <!--</a>-->
-                    <!--</li>-->
-                    <li>
-                      <router-link :to="{name:'download'}">
-                        {{$t('public0.public212')}}<!--APP下载-->
-                      </router-link>
-                    </li>
-                </ul>
-            </div>
+            <a class="logo" href="javascript:;" @click="goHome"></a>
+            <div class="center-left"></div>
             <div class="center-right">
                 <ul class="minWidth">
                   <li>
@@ -431,16 +398,10 @@ export default {
 .message-panel-operation span.disabled:hover{color: #999;}
 
 .header{height: 70px;}
-.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%; background-color: #0c151d;}
-.header-center{display: flex;justify-content: space-between;align-items: center;max-width: 1360px;height: 70px;margin-left: auto;margin-right: auto;transition: width .2s ease-out;}
+.header-fixed{position: fixed;z-index:1000;top: 0;left: 0;width: 100%; background-color: #202020;}
+.header-center{display: flex;justify-content: space-between;align-items: center;height: 70px;margin-left: 20px;margin-right: 20px;transition: width .2s ease-out; position: relative;}
 .header-center.full-screen{box-sizing: border-box;min-width:1200px;width: 100%;padding-left: 20px;padding-right: 10px;}
-.header-center .center-left{display: flex;align-items: center;}
-.header-center .center-left > a{width: 151px;height: 50px;background: url(../assets/images/logo.png) no-repeat center center;background-size:contain; background-position: center;}
-.header-center .center-left > ul{height: 24px;}
-.header-center .center-left > ul li{float: left;margin-left: 12px;height: 24px;line-height: 24px;}
-.header-center .center-left > ul li:first-of-type{margin-left: 54px;}
-.header-center .center-left > ul li a{padding-left: 6px;padding-right: 6px;font-size: 14px;color: #FFFFFF;cursor: pointer;}
-.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #3283FF;}
+.header-center a.logo{position: absolute; width: 151px;height: 50px;background: url(../assets/images/logo.png) no-repeat center center;background-size:contain; background-position: center;}
 .header-center .center-right{display: flex;align-items: center;}
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}

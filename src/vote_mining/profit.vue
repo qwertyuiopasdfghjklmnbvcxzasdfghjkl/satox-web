@@ -321,14 +321,14 @@ export default {
 	position: relative;
 	background-color: #fff;
 }
-.tabs span:hover {color: #0D66EF; }
+.tabs span:hover {color: #BA8D35; }
 .tabs span:nth-of-type(n+1) {
 	margin-left: -6px;
 }
 .tabs span:nth-of-type(1){z-index: 3;}
 .tabs span:nth-of-type(2){z-index: 2;}
 .tabs span:nth-of-type(3){z-index: 1;}
-.tabs span.active {background-color: #0D66EF; color: #fff; font-size: 24px; border-color: #0D66EF;}
+.tabs span.active {background-color: #BA8D35; color: #fff; font-size: 24px; border-color: #BA8D35;}
 .tabs button {position: absolute; right: 25px; top: 15px; height: 40px; background-color: #3283FF; border: none; border-radius: 20px; font-size: 16px; color: #fff; padding: 0 20px; cursor: pointer;}
 .tabs button:hover {background-color: #0044ad;}
 

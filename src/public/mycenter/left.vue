@@ -77,11 +77,10 @@ export default {
 }
 .myassets-left ul li:first-of-type{margin-top: 0;}
 .myassets-left ul li:hover,
-.myassets-left ul li.active{color: #fff; background-color: #0D66EF;}
+.myassets-left ul li.active{color: #fff; background-color: #BA8D35;}
 .myassets-left ul li i,
 .myassets-left ul li span{display: inline-block;vertical-align: middle;}
 .myassets-left ul li i{font-size: 20px;}
 .myassets-left ul li span{height: 50px;line-height: 50px;font-size: 16px;text-indent: 10px;}
 .myassets-left ul li i.icon-like:before{color: #666}
-.myassets-left ul li:hover,.myassets-left ul li:hover i:before{color: #fff;}
 </style>

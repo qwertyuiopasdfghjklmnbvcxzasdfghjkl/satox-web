@@ -137,7 +137,7 @@ export default {
 
 <style scoped>
 .export-record{width: 370px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
-.export-record-title{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.export-record-title{height: 60px;line-height: 60px;color: #fff;font-size: 18px;  text-align: center;background-color: #BA8D35; position: relative;}
 .export-record-title h3{font-weight: normal;}
 .export-record-title i{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:calc(50% - 7px);right:15px; opacity: 0.8; cursor: pointer;}
 .export-record-title i:hover{opacity: 1;}
@@ -151,6 +151,6 @@ export default {
 .export-record-cont .list label em::before{content: "";display: inline-block;width: 10px;height: 10px;margin-right: 12px;vertical-align: -1px;border: 1px solid #4182e6;}
 .export-record-cont .list label input:checked + em::before{background-color: #4182e6;}
 .export-record-cont .button {margin-top: 20px;}
-.export-record-cont .button button{width: 100%;height: 35px;font-size: 14px; color: #fff;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
+.export-record-cont .button button{width: 100%;height: 35px;font-size: 14px; color: #fff;background-color: #BA8D35;border-radius: 4px;cursor: pointer;}
 .export-record-cont .button button:hover{background-color: #0b4cb1;}
 </style>

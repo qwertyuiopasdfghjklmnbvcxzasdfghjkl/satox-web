@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="night">
     <template v-if="$route.name !== 'login'">
       <!--屏蔽用户名/密码自动填写：创建假的用户名/密码input让chrome浏览器填充，在autocomplete=off不起作用时适用-->
       <input class="fake-input" type="text" name="fakeusernameremembered">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import utils from '@/assets/js/utils'
 import numUtils from '@/assets/js/numberUtils'
@@ -155,7 +156,9 @@ export default {
   }
 }
 </script>
-
+<style lang="less" scoped>
+@import "./assets/css/night.less";
+</style>
 <style scoped>
 .fake-input{position: absolute;clip: rect(0, 0, 0, 0);}
 .mycenter{position: fixed;z-index: 9999;top: 50%;width: 24px;height: 50px;margin-top: -25px;background: url(./assets/images/slide.png) no-repeat center center;}

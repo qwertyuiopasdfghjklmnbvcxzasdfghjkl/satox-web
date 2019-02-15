@@ -285,7 +285,7 @@ section  .info .avatar i {position: absolute; z-index: 1; width: 28px; height: 2
 section  .info .detail { flex: 1; margin-left: 35px; color: #333;}
 section  .info .detail span {display: inline-block;}
 section  .info .detail span.gray {color: #666;}
-section  .info .detail span.blue {color: #0D66EF;}
+section  .info .detail span.blue {color: #BA8D35;}
 section  .info .detail .edit {display: inline-block; width: 20px; height: 20px; background: url('../../assets/images/icon-edit.png') no-repeat center; vertical-align: middle;}
 
 .curreny /deep/ .filtrate,
