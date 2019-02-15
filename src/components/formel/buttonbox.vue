@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style scoped>
-.button{display:flex;justify-content:center;align-items:center;font-size: 14px; color: #fff;background-color: #0D66EF;cursor:pointer;}
-.button:hover{background-color:#0b4cb1;}
+.button{display:flex;justify-content:center;align-items:center;font-size: 14px; color: #fff;background-color: #BA8D35;cursor:pointer;}
+.button:hover{background-color:#a07a2e;}
 .button.disabled{background-color:#999;}
 </style>
 

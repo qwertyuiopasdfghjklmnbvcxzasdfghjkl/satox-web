@@ -220,7 +220,7 @@ export default {
 <style scoped>
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {appearance:none !important;margin: 0;}
 .buy{width: 320px;background-color: #FFF; border-radius: 4px; box-shadow: 0 2px 8px #5d5d5d; overflow: hidden;}
-.title{text-transform: uppercase;padding-top: 10px;padding-bottom: 10px;background-color:#0D66EF;color:#fff;font-size: 16px; text-align: center;}
+.title{text-transform: uppercase;padding-top: 10px;padding-bottom: 10px;background-color:#BA8D35;color:#fff;font-size: 16px; text-align: center;}
 .buy-cont{padding: 10px 30px 30px 30px; color: #333;}
 .buy-cont p{display: flex;justify-content: space-between;line-height: 30px;position: relative;}
 .buy-cont p input{display: block;width: 100%;height: 30px;background-color: transparent;border: 1px solid #ccc;color: #333;}

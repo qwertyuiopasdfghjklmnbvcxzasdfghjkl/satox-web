@@ -423,18 +423,18 @@ export default {
 .secretkey-tips .tips-icon,
 .cellphone-tips .tips-icon{display: inline-block; width: 20px;height: 20px;font-weight: bold;font-size: 12px;line-height: 20px;color: #fff;text-align: center;background-color: #FA4D4D;border-radius: 50%;cursor: help;}
 .secretkey-tips .tips-text,
-.cellphone-tips .tips-text{display: none; position: absolute;top: -2px;height: 24px;padding-left: 6px;padding-right: 6px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px; left: 25px;}
+.cellphone-tips .tips-text{display: none; position: absolute;top: -2px;height: 24px;padding-left: 6px;padding-right: 6px;font-size: 12px;line-height: 24px;color: #181b2a;white-space: nowrap;background-color: #fff;border-radius: 4px; left: 10px;  transform: translate(-50%,-150%);}
 .secretkey-tips .tips-text:before,
 .cellphone-tips .tips-text:before{content: "";position: absolute;bottom: -6px;left: 50%;width: 0;height: 0;margin-left: -6px;border-width: 6px 6px 0 6px;border-style: solid;border-color: #fff transparent transparent transparent;}
 .secretkey-tips .tips-icon:hover + .tips-text,
 .cellphone-tips .tips-icon:hover + .tips-text{display: block;}
 .secretkey{display: flex;align-items: center;}
-.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #E6EFFD; color: #333；}
+.secretkey .secretkey-code{height: 20px;font-size: 12px;line-height: 20px;padding-left: 6px;padding-right: 6px;background-color: #E6EFFD; color: #333;}
 .secretkey .secretkey-tips{display: flex;justify-content: center;position: relative; margin-left: 6px;}
 
 .password, .google{background-color: #FFF; border-radius: 4px; box-shadow: 0 1px 3px #e2e2e2;}
 .password-level{display: flex;justify-content: space-between;align-items: center;height: 80px;padding-left: 30px;padding-right: 30px; position: relative;}
-.password-level.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
+.password-level.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #202020; z-index: 1;}
 .password-level-left{font-size: 0;line-height: 0;}
 .password-level-left img{margin-right: 50px;vertical-align: middle;}
 .password-level-left .label{display: inline-block;height: 24px;margin-right: 50px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
@@ -443,12 +443,12 @@ export default {
 .password-level-left .state span.low{width: 70px;background-color: #FA4D4D;}
 .password-level-left .state span.middle{width: 140px;background-color: #22AC38;}
 .password-level-left .state span.high{width: 210px;background-color: #22AC38;}
-.password-level-right input{min-width: 140px;height: 50px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #0D66EF;border-radius: 4px;cursor: pointer;}
+.password-level-right input{min-width: 140px;height: 50px;padding: 0 30px;color: #fff;text-align: center;vertical-align: top;background-color: #BA8D35;border-radius: 4px;cursor: pointer;}
 .password-level-right input:hover{background-color: #0a47a5;}
 
 .google{margin-top: 8px;}
 .google-content{display: flex;justify-content: space-between;align-items: center;height: 240px;padding-left: 30px;padding-right: 30px; position: relative;}
-.google-content.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #fff; z-index: 1;}
+.google-content.active::after {content: ''; position: absolute; left: 0;top: 0; right: 0; bottom: 0; background-color: #202020; z-index: 1;}
 .google-content-left{font-size: 0;line-height: 0;}
 .google-content-left img{margin-right: 50px;vertical-align: middle;}
 .google-content-left .label{display: inline-block;width: 140px;min-height: 24px;font-size: 14px;line-height: 24px;color: #261003;vertical-align: middle;}
@@ -466,11 +466,11 @@ export default {
 .google-content-center .unbind-form em.asterisk{position: relative;top: 5px;line-height: 0;font-size: 18px;color: #FA4D4D;}
 .google-content-center .bind-form em.error,
 .google-content-center .unbind-form em.error{display: block;height: 24px;font-size: 12px;color: #e53f3f;white-space: nowrap;}
-.google-content-center button{width:120px;height:24px;padding: 0;color:#fff;background-color:#0D66EF;border-radius:3px;cursor:pointer;}
+.google-content-center button{width:120px;height:24px;padding: 0;color:#fff;background-color:#BA8D35;border-radius:3px;cursor:pointer;}
 .google-content-center button:hover{background-color: #0a47a5;}
 .google-content-center button.disabled,
 .google-content-center button.disabled:hover{background-color:#999;color:#FFF;cursor:not-allowed;}
-.google-content-right input{min-width: 140px;height: 50px;padding: 0px 30px;color: #fff;text-align: center;vertical-align: top;border-radius: 4px;background-color: #0D66EF;cursor: pointer;}
+.google-content-right input{min-width: 140px;height: 50px;padding: 0px 30px;color: #fff;text-align: center;vertical-align: top;border-radius: 4px;background-color: #BA8D35;cursor: pointer;}
 .google-content-right input:hover{background-color: #0a47a5;}
 .google-content-right input.cancel{margin-top:4px;color:#666;background-color:transparent;border:1px solid #ccc;}
 .google-content-right input.cancel:hover{color:#333;border-color:#bbb;}

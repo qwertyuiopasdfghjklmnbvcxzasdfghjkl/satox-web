@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 .dialog{width:370px;background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d;}
-.top{height: 40px;line-height: 40px;color: #fff;font-size: 18px;  text-align: center;background-color: #0D66EF; position: relative;}
+.top{height: 40px;line-height: 40px;color: #fff;font-size: 18px;  text-align: center;background-color: #BA8D35; position: relative;}
 .icon-close{position:absolute;text-decoration:none;font-size:14px;color:#fff;top:13px;right:13px; opacity: 0.8;}
 .icon-close:hover{opacity: 1;}
 /*.title{width:100%;height:30px;line-height:30px;text-align:center;font-size:14px;color:#becbe8;}*/

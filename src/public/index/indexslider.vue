@@ -82,7 +82,7 @@
 <style scoped>
   .bk-wrap{position:relative;overflow:hidden;width:100%;}
   .bk-main{position:relative;overflow:hidden;margin:0 auto;width:100%;}
-  .index-slider{background: #0c151d;min-width:1200px;}
+  .index-slider{background: #202020;min-width:1200px;}
   .index-slider .index-content{
     height: auto;
     position: relative;

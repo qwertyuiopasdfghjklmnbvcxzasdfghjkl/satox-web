@@ -530,7 +530,7 @@ export default {
 .form-flex-center .not-set p{min-height: 24px;}
 .form-flex-center .have-set p{height: 24px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .form-flex-right{width: 200px;text-align: right;}
-.form-flex-right span{display: inline-block;min-width: 150px;height: 40px;padding-left: 24px;padding-right: 24px;line-height: 40px;color: #fff;text-align: center;background-color: #0D66EF;border-radius: 4px;cursor: pointer; box-sizing: border-box;}
+.form-flex-right span{display: inline-block;min-width: 150px;height: 40px;padding-left: 24px;padding-right: 24px;line-height: 40px;color: #fff;text-align: center;background-color: #BA8D35;border-radius: 4px;cursor: pointer; box-sizing: border-box;}
 .form-flex-right span:hover{background-color: #0945a2;}
 
 .form-table{padding: 30px;}
@@ -556,6 +556,6 @@ export default {
 .form-upload + .form-error{align-self: flex-end;}
 .form-cancel{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;margin-right: 30px;text-align: center;color:#261003;background-color:transparent;border:1px solid #ccc;border-radius: 4px;cursor: pointer;}
 .form-cancel:hover{color:#261003;border-color:#bbb;}
-.form-save{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;color:#fff;background-color:#0D66EF;border-radius: 4px;cursor: pointer;}
+.form-save{min-width: 100px;height: 30px;padding-left: 24px;padding-right: 24px;color:#fff;background-color:#BA8D35;border-radius: 4px;cursor: pointer;}
 .form-save:hover{background-color: #094fbb;}
 </style>

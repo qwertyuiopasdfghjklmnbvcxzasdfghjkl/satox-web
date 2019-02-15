@@ -44,8 +44,8 @@
               </div>
             </div>
             <div class="home-center-bottom">
-              <businesspanel ref="businesspanel" :accuracy="accuracy" :fixedNumber="fixedNumber" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
-              <entrust ref="entrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
+              <businesspanel ref="businesspanel" v-show="!isEntrust" :accuracy="accuracy" :fixedNumber="fixedNumber" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
+              <entrust ref="entrust" v-show="isEntrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
             </div>
           </div>
           <div class="home-right">
@@ -83,6 +83,7 @@ export default {
   },
   data () {
     return {
+      isEntrust: false,
       isFirst: true,
       accuracy: 8,
       fixedNumber: 8,
@@ -113,9 +114,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'STO'
+        return symbol || 'SAT'
       } else {
-        return 'STO'
+        return 'SAT'
       }
     },
     symbol () {
@@ -318,7 +319,7 @@ export default {
 .top-left-header > ul{display:flex;align-items:center;height:100%;}
 .top-left-header-right{flex:1;justify-content:space-between;}
 /*.symbol-icon{background-color:#fff;width:32px;height:32px;border-radius:50%;color:#181b2a;display:flex;justify-content:center;align-items:center;font-size:26px;margin-right:10px;}*/
-.symbol-icon{width:32px;height:32px;margin-right:10px;border-radius:50%; border: 1px solid #e2e2e2}
+.symbol-icon{width:32px;height:32px;margin-right:10px;border-radius:50%; border: 1px solid #e2e2e2; overflow: hidden;}
 .market-symbol{font-size:18px;}
 .last-item{display:flex;padding-right:10px;flex-flow:column;}
 .last-item:not(:first-child){margin-left:40px;justify-self:flex-end;}

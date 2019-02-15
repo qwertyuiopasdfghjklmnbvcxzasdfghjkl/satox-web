@@ -24,7 +24,8 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Index
+      component: Index,
+      redirect:'/exchange'
     },
     {
       path: '/invite',

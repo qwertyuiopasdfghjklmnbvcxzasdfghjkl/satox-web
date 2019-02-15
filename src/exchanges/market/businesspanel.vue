@@ -9,6 +9,12 @@
             <li class="tab-item" :class="{selected:isShow && active==='limit'}" @click="switchTab('limit')">
               {{$t('exchange.exchange_limit')}}<!--限价委托-->
             </li>
+            <li class="tab-item" :class="{selected:isShow && active==='current'}" @click="switchTab('current')">
+              {{$t('trade_record.current_entrust')}}<!--当前委托-->
+            </li>
+            <li class="tab-item" :class="{selected:isShow && active==='history'}" @click="switchTab('history')">
+              {{$t('trade_record.history_entrust')}}<!--历史委托-->
+            </li>
             <!--市价委托-->
             <!-- <li class="tab-item" :class="{selected:isShow && active==='market'}" @click="switchTab('market')">
               {{$t('exchange.exchange_market')}}
@@ -60,6 +66,11 @@ export default {
     switchTab (tab, isShow) {
       this.isShow = !isShow
       this.active = tab
+      if(tab!=='limit'){
+        this.$parent.isEntrust = true
+        this.$parent.$refs.entrust.isShow = true
+        this.$parent.$refs.entrust.active = tab
+      }
     },
     getrateSysparams () {
       marketApi.rateSysparams((res) => {
@@ -85,7 +96,7 @@ export default {
 }
 .business-panel.unfold .tabs .tab-item{color:#666;}
 .tabs .tab-item:hover,
-.tabs .tab-item.selected{color: #3A76E7!important;}
+.tabs .tab-item.selected{color: #3A76E7;}
 .tabs .tab-item.selected {border-color: #3A76E7;}
 .tabs .arrow-item{position: relative;float: left;width: 50px;height: 40px;}
 .tabs .arrow-item em{position: absolute;top: 50%;left: 50%; width: 20px;height: 20px; margin-left:-8px; margin-top: -8px;overflow: hidden;cursor: pointer;}
