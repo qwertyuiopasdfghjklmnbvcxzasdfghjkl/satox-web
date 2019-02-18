@@ -292,7 +292,44 @@ individual.unbindMobile = unbindMobile
 // 发送授权短信验证码（6位）
 const sendAuthSMSCode = function (data, success, error) {
   let lang = window.localStorage.getItem('lang') || 'en'
-  data.lang = lang === 'zh-CN'?'CN':(lang === 'cht'?'CNZH':(lang === 'jp'?'JP':(lang === 'kr'?'KR':'EN')))
+  switch(lang){
+    case 'zh-CN':
+      lang = 'CN'
+      break
+    case 'cht':
+      lang = 'CNZH'
+      break
+    case 'ko':
+      lang = 'KO'
+      break
+    case 'ja':
+      lang = 'JA'
+      break
+    case 'ar':
+      lang = 'AR'
+      break
+    case 'de':
+      lang = 'DE'
+      break
+    case 'es':
+      lang = 'ES'
+      break
+    case 'fr':
+      lang = 'FR'
+      break
+    case 'it':
+      lang = 'IT'
+      break
+    case 'th':
+      lang = 'TH'
+      break
+    case 'ru':
+      lang = 'RU'
+      break
+    default:
+      lang = 'EN'
+  }
+  data.lang = lang
   api.post(`${domain}api/v3/individual/sendAuthSms`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.msg)
