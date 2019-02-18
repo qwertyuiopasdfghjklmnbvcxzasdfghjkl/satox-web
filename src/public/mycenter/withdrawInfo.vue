@@ -8,7 +8,22 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed" v-if="symbol!=='SAT'">
+                <div class="filed" v-if="symbol==='USDS'">
+                    <em>
+                        {{$t('public.account_info').format(symbol)}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
+                    </em>
+                    <div class="bank-info" style="position:relative;">
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankCountryCode" v-model="userBankInfo.bankCountryCode" :placeholder="$t('public.state_bank')" :class="{error:errors.has('bankCountryCode')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankProvince" v-model="userBankInfo.bankProvince" :placeholder="$t('public.bank_province')" :class="{error:errors.has('bankProvince')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankDistrict" v-model="userBankInfo.bankDistrict" :placeholder="$t('public.bank_area')" :class="{error:errors.has('bankDistrict')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankCode" v-model="userBankInfo.bankCode" :placeholder="$t('public.bank_number')" :class="{error:errors.has('bankCode')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankBranch" v-model="userBankInfo.bankBranch" :placeholder="$t('public.branch_name')" :class="{error:errors.has('bankBranch')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankRealname" v-model="userBankInfo.bankRealname" :placeholder="$t('public.account_name')" :class="{error:errors.has('bankRealname')}"/>
+                        <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankNumber" v-model="userBankInfo.bankNumber" :placeholder="$t('public.bank_account')" :class="{error:errors.has('bankNumber')}"/>
+                     
+                    </div>
+                </div>
+                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USDS'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -60,6 +75,7 @@
                 <ul class="tips">
                     <li>{{$t('account.user_minimum_number_of_cash').format(`：${minWithdraw} ${symbol}`)}}<!--最小提现数量为{0}。--></li>
                     <li v-if="false">{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
+                    <li  v-if="symbol==='USDS'">{{$t('account.user_account_fill_prompt')}}<!--请仔细填写账户信息,填写错误后将无法进行正常转账。--></li>
                     <li>{{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。--></li>
                 </ul>
             </div>
@@ -110,6 +126,15 @@ export default {
       alias: '', // 别名
       amount: '', // 提现金额
       toAddress: '', // 提现地址
+      userBankInfo:{
+        bankCountryCode:'',
+        bankCode:'',
+        bankBranch:'',
+        bankProvince:'',
+        bankDistrict:'',
+        bankRealname:'',
+        bankNumber:''
+      },
       msgs: {
         amount: {required: this.$t('public0.public46')} // 请输入提现金额
       }
@@ -136,7 +161,11 @@ export default {
   },
   computed: {
     procedureFee () { // 手续费 提现数量-固定手续费
-      return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
+      if(this.symbol==='USDS'){
+        return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
+      } else {
+        return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
+      }
     },
     lastMount () { // 实际到账
       if (this.amount === '' || this.amount === 0) {
@@ -231,6 +260,18 @@ export default {
           amount: this.amount
         }
       }
+      if(this.symbol==='USDS'){
+        let userBankInfo = {
+          bankCountryCode:this.userBankInfo.bankCountryCode,
+          bankCode:this.userBankInfo.bankCode,
+          bankBranch:this.userBankInfo.bankBranch,
+          bankProvince:this.userBankInfo.bankProvince,
+          bankDistrict:this.userBankInfo.bankDistrict,
+          bankRealname:this.userBankInfo.bankRealname,
+          bankNumber:this.userBankInfo.bankNumber
+        }
+        validData = Object.assign(validData, userBankInfo)
+      }
       this.$validator.validateAll(validData).then((validResult) => {
         if (!validResult) {
           return
@@ -254,6 +295,8 @@ export default {
               fromAccount: this.fromAccount, // 用户id
               toAddress: this.toAddress,
               alias: this.alias,
+              fee: this.procedureFee,
+              userBankInfo: this.userBankInfo,
               lang: window.localStorage.getItem('lang') === 'zh-CN' ? 'cn' : 'en'
             }
             let saveFun = () => {
@@ -307,7 +350,7 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
 .withdrawBox .filed .BNB-subbtn:hover{background-color: #BA8D35;}
 .withdrawBox .filed .withAdress{
   position: relative; color:#999;font-size: 0; width: 500px;height:30px;
-  background-color: #FFF;border:1px solid #ccc;
+  background-color: #FFF;border:1px solid rgba(186,141,53,0.5);
 }
 .withAdress span.dowml{position: relative;cursor: pointer; vertical-align: top; width: 29px;height: 30px;border-left: 1px solid transparent; display: inline-block;float:right;}
 .withAdress span.dowml:before{content:"";display: inline-block; width: 0px;height: 0px;border-left: 9px solid transparent;border-bottom:9px solid transparent;border-right:9px solid transparent;border-top: 9px solid #aeb7d0;position: absolute;top:10px;left:5px;}
@@ -324,16 +367,21 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   color: #261003;background-color:transparent; border: 1px solid #ccc;}
 .address{width: 357px;box-sizing: border-box;height: 30px;padding-left: 12px;padding-right: 12px;line-height: 28px;
   color: #261003;background-color:transparent; border: 1px solid #ccc;}
-.number{
+.number {
   position: relative; box-sizing: border-box;width: 502px;height: 30px;padding: 0 12px;
-  border: 1px solid #54616c;color: #aeb7d0;margin-top: 0px;text-align: right;line-height: 30px;
+  border: 1px solid rgba(186,141,53,0.5);color: #aeb7d0;margin-top: 0px;text-align: right;line-height: 30px;
   background:#FFF;
 }
+.bank-info {position: relative; box-sizing: border-box;width: 502px; text-align: right; 
+  background:#FFF; display: flex; flex-wrap: wrap;}
+.bank-info input {border: 1px solid rgba(186,141,53,0.5); color: #333; padding: 0 10px; margin-bottom: 10px; margin-right: 25px; height:30px; line-height: 30px; width: 150px; box-sizing: border-box;}
+.bank-info input:nth-of-type(3n){margin-right: 0;}
+.bank-info input:last-of-type{width: 502px; margin-right: 0; margin-bottom: 0;}
 .number a{color: #BA8D35;}
 .number a:hover{color: #BA8D35;}
 .number .numberAll{
   position: absolute;left: 0;width: 408px;height: 28px;padding-left: 12px;padding-right: 12px;line-height: 28px;
-  color: #261003;background-color:transparent;
+  color: #333;background-color:transparent;
 }
 .withdrawBox:after{content:".";display:block;clear:both;visibility:hidden;height:0;}
 .withdrawBox .tips{width: 226px;margin-top:18px;}

@@ -85,11 +85,11 @@
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
                             <div class="action f-right"  v-if="accountType===1">
                               <!--充值与提现-->
-                              <!-- <span class="btn" :class="[data.show ? 'icon-less' : 'icon-add', {disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}]" @click="Number(data.rechargeFlag) === 1 || Number(data.withdrawFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_title')"></span> -->
-                              <span class="icon_withdraw" :class="{disabled: Number(data.rechargeFlag) !== 1 && Number(data.withdrawFlag) !== 1}" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
+                              <span class="icon_recharge" :class="{disabled: Number(data.rechargeFlag) !== 1}" @click="Number(data.rechargeFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_deposit')"></span>
+                              <span class="icon_withdraw" :class="{disabled: Number(data.withdrawFlag) !== 1}" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
                             </div>
                         </div>
-                        <!-- <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/> -->
+                        <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/>
                     </li>
                 </ul>
             </div>
@@ -385,10 +385,14 @@ export default {
 .acount_tab > div.active:hover {color: #fff;}
 .acount_tab > span {position: absolute; right: 20px; height: 50px; line-height: 50px; color: #1571FF; cursor: pointer;}
 
-.icon_withdraw{display: inline-block;width: 25px;height: 25px;margin-right: 5px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
+.icon_withdraw, .icon_recharge{display: inline-block;width: 25px;height: 25px;margin-right: 10px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
 .icon_withdraw:hover{background-image: url(../../assets/images/icon_withdraw_hover.png);}
-.icon_withdraw.disabled{cursor: not-allowed;}
+.icon_withdraw.disabled, .icon_recharge.disabled{cursor: not-allowed;}
 .icon_withdraw.disabled,
 .icon_withdraw.disabled:hover{background-image: url(../../assets/images/icon_withdraw_disabled.png);}
+.icon_recharge{background-image: url(../../assets/images/icon_recharge.png);}
+.icon_recharge:hover{background-image: url(../../assets/images/icon_recharge_hover.png);}
+.icon_recharge.disabled,
+.icon_recharge.disabled:hover{background-image: url(../../assets/images/icon_recharge_disabled.png);}
 </style>
 
