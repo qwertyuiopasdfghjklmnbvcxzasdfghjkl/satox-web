@@ -26,9 +26,8 @@
                             <span class="ewm icon_recharge" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanEWM()" :title="$t('account.estimated_value_deposit')">
                                 <!--充值-->
                             </span>
-                            <span class="reche icon_withdraw" :class="{disabled: Number(item.withdrawFlag) !== 1}" @click="Number(item.withdrawFlag) !== 1 ? false : withdrawDalog()" :title="$t('account.estimated_value_withdrawal')">
-                                <!--提现-->
-                            </span>
+                            <!--提现-->
+                            <!-- <span class="reche icon_withdraw" :class="{disabled: Number(item.withdrawFlag) !== 1}" @click="Number(item.withdrawFlag) !== 1 ? false : withdrawDalog()" :title="$t('account.estimated_value_withdrawal')"></span> -->
                         </div>
                     </div>
                 </div>
@@ -45,7 +44,7 @@
                               <span class="copy icon_copy" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : copy_memo()" :title="$t('account.user_Copy_address')">
                                   <!--复制地址-->
                               </span>
-                              <span class="ewm icon-qrcode" style="color: #4A91FD;" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanMEMO()" >
+                              <span class="ewm icon-qrcode"  :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanMEMO()" >
                                   <!--充值-->
                               </span>
                           </div>

@@ -163,10 +163,16 @@ export default {
       languages: [
         {id: 'en', name: 'English', n: 4},
         {id: 'cht', name: '中文繁體', n: 2},
-        {id: 'zh-CN', name: '中文简体', n: 2}
+        {id: 'zh-CN', name: '中文简体', n: 2},
         // {id: 'ko', name: '한국어', n: 4},
         // {id: 'ja', name: '日本語', n: 2},
-        // {id: 'ru', name: 'русский', n: 4}
+        {id: 'ar', name: 'العربية', n: 4},
+        {id: 'de', name: 'Deutsch', n: 4},
+        {id: 'es', name: 'Español', n: 4},
+        {id: 'fr', name: 'Le français', n: 4},
+        {id: 'it', name: 'lingua italiana', n: 4},
+        {id: 'th', name: 'ไทย', n: 4},
+        {id: 'ru', name: 'русский', n: 4}
       ]
     }
   },
@@ -405,14 +411,14 @@ export default {
 .header-center .center-right{display: flex;align-items: center;}
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}
-.header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 6px;font-size:14px;cursor: pointer;color:#FFFFFF;}
+.header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 26px;font-size:14px;cursor: pointer;color:#FFFFFF;}
 .header-center .center-right > ul > li > a:hover{color: #3283FF;}
 .header-center .center-right ul li.translations{position: relative;margin-left: 18px;}
 .header-center .center-right ul li.translations a{display: block;height: 22px;padding-left: 0;padding-right: 0;line-height: 22px;font-size: 14px;color: #FFFFFF;text-align: center;border-radius: 12px;margin-top:1px;}
 .header-center .center-right ul li.translations a:hover,
 .header-center .center-right ul li.translations a.unfold{color: #3283FF; border-color: #3283FF;}
 .header-center .center-right ul li.translations a i{padding-left: 12px;font-size: 12px;}
-.header-center .center-right ul li.translations .lang-list{display:flex;flex-flow:column;width:104px;height:117px;position: absolute;top: 24px;right:0;background-color: #12141f;box-shadow:0 3px 6px #12141f;}
+.header-center .center-right ul li.translations .lang-list{display:flex;flex-flow:column;width:104px;position: absolute;top: 24px;right:0;background-color: #12141f;box-shadow:0 3px 6px #12141f;}
 .header-center .center-right ul li.translations .lang-item{flex:1;height: 38px;line-height: 38px;font-size: 14px;color: #a1a8bb;text-align: center;border-bottom: 1px solid #252e44;cursor: pointer;}
 .header-center .center-right ul li.translations .lang-item:hover{color: #cbd4ec;background-color: #252e44;}
 

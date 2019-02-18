@@ -114,9 +114,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'SAT'
+        return symbol || 'SATO'
       } else {
-        return 'SAT'
+        return 'SATO'
       }
     },
     symbol () {

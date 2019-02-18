@@ -215,14 +215,15 @@ export default {
       return Math.max(this.hoverPercent, this.percent)
     },
     fixedPrice(){
-      let fixedPrice = ''
+      let fixedPrice = '', fixedBuyOrSellPrice = ''
       for(let item of this.marketList){
         if(item.market===this.currentSymbol+this.baseSymbol){
-          fixedPrice = item.fixedPrice
+          fixedPrice = item.fixedPrice || 0
+          fixedBuyOrSellPrice = (this.isBuy?item.fixedBuyPrice:item.fixedSellPrice) || 0
           break
         }
       }
-      return fixedPrice
+      return fixedBuyOrSellPrice?fixedBuyOrSellPrice:fixedPrice
     }
   },
   watch: {
