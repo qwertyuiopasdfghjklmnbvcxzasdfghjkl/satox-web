@@ -150,15 +150,16 @@
   /deep/ .myassets::before {background-color:#262525;}
   /deep/ .myassets {
     padding-top: 25px;
-    .myassets-left ul, .digassets, .password, .google, .mycenter .top, .transaction, .message, .recharge {background-color: #202020; box-shadow: 0 1px 5px #131313;}
+    .myassets-left ul, .digassets, .password, .google, .mycenter .top, .transaction, .message, .recharge, .authentication {background-color: #202020; box-shadow: 0 1px 5px #131313;}
     .myassets-left ul li {color: #fff;
       &:hover, &.active, {
         color: #BA8D35; background-color: #131212;
       }
     }
-    .digassets h3, .safety h3, .mycenter h3, .message-title, .recharge h3, .withdrawal h3 {color: #fff; background-color: #000; border-color: #2D2B2B; border-top-left-radius: 4px; border-top-right-radius: 4px;}
-    .recharge h3 a {color: #BA8D35;}
-    .acount_tab > span, .accountInfo-lists.header li .items>div, .accountInfo-lists li.th > .items > div > em i.active {color: #BA8D35;}
+    .digassets h3, .safety h3, .mycenter h3, .message-title, .recharge h3, .withdrawal h3, .authentication h3 {color: #fff; background-color: #000; border-color: #2D2B2B; border-top-left-radius: 4px; border-top-right-radius: 4px;}
+    .recharge h3 a, .authentication .tab-item.active {color: #BA8D35;}
+    .acount_tab > span, .accountInfo-lists.header li .items>div, .accountInfo-lists li.th > .items > div > em i.active, .depositBox .filed span {color: #BA8D35;}
+    .accountInfo-lists li .items>div .btn:hover, .depositBox .filed span:hover {color: #a07a2e;}
     .acount_tab {
       background-color: #000;
       > div {border: none; border-radius: 0; background-color: transparent; color: #fff;
@@ -195,7 +196,7 @@
     .delegate .filtrate input, .delegate .filtrate select, .curreny .filtrate input, .curreny .filtrate select {color: #fff; border-color: #594F39;
       &:focus {border-color: #847046!important;}
     }
-    .delegate .filtrate select, .message-title select, .curreny .filtrate select {background-image: url(../images/icon_arrowdown_yellow.png);}
+    .delegate .filtrate select, .message-title select, .curreny .filtrate select, .form-row .row-select {background-image: url(../images/icon_arrowdown_yellow.png);}
     .delegate .filtrate .button .search, .curreny .filtrate .button .search{color: #fff;background-color: #BA8D35;}
     .delegate .filtrate .button .search:hover, .curreny .filtrate .button .search:hover{background-color: #a07a2e;}
     .delegate .filtrate .button .reset, .curreny .filtrate .button .reset{color: #BA8D35;border-color: #BA8D35;}
@@ -231,7 +232,17 @@
     .recharge ul.header {background-color: #1D1814; }
     .recharge ul.header li span {color: #BA8D35;}
     .recharge ul li {border-bottom-color: #5F543D;}
-    .recharge ul li span {color: #fff;}
+    .recharge ul li span, .authentication .tab-item {color: #fff;}
+    .depositBox .filed input.adressName, .form-row .row-text, .form-row .row-select {border-color: rgba(186,141,53,0.5); background-color: rgba(186,141,53,0.2);}
+    .authentication .tab {border-bottom: none; background-color: #000;}
+    .authentication .tab-item.active {border-bottom-color: #BA8D35;}
+    .form-summary p, .form-row .row-label, .form-row .row-text, .form-row .row-select {color: #fff;}
+    .form-row .row-description, .form-row .row-file-prompt {color: #999;}
+    .form-button input.confirm {background-color: #BA8D35;}
+    .form-button input.confirm:hover {background-color: #a07a2e;}
+    .form-button input.cancel{color:#efefef;background-color:transparent;border:1px solid #ccc;}
+    .form-button input.cancel:hover{color:#999;border-color:#bbb;}
+
   }
   /deep/ .page {
     .page-item{color: #959eb7;}
