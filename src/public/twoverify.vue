@@ -1,5 +1,5 @@
 <template>
-    <div class="twoverify">
+    <div class="login twoverify">
         <div class="twoverify-container">
             <div class="twoverify-left">
                 <!-- <img src="../assets/images/logo.png" alt=""> -->
