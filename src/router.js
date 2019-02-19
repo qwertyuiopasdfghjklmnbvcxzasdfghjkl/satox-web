@@ -363,6 +363,18 @@ export const financeRouter = [
         children: [
             { path: 'index', title: '平账管理', name: 'account_manage_index', component: resolve => { require(['./views/manage_finance/account_manage.vue'], resolve); } }
         ]
+    },
+    {
+        path: '/usds_recharge',
+        name: 'usds_recharge',
+        title: 'USDS充值',
+        component: Main,
+        meta:{
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+        },
+        children: [
+            { path: 'index', title: 'USDS充值', name: 'usds_recharge_index', component: resolve => { require(['./views/manage_finance/usds_recharge.vue'], resolve); } }
+        ]
     }
 ];
 

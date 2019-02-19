@@ -1,0 +1,67 @@
+<template>
+  <Card style="width:600px;padding-bottom: 50px;">
+      <p slot="title">
+          <span>充值USDS</span>
+          <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+      </p>
+      <div class="detail">
+          <p><label>总金额：</label><span>{{data.totalBalance}}</span></p>
+          <p><label>可用余额：</label><span>{{data.availableBalance}}</span></p>
+          <p><label>冻结金额：</label><span>{{data.frozenBalance}}</span></p>
+          <p><label>充值数量：</label>
+            <input autocomplete="off" spellcheck="false" type="Number" placeholder="充值数量需大于0" class="ivu-input" style="width: 250px;" v-model="amount">
+            <button  type="button" class="ivu-btn ivu-btn-primary recharge-btn" @click="recharge" :disabled="locked"><span>充值</span></button>
+            </p>
+      </div>
+  </Card>
+</template>
+
+<script>
+import financeApi from '../../api/finance'
+export default {
+    props:['id'],
+    data () {
+        return {
+            data: {},
+            amount:'',
+            locked: false
+        }
+    },
+    created () {
+        this.getAccount()
+    },
+    methods: {
+        recharge(){
+            if(Number(this.amount)>0){
+                this.locked = true
+                financeApi.recordRecharge({accountId:this.id, availableBalance:this.amount},res=>{
+                    this.locked = false
+                    this.$Message.success({content: '充值成功'})
+                    this.$emit('okCallback')
+                    this.$emit('removeDialog')
+                },msg=>{
+                    this.locked = false
+                    this.$Message.error({content: msg})
+                })
+            } else {
+                this.$Message.error({content: '充值数量需大于0'})
+            }
+        },
+        getAccount(){
+            financeApi.findUSDSRechargeRecord({accountId:this.id},rdata=>{
+                this.data = rdata
+            })
+        },
+        closeDialog () {
+            this.$emit('removeDialog')
+        },
+        
+    }
+}
+</script>
+
+<style>
+.detail p{font-size: 16px; margin-top: 20px; position: relative;}
+.detail label{ display: inline-block; width: 150px;}
+.recharge-btn {position: absolute; right: 50px;}
+</style>
