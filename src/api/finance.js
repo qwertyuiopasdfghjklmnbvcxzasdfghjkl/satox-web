@@ -212,4 +212,40 @@ const findRechargeRecords = function (curPage, sortStr, success, error) {
 }
 finance.findRechargeRecords = findRechargeRecords
 
+// 财务管理--USDS充值--账户列表
+const findUSDSRechargeRecords = function (data, success, error) {
+  api.get(`/api/bm/financialManage/usds/accounts`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.findUSDSRechargeRecords = findUSDSRechargeRecords
+
+// 财务管理--USDS充值--账户详情
+const findUSDSRechargeRecord = function (data, success, error) {
+  api.get(`/api/bm/financialManage/usds/account`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.findUSDSRechargeRecord = findUSDSRechargeRecord
+
+// 财务管理--USDS充值--账户充值
+const recordRecharge = function (data, success, error) {
+  api.post(`api/bm/financialManage/usds/recharge`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+finance.recordRecharge = recordRecharge
+
 export default finance
