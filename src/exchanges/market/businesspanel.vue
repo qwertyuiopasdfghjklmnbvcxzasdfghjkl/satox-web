@@ -19,7 +19,7 @@
             <!-- <li class="tab-item" :class="{selected:isShow && active==='market'}" @click="switchTab('market')">
               {{$t('exchange.exchange_market')}}
             </li> -->
-            <li class="procedure-item" v-if="isShow">{{$t('public.fee_rate')}}：{{rateData || 0.01}}%<!--手续费率--></li>
+            <li class="procedure-item" v-if="isShow">{{$t('public.fee_rate')}}：{{rateData}}%<!--手续费率--></li>
         </ul>
         <div class="business-panel-form" v-show="isShow">
             <div class="business-panel-left">
