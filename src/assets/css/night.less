@@ -74,6 +74,7 @@
     .top {margin-top: -10px; margin-right: -10px; padding-top: 10px; margin-bottom: 0; padding-bottom: 10px; padding-right: 10px;}
     .list {width: auto; padding-left: 0; margin-right: -10px;}
     .list li {padding-right: 10px;}
+    .list li:hover {background-color: rgba(255,255,255, .1);}
     .lastprice {background-color: transparent;}
     .lastdeal .title {margin-top: -10px; margin-left: -10px; margin-right: -10px; padding: 10px; margin-bottom: 0; color: #B38C48;}
     .list-header, .list-header-item {color: #9C7C48!important;}
@@ -89,6 +90,8 @@
     .list-item.ask{background-image:url(../images/depth-bid-bg-night.png);}
     .list-item.bid{background-image:url(../images/depth-ask-bg-night.png);}
     .panel .list-header {margin-top: 0;}
+    .col-operate div:first-of-type .cancel {color: #BA8D35;}
+    .col-operate div:first-of-type .cancel:hover {color: #a07a2e;}
   }
   /deep/ .login {
     .login-container {
@@ -219,10 +222,10 @@
     .delegate .filtrate .disabled:hover i,
     .curreny .filtrate .disabled:hover a,
     .curreny .filtrate .disabled:hover i{color: #999;}
-    .delegate h3, .curreny h3  {border: none; background-color: #1D1814; color: #BA8D35;}
+    .delegate h3, .curreny h3  {border: none; border-bottom: 1px solid #5F543D; background-color: #1D1814; color: #BA8D35;}
     .message-title select {color: #BA8D35;}
-    .message-title a{color: #BA8D35;}
-    .message-title a:hover{color: #a07a2e;}
+    .message-title a, .delegate .record ul li.list span.operation a {color: #BA8D35;}
+    .message-title a:hover, .delegate .record ul li.list span.operation a:hover {color: #a07a2e;}
     .message-title a.disabled{color: #999;}
     .message-title a.disabled:hover{color: #999;}
     .message-nodata, .curreny .record {background-color: transparent;}
@@ -231,10 +234,10 @@
     .message-item.markread .message-item-title .main::before {background-color:#BA8D35;}
     .message-item-title .main::before {background-color:#BA8D35;}
     .message-item-cont .inner{background-color: #5F543D; color: #999;}
-    .recharge ul.header {background-color: #1D1814; }
-    .recharge ul.header li span {color: #BA8D35;}
-    .recharge ul li {border-bottom-color: #5F543D;}
-    .recharge ul li span, .authentication .tab-item {color: #fff;}
+    .recharge ul.header, .delegate .record ul.header {background-color: #1D1814; }
+    .recharge ul.header li span, .delegate .entrust-current ul.header li span, .delegate .record ul.header li span {color: #BA8D35;}
+    .recharge ul li, .delegate .entrust-current ul li, .delegate .record ul li {border-bottom-color: #5F543D;}
+    .recharge ul li span, .authentication .tab-item, .delegate .entrust-current ul li span, .delegate .record ul li span {color: #fff;}
     .depositBox .filed input.adressName, .form-row .row-text, .form-row .row-select {border-color: rgba(186,141,53,0.5); background-color: rgba(186,141,53,0.2);}
     .authentication .tab {border-bottom: none; background-color: #000;}
     .authentication .tab-item.active {border-bottom-color: #BA8D35;}
