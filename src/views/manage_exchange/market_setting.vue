@@ -93,6 +93,16 @@
           <Button type="primary" @click="tabs('minPlaceOrderQuantity')">保存</Button>
         </Col>
       </Row>
+      <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+        <Col span="6">固定价格</Col>
+        <Col span="6">{{item.fixedPrice || 0}}</Col>
+        <Col span="6">
+          <InputNumber style="width:113px;" v-model="fixedPrice"></InputNumber>
+        </Col>
+        <Col span="6" style="text-align:right;">
+          <Button type="primary" @click="tabs('fixedPrice')">保存</Button>
+        </Col>
+      </Row>
     </Card>
 </template>
 
@@ -112,6 +122,7 @@ export default {
       minPlaceOrderQuantity: null,
       currencySymbol: '',
       baseSymbol: '',
+      fixedPrice: '',
       openingPrice: null
     }
   },
@@ -131,7 +142,7 @@ export default {
         })
     },
     tabs(propName) {
-        if (!this[propName]) {
+        if (!this[propName] && this[propName] !== 0) {
           this.$Message.error({content: '请输入值'})
           return
         }
