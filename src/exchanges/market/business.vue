@@ -5,7 +5,7 @@
                 <div class="formel price-balance">
                     {{isBuy ? baseSymbol : currentSymbol}}
                     {{$t('exchange.exchange_balance')}}<!--余额-->：
-                    {{toFixed(isBuy ? toBalance.availableBalance : fromBalance.availableBalance).toMoney()}}
+                    {{toFixed(isBuy ? toBalance.availableBalance : (currentSymbol+baseSymbol !== 'SATOUSDS' ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
                 </div>
                 <div class="formel price">
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
@@ -447,8 +447,8 @@ export default {
         }
       } else if (this.tradeType === 'sell') {
         direction = 2 // 卖
-        balance = this.fromBalance.availableBalance // 金额
-        fromAccountId = this.fromBalance.accountId // 帐号id
+        balance = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
+        fromAccountId = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
         toAccountId = this.toBalance.accountId // 帐号id
         if (numUtils.BN(amount).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
@@ -465,7 +465,7 @@ export default {
         direction: direction // 1买 2卖
       }
 
-      if (this.active === 'limit' && this.tradeType === 'sell' && numUtils.BN(this.formData.price).lt(numUtils.mul(this.getLast24h.close, 0.95))) {
+      /*if (this.active === 'limit' && this.tradeType === 'sell' && numUtils.BN(this.formData.price).lt(numUtils.mul(this.getLast24h.close, 0.95))) {
         // 您委托价格低于最新成交价5%，是否确认下单？
         Vue.$confirmDialog({
           content: this.$t('public.entrustment_price_lower_5'),
@@ -483,7 +483,7 @@ export default {
           }
         })
         return
-      }
+      }*/
       this.okCallback(data)
     },
     okCallback (data) {

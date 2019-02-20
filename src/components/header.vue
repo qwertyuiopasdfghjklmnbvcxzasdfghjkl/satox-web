@@ -412,7 +412,7 @@ export default {
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}
 .header-center .center-right > ul > li > a{padding-left: 6px;padding-right: 26px;font-size:14px;cursor: pointer;color:#FFFFFF;}
-.header-center .center-right > ul > li > a:hover{color: #3283FF;}
+.header-center .center-right > ul > li > a:hover{color: #BA8D35;}
 .header-center .center-right ul li.translations{position: relative;margin-left: 18px;}
 .header-center .center-right ul li.translations a{display: block;height: 22px;padding-left: 0;padding-right: 0;line-height: 22px;font-size: 14px;color: #FFFFFF;text-align: center;border-radius: 12px;margin-top:1px;}
 .header-center .center-right ul li.translations a:hover,
@@ -425,7 +425,7 @@ export default {
 .header-center .center-right ul li.message{position: relative;margin-left: 0;}
 .header-center .center-right ul li.message > a{display: block;position: relative;
   height: 20px;padding-left: 0; padding-right: 0;margin-top: 2px;line-height: 20px;font-size: 20px;}
-.header-center .center-right ul li.message > a.unfold{color: #3283FF;}
+.header-center .center-right ul li.message > a.unfold{color: #BA8D35;}
 .header-center .center-right ul li.message > a em{position: absolute;top: -5px;left: 11px;min-width: 6px;height: 12px;padding-left: 3px;padding-right: 3px;line-height: 10px;font-size: 12px;color: #fff;background-color: #e2261c;border-radius: 5px;}
 .header-center .center-right > ul.minWidth{display:none;}
 .header .minWidthList{position:absolute;z-index:1000;left:-100%;top:60px;width:100%;background:#222121;display:none;flex-direction:column;height:fit-content;transition:0.3s;}
