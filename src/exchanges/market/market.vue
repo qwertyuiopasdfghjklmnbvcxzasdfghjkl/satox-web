@@ -29,11 +29,11 @@
                         <font class="list1-price">
                           {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
                         </font>
-                        <font class="list1-amount">
-                          <!-- <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> -->
+                        <!-- <font class="list1-amount">
+                          <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> 
                           <i></i>
-                        </font>
-                        <font class="list1-amount">
+                        </font> -->
+                        <font class="list1-amount" style="margin-top: 5px;">
                           vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
                         </font>
                       </span>
