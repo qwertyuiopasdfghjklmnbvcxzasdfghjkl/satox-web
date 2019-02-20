@@ -3,7 +3,21 @@
         <div class="header-fixed">
         <div class="header-center" :class="{'full-screen': $route.name === 'exchange_index2' || $route.name === 'exchange_index'}">
             <a class="logo" href="javascript:;" @click="goHome"></a>
-            <div class="center-left"></div>
+            <div class="center-left">
+              <ul class="maxWidth">
+                  <li>
+                    <a @click="reloadPage('exchange_index')" :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
+                      {{$t('public.navigation_exchange')}}<!--币币交易-->
+                    </a>
+                  </li>
+                  <!--APP下载-->
+                  <!-- <li>
+                    <router-link :to="{name:'download'}">
+                      {{$t('public0.public212')}}
+                    </router-link>
+                  </li> -->
+              </ul>
+            </div>
             <div class="center-right">
                 <ul class="minWidth">
                   <li>
@@ -112,11 +126,12 @@
               {{$t('public.navigation_support')}}
             </a>
           </li> -->
-          <li>
+          <!--APP下载-->
+          <!-- <li>
             <router-link :to="{name:'download'}">
-              {{$t('public0.public212')}}<!--APP下载-->
+              {{$t('public0.public212')}}
             </router-link>
-          </li>
+          </li> -->
           <li v-if="!isLogin">
             <a href="javascript:;" @click="registerDialog">
               {{$t('public.navigation_register')}}<!--注册-->
@@ -408,6 +423,12 @@ export default {
 .header-center{display: flex;justify-content: space-between;align-items: center;height: 70px;margin-left: 20px;margin-right: 20px;transition: width .2s ease-out; position: relative;}
 .header-center.full-screen{box-sizing: border-box;min-width:1200px;width: 100%;padding-left: 20px;padding-right: 10px;}
 .header-center a.logo{position: absolute; width: 151px;height: 50px;background: url(../assets/images/logo.png) no-repeat center center;background-size:contain; background-position: center;}
+.header-center .center-left{display: flex;align-items: center; margin-left: 200px;}
+.header-center .center-left > ul{height: 24px;}
+.header-center .center-left > ul li{float: left;margin-left: 12px;height: 24px;line-height: 24px;}
+.header-center .center-left > ul li:first-of-type{margin-left: 54px;}
+.header-center .center-left > ul li a{padding-left: 6px;padding-right: 6px;font-size: 14px;color: #FFFFFF;cursor: pointer;}
+.header-center .center-left > ul li a:hover,.header-center .center-left > ul li a.current{color: #3283FF;}
 .header-center .center-right{display: flex;align-items: center;}
 .header-center .center-right > ul{height: 24px;}
 .header-center .center-right > ul > li{float: right;margin-left: 12px;height: 24px;line-height: 24px;}

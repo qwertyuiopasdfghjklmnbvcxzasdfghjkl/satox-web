@@ -162,7 +162,7 @@ export default {
       }
       if (res && res.type === 'updateData') {
         let temp = {}, temp2 = {}
-        res.data.forEach((item) => {
+        res.data[0].forEach((item) => {
           temp[item.accountName] = item
         })
         this.datas.forEach((item) => {
@@ -174,7 +174,7 @@ export default {
           }
         })
 
-        res.tradeAct.forEach((item) => {
+        res.data[1].forEach((item) => {
           temp2[item.accountName] = item
         })
         this.tradeAct.forEach((item) => {
