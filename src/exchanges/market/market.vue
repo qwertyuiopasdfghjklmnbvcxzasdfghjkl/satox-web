@@ -30,7 +30,8 @@
                           {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
                         </font>
                         <font class="list1-amount">
-                          <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i>
+                          <!-- <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> -->
+                          <i></i>
                         </font>
                         <font class="list1-amount">
                           vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}

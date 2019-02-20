@@ -15,9 +15,9 @@
                         <input v-if="isMarket" class="formel-textbox" :value="$t('exchange.exchange_market_price')" type="text" readonly="readonly"/>
                         <em class="tip-title" ref="tipBaseSymbol">{{baseSymbol}}</em>
                         <arrows v-if="false" :disabled="isMarket" :fixedNumber="fixedNumber" v-model="formData.price"/>
-                        <em v-show="isShowPrice" class="error-tip icon-arrow-down">
+                        <!-- <em v-show="isShowPrice" class="error-tip icon-arrow-down">
                           <i><valuation :lastPrice="formData.price" :baseSymbol="baseSymbol"/></i>
-                        </em>
+                        </em> -->
                     </div>
                 </div>
                 <div class="formel amount">
@@ -34,9 +34,9 @@
                         <numberbox ref="total" :style="baseStyle" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.total" />
                         <em class="tip-title">{{baseSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.total"/>
-                        <em v-show="isShowTotal" class="error-tip icon-arrow-down">
+                        <!-- <em v-show="isShowTotal" class="error-tip icon-arrow-down">
                           <i><valuation :lastPrice="formData.total" :baseSymbol="baseSymbol"/></i>
-                        </em>
+                        </em> -->
                     </div>
                 </div>
                 <div ref="percent" class="percent">

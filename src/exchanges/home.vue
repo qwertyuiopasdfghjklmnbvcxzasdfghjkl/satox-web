@@ -11,14 +11,15 @@
                   <li class="last-item">
                     <img class="symbol-icon" :src="iconUrl"/>
                     <span>{{currentSymbol}}/{{baseSymbol}}</span>
-                    <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em>
+                    <!-- <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em> -->
+                    <em></em>
                   </li>
                 </ul>
                 <ul class="top-left-header-right">
                   <li class="last-item">
                     <span class="last-price market-symbol" :class="[(getLast24h.direction===1  || getLast24h.direction===0) ? 'font-green':'font-red']">
                       {{toFixed(getLast24h.close)}}
-                      <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font>
+                      <!-- <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font> -->
                     </span>
                   </li>
                   <li class="last-item last-change">
