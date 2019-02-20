@@ -209,7 +209,7 @@ export default {
             name: 'balanceEvent',
             params: {
               type: 'updateData',
-              data: res.data
+              data: [res.data, res.tradeAct]
             }
           })
         } else if (res.dataType === 'LastUserOrderBook') {
