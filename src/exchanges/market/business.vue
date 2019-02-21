@@ -342,14 +342,14 @@ export default {
         return
       }
       this.changeInput = type
-      if (type === 'total' && numUtils.BN(this.formData.price).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.formData.price))
+      if (type === 'total' && numUtils.BN(this.fixedPrice).gt(0)) {
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
       } else if (type === 'total' && numUtils.BN(this.formData.amount).gt(0)) {
         this.formData.price = this.toFixed(numUtils.div(this.formData.total, this.formData.amount))
-      } else if (numUtils.BN(this.formData.price).gt(0) && numUtils.BN(this.formData.amount).gt(0)) {
-        this.formData.total = this.toFixed(numUtils.mul(this.formData.price, this.formData.amount))
-      } else if (numUtils.BN(this.formData.price).gt(0) && numUtils.BN(this.formData.total).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.formData.price))
+      } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.amount).gt(0)) {
+        this.formData.total = this.toFixed(numUtils.mul(this.fixedPrice, this.formData.amount))
+      } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.total).gt(0)) {
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
       } else {
         this.changeInput = ''
       }
