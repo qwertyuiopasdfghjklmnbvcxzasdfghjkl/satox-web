@@ -103,6 +103,16 @@
           <Button type="primary" @click="tabs('fixedPrice')">保存</Button>
         </Col>
       </Row>
+      <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+        <Col span="6">自动委托笔数</Col>
+        <Col span="6">{{item.autoEntrustCount || 0}}</Col>
+        <Col span="6">
+          <InputNumber style="width:113px;" v-model="autoEntrustCount"></InputNumber>
+        </Col>
+        <Col span="6" style="text-align:right;">
+          <Button type="primary" @click="tabs('autoEntrustCount')">保存</Button>
+        </Col>
+      </Row>
     </Card>
 </template>
 
@@ -123,6 +133,7 @@ export default {
       currencySymbol: '',
       baseSymbol: '',
       fixedPrice: '',
+      autoEntrustCount: 0,
       openingPrice: null
     }
   },
