@@ -40,6 +40,12 @@
         <FormItem label="最小交易数量" prop="minPlaceOrderQuantity">
             <InputNumber style="width:100%;" v-model="formLeft.minPlaceOrderQuantity" name="minPlaceOrderQuantity"></InputNumber>
         </FormItem>
+         <FormItem label="固定价格" prop="fixedPrice">
+             <InputNumber style="width:100%;" v-model="formLeft.fixedPrice" name="fixedPrice"></InputNumber>
+         </FormItem>
+         <FormItem label="自动委托笔数" prop="autoEntrustCount">
+             <InputNumber style="width:100%;" v-model="formLeft.autoEntrustCount" name="autoEntrustCount"></InputNumber>
+         </FormItem>
         <Button type="primary" @click="getAddMarket()">添加</Button>
     </Form>
     </Card>
@@ -68,7 +74,9 @@ export default {
         digit: null,
         minPlaceOrderAmount: null,
         minPlaceOrderQuantity: null,
-        state:  '2'
+        state:  '2',
+        fixedPrice: '',
+        autoEntrustCount: 0
       },
        ruleInline: {
             market: [
