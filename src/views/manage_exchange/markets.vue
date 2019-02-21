@@ -171,6 +171,14 @@ export default {
               key: 'minPlaceOrderQuantity2'
           },
           {
+              title: '固定价格',
+              key: 'fixedPrice'
+          },
+          {
+              title: '自动委托笔数',
+              key: 'autoEntrustCount'
+          },
+          {
               title: '操作',
               key: 'address',
               render: (h, params) => {
