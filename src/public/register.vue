@@ -111,12 +111,39 @@ export default {
       }
     },
     getAgreementUrl () {
-      // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
-      //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
-      // } else {
-      //   return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
-      // }
-      return '#'
+      let URL = ''
+      switch(this.getLang){
+          case 'zh-CN':
+            URL = 'https://www.satox.io/scn/terms.html'
+            break
+          case 'cht':
+            URL = 'https://www.satox.io/tcn/terms.html'
+            break
+          case 'ko':
+            URL = 'https://www.satox.io/kn/terms.html'
+            break
+          case 'ja':
+            URL = 'https://www.satox.io/jpn/terms.html'
+            break
+          case 'ar':
+            URL = 'https://www.satox.io/ar/terms.html'
+            break
+          case 'de':
+            URL = 'https://www.satox.io/gn/terms.html'
+            break
+          case 'es':
+            URL = 'https://www.satox.io/spn/terms.html'
+            break
+          case 'fr':
+            URL = 'https://www.satox.io/fr/terms.html'
+            break
+          case 'it':
+            URL = 'https://www.satox.io/itl/terms.html'
+            break
+          default:
+            URL = 'https://www.satox.io/terms.html'
+      }
+      return URL
     }
   },
   watch: {
