@@ -119,10 +119,10 @@ export default {
           case 'cht':
             URL = 'https://www.satox.io/tcn/terms.html'
             break
-          case 'ko':
+          case 'kr':
             URL = 'https://www.satox.io/kn/terms.html'
             break
-          case 'ja':
+          case 'jp':
             URL = 'https://www.satox.io/jpn/terms.html'
             break
           case 'ar':
