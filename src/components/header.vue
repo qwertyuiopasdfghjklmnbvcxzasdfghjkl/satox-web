@@ -179,13 +179,13 @@ export default {
         {id: 'en', name: 'English', n: 4},
         {id: 'cht', name: '中文繁體', n: 2},
         {id: 'zh-CN', name: '中文简体', n: 2},
-        {id: 'ko', name: '한국어', n: 4},
-        {id: 'ja', name: '日本語', n: 2},
+        {id: 'kr', name: '한국어', n: 4},
+        {id: 'jp', name: '日本語', n: 2},
         {id: 'ar', name: 'العربية', n: 4},
         {id: 'de', name: 'Deutsch', n: 4},
         {id: 'es', name: 'Español', n: 4},
-        {id: 'fr', name: 'Le français', n: 4},
-        {id: 'it', name: 'lingua italiana', n: 4},
+        {id: 'fr', name: 'Français', n: 4},
+        {id: 'it', name: 'Italiana', n: 4},
         // {id: 'th', name: 'ไทย', n: 4},
         // {id: 'ru', name: 'русский', n: 4}
       ]

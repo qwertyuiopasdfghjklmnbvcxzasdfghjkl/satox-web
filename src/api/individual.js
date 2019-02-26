@@ -299,10 +299,10 @@ const sendAuthSMSCode = function (data, success, error) {
     case 'cht':
       lang = 'CNZH'
       break
-    case 'ko':
+    case 'kr':
       lang = 'KO'
       break
-    case 'ja':
+    case 'jp':
       lang = 'JA'
       break
     case 'ar':
