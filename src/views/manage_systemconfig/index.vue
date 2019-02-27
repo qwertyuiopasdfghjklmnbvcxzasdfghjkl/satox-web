@@ -115,6 +115,10 @@ export default {
                     key: 'coinReserve'
                 },
                 {
+                  title: '矿工费币种',
+                  key: 'minerSymbol'
+                },
+                {
                     title: 'BTC矿工费',
                     key: 'minerFee'
                 },
@@ -374,7 +378,7 @@ export default {
             }
           })
         }
-        
+
       }
       value = code === 'otcCoinType' ? nValues.join(',') : value
       system.saveSysParam({
