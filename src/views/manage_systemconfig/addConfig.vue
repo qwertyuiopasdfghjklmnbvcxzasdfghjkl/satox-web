@@ -12,7 +12,10 @@
                 <FormItem label="保留金额" prop="coinReserve">
                     <Input type="text" v-model="formValidate.coinReserve"></Input>
                 </FormItem>
-                <FormItem label="旷工费" prop="minerFee" v-if="formValidate.symbolType !== '2'">
+                <FormItem label="旷工费币种" prop="minerSymbol">
+                    <Input type="text" v-model="formValidate.minerSymbol"></Input>
+                </FormItem>
+                <FormItem label="旷工费数量" prop="minerFee" v-if="formValidate.symbolType !== '2'">
                     <Input type="text" v-model="formValidate.minerFee" style="width:100%;"></Input>
                 </FormItem>
                 <FormItem label="GASPrice" prop="gasPrice" v-if="formValidate.symbolType === '2'">
@@ -74,6 +77,7 @@ export default {
                 symbol: '',
                 coinMin:null,
                 coinReserve: null,
+                minerSymbol: null,
                 minerFee:null,
                 gasPrice:null,
                 gasLimit:null,
@@ -89,6 +93,9 @@ export default {
                 ],
                 coinReserve: [
                     { required: true, message: '请输入保留金额', trigger: 'blur' }
+                ],
+                minerSymbol: [
+                    { required: true, message: '请输入旷工费币种', trigger: 'blur' }
                 ],
                 minerFee: [
                     { required: true, message: '请输入矿工费', trigger: 'blur' }
@@ -124,6 +131,7 @@ export default {
                         symbol: this.formValidate.symbol,
                         coinMin: this.formValidate.coinMin,
                         coinReserve: this.formValidate.coinReserve,
+                        minerSymbol: this.formValidate.minerSymbol,
                         minerFee: this.formValidate.minerFee,
                         gasPrice: this.formValidate.gasPrice,
                         gasLimit: this.formValidate.gasLimit,
