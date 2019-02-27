@@ -66,6 +66,13 @@ export default {
                 key: 'symbol'
             },
             {
+                title: '钱包类型',
+                key: 'type',
+                render: (h, params) => {
+                    return h('div', params.row.type === 1 ? '主钱包' : '非主钱包');
+                }
+            },
+            {
                 title: '可用',
                 key: 'availableAmount'
             },
