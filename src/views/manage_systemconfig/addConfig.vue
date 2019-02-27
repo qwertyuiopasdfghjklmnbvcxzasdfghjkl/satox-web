@@ -119,11 +119,11 @@ export default {
             let form = this.$refs.formValidate;
             form.validate((valid) => {
                 if (valid) {
-                    if (this.formValidate.coinReserve > this.formValidate.coinMin) {
+                    if (Number(this.formValidate.coinReserve) > Number(this.formValidate.coinMin)) {
                         this.$Message.error({content: '保留金额要少于等于最小金额'})
                         return
                     }
-                    if (this.formValidate.coinReserve < this.formValidate.minerFee) {
+                    if (Number(this.formValidate.coinReserve) < Number(this.formValidate.minerFee)) {
                         this.$Message.error({content: '保留金额大于等于矿工费'})
                         return
                     }
