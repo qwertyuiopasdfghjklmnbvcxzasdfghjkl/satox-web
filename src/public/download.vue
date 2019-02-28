@@ -21,11 +21,11 @@
                         <!--安卓下载-->
                         <img src="../assets/images/download/android.png">{{$t('public0.public226')}}
                     </a>
-                    <div class="qrcode" ref="qrcode_ios"></div>
+                    <!--IOS下载-->
+                    <!-- <div class="qrcode" ref="qrcode_ios"></div>
                     <a class="button" :class="{en:getLang=='en'}" :href="ios" target="_blank">
-                        <!--IOS下载-->
                         <img src="../assets/images/download/iphone.png">{{$t('public0.public227')}}
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
@@ -37,12 +37,13 @@
 import Vue from 'vue'
 import {mapGetters} from 'vuex'
 import utils from '@/assets/js/utils'
+import config from '@/assets/js/config'
 export default {
   data () {
     return {
       isWeiXi: /MicroMessenger/i.test(window.navigator.userAgent),
-      apk:'#',
-      // apk:'https://www.cdcc.ink/static/cdcc-release-1.0.1.apk',
+      // apk:'#',
+      apk:`${config.origin}/static/satox-release-1.0.1.apk`,
       ios:'#'
       // ios:'https://www.pgyer.com/68kt'
     }
@@ -85,10 +86,10 @@ export default {
 
 }
 .download .banner1 .content{min-width:1200px;}
-.download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#fff;}
+.download .banner1 .content .title1{font-size:50px;font-weight:bold;color:#D79802;}
 .download .banner1 .content .title2{font-size:28px;font-weight:normal;color:#CCCCCC;line-height:73px;}
 .download .banner1 .content .buttons .button{
-    display: block; text-align: center; width:320px;height:70px; line-height: 70px; cursor: pointer; color:#FFF;font-size:24px; background-color: rgba(4,114,233,0.6); border-radius: 4px; margin-top: 30px;
+    display: block; text-align: center; width:320px;height:70px; line-height: 70px; cursor: pointer; color:#FFF;font-size:24px; background-color: rgba(215,152,2,0.6); border-radius: 4px; margin-top: 30px;
 }
 .download .banner1 .content .buttons .button img{ vertical-align: middle; margin-right: 20px; }
 .download .banner1 .content .buttons .button.en{font-size:18px;}

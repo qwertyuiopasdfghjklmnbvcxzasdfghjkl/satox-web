@@ -11,11 +11,11 @@
                     </a>
                   </li>
                   <!--APP下载-->
-                  <!-- <li>
-                    <router-link :to="{name:'download'}">
+                  <li>
+                    <router-link :to="{name:'download'}" :class="{'current':$route.name==='download'}">
                       {{$t('public0.public212')}}
                     </router-link>
-                  </li> -->
+                  </li>
               </ul>
             </div>
             <div class="center-right">
