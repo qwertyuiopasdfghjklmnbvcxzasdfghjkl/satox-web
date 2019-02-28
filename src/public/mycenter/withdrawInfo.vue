@@ -10,7 +10,7 @@
             <div class="f-fl">
                 <div class="filed" v-if="symbol==='USDS'">
                     <em>
-                        {{$t('public.account_info').format(symbol)}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
+                        {{$t('public.account_info')}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
                     </em>
                     <div class="bank-info" style="position:relative;">
                         <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankCountryCode" v-model="userBankInfo.bankCountryCode" :placeholder="$t('public.state_bank')" :class="{error:errors.has('bankCountryCode')}"/>
