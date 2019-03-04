@@ -127,11 +127,11 @@
             </a>
           </li> -->
           <!--APP下载-->
-          <!-- <li>
+          <li>
             <router-link :to="{name:'download'}">
               {{$t('public0.public212')}}
             </router-link>
-          </li> -->
+          </li>
           <li v-if="!isLogin">
             <a href="javascript:;" @click="registerDialog">
               {{$t('public.navigation_register')}}<!--注册-->
