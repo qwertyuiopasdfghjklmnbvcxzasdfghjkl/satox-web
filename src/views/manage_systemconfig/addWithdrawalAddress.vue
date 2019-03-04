@@ -1,29 +1,38 @@
-<!-- 系统参数 -->
 <template>
     <Card>
-        <p slot="title">币币交易参数</p>
-            <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
-                <Col span="6">项目</Col>
-                <Col span="6">现状</Col>
-                <Col span="12">修改</Col>
-            </Row>
-            <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 1"
-                 :key="data.id">
-                <Col span="6">{{data.codeDesc}}</Col>
-                <Col span="6" v-if="data.code !== 'loginLockCount'">{{data.value}}</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value}}次</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value2}}分钟</Col>
-                <Col span="12" v-if="data.code === 'loginLockCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Input ref="price" type="text" v-model="data.$value2" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">修改</Button>
-                </Col>
-                <Col span="12"
-                     v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !== 'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
-                </Col>
-            </Row>
+        <p slot="title">添加特殊账户地址参数设置</p>
+        <Card>
+            <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
+                <span style="height:32px;font-weight:normal;line-height:32px;">交易所手续费账户</span>
+                <span>
+              <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字"
+                     style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+            </span>
+                <Button type="primary" style="float:right;" @click="addOrEditFeeAccountDialog">添加手续费账户</Button>
+            </p>
+            <Table :columns="accountsColumns" :data="accountsData" style="margin-top:10px;"></Table>
+            <Page :current="accountsPage.currentPage" :total="accountsPage.total"
+                  @on-change="changePage(arguments[0], 1)" style="text-align:center;margin-top:20px;"></Page>
+        </Card>
+        <Card style="margin-top:16px;">
+            <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
+                <span style="height:32px;font-weight:normal;line-height:32px;">提币主地址设置</span>
+                <span>
+              <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字"
+                     style="width:auto;margin-left:28px;"></Input>
+              <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
+              <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+            </span>
+                <Button type="primary" style="float:right;" @click="addOrEditWithdrawalAddressDialog">添加提币主地址
+                </Button>
+            </p>
+            <Table :columns="coinPoolsColumns" :data="coinPoolsData" style="margin-top:10px;"></Table>
+            <Page :current="coinPoolsPage.currentPage" :total="coinPoolsPage.total"
+                  @on-change="changePage(arguments[0], 2)" style="text-align:center;margin-top:20px;"></Page>
+        </Card>
+
     </Card>
 </template>
 
@@ -426,8 +435,6 @@
     };
 </script>
 
-<style lang="less">
-    input[type="file"] {
-        line-height: 26px;
-    }
+<style scoped>
+
 </style>

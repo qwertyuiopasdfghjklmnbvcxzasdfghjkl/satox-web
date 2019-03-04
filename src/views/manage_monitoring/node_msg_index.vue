@@ -3,12 +3,12 @@
         <Card>
             <p slot="title" >比特币同步区块数</p>
             <Table :columns="columns2" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
          <Card style="margin-top:30px;">
             <p slot="title" >以太坊同步区块数</p>
             <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card style="margin-top:30px;">
             <p slot="title" >OMNI同步区块数</p>
@@ -82,6 +82,10 @@ import monitApi from '../../api/monitoring'
                     {
                         title: '同步区块差值',
                         key: 'difference'
+                    },
+                    {
+                        title: '已扫描与网络差值',
+                        key: 'scanOnlineDifference'
                     }
                 ],
                 data2: []

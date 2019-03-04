@@ -6,7 +6,9 @@ export const loginRouter = {
     meta: {
         title: 'Login - 登录'
     },
-    component: resolve => { require(['./views/login.vue'], resolve); }
+    component: resolve => {
+        require(['./views/login.vue'], resolve);
+    }
 };
 
 export const page404 = {
@@ -15,7 +17,9 @@ export const page404 = {
     meta: {
         title: '404-页面不存在'
     },
-    component: resolve => { require(['./views/error_page/404.vue'], resolve); }
+    component: resolve => {
+        require(['./views/error_page/404.vue'], resolve);
+    }
 };
 
 export const page401 = {
@@ -24,7 +28,9 @@ export const page401 = {
         title: '401-权限不足'
     },
     name: 'error_401',
-    component: resolve => { require(['./views/error_page/401.vue'], resolve); }
+    component: resolve => {
+        require(['./views/error_page/401.vue'], resolve);
+    }
 };
 
 export const page500 = {
@@ -33,7 +39,9 @@ export const page500 = {
         title: '500-服务端错误'
     },
     name: 'error_500',
-    component: resolve => { require(['./views/error_page/500.vue'], resolve); }
+    component: resolve => {
+        require(['./views/error_page/500.vue'], resolve);
+    }
 };
 
 export const otherRouter = {
@@ -42,22 +50,38 @@ export const otherRouter = {
     redirect: '/home',
     component: Main,
     children: [
-        { path: 'home', title: '首页', name: 'home_index', component: resolve => { require(['./views/home/home.vue'], resolve); } },
-        { path: 'ownspace', title: '修改密码', name: 'ownspace_index', component: resolve => { require(['./views/own-space/own-space.vue'], resolve); } },
-        { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['./views/message/message.vue'], resolve); } }
+        {
+            path: 'home', title: '首页', name: 'home_index', component: resolve => {
+                require(['./views/home/home.vue'], resolve);
+            }
+        },
+        {
+            path: 'ownspace', title: '修改密码', name: 'ownspace_index', component: resolve => {
+                require(['./views/own-space/own-space.vue'], resolve);
+            }
+        },
+        {
+            path: 'message', title: '消息中心', name: 'message_index', component: resolve => {
+                require(['./views/message/message.vue'], resolve);
+            }
+        }
     ]
 };
 
 export const preview = {
     path: '/preview',
     name: 'preview',
-    component: resolve => { require(['./views/form/article-publish/preview.vue'], resolve); }
+    component: resolve => {
+        require(['./views/form/article-publish/preview.vue'], resolve);
+    }
 };
 
 export const locking = {
     path: '/locking',
     name: 'locking',
-    component: resolve => { require(['./views/main_components/locking-page.vue'], resolve); }
+    component: resolve => {
+        require(['./views/main_components/locking-page.vue'], resolve);
+    }
 };
 
 export const kycRouter = [
@@ -66,11 +90,15 @@ export const kycRouter = [
         name: 'kycauditing',
         title: 'KYC审核',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_AUDIT', 'ROLE_KYC_RECHECK'],
         },
         children: [
-            { path: 'index', title: 'KYC审核', name: 'kycauditing_index', component: resolve => { require(['./views/manage_kyc/auditing.vue'], resolve); } }
+            {
+                path: 'index', title: 'KYC审核', name: 'kycauditing_index', component: resolve => {
+                    require(['./views/manage_kyc/auditing.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -78,11 +106,15 @@ export const kycRouter = [
         name: 'kyccheck',
         title: 'KYC复核',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_RECHECK'],
         },
         children: [
-            { path: 'index', title: 'KYC复核', name: 'kyccheck_index', component: resolve => { require(['./views/manage_kyc/check.vue'], resolve); } }
+            {
+                path: 'index', title: 'KYC复核', name: 'kyccheck_index', component: resolve => {
+                    require(['./views/manage_kyc/check.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -90,11 +122,15 @@ export const kycRouter = [
         name: 'kycmanage',
         title: 'KYC管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_RECHECK'],
         },
         children: [
-            { path: 'index', title: 'KYC管理', name: 'kycmanage_index', component: resolve => { require(['./views/manage_kyc/manage.vue'], resolve); } }
+            {
+                path: 'index', title: 'KYC管理', name: 'kycmanage_index', component: resolve => {
+                    require(['./views/manage_kyc/manage.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -105,11 +141,15 @@ export const otcRouter = [
         name: 'otc_data_statistics',
         title: '数据统计',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '数据统计', name: 'otc_data_statistics_index', component: resolve => { require(['./views/manage_otc/data_statistics.vue'], resolve); } }
+            {
+                path: 'index', title: '数据统计', name: 'otc_data_statistics_index', component: resolve => {
+                    require(['./views/manage_otc/data_statistics.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -117,11 +157,15 @@ export const otcRouter = [
         name: 'otc_merchant_review',
         title: '商家审核',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '商家审核', name: 'otc_merchant_review_index', component: resolve => { require(['./views/manage_otc/merchant_review.vue'], resolve); } }
+            {
+                path: 'index', title: '商家审核', name: 'otc_merchant_review_index', component: resolve => {
+                    require(['./views/manage_otc/merchant_review.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -129,11 +173,15 @@ export const otcRouter = [
         name: 'otc_users',
         title: '用户管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '用户管理', name: 'otc_users_index', component: resolve => { require(['./views/manage_otc/users.vue'], resolve); } }
+            {
+                path: 'index', title: '用户管理', name: 'otc_users_index', component: resolve => {
+                    require(['./views/manage_otc/users.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -141,11 +189,15 @@ export const otcRouter = [
         name: 'otc_ads',
         title: '广告管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '广告管理', name: 'otc_ads_index', component: resolve => { require(['./views/manage_otc/ads.vue'], resolve); } }
+            {
+                path: 'index', title: '广告管理', name: 'otc_ads_index', component: resolve => {
+                    require(['./views/manage_otc/ads.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -153,11 +205,15 @@ export const otcRouter = [
         name: 'otc_orders',
         title: '订单管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '订单管理', name: 'otc_orders_index', component: resolve => { require(['./views/manage_otc/orders.vue'], resolve); } }
+            {
+                path: 'index', title: '订单管理', name: 'otc_orders_index', component: resolve => {
+                    require(['./views/manage_otc/orders.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -165,11 +221,15 @@ export const otcRouter = [
         name: 'otc_appeals',
         title: '申诉管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '申诉管理', name: 'otc_appeals_index', component: resolve => { require(['./views/manage_otc/appeals.vue'], resolve); } }
+            {
+                path: 'index', title: '申诉管理', name: 'otc_appeals_index', component: resolve => {
+                    require(['./views/manage_otc/appeals.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -177,11 +237,15 @@ export const otcRouter = [
         name: 'otc_auditing',
         title: '审核管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OTC_AUDIT'],
         },
         children: [
-            { path: 'index', title: '审核管理', name: 'otc_auditing_index', component: resolve => { require(['./views/manage_otc/auditing.vue'], resolve); } }
+            {
+                path: 'index', title: '审核管理', name: 'otc_auditing_index', component: resolve => {
+                    require(['./views/manage_otc/auditing.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -192,11 +256,15 @@ export const communityRouter = [
         name: 'community_users',
         title: '社区管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '社区用户管理', name: 'community_users_index', component: resolve => { require(['./views/community/users.vue'], resolve); } }
+            {
+                path: 'index', title: '社区用户管理', name: 'community_users_index', component: resolve => {
+                    require(['./views/community/users.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -207,11 +275,15 @@ export const voteRouter = [
         name: 'vote_data_count',
         title: '数据统计',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '数据统计', name: 'vote_data_count_index', component: resolve => { require(['./views/vote/index.vue'], resolve); } }
+            {
+                path: 'index', title: '数据统计', name: 'vote_data_count_index', component: resolve => {
+                    require(['./views/vote/index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -219,11 +291,15 @@ export const voteRouter = [
         name: 'vote_miner_query',
         title: '用户投票挖矿查询',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
         children: [
-            { path: 'index', title: '用户投票挖矿查询', name: 'vote_query_index', component: resolve => { require(['./views/vote/query.vue'], resolve); } }
+            {
+                path: 'index', title: '用户投票挖矿查询', name: 'vote_query_index', component: resolve => {
+                    require(['./views/vote/query.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -231,11 +307,15 @@ export const voteRouter = [
         name: 'vote_record',
         title: '投票记录',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
         children: [
-            { path: 'index', title: '投票记录', name: 'vote_record_index', component: resolve => { require(['./views/vote/vote.vue'], resolve); } }
+            {
+                path: 'index', title: '投票记录', name: 'vote_record_index', component: resolve => {
+                    require(['./views/vote/vote.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -243,11 +323,15 @@ export const voteRouter = [
         name: 'vote_miner_dispense',
         title: '挖矿分发记录',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
         children: [
-            { path: 'index', title: '挖矿分发记录', name: 'vote_dispense_index', component: resolve => { require(['./views/vote/dispense.vue'], resolve); } }
+            {
+                path: 'index', title: '挖矿分发记录', name: 'vote_dispense_index', component: resolve => {
+                    require(['./views/vote/dispense.vue'], resolve);
+                }
+            }
         ]
     },
 ];
@@ -258,11 +342,15 @@ export const exchangeRouter = [
         name: 'exchange_data_statistics',
         title: '数据统计',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '数据统计', name: 'exchange_data_statistics_index', component: resolve => { require(['./views/manage_exchange/data_statistics.vue'], resolve); } }
+            {
+                path: 'index', title: '数据统计', name: 'exchange_data_statistics_index', component: resolve => {
+                    require(['./views/manage_exchange/data_statistics.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -270,23 +358,31 @@ export const exchangeRouter = [
         name: 'exchange_users',
         title: '用户管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
         children: [
-            { path: 'index', title: '用户管理', name: 'exchange_users_index', component: resolve => { require(['./views/manage_exchange/users.vue'], resolve); } }
+            {
+                path: 'index', title: '用户管理', name: 'exchange_users_index', component: resolve => {
+                    require(['./views/manage_exchange/users.vue'], resolve);
+                }
+            }
         ]
     },
     {
         path: '/exchange_coins',
-        name: 'exchange_coins', 
+        name: 'exchange_coins',
         title: '币种管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '币种管理', name: 'exchange_coins_index', component: resolve => { require(['./views/manage_exchange/coins.vue'], resolve); } }
+            {
+                path: 'index', title: '币种管理', name: 'exchange_coins_index', component: resolve => {
+                    require(['./views/manage_exchange/coins.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -294,11 +390,15 @@ export const exchangeRouter = [
         name: 'exchange_markets',
         title: '交易市场管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '交易市场管理', name: 'exchange_markets_index', component: resolve => { require(['./views/manage_exchange/markets.vue'], resolve); } }
+            {
+                path: 'index', title: '交易市场管理', name: 'exchange_markets_index', component: resolve => {
+                    require(['./views/manage_exchange/markets.vue'], resolve);
+                }
+            }
         ]
     },
     // {
@@ -318,11 +418,15 @@ export const exchangeRouter = [
         name: 'exchange_address',
         title: '地址管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
         children: [
-            { path: 'index', title: '地址管理', name: 'exchange_address_index', component: resolve => { require(['./views/manage_exchange/exchange_address.vue'], resolve); } }
+            {
+                path: 'index', title: '地址管理', name: 'exchange_address_index', component: resolve => {
+                    require(['./views/manage_exchange/exchange_address.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -333,11 +437,15 @@ export const financeRouter = [
         name: 'finance_finance',
         title: '财务管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
         },
         children: [
-            { path: 'index', title: '财务管理', name: 'finance_finance_index', component: resolve => { require(['./views/manage_finance/finance.vue'], resolve); } }
+            {
+                path: 'index', title: '财务管理', name: 'finance_finance_index', component: resolve => {
+                    require(['./views/manage_finance/finance.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -345,11 +453,15 @@ export const financeRouter = [
         name: 'finance_withdraw',
         title: '提币审核',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
         children: [
-            { path: 'index', title: '提币审核', name: 'finance_withdraw_index', component: resolve => { require(['./views/manage_finance/withdraw.vue'], resolve); } }
+            {
+                path: 'index', title: '提币审核', name: 'finance_withdraw_index', component: resolve => {
+                    require(['./views/manage_finance/withdraw.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -357,11 +469,15 @@ export const financeRouter = [
         name: 'account_manage',
         title: '平账管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
         children: [
-            { path: 'index', title: '平账管理', name: 'account_manage_index', component: resolve => { require(['./views/manage_finance/account_manage.vue'], resolve); } }
+            {
+                path: 'index', title: '平账管理', name: 'account_manage_index', component: resolve => {
+                    require(['./views/manage_finance/account_manage.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -369,11 +485,15 @@ export const financeRouter = [
         name: 'usds_recharge',
         title: 'USDS充值',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
         children: [
-            { path: 'index', title: 'USDS充值', name: 'usds_recharge_index', component: resolve => { require(['./views/manage_finance/usds_recharge.vue'], resolve); } }
+            {
+                path: 'index', title: 'USDS充值', name: 'usds_recharge_index', component: resolve => {
+                    require(['./views/manage_finance/usds_recharge.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -384,11 +504,15 @@ export const riskRouter = [
         name: 'risk_exchange',
         title: '币币异常预警',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
         children: [
-            { path: 'index', title: '币币异常预警', name: 'risk_exchange_index', component: resolve => { require(['./views/manage_risk/exchange.vue'], resolve); } }
+            {
+                path: 'index', title: '币币异常预警', name: 'risk_exchange_index', component: resolve => {
+                    require(['./views/manage_risk/exchange.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -396,11 +520,15 @@ export const riskRouter = [
         name: 'risk_otc',
         title: 'OTC异常预警',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
         children: [
-            { path: 'index', title: 'OTC异常预警', name: 'risk_otc_index', component: resolve => { require(['./views/manage_risk/otc.vue'], resolve); } }
+            {
+                path: 'index', title: 'OTC异常预警', name: 'risk_otc_index', component: resolve => {
+                    require(['./views/manage_risk/otc.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -408,11 +536,15 @@ export const riskRouter = [
         name: 'risk_urgent',
         title: '紧急异常预警',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
         children: [
-            { path: 'index', title: '紧急异常预警', name: 'risk_urgent_index', component: resolve => { require(['./views/manage_risk/urgent.vue'], resolve); } }
+            {
+                path: 'index', title: '紧急异常预警', name: 'risk_urgent_index', component: resolve => {
+                    require(['./views/manage_risk/urgent.vue'], resolve);
+                }
+            }
         ]
     }
     // {
@@ -432,11 +564,15 @@ export const operationRouter = [
         name: 'operation_distribute',
         title: '分发',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '分发', name: 'operation_distribute_index', component: resolve => { require(['./views/manage_operation/distribute.vue'], resolve); } }
+            {
+                path: 'index', title: '分发', name: 'operation_distribute_index', component: resolve => {
+                    require(['./views/manage_operation/distribute.vue'], resolve);
+                }
+            }
         ]
     },
     // {
@@ -453,11 +589,15 @@ export const operationRouter = [
         name: 'operation_activity',
         title: '推广活动',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '推广活动', name: 'operation_activity_index', component: resolve => { require(['./views/manage_operation/promotion_activities.vue'], resolve); } }
+            {
+                path: 'index', title: '推广活动', name: 'operation_activity_index', component: resolve => {
+                    require(['./views/manage_operation/promotion_activities.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -465,11 +605,15 @@ export const operationRouter = [
         name: 'operation_market',
         title: '推荐市场',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '推荐市场', name: 'operation_market_index', component: resolve => { require(['./views/manage_operation/operation_market.vue'], resolve); } }
+            {
+                path: 'index', title: '推荐市场', name: 'operation_market_index', component: resolve => {
+                    require(['./views/manage_operation/operation_market.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -477,11 +621,15 @@ export const operationRouter = [
         name: 'operation_placard',
         title: '公告',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
         children: [
-            { path: 'index', title: '推荐市场', name: 'operation_placard_index', component: resolve => { require(['./views/manage_operation/operation_placard.vue'], resolve); } }
+            {
+                path: 'index', title: '推荐市场', name: 'operation_placard_index', component: resolve => {
+                    require(['./views/manage_operation/operation_placard.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -492,11 +640,15 @@ export const adminRouter = [
         name: 'admin',
         title: '管理员权限管理',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'index', title: '管理员权限管理', name: 'admin_index', component: resolve => { require(['./views/manage_admin/index.vue'], resolve); } }
+            {
+                path: 'index', title: '管理员权限管理', name: 'admin_index', component: resolve => {
+                    require(['./views/manage_admin/index.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -505,13 +657,87 @@ export const systemConfigRouter = [
     {
         path: '/systemconfig',
         name: 'systemconfig',
-        title: '系统参数',
+        title: '币币交易参数',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'index', title: '系统参数', name: 'systemconfig_index', component: resolve => { require(['./views/manage_systemconfig/index.vue'], resolve); } }
+            {
+                path: 'index', title: '币币交易参数', name: 'systemconfig_index', component: resolve => {
+                    require(['./views/manage_systemconfig/index.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/system',
+        name: 'system',
+        title: 'OTC交易设置',
+        component: Main,
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'otc_index', title: 'OTC交易设置', name: 'otc_index', component: resolve => {
+                    require(['./views/manage_systemconfig/otcTradeSet.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/sys',
+        name: 'sys',
+        title: '系统参数设置',
+        component: Main,
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'sys_index', title: '系统参数设置', name: 'sys_index', component: resolve => {
+                    require(['./views/manage_systemconfig/systemConfig.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/addwithdrawaladdress',
+        name: 'addwithdrawaladdress',
+        title: '添加特殊账户地址参数设置',
+        component: Main,
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'addwithdrawaladdress_index',
+                title: '添加特殊账户地址参数设置',
+                name: 'addwithdrawaladdress_index',
+                component: resolve => {
+                    require(['./views/manage_systemconfig/addWithdrawalAddress.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/poolwallet',
+        name: 'poolwallet',
+        title: '币池钱包整理参数',
+        component: Main,
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'poolwallet_index',
+                title: '币池钱包整理参数',
+                name: 'poolwallet_index',
+                component: resolve => {
+                    require(['./views/manage_systemconfig/poolWallet.vue'], resolve);
+                }
+            }
         ]
     }
 ];
@@ -522,15 +748,18 @@ export const systemLogsRouter = [
         name: 'systemlogs',
         title: '系统日志',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'index', title: '系统日志', name: 'systemlogs_index', component: resolve => { require(['./views/manage_systemlogs/index.vue'], resolve); } }
+            {
+                path: 'index', title: '系统日志', name: 'systemlogs_index', component: resolve => {
+                    require(['./views/manage_systemlogs/index.vue'], resolve);
+                }
+            }
         ]
     }
 ];
-
 
 export const monitoringRouter = [
     {
@@ -538,11 +767,15 @@ export const monitoringRouter = [
         name: 'monitoring',
         title: '提现失败列表',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'index', title: '提现失败列表', name: 'monitoring_index', component: resolve => { require(['./views/manage_monitoring/index.vue'], resolve); } }
+            {
+                path: 'index', title: '提现失败列表', name: 'monitoring_index', component: resolve => {
+                    require(['./views/manage_monitoring/index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -550,11 +783,15 @@ export const monitoringRouter = [
         name: 'congestion',
         title: '提现拥堵列表',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'congestion_index', title: '提现拥堵列表', name: 'congestion_index', component: resolve => { require(['./views/manage_monitoring/congestion_index.vue'], resolve); } }
+            {
+                path: 'congestion_index', title: '提现拥堵列表', name: 'congestion_index', component: resolve => {
+                    require(['./views/manage_monitoring/congestion_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -562,11 +799,15 @@ export const monitoringRouter = [
         name: 'withdraw',
         title: '提现记录列表',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'withdraw_index', title: '提现记录列表', name: 'withdraw_index', component: resolve => { require(['./views/manage_monitoring/withdraw_index.vue'], resolve); } }
+            {
+                path: 'withdraw_index', title: '提现记录列表', name: 'withdraw_index', component: resolve => {
+                    require(['./views/manage_monitoring/withdraw_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -574,11 +815,15 @@ export const monitoringRouter = [
         name: 'block',
         title: '区块确认列表',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'block_index', title: '区块确认列表', name: 'block_index', component: resolve => { require(['./views/manage_monitoring/block_index.vue'], resolve); } }
+            {
+                path: 'block_index', title: '区块确认列表', name: 'block_index', component: resolve => {
+                    require(['./views/manage_monitoring/block_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -586,11 +831,15 @@ export const monitoringRouter = [
         name: 'account_msg',
         title: '主账户信息',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'account_msg_index', title: '主账户信息', name: 'account_msg_index', component: resolve => { require(['./views/manage_monitoring/account_msg_index.vue'], resolve); } }
+            {
+                path: 'account_msg_index', title: '主账户信息', name: 'account_msg_index', component: resolve => {
+                    require(['./views/manage_monitoring/account_msg_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -598,11 +847,15 @@ export const monitoringRouter = [
         name: 'accountInofo',
         title: '用户账户信息',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'accountInofo_index', title: '用户账户信息', name: 'accountInofo_index', component: resolve => { require(['./views/manage_monitoring/accountInofo_index.vue'], resolve); } }
+            {
+                path: 'accountInofo_index', title: '用户账户信息', name: 'accountInofo_index', component: resolve => {
+                    require(['./views/manage_monitoring/accountInofo_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -610,11 +863,15 @@ export const monitoringRouter = [
         name: 'node_msg',
         title: '节点信息',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'node_msg_index', title: '节点信息', name: 'node_msg_index', component: resolve => { require(['./views/manage_monitoring/node_msg_index.vue'], resolve); } }
+            {
+                path: 'node_msg_index', title: '节点信息', name: 'node_msg_index', component: resolve => {
+                    require(['./views/manage_monitoring/node_msg_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -622,11 +879,15 @@ export const monitoringRouter = [
         name: 'error_log',
         title: '错误日志',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_DEVELOP'],
         },
         children: [
-            { path: 'error_log_index', title: '错误日志', name: 'error_log_index', component: resolve => { require(['./views/manage_monitoring/error_log_index.vue'], resolve); } }
+            {
+                path: 'error_log_index', title: '错误日志', name: 'error_log_index', component: resolve => {
+                    require(['./views/manage_monitoring/error_log_index.vue'], resolve);
+                }
+            }
         ]
     },
 ];
@@ -637,11 +898,15 @@ export const fundRouter = [
         name: 'coldWalletSet',
         title: '冷钱包设置',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'coldWalletSet_index', title: '冷钱包设置', name: 'coldWalletSet_index', component: resolve => { require(['./views/manage_fund/coldWalletSet_index.vue'], resolve); } }
+            {
+                path: 'coldWalletSet_index', title: '冷钱包设置', name: 'coldWalletSet_index', component: resolve => {
+                    require(['./views/manage_fund/coldWalletSet_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -649,11 +914,15 @@ export const fundRouter = [
         name: 'addressSet',
         title: '主地址转冷钱包设置',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'addressSet_index', title: '主地址转冷钱包设置', name: 'addressSet_index', component: resolve => { require(['./views/manage_fund/addressSet_index.vue'], resolve); } }
+            {
+                path: 'addressSet_index', title: '主地址转冷钱包设置', name: 'addressSet_index', component: resolve => {
+                    require(['./views/manage_fund/addressSet_index.vue'], resolve);
+                }
+            }
         ]
     },
     {
@@ -661,11 +930,15 @@ export const fundRouter = [
         name: 'transferRecord',
         title: '转账记录',
         component: Main,
-        meta:{
+        meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
-            { path: 'transferRecord_index', title: '转账记录', name: 'transferRecord_index', component: resolve => { require(['./views/manage_fund/transferRecord_index.vue'], resolve); } }
+            {
+                path: 'transferRecord_index', title: '转账记录', name: 'transferRecord_index', component: resolve => {
+                    require(['./views/manage_fund/transferRecord_index.vue'], resolve);
+                }
+            }
         ]
     }
 ];
