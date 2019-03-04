@@ -1,29 +1,29 @@
-<!-- 系统参数 -->
 <template>
     <Card>
-        <p slot="title">币币交易参数</p>
-            <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
-                <Col span="6">项目</Col>
-                <Col span="6">现状</Col>
-                <Col span="12">修改</Col>
-            </Row>
-            <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 1"
-                 :key="data.id">
-                <Col span="6">{{data.codeDesc}}</Col>
-                <Col span="6" v-if="data.code !== 'loginLockCount'">{{data.value}}</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value}}次</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value2}}分钟</Col>
-                <Col span="12" v-if="data.code === 'loginLockCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Input ref="price" type="text" v-model="data.$value2" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">修改</Button>
-                </Col>
-                <Col span="12"
-                     v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !== 'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
-                </Col>
-            </Row>
+        <p slot="title">系统参数配置</p>
+        <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
+            <Col span="6">项目</Col>
+            <Col span="6">现状</Col>
+            <Col span="12">修改</Col>
+        </Row>
+        <Row style="margin-bottom:10px;">
+            <Col span="6">{{sysItem[0].codeDesc}}</Col>
+            <Col span="6">{{sysItem[0].value}}</Col>
+            <Col span="12">
+                <Input :min="0" style="width:80px;" type="text" v-model="sysItem[0].$value"></Input>
+                <Button @click="updataSystem(sysItem[0])" style="margin-left:10px;" type="primary">修改</Button>
+            </Col>
+        </Row>
+        <Row v-for="(data,index) in sysItem" v-if="data.code !== 'siteName'" style="margin-bottom:10px;">
+            <Col span="6">{{data.codeDesc}}</Col>
+            <Col span="6"><img class="img" :src="base+data.value"/></Col>
+            <Col span="8">
+                <input name="siteLogo" ref="form" type="file"/>
+            </Col>
+            <Col span="3">
+                <Button @click="updataSystemImg(data.sysParamId, index)" type="primary">保存</Button>
+            </Col>
+        </Row>
     </Card>
 </template>
 
@@ -55,65 +55,11 @@
                 return callback();
             };
             return {
-                curPage: 1,
-                total: 0,
-                columnsSymbol: [
+                siteLogo: '',
+                base: util.baseURL,
+                sysItem: [
                     {
-                        title: '币种',
-                        key: 'symbol'
-                    },
-                    {
-                        title: '最小金额',
-                        key: 'coinMin'
-                    },
-                    {
-                        title: '保留金额',
-                        key: 'coinReserve'
-                    },
-                    {
-                        title: '矿工费币种',
-                        key: 'minerSymbol'
-                    },
-                    {
-                        title: 'BTC矿工费',
-                        key: 'minerFee'
-                    },
-                    {
-                        title: 'ETH GAS单价',
-                        key: 'gasPrice'
-                    },
-                    {
-                        title: 'ETH GAS上限',
-                        key: 'gasLimit'
-                    },
-                    {
-                        title: '是否可用',
-                        key: 'enable',
-                        render: (h, params) => {
-                            return h('div', params.row.enable === 0 ? '不可用' : '可用');
-                        }
-                    },
-                    {
-                        title: ' ',
-                        key: 'address',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {type: 'primary', size: 'small'},
-                                    style: {marginRight: '10px'},
-                                    on: {
-                                        click: () => {
-                                            util.setDialog(upAddress, {
-                                                item: params.row,
-                                                okCallback: () => {
-                                                    this.getfindCollectConfig();
-                                                }
-                                            });
-                                        }
-                                    }
-                                }, '修改')
-                            ]);
-                        }
+                        codeDesc: ''
                     }
                 ],
                 columnsSymbolData: [],
@@ -291,6 +237,11 @@
                         d.$valu2 = '';
                     });
                     this.exchangeItem = res;
+                    this.sysItem = this.exchangeItem.filter(data => {
+                        if (data.paramGroup === 3) {
+                            return data;
+                        }
+                    });
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
@@ -418,16 +369,33 @@
                 }
             },
             iconValidator (d, e) {
-                console.log(e);
-                d.$value = e.target.value;
-                // this.formData[prop] = e.target.value;
+                d.file = e.target.value;
+            },
+            updataSystemImg (d, i) {
+                var formData = new FormData();
+                formData.append('file', this.$refs.form[i - 1].files[0]);
+                formData.append('sysParamId', d);
+                if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[i - 1].files[0].name) === false) {
+                    this.$Message.error({content: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片'})
+                    return
+                }
+                system.updateAdminImg(formData, (res) => {
+                    this.getfindSysParam();
+                    this.$Message.success({content: '修改成功'});
+                    // console.log(this.$refs.form[0].files[0].name)
+                    // this.$refs.form[0].value = this.$refs.form[0].files[0].name = ''
+                    document.getElementsByTagName('input').value = ''
+                }, (msg) => {
+                    this.$$Message.error({content: msg});
+                });
             }
         }
     };
 </script>
 
-<style lang="less">
-    input[type="file"] {
-        line-height: 26px;
-    }
+<style scoped>
+.img{
+    max-width: 60px;
+    max-height: 40px;
+}
 </style>

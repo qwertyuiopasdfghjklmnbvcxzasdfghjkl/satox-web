@@ -1,10 +1,14 @@
 <style lang="less">
     @import "./main.less";
-    .main-header{min-width: 1362px;}
+
+    .main-header {
+        min-width: 1362px;
+    }
 </style>
 <template>
     <div id="main" class="main" :class="{'main-hide-text': hideMenuText}">
-        <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
+        <div class="sidebar-menu-con"
+             :style="{width: hideMenuText?'60px':'240px', overflowY: hideMenuText ? 'visible' : 'auto', overflowX:'hidden', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
             <div class="logo-con">
                 <!--
                 <img v-show="!hideMenuText"  src="../images/logo.jpg">
@@ -12,10 +16,11 @@
                 -->
                 后台信息管理系统
             </div>
-            <sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>
-            <sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menuList"/>
+            <!--<sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>-->
+            <!--<sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menuList"/>-->
+            <menus/>
         </div>
-        <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'200px'}" style="min-width:1280px;">
+        <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}" style="min-width:1280px;">
             <div class="main-header">
                 <!--
                 <div class="navicon-con">
@@ -29,7 +34,7 @@
                     </div>
                 </div>
                 -->
-                <menus/>
+                <!--<menus/>-->
                 <div class="header-avator-con">
                     <div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">
                         <Tooltip :content="isFullScreen ? '退出全屏' : '全屏'" placement="bottom">
@@ -42,7 +47,8 @@
                         </Tooltip>
                     </div>
                     <div @click="showMessage" class="message-con">
-                        <Tooltip :content="messageCount > 0 ? '有' + messageCount + '条未读消息' : '无未读消息'" placement="bottom">
+                        <Tooltip :content="messageCount > 0 ? '有' + messageCount + '条未读消息' : '无未读消息'"
+                                 placement="bottom">
                             <Badge :count="messageCount" dot>
                                 <Icon type="ios-bell" :size="22"></Icon>
                             </Badge>
@@ -66,7 +72,7 @@
                                 </a>
                                 <DropdownMenu slot="list">
                                     <DropdownItem name="ownSpace">修改密码</DropdownItem>
-                                    <DropdownItem name="loginout" divided >退出登录</DropdownItem>
+                                    <DropdownItem name="loginout" divided>退出登录</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                             <Avatar :src="avatorPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
@@ -78,7 +84,7 @@
                 <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
             </div>
         </div>
-        <div class="single-page-con" :style="{paddingLeft: hideMenuText?'60px':'200px'}">
+        <div class="single-page-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}">
             <div class="single-page">
                 <router-view></router-view>
             </div>
@@ -91,12 +97,12 @@
     import breadcrumbNav from './main_components/breadcrumbNav.vue';
     import themeDropdownMenu from './main_components/themeDropdownMenu.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
-    import menus from './menus'
+    import menus from './menus';
     import Cookies from 'js-cookie';
-    import fullscreen from '../libs/fullscreen'
+    import fullscreen from '../libs/fullscreen';
     import util from '../libs/util.js';
-    import userApi from '../api/user'
-    
+    import userApi from '../api/user';
+
     export default {
         components: {
             sidebarMenu,
@@ -122,6 +128,7 @@
         },
         computed: {
             menuList () {
+                console.log(this.$store.state.menuList);
                 return this.$store.state.menuList;
             },
             tagsList () {
@@ -163,7 +170,8 @@
                 if (name === 'ownSpace') {
                     util.openPage(this, 'ownspace_index', '修改密码');
                 } else if (name === 'loginout') {
-                     userApi.logout((res) => {})
+                    userApi.logout((res) => {
+                    });
                     // 退出登录
                     Cookies.remove('username');
                     Cookies.remove('password');
@@ -184,7 +192,7 @@
                         localStorage.theme = theme;
                     }
                     this.$router.push({name: 'login'});
-                    return
+                    return;
                     util.ajax.get('login').then((res) => {
                         this.$router.push({
                             name: 'login'
@@ -199,8 +207,8 @@
                 }
             },
             handleFullScreen () {
-                this.fullscreen.toggle()
-                return
+                this.fullscreen.toggle();
+                return;
                 let main = document.getElementById('main');
                 if (this.isFullScreen) {
                     if (document.exitFullscreen) {
@@ -324,7 +332,7 @@
             }
         },
         created () {
-            this.fullscreen = fullscreen()
+            this.fullscreen = fullscreen();
             // 权限菜单过滤相关
             this.$store.commit('updateMenulist');
             // 查找当前用户之前登录时设置的主题
@@ -359,6 +367,8 @@
     };
 </script>
 <style>
-.ivu-badge-dot{background: #fff !important;}
+    .ivu-badge-dot {
+        background: #fff !important;
+    }
 </style>
 

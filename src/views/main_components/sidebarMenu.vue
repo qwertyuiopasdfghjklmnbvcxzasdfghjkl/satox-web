@@ -58,12 +58,14 @@ export default {
                 }
                 if (!tagHasOpened) {
                     let tag = this.tagsList.filter((item) => {
+                        console.log(item);
                         if (item.children) {
                             return active === item.children[0].name;
                         } else {
                             return active === item.name;
                         }
                     });
+                    console.log(tag);
                     tag = tag[0];
                     tag = tag.children ? tag.children[0] : tag;
                     this.$store.commit('increateTag', tag);
