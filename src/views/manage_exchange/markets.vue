@@ -159,6 +159,14 @@ export default {
               key: 'accuracy'
           },
           {
+              title: '数量精度',
+              key: 'quantityAccu'
+          },
+          {
+              title: '金额精度',
+              key: 'amountAccu'
+          },
+          {
               title: '深度合并精度',
               key: 'digit'
           },
@@ -262,7 +270,7 @@ export default {
     },
     findMarket () {
         currenyApi.findMarketExchangeInfoList(this.curPage1,{
-             market: this.symbol 
+             market: this.symbol
         }, (res, total) => {
             this.total1 = total
             this.data1 = res

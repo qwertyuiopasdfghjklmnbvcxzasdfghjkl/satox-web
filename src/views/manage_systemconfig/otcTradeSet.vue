@@ -1,29 +1,32 @@
-<!-- 系统参数 -->
 <template>
     <Card>
-        <p slot="title">币币交易参数</p>
-            <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
-                <Col span="6">项目</Col>
-                <Col span="6">现状</Col>
-                <Col span="12">修改</Col>
+        <p slot="title">OTC交易设置</p>
+        <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
+            <Col span="6">项目</Col>
+            <Col span="6">现状</Col>
+            <Col span="12">修改</Col>
+        </Row>
+        <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 2"
+             :key="data.id">
+            <Col span="6">{{data.codeDesc}}</Col>
+            <Col span="6" v-if="data.code !== 'otcCoinType'">{{data.value}}</Col>
+            <Col span="12"
+                 v-if="data.code !== 'otcCoinType' && data.code !== 'cancelOrderCountLimit' && data.code !== 'oneAdMaxConcurrency' && data.code !== 'adCountLimit' && data.code !== 'priceBasePlatform'">
+                <Input ref="price" type="text" v-model="data.$value" style="width:80px;"
+                       v-if="data.code !== 'priceBasePlatform'"/>
+                <Input type="text" :min="0" v-model="data.$value" v-if="data.code === 'priceBasePlatform'"
+                       style="width:80px;"></Input>
+                <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
+            </Col>
+            <Row style="margin-bottom:10px;border:1px solid rgb(221, 222, 225);min-height:30px;line-height:30px;"
+                 v-if="data.code === 'otcCoinType'">
+                <CheckboxGroup v-model="data.$value" @on-change="updataSystem(data)">
+                    <Checkbox :label="`${da.symbol}-${da.symbolType}`" v-for="da in dataSymbol" :key="da.id">
+                        {{da.symbol}}
+                    </Checkbox>
+                </CheckboxGroup>
             </Row>
-            <Row style="margin-bottom:10px;" v-for="(data,index) in exchangeItem" v-if="data.paramGroup == 1"
-                 :key="data.id">
-                <Col span="6">{{data.codeDesc}}</Col>
-                <Col span="6" v-if="data.code !== 'loginLockCount'">{{data.value}}</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value}}次</Col>
-                <Col span="3" v-if="data.code === 'loginLockCount'">{{data.value2}}分钟</Col>
-                <Col span="12" v-if="data.code === 'loginLockCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Input ref="price" type="text" v-model="data.$value2" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">修改</Button>
-                </Col>
-                <Col span="12"
-                     v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !== 'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
-                    <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
-                    <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">修改</Button>
-                </Col>
-            </Row>
+        </Row>
     </Card>
 </template>
 
@@ -426,8 +429,6 @@
     };
 </script>
 
-<style lang="less">
-    input[type="file"] {
-        line-height: 26px;
-    }
+<style scoped>
+
 </style>

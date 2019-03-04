@@ -210,7 +210,7 @@ export default {
                 totalCirculation: null,
                 totalIssuance: null,
             }
-         } 
+         }
     },
     created () {
         this.getSymbolInfo()
@@ -238,15 +238,17 @@ export default {
             // }
             // data[propName] = this.datas[propName]
             var formData = new FormData()
+            console.log(this.$refs)
             formData.append('iconFile', this.$refs.form.files[0])
             formData.append('symbolId', this.item.symbolId)
             formData.append('symbol', this.item.symbol)
+            console.log(formData);
             currenyApi.updateIconFile(formData, (res) =>{
                 this.getSymbolInfo()
                 this.$Message.success({content: '修改成功'})
             }, (msg) => {
                 this.$Message.error({content: msg})
-            }) 
+            })
         },
         tabs1(propName) {
             let data = {
@@ -258,7 +260,7 @@ export default {
                 this.$Message.success({content: '修改成功'})
             }, (msg) => {
                 this.$Message.error({content: msg})
-            }) 
+            })
         },
         tabs(propName) {
             if (!this[propName]) {
@@ -275,7 +277,7 @@ export default {
                 // this.$emit('okCallback')
             }, (msg) => {
                 this.$Message.error({content: msg})
-            }) 
+            })
         },
          tabs2(propName) {
             if (!this[propName]) {
@@ -291,7 +293,7 @@ export default {
                 this.$Message.success({content: '修改成功'})
             }, (msg) => {
                 this.$Message.error({content: msg})
-            }) 
+            })
         }
     }
 }
