@@ -27,14 +27,14 @@
                       </span>
                       <span class="list1-col list1-right">
                         <font class="list1-price">
-                          {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
+                          {{toFixed(data.lastPrice, data.accuracy)}}{{data.baseSymbol}}
                         </font>
                         <!-- <font class="list1-amount">
                           <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> 
                           <i></i>
                         </font> -->
                         <font class="list1-amount" style="margin-top: 5px;">
-                          vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
+                          vol. {{toFixed(data.dealAmount, data.quantityAccu)}} {{data.baseSymbol}}
                         </font>
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
@@ -60,7 +60,7 @@
                           <em class="list-collection icon-star-full"  :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                           {{data.currencySymbol}}/{{data.baseSymbol}}
                       </span>
-                      <span class="list-col price" :class="[(getDirection(data.direction)===1 || getDirection(data.direction)===0)?'font-green':'font-red']">{{toFixed(data.lastPrice)}}</span>
+                      <span class="list-col price" :class="[(getDirection(data.direction)===1 || getDirection(data.direction)===0)?'font-green':'font-red']">{{toFixed(data.lastPrice,data.accuracy)}}</span>
                       <span class="list-col fall" v-html="percent(data)"></span><!-- 跌涨 -->
                   </li>
                   <li class="list-loading" v-if="showLoading && products.length===0">
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import marketApi from '@/api/market'
@@ -152,15 +153,17 @@ export default {
       return datas
     },
     getAccuracy () {
-      var accuracy = 8
+      let accuracy,Quantityaccu,Amountaccu,digit
       for (let i = 0; i < this.products.length; i++) {
         let data = this.products[i]
         if (data.market === this.symbol) {
-          accuracy = Number(data.accuracy)
+          this.$parent.fixedNumber = Number(data.accuracy) || 8
+          this.$parent.Quantityaccu = Number(data.quantityAccu) || 4
+          this.$parent.Amountaccu = Number(data.amountAccu) || 8
+          this.$parent.digit = Number(data.digit) || 4
           break
         }
       }
-      return accuracy
     },
     marketConfig () {
       let config = {}

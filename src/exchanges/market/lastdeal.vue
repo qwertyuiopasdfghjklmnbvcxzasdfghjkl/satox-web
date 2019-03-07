@@ -13,7 +13,7 @@
           <li class="list-item" v-for="(item, index) in datas" :key="index" @click="clickChangeValue(item)">
               <span class="list-col time">{{formatDate(item.createdAt)}}</span>
               <span class="list-col price" :class="[Number(item.direction)===1 ? 'ask' : 'bid']">{{toFixed(item.price)}}</span>
-              <span class="list-col volume">{{toFixed(item.amount, 4)}}</span>
+              <span class="list-col volume">{{toFixed(item.amount, Quantityaccu)}}</span>
           </li>
           <li class="list-loading" v-if="showLoading">
             <loading :size="24"/>
@@ -39,6 +39,9 @@ export default {
       default: ''
     },
     fixedNumber: {
+      type: Number
+    },
+    Quantityaccu: {
       type: Number
     },
     symbol: {
