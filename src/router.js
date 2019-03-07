@@ -90,6 +90,7 @@ export const kycRouter = [
         name: 'kycauditing',
         title: 'KYC审核',
         component: Main,
+        icon: 'briefcase',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_AUDIT', 'ROLE_KYC_RECHECK'],
         },
@@ -106,6 +107,7 @@ export const kycRouter = [
         name: 'kyccheck',
         title: 'KYC复核',
         component: Main,
+        icon: 'folder',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_RECHECK'],
         },
@@ -122,6 +124,7 @@ export const kycRouter = [
         name: 'kycmanage',
         title: 'KYC管理',
         component: Main,
+        icon: 'clipboard',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_KYC_RECHECK'],
         },
@@ -141,6 +144,7 @@ export const otcRouter = [
         name: 'otc_data_statistics',
         title: '数据统计',
         component: Main,
+        icon: 'arrow-graph-up-right',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -157,6 +161,7 @@ export const otcRouter = [
         name: 'otc_merchant_review',
         title: '商家审核',
         component: Main,
+        icon: 'lock-combination',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
@@ -173,6 +178,7 @@ export const otcRouter = [
         name: 'otc_users',
         title: '用户管理',
         component: Main,
+        icon: 'person-stalker',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
@@ -189,6 +195,7 @@ export const otcRouter = [
         name: 'otc_ads',
         title: '广告管理',
         component: Main,
+        icon: 'chatbox',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
@@ -205,6 +212,7 @@ export const otcRouter = [
         name: 'otc_orders',
         title: '订单管理',
         component: Main,
+        icon: 'clipboard',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
@@ -221,6 +229,7 @@ export const otcRouter = [
         name: 'otc_appeals',
         title: '申诉管理',
         component: Main,
+        icon: 'mic-a',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_OTC_APPEAL', 'ROLE_OTC_AUDIT'],
         },
@@ -237,6 +246,7 @@ export const otcRouter = [
         name: 'otc_auditing',
         title: '审核管理',
         component: Main,
+        icon: 'ios-cog',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OTC_AUDIT'],
         },
@@ -256,6 +266,7 @@ export const communityRouter = [
         name: 'community_users',
         title: '社区管理',
         component: Main,
+        icon: 'ios-cog',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -275,6 +286,7 @@ export const voteRouter = [
         name: 'vote_data_count',
         title: '数据统计',
         component: Main,
+        icon: 'ios-pie-outline',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -291,6 +303,7 @@ export const voteRouter = [
         name: 'vote_miner_query',
         title: '用户投票挖矿查询',
         component: Main,
+        icon: 'ios-box',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
@@ -307,6 +320,7 @@ export const voteRouter = [
         name: 'vote_record',
         title: '投票记录',
         component: Main,
+        icon: 'ios-copy-outline',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
@@ -323,6 +337,7 @@ export const voteRouter = [
         name: 'vote_miner_dispense',
         title: '挖矿分发记录',
         component: Main,
+        icon: 'ios-list',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
@@ -342,6 +357,7 @@ export const exchangeRouter = [
         name: 'exchange_data_statistics',
         title: '数据统计',
         component: Main,
+        icon: 'ios-timer-outline',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -358,6 +374,7 @@ export const exchangeRouter = [
         name: 'exchange_users',
         title: '用户管理',
         component: Main,
+        icon: 'person',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
@@ -374,6 +391,7 @@ export const exchangeRouter = [
         name: 'exchange_coins',
         title: '币种管理',
         component: Main,
+        icon: 'toggle-filled',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -390,6 +408,7 @@ export const exchangeRouter = [
         name: 'exchange_markets',
         title: '交易市场管理',
         component: Main,
+        icon: 'shuffle',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -418,6 +437,7 @@ export const exchangeRouter = [
         name: 'exchange_address',
         title: '地址管理',
         component: Main,
+        icon: 'ionic',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_CUSTOMER'],
         },
@@ -437,6 +457,7 @@ export const financeRouter = [
         name: 'finance_finance',
         title: '财务管理',
         component: Main,
+        icon: 'connection-bars',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
         },
@@ -453,6 +474,7 @@ export const financeRouter = [
         name: 'finance_withdraw',
         title: '提币审核',
         component: Main,
+        icon: 'soup-can-outline',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
@@ -469,6 +491,7 @@ export const financeRouter = [
         name: 'account_manage',
         title: '平账管理',
         component: Main,
+        icon: 'monitor',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
@@ -485,6 +508,7 @@ export const financeRouter = [
         name: 'usds_recharge',
         title: 'USDS充值',
         component: Main,
+        icon: 'radio-waves',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
         },
@@ -504,6 +528,7 @@ export const riskRouter = [
         name: 'risk_exchange',
         title: '币币异常预警',
         component: Main,
+        icon: 'ios-alarm',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
@@ -520,6 +545,7 @@ export const riskRouter = [
         name: 'risk_otc',
         title: 'OTC异常预警',
         component: Main,
+        icon: 'ios-speedometer',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
@@ -536,6 +562,7 @@ export const riskRouter = [
         name: 'risk_urgent',
         title: '紧急异常预警',
         component: Main,
+        icon: 'ios-timer',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION', 'ROLE_FINANCE', 'ROLE_RISK_CONTROL'],
         },
@@ -564,6 +591,7 @@ export const operationRouter = [
         name: 'operation_distribute',
         title: '分发',
         component: Main,
+        icon: 'ios-paper',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -589,6 +617,7 @@ export const operationRouter = [
         name: 'operation_activity',
         title: '推广活动',
         component: Main,
+        icon: 'ios-bell',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -604,6 +633,7 @@ export const operationRouter = [
         path: '/operation_market',
         name: 'operation_market',
         title: '推荐市场',
+        icon: 'social-dropbox',
         component: Main,
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
@@ -621,6 +651,7 @@ export const operationRouter = [
         name: 'operation_placard',
         title: '公告',
         component: Main,
+        icon: 'android-clipboard',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
         },
@@ -640,6 +671,7 @@ export const adminRouter = [
         name: 'admin',
         title: '管理员权限管理',
         component: Main,
+        icon: 'android-settings',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -659,6 +691,7 @@ export const systemConfigRouter = [
         name: 'systemconfig',
         title: '币币交易参数',
         component: Main,
+        icon: 'android-options',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -675,6 +708,7 @@ export const systemConfigRouter = [
         name: 'system',
         title: 'OTC交易设置',
         component: Main,
+        icon: 'ios-cog',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -691,6 +725,7 @@ export const systemConfigRouter = [
         name: 'sys',
         title: '系统参数设置',
         component: Main,
+        icon: 'ios-settings-strong',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -705,15 +740,16 @@ export const systemConfigRouter = [
     {
         path: '/addwithdrawaladdress',
         name: 'addwithdrawaladdress',
-        title: '添加特殊账户地址参数设置',
+        title: '特殊账户参数设置',
         component: Main,
+        icon: 'ios-toggle',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
         children: [
             {
                 path: 'addwithdrawaladdress_index',
-                title: '添加特殊账户地址参数设置',
+                title: '特殊账户参数设置',
                 name: 'addwithdrawaladdress_index',
                 component: resolve => {
                     require(['./views/manage_systemconfig/addWithdrawalAddress.vue'], resolve);
@@ -726,6 +762,7 @@ export const systemConfigRouter = [
         name: 'poolwallet',
         title: '币池钱包整理参数',
         component: Main,
+        icon: 'ios-bookmarks',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -748,6 +785,7 @@ export const systemLogsRouter = [
         name: 'systemlogs',
         title: '系统日志',
         component: Main,
+        icon: 'ios-list',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -767,6 +805,7 @@ export const monitoringRouter = [
         name: 'monitoring',
         title: '提现失败列表',
         component: Main,
+        icon: 'heart-broken',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -783,6 +822,7 @@ export const monitoringRouter = [
         name: 'congestion',
         title: '提现拥堵列表',
         component: Main,
+        icon: 'clipboard',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -799,6 +839,7 @@ export const monitoringRouter = [
         name: 'withdraw',
         title: '提现记录列表',
         component: Main,
+        icon: 'ios-paper',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -815,6 +856,7 @@ export const monitoringRouter = [
         name: 'block',
         title: '区块确认列表',
         component: Main,
+        icon: 'ios-photos',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -831,6 +873,7 @@ export const monitoringRouter = [
         name: 'account_msg',
         title: '主账户信息',
         component: Main,
+        icon: 'ios-person',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -847,6 +890,7 @@ export const monitoringRouter = [
         name: 'accountInofo',
         title: '用户账户信息',
         component: Main,
+        icon: 'ios-people',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -863,6 +907,7 @@ export const monitoringRouter = [
         name: 'node_msg',
         title: '节点信息',
         component: Main,
+        icon: 'network',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -879,6 +924,7 @@ export const monitoringRouter = [
         name: 'error_log',
         title: '错误日志',
         component: Main,
+        icon: 'bug',
         meta: {
             roles: ['ROLE_DEVELOP'],
         },
@@ -898,6 +944,7 @@ export const fundRouter = [
         name: 'coldWalletSet',
         title: '冷钱包设置',
         component: Main,
+        icon: 'steam',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -914,6 +961,7 @@ export const fundRouter = [
         name: 'addressSet',
         title: '主地址转冷钱包设置',
         component: Main,
+        icon: 'pull-request',
         meta: {
             roles: ['ROLE_ADMIN'],
         },
@@ -930,6 +978,7 @@ export const fundRouter = [
         name: 'transferRecord',
         title: '转账记录',
         component: Main,
+        icon: 'ios-loop-strong',
         meta: {
             roles: ['ROLE_ADMIN'],
         },

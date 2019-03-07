@@ -1,33 +1,24 @@
 <!-- 顶部菜单 -->
 <style lang="less">
     @import './menus.less';
-
-    a {
-        color: #fff;
-    }
 </style>
 
 <template>
-    <!--<ul class="menus">-->
-    <!--<li v-for="item in filterMenus" :key="item.id" :class="{select:item.id===selected}" @click="switchMenus(item)">-->
-    <!--{{item.name}}-->
-    <!---->
-    <!--</li>-->
-    <!--</ul>-->
-    <Menu accordion :active-name="currentPageName" :open-names="openedSubmenuArr" :theme="$store.state.menuTheme">
-        <Submenu v-for="(item, index) in filterMenus" :key="item.id" :class="{select:item.id===selected}"
-                 :name="index">
-            <template slot="title">
-                <Icon :type="icon[index]"/>
-                {{item.name}}
-            </template>
-            <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i">
-                <!--<router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff">{{data.title}}-->
-                <!--</router-link>-->
-                <p @click="switchMenus(item)">{{data.title}}</p>
-            </MenuItem>
-        </Submenu>
-    </Menu>
+    <ul class="nav">
+        <li v-for="(item, index) in filterMenus" :key="item.id" :class="{select:item.id===selected}"
+            @click="switchMenus(item)">
+            <p>
+                <Icon :type="icon[index]" size="16"/>
+                <span>{{item.name}}</span>
+                <Icon type="ios-arrow-down" class="up_down"/>
+            </p>
+            <ol>
+                <li>
+                    <sidebar-menu :menuList="menuList" :iconSize="14"/>
+                </li>
+            </ol>
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -35,10 +26,7 @@
     import util from '../libs/util.js';
     import {
         kycRouter,
-        otcRouter,
         exchangeRouter,
-        communityRouter,
-        voteRouter,
         financeRouter,
         riskRouter,
         operationRouter,
@@ -48,7 +36,6 @@
         monitoringRouter,
         fundRouter
     } from '../router';
-    import breadcrumbNavVue from './main_components/breadcrumbNav.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
     import sidebarMenu from './main_components/sidebarMenu.vue';
 
@@ -139,7 +126,6 @@
                         });
                     }
                 });
-                console.log(newMenus);
                 return newMenus;
             },
             tagsList () {
@@ -147,7 +133,7 @@
             },
             menuList () {
                 return this.$store.state.menuList;
-            },
+            }
         },
         watch: {
             selected (newVal) {
@@ -178,52 +164,18 @@
             // }
         },
         methods: {
-            toMenu () {
-                console.log('ddddd');
-            },
-            routeTo (active) {
-                let pageOpenedList = this.$store.state.pageOpenedList;
-                let openedPageLen = pageOpenedList.length;
-                let i = 0;
-                let tagHasOpened = false;
-                while (i < openedPageLen) {
-                    if (active === pageOpenedList[i].name) {  // 页面已经打开
-                        this.$store.commit('moveToSecond', i);
-                        tagHasOpened = true;
-                        break;
-                    }
-                    i++;
-                }
-                if (!tagHasOpened) {
-                    let tag = this.tagsList.filter((item) => {
-                        console.log(item);
-                        if (item.children) {
-                            return active === item.children[0].name;
-                        } else {
-                            return active === item.name;
-                        }
-                    });
-                    console.log(this);
-                    tag = tag[0];
-                    tag = tag.children ? tag.children[0] : tag;
-                    this.$store.commit('increateTag', tag);
-                    localStorage.pageOpenedList = JSON.stringify(this.$store.state.pageOpenedList); // 本地存储已打开页面
-                }
-                this.$store.commit('setCurrentPageName', active);
-                this.$router.push({
-                    name: active
-                });
-            },
             switchMenus (item, notClear) {
-                this.selected = item.id;
                 this.$store.commit('updateMenulist', item.menus);
                 if (notClear === false) {
                     return;
                 }
+                if (this.selected === item.id) {
+                    // this.selected = null;
+                    return;
+                }
+                this.selected = item.id;
                 this.$store.commit('clearTag');
-                console.log(item);
-                this.changeMenu(item);
-                // this.menuList();
+                this.changeMenu(item.menus[0].children[0].name);
             },
             changeMenu (active) {
                 if (active !== 'accesstest_index') {
@@ -241,7 +193,6 @@
                     }
                     if (!tagHasOpened) {
                         let tag = this.tagsList.filter((item) => {
-                            console.log(item);
                             if (item.children) {
                                 return active === item.children[0].name;
                             } else {
