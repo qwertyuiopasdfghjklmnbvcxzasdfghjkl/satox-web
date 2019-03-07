@@ -36,7 +36,7 @@
                   </li>
                   <li class="last-item">
                     <span class="last-title">{{$t('home.home_volume_24h')}}<!--24h成交量--></span>
-                    <span class="last-price">{{toFixed(getLast24h.vol, 2)}} {{baseSymbol}}</span>
+                    <span class="last-price">{{toFixed(getLast24h.vol, Quantityaccu)}} {{baseSymbol}}</span>
                   </li>
                 </ul>
               </div>
@@ -45,13 +45,13 @@
               </div>
             </div>
             <div class="home-center-bottom">
-              <businesspanel ref="businesspanel" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :fromWallet="fromWallet" :toWallet="toWallet" :marketList="marketList"/>
-              <entrust ref="entrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
+              <businesspanel ref="businesspanel" v-show="!isEntrust" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
+              <entrust ref="entrust" v-show="isEntrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
             </div>
           </div>
           <div class="home-right">
             <depth ref="depth" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :digit="digit"/>
-            <lastdeal ref="lastdeal" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :symbol="symbol" />
+            <lastdeal ref="lastdeal" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :symbol="symbol" :toFixed="toFixed"/>
           </div>
         </div>
     </div>
