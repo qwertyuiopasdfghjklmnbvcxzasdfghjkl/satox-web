@@ -1,6 +1,6 @@
 <template>
     <Card>
-        <p slot="title">添加特殊账户地址参数设置</p>
+        <p slot="title">特殊账户参数设置</p>
         <Card>
             <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
                 <span style="height:32px;font-weight:normal;line-height:32px;">交易所手续费账户</span>

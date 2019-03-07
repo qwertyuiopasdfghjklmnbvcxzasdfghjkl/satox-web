@@ -3,3 +3,64 @@
     li{list-style:none;margin:0;padding:0;padding:8px 10px;margin:10px 8px 10px 0;cursor:pointer;font-size: 14px;}
     li.select,li:hover{background:rgb(45, 140, 240);color:#fff;border-radius:3px;}
 }
+.nav{
+    color: #ffffff;
+    margin: 10px 0;
+    li{
+        list-style-type: none;
+    }
+    p{
+        padding: 16px 20px;
+        color: #d3d4d6;
+        cursor: pointer;
+        transition: .3s;
+        position: relative;
+        .up_down{
+            position: absolute;
+            left: 210px;
+            top: 19px;
+        }
+        span{
+            padding-left: 6px;
+        }
+    }
+    p:hover{
+        color: #FFFFFF;
+    }
+    span{
+        cursor: pointer;
+    }
+    ol{
+        height: 0;
+        overflow: hidden;
+        width: 100%;
+        background: #363e4f;
+        transition: .3s;
+        li{
+            display: flex;
+            ul{
+                flex-grow: 1;
+                text-indent: 8px;
+                li{
+                    display: flex;
+                    align-items: center;
+                    padding-left: 32px;
+                }
+                .ivu-menu-item-selected{
+                    background: #404858 !important;
+                    border-right: 6px solid #2d8cf0 !important;
+                }
+            }
+        }
+    }
+    .select{
+        p{
+            color: #ffffff;
+            //background: #40495d;
+        }
+        ol{
+            height: inherit;
+            transition: .3s;
+        }
+    }
+}
