@@ -23,7 +23,7 @@
                 <div class="formel amount">
                     <label class="formel-label">{{$t('exchange.exchange_amount')}}<!--数量--></label>
                     <div class="formel-text">
-                        <numberbox :style="currentStyle" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.amount" />
+                        <numberbox :style="currentStyle" :accuracy="Quantityaccu" class="formel-textbox" type="text" v-model="formData.amount" />
                         <em class="tip-title" ref="tipCurrentSymbol">{{currentSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.amount"/>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="formel price" v-show="!isMarket">
                     <label class="formel-label">{{$t('exchange.exchange_total')}}<!--金额--></label>
                     <div class="formel-text">
-                        <numberbox ref="total" :style="baseStyle" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.total" />
+                        <numberbox ref="total" :style="baseStyle" :accuracy="Amountaccu" class="formel-textbox" type="text" v-model="formData.total" />
                         <em class="tip-title">{{baseSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.total"/>
                         <!-- <em v-show="isShowTotal" class="error-tip icon-arrow-down">
@@ -110,10 +110,13 @@ export default {
       type: String,
       default: 'limit'
     },
-    accuracy: {
-      default: 0
-    },
     fixedNumber: {
+      type: Number
+    },
+    Quantityaccu: {
+      type: Number
+    },
+    Amountaccu: {
       type: Number
     },
     currentSymbol: {
@@ -246,7 +249,9 @@ export default {
     getLast24h (newVal) {
       if (this.updateValue) {
         this.updateValue = false
-        this.formData.price = utils.removeEndZero(this.getLast24h.close)
+        setTimeout(()=>{
+          this.formData.price = this.toFixed(utils.removeEndZero(this.getLast24h.close))
+        },200)
       }
     },
     symbol () {
@@ -343,13 +348,13 @@ export default {
       }
       this.changeInput = type
       if (type === 'total' && numUtils.BN(this.fixedPrice).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice), this.Quantityaccu)
       } else if (type === 'total' && numUtils.BN(this.formData.amount).gt(0)) {
         this.formData.price = this.toFixed(numUtils.div(this.formData.total, this.formData.amount))
       } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.amount).gt(0)) {
-        this.formData.total = this.toFixed(numUtils.mul(this.fixedPrice, this.formData.amount))
+        this.formData.total = this.toFixed(numUtils.mul(this.fixedPrice, this.formData.amount), this.Amountaccu)
       } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.total).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice), this.Quantityaccu)
       } else {
         this.changeInput = ''
       }

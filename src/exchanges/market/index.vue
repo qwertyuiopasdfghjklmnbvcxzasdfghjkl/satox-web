@@ -74,6 +74,9 @@ let chartSettings = window.localStorage.getItem('chartSettings')
 chartSettings && (chartSettings = JSON.parse(chartSettings))
 export default {
   props: {
+    fixedNumber: {
+      type: Number
+    },
     symbol: {
       type: String,
       default: ''
@@ -319,7 +322,7 @@ export default {
         klineType: 'eosbtc',
         hideDepth: true,
         scale: 3,
-        fixedNumber: 8,
+        fixedNumber: this.fixedNumber,
         ThemeColor: {
           Positive: '#00A55E',
           TextPositive: '#00A55E',
