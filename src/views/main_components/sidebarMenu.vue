@@ -65,7 +65,7 @@ export default {
                             return active === item.name;
                         }
                     });
-                    console.log(tag);
+                    console.log()
                     tag = tag[0];
                     tag = tag.children ? tag.children[0] : tag;
                     this.$store.commit('increateTag', tag);
@@ -107,6 +107,6 @@ export default {
             this.$refs.sideMenu.updateOpened();
         });
     }
-
 };
 </script>
+

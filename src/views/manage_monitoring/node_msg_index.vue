@@ -1,27 +1,30 @@
 <template>
     <div>
         <Card>
-            <p slot="title" >比特币同步区块数</p>
+            <p slot="title">比特币同步区块数</p>
             <Table :columns="columns2" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
-        </Card>
-         <Card style="margin-top:30px;">
-            <p slot="title" >以太坊同步区块数</p>
-            <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
+            <Page :current="curPage" :total="total" @on-change="changePage"
+                  style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card style="margin-top:30px;">
-            <p slot="title" >OMNI同步区块数</p>
+            <p slot="title">以太坊同步区块数</p>
+            <Table :columns="columns2" :data="data2"></Table>
+            <Page :current="curPage1" :total="total1" @on-change="changePage1"
+                  style="text-align:center;margin-top:20px;"></Page>
+        </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title">OMNI同步区块数</p>
             <Table :columns="columns2" :data="data3"></Table>
         </Card>
         <Card style="margin-top:30px;">
-            <p slot="title" >MBT同步区块数</p>
+            <p slot="title">MBT同步区块数</p>
             <Table :columns="columns2" :data="data4"></Table>
         </Card>
     </div>
 </template>
 <script>
-import monitApi from '../../api/monitoring'
+    import monitApi from '../../api/monitoring';
+
     export default {
         data () {
             return {
@@ -89,50 +92,53 @@ import monitApi from '../../api/monitoring'
                     }
                 ],
                 data2: []
-            }
+            };
         },
         created () {
-            this.getfindBtcNodeList()
-            this.getfindEthNodeList()
-            this.getfindOMNINodeList()
-            this.getfindMBTNodeList()
+            this.getfindBtcNodeList();
+            this.getfindEthNodeList();
+            this.getfindOMNINodeList();
+            this.getfindMBTNodeList();
         },
         methods: {
             getfindBtcNodeList () {
                 monitApi.findBtcNodeList(this.curPage, (res, total) => {
-                    this.total = total
-                    this.data1 = res.data
-                })
+                    this.total = total;
+                    this.data1 = res.data;
+                });
             },
             getfindEthNodeList () {
                 monitApi.findEthNodeList(this.curPage1, (res, total) => {
-                    this.total1 = total
-                    this.data2 = res.data
-                })
+                    this.total1 = total;
+                    this.data2 = res.data;
+                });
             },
             getfindOMNINodeList () {
                 monitApi.findOMNINNodeList((res, total) => {
-                    this.data3.push(res)
+                    this.data3.push(res);
 
-                })
+                });
             },
             getfindMBTNodeList () {
                 monitApi.findMBTNNodeList((res, total) => {
-                    this.data4.push(res)
+                    this.data4.push(res);
 
-                })
+                });
             },
             changePage (page) {
-                this.curPage = page
-                this.getfindBtcNodeList()
+                this.curPage = page;
+                this.getfindBtcNodeList();
             },
             changePage1 (page) {
-                this.curPage1 = page
-                this.getfindEthNodeList()
+                this.curPage1 = page;
+                this.getfindEthNodeList();
             },
         }
-    }
+    };
 </script>
 <style scoped>
-.ivu-row{height: 40px;line-height: 40px;}
+    .ivu-row {
+        height: 40px;
+        line-height: 40px;
+    }
 </style>

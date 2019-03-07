@@ -8,17 +8,20 @@
 <template>
     <div id="main" class="main" :class="{'main-hide-text': hideMenuText}">
         <div class="sidebar-menu-con"
-             :style="{width: hideMenuText?'60px':'240px', overflowY: hideMenuText ? 'visible' : 'auto', overflowX:'hidden', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
-            <div class="logo-con">
-                <!--
-                <img v-show="!hideMenuText"  src="../images/logo.jpg">
-                <img v-show="hideMenuText" src="../images/logo-min.jpg">
-                -->
-                后台信息管理系统
+             :style="{width: hideMenuText?'60px':'240px', overflow: 'hidden', background: $store.state.menuTheme === 'dark'?'#363e4f':'white'}">
+            <div style="width: 260px; overflow: hidden auto;height: 100vh;">
+                <div class="logo-con">
+                    <!--
+                    <img v-show="!hideMenuText"  src="../images/logo.jpg">
+                    <img v-show="hideMenuText" src="../images/logo-min.jpg">
+                    -->
+                    后台信息管理系统
+                </div>
+                <!--<sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>-->
+                <!--<sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menuList"/>-->
+                <menus/>
             </div>
-            <!--<sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>-->
-            <!--<sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menuList"/>-->
-            <menus/>
+
         </div>
         <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}" style="min-width:1280px;">
             <div class="main-header">
@@ -97,7 +100,7 @@
     import breadcrumbNav from './main_components/breadcrumbNav.vue';
     import themeDropdownMenu from './main_components/themeDropdownMenu.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
-    import menus from './menus';
+    import menus from './menusLeft';
     import Cookies from 'js-cookie';
     import fullscreen from '../libs/fullscreen';
     import util from '../libs/util.js';
