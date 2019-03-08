@@ -21,10 +21,14 @@
                 <Icon :type="icon[index]"/>
                 {{item.name}}
             </template>
-            <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i">
-                <!--<router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff">{{data.title}}-->
-                <!--</router-link>-->
-                <p @click="switchMenus(item)">{{data.title}}</p>
+            <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i" class="menu_left">
+                <router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff">
+                    <p>
+                        <Icon :type="data.icon"/>
+                        <span>{{data.title}}</span>
+                    </p>
+                </router-link>
+                <!--<p @click="switchMenus(item)">{{data.title}}</p>-->
             </MenuItem>
         </Submenu>
     </Menu>
