@@ -36,7 +36,7 @@
                   </li>
                   <li class="last-item">
                     <span class="last-title">{{$t('home.home_volume_24h')}}<!--24h成交量--></span>
-                    <span class="last-price">{{toFixed(getLast24h.vol, Quantityaccu)}} {{baseSymbol}}</span>
+                    <span class="last-price">{{toFixed(getLast24h.vol, 2)}} {{baseSymbol}}</span>
                   </li>
                 </ul>
               </div>

@@ -34,7 +34,7 @@
                           <i></i>
                         </font> -->
                         <font class="list1-amount" style="margin-top: 5px;">
-                          vol. {{toFixed(data.dealAmount, data.quantityAccu)}} {{data.baseSymbol}}
+                          vol. {{toFixed(data.dealAmount, 2)}} {{data.baseSymbol}}
                         </font>
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
