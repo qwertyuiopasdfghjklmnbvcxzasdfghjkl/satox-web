@@ -22,7 +22,7 @@
                 {{item.name}}
             </template>
             <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i" class="menu_left">
-                <router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff" class="">
+                <router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff">
                     <p>
                         <Icon :type="data.icon"/>
                         <span>{{data.title}}</span>
