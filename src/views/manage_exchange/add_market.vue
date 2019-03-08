@@ -33,11 +33,11 @@
                 </FormItem>
                 <FormItem label="数量精度" prop="quantityAccu">
                     <InputNumber style="width:100%;" v-model="formLeft.quantityAccu"
-                                 max="8" min="0" stpe="1" name="quantityAccu"></InputNumber>
+                                 :max="8" :min="0" :stpe="1" name="quantityAccu"></InputNumber>
                 </FormItem>
                 <FormItem label="金额精度" prop="amountAccu">
                     <InputNumber style="width:100%;" v-model="formLeft.amountAccu"
-                                 max="8" min="0" stpe="1" name="amountAccu"></InputNumber>
+                                 :max="8" :min="0" :stpe="1" name="amountAccu"></InputNumber>
                 </FormItem>
                 <FormItem label="深度合并精度" prop="digit">
                     <InputNumber style="width:100%;" v-model="formLeft.digit" name="digit"></InputNumber>
