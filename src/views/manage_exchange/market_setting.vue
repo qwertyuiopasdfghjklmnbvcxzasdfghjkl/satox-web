@@ -67,7 +67,7 @@
             <Col span="6">数量精度</Col>
             <Col span="6">{{item.quantityAccu}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" :min="0" v-model="quantityAccu"></InputNumber>
+                <InputNumber style="width:113px;" max="8" min="0" stpe="1" v-model="quantityAccu"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
                 <Button type="primary" @click="tabs('quantityAccu')">保存</Button>
@@ -77,7 +77,7 @@
             <Col span="6">金额精度</Col>
             <Col span="6">{{item.amountAccu}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" :min="0" v-model="amountAccu"></InputNumber>
+                <InputNumber style="width:113px;" max="8" min="0" stpe="1" v-model="amountAccu"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
                 <Button type="primary" @click="tabs('amountAccu')">保存</Button>
@@ -176,7 +176,7 @@
                 });
             },
             tabs (propName) {
-                if (!this[propName] && this[propName] !== 0) {
+                if (!this[propName] && (this[propName] !== 0)) {
                     this.$Message.error({content: '请输入值'});
                     return;
                 }
