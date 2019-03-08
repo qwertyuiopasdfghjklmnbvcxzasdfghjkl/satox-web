@@ -10,7 +10,7 @@
             <div class="ticker-list">
               <p class="price" :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice, item.accuracy)}}</p>
               <p class="value">≈<valuation :lastPrice="item.lastPrice" :baseSymbol="item.baseSymbol"/></p>
-              <p class="volume">Volume: {{toFixed(item.dealAmount,item.quantityAccu)}}{{item.baseSymbol}}</p>
+              <p class="volume">Volume: {{toFixed(item.dealAmount, 2)}}{{item.baseSymbol}}</p>
             </div>
           </li>
         </ul>
