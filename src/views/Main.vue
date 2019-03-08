@@ -100,7 +100,7 @@
     import breadcrumbNav from './main_components/breadcrumbNav.vue';
     import themeDropdownMenu from './main_components/themeDropdownMenu.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
-    import menus from './menus';
+    import menus from './menusLeft';
     import Cookies from 'js-cookie';
     import fullscreen from '../libs/fullscreen';
     import util from '../libs/util.js';
