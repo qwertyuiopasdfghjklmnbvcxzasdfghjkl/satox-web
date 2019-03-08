@@ -28,7 +28,6 @@
                         <span>{{data.title}}</span>
                     </p>
                 </router-link>
-                <!--<p @click="switchMenus(item)">{{data.title}}</p>-->
             </MenuItem>
         </Submenu>
     </Menu>
