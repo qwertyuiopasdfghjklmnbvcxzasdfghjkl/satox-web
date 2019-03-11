@@ -2,6 +2,18 @@ import api from './api'
 
 let curreny = {}
 
+// 更新用户登录冻结状态
+const updateUserLoginPermission = function (userId, status, success, error) {
+  api.put(`api/bm/bbManage/userManage/updateUserLoginPermission/${userId}/${status}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+curreny.updateUserLoginPermission = updateUserLoginPermission
+
 // 用户管理列表
 const getfindUserList = function (curPage, sortStr, data, success, error) {
   api.post(`api/bm/bbManage/userManage/findUserList/10/${curPage}/${sortStr}`, data, (res) => {
