@@ -11,6 +11,13 @@
                 <Col span="4" style="text-align:right;">修改</Col>
             </Row>
             <Row style="margin-bottom:10px;">
+                <Col span="12">登录权限</Col>
+                <Col span="8">{{data2.loginPermission === 0? '正常':'冻结'}}</Col>
+                <Col span="4">
+                    <Button type="primary" style="float:right;" @click="updateUserLoginPermission(data2)">{{data2.loginPermission === 0? '冻结':'解冻'}}</Button>
+                </Col>
+            </Row>
+            <Row style="margin-bottom:10px;">
                 <Col span="12">币币交易权限{{data2.length}}</Col>
                 <Col span="8">{{data2.exchangePermission === 1? '正常':'冻结'}}</Col>
                 <Col span="4">
@@ -150,6 +157,15 @@ export default {
         this.getPermission()
     },
     methods: {
+        updateUserLoginPermission(userData){
+            let status = userData.loginPermission === 0 ? 1 : 0
+            currenyApi.updateUserLoginPermission(userData.userId, status, (res)=>{
+                this.$Message.success({content: '修改成功'})
+                this.getPermission()
+            },(msg)=>{
+                this.$Message.error({content: msg})
+            })
+        },
         closeDialog () {
             this.$emit('removeDialog');
         },
