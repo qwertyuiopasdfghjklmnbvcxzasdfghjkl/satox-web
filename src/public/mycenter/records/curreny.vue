@@ -52,7 +52,7 @@
           <span class="avgPrice">{{getPrice(item.averagePrice)}}</span><!--成交均价-->
           <span class="tradeVolume">{{toFixed(item.finishedAmount)}}</span><!--成交量-->
           <span class="tradeSum">{{toFixed(item.dealCurrency)}} {{item.direction === 1 ? item.fromSymbol : item.toSymbol}}</span><!--成交金额-->
-          <span class="charge">{{toFixed(item.fee)}} {{item.toSymbol}} <template v-if="Number(item.deductionFee)">, {{toFixed(item.deductionFee)}} {{symbolDeduction}}</template></span><!--手续费-->
+          <span class="charge">{{toFixed(item.fee)}} {{item.toSymbol}}</span><!--手续费-->
         </li>
       </ul>
       <page v-if="!coinsLoading && coinsEntrust.length > 0" :pageIndex="coinsParams.current" :pageSize="coinsParams.limit" :total="coinsTotal" @changePageIndex="coinsPageChange"/>
@@ -110,18 +110,8 @@ export default {
   created () {
     this.getCoinsHistory()
     this.getMarket()
-    this.getrateSysparams()
   },
   methods: {
-    getrateSysparams () {
-      market.rateSysparams((res) => {
-        res.forEach((item) => {
-          if (item.code === 'symbolDeduction') {
-            this.symbolDeduction = item.value
-          }
-        })
-      })
-    },
     getMarketByType (type, toSymbol, fromSymbol) {
       if (numUtils.BN(type).equals(numUtils.BN(1))) {
         return `${toSymbol}/${fromSymbol}` // 买
