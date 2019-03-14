@@ -204,7 +204,7 @@ export default {
       let mergeDatas = []
       let temp = {}
       datas.forEach((item) => {
-        let key = this.toFixed(item.price)
+        let key = this.toFixed(item.price, this.mergeValue)
         let tempItem = temp[key]
         if (!tempItem) {
           temp[key] = {
