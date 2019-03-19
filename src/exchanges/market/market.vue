@@ -27,14 +27,14 @@
                       </span>
                       <span class="list1-col list1-right">
                         <font class="list1-price">
-                          {{toFixed(data.lastPrice, data.accuracy)}}{{data.baseSymbol}}
+                          {{toFixed(data.lastPrice, data.accuracy)}} {{data.baseSymbol}}
                         </font>
                         <!-- <font class="list1-amount">
                           <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> 
                           <i></i>
                         </font> -->
                         <font class="list1-amount" style="margin-top: 5px;">
-                          vol. {{toFixed(data.dealAmount, 2)}} {{data.baseSymbol}}
+                          Vol. {{toFixed(data.dealAmount, 2)}} {{data.baseSymbol}}
                         </font>
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
