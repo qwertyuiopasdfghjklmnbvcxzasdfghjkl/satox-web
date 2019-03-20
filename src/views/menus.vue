@@ -28,7 +28,6 @@
                         <span>{{data.title}}</span>
                     </p>
                 </router-link>
-                <!--<p @click="switchMenus(item)">{{data.title}}</p>-->
             </MenuItem>
         </Submenu>
     </Menu>
@@ -143,7 +142,6 @@
                         });
                     }
                 });
-                console.log(newMenus);
                 return newMenus;
             },
             tagsList () {
@@ -176,48 +174,8 @@
             if (!isExist && this.filterMenus.length) {
                 this.switchMenus(this.filterMenus[0]);
             }
-            // let apiToken = Cookies.get('Authorization')
-            // if (apiToken && this.$route.name === 'home_index' && this.filterMenus.length) {
-            //   this.$router.push({name: this.filterMenus[0].menus[0].children[0].name})
-            // }
         },
         methods: {
-            toMenu () {
-                console.log('ddddd');
-            },
-            routeTo (active) {
-                let pageOpenedList = this.$store.state.pageOpenedList;
-                let openedPageLen = pageOpenedList.length;
-                let i = 0;
-                let tagHasOpened = false;
-                while (i < openedPageLen) {
-                    if (active === pageOpenedList[i].name) {  // 页面已经打开
-                        this.$store.commit('moveToSecond', i);
-                        tagHasOpened = true;
-                        break;
-                    }
-                    i++;
-                }
-                if (!tagHasOpened) {
-                    let tag = this.tagsList.filter((item) => {
-                        console.log(item);
-                        if (item.children) {
-                            return active === item.children[0].name;
-                        } else {
-                            return active === item.name;
-                        }
-                    });
-                    console.log(this);
-                    tag = tag[0];
-                    tag = tag.children ? tag.children[0] : tag;
-                    this.$store.commit('increateTag', tag);
-                    localStorage.pageOpenedList = JSON.stringify(this.$store.state.pageOpenedList); // 本地存储已打开页面
-                }
-                this.$store.commit('setCurrentPageName', active);
-                this.$router.push({
-                    name: active
-                });
-            },
             switchMenus (item, notClear) {
                 this.selected = item.id;
                 this.$store.commit('updateMenulist', item.menus);
