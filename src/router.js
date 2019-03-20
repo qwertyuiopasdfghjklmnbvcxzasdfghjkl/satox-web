@@ -500,7 +500,7 @@ export const financeRouter = [
                 path: 'index', title: '平账管理', name: 'account_manage_index', component: resolve => {
                     require(['./views/manage_finance/account_manage.vue'], resolve);
                 }
-            }
+            },
         ]
     },
     {
@@ -516,6 +516,57 @@ export const financeRouter = [
             {
                 path: 'index', title: 'USDS充值', name: 'usds_recharge_index', component: resolve => {
                     require(['./views/manage_finance/usds_recharge.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/internal_transfer',
+        name: 'internal_transfer',
+        title: '内部转账',
+        component: Main,
+        icon: 'ios-loop-strong',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+        },
+        children: [
+            {
+                path: 'index', title: '内部转账', name: 'internal_transfer_index', component: resolve => {
+                    require(['./views/manage_finance/internal_transfer.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/change_sato_data',
+        name: 'change_sato_data',
+        title: 'SATO数量修改',
+        component: Main,
+        icon: 'ios-compose',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+        },
+        children: [
+            {
+                path: 'index', title: 'SATO数量修改', name: 'change_sato_data_index', component: resolve => {
+                    require(['./views/manage_finance/change_sato_data.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/bank_data',
+        name: 'bank_data',
+        title: 'USDS银行资料',
+        component: Main,
+        icon: 'card',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+        },
+        children: [
+            {
+                path: 'index', title: '内部转账', name: 'bank_data_index', component: resolve => {
+                    require(['./views/manage_finance/bank_data.vue'], resolve);
                 }
             }
         ]
