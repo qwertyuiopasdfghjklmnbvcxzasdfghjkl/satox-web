@@ -11,10 +11,6 @@
              :style="{width: hideMenuText?'60px':'240px', overflow: 'hidden', background: $store.state.menuTheme === 'dark'?'#363e4f':'white'}">
             <div style="width: 260px; overflow: hidden auto;height: 100vh;">
                 <div class="logo-con">
-                    <!--
-                    <img v-show="!hideMenuText"  src="../images/logo.jpg">
-                    <img v-show="hideMenuText" src="../images/logo-min.jpg">
-                    -->
                     后台信息管理系统
                 </div>
                 <!--<sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>-->
@@ -100,7 +96,7 @@
     import breadcrumbNav from './main_components/breadcrumbNav.vue';
     import themeDropdownMenu from './main_components/themeDropdownMenu.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
-    import menus from './menusLeft';
+    import menus from './menus';
     import Cookies from 'js-cookie';
     import fullscreen from '../libs/fullscreen';
     import util from '../libs/util.js';
