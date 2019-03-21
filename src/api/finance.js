@@ -291,4 +291,28 @@ const recordSato = function (data, success, error) {
 };
 finance.recordSato = recordSato;
 
+// 财务管理--内部转账--列表
+const listTransfer = function (data, success, error) {
+    api.get(`api/bm/account/transfer/list`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.listTransfer = listTransfer;
+
+// 财务管理--内部转账--添加
+const addTransfer = function (data, success, error) {
+    api.post(`api/bm/account/transfer`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.addTransfer = addTransfer;
+
 export default finance;

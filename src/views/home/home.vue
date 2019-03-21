@@ -3,267 +3,178 @@
     @import "../../styles/common.less";
 </style>
 <template>
-<!--
-    <div class="home-main" style="display:none;">
+    <div class="home-main">
         <Row>
-            <Col span="8">
-                <Row>
-                    <Card>
-                        <Row type="flex" class="user-infor">
-                            <Col span="8">
-                                <Row class-name="made-child-con-middle" type="flex" align="middle">
-                                    <img class="avator-img" :src="avatorPath" />
-                                </Row>
-                            </Col>
-                            <Col span="16" style="padding-left:6px;">
-                                <Row class-name="made-child-con-middle" type="flex" align="middle">
-                                    <div>
-                                        <b class="card-user-infor-name">Admin</b>
-                                        <p>super admin</p>
-                                    </div>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <div class="line-gray"></div>
-                        <Row class="margin-top-8">
-                            <Col span="8"><p class="notwrap">上次登录时间:</p></Col>
-                            <Col span="16" class="padding-left-8">2017.09.12-13:32:20</Col>
-                        </Row>
-                        <Row class="margin-top-8">
-                            <Col span="8"><p class="notwrap">上次登录地点:</p></Col>
-                            <Col span="16" class="padding-left-8">北京</Col>
-                        </Row>
-                    </Card>
-                </Row>
-                <Row class="margin-top-10">
-                    <Card>
-                        <p slot="title" class="card-title">
-                            <Icon type="android-checkbox-outline"></Icon>
-                            待办事项
-                        </p>
-                        <a type="text" slot="extra" @click.prevent="addNewToDoItem">
-                            <Icon type="plus-round"></Icon>
-                        </a>
-                        <Modal
-                            v-model="showAddNewTodo"
-                            title="添加新的待办事项"
-                            @on-ok="addNew"
-                            @on-cancel="cancelAdd">
-                            <Row type="flex" justify="center">
-                                <Input v-model="newToDoItemValue" icon="compose" placeholder="请输入..." style="width: 300px" />
-                            </Row>
-                            <Row slot="footer">
-                                <Button type="text" @click="cancelAdd">取消</Button>
-                                <Button type="primary" @click="addNew">确定</Button>
-                            </Row>
-                        </Modal>
-                        <div class="to-do-list-con">
-                            <div v-for="(item, index) in toDoList" :key="index" class="to-do-item">
-                                <to-do-list-item :content="item.title"></to-do-list-item>
-                            </div>
-                        </div>
-                    </Card>
-                </Row>
+            <Col span="6">
+                <infor-card
+                        id-name="allUserAmount"
+                        :end-val="data2.allUserAmount || 0"
+                        iconType="person"
+                        color="#64d572"
+                        :iconSize="50"
+                        intro-text="总用户"
+                ></infor-card>
             </Col>
-            <Col span="16" class-name="padding-left-5">
-                <Row>
-                    <Col span="6">
-                        <infor-card
-                            id-name="user_created_count"
-                            :end-val="count.createUser"
-                            iconType="android-person-add"
-                            color="#2d8cf0"
-                            intro-text="今日新增用户"
-                        ></infor-card>
-                    </Col>
-                    <Col span="6" class-name="padding-left-5">
-                        <infor-card
-                            id-name="visit_count"
-                            :end-val="count.visit"
-                            iconType="ios-eye"
-                            color="#64d572"
-                            :iconSize="50"
-                            intro-text="今日浏览量"
-                        ></infor-card>
-                    </Col>
-                    <Col span="6" class-name="padding-left-5">
-                        <infor-card
-                            id-name="collection_count"
-                            :end-val="count.collection"
-                            iconType="upload"
-                            color="#ffd572"
-                            intro-text="今日数据采集量"
-                        ></infor-card>
-                    </Col>
-                    <Col span="6" class-name="padding-left-5">
-                        <infor-card
-                            id-name="transfer_count"
-                            :end-val="count.transfer"
-                            iconType="shuffle"
-                            color="#f25e43"
-                            intro-text="今日服务调用量"
-                        ></infor-card>
-                    </Col>
-                </Row>
-                <Row class="margin-top-10">
-                    <Card :padding="0">
-                        <p slot="title" class="card-title">
-                            <Icon type="map"></Icon>
-                            今日服务调用地理分布
-                        </p>
-                        <div class="map-con">
-                            <Col span="10">
-                                <map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>
-                            </Col>
-                            <Col span="14" class="map-incon">
-                                <Row type="flex" justify="center" align="middle">
-                                    <home-map :city-data="cityData"></home-map>
-                                </Row>
-                            </Col>
-                        </div>
-                    </Card>
-                </Row>
+
+            <Col span="6">
+                <infor-card
+                        id-name="registerAmountDaily"
+                        :end-val="data1.registerAmountDaily || 0"
+                        iconType="person-add"
+                        color="#2d8cf0"
+                        intro-text="今日新增用户"
+                ></infor-card>
+            </Col>
+
+            <Col span="6">
+                <infor-card
+                        id-name="onlineUserAmount"
+                        :end-val="data2.onlineUserAmount || 0"
+                        iconType="mouse"
+                        color="#ffd572"
+                        intro-text="当前在线用户"
+                ></infor-card>
+            </Col>
+            <Col span="6">
+                <infor-card
+                        id-name="loginAmountDaily"
+                        :end-val="data1.loginAmountDaily || 0"
+                        iconType="coffee"
+                        color="#f25e43"
+                        intro-text="今日登陆用户"
+                ></infor-card>
             </Col>
         </Row>
-        <Row class="margin-top-10">
-            <Col span="8">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-map"></Icon>
-                        上周每日来访量统计
-                    </p>
-                    <div class="data-source-row">
-                        <visite-volume></visite-volume>
-                    </div>
-                </Card>
+
+
+        <!--<Row style="margin-top: 2rem">-->
+            <!--<Col span="6">-->
+                <!--<infor-card-->
+                        <!--id-name="btcTransactionAmount"-->
+                        <!--:end-val="data2.btcTransactionAmount || 0"-->
+                        <!--iconType="social-bitcoin"-->
+                        <!--color="#1dd5f3"-->
+                        <!--:iconSize="50"-->
+                        <!--intro-text="今日BTC交易量"-->
+                <!--&gt;</infor-card>-->
+            <!--</Col>-->
+            <!--<Col span="6">-->
+                <!--<infor-card-->
+                        <!--id-name="ethTransactionAmount"-->
+                        <!--:end-val="data2.ethTransactionAmount || 0"-->
+                        <!--iconType="ios-shuffle-strong"-->
+                        <!--color="#8424bf"-->
+                        <!--intro-text="今日ETH交易量"-->
+                <!--&gt;</infor-card>-->
+            <!--</Col>-->
+
+            <!--<Col span="6">-->
+                <!--<infor-card-->
+                        <!--id-name="usdtTransactionAmount"-->
+                        <!--:end-val="data2.usdtTransactionAmount || 0"-->
+                        <!--iconType="arrow-graph-up-right"-->
+                        <!--color="#ff72a6"-->
+                        <!--intro-text="今日USDT交易量"-->
+                <!--&gt;</infor-card>-->
+            <!--</Col>-->
+        <!--</Row>-->
+
+
+        <Row style="margin-top: 2rem">
+
+            <Col span="6">
+                <infor-card
+                        id-name="visit_count"
+                        :end-val="data3.verifyWaitFirstCheck || 0"
+                        iconType="lock-combination"
+                        color="#64d572"
+                        :iconSize="50"
+                        intro-text="KYC待审核"
+                ></infor-card>
             </Col>
-            <Col span="8" class="padding-left-10">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="ios-pulse-strong"></Icon>
-                        数据来源统计
-                    </p>
-                    <div class="data-source-row">
-                        <data-source-pie></data-source-pie>
-                    </div>
-                </Card>
-            </Col>
-            <Col span="8" class="padding-left-10">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-wifi"></Icon>
-                        各类用户服务调用变化统计
-                    </p>
-                    <div class="data-source-row">
-                        <user-flow></user-flow>
-                    </div>
-                </Card>
-            </Col>
-        </Row>
-        <Row class="margin-top-10">
-            <Card>
-                <p slot="title" class="card-title">
-                    <Icon type="ios-shuffle-strong"></Icon>
-                    上周每日服务调用量(万)
-                </p>
-                <div class="line-chart-con">
-                    <service-requests></service-requests>
-                </div>
-            </Card>
+            <!--<Col span="6">-->
+                <!--<infor-card-->
+                        <!--id-name="waitHandleAppealAmount"-->
+                        <!--:end-val="data3.waitHandleAppealAmount || 0"-->
+                        <!--iconType="ios-compose"-->
+                        <!--color="#2d8cf0"-->
+                        <!--intro-text="OTC待处理申诉"-->
+                <!--&gt;</infor-card>-->
+            <!--</Col>-->
+
+            <!--<Col span="6">-->
+                <!--<infor-card-->
+                        <!--id-name="shop"-->
+                        <!--:end-val="data3.shop || 0"-->
+                        <!--iconType="ios-box"-->
+                        <!--color="#ffba72"-->
+                        <!--intro-text="商家待审核"-->
+                <!--&gt;</infor-card>-->
+            <!--</Col>-->
+
         </Row>
     </div>
-    -->
+
 </template>
 
 <script>
-import cityData from './map-data/get-city-value.js';
-import homeMap from './components/map.vue';
-import dataSourcePie from './components/dataSourcePie.vue';
-import visiteVolume from './components/visiteVolume.vue';
-import serviceRequests from './components/serviceRequests.vue';
-import userFlow from './components/userFlow.vue';
-import countUp from './components/countUp.vue';
-import inforCard from './components/inforCard.vue';
-import mapDataTable from './components/mapDataTable.vue';
-import toDoListItem from './components/toDoListItem.vue';
-import curreny from '../../api/currency'
+    import inforCard from './components/inforCard.vue';
+    import kycAPI from '../../api/kyc';
+    import otcApi from '../../api/otc';
+    import currenyApi from '../../api/currency';
 
-export default {
-    components: {
-        homeMap,
-        dataSourcePie,
-        visiteVolume,
-        serviceRequests,
-        userFlow,
-        countUp,
-        inforCard,
-        mapDataTable,
-        toDoListItem
-    },
-    data () {
-        return {
-            toDoList: [
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                }
-            ],
-            count: {
-                createUser: 496,
-                visit: 3264,
-                collection: 24389305,
-                transfer: 39503498
-            },
-            cityData: cityData,
-            showAddNewTodo: false,
-            newToDoItemValue: ''
-        };
-    },
-    computed: {
-        avatorPath () {
-            return localStorage.avatorImgPath;
-        }
-    },
-    created () {
-        // this.aaa()
-    },
-    methods: {
-        aaa () {
-            curreny.getfindUserList(1, {}, (res) => {
-
-            })
+    export default {
+        components: {
+            inforCard
         },
-        addNewToDoItem () {
-            this.showAddNewTodo = true;
+        data () {
+            return {
+                data1: {
+                    allUserAmount: 0,
+                    registerAmountDaily: 0,
+                    onlineUserAmount: 0,
+                    loginAmountDaily: 0
+                },
+                data2: {},
+                data3: {}
+            };
         },
-        addNew () {
-            if (this.newToDoItemValue.length !== 0) {
-                this.toDoList.unshift({
-                    title: this.newToDoItemValue
+        computed: {},
+        created () {
+            this.getStatusCount();
+            this.getfindDataStatistic();
+            this.getRequestManage();
+            this.getfindStatisticData();
+            this.getfindUserDataList();
+        },
+        methods: {
+            getStatusCount () {
+                kycAPI.showReviewStatusCount((res) => {
+                    this.data3.verifyWaitFirstCheck = Number(res.data.verifyWaitFirstCheck);
+                }, (msg) => {
+                    this.$Message.error({content: msg});
                 });
-                setTimeout(function () {
-                    this.newToDoItemValue = '';
-                }, 200);
-                this.showAddNewTodo = false;
-            } else {
-                this.$Message.error('请输入待办事项内容');
+            },
+            getfindDataStatistic () {
+                otcApi.findDataStatistic((res) => {
+                    this.data3.waitHandleAppealAmount = Number(res.data.waitHandleAppealAmount);
+                });
+            },
+            getRequestManage () {
+                otcApi.listAppealRequestManage(1, {}, (res, total) => {
+                    this.data3.shop = total;
+                });
+            },
+            getfindStatisticData () {
+                currenyApi.findStatisticData((res) => {
+                    this.data2 = [res][0];
+                });
+            },
+            getfindUserDataList () {
+                currenyApi.findUserDataList((res) => {
+                    this.data1 = res;
+                });
             }
-        },
-        cancelAdd () {
-            this.showAddNewTodo = false;
-            this.newToDoItemValue = '';
         }
-    }
-};
+    };
 </script>

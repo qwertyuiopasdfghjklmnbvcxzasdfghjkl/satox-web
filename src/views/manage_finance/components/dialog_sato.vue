@@ -5,10 +5,11 @@
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <div class="detail">
+            <p><label>钱包类型：</label><span>{{data.type | myCurrency}}</span></p>
             <p><label>总金额：</label><span>{{data.totalBalance}}</span></p>
             <p><label>可用余额：</label><span>{{data.availableBalance}}</span></p>
             <p><label>冻结金额：</label><span>{{data.frozenBalance}}</span></p>
-            <p><label>{{state==='0'?'充值':'扣除'}}数量：</label>
+            <p><label>{{state==='0'?'增加':'扣除'}}数量：</label>
                 <input autocomplete="off" spellcheck="false" type="Number"
                        :placeholder="state==='0'?'增加数量需大于0':'扣除数量需大于0'" class="ivu-input"
                        style="width: 250px;" v-model="amount">
@@ -72,6 +73,15 @@
             },
             closeDialog () {
                 this.$emit('removeDialog');
+            }
+        },
+        filters: {
+            myCurrency: function (myInput) {
+                let result = {
+                    1: '主钱包',
+                    2: '非主钱包'
+                };
+                return result[myInput];
             }
         }
     };

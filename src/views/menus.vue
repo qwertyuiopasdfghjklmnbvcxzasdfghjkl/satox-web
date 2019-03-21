@@ -8,12 +8,6 @@
 </style>
 
 <template>
-    <!--<ul class="menus">-->
-    <!--<li v-for="item in filterMenus" :key="item.id" :class="{select:item.id===selected}" @click="switchMenus(item)">-->
-    <!--{{item.name}}-->
-    <!---->
-    <!--</li>-->
-    <!--</ul>-->
     <Menu accordion :active-name="currentPageName" :open-names="openedSubmenuArr" :theme="$store.state.menuTheme">
         <Submenu v-for="(item, index) in filterMenus" :key="item.id" :class="{select:item.id===selected}"
                  :name="index">
@@ -22,12 +16,10 @@
                 {{item.name}}
             </template>
             <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i" class="menu_left">
-                <router-link :to="data.path+'/'+data.children[0].path" style="color: #ffffff">
-                    <p>
-                        <Icon :type="data.icon"/>
-                        <span>{{data.title}}</span>
-                    </p>
-                </router-link>
+                <p @click="readerTo(data)">
+                    <Icon :type="data.icon"/>
+                    <span>{{data.title}}</span>
+                </p>
             </MenuItem>
         </Submenu>
     </Menu>
@@ -157,7 +149,7 @@
             },
             '$route' (to) {
                 if (to.name === 'home_index' && this.filterMenus.length) {
-                    this.changeMenu(this.filterMenus[0].menus[0].children[0].name);
+                    // this.changeMenu(this.filterMenus[0].menus[0].children[0].name);
                 }
             }
         },
@@ -176,6 +168,13 @@
             }
         },
         methods: {
+
+            readerTo (active) {
+                let urlName = null;
+                urlName = active.children[0].name;
+                this.changeMenu(urlName);
+            },
+
             switchMenus (item, notClear) {
                 this.selected = item.id;
                 this.$store.commit('updateMenulist', item.menus);
@@ -183,9 +182,7 @@
                     return;
                 }
                 this.$store.commit('clearTag');
-                console.log(item);
-                this.changeMenu(item);
-                // this.menuList();
+                this.changeMenu(item.menus[0].children[0].name);
             },
             changeMenu (active) {
                 if (active !== 'accesstest_index') {
@@ -203,7 +200,6 @@
                     }
                     if (!tagHasOpened) {
                         let tag = this.tagsList.filter((item) => {
-                            console.log(item);
                             if (item.children) {
                                 return active === item.children[0].name;
                             } else {

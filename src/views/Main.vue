@@ -13,27 +13,15 @@
                 <div class="logo-con">
                     后台信息管理系统
                 </div>
-                <!--<sidebar-menu v-if="!hideMenuText" :menuList="menuList" :iconSize="14"/>-->
-                <!--<sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menuList"/>-->
                 <menus/>
             </div>
-
         </div>
         <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}" style="min-width:1280px;">
             <div class="main-header">
-                <!--
-                <div class="navicon-con">
-                    <Button :style="{transform: 'rotateZ(' + (this.hideMenuText ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
-                        <Icon type="navicon" size="32"></Icon>
-                    </Button>
+                <div class="back_home">
+                    <Icon type="ios-monitor-outline"></Icon>
+                    <router-link to="/home">首页</router-link>
                 </div>
-                <div class="header-middle-con">
-                    <div class="main-breadcrumb">
-                        <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
-                    </div>
-                </div>
-                -->
-                <!--<menus/>-->
                 <div class="header-avator-con">
                     <div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">
                         <Tooltip :content="isFullScreen ? '退出全屏' : '全屏'" placement="bottom">
