@@ -283,7 +283,7 @@ finance.updateBank = updateBank;
 const recordSato = function (data, success, error) {
     api.get(`api/bm/account/transfer/record`, data, (res) => {
         if (res.rst === 1) {
-            success && success(res.data);
+            success && success(res.data, res.total);
         } else {
             error && error(res.msg);
         }
@@ -295,7 +295,7 @@ finance.recordSato = recordSato;
 const listTransfer = function (data, success, error) {
     api.get(`api/bm/account/transfer/list`, data, (res) => {
         if (res.rst === 1) {
-            success && success(res.data);
+            success && success(res.data, res.total);
         } else {
             error && error(res.msg);
         }

@@ -41,16 +41,16 @@
                         title: '钱包类型',
                         key: 'type',
                         render: (h, params) => {
-                            return h('div', params.row.type === 1 ? '主钱包' : '非主钱包');
+                            return h('div', params.row.type == 1 ? '主钱包' : '非主钱包');
                         }
                     },
                     {title: '币种代号', key: 'symbol'},
                     {title: '数量', key: 'quantity'},
                     {
                         title: '修改类型',
-                        key: 'quantity',
+                        key: 'direction',
                         render: (h, params) => {
-                            return h('div', parseFloat(params.row.quantity) > 0 ? '增加' : '扣除');
+                            return h('div', params.row.direction == 1 ? '增加' : '扣除');
                         }
                     },
                     {title: '操作人', key: 'lastUpdatedBy'}
