@@ -50,6 +50,7 @@
                             return h('div', [
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
+                                    style: {marginRight: '3px'},
                                     on: {
                                         click: () => {
                                             util.setDialog(dialog, {
