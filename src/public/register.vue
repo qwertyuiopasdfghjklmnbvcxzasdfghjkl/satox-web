@@ -36,7 +36,7 @@
                     </template>
                     <inputbox id="SATOX-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
-                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
+                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')" v-show="false"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
