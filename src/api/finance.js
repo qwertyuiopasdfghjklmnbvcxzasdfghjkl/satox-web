@@ -244,7 +244,7 @@ const recordRecharge = function (data, success, error) {
 finance.recordRecharge = recordRecharge;
 
 // 财务管理--USDS管理--银行卡列表
-const selectPageUsdsBanks = function ( data, success, error) {
+const selectPageUsdsBanks = function (data, success, error) {
     api.get(`api/bm/financialManage/usds/banks`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
@@ -256,7 +256,7 @@ const selectPageUsdsBanks = function ( data, success, error) {
 finance.selectPageUsdsBanks = selectPageUsdsBanks;
 
 // 财务管理--USDS管理--添加银行卡
-const insertUsdsBank = function ( data, success, error) {
+const insertUsdsBank = function (data, success, error) {
     api.post(`api/bm/financialManage/usds/bank`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data);
@@ -268,7 +268,7 @@ const insertUsdsBank = function ( data, success, error) {
 finance.insertUsdsBank = insertUsdsBank;
 
 // 财务管理--USDS管理--更新银行卡
-const updateBank = function ( data, success, error) {
+const updateBank = function (data, success, error) {
     api.put(`api/bm/financialManage/usds/bank`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data);
@@ -278,5 +278,17 @@ const updateBank = function ( data, success, error) {
     }, error);
 };
 finance.updateBank = updateBank;
+
+// 财务管理--SATO数量修改--修改记录
+const recordSato = function (data, success, error) {
+    api.get(`api/bm/account/transfer/record`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.recordSato = recordSato;
 
 export default finance;

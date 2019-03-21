@@ -8,7 +8,7 @@
             <Row>
                 <Col span="16">
                     <Select v-model="formData.type" style="width:200px;">
-                        <Option value="account">用户名</Option>
+                        <Option value="username">用户名</Option>
                     </Select>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
                     <Button type="primary" @click="getList(true)">查询</Button>
@@ -18,15 +18,15 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
+            <Page :current="page" :total="total" @on-change="changePage"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </Row>
 </template>
 
 <script>
-    // import financeApi from '../../api/finance',
-    import kyc from '../../api/kyc';
+    import financeApi from '../../api/finance';
+    // import kyc from '../../api/kyc';
     import util from '../../libs/util';
     import reviseDialog from './components/revise_list';
     import dialog from './components/dialog_sato';
@@ -34,21 +34,28 @@
     export default {
         data () {
             return {
-                curPage: 1,
-                total: 0,
                 formData: {
-                    type: 'account',
+                    type: 'username',
                     text: ''
                 },
+                page: 1,
+                size: 20,
+                total: 0,
                 columns1: [
-                    {title: '用户名', key: 'account'},
-                    {title: '手机号', key: 'account'},
-                    {title: '姓名', key: 'cn'},
-                    {title: '钱包类型', key: 'verifyName'},
-                    {title: '币种代号', key: 'verifyName'},
-                    {title: '总金额', key: 'verifyName'},
-                    {title: '可用金额', key: 'verifyName'},
-                    {title: '冻结金额', key: 'verifyName'},
+                    {title: '用户名', key: 'username'},
+                    {title: '手机号', key: 'mobile'},
+                    {title: '姓名', key: 'userRealName'},
+                    {
+                        title: '钱包类型',
+                        key: 'type',
+                        render: (h, params) => {
+                            return h('div', this.switchStaus(params.row.type));
+                        }
+                    },
+                    {title: '币种代号', key: 'symbol'},
+                    {title: '总金额', key: 'totalBalance'},
+                    {title: '可用金额', key: 'availableBalance'},
+                    {title: '冻结金额', key: 'frozenBalance'},
                     {
                         title: '操作',
                         key: 'opreat',
@@ -95,49 +102,28 @@
             this.getList();
         },
         methods: {
-            switchVerify (state) {// 0：驾照，1：护照，2：国民身份证）
+            switchStaus (state) { // 1：主钱包，2：非主钱包）
                 switch (state) {
-                    case 2:
-                        return '身份证';
-                        break;
-                    case 0:
-                        return '驾照';
-                        break;
                     case 1:
-                        return '护照';
+                        return '主钱包';
+                        break;
+                    case 2:
+                        return '非主钱包';
                         break;
                 }
             },
-            switchStaus (state) {//0：未验证、1：待审核、2：已通过、3：未通过、4 : 待复核
-                switch (state) {
-                    case 0:
-                        return '未验证';
-                        break;
-                    case 1:
-                        return '待审核';
-                        break;
-                    case 2:
-                        return '已通过';
-                        break;
-                    case 3:
-                        return '未通过';
-                        break;
-                    case 4:
-                        return '待复核';
-                        break;
-                }
-            },
-            getList (key) {
-                if (key) {
-                    this.curPage = 1;
-                }
-                let data = {};
-                if (this.formData.text) {
+            getList () {
+                let data = {
+                    page: this.page,
+                    size: this.size,
+                    symbol: 'SATO'
+                };
+                if (this.formData.type && this.formData.text) {
                     data[this.formData.type] = this.formData.text;
                 }
-                kyc.selectPageKycVerifys(this.curPage, data, (res, total) => {
-                    this.total = total;
-                    this.data1 = res;
+                financeApi.findUSDSRechargeRecords(data, (rdata, rtotel) => {
+                    this.data1 = rdata;
+                    this.total = rtotel;
                 });
             },
             reviseDialog () {
@@ -148,7 +134,7 @@
                 });
             },
             changePage (page) {
-                this.curPage = page;
+                this.page = page;
                 this.getList();
             }
         }

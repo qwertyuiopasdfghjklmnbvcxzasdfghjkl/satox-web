@@ -13,35 +13,47 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
+            <Page :current="page" :total="total" @on-change="changePage"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </Row>
 </template>
 
 <script>
-    // import financeApi from '../../api/finance',
+    import financeApi from '../../../api/finance';
     import kyc from '../../../api/kyc';
 
     export default {
         data () {
             return {
-                curPage: 1,
+                page: 1,
                 total: 0,
                 formData: {
-                    type: 'account',
+                    type: 'username',
                     text: ''
                 },
                 columns1: [
-                    {title: '创建时间', key: 'account'},
-                    {title: '用户名', key: 'account'},
-                    {title: '手机号', key: 'cn'},
-                    {title: '姓名', key: 'verifyName'},
-                    {title: '钱包类型', key: 'verifyName'},
-                    {title: '币种代号', key: 'verifyName'},
-                    {title: '修改类型', key: 'verifyName'},
-                    {title: '数量', key: 'verifyName'},
-                    {title: '操作人', key: 'opreat'}
+                    {title: '创建时间', key: 'createdAt'},
+                    {title: '用户名', key: 'username'},
+                    {title: '手机号', key: 'mobile'},
+                    {title: '姓名', key: 'userRealName'},
+                    {
+                        title: '钱包类型',
+                        key: 'type',
+                        render: (h, params) => {
+                            return h('div', params.row.type === 1 ? '主钱包' : '非主钱包');
+                        }
+                    },
+                    {title: '币种代号', key: 'symbol'},
+                    {
+                        title: '修改类型',
+                        key: 'quantity',
+                        render: (h, params) => {
+                            return h('div', parseFloat(params.row.type) > 0 ? '增加' : '扣除');
+                        }
+                    },
+                    {title: '数量', key: 'quantity '},
+                    {title: '操作人', key: 'fromUsername'}
                 ],
                 data1: []
             };
@@ -50,21 +62,27 @@
             this.getList();
         },
         methods: {
-            getList (key) {
-                if (key) {
-                    this.curPage = 1;
+            state (data) {
+                switch (data) {
+                    case 1:
                 }
-                let data = {};
+            },
+            getList () {
+                let data = {
+                    page: this.page,
+                    size: 10,
+                    symbol: 'SATO'
+                };
                 if (this.formData.text) {
                     data[this.formData.type] = this.formData.text;
                 }
-                kyc.selectPageKycVerifys(this.curPage, data, (res, total) => {
+                financeApi.recordSato(data, (res, total) => {
                     this.total = total;
                     this.data1 = res;
                 });
             },
             changePage (page) {
-                this.curPage = page;
+                this.page = page;
                 this.getList();
             },
             closeDialog () {
