@@ -38,7 +38,7 @@
                 size: 20,
                 total: 0,
                 columns: [
-                    {title: '账号', key: 'username'},
+                    {title: '用户名', key: 'username'},
                     {title: '手机号', key: 'mobile'},
                     {title: '姓名', key: 'userRealName'},
                     {title: '币种代号', key: 'symbol'},

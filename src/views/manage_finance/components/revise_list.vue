@@ -2,7 +2,7 @@
     <Row>
         <Card style="width:1000px;">
             <p slot="title">
-                <span>SATO数量修改</span>
+                <span>SATO数量修改记录</span>
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Row>
@@ -53,7 +53,7 @@
                             return h('div', parseFloat(params.row.quantity) > 0 ? '增加' : '扣除');
                         }
                     },
-                    {title: '操作人', key: 'fromUsername'}
+                    {title: '操作人', key: 'lastUpdatedBy'}
                 ],
                 data1: []
             };

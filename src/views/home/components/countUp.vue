@@ -14,8 +14,8 @@ function transformValue (val) {
     if (val < 1000) {
         endVal = val;
     } else if (val >= 1000 && val < 1000000) {
-        endVal = parseInt(val / 1000);
-        unit = 'K+';
+        endVal = parseInt(val / 1);
+        unit = '';
     } else if (val >= 1000000 && val < 10000000000) {
         endVal = parseInt(val / 1000000);
         unit = 'M+';
@@ -99,9 +99,9 @@ export default {
     watch: {
         endVal (val) {
             let res = transformValue(val);
-            let endVal = res.val;
+            // let endVal = res.val;
             this.unit = res.unit;
-            this.demo.update(endVal);
+            // this.demo.update(endVal);
         }
     }
 };

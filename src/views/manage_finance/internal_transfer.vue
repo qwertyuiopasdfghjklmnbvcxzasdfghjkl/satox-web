@@ -8,8 +8,8 @@
             <Row>
                 <Col span="16">
                     <Select v-model="formData.type" style="width:200px;">
-                        <Option value="account">转出用户名</Option>
-                        <Option value="verifyName">转入用户名</Option>
+                        <Option value="fromUsername">转出用户名</Option>
+                        <Option value="username">转入用户名</Option>
                     </Select>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
                     <Button type="primary" @click="getList(true)">查询</Button>
@@ -19,44 +19,41 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
+            <Page :current="page" :total="total" @on-change="changePage"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </Row>
 </template>
 
 <script>
-    // import financeApi from '../../api/finance',
-    import kyc from '../../api/kyc';
+    import financeApi from '../../api/finance';
     import util from '../../libs/util';
     import add from './components/add';
 
     export default {
         data () {
             return {
-                curPage: 1,
+                page: 1,
                 total: 0,
                 formData: {
-                    type: 'account',
+                    type: 'fromUsername',
                     text: ''
                 },
                 columns1: [
-                    {title: '创建时间', key: 'account'},
-                    {title: '转出用户名', key: 'account'},
-                    {title: '收入用户名', key: 'cn'},
-                    {title: '币种', key: 'verifyName'},
-                    {title: '数量', key: 'verifyName'},
-                    {title: '备注', key: 'verifyName'},
-                    {title: '操作人', key: 'verifyName'},
+                    {title: '创建时间', key: 'createdAt'},
+                    {title: '转出用户名', key: 'fromUsername'},
+                    {title: '收入用户名', key: 'username'},
+                    {title: '币种', key: 'symbol'},
+                    {title: '数量', key: 'quantity'},
+                    {title: '备注', key: 'remarks'},
+                    {title: '操作人', key: 'lastUpdatedBy'},
                     {
-                        title: '状态', key: 'verifyStatus',  // 已完成、失败、待完成
-                        render: (h, params) => { // 0：未验证  蓝色、1：待审核 蓝色、2：已通过 绿色、3：未通过 红色、4 : 待复核 紫色
-                            let status = Number(params.row.verifyStatus);
+                        title: '状态',
+                        key: 'status ',
+                        render: (h, params) => { // 1：进行中，2：已完成，3：已取消，4：已拒绝
+                            let status = Number(params.row.status);
                             let color = '';
                             switch (status) {
-                                case 0:
-                                    color = 'blue';
-                                    break;
                                 case 1:
                                     color = 'blue';
                                     break;
@@ -73,7 +70,7 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, this.switchStaus(params.row.verifyStatus)),
+                                }, this.switchStaus(params.row.status)),
                             ]);
 
                         }
@@ -86,47 +83,31 @@
             this.getList();
         },
         methods: {
-            switchVerify (state) {// 0：驾照，1：护照，2：国民身份证）
+            switchStaus (state) {
                 switch (state) {
-                    case 2:
-                        return '身份证';
-                        break;
-                    case 0:
-                        return '驾照';
-                        break;
                     case 1:
-                        return '护照';
-                        break;
-                }
-            },
-            switchStaus (state) {//0：未验证、1：待审核、2：已通过、3：未通过、4 : 待复核
-                switch (state) {
-                    case 0:
-                        return '未验证';
-                        break;
-                    case 1:
-                        return '待审核';
+                        return '进行中';
                         break;
                     case 2:
-                        return '已通过';
+                        return '已完成';
                         break;
                     case 3:
-                        return '未通过';
+                        return '已取消';
                         break;
                     case 4:
-                        return '待复核';
+                        return '已拒绝';
                         break;
                 }
             },
-            getList (key) {
-                if (key) {
-                    this.curPage = 1;
-                }
-                let data = {};
+            getList () {
+                let data = {
+                    page: this.page,
+                    size: 15
+                };
                 if (this.formData.text) {
                     data[this.formData.type] = this.formData.text;
                 }
-                kyc.selectPageKycVerifys(this.curPage, data, (res, total) => {
+                financeApi.listTransfer(data, (res, total) => {
                     this.total = total;
                     this.data1 = res;
                 });
