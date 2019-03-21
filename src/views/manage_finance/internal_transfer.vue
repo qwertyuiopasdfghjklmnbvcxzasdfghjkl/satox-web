@@ -72,7 +72,6 @@
                                     style: {color: color}
                                 }, this.switchStaus(params.row.status)),
                             ]);
-
                         }
                     }
                 ],
