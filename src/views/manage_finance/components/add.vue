@@ -15,7 +15,7 @@
                         placeholder="币种代号"></AutoComplete>
             </FormItem>
             <FormItem label="数量" prop="quantity">
-                <InputNumber v-model="formValidate.quantity" name="quantity" style="width: 100%"></InputNumber>
+                <InputNumber v-model="formValidate.quantity" :min="0" name="quantity" style="width: 100%"></InputNumber>
             </FormItem>
             <FormItem label="转出用户名" prop="fromUserName">
                 <!--<Input v-model="formValidate.fromUserName" name="fromUserName"></Input>-->
@@ -33,7 +33,7 @@
                         :data="data3"
                         @on-search="nameSearch(formValidate.toUserName, 'name')"
                         name="fromUserName"
-                        placeholder="转出用户名"></AutoComplete>
+                        placeholder="收款用户名"></AutoComplete>
             </FormItem>
             <FormItem label="备注" prop="remarks">
                 <Input v-model="formValidate.remarks" name="remarks" :maxlength="255"></Input>
