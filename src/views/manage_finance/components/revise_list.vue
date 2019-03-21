@@ -45,7 +45,13 @@
                         }
                     },
                     {title: '币种代号', key: 'symbol'},
-                    {title: '数量', key: 'quantity'},
+                    {
+                        title: '数量',
+                        key: 'quantity',
+                        render: (h, params) => {
+                            return h('div', Math.abs(params.row.quantity));
+                        }
+                    },
                     {
                         title: '修改类型',
                         key: 'direction',
