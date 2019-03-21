@@ -58,7 +58,7 @@
                     {title: '冻结金额', key: 'frozenBalance'},
                     {
                         title: '操作',
-                        key: 'opreat',
+                        key: 'action',
                         render: (h, params) => {
                             return h('div', [
                                 h('Button', {
@@ -67,7 +67,7 @@
                                     on: {
                                         click: () => {
                                             util.setDialog(dialog, {
-                                                item: params.row,
+                                                id: params.row.accountId,
                                                 state: '0',
                                                 okCallback: () => {
                                                     this.getList();
@@ -82,7 +82,7 @@
                                     on: {
                                         click: () => {
                                             util.setDialog(dialog, {
-                                                item: params.row,
+                                                id: params.row.accountId,
                                                 state: '1',
                                                 okCallback: () => {
                                                     this.getList();

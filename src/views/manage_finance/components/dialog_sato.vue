@@ -40,13 +40,13 @@
                 if (Number(this.amount) > 0) {
                     this.locked = true;
                     if (this.state === '0') {
-                        this.add();
+                        this.add(this.amount, '增加成功');
                     } else if (this.state === '1') {
                         if (Number(this.amount) > Number(this.data.availableBalance)) {
                             this.$Message.error({content: '扣除数量需小于等于可用余额'});
                             this.locked = false;
                         } else {
-                            this.deduct();
+                            this.add(-this.amount, '扣除成功');
                         }
                     }
                 } else {
@@ -54,21 +54,10 @@
                     this.locked = false;
                 }
             },
-            add () {
-                financeApi.recordRecharge({accountId: this.id, availableBalance: this.amount}, res => {
+            add (i, d) {
+                financeApi.recordRecharge({accountId: this.id, availableBalance: i}, res => {
                     this.locked = false;
-                    this.$Message.success({content: '增加成功'});
-                    this.$emit('okCallback');
-                    this.$emit('removeDialog');
-                }, msg => {
-                    this.locked = false;
-                    this.$Message.error({content: msg});
-                });
-            },
-            deduct () {
-                financeApi.recordRecharge({accountId: this.id, availableBalance: this.amount}, res => {
-                    this.locked = false;
-                    this.$Message.success({content: '扣除成功'});
+                    this.$Message.success({content: d});
                     this.$emit('okCallback');
                     this.$emit('removeDialog');
                 }, msg => {
