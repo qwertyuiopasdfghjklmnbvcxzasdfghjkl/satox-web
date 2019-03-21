@@ -45,14 +45,14 @@
                         }
                     },
                     {title: '币种代号', key: 'symbol'},
+                    {title: '数量', key: 'quantity'},
                     {
                         title: '修改类型',
                         key: 'quantity',
                         render: (h, params) => {
-                            return h('div', parseFloat(params.row.type) > 0 ? '增加' : '扣除');
+                            return h('div', parseFloat(params.row.quantity) > 0 ? '增加' : '扣除');
                         }
                     },
-                    {title: '数量', key: 'quantity '},
                     {title: '操作人', key: 'fromUsername'}
                 ],
                 data1: []
