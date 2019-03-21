@@ -39,7 +39,7 @@
                     text: ''
                 },
                 page: 1,
-                size: 20,
+                size: 15,
                 total: 0,
                 columns1: [
                     {title: '用户名', key: 'username'},

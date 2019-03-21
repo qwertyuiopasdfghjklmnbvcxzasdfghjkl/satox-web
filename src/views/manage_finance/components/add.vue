@@ -6,24 +6,37 @@
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Form ref="formValidate" :model="formValidate" :rules="ruleInline" :label-width="90" style="margin:0 20px;">
-            <FormItem label="币种代号" prop="verifyClass">
-                <Select v-model="formValidate.verifyClass" name="verifyClass">
-                    <Option value="2">二代身份证</Option>
-                    <Option value="0">驾照</Option>
-                    <Option value="1">护照</Option>
-                </Select>
+            <FormItem label="币种代号" prop="symbol">
+                <AutoComplete
+                        v-model="formValidate.symbol"
+                        :data="data1"
+                        @on-search="handleSearch"
+                        name="symbol"
+                        placeholder="币种代号"></AutoComplete>
             </FormItem>
-            <FormItem label="数量" prop="account">
-                <InputNumber  v-model="formValidate.account" name="account" style="width: 100%"></InputNumber>
+            <FormItem label="数量" prop="quantity">
+                <InputNumber v-model="formValidate.quantity" name="quantity" style="width: 100%"></InputNumber>
             </FormItem>
-            <FormItem label="转出用户名" prop="cn">
-                <Input v-model="formValidate.cn" name="cn"></Input>
+            <FormItem label="转出用户名" prop="fromUserName">
+                <!--<Input v-model="formValidate.fromUserName" name="fromUserName"></Input>-->
+                <AutoComplete
+                        v-model="formValidate.fromUserName"
+                        :data="data2"
+                        @on-search="nameSearch(formValidate.fromUserName, 'formName')"
+                        name="fromUserName"
+                        placeholder="转出用户名"></AutoComplete>
             </FormItem>
-            <FormItem label="收款用户名" prop="verifySurname">
-                <Input v-model="formValidate.verifySurname" name="verifySurname"></Input>
+            <FormItem label="收款用户名" prop="toUserName">
+                <!--<Input v-model="formValidate.toUserName" name="toUserName"></Input>-->
+                <AutoComplete
+                        v-model="formValidate.toUserName"
+                        :data="data3"
+                        @on-search="nameSearch(formValidate.toUserName, 'name')"
+                        name="fromUserName"
+                        placeholder="转出用户名"></AutoComplete>
             </FormItem>
-            <FormItem label="备注" prop="verifyIdCard">
-                <Input v-model="formValidate.verifyIdCard" name="verifyIdCard" maxlength="'255'"></Input>
+            <FormItem label="备注" prop="remarks">
+                <Input v-model="formValidate.remarks" name="remarks" :maxlength="255"></Input>
             </FormItem>
 
             <FormItem>
@@ -35,43 +48,76 @@
 
 <script>
     import kycApi from '../../../api/kyc';
+    import currenyApi from '../../../api/currency';
+    import financeApi from '../../../api/finance';
     import until from '../../../libs/util';
 
     export default {
         data () {
             return {
                 formValidate: {
-                    account: null,
-                    verifyClass: '',
-                    verifySex: '1',
-                    verifyIdCard: null,
-                    verifyStatus: null,
-                    verifyAddTime: '',
-                    verifyUserID: null,
-                    verifyCountryId: null,
-                    cn: '',
-                    verifySurname: ''
+                    symbol: null,
+                    quantity: null,
+                    fromUserName: null,
+                    toUserName: null,
+                    remarks: null,
                 },
+                data1: [],
+                data2: [],
+                data3: [],
                 ruleInline: {
-                    verifyClass: [
+                    symbol: [
                         {required: true, message: '请选择币种', trigger: 'blur'}
                     ],
-                    account: [
-                        {required: true, message: '请输入数量', trigger: 'blur'}
+                    quantity: [
+                        {required: true, message: '请输入数量'}
                     ],
-                    cn: [
+                    fromUserName: [
                         {required: true, message: '请输入转出用户名', trigger: 'blur'}
                     ],
-                    verifySurname: [
+                    toUserName: [
                         {required: true, message: '请输入收款用户名', trigger: 'blur'}
                     ],
-                    verifyIdCard: [
-                        {required: false, message: '', trigger: 'blur'}
+                    remarks: [
+                        {required: false, message: ''}
                     ]
                 }
             };
         },
         methods: {
+            handleSearch (value) {
+                this.getHandleSearch(value);
+            },
+            nameSearch (value, state) {
+                this.getNameSearch(value, state);
+            },
+            getHandleSearch (value) {
+                currenyApi.findSymbolList({
+                    symbol: value || null
+                }, 1, 1, (res) => {
+                    let data = [];
+                    res.forEach(res => {
+                        data.push(res.symbol);
+                    });
+                    this.data1 = data;
+                });
+            },
+            getNameSearch (value, state) {
+                currenyApi.getfindUserList(1, 1,
+                    {
+                        username: value || null
+                    }, (res) => {
+                        let data = [];
+                        res.forEach(res => {
+                            data.push(res.username);
+                        });
+                        if (state === 'formName') {
+                            this.data2 = data;
+                        } else if (state === 'name') {
+                            this.data3 = data;
+                        }
+                    });
+            },
             iconValidator (prop, e) {
                 this.formValidate[prop] = e.target.value;
             },
@@ -81,12 +127,8 @@
             addVerify () {
                 this.$refs.formValidate.validate((valid) => {
                     if (valid) {
-                        let formData = new FormData(this.$refs.formValidate.$el);
-                        formData.append('verifyClass', this.formValidate.verifyClass);
-                        formData.append('verifyCountryId', '1');
-                        formData.append('verifySex', this.formValidate.verifySex);
-                        // formData.append('verifyUserID', this.formItem.verifyUserID);
-                        kycApi.insertVerify(formData, (res) => {
+                        // let formData = new FormData(this.$refs.formValidate.$el);
+                        financeApi.addTransfer(this.formValidate, (res) => {
                             this.$Message.success({content: '添加成功'});
                             this.$emit('okCallback');
                             this.$emit('removeDialog');
