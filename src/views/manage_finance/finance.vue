@@ -28,14 +28,14 @@
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
-            <Row style="margin:10px 0;">
-                <Card>
-                    <p slot="title">实时对账</p>
-                    <Table :columns="columns3" :data="data3"></Table>
-                    <Page :current="curPage2" :total="total2" @on-change="changePage2"
-                          style="text-align:center;margin-top:20px;"></Page>
-                </Card>
-            </Row>
+            <!--<Row style="margin:10px 0;">-->
+                <!--<Card>-->
+                    <!--<p slot="title">实时对账</p>-->
+                    <!--<Table :columns="columns3" :data="data3"></Table>-->
+                    <!--<Page :current="curPage2" :total="total2" @on-change="changePage2"-->
+                          <!--style="text-align:center;margin-top:20px;"></Page>-->
+                <!--</Card>-->
+            <!--</Row>-->
             <Row>
                 <Card>
                     <p slot="title">资金池情况</p>
