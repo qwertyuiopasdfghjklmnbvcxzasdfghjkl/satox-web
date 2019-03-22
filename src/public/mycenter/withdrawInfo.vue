@@ -183,6 +183,7 @@ export default {
   },
   created () {
     this.getUserState()
+    this.getBank()
     Validator.extend('isLessMin', {
       getMessage: (field, args) => this.$t('account.user_minimum_number_of_cash').format(`${this.minWithdraw}`),
       validate: (files, args) => {
@@ -205,6 +206,17 @@ export default {
     })
   },
   methods: {
+    getBank(){
+      userApi.getBank(data=>{
+        this.userBankInfo.bankCountryCode = data.bankCountryCode
+        this.userBankInfo.bankCode = data.bankCode
+        this.userBankInfo.bankBranch = data.bankBranch
+        this.userBankInfo.bankProvince = data.bankProvince
+        this.userBankInfo.bankDistrict = data.bankDistrict
+        this.userBankInfo.bankRealname = data.bankRealname
+        this.userBankInfo.bankNumber = data.bankNumber
+      })
+    },
     getUserState () {
       // 获取当前用户状态信息
       userApi.getUserState((data) => {
