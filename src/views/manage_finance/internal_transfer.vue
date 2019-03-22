@@ -9,7 +9,7 @@
                 <Col span="16">
                     <Select v-model="formData.type" style="width:200px;">
                         <Option value="fromUsername">转出用户名</Option>
-                        <Option value="username">转入用户名</Option>
+                        <Option value="username">收款用户名</Option>
                     </Select>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
                     <Button type="primary" @click="getList(true)">查询</Button>
@@ -19,8 +19,7 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
-            <Page :current="page" :total="total" @on-change="changePage"
-                  style="text-align:center;margin-top:20px;"></Page>
+            <Page :current="page" :total="total" :page-size="size" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </Row>
 </template>
@@ -35,6 +34,7 @@
             return {
                 page: 1,
                 total: 0,
+                size: 15,
                 formData: {
                     type: 'fromUsername',
                     text: ''
@@ -42,7 +42,7 @@
                 columns1: [
                     {title: '创建时间', key: 'createdAt'},
                     {title: '转出用户名', key: 'fromUsername'},
-                    {title: '收入用户名', key: 'username'},
+                    {title: '收款用户名', key: 'username'},
                     {title: '币种', key: 'symbol'},
                     {title: '数量', key: 'quantity'},
                     {title: '备注', key: 'remarks'},
@@ -101,7 +101,7 @@
             getList () {
                 let data = {
                     page: this.page,
-                    size: 15
+                    size: this.size
                 };
                 if (this.formData.text) {
                     data[this.formData.type] = this.formData.text;
@@ -119,7 +119,7 @@
                 });
             },
             changePage (page) {
-                this.curPage = page;
+                this.page = page;
                 this.getList();
             }
         }
