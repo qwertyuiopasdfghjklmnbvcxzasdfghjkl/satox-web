@@ -90,6 +90,8 @@
                     bankRealname: null,
                     bankNumber: null
                 },
+                data: {
+                },
                 bankProvince: null,
                 bankDistrict: null,
                 bankCode: null,
@@ -121,7 +123,7 @@
                 finance.updateBank(data, (res) => {
                     this.$Message.success({content: '修改成功'});
                     this.$emit('okCallback');
-                    this.$emit('removeDialog');
+                    this.datas[propName] = this[propName];
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
