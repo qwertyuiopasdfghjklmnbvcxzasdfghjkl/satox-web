@@ -7,18 +7,15 @@
         </p>
         <Form ref="formValidate" :model="formValidate" :rules="ruleInline" :label-width="90" style="margin:0 20px;">
             <FormItem label="币种代号" prop="symbol">
-                <AutoComplete
-                        v-model="formValidate.symbol"
-                        :data="data1"
-                        @on-search="handleSearch"
-                        name="symbol"
-                        placeholder="币种代号"></AutoComplete>
+                <Select v-model="formValidate.symbol">
+                    <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                    </Option>
+                </Select>
             </FormItem>
             <FormItem label="数量" prop="quantity">
-                <InputNumber v-model="formValidate.quantity" :min="0" name="quantity" style="width: 100%"></InputNumber>
+                <input class="number_input" type="number" @input="oninput"/>
             </FormItem>
             <FormItem label="转出用户名" prop="fromUserName">
-                <!--<Input v-model="formValidate.fromUserName" name="fromUserName"></Input>-->
                 <AutoComplete
                         v-model="formValidate.fromUserName"
                         :data="data2"
@@ -27,7 +24,6 @@
                         placeholder="转出用户名"></AutoComplete>
             </FormItem>
             <FormItem label="收款用户名" prop="toUserName">
-                <!--<Input v-model="formValidate.toUserName" name="toUserName"></Input>-->
                 <AutoComplete
                         v-model="formValidate.toUserName"
                         :data="data3"
@@ -65,6 +61,7 @@
                 data1: [],
                 data2: [],
                 data3: [],
+                symbolList: [],
                 ruleInline: {
                     symbol: [
                         {required: true, message: '请选择币种', trigger: 'blur'}
@@ -84,22 +81,16 @@
                 }
             };
         },
+        created () {
+            this.getdataSymbol();
+        },
         methods: {
-            handleSearch (value) {
-                this.getHandleSearch(value);
-            },
             nameSearch (value, state) {
                 this.getNameSearch(value, state);
             },
-            getHandleSearch (value) {
-                currenyApi.findSymbolList({
-                    symbol: value || null
-                }, 1, 1, (res) => {
-                    let data = [];
-                    res.forEach(res => {
-                        data.push(res.symbol);
-                    });
-                    this.data1 = data;
+            getdataSymbol () {
+                currenyApi.findAllValidSymbolList((res) => {
+                    this.symbolList = res;
                 });
             },
             getNameSearch (value, state) {
@@ -117,6 +108,11 @@
                             this.data3 = data;
                         }
                     });
+            },
+            oninput (e) {
+                // 通过正则过滤小数点后8位
+                e.target.value = (e.target.value.match(/^\d*(\.?\d{0,8})/g)[0]) || null;
+                this.formValidate.quantity = e.target.value;
             },
             iconValidator (prop, e) {
                 this.formValidate[prop] = e.target.value;
@@ -143,5 +139,10 @@
 </script>
 
 <style>
-
+.number_input{
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    width: 267px;
+    text-indent: 6px;
+}
 </style>
