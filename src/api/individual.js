@@ -6,6 +6,18 @@ import api from '@/api'
 let domain = ''
 let individual = {}
 
+// 获取用户银行卡信息
+const getBank = function (success, error) {
+  api.get(`${domain}api/v2/account2/bank`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+individual.getBank = getBank
+
 // 登录之后添加一条登录记录
 const addLoginHistory = function () {
   api.get(`${domain}api/v2/individual/addRecentLoginRecord`)
