@@ -52,6 +52,16 @@
                 <Button type="primary" @click="tabs('openingPrice')">保存</Button>
             </Col>
         </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">最新价格</Col>
+            <Col span="6">{{item.openingPrice}}</Col>
+            <Col span="6">
+                <InputNumber style="width:113px;" :min="0" v-model="openingPrice"></InputNumber>
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('openingPrice')">保存</Button>
+            </Col>
+        </Row>
 
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
             <Col span="6">价格精度</Col>
@@ -162,6 +172,7 @@
         },
         created () {
             this.findMarketList();
+            console.log(this.item);
         },
         methods: {
             closeDialog () {
