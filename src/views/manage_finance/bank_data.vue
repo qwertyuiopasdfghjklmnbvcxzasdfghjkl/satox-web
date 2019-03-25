@@ -8,7 +8,7 @@
             <Row>
                 <Col span="16">
                     <Select v-model="formData.type" style="width:200px;">
-                        <Option value="account">用户名</Option>
+                        <Option value="username">用户名</Option>
                     </Select>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
                     <Button type="primary" @click="getList(true)">查询</Button>
