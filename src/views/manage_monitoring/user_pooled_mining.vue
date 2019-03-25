@@ -1,0 +1,123 @@
+<template>
+    <div style="min-width:1000px;">
+        <Card>
+            <p slot="title">用户币池信息</p>
+            <Row style="margin-bottom: 20px;">
+                <Col span="6">
+                    币种：
+                    <Select v-model="symbol"  style="width:180px;">
+                        <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                        </Option>
+                    </Select>
+                </Col>
+                <Col span="6">
+                    锁定状态：
+                    <Select v-model="locked" style="width:180px;">
+                        <Option :value="'0'">等于0</Option>
+                        <Option :value="'1'">大于0小于10000</Option>
+                        <Option :value="'2'">大于等于10000</Option>
+                    </Select>
+                </Col>
+                <Col span="6">
+                    用户名：
+                    <Input v-model="username" style="width:180px;"/>
+                </Col>
+
+                <Col span="2">
+                    <Button type="primary" @click="curPage=1;getfindAccountList()">查询</Button>
+                </Col>
+            </Row>
+            <Table :columns="columns1" :data="data1"></Table>
+            <Page :current="curPage" :total="total" @on-change="changePage"
+                  style="text-align:center;margin-top:20px;"></Page>
+        </Card>
+
+    </div>
+</template>
+<script>
+    import monitApi from '../../api/monitoring';
+    import currenyApi from '../../api/currency';
+
+    export default {
+        data () {
+            return {
+                username: '',
+                symbol: 'ETH',
+                locked: '1',
+                curPage: 1,
+                total: 0,
+                columns1: [
+                    {
+                        title: '用户名',
+                        key: 'username'
+                    },
+                    {
+                        title: '币种ID',
+                        key: 'accountId'
+                    },
+                    {
+                        title: '币种',
+                        key: 'symbol'
+                    },
+                    {
+                        title: '地址',
+                        key: 'symbol'
+                    },
+                    {
+                        title: '总金额',
+                        key: 'totalBalance'
+                    },
+                    {
+                        title: '可用金额',
+                        key: 'availableBalance'
+                    },
+                    {
+                        title: '冻结金额',
+                        key: 'frozenBalance'
+                    },
+                    {
+                        title: '创建时间',
+                        key: 'adFrozenBalance'
+                    },
+                    {
+                        title: '更新时间',
+                        key: 'withdrawAmount'
+                    }
+                ],
+                data1: [],
+                symbolList: [],
+            };
+        },
+        created () {
+            this.getfindAccountList();
+            this.getdataSymbol();
+        },
+        methods: {
+            getfindAccountList () {
+                monitApi.findAccountList(this.curPage, {
+                    username: this.username || '',
+                    symbol: this.symbol || '',
+                    locked: this.locked || ''
+                }, (res, total) => {
+                    this.total = total;
+                    this.data1 = res;
+                });
+            },
+            changePage (page) {
+                this.curPage = page;
+                this.getfindAccountList();
+            },
+            getdataSymbol () {
+                currenyApi.findAllValidSymbolList((res) => {
+                    this.symbolList = res;
+                });
+            }
+        }
+    };
+</script>
+<style scoped>
+    .ivu-row {
+        height: 40px;
+        line-height: 40px;
+    }
+</style>

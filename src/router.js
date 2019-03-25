@@ -713,7 +713,27 @@ export const operationRouter = [
                 }
             }
         ]
-    }
+    },
+    // {
+    //     path: '/operation_app',
+    //     name: 'operation_app',
+    //     title: 'APP发布',
+    //     component: Main,
+    //     icon: 'social-apple-outline',
+    //     meta: {
+    //         roles: ['ROLE_ADMIN']
+    //     },
+    //     children: [
+    //         {
+    //             path: 'operation_app_index',
+    //             title: 'APP发布',
+    //             name: 'operation_app_index',
+    //             component: resolve => {
+    //                 require(['./views/manage_operation/operation_app.vue'], resolve);
+    //             }
+    //         }
+    //     ]
+    // }
 ];
 
 export const adminRouter = [
@@ -902,6 +922,26 @@ export const monitoringRouter = [
             }
         ]
     },
+    // {
+    //     path: '/collection',
+    //     name: 'collection',
+    //     title: '归集记录列表',
+    //     component: Main,
+    //     icon: 'arrow-shrink',
+    //     meta: {
+    //         roles: ['ROLE_DEVELOP']
+    //     },
+    //     children: [
+    //         {
+    //             path: 'collection_index',
+    //             title: '归集记录列表',
+    //             name: 'collection_index',
+    //             component: resolve => {
+    //                 require(['./views/manage_monitoring/collection.vue'], resolve);
+    //             }
+    //         }
+    //     ]
+    // },
     {
         path: '/block',
         name: 'block',
@@ -953,6 +993,26 @@ export const monitoringRouter = [
             }
         ]
     },
+    // {
+    //     path: '/userPooledMining',
+    //     name: 'userPooledMining',
+    //     title: '用户币池信息',
+    //     component: Main,
+    //     icon: 'social-bitcoin',
+    //     meta: {
+    //         roles: ['ROLE_DEVELOP'],
+    //     },
+    //     children: [
+    //         {
+    //             path: 'userPooledMining_index',
+    //             title: '用户币池信息',
+    //             name: 'userPooledMining_index',
+    //             component: resolve => {
+    //                 require(['./views/manage_monitoring/user_pooled_mining.vue'], resolve);
+    //             }
+    //         }
+    //     ]
+    // },
     {
         path: '/node_msg',
         name: 'node_msg',
