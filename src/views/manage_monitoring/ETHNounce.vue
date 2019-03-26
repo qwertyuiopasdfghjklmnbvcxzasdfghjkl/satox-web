@@ -57,7 +57,7 @@
                                             util.setDialog(updataNonce, {
                                                 item: params.row,
                                                 okCallback: () => {
-                                                    this.getCheckVerifys();
+                                                    this.getETHNonceList();
                                                 }
                                             });
                                         }
