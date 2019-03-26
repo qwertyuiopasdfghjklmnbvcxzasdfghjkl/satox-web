@@ -6,11 +6,9 @@
                 <span class="refresh" @click="reshAll"></span>
             </p>
             <Row style="margin-bottom: 20px;">
-                <Col span="4">
+                <Col span="14">
                     ETH地址：
-                    <Input v-model="address" style="width:180px;"/>
-                </Col>
-                <Col span="2">
+                    <Input v-model="address" style="width:300px;"/>
                     <Button type="primary" @click="curPage1=1;getfindETHNonceList()">查询</Button>
                 </Col>
             </Row>
@@ -86,9 +84,9 @@
                 this.getETHNonceList();
             },
             getfindETHNonceList () {
-                monitApi.findETHNonce(this.address, (res, total) => {
-                    this.total1 = total;
-                    this.data2 = res;
+                monitApi.findETHNonce(this.address, (res) => {
+                    // this.total1 = total;
+                    this.data2 = res ? [res] : [];
                 });
             },
             reshAll () {
