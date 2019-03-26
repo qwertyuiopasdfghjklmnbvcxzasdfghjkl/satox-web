@@ -7,10 +7,11 @@
                     <select v-model="symbolType"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="1">BTC</option>
-                        <option value="2">ETH</option>
+                        <option value="1">ETH</option>
+                        <option value="2">BTC</option>
                         <option value="3">OMNI</option>
-                        <!--<option value="4">MBT</option>-->
+                        <option value="4">MBT</option>
+                        <option value="5">EOS</option>
                     </select>
                 </Col>
                 <Col span="2">币种：</Col>
@@ -19,32 +20,33 @@
                 </Col>
                 <Col span="2">用户名：</Col>
                 <Col span="4">
-                    <Input v-model="userName" style="width:100px;"/>
+                    <Input v-model="username" style="width:100px;"/>
                 </Col>
             </Row>
             <Row style="margin-bottom: 20px;">
                 <Col span="2">归集状态：</Col>
                 <Col span="4">
-                    <select v-model="direction"
+                    <select v-model="status"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="1">等待交易发起</option>
-                        <option value="2">交易已发送</option>
-                        <option value="3">撤销</option>
-                        <option value="4">归集失败</option>
-                        <option value="5">归集完成</option>
-                        <option value="5">归集失败资金返还</option>
+                        <option value="1">未处理</option>
+                        <option value="2">等待交易发起</option>
+                        <option value="3">交易已发送</option>
+                        <option value="4">撤销</option>
+                        <option value="5">提现失败</option>
+                        <option value="6">对账完成</option>
+                        <option value="7">提现失败资金返还</option>
                     </select>
                 </Col>
                 <Col span="2">交易发起时长：</Col>
                 <Col span="4">
-                    <select v-model="time"
+                    <select v-model="initiationTime"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="3">1h以上</option>
-                        <option value="4">2h以</option>
-                        <option value="6">5h以上</option>
-                        <option value="8">24h以上</option>
+                        <option value="1">1h以上</option>
+                        <option value="2">2h以</option>
+                        <option value="5">5h以上</option>
+                        <option value="24">24h以上</option>
                     </select>
                 </Col>
                 <Col span="2">交易ID：</Col>
@@ -72,11 +74,11 @@
             return {
                 symbolType: '',
                 symbol: '',
-                time: '',
+                initiationTime: '',
                 direction: '',
-                userName: '',
+                username: '',
                 txId: '',
-                status: 1,
+                status: '',
                 curPage: 1,
                 size: 10,
                 total: 0,
@@ -87,7 +89,7 @@
                     },
                     {
                         title: '用户名',
-                        key: 'userName'
+                        key: 'username'
                     },
                     {
                         title: '币种',
@@ -114,30 +116,30 @@
                     },
                     {
                         title: '矿工费',
-                        key: 'minerFee'
+                        key: 'btcMinerFee'
                     },
                     {
                         title: '归集状态', //1 等待  2 完成
                         key: 'status',
                         render: (h, params) => {
-                            return h('div', params.row.status === 1 ? '等待' : '完成');
+                            return h('div', this.switchStaus2(params.row.status));
                         }
                     },
                     {
                         title: '交易失败原因',
-                        key: 'ledgeredFlag'
+                        key: 'failMsg'
                     },
                     {
                         title: 'Nounce值',
-                        key: 'createdTime'
+                        key: 'nonce'
                     },
                     {
                         title: '交易发起时间',
-                        key: 'createdTime'
+                        key: 'tradeAt'
                     },
                     {
                         title: '交易完成时间',
-                        key: 'createdTime'
+                        key: 'completeTime'
                     },
                     {
                         title: '解冻归还ID',
@@ -151,37 +153,18 @@
             this.getconfirmList();
         },
         methods: {
-            switchStaus1 (state) {
-                switch (state) {
-                    case 1:
-                        return '用户充值';
-                        break;
-                    case 2:
-                        return '用户提现';
-                        break;
-                    case 3:
-                        return '交易所归集';
-                        break;
-                    case 4:
-                        return '冷钱包充值';
-                        break;
-                    case 5:
-                        return '冷钱包提现';
-                        break;
-                }
-            },
             switchStaus (state) {
-                switch (state) {
-                    case '1':
-                        return 'BTC';
-                        break;
-                    case '2':
+                switch (state) { // 1 ETH 2BTC 3 OMNI 4 MBT 5 EOS
+                    case 1:
                         return 'ETH';
                         break;
-                    case '3':
+                    case 2:
+                        return 'BTC';
+                        break;
+                    case 3:
                         return 'OMNI';
                         break;
-                    case '4':
+                    case 4:
                         return 'MBT';
                         break;
                     case 5:
@@ -189,16 +172,41 @@
                         break;
                 }
             },
+            switchStaus2 (state) {
+                switch (state) { //  1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6 对账完成 7 提现失败资金返还
+                    case 1:
+                        return '未处理';
+                        break;
+                    case 2:
+                        return '等待交易发起';
+                        break;
+                    case 3:
+                        return '交易已发送';
+                        break;
+                    case 4:
+                        return '撤销';
+                        break;
+                    case 5:
+                        return '提现失败';
+                        break;
+                    case 6:
+                        return '对账完成';
+                        break;
+                    case 7:
+                        return '提现失败资金返还';
+                        break;
+                }
+            },
             getconfirmList () {
-                monitorApi.confirmList({
+                monitorApi.transfersList({
                     page: this.curPage,
                     size: this.size,
-                    symbolType: this.symbolType || '',
-                    symbol: this.symbol || '',
-                    timeInterval: this.time || '',
-                    direction: this.direction || '',
-                    userName: this.userName || '',
-                    txId: this.txId || ''
+                    symbolType: this.symbolType,
+                    initiationTime: this.initiationTime,
+                    username: this.username,
+                    status: this.status,
+                    symbol: this.symbol,
+                    txId: this.txId
                 }, (res, total) => {
                     this.total = total;
                     this.data1 = res;
