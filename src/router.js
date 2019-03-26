@@ -1014,6 +1014,26 @@ export const monitoringRouter = [
         ]
     },
     {
+        path: '/ETHNounce',
+        name: 'ETHNounce',
+        title: 'ETHNounce值',
+        component: Main,
+        icon: 'android-locate',
+        meta: {
+            roles: ['ROLE_DEVELOP'],
+        },
+        children: [
+            {
+                path: 'ETHNounce_index',
+                title: 'ETHNounce值',
+                name: 'ETHNounce_index',
+                component: resolve => {
+                    require(['./views/manage_monitoring/ETHNounce.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/node_msg',
         name: 'node_msg',
         title: '节点信息',

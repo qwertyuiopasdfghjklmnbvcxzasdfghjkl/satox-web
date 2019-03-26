@@ -45,6 +45,7 @@
                 symbol: 'ETH',
                 locked: '1',
                 curPage: 1,
+                size: 10,
                 total: 0,
                 columns1: [
                     {
@@ -53,7 +54,7 @@
                     },
                     {
                         title: '币种ID',
-                        key: 'accountId'
+                        key: 'symbolId'
                     },
                     {
                         title: '币种',
@@ -61,7 +62,7 @@
                     },
                     {
                         title: '地址',
-                        key: 'symbol'
+                        key: 'toAddress'
                     },
                     {
                         title: '总金额',
@@ -73,15 +74,15 @@
                     },
                     {
                         title: '冻结金额',
-                        key: 'frozenBalance'
+                        key: 'loanBalance'
                     },
                     {
                         title: '创建时间',
-                        key: 'adFrozenBalance'
+                        key: 'createdAt'
                     },
                     {
                         title: '更新时间',
-                        key: 'withdrawAmount'
+                        key: 'updatedAt'
                     }
                 ],
                 data1: [],
@@ -94,10 +95,12 @@
         },
         methods: {
             getfindAccountList () {
-                monitApi.findAccountList(this.curPage, {
+                monitApi.findCoinPoolList( {
+                    page: this.curPage,
+                    size: this.size,
                     username: this.username || '',
                     symbol: this.symbol || '',
-                    locked: this.locked || ''
+                    // locked: this.locked || ''
                 }, (res, total) => {
                     this.total = total;
                     this.data1 = res;
