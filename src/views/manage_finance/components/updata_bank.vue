@@ -11,6 +11,16 @@
                 <Col span="6"></Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
+                <Col span="5">国家银行</Col>
+                <Col span="8">{{this.datas.bankCountryCode}}</Col>
+                <Col span="8">
+                    <Input v-model="bankCountryCode"/>
+                </Col>
+                <Col span="3">
+                    <Button type="primary" @click="tabs('bankCountryCode')">保存</Button>
+                </Col>
+            </Row>
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="5">银行省</Col>
                 <Col span="8">{{this.datas.bankProvince}}</Col>
                 <Col span="8">
@@ -85,15 +95,16 @@
                 datas: {
                     bankProvince: null,
                     bankDistrict: null,
+                    bankCountryCode: null,
                     bankCode: null,
                     bankBranch: null,
                     bankRealname: null,
                     bankNumber: null
                 },
-                data: {
-                },
+                data: {},
                 bankProvince: null,
                 bankDistrict: null,
+                bankCountryCode: null,
                 bankCode: null,
                 bankBranch: null,
                 bankRealname: null,
@@ -123,7 +134,9 @@
                 finance.updateBank(data, (res) => {
                     this.$Message.success({content: '修改成功'});
                     this.$emit('okCallback');
-                    this.datas[propName] = this[propName];
+                    let d = JSON.stringify(this[propName]);
+                    this.datas[propName] = JSON.parse(d);
+                    this[propName] = '';
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
