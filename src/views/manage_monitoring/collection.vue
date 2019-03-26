@@ -78,6 +78,7 @@
                 txId: '',
                 status: 1,
                 curPage: 1,
+                size: 10,
                 total: 0,
                 columns1: [
                     {
@@ -189,14 +190,15 @@
                 }
             },
             getconfirmList () {
-                monitorApi.confirmList(this.curPage, {
+                monitorApi.confirmList({
+                    page: this.curPage,
+                    size: this.size,
                     symbolType: this.symbolType || '',
                     symbol: this.symbol || '',
                     timeInterval: this.time || '',
                     direction: this.direction || '',
                     userName: this.userName || '',
-                    txId: this.txId || '',
-                    status: this.status
+                    txId: this.txId || ''
                 }, (res, total) => {
                     this.total = total;
                     this.data1 = res;

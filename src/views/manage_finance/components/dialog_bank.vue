@@ -9,6 +9,9 @@
             <FormItem label="用户名" prop="username">
                 <Input v-model="formValidate.username" name="username"></Input>
             </FormItem>
+            <FormItem label="国家银行" prop="bankCountryCode">
+                <Input  v-model="formValidate.bankCountryCode" name="bankCountryCode"></Input>
+            </FormItem>
             <FormItem label="银行省" prop="bankProvince">
                 <Input  v-model="formValidate.bankProvince" name="bankProvince"></Input>
             </FormItem>
@@ -44,6 +47,7 @@
             return {
                 formValidate: {
                     username: '',
+                    bankCountryCode: null,
                     bankProvince: null,
                     bankDistrict: null,
                     bankCode: '',
@@ -54,6 +58,9 @@
                 ruleInline: {
                     username: [
                         {required: true, message: '请输入用户名', trigger: 'blur'}
+                    ],
+                    bankCountryCode: [
+                        {required: true, message: '请输入国家银行', trigger: 'blur'}
                     ],
                     bankProvince: [
                         {required: true, message: '请输入银行省', trigger: 'blur'}
