@@ -54,12 +54,12 @@
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
             <Col span="6">最新价格</Col>
-            <Col span="6">{{item.openingPrice}}</Col>
+            <Col span="6">{{item.lastPrice}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" :min="0" v-model="openingPrice"></InputNumber>
+                <InputNumber style="width:113px;" :min="0" v-model="lastPrice"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('openingPrice')">保存</Button>
+                <Button type="primary" @click="tabs('lastPrice')">保存</Button>
             </Col>
         </Row>
 
@@ -158,6 +158,7 @@
                 value1: null,
                 data1: [],
                 accuracy: null,
+                lastPrice: null,
                 quantityAccu: null,
                 amountAccu: null,
                 digit: null,
