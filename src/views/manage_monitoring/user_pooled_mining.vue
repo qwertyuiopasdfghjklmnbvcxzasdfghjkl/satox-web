@@ -5,17 +5,17 @@
             <Row style="margin-bottom: 20px;">
                 <Col span="6">
                     币种：
-                    <Select v-model="symbol"  style="width:180px;">
+                    <Select v-model="symbol" style="width:180px;">
                         <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                         </Option>
                     </Select>
                 </Col>
                 <Col span="6">
-                    锁定状态：
-                    <Select v-model="locked" style="width:180px;">
-                        <Option :value="'0'">等于0</Option>
-                        <Option :value="'1'">大于0小于10000</Option>
-                        <Option :value="'2'">大于等于10000</Option>
+                    总金额：
+                    <Select v-model="totalBalance" style="width:180px;">
+                        <Option :value="0">等于0</Option>
+                        <Option :value="1">大于0小于10000</Option>
+                        <Option :value="2">大于等于10000</Option>
                     </Select>
                 </Col>
                 <Col span="6">
@@ -43,7 +43,7 @@
             return {
                 username: '',
                 symbol: 'ETH',
-                locked: '1',
+                totalBalance: 1,
                 curPage: 1,
                 size: 10,
                 total: 0,
@@ -95,12 +95,13 @@
         },
         methods: {
             getfindAccountList () {
-                monitApi.findCoinPoolList( {
+                monitApi.findCoinPoolList({
                     page: this.curPage,
                     size: this.size,
-                    username: this.username || '',
-                    symbol: this.symbol || '',
-                    // locked: this.locked || ''
+                    username: this.username,
+                    symbol: this.symbol,
+                    max: this.getTal(this.totalBalance),
+                    min: this.totalBalance === 2 ? 10000 : ''
                 }, (res, total) => {
                     this.total = total;
                     this.data1 = res;
@@ -114,6 +115,13 @@
                 currenyApi.findAllValidSymbolList((res) => {
                     this.symbolList = res;
                 });
+            },
+            getTal (i) {
+                if (i === 0) {
+                    return i;
+                } else if (i === 1) {
+                    return 10000;
+                }
             }
         }
     };
