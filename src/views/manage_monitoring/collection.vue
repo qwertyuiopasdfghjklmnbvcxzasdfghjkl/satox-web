@@ -43,10 +43,10 @@
                     <select v-model="initiationTime"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="1">1h以上</option>
-                        <option value="2">2h以</option>
-                        <option value="5">5h以上</option>
-                        <option value="24">24h以上</option>
+                        <option value="1">1h以内</option>
+                        <option value="2">2h以内</option>
+                        <option value="5">5h以内</option>
+                        <option value="24">24小时以内</option>
                     </select>
                 </Col>
                 <Col span="2">交易ID：</Col>
