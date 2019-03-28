@@ -69,15 +69,19 @@
             };
         },
         created () {
-            this.getETHNonceList();
+            // this.getETHNonceList();
         },
         methods: {
             getETHNonceList () {
-                let data = {page: this.curPage1, size: this.size, keyword: this.address};
-                monitApi.findETHNonceList(data, (res, total) => {
-                    this.total1 = total;
-                    this.data2 = res;
-                });
+                if (this.address) {
+                    let data = {page: this.curPage1, size: this.size, keyword: this.address};
+                    monitApi.findETHNonceList(data, (res, total) => {
+                        this.total1 = total;
+                        this.data2 = res;
+                    });
+                } else {
+                    this.$Message.error({content: 'ETH地址不能为空'});
+                }
             },
             changePage1 (page) {
                 this.curPage1 = page;
