@@ -108,12 +108,8 @@
                           <p v-if="mobileState == 1 || readonly">
                             {{mobileFormData.phoneNumber}}
                           </p>
-                          <!-- <p v-if="mobileState == 0 && !readonly"> -->
-                            <p>
+                          <p v-if="mobileState == 0 && !readonly">
                               <span class="mobile">
-                                <!-- <select v-model="mobileFormData.countryCode">
-                                  <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
-                                </select> -->
                                 <div class="select" @click="showFilterCountry=!showFilterCountry">{{$t(getCountry.name)}}&nbsp;{{mobileFormData.countryCode}}</div>
                                 <div class="filterCountry" v-show="showFilterCountry">
                                   <input type="text" name="filter" class="filter" v-model="filterKey" placeholder="请输入过滤关键词">
