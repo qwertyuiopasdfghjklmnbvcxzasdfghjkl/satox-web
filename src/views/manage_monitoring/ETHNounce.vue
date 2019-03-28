@@ -9,11 +9,11 @@
                 <Col span="14">
                     ETH地址：
                     <Input v-model="address" style="width:300px;"/>
-                    <Button type="primary" @click="curPage1=1;getfindETHNonceList()">查询</Button>
+                    <Button type="primary" @click="curPage1=1;getETHNonceList()">查询</Button>
                 </Col>
             </Row>
             <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1"
+            <Page :current="curPage1" :total="total1" :page-size="size" @on-change="changePage1"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
@@ -73,7 +73,7 @@
         },
         methods: {
             getETHNonceList () {
-                let data = {page: this.curPage1, size: this.size};
+                let data = {page: this.curPage1, size: this.size, keyword: this.address};
                 monitApi.findETHNonceList(data, (res, total) => {
                     this.total1 = total;
                     this.data2 = res;
@@ -82,12 +82,6 @@
             changePage1 (page) {
                 this.curPage1 = page;
                 this.getETHNonceList();
-            },
-            getfindETHNonceList () {
-                monitApi.findETHNonce(this.address, (res) => {
-                    // this.total1 = total;
-                    this.data2 = res ? [res] : [];
-                });
             },
             reshAll () {
                 this.getETHNonceList();
