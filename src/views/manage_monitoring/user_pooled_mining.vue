@@ -22,7 +22,6 @@
                     用户名：
                     <Input v-model="username" style="width:180px;"/>
                 </Col>
-
                 <Col span="2">
                     <Button type="primary" @click="curPage=1;getfindAccountList()">查询</Button>
                 </Col>
@@ -101,7 +100,7 @@
                     username: this.username,
                     symbol: this.symbol,
                     max: this.getTal(this.totalBalance),
-                    min: this.totalBalance === 2 ? 10000 : ''
+                    min: this.getTal2(this.totalBalance)
                 }, (res, total) => {
                     this.total = total;
                     this.data1 = res;
@@ -120,6 +119,13 @@
                 if (i === 0) {
                     return i;
                 } else if (i === 1) {
+                    return 10000;
+                }
+            },
+            getTal2 (i) {
+                if (i === 1) {
+                    return 0.0001;
+                } else if (i === 2) {
                     return 10000;
                 }
             }
