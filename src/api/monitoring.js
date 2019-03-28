@@ -234,7 +234,7 @@ monitoring.findCoinPoolList = findCoinPoolList;
 const findETHNonce = function ( data, success, error) {
     api.get(`api/bm/monitor/nonce/query/${data}`, (res) => {
         if (res.rst === 1) {
-            success && success(res.data);
+            success && success(res.data, res.total);
         } else {
             error && error(res.msg);
         }
@@ -244,7 +244,7 @@ monitoring.findETHNonce = findETHNonce;
 
 // 分页查询nonce列表
 const findETHNonceList = function (data, success, error) {
-    api.get(`api/bm/monitor/nonce/queryList/${data.page}/${data.size}`, (res) => {
+    api.post(`api/bm/monitor/nonce/queryList`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {
@@ -254,7 +254,7 @@ const findETHNonceList = function (data, success, error) {
 };
 monitoring.findETHNonceList = findETHNonceList;
 
-// 分页查询nonce列表 GET /monitor/coinPool/
+// 更新nonce值
 const findUpdataETHNonce = function (data, success, error) {
     api.put(`api/bm/monitor/nonce/update/${data.address}/${data.nonce}`, (res) => {
         if (res.rst === 1) {
