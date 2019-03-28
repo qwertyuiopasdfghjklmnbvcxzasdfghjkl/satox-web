@@ -108,11 +108,22 @@
                           <p v-if="mobileState == 1 || readonly">
                             {{mobileFormData.phoneNumber}}
                           </p>
-                          <p v-if="mobileState == 0 && !readonly">
+                          <!-- <p v-if="mobileState == 0 && !readonly"> -->
+                            <p>
                               <span class="mobile">
-                                <select v-model="mobileFormData.countryCode">
+                                <!-- <select v-model="mobileFormData.countryCode">
                                   <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
-                                </select>
+                                </select> -->
+                                <div class="select" @click="showFilterCountry=!showFilterCountry">{{$t(getCountry.name)}}&nbsp;{{mobileFormData.countryCode}}</div>
+                                <div class="filterCountry" v-show="showFilterCountry">
+                                  <input type="text" name="filter" class="filter" v-model="filterKey" placeholder="请输入过滤关键词">
+                                  <ul class="areaCodeList">
+                                    <li v-for="item in areaFilter" @click="selectCountryCode(item)">
+                                      <span>{{$t(item.name)}}</span>
+                                      <span>{{item.code}}</span>
+                                    </li>
+                                  </ul>
+                                </div>
                                 <input :class="{error: errors.has('phoneNumber')}" type="text" v-model="mobileFormData.phoneNumber" v-validate="'required|telphone'" data-vv-name="phoneNumber"/>
                               </span>
                               <em class="error">
@@ -160,10 +171,11 @@ import userApi from '@/api/individual'
 import myApi from '@/api/user'
 import utils from '@/assets/js/utils'
 import changepwd from '@/public/dialog/changepwd'
-import commonConfig from '@/assets/js/commonConfig'
 export default {
   data () {
     return {
+      filterKey:'',
+      showFilterCountry:false,
       infoLoaded: false,
       delayedShow: false,
       googleState: 0,
@@ -180,9 +192,8 @@ export default {
       },
       showUnbindGoogleButton: false,
       showUnbindGoogleForm: false,
-      areaCodeList: commonConfig.areaCodeList,
       mobileFormData: {
-        countryCode: commonConfig.defaultCode,
+        countryCode: '+86',
         phoneNumber: '',
         phonepassword: '',
         smsCode: ''
@@ -194,7 +205,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUserInfo']),
+    ...mapGetters(['getUserInfo','getSmsCountrys']),
+    areaFilter(){
+      let result = this.getSmsCountrys
+      if(this.filterKey.trim()){
+        result = this.getSmsCountrys.filter(item=>{
+          return  item.name.toLowerCase().includes(this.filterKey.trim().toLowerCase())
+        })
+      }
+      return result
+    },
+    getCountry(){
+      let country = {} 
+      for(let item of this.getSmsCountrys){
+        if(item.code === this.mobileFormData.countryCode){
+          country = item
+          break
+        }
+      }
+      return country
+    },
     errorsInfo () {
       let info = {}
       this.errors.has('password') && (info.password = this.$t('login_register.password')) // 请输入密码
@@ -236,6 +266,11 @@ export default {
   },
   methods: {
     ...mapActions(['setUserInfo']),
+    selectCountryCode(country){
+      this.mobileFormData.countryCode = country.code
+      this.filterKey = ''
+      this.showFilterCountry = false
+    },
     fnUserState () { // 获取当前用户状态信息
       userApi.getUserState((data) => {
         this.googleState = data.googleState
@@ -415,7 +450,12 @@ export default {
 }
 </script>
 <style scoped>
-
+.filterCountry {position: absolute; left: 0; right: 0; top:25px; padding: 5px; background-color: #fff; border-radius: 5px; z-index: 1000;}
+.filterCountry .filter {width: 100%!important; height: 40px; border:1px solid #ccc; border-radius: 4px; background-color: #fff; box-sizing: border-box; padding: 0 15px; line-height: 45px; font-size: 14px;}
+.filterCountry .areaCodeList {width: 100%;  max-height: 230px; overflow-y:auto; color: #666; font-size: 14px; margin-top: 5px;}
+.filterCountry .areaCodeList li {line-height: 30px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between;}
+.filterCountry .areaCodeList li:hover {color: #BF7600;}
+.filterCountry .areaCodeList li:last-of-type {border-bottom: none;}
 .safety h3{height: 55px; padding-left: 28px; font-weight: normal;font-size: 18px;line-height: 55px;color: #333; border-bottom: 1px solid #e7e7e7;}
 .safety .cellphone h3 .text{display: inline-block;height: 24px;font-size: 14px;line-height: 24px;text-indent: 8px;}
 .cellphone-tips{display: inline-block;}
@@ -476,10 +516,8 @@ export default {
 .google-content-right input.cancel:hover{color:#333;border-color:#bbb;}
 
 .mobile{position:relative;}
-.mobile /deep/ select{
-  position:absolute;left:4px;top:0px;
-  width: 120px;height:22px;padding-right: 20px;color: #d6dff9;z-index: 1;
-  background-position: right 4px center;
+.mobile /deep/ .select{
+  position: absolute;top: 0;left: 0;z-index: 1;width: 30%;height: 22px; line-height: 17px; color: #fff; padding-left: 5px; padding-right: 20px;font-size: 12px; background: url(../../assets/images/arrow-down-lightGray.png) no-repeat right 3px;  background-size: 14px 14px; cursor: pointer;
 }
 .mobile /deep/ input{padding-left:126px;width:120px!important;}
 </style>
