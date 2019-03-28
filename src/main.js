@@ -36,6 +36,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 let lang = window.localStorage.getItem('lang') || 'en'
 langApi.getLanguage(lang, (res) => {
+  store.state.smsCountrys = res.sms_countrys
   i18n.locale = lang
   i18n.setLocaleMessage(lang, res)
   new Vue({

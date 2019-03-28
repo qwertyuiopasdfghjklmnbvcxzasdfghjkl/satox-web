@@ -166,6 +166,7 @@ import { mapGetters, mapActions } from 'vuex'
 import langApi from '@/api/language'
 import msgApi from '@/api/individual'
 import utils from '@/assets/js/utils'
+import store from '@/vuex'
 export default {
   data () {
     return {
@@ -306,11 +307,13 @@ export default {
       this.showLang = false
       this.setLang(lang)
       if (!utils.isPlainEmpty(this.$i18n.getLocaleMessage(lang))) {
+        store.state.smsCountrys = this.$i18n.getLocaleMessage(lang).sms_countrys
         this.$i18n.locale = lang
         return
       }
       console.log('change langugae')
       langApi.getLanguage(lang, (res) => {
+        store.state.smsCountrys = res.sms_countrys
         this.$i18n.locale = lang
         this.$i18n.setLocaleMessage(lang, res)
       })
