@@ -29,9 +29,13 @@ export default new Vuex.Store({
     entrustNewPrice: 0,
     networkSignal: 0,
     events: {},
-    btcValues: {}
+    btcValues: {},
+    smsCountrys:[]
   },
   getters: {
+    getSmsCountrys(state){
+      return state.smsCountrys
+    },
     getUserInfo (state) {
       return state.userInfo
     },
