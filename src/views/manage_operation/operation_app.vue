@@ -7,23 +7,21 @@
                 安卓APP
             </p>
             <Row style="margin-bottom:20px;">
-                <Col span="5">下载网址</Col>
-                <Col span="5">{{datas.sequence}}</Col>
-                <Col span="11">
-                    <Input style="width:200px;" v-model="sequence"></Input>
+                <Col span="10">下载网址： {{datas.androidUrl}}</Col>
+                <Col span="10">
+                    <Input v-model="androidUrl"></Input>
                 </Col>
-                <Col span="3">
-                    <Button @click="tabs2('sequence')">保存</Button>
+                <Col span="4" style="text-align: center">
+                    <Button @click="tabs2('androidUrl')">保存</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom:20px;">
-                <Col span="5">APK文件</Col>
-                <Col span="5">{{datas.title}}</Col>
-                <Col span="11">
+                <Col span="10">APK文件： {{datas.androidPath}}</Col>
+                <Col span="10">
                     <input name="apk" ref="form" type="file"/>
                 </Col>
-                <Col span="3">
-                    <Button @click="tabs2('title')">保存</Button>
+                <Col span="4" style="text-align: center">
+                    <Button @click="tabs2('androidFile')">保存</Button>
                 </Col>
             </Row>
             <p class="lit">
@@ -31,23 +29,21 @@
                 苹果APP
             </p>
             <Row style="margin-bottom:20px;">
-                <Col span="5">下载网址</Col>
-                <Col span="5">{{datas.link}}</Col>
-                <Col span="11">
-                    <Input v-model="link" style="width: 200px"/>
+                <Col span="10">下载网址： {{datas.appleUrl}}</Col>
+                <Col span="10">
+                    <Input v-model="appleUrl"/>
                 </Col>
-                <Col span="3">
-                    <Button @click="tabsLink('link')">保存</Button>
+                <Col span="4" style="text-align: center">
+                    <Button @click="tabs2('appleUrl')">保存</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom:20px;">
-                <Col span="5">IPA文件</Col>
-                <Col span="5">{{datas.titleEn}}</Col>
-                <Col span="11">
-                    <Input v-model="titleEn" style="width: 200px"/>
+                <Col span="10">IPA文件： {{datas.appleIpa}}</Col>
+                <Col span="10">
+                    <Input v-model="appleIpa"/>
                 </Col>
-                <Col span="3">
-                    <Button @click="tabs2('titleEn')">保存</Button>
+                <Col span="4" style="text-align: center">
+                    <Button @click="tabs2('appleIpa')">保存</Button>
                 </Col>
             </Row>
         </Card>
@@ -60,21 +56,17 @@
         props: ['item'],
         data () {
             return {
-                sequence: null,
-                title: '',
-                link: '',
-                titleEn: '',
-                linkEn: '',
-                titleCht: '',
-                linkCht: '',
+                androidFile: '0',
+                androidPath: '',
+                androidUrl: '',
+                appleIpa: '',
+                appleUrl: '',
                 datas: {
-                    sequence: null,
-                    title: '',
-                    link: '',
-                    titleEn: '',
-                    linkEn: '',
-                    titleCht: '',
-                    linkCht: ''
+                    androidFile: null,
+                    androidPath: '',
+                    androidUrl: '',
+                    appleIpa: '',
+                    appleUrl: ''
                 }
             };
         },
@@ -83,10 +75,8 @@
         },
         methods: {
             detail () {
-                extendApi.findDetail({
-                    announcementId: this.item.announcementId
-                }, (res) => {
-                    this.datas = [res][0][0];
+                extendApi.findAppDetail((res) => {
+                    this.datas = res;
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
@@ -96,18 +86,40 @@
                     this.$Message.error({content: this.swithType(propName) + '不能为空'});
                     return;
                 }
-                let data = {
-                    announcementId: this.item.announcementId,
-                    version: this.item.version
-                };
-                data[propName] = this[propName];
-                extendApi.updateAnnouncement(data, (res) => {
+                let formData = new FormData();
+                if (propName === 'androidFile') {
+                    formData.append('androidFile', this.$refs.form.files[0]);
+                    let type = this.$refs.form.files[0].type.split('/');
+                    if (type[type.length - 1] !== 'apk') {
+                        this.$Message.error({content: '只能上传apk的文件'});
+                        return;
+                    }
+                } else {
+                    formData.append(propName, this[propName]);
+                }
+                this.upData(propName, formData);
+            },
+            upData (propName, formData) {
+                extendApi.updataAppDetail(formData, (res) => {
                     this.detail();
                     this.$Message.success({content: '修改成功'});
                     this[propName] = '';
+                    document.getElementsByTagName('input').value = '';
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
+            },
+            swithType (i) {
+                switch (i) {
+                    case 'androidPath':
+                        return '安卓上传文件';
+                    case 'androidUrl':
+                        return '安卓下载网址';
+                    case 'appleIpa':
+                        return '苹果IPA文件';
+                    case 'appleUrl':
+                        return '苹果下载网址';
+                }
             }
         }
     };

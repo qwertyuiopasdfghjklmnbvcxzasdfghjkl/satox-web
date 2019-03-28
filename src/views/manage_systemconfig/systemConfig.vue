@@ -373,17 +373,16 @@
             },
             updataSystemImg (d, i) {
                 var formData = new FormData();
-                formData.append('file', this.$refs.form[i - 1].files[0]);
+                console.log(this.$refs.form[i], i);
+                formData.append('file', this.$refs.form[i].files[0]);
                 formData.append('sysParamId', d);
-                if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[i - 1].files[0].name) === false) {
+                if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[i].files[0].name) === false) {
                     this.$Message.error({content: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片'})
                     return
                 }
                 system.updateAdminImg(formData, (res) => {
                     this.getfindSysParam();
                     this.$Message.success({content: '修改成功'});
-                    // console.log(this.$refs.form[0].files[0].name)
-                    // this.$refs.form[0].value = this.$refs.form[0].files[0].name = ''
                     document.getElementsByTagName('input').value = ''
                 }, (msg) => {
                     this.$$Message.error({content: msg});
