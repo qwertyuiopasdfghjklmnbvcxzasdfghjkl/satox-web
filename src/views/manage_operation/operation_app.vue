@@ -23,6 +23,10 @@
                 <Col span="4" style="text-align: center">
                     <Button @click="tabs2('androidFile')">保存</Button>
                 </Col>
+                <Spin fix v-if="show">
+                    <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+                    <div>上传中</div>
+                </Spin>
             </Row>
             <p class="lit">
                 <Icon type="social-apple"></Icon>
@@ -67,7 +71,8 @@
                     androidUrl: '',
                     appleIpa: '',
                     appleUrl: ''
-                }
+                },
+                show: false
             };
         },
         created () {
@@ -94,6 +99,7 @@
                         this.$Message.error({content: '只能上传apk的文件'});
                         return;
                     }
+                    this.show = true;
                 } else {
                     formData.append(propName, this[propName]);
                 }
@@ -106,6 +112,7 @@
                     this[propName] = '';
                     this.androidFile = '0';
                     document.getElementsByTagName('input').value = '';
+                    this.show = false;
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
@@ -139,5 +146,18 @@
         &:first-child {
             border: none;
         }
+    }
+    .demo-spin-icon-load{
+        animation: ani-demo-spin 1s linear infinite;
+    }
+    @keyframes ani-demo-spin {
+        from { transform: rotate(0deg);}
+        50%  { transform: rotate(180deg);}
+        to   { transform: rotate(360deg);}
+    }
+    .demo-spin-col{
+        height: 100px;
+        position: relative;
+        border: 1px solid #eee;
     }
 </style>
