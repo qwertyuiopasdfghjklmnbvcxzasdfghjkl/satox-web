@@ -89,7 +89,7 @@
                 let formData = new FormData();
                 if (propName === 'androidFile') {
                     formData.append('androidFile', this.$refs.form.files[0]);
-                    let type = this.$refs.form.files[0].type.split('/');
+                    let type = this.$refs.form.files[0].name.split('.');
                     if (type[type.length - 1] !== 'apk') {
                         this.$Message.error({content: '只能上传apk的文件'});
                         return;
@@ -104,6 +104,7 @@
                     this.detail();
                     this.$Message.success({content: '修改成功'});
                     this[propName] = '';
+                    this.androidFile = '0';
                     document.getElementsByTagName('input').value = '';
                 }, (msg) => {
                     this.$Message.error({content: msg});
