@@ -14,11 +14,14 @@
                 <Col span="5">Nounce值</Col>
                 <Col span="8">{{this.item.nonce}}</Col>
                 <Col span="8">
-                    <InputNumber  v-model="nonce" :min="0" :step="1" :precision="0" style="width: 180px"></InputNumber>
+                    <InputNumber v-model="nonce" :min="0" :step="1" :precision="0" style="width: 180px"></InputNumber>
                 </Col>
                 <Col span="3">
                     <Button type="primary" @click="tabs('nonce')">保存</Button>
                 </Col>
+            </Row>
+            <Row style="margin-top：10px;height:45px; line-height:40px;">
+                备注：系统采用Nounce先用，后自增1的方式进行维护。
             </Row>
         </Card>
     </div>
