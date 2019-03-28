@@ -154,12 +154,12 @@
         },
         methods: {
             switchStaus (state) {
-                switch (state) { // 1 ETH 2BTC 3 OMNI 4 MBT 5 EOS
+                switch (state) { // 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS
                     case 1:
-                        return 'ETH';
+                        return 'BTC';
                         break;
                     case 2:
-                        return 'BTC';
+                        return 'ETH';
                         break;
                     case 3:
                         return 'OMNI';
