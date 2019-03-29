@@ -110,12 +110,12 @@
                           </p>
                           <p v-if="mobileState == 0 && !readonly">
                               <span class="mobile">
-                                <div class="select" @click="showFilterCountry=!showFilterCountry">{{$t(getCountry.name)}}&nbsp;{{mobileFormData.countryCode}}</div>
+                                <div class="select" @click="showFilterCountry=!showFilterCountry">{{getCountry.name}}&nbsp;{{mobileFormData.countryCode}}</div>
                                 <div class="filterCountry" v-show="showFilterCountry">
                                   <input type="text" name="filter" class="filter" v-model="filterKey" placeholder="请输入过滤关键词">
                                   <ul class="areaCodeList">
                                     <li v-for="item in areaFilter" @click="selectCountryCode(item)">
-                                      <span>{{$t(item.name)}}</span>
+                                      <span>{{item.name}}</span>
                                       <span>{{item.code}}</span>
                                     </li>
                                   </ul>
