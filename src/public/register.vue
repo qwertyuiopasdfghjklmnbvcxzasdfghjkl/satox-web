@@ -23,7 +23,7 @@
                       <div class="mobile">
                         <div class="select" @click="showFilterCountry=!showFilterCountry">{{getCountry.name}}&nbsp;{{formData.countryCode}}</div>
                         <div class="filterCountry" v-show="showFilterCountry">
-                          <input type="text" name="filter" class="filter" v-model="filterKey" placeholder="请输入过滤关键词">
+                          <input type="text" name="filter" class="filter" v-model="filterKey" :placeholder="$t('public.keyword_prompt')">
                           <ul class="areaCodeList">
                             <li v-for="item in areaFilter" @click="selectCountryCode(item)">
                               <span>{{item.name}}</span>
