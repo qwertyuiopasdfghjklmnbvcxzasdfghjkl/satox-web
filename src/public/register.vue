@@ -270,7 +270,7 @@ export default {
         Vue.$koallTipBox({icon: 'success', message: this.$t('error_code.SEND_CODE_SUCCESS')})
       }, (msg) => {
         this.disabled = false
-        Vue.$koallTipBox({icon: 'notification', message: msg})
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
       })
     }
   }
