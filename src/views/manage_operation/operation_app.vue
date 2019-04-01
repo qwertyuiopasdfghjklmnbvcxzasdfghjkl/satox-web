@@ -18,15 +18,22 @@
             <Row style="margin-bottom:20px;">
                 <Col span="10">APK文件： {{datas.androidPath}}</Col>
                 <Col span="10">
-                    <input name="apk" ref="form" type="file"/>
+                    <Upload
+                            :before-upload="handleUpload"
+                            :format="format"
+                            action="//jsonplaceholder.typicode.com/posts/">
+                        <Button icon="ios-cloud-upload-outline">选择文件</Button>
+                        <span v-if="file !== null"> {{ file.name }}</span>
+                    </Upload>
+                    <div class="loding" v-if="loadingStatus">
+                        <Progress :percent="percentComplete" :status="status"/>
+                    </div>
                 </Col>
                 <Col span="4" style="text-align: center">
-                    <Button @click="tabs2('androidFile')">保存</Button>
+                    <div>
+                        <Button @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '上传' }}</Button>
+                    </div>
                 </Col>
-                <Spin fix v-if="show">
-                    <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
-                    <div>上传中</div>
-                </Spin>
             </Row>
             <p class="lit">
                 <Icon type="social-apple"></Icon>
@@ -72,7 +79,13 @@
                     appleIpa: '',
                     appleUrl: ''
                 },
-                show: false
+                show: false,
+                file: null,
+                fileSize: 0,
+                percentComplete: 0,
+                loadingStatus: false,
+                status: 'active',
+                format: ['apk']
             };
         },
         created () {
@@ -92,17 +105,7 @@
                     return;
                 }
                 let formData = new FormData();
-                if (propName === 'androidFile') {
-                    formData.append('androidFile', this.$refs.form.files[0]);
-                    let type = this.$refs.form.files[0].name.split('.');
-                    if (type[type.length - 1] !== 'apk') {
-                        this.$Message.error({content: '只能上传apk的文件'});
-                        return;
-                    }
-                    this.show = true;
-                } else {
-                    formData.append(propName, this[propName]);
-                }
+                formData.append(propName, this[propName]);
                 this.upData(propName, formData);
             },
             upData (propName, formData) {
@@ -128,6 +131,46 @@
                     case 'appleUrl':
                         return '苹果下载网址';
                 }
+            },
+            handleUpload (file) {
+                this.file = file;
+                let type = file.name.split('.');
+                if (type[type.length - 1] !== 'apk') {
+                    this.$Message.error({content: '只能上传apk的文件'});
+                    this.file = null;
+                    return;
+                }
+                return false;
+            },
+            upload () {
+                if (!this.file) {
+                    this.$Message.error({content: 'APK文件不能为空'});
+                    return;
+                }
+                this.loadingStatus = true;
+                extendApi.upData(this.file, (evt) => {
+                        if (evt.lengthComputable) {
+                            this.percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                        } else {
+                            this.$Message.error('文件有误');
+                        }
+                    },
+                    (evt) => {
+                        /* 当服务器响应后，这个事件就会被触发 */
+                        this.file = null;
+                        this.loadingStatus = false;
+                        this.detail();
+                        this.$Message.success('上传成功');
+                    },
+                    (evt) => {
+                        this.$Message.error('上传文件发生了错误尝试');
+                        this.status = 'wrong';
+                    },
+                    (evt) => {
+                        this.$Message.error('上传被用户取消或者浏览器断开连接');
+                        this.status = 'wrong';
+                    }
+                );
             }
         }
     };
@@ -147,15 +190,24 @@
             border: none;
         }
     }
-    .demo-spin-icon-load{
+
+    .demo-spin-icon-load {
         animation: ani-demo-spin 1s linear infinite;
     }
+
     @keyframes ani-demo-spin {
-        from { transform: rotate(0deg);}
-        50%  { transform: rotate(180deg);}
-        to   { transform: rotate(360deg);}
+        from {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-    .demo-spin-col{
+
+    .demo-spin-col {
         height: 100px;
         position: relative;
         border: 1px solid #eee;
