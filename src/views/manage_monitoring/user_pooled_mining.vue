@@ -84,12 +84,22 @@
                         key: 'updatedAt'
                     }
                 ],
-                data1: [],
+                data1: [{
+                    username: null,
+                    symbolId: null,
+                    symbol: null,
+                    toAddress: null,
+                    totalBalance: null,
+                    availableBalance: null,
+                    loanBalance: null,
+                    createdAt: null,
+                    updatedAt: null
+                }],
                 symbolList: [],
             };
         },
         created () {
-            this.getfindAccountList();
+            // this.getfindAccountList();
             this.getdataSymbol();
         },
         methods: {
