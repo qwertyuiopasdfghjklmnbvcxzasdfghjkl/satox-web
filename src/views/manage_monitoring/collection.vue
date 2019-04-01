@@ -10,8 +10,8 @@
                         <option value="1">ETH</option>
                         <option value="2">BTC</option>
                         <option value="3">OMNI</option>
-                        <option value="4">MBT</option>
-                        <option value="5">EOS</option>
+                        <!--<option value="4">MBT</option>-->
+                        <!--<option value="5">EOS</option>-->
                     </select>
                 </Col>
                 <Col span="2">币种：</Col>
@@ -29,13 +29,13 @@
                     <select v-model="status"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="1">未处理</option>
+                        <!--<option value="1">未处理</option>-->
                         <option value="2">等待交易发起</option>
                         <option value="3">交易已发送</option>
                         <option value="4">撤销</option>
-                        <option value="5">提现失败</option>
-                        <option value="6">对账完成</option>
-                        <option value="7">提现失败资金返还</option>
+                        <option value="5">归集失败</option>
+                        <option value="6">归集完成</option>
+                        <option value="7">归集失败资金返还</option>
                     </select>
                 </Col>
                 <Col span="2">交易发起时长：</Col>
