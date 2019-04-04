@@ -167,7 +167,7 @@
                         this.status = 'wrong';
                     },
                     (evt) => {
-                        this.$Message.error('上传被用户取消或者浏览器断开连接');
+                        this.$Message.error('上传被取消或者浏览器断开连接');
                         this.status = 'wrong';
                     }
                 );
