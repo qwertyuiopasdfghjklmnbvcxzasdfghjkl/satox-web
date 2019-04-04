@@ -55,8 +55,8 @@
             <!-- <Table :columns="columns1" :data="data1"></Table> -->
 
             <Table :columns="columns10" :data="data9"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
-         </Card>    
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+         </Card>
     </div>
 </template>
 <script>
@@ -122,6 +122,10 @@ import util from '../../libs/util'
                         key: 'toAddress'
                     },
                     {
+                        title: 'Memo',
+                        key: 'memo'
+                    },
+                    {
                         title: '提现数额',
                         key: 'withdrawAmount'
                     },
@@ -185,15 +189,15 @@ import util from '../../libs/util'
             // data.beginDate = util.dateToStr(new Date(), 'yyyy-MM-dd 00:00:00')
              if (this.date) {
                 data.beginTime = util.dateToStrDate(this.date)
-            } 
+            }
             if (this.date1) {
                 data.endTime = util.dateToStrDate(this.date1)
-            } 
+            }
             return data
             }
         },
         methods: {
-            switchStaus(state) { 
+            switchStaus(state) {
                 switch(state){
                     case '1':
                         return 'BTC'
@@ -242,7 +246,7 @@ import util from '../../libs/util'
                     this.total = total
                     this.data9 = res
                 }, (msg) => {
-                   this.$Message.error({name: msg}) 
+                   this.$Message.error({name: msg})
                 })
             },
             getApplyList () {
@@ -250,7 +254,7 @@ import util from '../../libs/util'
                     this.total = total
                     this.data9 = res
                 }, (msg) => {
-                     this.$Message.error({name: msg}) 
+                     this.$Message.error({name: msg})
                 })
             },
             changePage (page) {
