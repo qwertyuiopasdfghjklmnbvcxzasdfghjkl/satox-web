@@ -63,11 +63,11 @@
             </Col>
             <Col span="2">
                 <Button type="primary" @click="curPage=1;getconfirmList()">查询</Button>
-                <Button type="primary" @click="block">区块扫描进度</Button>
+                <!--<Button type="primary" @click="block">区块扫描进度</Button>-->
             </Col>
         </Row>
          <Table :columns="columns1" :data="data1"></Table>
-         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
      </Card>
   </div>
 </template>
@@ -126,6 +126,10 @@ import util from '../../libs/util';
                     {
                         title: 'to地址',
                         key: 'toAddress'
+                    },
+                    {
+                        title: 'Memo',
+                        key: 'memo'
                     },
                     {
                         title: '数额',
@@ -197,7 +201,7 @@ import util from '../../libs/util';
             this.getconfirmList()
         },
         methods: {
-            switchStaus1(state) { 
+            switchStaus1(state) {
                 switch(state){
                     case 1:
                         return '用户充值'
@@ -219,7 +223,7 @@ import util from '../../libs/util';
             block () {
                 util.setDialog(block_scan)
             },
-            switchStaus(state) { 
+            switchStaus(state) {
                 switch(state){
                     case '1':
                         return 'BTC'

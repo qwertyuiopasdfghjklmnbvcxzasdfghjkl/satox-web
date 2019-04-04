@@ -258,17 +258,19 @@ extend.updataAppDetail = updataAppDetail;
 
 // 进度条上传图片 有进度条的
 const upData = function uploadFile (file, uploadProgress, uploadComplete, uploadFailed, uploadCanceled) {
-    var fd = new FormData();
-    fd.append('androidFile', file);
+    var formData = new FormData();
+    formData.append('androidFile', file);
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener('progress', uploadProgress, false);
     xhr.addEventListener('load', uploadComplete, false);
     xhr.addEventListener('error', uploadFailed, false);
     xhr.addEventListener('abort', uploadCanceled, false);
+
     xhr.open('POST', `${util.baseURL}api/bm/promotionManage/app/update`);
     xhr.setRequestHeader('Authorization', Cookies.get('Authorization'));
     xhr.setRequestHeader('roles', Cookies.get('roles'));
-    xhr.send(fd);
+
+    xhr.send(formData);
 };
 extend.upData = upData;
 

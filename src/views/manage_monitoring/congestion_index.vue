@@ -57,7 +57,7 @@
             </Row>
             <!-- <Table :columns="columns1" :data="data1"></Table> -->
             <Table :columns="columns10" :data="data9"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
      </Card>
   </div>
 </template>
@@ -124,6 +124,10 @@ import monitorApi from '../../api/monitoring'
                         key: 'toAddress'
                     },
                     {
+                        title: 'Memo',
+                        key: 'memo'
+                    },
+                    {
                         title: '提现数额',
                         key: 'withdrawAmount'
                     },
@@ -180,7 +184,7 @@ import monitorApi from '../../api/monitoring'
             this.getWithdrawApplyList()
         },
         methods: {
-            switchStaus(state) { 
+            switchStaus(state) {
                 switch(state){
                     case '1':
                         return 'BTC'
@@ -210,7 +214,7 @@ import monitorApi from '../../api/monitoring'
                     case 2:
                         return '审核通过'
                         break;
-                    
+
                 }
             },
             statusSwicth1 (state) { //1 未处理  2 等待交易发起  3 交易已发送(等待记账)
@@ -224,7 +228,7 @@ import monitorApi from '../../api/monitoring'
                     case 3:
                         return '交易已发送(等待记账)'
                         break;
-                    
+
                 }
             },
             getWithdrawApplyList () {
