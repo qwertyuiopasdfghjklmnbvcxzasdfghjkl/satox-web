@@ -129,7 +129,7 @@
         optionalList: [], /* 自选临时数据 */
         tableheadpars: { newprise1: 'idefault', newprise2: 'idefault', twhourstop: 'idefault', twhourslow: 'idefault', volume: 'idefault' },
         checked: false,
-        active: 'USDS',
+        active: 'USSD',
         marketArry: [], // 市场信息
         filterMarketAtty: [], // 前台过滤'BTCETH、ETHBTC、BTCMARKET'市场信息
         products: []
@@ -272,7 +272,7 @@
       },
       markets () {
         // 收藏
-        return ['USDS']
+        return ['USSD']
         // return ['BTC', 'ETH', 'SATOX', 'USDT', this.$t('public0.public283')]
       },
       /* 选中数据的集合 */

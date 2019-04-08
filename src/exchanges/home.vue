@@ -108,9 +108,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'USDS'
+        return symbol || 'USSD'
       } else {
-        return 'USDS'
+        return 'USSD'
       }
     },
     currentSymbol () {

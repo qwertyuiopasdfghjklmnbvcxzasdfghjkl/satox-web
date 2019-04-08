@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed" v-if="symbol==='USDS'">
+                <div class="filed" v-if="symbol==='USSD'">
                     <em>
                         {{$t('public.account_info')}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -23,7 +23,7 @@
                      
                     </div>
                 </div>
-                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USDS'">
+                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USSD'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -75,7 +75,7 @@
                 <ul class="tips">
                     <li>{{$t('account.user_minimum_number_of_cash').format(`：${minWithdraw} ${symbol}`)}}<!--最小提现数量为{0}。--></li>
                     <li v-if="false">{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
-                    <li  v-if="symbol==='USDS'">{{$t('account.user_account_fill_prompt')}}<!--请仔细填写账户信息,填写错误后将无法进行正常转账。--></li>
+                    <li  v-if="symbol==='USSD'">{{$t('account.user_account_fill_prompt')}}<!--请仔细填写账户信息,填写错误后将无法进行正常转账。--></li>
                     <li>{{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。--></li>
                 </ul>
             </div>
@@ -161,7 +161,7 @@ export default {
   },
   computed: {
     procedureFee () { // 手续费 提现数量-固定手续费
-      if(this.symbol==='USDS'){
+      if(this.symbol==='USSD'){
         return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
       } else {
         return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
@@ -272,7 +272,7 @@ export default {
           amount: this.amount
         }
       }
-      if(this.symbol==='USDS'){
+      if(this.symbol==='USSD'){
         let userBankInfo = {
           bankCountryCode:this.userBankInfo.bankCountryCode,
           bankCode:this.userBankInfo.bankCode,

@@ -5,7 +5,7 @@
                 <div class="formel price-balance">
                     {{isBuy ? baseSymbol : currentSymbol}}
                     {{$t('exchange.exchange_balance')}}<!--余额-->：
-                    {{toFixed(isBuy ? toBalance.availableBalance : (currentSymbol+baseSymbol !== 'SATOUSDS' ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
+                    {{toFixed(isBuy ? toBalance.availableBalance : (currentSymbol+baseSymbol !== 'SATOUSSD' ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
                 </div>
                 <div class="formel price">
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
@@ -452,8 +452,8 @@ export default {
         }
       } else if (this.tradeType === 'sell') {
         direction = 2 // 卖
-        balance = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
-        fromAccountId = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
+        balance = (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
+        fromAccountId = (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
         toAccountId = this.toBalance.accountId // 帐号id
         if (numUtils.BN(amount).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
