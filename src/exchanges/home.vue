@@ -24,7 +24,7 @@
                   </li>
                   <li class="last-item last-change">
                     <span class="last-title">{{$t('home.home_change_24h')}}<!--24h涨跌--></span>
-                    <span class="last-price" :class="[getLast24h.isDown?'last-number-down':'last-number']">{{toFixed(getLast24h.rfvol, fixedNumber)}} {{getLast24h.percent}}%</span>
+                    <span class="last-price" :class="[getLast24h.isDown?'last-number-down':'last-number']">{{toFixed(getLast24h.rfvol, fixedNumber)}}&nbsp;&nbsp;&nbsp;&nbsp;{{getLast24h.isDown?'-':'+'}}{{getLast24h.percent}}%</span>
                   </li>
                   <li class="last-item">
                     <span class="last-title">{{$t('home.home_high_24h')}}<!--24h最高价--></span>
