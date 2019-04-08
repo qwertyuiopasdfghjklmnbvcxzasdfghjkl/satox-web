@@ -8,15 +8,15 @@
     </ul>
     <delegate v-show="active==='delegate'"/>
     <curreny v-show="active==='curreny'"/>
-    <otccurreny v-show="active==='otccurreny'"/>
-    <transfer v-show="active==='transfer'"/>
+    <!-- <otccurreny v-show="active==='otccurreny'"/> -->
+    <!-- <transfer v-show="active==='transfer'"/> -->
   </div>
 </template>
 <script>
 import delegate from '@/public/mycenter/records/delegate'
 import curreny from '@/public/mycenter/records/curreny'
-import otccurreny from '@/public/mycenter/records/otccurreny'
-import transfer from '@/public/mycenter/records/transfer'
+// import otccurreny from '@/public/mycenter/records/otccurreny'
+// import transfer from '@/public/mycenter/records/transfer'
 export default {
   data () {
     return {
@@ -26,8 +26,8 @@ export default {
   components: {
     delegate,
     curreny,
-    otccurreny,
-    transfer
+    // otccurreny,
+    // transfer
   },
   methods: {
     switch_tab (tab) {
