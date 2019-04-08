@@ -111,7 +111,7 @@ export default {
     ...mapGetters(['getApiToken']),
     markets () {
       // 收藏
-      return ['collection', 'USDS']
+      return ['collection', 'USSD']
     },
     tipPrice () {
       return this.hoverItem || {}

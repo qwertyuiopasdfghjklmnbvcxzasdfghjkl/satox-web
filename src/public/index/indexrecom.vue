@@ -47,7 +47,7 @@
         // 获取推荐市场
         marketApi.marketListCom(1, (res) => {
           this.products = res.filter(item=>{
-            return item.baseSymbol === 'USDS'
+            return item.baseSymbol === 'USSD'
           })
         }, () => {
         })
