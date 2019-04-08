@@ -212,14 +212,14 @@ export default {
 .curreny /deep/ .filtrate .disabled:hover a,
 .curreny /deep/ .filtrate .disabled:hover i{color: #999;}
 
-.curreny /deep/ h3{height: 35px;font-weight: normal;font-size: 14px;line-height: 35px;color: #333;padding: 0 20px; border-top: 1px solid #e7e7e7; border-bottom: 1px solid #e7e7e7;}
+.curreny /deep/ h3{height: 35px;font-weight: normal;font-size: 14px;line-height: 35px;color: #333;padding: 0 20px; border-top: 1px solid #e7e7e7;border-bottom: 1px solid #e7e7e7;}
 
-.curreny /deep/ .record{background-color: #fff;}
 .curreny /deep/ .record ul{padding-left: 20px;padding-right: 20px;}
 .curreny /deep/ .record ul.header{background:#F5F5F5;}
 .curreny /deep/ .record ul li{border-bottom: 1px solid #eee;}
 .curreny /deep/ .record ul.header li{border-bottom:none;}
 .curreny /deep/ .record ul li span{display: inline-block;height: 40px;line-height: 40px;font-size: 12px;color: #555;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;overflow: hidden;}
+
 
 .curreny /deep/ .record ul li span.time{width: 160px;}
 .curreny /deep/ .record ul li span.market{width: 100px;}
