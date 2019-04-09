@@ -9,7 +9,7 @@
                         日全站交易量：
                         <span style="margin-right:15px;">{{datas.length ? datas[0].btcTransactionAmount : 0}}BTC</span>
                         <span style="margin-right:15px;">{{datas.length ? datas[0].ethTransactionAmount : 0}}ETH</span>
-                        <span style="margin-right:15px;">{{datas.length ? datas[0].atnTransactionAmount : 0}}ATN</span>
+                        <!--<span style="margin-right:15px;">{{datas.length ? datas[0].atnTransactionAmount : 0}}ATN</span>-->
                         <span style="margin-right:15px;">{{datas.length ? datas[0].usdtTransactionAmount : 0}}USDT</span>
                         <span style="margin-right:15px;">合计：{{datas.length ? datas[0].btcPriceOfNewton : 0}}BTC = {{datas.length ? datas[0].usdPriceOfNewton : 0}}USD</span>
                     </p>
@@ -50,11 +50,8 @@
             <Form ref="formItem" :model="formItem" :label-width="80" inline>
                 <FormItem prop="user" label="币种">
                     <Select v-model="formItem.symbol" style="width:100px">
-                        <Option value="BTC">BTC</Option>
-                        <Option value="ETH">ETH</Option>
-                        <Option value="ATN">ATN</Option>
-                        <Option value="MECoin">MECoin</Option>
-                        <Option value="USDT">USDT</Option>
+                        <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem prop="password" label="项目">
@@ -112,6 +109,7 @@
                 total1: 0,
                 pageSize: 3,
                 pageSize1: 3,
+                symbolList: [],
                 columns1: [
                     {title: '市场', key: 'market'},
                     {title: '最新价格', key: 'currentPrice'},
@@ -187,8 +185,14 @@
             this.$nextTick(() => {
                 this.search();
             });
+            this.getdataSymbol();
         },
         methods: {
+            getdataSymbol () {
+                currenyApi.findAllValidSymbolList((res) => {
+                    this.symbolList = res;
+                });
+            },
             setMarketSort (column) {
                 this.curPage1 = 1;
                 if (column.order !== 'normal') {

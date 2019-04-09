@@ -207,6 +207,18 @@ const findRechargeRecords = function (curPage, sortStr, success, error) {
 };
 finance.findRechargeRecords = findRechargeRecords;
 
+// 财务管理--用户资产
+const finduserAccountList = function ( data, success, error) {
+    api.get(`/api/bm/monitor/userAccount/list`, data,(res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.finduserAccountList = finduserAccountList;
+
 // 财务管理--USDS充值--账户列表
 const findUSDSRechargeRecords = function (data, success, error) {
     api.get(`/api/bm/financialManage/usds/accounts`, data, (res) => {
