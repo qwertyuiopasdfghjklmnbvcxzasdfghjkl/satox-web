@@ -2,16 +2,16 @@
 <template>
     <Row>
         <Col span="24">
-            <Row style="margin:10px 0;">
-                <Card>
-                    <p slot="title">充值监控
-                        <span class="refresh" @click="reshAll"></span>
-                    </p>
-                    <Table :columns="columns1" :data="data1" @on-sort-change="setRechargeSort"></Table>
-                    <Page :current="curPage" :total="total" @on-change="changePage"
-                          style="text-align:center;margin-top:20px;"></Page>
-                </Card>
-            </Row>
+            <!--<Row style="margin:10px 0;">-->
+                <!--<Card>-->
+                    <!--<p slot="title">充值监控-->
+                        <!--<span class="refresh" @click="reshAll"></span>-->
+                    <!--</p>-->
+                    <!--<Table :columns="columns1" :data="data1" @on-sort-change="setRechargeSort"></Table>-->
+                    <!--<Page :current="curPage" :total="total" @on-change="changePage"-->
+                          <!--style="text-align:center;margin-top:20px;"></Page>-->
+                <!--</Card>-->
+            <!--</Row>-->
             <Row>
                 <Card>
                     <p slot="title">日提币统计</p>
@@ -60,14 +60,14 @@
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
-            <Row style="margin-top:10px;">
-                <Card>
-                    <p slot="title">充币列表</p>
-                    <Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="setChargeTokenSort"></Table>
-                    <Page :current="curPage7" :total="total7" @on-change="changePage7"
-                          style="text-align:center;margin-top:20px;"></Page>
-                </Card>
-            </Row>
+            <!--<Row style="margin-top:10px;">-->
+                <!--<Card>-->
+                    <!--<p slot="title">充币列表</p>-->
+                    <!--<Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="setChargeTokenSort"></Table>-->
+                    <!--<Page :current="curPage7" :total="total7" @on-change="changePage7"-->
+                          <!--style="text-align:center;margin-top:20px;"></Page>-->
+                <!--</Card>-->
+            <!--</Row>-->
             <Row style="margin-top:10px;">
                 <Card>
                     <p slot="title">主地址币种数量</p>

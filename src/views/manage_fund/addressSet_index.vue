@@ -5,23 +5,20 @@
                 <Button @click="adddEploy">添加配置</Button>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
-                  style="text-align:center;margin-top:20px;"></Page>
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card>
             <p slot="title">手动转账</p>
             <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1"
-                  style="text-align:center;margin-top:20px;"></Page>
+            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
 <script>
-    import upAddress from './upAddress';
-    import util from '../../libs/util';
-    import fundApi from '../../api/fund';
-    import eploy from './eploy';
-
+    import upAddress from './upAddress'
+    import util from '../../libs/util'
+    import fundApi from '../../api/fund'
+    import eploy from './eploy'
     export default {
         data () {
             return {
@@ -43,6 +40,10 @@
                         key: 'coinReserve'
                     },
                     {
+                        title: '矿工费币种',
+                        key: 'minerSymbol'
+                    },
+                    {
                         title: 'BTC矿工费',
                         key: 'minerFee'
                     },
@@ -58,7 +59,7 @@
                         title: '是否可用',
                         key: 'enable',
                         render: (h, params) => {
-                            return h('div', params.row.enable === 0 ? '不可用' : '可用');
+                            return h('div', params.row.enable === 0 ? '不可用' : '可用')
                         }
                     },
                     {
@@ -74,9 +75,9 @@
                                             util.setDialog(upAddress, {
                                                 item: params.row,
                                                 okCallback: () => {
-                                                    this.getTransferConfig();
+                                                    this.getTransferConfig()
                                                 }
-                                            });
+                                            })
                                         }
                                     }
                                 }, '修改')
@@ -109,15 +110,15 @@
                                     on: {
                                         click: () => {
                                             // util.setDialog(upAddress)
-                                            fundApi.transfer({
+                                            fundApi.transfer ({
                                                 param: '2000',
                                                 transferTye: 1,
                                                 symbol: params.row.symbol
-                                            }, (res) => {
-                                                this.$Message.success({content: '操作成功'});
+                                            },(res) => {
+                                                this.$Message.success({content: '操作成功'})
                                             }, (msg) => {
-                                                this.$Message.error({content: msg});
-                                            });
+                                                this.$Message.error({content: msg})
+                                            })
                                         }
                                     }
                                 }, '转账')
@@ -126,47 +127,43 @@
                     }
                 ],
                 data2: []
-            };
+            }
         },
         created () {
-            this.getTransferConfig();
-            this.getAdminCoinPool();
+            this.getTransferConfig()
+            this.getAdminCoinPool()
         },
         methods: {
             adddEploy () {
                 util.setDialog(eploy, {
                     okCallback: () => {
-                        this.getTransferConfig();
+                        this.getTransferConfig()
                     }
-                });
+                })
             },
             getTransferConfig () {
                 fundApi.findTransferConfig(this.curPage, (res, total) => {
-                    this.total = total;
-                    this.data1 = res;
-                });
+                    this.total = total
+                    this.data1 = res
+                })
             },
             changePage (page) {
-                this.curPage = page;
-                this.getTransferConfig();
+                this.curPage = page,
+                    this.getTransferConfig()
             },
             getAdminCoinPool () {
                 fundApi.getAdminCoinPool(this.curPage1, {}, (res, total) => {
-                    this.total1 = total;
-                    this.data2 = res;
-                });
+                    this.total1= total
+                    this.data2 = res
+                })
             },
             changePage1 (page) {
-                this.curPage1 = page;
-                this.getAdminCoinPool();
+                this.curPage1 = page,
+                    this.getAdminCoinPool()
             },
         }
-    };
+    }
 </script>
 <style scoped>
-    .ivu-card-head p {
-        display: flex;
-        justify-content: space-between;
-        height: 30px;
-    }
+    .ivu-card-head p{display: flex;justify-content:space-between;height: 30px;}
 </style>

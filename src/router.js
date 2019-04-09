@@ -470,6 +470,23 @@ export const financeRouter = [
         ]
     },
     {
+        path: '/recharge',
+        name: 'recharge',
+        title: '充值管理',
+        component: Main,
+        icon: 'battery-charging',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'index', title: '充值管理', name: 'recharge_index', component: resolve => {
+                    require(['./views/manage_finance/recharge.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/finance_withdraw',
         name: 'finance_withdraw',
         title: '提币审核',
@@ -482,6 +499,23 @@ export const financeRouter = [
             {
                 path: 'index', title: '提币审核', name: 'finance_withdraw_index', component: resolve => {
                     require(['./views/manage_finance/withdraw.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/finance_user',
+        name: 'finance_user',
+        title: '用户资产',
+        component: Main,
+        icon: 'pie-graph',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+        },
+        children: [
+            {
+                path: 'index', title: '用户资产', name: 'finance_user_index', component: resolve => {
+                    require(['./views/manage_finance/user_finance.vue'], resolve);
                 }
             }
         ]
