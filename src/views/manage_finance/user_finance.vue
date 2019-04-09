@@ -4,7 +4,7 @@
             <p slot="title">用户资产查询</p>
             <p style="margin-bottom: 20px">
                 币种：
-                <Select v-model="formData.symbol" style="width: 200px">
+                <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
                     <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                     </Option>
                 </Select>
@@ -42,7 +42,7 @@
             return {
                 curPage: 1,
                 total: 0,
-                size: 10,
+                size: 20,
                 columns: [
                     {title: '用户名', key: 'username'},
                     {title: '币种', key: 'symbol'},
