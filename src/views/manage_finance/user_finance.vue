@@ -5,11 +5,12 @@
             <p style="margin-bottom: 20px">
                 币种：
                 <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
+                    <Option value="0">全部</Option>
                     <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                     </Option>
                 </Select>
                 用户名：
-                <Input v-model="formData.username" clearable style="width: 200px"></Input>
+                <Input v-model="formData.username" clearable style="width: 200px" placeholder="请输入用户名"></Input>
                 数量：
                 <Select v-model="amount" style="width: 200px">
                     <Option value="0">全部</Option>
@@ -20,7 +21,7 @@
                 </Select>
                 钱包类型：
                 <Select v-model="formData.type" style="width: 200px">
-                    <Option value="">全部</Option>
+                    <Option value="0">全部</Option>
                     <Option value="1">主钱包</Option>
                     <Option value="2">非主钱包</Option>
                 </Select>
@@ -60,8 +61,8 @@
                 data: [],
                 formData: {
                     username: '',
-                    symbol: '',
-                    type: '',
+                    symbol: '0',
+                    type: '0',
                     max: null,
                     min: null
                 },
@@ -101,15 +102,13 @@
                         this.formData.max = null;
                         this.formData.min = null;
                         break;
-                    default:
-                        this.formData = {
-                            max: null,
-                            min: null
-                        };
                 }
                 this.formData.page = this.curPage;
                 this.formData.size = this.size;
-                let data = this.formData;
+                let D = JSON.stringify(this.formData)
+                let data = JSON.parse(D);
+                data.symbol = data.symbol === '0' ? null : data.symbol;
+                data.type = data.type === '0' ? null : data.type;
                 financeApi.finduserAccountList(data, (res, total) => {
                     this.total = total;
                     this.data = res;
