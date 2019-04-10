@@ -8,8 +8,7 @@
         <Form ref="formValidate" :model="formValidate" :rules="ruleInline" :label-width="90" style="margin:0 20px;">
             <FormItem label="币种代号" prop="symbol">
                 <Select v-model="formValidate.symbol">
-                    <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
-                    </Option>
+                    <Option value="USSD">USSD</Option>
                 </Select>
             </FormItem>
             <FormItem label="数量" prop="quantity">
@@ -52,7 +51,7 @@
         data () {
             return {
                 formValidate: {
-                    symbol: null,
+                    symbol: 'USSD',
                     quantity: null,
                     fromUserName: null,
                     toUserName: null,

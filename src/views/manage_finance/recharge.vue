@@ -17,14 +17,14 @@
                     <p slot="title">币种充值监控</p>
                     <p style="margin-bottom: 20px">
                         币种：
-                        <Select v-model="formData.symbol2" style="width: 200px">
+                        <Select v-model="formData.symbol2" style="width: 200px" :clearable="true">
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
-                        <Button type="primary" @click="curPage1=1;">查询</Button>
+                        <Button type="primary" @click="curPage1=1;getStatisticsList()">查询</Button>
                     </p>
                     <Table :columns="columns2" :data="data2" @on-sort-change="setWithdrawSort"></Table>
-                    <Page :current="curPage1" :total="total1" @on-change="changePage1"
+                    <Page :current="curPage1" :total="total1" @on-change="changePage1" :page-size="size"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
@@ -89,11 +89,13 @@
                 ],
                 data1: [],
                 columns2: [
-                    {title: '公链币种', key: 'symbol'},
-                    {title: '日待提币笔数', key: 'withdrawDailyToBeConfirmedCount', sortable: 'custom'},
-                    // {title: '日待提币总量', key: 'withdrawDailyToBeConfirmedAmount'},
-                    {title: '日已提币笔数', key: 'withdrawDailyFinishCount', sortable: 'custom'},
-                    // {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
+                    {title: '币种', key: 'symbol'},
+                    {title: '今日充值用户数', key: 'currentRechargeUserCount'},
+                    {title: '今日充值笔数', key: 'currentRechargeCount'},
+                    {title: '今日已充值数量', key: 'currentRechargeSum'},
+                    {title: '7日内充值用户数', key: 'rechargeUserCount7d'},
+                    {title: '7日内充值笔数', key: 'rechargeCount7d'},
+                    {title: '7日内已充值数量', key: 'rechargeSum7d'},
                 ],
                 data2: [],
                 columns8: [
@@ -122,6 +124,7 @@
                 ChargeTokenSortKey: null,
                 withdrawSortKey: null,
                 rechargeSortKey: null,
+                size: 10
             };
         },
         created () {
@@ -181,9 +184,13 @@
                 });
             },
             getStatisticsList () {
-                let sortStr = this.withdrawSortKey ? `${this.withdrawSortKey}%20${this.withdrawSortVal}` : 'null';
-                financeApi.findWithdrawStatisticsList(this.curPage1, sortStr, (res, total) => {
-                    this.total = total;
+                let data = {
+                    page: this.curPage1,
+                    size: this.size,
+                    symbol: this.formData.symbol2
+                };
+                financeApi.findSymbolRechargeList(data, (res, total) => {
+                    this.total1 = total;
                     this.data2 = res;
                 });
             },
