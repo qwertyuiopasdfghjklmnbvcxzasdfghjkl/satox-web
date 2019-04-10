@@ -561,7 +561,7 @@ export const financeRouter = [
         component: Main,
         icon: 'ios-loop-strong',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'TRANSFER_ADMIN']
         },
         children: [
             {
