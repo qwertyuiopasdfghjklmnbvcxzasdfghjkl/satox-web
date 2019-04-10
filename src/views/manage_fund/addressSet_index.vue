@@ -4,21 +4,96 @@
             <p slot="title">自动转账
                 <Button @click="adddEploy">添加配置</Button>
             </p>
-            <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+            <Table :columns="columns" :data="data"></Table>
+            <Page :current="curPage" :total="total" @on-change="changePage1"
+                  style="text-align:center;margin-top:20px;"></Page>
         </Card>
-        <Card>
-            <p slot="title">手动转账</p>
-            <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
+        <!--<Card>-->
+        <!--<p slot="title">手动转账</p>-->
+        <!--<Table :columns="columns2" :data="data2"></Table>-->
+        <!--<Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>-->
+        <!--</Card>-->
+        <Card style="margin-top: 20px;">
+            <Row style="margin-bottom: 20px;">
+                <Col span="2">公链类型：</Col>
+                <Col span="4">
+                    <select v-model="symbolType"
+                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
+                        <option value="">全部</option>
+                        <option value="1">ETH</option>
+                        <option value="2">BTC</option>
+                        <option value="3">OMNI</option>
+                        <!--<option value="4">MBT</option>-->
+                        <!--<option value="5">EOS</option>-->
+                    </select>
+                </Col>
+                <Col span="2">币种：</Col>
+                <Col span="4">
+                    <Input v-model="symbol" style="width:100px;"/>
+                </Col>
+                <Col span="2">转账类型：</Col>
+                <Col span="4">
+                    <!--<Input v-model="username" style="width:100px;"/>-->
+                    <select v-model="username"
+                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
+                        <option value="">全部</option>
+                        <!--<option value="1">未处理</option>-->
+                        <option value="2">等待交易发起</option>
+                        <option value="3">交易已发送</option>
+                        <option value="4">撤销</option>
+                        <option value="5">归集失败</option>
+                        <option value="6">归集完成</option>
+                        <option value="7">归集失败资金返还</option>
+                    </select>
+                </Col>
+            </Row>
+            <Row style="margin-bottom: 20px;">
+                <Col span="2">转账状态：</Col>
+                <Col span="4">
+                    <select v-model="status"
+                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
+                        <option value="">全部</option>
+                        <!--<option value="1">未处理</option>-->
+                        <option value="2">等待交易发起</option>
+                        <option value="3">交易已发送</option>
+                        <option value="4">撤销</option>
+                        <option value="5">归集失败</option>
+                        <option value="6">归集完成</option>
+                        <option value="7">归集失败资金返还</option>
+                    </select>
+                </Col>
+                <Col span="2">交易发起时长：</Col>
+                <Col span="4">
+                    <select v-model="initiationTime"
+                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
+                        <option value="">全部</option>
+                        <option value="1">1h以内</option>
+                        <option value="2">2h以内</option>
+                        <option value="5">5h以内</option>
+                        <option value="24">24小时以内</option>
+                    </select>
+                </Col>
+                <Col span="2">交易ID：</Col>
+                <Col span="4">
+                    <Input v-model="txId" style="width:100px;"/>
+                </Col>
+                <Col span="2">
+                    <Button type="primary" @click="curPage=1;getconfirmList()">查询</Button>
+                </Col>
+            </Row>
+            <Table :columns="columns1" :data="data1"></Table>
+            <Page :current="curPage1" :total="total1" @on-change="changePage"
+                  style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
 <script>
-    import upAddress from './upAddress'
-    import util from '../../libs/util'
-    import fundApi from '../../api/fund'
-    import eploy from './eploy'
+    import upAddress from './upAddress';
+    import util from '../../libs/util';
+    import fundApi from '../../api/fund';
+    import eploy from './eploy';
+    import monitorApi from '../../api/monitoring';
+
     export default {
         data () {
             return {
@@ -26,7 +101,15 @@
                 total: 0,
                 curPage1: 1,
                 total1: 0,
-                columns1: [
+                symbolType: '',
+                symbol: '',
+                initiationTime: '',
+                direction: '',
+                username: '',
+                txId: '',
+                status: '',
+                size: 10,
+                columns: [
                     {
                         title: '币种',
                         key: 'symbol'
@@ -59,7 +142,7 @@
                         title: '是否可用',
                         key: 'enable',
                         render: (h, params) => {
-                            return h('div', params.row.enable === 0 ? '不可用' : '可用')
+                            return h('div', params.row.enable === 0 ? '不可用' : '可用');
                         }
                     },
                     {
@@ -75,9 +158,9 @@
                                             util.setDialog(upAddress, {
                                                 item: params.row,
                                                 okCallback: () => {
-                                                    this.getTransferConfig()
+                                                    this.getTransferConfig();
                                                 }
-                                            })
+                                            });
                                         }
                                     }
                                 }, '修改')
@@ -85,85 +168,170 @@
                         }
                     }
                 ],
-                data1: [],
-                columns2: [
+                data: [],
+                columns1: [
+                    {
+                        title: '转账类型',
+                        key: 'txId'
+                    },
+                    {
+                        title: '交易ID',
+                        key: 'txId'
+                    },
+                    {
+                        title: '用户名',
+                        key: 'username'
+                    },
                     {
                         title: '币种',
                         key: 'symbol'
                     },
                     {
-                        title: '账户',
-                        key: 'username'
-                    },
-                    {
-                        title: '地址',
-                        key: 'address'
-                    },
-                    {
-                        title: ' ',
-                        key: 'address',
+                        title: '公链类型',
+                        key: 'symbolType',
                         render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {type: 'primary', size: 'small'},
-                                    style: {marginRight: '10px'},
-                                    on: {
-                                        click: () => {
-                                            // util.setDialog(upAddress)
-                                            fundApi.transfer ({
-                                                param: '2000',
-                                                transferTye: 1,
-                                                symbol: params.row.symbol
-                                            },(res) => {
-                                                this.$Message.success({content: '操作成功'})
-                                            }, (msg) => {
-                                                this.$Message.error({content: msg})
-                                            })
-                                        }
-                                    }
-                                }, '转账')
-                            ]);
+                            return h('div', this.switchStaus(params.row.symbolType));
                         }
+                    },
+                    {
+                        title: 'from地址',
+                        key: 'fromAddress'
+                    },
+                    {
+                        title: 'to地址',
+                        key: 'toAddress'
+                    },
+                    {
+                        title: '数量',
+                        key: 'amount'
+                    },
+                    {
+                        title: '矿工费',
+                        key: 'btcMinerFee'
+                    },
+                    {
+                        title: '转账状态', //1 等待  2 完成
+                        key: 'status',
+                        render: (h, params) => {
+                            return h('div', this.switchStaus2(params.row.status));
+                        }
+                    },
+                    {
+                        title: '交易失败原因',
+                        key: 'failMsg'
+                    },
+                    {
+                        title: 'Nounce值',
+                        key: 'nonce'
+                    },
+                    {
+                        title: '交易发起时间',
+                        key: 'tradeAt'
+                    },
+                    {
+                        title: '交易完成时间',
+                        key: 'completeTime'
+                    },
+                    {
+                        title: '解冻归还ID',
+                        key: 'tradeWaitingTime'
                     }
                 ],
-                data2: []
-            }
+                data1: []
+            };
         },
         created () {
-            this.getTransferConfig()
-            this.getAdminCoinPool()
+            this.getTransferConfig();
+            this.getconfirmList();
         },
         methods: {
             adddEploy () {
                 util.setDialog(eploy, {
                     okCallback: () => {
-                        this.getTransferConfig()
+                        this.getTransferConfig();
                     }
-                })
+                });
             },
             getTransferConfig () {
                 fundApi.findTransferConfig(this.curPage, (res, total) => {
-                    this.total = total
-                    this.data1 = res
-                })
-            },
-            changePage (page) {
-                this.curPage = page,
-                    this.getTransferConfig()
-            },
-            getAdminCoinPool () {
-                fundApi.getAdminCoinPool(this.curPage1, {}, (res, total) => {
-                    this.total1= total
-                    this.data2 = res
-                })
+                    this.total = total;
+                    this.data = res;
+                });
             },
             changePage1 (page) {
-                this.curPage1 = page,
-                    this.getAdminCoinPool()
+                this.curPage = page;
+                this.getTransferConfig();
             },
+            switchStaus (state) {
+                switch (state) { // 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS
+                    case 1:
+                        return 'BTC';
+                        break;
+                    case 2:
+                        return 'ETH';
+                        break;
+                    case 3:
+                        return 'OMNI';
+                        break;
+                    case 4:
+                        return 'MBT';
+                        break;
+                    case 5:
+                        return 'EOS';
+                        break;
+                }
+            },
+            switchStaus2 (state) {
+                switch (state) { //  1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6 对账完成 7 提现失败资金返还
+                    case 1:
+                        return '未处理';
+                        break;
+                    case 2:
+                        return '等待交易发起';
+                        break;
+                    case 3:
+                        return '交易已发送';
+                        break;
+                    case 4:
+                        return '撤销';
+                        break;
+                    case 5:
+                        return '提现失败';
+                        break;
+                    case 6:
+                        return '对账完成';
+                        break;
+                    case 7:
+                        return '提现失败资金返还';
+                        break;
+                }
+            },
+            getconfirmList () {
+                monitorApi.transfersList({
+                    page: this.curPage,
+                    size: this.size,
+                    symbolType: this.symbolType,
+                    initiationTime: this.initiationTime,
+                    username: this.username,
+                    status: this.status,
+                    symbol: this.symbol,
+                    txId: this.txId
+                }, (res, total) => {
+                    this.total = total;
+                    this.data1 = res;
+                });
+            },
+            changePage (page) {
+                this.curPage = page;
+                this.getconfirmList();
+            }
         }
-    }
+    };
 </script>
 <style scoped>
-    .ivu-card-head p{display: flex;justify-content:space-between;height: 30px;}
+    .ivu-card-head p {
+        display: flex;
+        justify-content: space-between;
+        height: 30px;
+    }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <Card style="width:600px;padding-bottom: 50px;">
         <p slot="title">
-            <span>{{state==='0'?'充值':'扣除'}}USDS</span>
+            <span>{{state==='0'?'充值':'扣除'}}USSD</span>
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <div class="detail">

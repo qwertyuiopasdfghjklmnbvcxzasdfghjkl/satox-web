@@ -7,8 +7,8 @@
                     <select v-model="symbolType"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">全部</option>
-                        <option value="1">ETH</option>
-                        <option value="2">BTC</option>
+                        <option value="1">BTC</option>
+                        <option value="2">ETH</option>
                         <option value="3">OMNI</option>
                         <!--<option value="4">MBT</option>-->
                         <!--<option value="5">EOS</option>-->
@@ -154,7 +154,7 @@
         },
         methods: {
             switchStaus (state) {
-                switch (state) { // 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS
+                switch (state) { // 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS ,
                     case 1:
                         return 'BTC';
                         break;
