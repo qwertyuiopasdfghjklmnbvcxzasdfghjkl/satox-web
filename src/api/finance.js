@@ -63,7 +63,7 @@ const findWithdrawStatisticsList = function (curPage, sortStr, success, error) {
 };
 finance.findWithdrawStatisticsList = findWithdrawStatisticsList;
 
-// 财务管理--币种充值记录 GET /financialManage/financialStatistics/symbolRecharge
+// 财务管理--币种充值记录
 const findSymbolRechargeList = function (data, success, error) {
     api.get(`api/bm/financialManage/financialStatistics/symbolRecharge`, data, (res) => {
         if (res.rst === 1) {
@@ -208,14 +208,15 @@ const findUserAssetList = function (curPage, sortStr, success, error) {
 finance.findUserAssetList = findUserAssetList;
 
 // 财务管理--用户充值记录
-const findRechargeRecords = function (curPage, sortStr, success, error) {
-    api.get(`/api/bm/financialManage/financialStatistics/findRechargeRecords/10/${curPage}/${sortStr}`, (res) => {
-        if (res.rst === 1) {
-            success && success(res.data, res.total);
-        } else {
-            error && error(res.msg);
-        }
-    }, error);
+const findRechargeRecords = function (curPage, sortStr, data, success, error) {
+    api.get(`/api/bm/financialManage/financialStatistics/findRechargeRecords/10/${curPage}/${sortStr}`, data,
+        (res) => {
+            if (res.rst === 1) {
+                success && success(res.data, res.total);
+            } else {
+                error && error(res.msg);
+            }
+        }, error);
 };
 finance.findRechargeRecords = findRechargeRecords;
 

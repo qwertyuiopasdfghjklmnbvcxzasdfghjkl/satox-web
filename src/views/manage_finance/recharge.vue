@@ -34,26 +34,26 @@
                     <p slot="title">充币列表</p>
                     <p style="margin-bottom: 20px">
                         币种：
-                        <Select v-model="formData.symbol" style="width: 200px">
+                        <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
                         创建时间：
-                        <DatePicker type="date" v-model="formData.beginTime" placeholder="开始时间" format="yyyy-MM-dd"
-                                    style="width: 150px"></DatePicker>
-                        <DatePicker type="date" v-model="formData.endTime" placeholder="结束时间" format="yyyy-MM-dd"
-                                    style="width: 150px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData.createdStart" placeholder="开始时间" format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData.createdEnd" placeholder="结束时间" format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
                         有户名：
                         <Input v-model="formData.username" clearable style="width: 200px"></Input>
                         数量：
                         <Select v-model="formData.amount" style="width: 200px">
-                            <Option value="">全部</Option>
+                            <Option value="0">全部</Option>
                             <Option value="1">小于等于1</Option>
                             <Option value="2">大于1小于等于1000</Option>
                             <Option value="3">大于1000小于等于10000</Option>
                             <Option value="4">大于10000</Option>
                         </Select>
-                        <Button type="primary" @click="curPage7=1;getfindRechargeRecords">查询</Button>
+                        <Button type="primary" @click="curPage7=1;getfindRechargeRecords()">查询</Button>
                     </p>
                     <Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="setChargeTokenSort"></Table>
                     <Page :current="curPage7" :total="total7" @on-change="changePage7"
@@ -68,6 +68,7 @@
 <script>
     import financeApi from '../../api/finance';
     import currenyApi from '../../api/currency';
+    import util from '../../libs/util';
 
     export default {
         data () {
@@ -118,8 +119,10 @@
                     symbol: '',
                     symbol2: '',
                     amount: '',
-                    beginTime: null,
-                    endTime: null
+                    createdStart: null,
+                    createdEnd: null,
+                    min: null,
+                    max: null
                 },
                 ChargeTokenSortKey: null,
                 withdrawSortKey: null,
@@ -171,10 +174,42 @@
             },
             getfindRechargeRecords () {
                 let sortStr = this.ChargeTokenSortKey ? `${this.ChargeTokenSortKey}%20${this.ChargeTokenSortVal}` : 'null';
-                financeApi.findRechargeRecords(this.curPage7, sortStr, (res, total) => {
+                this.switch(this.formData.amount);
+                let D = JSON.stringify(this.formData);
+                let data = JSON.parse(D);
+                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
+                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                financeApi.findRechargeRecords(this.curPage7, sortStr, data, (res, total) => {
                     this.total7 = total;
                     this.data8 = res;
                 });
+            },
+            switch (i) {
+                switch (i) {
+                    case '1':
+                        this.formData.min = null;
+                        this.formData.max = 1;
+                        break;
+                    case '2':
+                        this.formData.max = 1000;
+                        this.formData.min = 1;
+                        break;
+                    case '3':
+                        this.formData.max = 10000;
+                        this.formData.min = 1000;
+                        break;
+                    case '4':
+                        this.formData.min = 10000;
+                        this.formData.max = null;
+                        break;
+                    case '0':
+                        this.formData.max = null;
+                        this.formData.min = null;
+                        break;
+                    default:
+                        this.formData.max = null;
+                        this.formData.min = null;
+                }
             },
             getMonitorList () {
                 let sortStr = this.rechargeSortKey ? `${this.rechargeSortKey}%20${this.rechargeSortVal}` : 'null';
