@@ -17,7 +17,7 @@
                     <p slot="title">币种充值监控</p>
                     <p style="margin-bottom: 20px">
                         币种：
-                        <Select v-model="formData.symbol2" style="width: 200px" :clearable="true">
+                        <Select v-model="formData.symbol2" style="width: 200px" :clearable="true"  :placeholder="'请选择币种'">
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
@@ -34,7 +34,8 @@
                     <p slot="title">充币列表</p>
                     <p style="margin-bottom: 20px">
                         币种：
-                        <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
+                        <Select v-model="formData.symbol" style="width: 200px" :clearable="true" :placeholder="'请选择币种'">
+                            <Option value="0">全部</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
@@ -46,7 +47,7 @@
                         有户名：
                         <Input v-model="formData.username" clearable style="width: 200px"></Input>
                         数量：
-                        <Select v-model="formData.amount" style="width: 200px">
+                        <Select v-model="formData.amount" style="width: 200px" :placeholder="'请选择数量'">
                             <Option value="0">全部</Option>
                             <Option value="1">小于等于1</Option>
                             <Option value="2">大于1小于等于1000</Option>
@@ -116,9 +117,9 @@
                 data8: [],
                 formData: {
                     username: '',
-                    symbol: '',
+                    symbol: '0',
                     symbol2: '',
-                    amount: '',
+                    amount: '0',
                     createdStart: null,
                     createdEnd: null,
                     min: null,
@@ -179,6 +180,7 @@
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                data.symbol = data.symbol === '0' ? null : util.dateToStr(new Date(data.createdEnd));
                 financeApi.findRechargeRecords(this.curPage7, sortStr, data, (res, total) => {
                     this.total7 = total;
                     this.data8 = res;
