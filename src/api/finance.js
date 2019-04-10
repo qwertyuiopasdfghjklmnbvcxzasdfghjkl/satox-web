@@ -232,7 +232,7 @@ const finduserAccountList = function (data, success, error) {
 };
 finance.finduserAccountList = finduserAccountList;
 
-// 财务管理--USDS充值--账户列表
+// 财务管理--USSD充值--账户列表
 const findUSDSRechargeRecords = function (data, success, error) {
     api.get(`/api/bm/financialManage/usds/accounts`, data, (res) => {
         if (res.rst === 1) {

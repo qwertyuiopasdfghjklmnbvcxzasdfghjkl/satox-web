@@ -2,7 +2,7 @@
     <Row>
         <Card>
             <p slot="title">
-                USDS银行卡信息记录管理
+                USSD银行卡信息记录管理
                 <span class="refresh" @click="getList"></span>
             </p>
             <Row>
