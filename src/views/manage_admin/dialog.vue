@@ -19,8 +19,9 @@
             </FormItem>
             <FormItem label="权限类型" prop="type">
                 <Select v-model="model12" filterable multiple>
-                    <Option v-for="item in cityList" :value="item.roleId" :key="item.roleId">{{ item.roleNameCn }}</Option>
-            </Select>
+                    <Option v-for="item in cityList" :value="item.roleId" :key="item.roleId">{{ item.roleNameCn }}
+                    </Option>
+                </Select>
             </FormItem>
             <FormItem>
                 <Button type="primary" style="width:150px" @click="addUsername()">创建</Button>
@@ -30,99 +31,100 @@
 </template>
 
 <script>
-import author from '../../api/author'
-export default {
-    props: ['id'],
-    data () {
-        const passwordCheck = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入密码'));
-            } else {
-                if (this.formItem.passwordAgain !== '') {
-                    // 对第二个密码框单独验证
-                    this.$refs.formItem.validateField('passwordAgain');
+    import author from '../../api/author';
+
+    export default {
+        props: ['id'],
+        data () {
+            const passwordCheck = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.formItem.passwordAgain !== '') {
+                        // 对第二个密码框单独验证
+                        this.$refs.formItem.validateField('passwordAgain');
+                    }
+                    callback();
                 }
-                callback();
-            }
-        }
-        const passwordAgainCheck = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.formItem.password) {
-                callback(new Error('密码不一致'));
-            } else {
-                callback();
-            }
-        }
-        return {
-            cityList: [],
-            model12: [],
-            formItem:{
-                userRealName: '',
-                username: '',
-                password: '',
-                passwordAgain: '',
-                status: 1,
-                roleList: []
+            };
+            const passwordAgainCheck = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.formItem.password) {
+                    callback(new Error('密码不一致'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                cityList: [],
+                model12: [],
+                formItem: {
+                    userRealName: '',
+                    username: '',
+                    password: '',
+                    passwordAgain: '',
+                    status: 1,
+                    roleList: []
+                },
+                ruleInline: {
+                    userRealName: [
+                        {required: true, message: '请输入姓名', trigger: 'blur'}
+                    ],
+                    username: [
+                        {required: true, message: '请输入账号', trigger: 'blur'},
+                    ],
+                    password: [
+                        {required: true, message: '请输入账号', trigger: 'blur'},
+                        {validator: passwordCheck, trigger: 'blur'}
+                    ],
+                    passwordAgain: [
+                        {required: true, message: '请输入账号', trigger: 'blur'},
+                        {validator: passwordAgainCheck, trigger: 'blur'},
+                    ],
+                    model12: [
+                        {required: true, message: '请输入权限类型', trigger: 'blur'}
+                    ]
+                }
+            };
+        },
+        created () {
+            this.role();
+        },
+        methods: {
+            role () {
+                author.findAllRoleList({}, (res) => {
+                    this.cityList = res;
+                }, (msg) => {
+                    this.$Message.error({content: msg});
+                });
             },
-            ruleInline: {
-                userRealName: [
-                { required: true, message: '请输入姓名', trigger: 'blur' }
-                ],
-                username: [
-                    { required: true, message: '请输入账号', trigger: 'blur' },
-                ],
-                password: [
-                    { required: true, message: '请输入账号', trigger: 'blur' },
-                    {validator: passwordCheck, trigger: 'blur' }
-                ],
-                passwordAgain: [
-                    { required: true, message: '请输入账号', trigger: 'blur' },
-                    {validator: passwordAgainCheck, trigger: 'blur' },
-                ],
-                model12: [
-                    { required: true, message: '请输入权限类型', trigger: 'blur' }
-                ]
+            closeDialog () {
+                this.$emit('removeDialog');
+            },
+            addUsername () {
+                this.$refs.formItem.validate((valid) => {
+                    if (valid) {
+                        let a = ',' + this.model12.join(',') + ',';
+                        let roleList = [];
+                        this.cityList.forEach((item) => {
+                            if (a.indexOf(',' + item.roleId + ',') !== -1) {
+                                roleList.push(item);
+                            }
+                        });
+                        this.formItem.roleList = roleList;
+                        author.addUser(this.formItem, (res) => {
+                            this.$Message.success({content: '添加成功'});
+                            this.$emit('okCallback');
+                            this.$emit('removeDialog');
+                        }, (msg) => {
+                            this.$Message.error({content: msg});
+                        });
+                    }
+                });
             }
         }
-    },
-    created () {
-        this.role()
-    },
-    methods: {
-        role () {
-          author.findAllRoleList({}, (res) => {
-            this.cityList = res
-          }, (msg) => {
-            this.$Message.error({content: msg})
-          })
-        },
-        closeDialog () {
-            this.$emit('removeDialog');
-        },
-        addUsername() {
-            this.$refs.formItem.validate((valid) => {
-                if (valid) {
-                    let a = ',' + this.model12.join(',') + ','
-                    let roleList = []
-                    this.cityList.forEach((item) => {
-                        if (a.indexOf(','+item.roleId+',') !== -1) {
-                            roleList.push(item)
-                        }
-                    })
-                    this.formItem.roleList = roleList
-                    author.addUser(this.formItem, (res) => {
-                        this.$Message.success({content: '添加成功'})
-                        this.$emit('okCallback')
-                        this.$emit('removeDialog');
-                    }, (msg) => {
-                        this.$Message.error({content: msg})
-                    })
-                }
-            })        
-        }
-    }
-}
+    };
 </script>
 
 <style>
