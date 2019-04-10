@@ -1,10 +1,10 @@
-<!-- USDS 充值 -->
+<!-- USSD 充值 -->
 <template>
     <Row>
         <Col span="24">
             <Row>
                 <Card>
-                    <p slot="title">USDS 充值</p>
+                    <p slot="title">USSD 充值</p>
                     <Row>
                         <Select v-model="formData.type" style="width:200px;">
                             <Option value="username">用户名</Option>
@@ -42,9 +42,9 @@
                     {title: '手机号', key: 'mobile'},
                     {title: '姓名', key: 'userRealName'},
                     {title: '币种代号', key: 'symbol'},
-                    {title: 'USDS总金额', key: 'totalBalance'},
-                    {title: 'USDS可用金额', key: 'availableBalance'},
-                    {title: 'USDS冻结金额', key: 'frozenBalance'},
+                    {title: 'USSD总金额', key: 'totalBalance'},
+                    {title: 'USSD可用金额', key: 'availableBalance'},
+                    {title: 'USSD冻结金额', key: 'frozenBalance'},
                     {
                         title: '操作', key: 'action', render: (h, params) => {
                             return h('div', [

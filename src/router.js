@@ -540,7 +540,7 @@ export const financeRouter = [
     {
         path: '/usds_recharge',
         name: 'usds_recharge',
-        title: 'USDS充值',
+        title: 'USSD充值',
         component: Main,
         icon: 'radio-waves',
         meta: {
@@ -548,7 +548,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'USDS充值', name: 'usds_recharge_index', component: resolve => {
+                path: 'index', title: 'USSD充值', name: 'usds_recharge_index', component: resolve => {
                     require(['./views/manage_finance/usds_recharge.vue'], resolve);
                 }
             }
@@ -561,7 +561,7 @@ export const financeRouter = [
         component: Main,
         icon: 'ios-loop-strong',
         meta: {
-            roles: ['ROLE_ADMIN', 'TRANSFER_ADMIN']
+            roles: ['ROLE_ADMIN', 'ROLE_TRANSFER_ADMIN']
         },
         children: [
             {
@@ -591,7 +591,7 @@ export const financeRouter = [
     {
         path: '/bank_data',
         name: 'bank_data',
-        title: 'USDS银行资料',
+        title: 'USSD银行资料',
         component: Main,
         icon: 'card',
         meta: {
