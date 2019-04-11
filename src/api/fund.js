@@ -53,7 +53,7 @@ fund.findTransferConfig  = findTransferConfig
 
 // 查询转账记录
 const findTransactionRecords = function (curPage, success, error) {
-  api.get(`api/bm/coinTask/transactionRecords/findTransactionRecords/10/${curPage}`, (res) => {
+  api.get(`api/bm/coinTask/transactionRecords/findTransactionRecords/10/${curPage}/null`, (res) => {
     if (res.rst === 1) {
       success && success(res.data, res.total)
     } else {
@@ -175,7 +175,7 @@ const addColdWalletAddress = function (data, success, error) {
 }
 fund.addColdWalletAddress  = addColdWalletAddress
 
-   
+
 // 冷钱包设置--删除地址
 const deleteColdWallet = function (data, success, error) {
   api.post(`api/bm/coinTask/coinColdWallet/deleteColdWallet`, data, (res) => {
