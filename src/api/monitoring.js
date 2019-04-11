@@ -98,6 +98,18 @@ const transfersList = function (data, success, error) {
 };
 monitoring.transfersList = transfersList;
 
+// 主地址转冷钱包设置
+const transfersColdList = function (data, success, error) {
+    api.get(`api/bm/monitor/coinPool/transfers/cold`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+monitoring.transfersColdList = transfersColdList;
+
 //区块确认列表
 const confirmList = function (curPage, data, success, error) {
     api.post(`api/bm/monitor/comfirm/findWaitingTransactionConfirmList/10/${curPage}`, data, (res) => {
