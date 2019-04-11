@@ -68,7 +68,7 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage1"
+            <Page :current="curPage1" :total="total" @on-change="changePage1" :page-size="size"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
@@ -81,7 +81,7 @@
         data () {
             return {
                 curPage1: 1,
-                total1: 0,
+                total: 0,
                 symbolType: '',
                 symbol: '',
                 initiationTime: '',
