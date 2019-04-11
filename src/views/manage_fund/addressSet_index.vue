@@ -13,77 +13,7 @@
         <!--<Table :columns="columns2" :data="data2"></Table>-->
         <!--<Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>-->
         <!--</Card>-->
-        <Card style="margin-top: 20px;">
-            <Row style="margin-bottom: 20px;">
-                <Col span="2">公链类型：</Col>
-                <Col span="4">
-                    <select v-model="symbolType"
-                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">BTC</option>
-                        <option value="2">ETH</option>
-                        <option value="3">OMNI</option>
-                        <!--<option value="4">MBT</option>-->
-                        <!--<option value="5">EOS</option>-->
-                    </select>
-                </Col>
-                <Col span="2">币种：</Col>
-                <Col span="4">
-                    <Input v-model="symbol" style="width:100px;"/>
-                </Col>
-                <Col span="2">转账类型：</Col>
-                <Col span="4">
-                    <!--<Input v-model="username" style="width:100px;"/>-->
-                    <select v-model="direction"
-                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <!--<option value="1">充值</option>-->
-                        <!--<option value="2">提现</option>-->
-                        <!--<option value="3">交易所归集</option>-->
-                        <option value="4">冷钱包充值</option>
-                        <option value="5">冷钱包提现</option>
-                    </select>
-                </Col>
-            </Row>
-            <Row style="margin-bottom: 20px;">
-                <Col span="2">转账状态：</Col>
-                <Col span="4">
-                    <!--// 1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6对账完成 7提现失败资金返还 ,-->
-                    <select v-model="status"
-                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">未处理</option>
-                        <option value="2">等待交易发起</option>
-                        <option value="3">交易已发送</option>
-                        <option value="4">撤销</option>
-                        <option value="5">提现失败</option>
-                        <option value="6">对账完成</option>
-                        <option value="7">提现失败资金返还</option>
-                    </select>
-                </Col>
-                <Col span="2">交易发起时长：</Col>
-                <Col span="4">
-                    <select v-model="initiationTime"
-                            style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">1h以内</option>
-                        <option value="2">2h以内</option>
-                        <option value="5">5h以内</option>
-                        <option value="24">24小时以内</option>
-                    </select>
-                </Col>
-                <Col span="2">交易ID：</Col>
-                <Col span="4">
-                    <Input v-model="txId" style="width:100px;"/>
-                </Col>
-                <Col span="2">
-                    <Button type="primary" @click="curPage=1;getconfirmList()">查询</Button>
-                </Col>
-            </Row>
-            <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage1" :total="total1" @on-change="changePage"
-                  style="text-align:center;margin-top:20px;"></Page>
-        </Card>
+        <!-- -->
     </div>
 </template>
 <script>
