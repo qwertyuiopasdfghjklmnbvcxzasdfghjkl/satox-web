@@ -18,6 +18,7 @@
                     <p style="margin-bottom: 20px">
                         币种：
                         <Select v-model="formData.symbol2" style="width: 200px" :clearable="true"  :placeholder="'请选择币种'">
+                            <Option value="0">全部</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
@@ -44,7 +45,7 @@
                                     style="width: 200px"></DatePicker>
                         <DatePicker type="datetime" v-model="formData.createdEnd" placeholder="结束时间" format="yyyy-MM-dd HH:mm:ss"
                                     style="width: 200px"></DatePicker>
-                        有户名：
+                        用户名：
                         <Input v-model="formData.username" clearable style="width: 200px"></Input>
                         数量：
                         <Select v-model="formData.amount" style="width: 200px" :placeholder="'请选择数量'">
@@ -102,7 +103,7 @@
                 data2: [],
                 columns8: [
                     {title: '创建时间', key: 'createdTime', sortable: 'custom'},
-                    {title: '用户账号', key: 'userName'},
+                    {title: '用户名', key: 'userName'},
                     {title: '币种', key: 'symbol', sortable: 'custom'},
                     {title: '充值数量', key: 'amount', sortable: 'custom'},
                     {
@@ -118,7 +119,7 @@
                 formData: {
                     username: '',
                     symbol: '0',
-                    symbol2: '',
+                    symbol2: '0',
                     amount: '0',
                     createdStart: null,
                     createdEnd: null,
@@ -221,11 +222,13 @@
                 });
             },
             getStatisticsList () {
+                let Data = JSON.stringify(this.formData.symbol2);
                 let data = {
                     page: this.curPage1,
                     size: this.size,
-                    symbol: this.formData.symbol2
+                    symbol: JSON.parse(Data)
                 };
+                data.symbol = data.symbol === '0' ? null : data.symbol;
                 financeApi.findSymbolRechargeList(data, (res, total) => {
                     this.total1 = total;
                     this.data2 = res;
