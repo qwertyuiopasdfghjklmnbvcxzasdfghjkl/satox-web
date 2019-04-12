@@ -46,13 +46,13 @@ export default {
                 {key: 'createdTime', title: '创建时间'},
                 {key: 'userName', title: '用户账号'},
                 {key: 'withdrawAmount', title: '提现金额',
-                    render: (h, params) => { 
+                    render: (h, params) => {
                         return h('div', [params.row.withdrawAmount, params.row.symbol])
                     }
                 },
                 {key: 'phoneNumber', title: '电话'},
                 {key: 'auditStatus', title: '状态',
-                    render: (h, params) => { 
+                    render: (h, params) => {
                         return h('div', this.switchStaus(params.row.auditStatus))
                     }
                 },//0 未审核 1 审核不通过 2 审核通过
