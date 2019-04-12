@@ -3,28 +3,29 @@
     <Row>
         <Col span="24">
             <Row>
-                <Card>
+                <!--<Card>-->
+                    <!---->
+                    <!--<Row>-->
+                        <!--<Col span="12">-->
+                            <!--<p>自动审核</p>-->
+                            <!--<p>-->
+                                <!--<span>待审核笔数：{{numberData.toBeAuditingAutoCount }}</span>-->
+                                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishAutoCount }}</span>-->
+                            <!--</p>-->
+                        <!--</Col>-->
+                        <!--<Col span="12">-->
+                            <!--<p>人工审核</p>-->
+                            <!--<p>-->
+                                <!--<span>待审核笔数：{{numberData.toBeAuditingManualCount}}</span>-->
+                                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishManualCount}}</span>-->
+                            <!--</p>-->
+                        <!--</Col>-->
+                    <!--</Row>-->
+                <!--</Card>-->
+                <Card style="margin-top:10px;">
                     <p slot="title">提币审核
                         <span class="refresh" @click="reshAll"></span>
                     </p>
-                    <Row>
-                        <Col span="12">
-                            <p>自动审核</p>
-                            <p>
-                                <span>待审核笔数：{{numberData.toBeAuditingAutoCount }}</span>
-                                <span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishAutoCount }}</span>
-                            </p>
-                        </Col>
-                        <Col span="12">
-                            <p>人工审核</p>
-                            <p>
-                                <span>待审核笔数：{{numberData.toBeAuditingManualCount}}</span>
-                                <span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishManualCount}}</span>
-                            </p>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card style="margin-top:10px;">
                     <Table :columns="columns" :data="datas"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -82,12 +83,12 @@
                     }
                 ],
                 datas: [],
-                numberData: []
+                // numberData: []
             };
         },
         created () {
             this.getAuditing();
-            this.getAuditingData();
+            // this.getAuditingData();
         },
         methods: {
             reshAll () {
@@ -119,11 +120,11 @@
                 this.curPage = page;
                 this.getAuditing();
             },
-            getAuditingData () {
-                financeApi.findTotalWithdrawAuditingData((res) => {
-                    this.numberData = res;
-                });
-            }
+            // getAuditingData () {
+            //     financeApi.findTotalWithdrawAuditingData((res) => {
+            //         this.numberData = res;
+            //     });
+            // }
         }
     };
 </script>
