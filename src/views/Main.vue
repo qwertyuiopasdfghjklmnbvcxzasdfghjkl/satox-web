@@ -2,7 +2,7 @@
     @import "./main.less";
 
     .main-header {
-        min-width: 1362px;
+        min-width: 100%;
     }
 </style>
 <template>
@@ -16,23 +16,23 @@
                 <menus/>
             </div>
         </div>
-        <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}" style="min-width:1280px;">
+        <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'240px'}" style="width:100%">
             <div class="main-header">
                 <div class="back_home">
                     <Icon type="ios-monitor-outline"></Icon>
                     <router-link to="/home">首页</router-link>
                 </div>
                 <div class="header-avator-con">
-                    <div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">
-                        <Tooltip :content="isFullScreen ? '退出全屏' : '全屏'" placement="bottom">
-                            <Icon :type="isFullScreen ? 'arrow-shrink' : 'arrow-expand'" :size="23"></Icon>
-                        </Tooltip>
-                    </div>
-                    <div @click="lockScreen" class="lock-screen-btn-con">
-                        <Tooltip content="锁屏" placement="bottom">
-                            <Icon type="locked" :size="20"></Icon>
-                        </Tooltip>
-                    </div>
+                    <!--<div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">-->
+                        <!--<Tooltip :content="isFullScreen ? '退出全屏' : '全屏'" placement="bottom">-->
+                            <!--<Icon :type="isFullScreen ? 'arrow-shrink' : 'arrow-expand'" :size="23"></Icon>-->
+                        <!--</Tooltip>-->
+                    <!--</div>-->
+                    <!--<div @click="lockScreen" class="lock-screen-btn-con">-->
+                        <!--<Tooltip content="锁屏" placement="bottom">-->
+                            <!--<Icon type="locked" :size="20"></Icon>-->
+                        <!--</Tooltip>-->
+                    <!--</div>-->
                     <div @click="showMessage" class="message-con">
                         <Tooltip :content="messageCount > 0 ? '有' + messageCount + '条未读消息' : '无未读消息'"
                                  placement="bottom">
