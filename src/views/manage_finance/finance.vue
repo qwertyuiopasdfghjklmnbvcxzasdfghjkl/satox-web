@@ -14,7 +14,7 @@
             <!--</Row>-->
             <Row>
                 <Card>
-                    <p slot="title">日提币统计</p>
+                    <p slot="title">{{$t('finance.rtbtj')}}</p>
                     <Table :columns="columns2" :data="data2" @on-sort-change="setWithdrawSort"></Table>
                     <Page :current="curPage1" :total="total1" @on-change="changePage1"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -22,7 +22,7 @@
             </Row>
             <Row>
                 <Card style="margin:10px 0;">
-                    <p slot="title">每日充提统计</p>
+                    <p slot="title">{{$t('finance.mrcttj')}}</p>
                     <Table :columns="columns9" :data="data9" @on-sort-change="setFinanceSort"></Table>
                     <Page :current="curPage9" :total="total9" :page-size="pageSize9" @on-change="changePage9"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -38,7 +38,7 @@
             <!--</Row>-->
             <Row>
                 <Card>
-                    <p slot="title">资金池情况</p>
+                    <p slot="title">{{$t('finance.zjcqk')}}</p>
                     <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="setCapitalPoolSort"></Table>
                     <Page :current="curPage3" :total="total3" @on-change="changePage3"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -46,7 +46,7 @@
             </Row>
             <Row style="margin-top:10px;">
                 <Card>
-                    <p slot="title">手续费账户</p>
+                    <p slot="title">{{$t('finance.sxfzh')}}</p>
                     <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="setChargeSort"></Table>
                     <Page :current="curPage4" :total="total4" @on-change="changePage4"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -54,7 +54,7 @@
             </Row>
             <Row style="margin-top:10px;">
                 <Card>
-                    <p slot="title">用户总资产数据</p>
+                    <p slot="title">{{$t('finance.yhzzcsj')}}</p>
                     <Table ref="test3" :columns="columns7" :data="data7" @on-sort-change="setAssetSort"></Table>
                     <Page :current="curPage6" :total="total6" @on-change="changePage6"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -70,7 +70,7 @@
             <!--</Row>-->
             <Row style="margin-top:10px;">
                 <Card>
-                    <p slot="title">主地址币种数量</p>
+                    <p slot="title">{{$t('finance.zdzbzsl')}}</p>
                     <Table :columns="columns6" :data="data6"></Table>
                     <Page :current="curPage5" :total="total5" @on-change="changePage5"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -120,10 +120,10 @@
                 ],
                 data1: [],
                 columns2: [
-                    {title: '公链币种', key: 'symbol'},
-                    {title: '日待提币笔数', key: 'withdrawDailyToBeConfirmedCount', sortable: 'custom'},
+                    {title: this.$t('finance.glbz'), key: 'symbol'},
+                    {title: this.$t('finance.rdtbbs'), key: 'withdrawDailyToBeConfirmedCount', sortable: 'custom'},
                     // {title: '日待提币总量', key: 'withdrawDailyToBeConfirmedAmount'},
-                    {title: '日已提币笔数', key: 'withdrawDailyFinishCount', sortable: 'custom'},
+                    {title: this.$t('finance.rytbbs'), key: 'withdrawDailyFinishCount', sortable: 'custom'},
                     // {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
                 ],
                 data2: [],
@@ -201,7 +201,7 @@
                 ],
                 data8: [],
                 columns9: [
-                    {title: '币种', key: 'symbol'},
+                    {title: this.$t('finance.bz'), key: 'symbol'},
                     {title: '日充值数量', key: 'rechargeAmountDaily', sortable: 'custom'},
                     {title: '日充值笔数', key: 'rechargeCountDaily', sortable: 'custom'},
                     {title: '日提现数量', key: 'withdrawAmountDaily', sortable: 'custom'},

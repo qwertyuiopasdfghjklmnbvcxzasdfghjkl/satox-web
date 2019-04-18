@@ -181,7 +181,7 @@
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                data.symbol = data.symbol === '0' ? null : util.dateToStr(new Date(data.createdEnd));
+                data.symbol = data.symbol === '0' ? null : data.symbol;
                 financeApi.findRechargeRecords(this.curPage7, sortStr, data, (res, total) => {
                     this.total7 = total;
                     this.data8 = res;

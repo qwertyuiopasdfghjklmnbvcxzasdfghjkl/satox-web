@@ -1,56 +1,94 @@
 import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
-import {routers, otherRouter, appRouter, kycRouter, otcRouter, exchangeRouter, communityRouter, voteRouter, financeRouter, riskRouter, operationRouter, adminRouter, systemConfigRouter, systemLogsRouter, monitoringRouter, fundRouter} from './router';
+import {
+    routers,
+    otherRouter,
+    appRouter,
+    kycRouter,
+    otcRouter,
+    exchangeRouter,
+    communityRouter,
+    voteRouter,
+    financeRouter,
+    riskRouter,
+    operationRouter,
+    adminRouter,
+    systemConfigRouter,
+    systemLogsRouter,
+    monitoringRouter,
+    fundRouter
+} from './router';
 import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
 import Cookies from 'js-cookie';
 import 'iview/dist/styles/iview.css';
-import 'vue-directive-image-previewer/dist/assets/style.css'
+import 'vue-directive-image-previewer/dist/assets/style.css';
 import './views/components/dialog';
 
 import VueI18n from 'vue-i18n';
-import Locales from './locale';
+import Locales from 'iview/src/locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
-import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'
+import VueDirectiveImagePreviewer from 'vue-directive-image-previewer';
+// import zh from './locale/lang/zh-CN';
+// import en from './locale/lang/en-US';
 
 Vue.use(VueDirectiveImagePreviewer, {
     background: {     // or : background: '#000'
-      color: '#000' // or rgba or rgb     // or image: 'url(xxx)'
+        color: '#000' // or rgba or rgb     // or image: 'url(xxx)'
     },
     // transition
     animate: {
-      duration: 600,
-      delay: 500
+        duration: 600,
+        delay: 500
     },
     // loading (not supported)
     loading: {
-      image: ''
+        image: ''
     },
     zIndex: 9999999,
     // cursor(css)
     cursor: 'pointer'
-  })
+});
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
-Vue.use(iView);
+Vue.use(iView, {
+    i18n: function (path, options) {
+        let value = i18n.t(path, options);
+        if (value !== null && value !== undefined) {
+            return value;
+        }
+        return '';
+    }
+});
+Vue.locale = () => {
+};
 
 // 自动设置语言
 const navLang = navigator.language;
 const localLang = (navLang === 'zh-CN' || navLang === 'en-US') ? navLang : false;
 const lang = window.localStorage.getItem('language') || localLang || 'zh-CN';
 
-Vue.config.lang = lang;
+// Vue.config.lang = lang;
 
 // 多语言配置
-const locales = Locales;
-const mergeZH = Object.assign(zhLocale, locales['zh-CN']);
-const mergeEN = Object.assign(enLocale, locales['en-US']);
-Vue.locale('zh-CN', mergeZH);
-Vue.locale('en-US', mergeEN);
+// const locales = Locales;
+// const mergeZH = Object.assign(zhLocale, locales['zh-CN']);
+// const mergeEN = Object.assign(enLocale, locales['en-US']);
+// Vue.locale('zh-CN', mergeZH);
+// Vue.locale('en-US', mergeEN);
+
+const messages = {
+    'en-US': Object.assign(require('./locale/lang/en-US'), enLocale),
+    'zh-CN': Object.assign(require('./locale/lang/zh-CN'), zhLocale)
+};
+const i18n = new VueI18n({
+    locale: lang,    // 语言标识, 通过切换locale的值来实现语言切换,this.$i18n.locale
+    messages
+});
 
 // 路由配置
 const RouterConfig = {
@@ -114,9 +152,7 @@ const store = new Vuex.Store({
         menuTheme: '', // 主题
         theme: ''
     },
-    getters: {
-
-    },
+    getters: {},
     mutations: {
         setTagsList (state, list) {
             state.tagsList.push(...list);
@@ -231,13 +267,12 @@ const store = new Vuex.Store({
             localStorage.avatorImgPath = path;
         }
     },
-    actions: {
-
-    }
+    actions: {}
 });
 
 new Vue({
     el: '#app',
+    i18n: i18n,
     router: router,
     store: store,
     render: h => h(App),
