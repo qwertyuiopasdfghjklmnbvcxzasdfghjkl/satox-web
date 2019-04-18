@@ -4,27 +4,61 @@
         <Col span="24">
             <Row>
                 <!--<Card>-->
-                    <!---->
-                    <!--<Row>-->
-                        <!--<Col span="12">-->
-                            <!--<p>自动审核</p>-->
-                            <!--<p>-->
-                                <!--<span>待审核笔数：{{numberData.toBeAuditingAutoCount }}</span>-->
-                                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishAutoCount }}</span>-->
-                            <!--</p>-->
-                        <!--</Col>-->
-                        <!--<Col span="12">-->
-                            <!--<p>人工审核</p>-->
-                            <!--<p>-->
-                                <!--<span>待审核笔数：{{numberData.toBeAuditingManualCount}}</span>-->
-                                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishManualCount}}</span>-->
-                            <!--</p>-->
-                        <!--</Col>-->
-                    <!--</Row>-->
+                <!---->
+                <!--<Row>-->
+                <!--<Col span="12">-->
+                <!--<p>自动审核</p>-->
+                <!--<p>-->
+                <!--<span>待审核笔数：{{numberData.toBeAuditingAutoCount }}</span>-->
+                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishAutoCount }}</span>-->
+                <!--</p>-->
+                <!--</Col>-->
+                <!--<Col span="12">-->
+                <!--<p>人工审核</p>-->
+                <!--<p>-->
+                <!--<span>待审核笔数：{{numberData.toBeAuditingManualCount}}</span>-->
+                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishManualCount}}</span>-->
+                <!--</p>-->
+                <!--</Col>-->
+                <!--</Row>-->
                 <!--</Card>-->
                 <Card style="margin-top:10px;">
-                    <p slot="title">提币审核
+                    <p slot="title">{{$t('finance.title')}}
                         <span class="refresh" @click="reshAll"></span>
+                    </p>
+                    <p style="margin-bottom: 20px">
+                        币种：
+                        <Select v-model="formData.symbol" style="width: 200px" :clearable="true" :placeholder="'请选择币种'">
+                            <Option value="0">全部</Option>
+                            <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                            </Option>
+                        </Select>
+                        创建时间：
+                        <DatePicker type="datetime" v-model="formData.createdStart" placeholder="开始时间"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData.createdEnd" placeholder="结束时间"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        用户名：
+                        <Input v-model="formData.userName" clearable style="width: 200px"
+                               :placeholder="'请输入用户名'"></Input>
+                        数量：
+                        <Select v-model="formData.amount" style="width: 200px" :placeholder="'请选择数量'">
+                            <Option value="0">全部</Option>
+                            <Option value="1">小于等于1</Option>
+                            <Option value="2">大于1小于等于1000</Option>
+                            <Option value="3">大于1000小于等于10000</Option>
+                            <Option value="4">大于10000</Option>
+                        </Select>
+                        状态：
+                        <Select v-model="formData.auditStatus" style="width: 200px" :placeholder="'请选择状态'">
+                            <Option value="3">全部</Option>
+                            <Option value="0">未审核</Option>
+                            <Option value="1">审核通过</Option>
+                            <Option value="2">审核不通过</Option>
+                        </Select>
+                        <Button type="primary" @click="curPage=1;getAuditing()">查询</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage"
@@ -39,6 +73,7 @@
     import util from '../../libs/util';
     import check from './check';
     import financeApi from '../../api/finance';
+    import currenyApi from '../../api/currency';
 
     export default {
         data () {
@@ -47,7 +82,7 @@
                 total: 0,
                 columns: [
                     {key: 'createdTime', title: '创建时间'},
-                    {key: 'userName', title: '用户账号'},
+                    {key: 'userName', title: '用户名'},
                     {
                         key: 'withdrawAmount', title: '提现金额',
                         render: (h, params) => {
@@ -84,16 +119,31 @@
                 ],
                 datas: [],
                 // numberData: []
+                formData: {
+                    userName: '',
+                    symbol: '0',
+                    amount: '0',
+                    createdStart: null,
+                    createdEnd: null,
+                    min: null,
+                    max: null,
+                    auditStatus: '3'
+                },
+                symbolList: []
             };
         },
         created () {
             this.getAuditing();
-            // this.getAuditingData();
+            this.getdataSymbol();
         },
         methods: {
             reshAll () {
                 this.getAuditing();
-                this.getAuditingData();
+            },
+            getdataSymbol () {
+                currenyApi.findAllValidSymbolList((res) => {
+                    this.symbolList = res;
+                });
             },
             switchStaus (state) {//0 未审核 1 审核不通过 2 审核通过
                 switch (state) {
@@ -109,22 +159,51 @@
                 }
             },
             getAuditing () {
-                financeApi.getAuditingList(this.curPage, {
-                    auditType: '' // 1 自动  2  人工
-                }, (res, total) => {
-                    this.total = total;
-                    this.datas = res;
-                });
+                this.switch(this.formData.amount);
+                let D = JSON.stringify(this.formData);
+                let data = JSON.parse(D);
+                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
+                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                data.symbol = data.symbol === '0' ? null : data.symbol;
+                data.auditStatus = data.auditStatus === '3' ? null : data.auditStatus;
+                data.auditType = '';
+                financeApi.getAuditingList(this.curPage, data,
+                    (res, total) => {
+                        this.total = total;
+                        this.datas = res;
+                    });
+            },
+            switch (i) {
+                switch (i) {
+                    case '1':
+                        this.formData.min = null;
+                        this.formData.max = 1;
+                        break;
+                    case '2':
+                        this.formData.max = 1000;
+                        this.formData.min = 1;
+                        break;
+                    case '3':
+                        this.formData.max = 10000;
+                        this.formData.min = 1000;
+                        break;
+                    case '4':
+                        this.formData.min = 10000;
+                        this.formData.max = null;
+                        break;
+                    case '0':
+                        this.formData.max = null;
+                        this.formData.min = null;
+                        break;
+                    default:
+                        this.formData.max = null;
+                        this.formData.min = null;
+                }
             },
             changePage (page) {
                 this.curPage = page;
                 this.getAuditing();
-            },
-            // getAuditingData () {
-            //     financeApi.findTotalWithdrawAuditingData((res) => {
-            //         this.numberData = res;
-            //     });
-            // }
+            }
         }
     };
 </script>
