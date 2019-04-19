@@ -1,0 +1,146 @@
+<template>
+    <Card class="market_setting" style="width:500px;">
+        <p slot="title">
+            虚拟{{type === 1 ? '提现':'充值'}}
+            <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+        </p>
+        <Row>
+            <Col span="8">钱包类型</Col>
+            <Col span="8">{{item.type | myCurrency}}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">币种</Col>
+            <Col span="8">{{item.symbol}}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">总金额</Col>
+            <Col span="8">{{item.totalBalance}}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">可用余额</Col>
+            <Col span="8">{{item.availableBalance }}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">冻结金额</Col>
+            <Col span="8">{{item.loanBalance}}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">币池虚拟金额</Col>
+            <Col span="8">{{item.virtualBalance}}</Col>
+            <Col span="8"></Col>
+        </Row>
+        <Row>
+            <Col span="8">{{type === 0 ? '充值': '提现'}}数量</Col>
+            <Col span="8">
+                <!--<InputNumber style="width:113px;" :min="0" v-model="coinPoolsDTO"></InputNumber>-->
+                <input class="number_input" type="number" @input="oninput"/>
+            </Col>
+            <Col span="8" style="text-align:right;">
+                <Button type="primary" @click="tabs('virtualBalance')">保存</Button>
+            </Col>
+        </Row>
+    </Card>
+</template>
+
+<script>
+    import financeApi from '../../api/finance';
+
+    export default {
+        props: ['item', 'type'],
+        data () {
+            return {
+                virtualBalance: null
+            };
+        },
+        created () {
+            console.log(this.item);
+        },
+        methods: {
+            closeDialog () {
+                this.$emit('removeDialog');
+            },
+            tabs (propName) {
+                if (!this[propName] && (this[propName] !== 0)) {
+                    this.$Message.error({content: '请输入值'});
+                    return;
+                }
+                let data = {
+                    'coinPoolId': this.item.coinPoolId,
+                    virtualBalance: this.virtualBalance
+                };
+                if (this.type === 0) {
+                    financeApi.findRecharge(data, (res) => {
+                        this.$emit('okCallback');
+                        this.$Message.success({content: '修改成功'});
+                        this.$emit('removeDialog');
+                    }, (msg) => {
+                        this.$Message.error({content: msg});
+                    });
+                } else {
+                    financeApi.findWithdraw(data, (res) => {
+                        this.$emit('okCallback');
+                        this.$Message.success({content: '修改成功'});
+                        this.$emit('removeDialog');
+                    }, (msg) => {
+                        this.$Message.error({content: msg});
+                    });
+                }
+            },
+            oninput (e) {
+                // 通过正则过滤小数点后8位
+                e.target.value = (e.target.value.match(/^\d*(\.?\d{0,8})/g)[0]) || null;
+                this.virtualBalance = e.target.value;
+            }
+        },
+        filters: {
+            myCurrency: function (myInput) {
+                let result = {
+                    1: '主钱包',
+                    2: '非主钱包'
+                };
+                return result[myInput];
+            }
+        }
+    };
+</script>
+<style lang="less" scoped>
+    .market_setting {
+        background: #fff;
+        padding: 8px;
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .ivu-table-cell input {
+            width: 50px;
+        }
+
+        .ivu-table-cell > div {
+            display: flex;
+        }
+
+        .ivu-btn-primary {
+            margin-left: 12px;
+        }
+
+        .ivu-row {
+            padding: 10px 0;
+        }
+
+        .number_input {
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            width: 180px;
+            text-indent: 6px;
+            padding: 4px;
+        }
+    }
+</style>

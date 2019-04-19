@@ -604,6 +604,23 @@ export const financeRouter = [
                 }
             }
         ]
+    },
+    {
+        path: '/virtual',
+        name: 'virtual',
+        title: '虚拟充提',
+        component: Main,
+        icon: 'arrow-swap',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'index', title: '虚拟充提', name: 'virtual_index', component: resolve => {
+                    require(['./views/manage_finance/virtual.vue'], resolve);
+                }
+            }
+        ]
     }
 ];
 
