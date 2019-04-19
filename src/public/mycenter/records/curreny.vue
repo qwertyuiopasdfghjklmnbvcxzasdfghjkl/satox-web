@@ -52,7 +52,7 @@
           <span class="avgPrice">{{getPrice(item.averagePrice)}}</span><!--成交均价-->
           <span class="tradeVolume">{{toFixed(item.finishedAmount)}}</span><!--成交量-->
           <span class="tradeSum">{{toFixed(item.dealCurrency)}} {{item.direction === 1 ? item.fromSymbol : item.toSymbol}}</span><!--成交金额-->
-          <span class="charge">{{toFixed(item.fee)}} {{item.toSymbol}}</span><!--手续费-->
+          <span class="charge" v-html="fee(item)"></span><!--手续费-->
         </li>
       </ul>
       <page v-if="!coinsLoading && coinsEntrust.length > 0" :pageIndex="coinsParams.current" :pageSize="coinsParams.limit" :total="coinsTotal" @changePageIndex="coinsPageChange"/>
@@ -98,7 +98,8 @@ export default {
         current: 1, // 当前第几页 默认为"" 为第一页
         limit: 6 // limit每页记录数，“”默认20条
       },
-      coinsLoading: true
+      coinsLoading: true,
+      symbolDeduction:''
     }
   },
   computed: {
@@ -110,8 +111,25 @@ export default {
   created () {
     this.getCoinsHistory()
     this.getMarket()
+    this.getrateSysparams()
   },
   methods: {
+    fee(item){
+      if(Number(item.deductionFee)){
+        return `${this.toFixed(item.fee)} ${item.toSymbol}, ${this.toFixed(item.deductionFee)} ${this.symbolDeduction}`
+      } else {
+        return `${this.toFixed(item.fee)} ${item.toSymbol}`
+      }
+    },
+    getrateSysparams () {
+      market.rateSysparams((res) => {
+        res.forEach((item) => {
+          if (item.code === 'symbolDeduction') {
+            this.symbolDeduction = item.value
+          }
+        })
+      })
+    },
     getMarketByType (type, toSymbol, fromSymbol) {
       if (numUtils.BN(type).equals(numUtils.BN(1))) {
         return `${toSymbol}/${fromSymbol}` // 买
@@ -224,10 +242,10 @@ export default {
 .curreny /deep/ .record ul li span.time{width: 160px;}
 .curreny /deep/ .record ul li span.market{width: 100px;}
 .curreny /deep/ .record ul li span.type{width: 60px;}
-.curreny /deep/ .record ul li span.avgPrice{width: 140px;}
-.curreny /deep/ .record ul li span.tradeVolume{width: 140px;}
-.curreny /deep/ .record ul li span.tradeSum{width: 140px;}
-.curreny /deep/ .record ul li span.charge{width: 190px;}
+.curreny /deep/ .record ul li span.avgPrice{width: 120px;}
+.curreny /deep/ .record ul li span.tradeVolume{width: 120px;}
+.curreny /deep/ .record ul li span.tradeSum{width: 120px;}
+/*.curreny /deep/ .record ul li span.charge{width: 250px;}*/
 .curreny /deep/ .record ul li.list span.buy{color: #23CD09;}
 .curreny /deep/ .record ul li.list span.sell{color: #F34246;}
 
