@@ -143,11 +143,37 @@
                 <Button type="primary" @click="tabs('autoEntrustCount')">保存</Button>
             </Col>
         </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">市场类型</Col>
+            <Col span="6">{{item.marketType === 1 ? '真实市场': '虚拟市场'}}</Col>
+            <Col span="6">
+                <Select v-model="marketType" style="width:113px" :disabled="role">
+                    <Option :value="1">真实市场</Option>
+                    <Option :value="0">虚拟市场</Option>
+                </Select>
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('marketType')" :disabled="role">保存</Button>
+            </Col>
+        </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">24H交易量修正</Col>
+            <Col span="6">{{parseFloat(item.volumeRatio24h)/0.01 || 0}}%</Col>
+            <Col span="6">
+                <input class="number_input" type="number" @input="oninput"
+                       style="width:113px;border:1px solid #dddee1;padding: 4px;"/>
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('volumeRatio24h')">保存</Button>
+            </Col>
+        </Row>
     </Card>
 </template>
 
 <script>
     import currenyApi from '../../api/currency';
+    import numberbox from '../components/dialog/numberbox';
+    import Cookies from 'js-cookie';
 
     export default {
         props: ['item'],
@@ -168,14 +194,31 @@
                 baseSymbol: '',
                 fixedPrice: '',
                 autoEntrustCount: 0,
-                openingPrice: null
+                volumeRatio24h: null,
+                openingPrice: null,
+                marketType: null,
+                role: false
             };
+        },
+        components: {
+            numberbox
         },
         created () {
             this.findMarketList();
-            console.log(this.item);
+            this.getRole();
         },
         methods: {
+            oninput (e) {
+                // 通过正则过滤小数点后8位
+                e.target.value = (e.target.value.match(/^\d*(\.?\d{0,4})/g)[0]) || null;
+                e.target.value = e.target.value > 1 ? 1 : e.target.value;
+                this.volumeRatio24h = e.target.value;
+            },
+            getRole () {
+                let roles = Cookies.get('roles');
+
+                // console.log(roles indexOf);
+            },
             closeDialog () {
                 this.$emit('removeDialog');
             },

@@ -60,4 +60,7 @@ export const finance = {
     qrnyczsl: '7日内已充值数量',
     czsl: '充值数量',
     qrks: '确认块数',
+    btjzh: '不统计账户（仅对当天统计有效）',
+    jqrzh: '机器人账号',
+    sxfjjqrzh: '手续费加机器人账号',
 };
