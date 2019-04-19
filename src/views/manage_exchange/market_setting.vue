@@ -197,7 +197,7 @@
                 volumeRatio24h: null,
                 openingPrice: null,
                 marketType: null,
-                role: false
+                role: true
             };
         },
         components: {
@@ -216,8 +216,11 @@
             },
             getRole () {
                 let roles = Cookies.get('roles');
-
-                // console.log(roles indexOf);
+                if (roles.indexOf('ROLE_ADMIN') === -1) {
+                    this.role = true;
+                } else {
+                    this.role = false;
+                }
             },
             closeDialog () {
                 this.$emit('removeDialog');
