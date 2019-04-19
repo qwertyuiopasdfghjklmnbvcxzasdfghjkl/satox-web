@@ -24,7 +24,7 @@
                     <p style="margin-bottom: 20px">
                         {{$t('common.bz')}}：
                         <Select v-model="formData.symbol" style="width: 200px" :placeholder="'请选择币种'">
-                            <Option value="0">{{$t('common.qb')}}：</Option>
+                            <Option value="0">{{$t('common.qb')}}</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
@@ -48,7 +48,7 @@
                     <p style="margin-bottom: 20px">
                         {{$t('common.bz')}}：
                         <Select v-model="formData1.symbol" style="width: 200px" :placeholder="'请选择币种'">
-                            <Option value="0">{{$t('common.qb')}}：</Option>
+                            <Option value="0">{{$t('common.qb')}}</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
@@ -69,6 +69,31 @@
             <Row style="margin-top:10px;">
                 <Card>
                     <p slot="title">{{$t('finance.yhzzcsj')}}</p>
+                    <p style="margin-bottom: 20px">
+                        {{$t('common.bz')}}：
+                        <Select v-model="formData2.symbol" style="width: 200px">
+                            <Option value="0">{{$t('common.qb')}}</Option>
+                            <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                            </Option>
+                        </Select>
+                        {{$t('common.rq')}}：
+                        <DatePicker type="datetime" v-model="formData2.createdStart" :placeholder="$t('common.kssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData2.createdEnd" :placeholder="$t('common.jssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <Button type="primary" @click="curPage6=1;reGetfindUserAssetList()">{{$t('common.cx')}}</Button>
+                    </p>
+                    <p style="margin-bottom: 20px">
+                        {{$t('finance.btjzh')}}:
+                        <Select v-model="formData3.symbol" style="width: 200px" >
+                            <Option value="1">{{$t('finance.sxfzh')}}</Option>
+                            <Option value="2">{{$t('finance.jqrzh')}}</Option>
+                            <Option value="0">{{$t('finance.sxfjjqrzh')}}</Option>
+                        </Select>
+                        <Button type="primary" @click="curPage6=1;reGetfindUserAssetList1()">{{$t('common.cx')}}</Button>
+                    </p>
                     <Table ref="test3" :columns="columns7" :data="data7" @on-sort-change="setAssetSort"></Table>
                     <Page :current="curPage6" :total="total6" @on-change="changePage6"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -161,6 +186,7 @@
                 ],
                 data6: [],
                 columns7: [
+                    {title: this.$t('common.rq'), key: 'symbol'},
                     {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
                     {title: this.$t('finance.dqsl'), key: 'currentAssetAmount', sortable: 'custom'},
                     {title: this.$t('finance.syjyrsl'), key: 'closingAssetYesterdayQuantity', sortable: 'custom'},
@@ -191,6 +217,14 @@
                     symbol: '0',
                     createdStart: null,
                     createdEnd: null
+                },
+                formData2: {
+                    symbol: '0',
+                    createdStart: null,
+                    createdEnd: null
+                },
+                formData3: {
+                    symbol: '0',
                 }
             };
         },
@@ -395,6 +429,14 @@
             reGetAccountList () {
                 this.columns5.splice(3, 2);
                 this.getAccountList();
+            },
+            reGetfindUserAssetList () {
+                this.columns7.splice(3, 2);
+                this.getfindUserAssetList()
+            },
+            reGetfindUserAssetList1 () {
+                this.columns7.splice(3, 2);
+                this.getfindUserAssetList()
             }
         }
     };
