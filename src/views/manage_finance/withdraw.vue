@@ -23,12 +23,12 @@
                 <!--</Row>-->
                 <!--</Card>-->
                 <Card style="margin-top:10px;">
-                    <p slot="title">{{$t('finance.title')}}
+                    <p slot="title">{{$t('finance.tbsh')}}
                         <span class="refresh" @click="reshAll"></span>
                     </p>
                     <p style="margin-bottom: 20px">
                         币种：
-                        <Select v-model="formData.symbol" style="width: 200px" :clearable="true" :placeholder="'请选择币种'">
+                        <Select v-model="formData.symbol" style="width: 200px" :placeholder="'请选择币种'">
                             <Option value="0">全部</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>

@@ -2,16 +2,6 @@
 <template>
     <Row>
         <Col span="24">
-            <!--<Row style="margin:10px 0;">-->
-                <!--<Card>-->
-                    <!--<p slot="title">充值监控-->
-                        <!--<span class="refresh" @click="reshAll"></span>-->
-                    <!--</p>-->
-                    <!--<Table :columns="columns1" :data="data1" @on-sort-change="setRechargeSort"></Table>-->
-                    <!--<Page :current="curPage" :total="total" @on-change="changePage"-->
-                          <!--style="text-align:center;margin-top:20px;"></Page>-->
-                <!--</Card>-->
-            <!--</Row>-->
             <Row>
                 <Card>
                     <p slot="title">{{$t('finance.rtbtj')}}</p>
@@ -28,17 +18,25 @@
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
-            <!--<Row style="margin:10px 0;">-->
-                <!--<Card>-->
-                    <!--<p slot="title">实时对账</p>-->
-                    <!--<Table :columns="columns3" :data="data3"></Table>-->
-                    <!--<Page :current="curPage2" :total="total2" @on-change="changePage2"-->
-                          <!--style="text-align:center;margin-top:20px;"></Page>-->
-                <!--</Card>-->
-            <!--</Row>-->
             <Row>
                 <Card>
                     <p slot="title">{{$t('finance.zjcqk')}}</p>
+                    <p style="margin-bottom: 20px">
+                        {{$t('common.bz')}}：
+                        <Select v-model="formData.symbol" style="width: 200px" :placeholder="'请选择币种'">
+                            <Option value="0">{{$t('common.qb')}}：</Option>
+                            <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                            </Option>
+                        </Select>
+                        {{$t('common.rq')}}：
+                        <DatePicker type="datetime" v-model="formData.createdStart" :placeholder="$t('common.kssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData.createdEnd" :placeholder="$t('common.jssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <Button type="primary" @click="curPage3=1;reGetPoolList()">{{$t('common.cx')}}</Button>
+                    </p>
                     <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="setCapitalPoolSort"></Table>
                     <Page :current="curPage3" :total="total3" @on-change="changePage3"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -47,6 +45,22 @@
             <Row style="margin-top:10px;">
                 <Card>
                     <p slot="title">{{$t('finance.sxfzh')}}</p>
+                    <p style="margin-bottom: 20px">
+                        {{$t('common.bz')}}：
+                        <Select v-model="formData1.symbol" style="width: 200px" :placeholder="'请选择币种'">
+                            <Option value="0">{{$t('common.qb')}}：</Option>
+                            <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
+                            </Option>
+                        </Select>
+                        {{$t('common.rq')}}：
+                        <DatePicker type="datetime" v-model="formData1.createdStart" :placeholder="$t('common.kssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <DatePicker type="datetime" v-model="formData1.createdEnd" :placeholder="$t('common.jssj')"
+                                    format="yyyy-MM-dd HH:mm:ss"
+                                    style="width: 200px"></DatePicker>
+                        <Button type="primary" @click="curPage4=1;reGetAccountList()">{{$t('common.cx')}}</Button>
+                    </p>
                     <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="setChargeSort"></Table>
                     <Page :current="curPage4" :total="total4" @on-change="changePage4"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -60,14 +74,6 @@
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
-            <!--<Row style="margin-top:10px;">-->
-                <!--<Card>-->
-                    <!--<p slot="title">充币列表</p>-->
-                    <!--<Table ref="test2" :columns="columns8" :data="data8" @on-sort-change="setChargeTokenSort"></Table>-->
-                    <!--<Page :current="curPage7" :total="total7" @on-change="changePage7"-->
-                          <!--style="text-align:center;margin-top:20px;"></Page>-->
-                <!--</Card>-->
-            <!--</Row>-->
             <Row style="margin-top:10px;">
                 <Card>
                     <p slot="title">{{$t('finance.zdzbzsl')}}</p>
@@ -110,15 +116,6 @@
                 total6: 0,
                 curPage7: 1,
                 total7: 0,
-                columns1: [
-                    {title: '公链币种', key: 'symbol'},
-                    {title: '监控地址数量', key: 'currentMonitorAddrCount'},
-                    {title: '日充值待确认笔数', key: 'dailyRechargeWaitComfirmCount', sortable: 'custom'},
-                    // {title: '日充值待确认总量', key: 'dailyRechargeWaitComfirmAmount'},
-                    {title: '日充值完成笔数', key: 'dailyRechargeFinishCount', sortable: 'custom'},
-                    // {title: '日充值完成总量', key: 'dailyRechargeWaitComfirmAmount'}
-                ],
-                data1: [],
                 columns2: [
                     {title: this.$t('finance.glbz'), key: 'symbol'},
                     {title: this.$t('finance.rdtbbs'), key: 'withdrawDailyToBeConfirmedCount', sortable: 'custom'},
@@ -127,51 +124,36 @@
                     // {title: '日已提币总量', key: 'withdrawDailyFinishAmount'},
                 ],
                 data2: [],
-                columns3: [
-                    {
-                        title: '对账状态', key: 'status',
-                        render: (h, params) => {
-                            return h('div', params.row.status == 1 ? '正常' : '异常');
-                        }
-                    },
-                    {title: '日已核对交易笔数', key: 'exchangeVerifyDailyCount'},
-                    {title: '日待核对交易笔数', key: 'exchangeToBeVerifyCount'},
-                    {
-                        title: '异常交易', key: 'action', render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {type: 'primary', size: 'small'},
-                                    on: {
-                                        click: () => {
-                                            util.setDialog(dialog);
-                                        }
-                                    }
-                                }, '查看')
-                            ]);
-                        }
-                    }
-                ],
-                data3: [],
                 columns4: [
-                    {title: '币种', key: 'symbol', sortable: 'custom'},
-                    {title: '当前数量', key: 'currentCapitalPoolQuantity', sortable: 'custom'},
-                    {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity', sortable: 'custom'},
-                    {title: '日净增', key: 'increaseDailyQuantity', sortable: 'custom'}
+                    {title: this.$t('common.rq'), key: 'symbol', sortable: 'custom'},
+                    {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
+                    {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
+                    {
+                        title: this.$t('finance.syjyrspsj'),
+                        key: 'closingCapitalPoolYesterdayQuantity',
+                        sortable: 'custom'
+                    },
+                    {title: this.$t('finance.rjz'), key: 'increaseDailyQuantity', sortable: 'custom'}
                 ],
                 data4: [],
                 columns5: [
-                    {title: '币种', key: 'symbol', sortable: 'custom'},
-                    {title: '当前数量', key: 'currentCapitalPoolQuantity', sortable: 'custom'},
-                    {title: '上一交易日收盘数量', key: 'closingCapitalPoolYesterdayQuantity', sortable: 'custom'},
-                    {title: '日收取', key: 'collectfeeDailyQuantity', sortable: 'custom'}
+                    {title: this.$t('common.rq'), key: 'symbol'},
+                    {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
+                    {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
+                    {
+                        title: this.$t('finance.syjyrspsj'),
+                        key: 'closingCapitalPoolYesterdayQuantity',
+                        sortable: 'custom'
+                    },
+                    {title: this.$t('finance.rsq'), key: 'collectfeeDailyQuantity', sortable: 'custom'}
                 ],
                 data5: [],
                 columns6: [
-                    {title: '币种', key: 'symbol'},
-                    {title: '账号', key: 'username'},
-                    {title: '地址', key: 'address'},
+                    {title: this.$t('common.bz'), key: 'symbol'},
+                    {title: this.$t('common.zh'), key: 'username'},
+                    {title: this.$t('common.dz'), key: 'address'},
                     {
-                        title: '数量', key: 'availableBalance',
+                        title: this.$t('common.sl'), key: 'availableBalance',
                         render: (h, params) => {
                             return h('div', [params.row.availableBalance, params.row.symbol]);
                         }
@@ -179,41 +161,37 @@
                 ],
                 data6: [],
                 columns7: [
-                    {title: '币种', key: 'symbol', sortable: 'custom'},
-                    {title: '当前数量', key: 'currentAssetAmount', sortable: 'custom'},
-                    {title: '上一交易日数量', key: 'closingAssetYesterdayQuantity', sortable: 'custom'},
-                    {title: '日净增', key: 'increaseDailyQuantity', sortable: 'custom'}
+                    {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
+                    {title: this.$t('finance.dqsl'), key: 'currentAssetAmount', sortable: 'custom'},
+                    {title: this.$t('finance.syjyrsl'), key: 'closingAssetYesterdayQuantity', sortable: 'custom'},
+                    {title: this.$t('finance.rjz'), key: 'increaseDailyQuantity', sortable: 'custom'}
                 ],
                 data7: [],
-                columns8: [
-                    {title: '创建时间', key: 'createdTime', sortable: 'custom'},
-                    {title: '用户账号', key: 'userName'},
-                    {title: '币种', key: 'symbol', sortable: 'custom'},
-                    {title: '充值数量', key: 'amount', sortable: 'custom'},
-                    {
-                        title: '状态', key: 'status',
-                        render: (h, params) => {
-                            return h('div', params.row.status === 1 ? '等待' : '完成');
-                        },
-                        sortable: 'custom'
-                    },
-                    {title: '确认块数', key: 'confirmation'}
-                ],
-                data8: [],
                 columns9: [
                     {title: this.$t('finance.bz'), key: 'symbol'},
-                    {title: '日充值数量', key: 'rechargeAmountDaily', sortable: 'custom'},
-                    {title: '日充值笔数', key: 'rechargeCountDaily', sortable: 'custom'},
-                    {title: '日提现数量', key: 'withdrawAmountDaily', sortable: 'custom'},
-                    {title: '日提现笔数', key: 'withdrawCountDaily', sortable: 'custom'},
-                    {title: '日新增净额', key: 'increaseAmountDaily', sortable: 'custom'},
-                    {title: '待审核提现', key: 'waitCheckWithdraw', sortable: 'custom'},
-                    {title: '待审核提现请求数量', key: 'waitCheckWithdrawAmount', sortable: 'custom'}
+                    {title: this.$t('finance.rczsl'), key: 'rechargeAmountDaily', sortable: 'custom'},
+                    {title: this.$t('finance.rczbs'), key: 'rechargeCountDaily', sortable: 'custom'},
+                    {title: this.$t('finance.rtxsl'), key: 'withdrawAmountDaily', sortable: 'custom'},
+                    {title: this.$t('finance.rtxbs'), key: 'withdrawCountDaily', sortable: 'custom'},
+                    {title: this.$t('finance.rxzjd'), key: 'increaseAmountDaily', sortable: 'custom'},
+                    {title: this.$t('finance.dshtx'), key: 'waitCheckWithdraw', sortable: 'custom'},
+                    {title: this.$t('finance.dshtxpqsl'), key: 'waitCheckWithdrawAmount', sortable: 'custom'}
                 ],
                 data9: [],
                 curPage9: 1,
                 total9: 0,
                 pageSize9: 3,
+                symbolList: [],
+                formData: {
+                    symbol: '0',
+                    createdStart: null,
+                    createdEnd: null
+                },
+                formData1: {
+                    symbol: '0',
+                    createdStart: null,
+                    createdEnd: null
+                }
             };
         },
         created () {
@@ -224,19 +202,14 @@
             this.getAccountList();
             this.getAdminWithdrawAccountInfo();
             this.getfindUserAssetList();
-            this.getfindRechargeRecords();
             this.getDataList9();
+            this.getdataSymbol();
         },
         methods: {
-            setChargeTokenSort (column) {
-                this.curPage7 = 1;
-                if (column.order !== 'normal') {
-                    this.ChargeTokenSortKey = column.key;
-                    this.ChargeTokenSortVal = column.order;
-                } else {
-                    this.ChargeTokenSortKey = null;
-                }
-                this.getfindRechargeRecords();
+            getdataSymbol () {
+                currenyApi.findAllValidSymbolList((res) => {
+                    this.symbolList = res;
+                });
             },
             setAssetSort (column) {
                 this.curPage6 = 1;
@@ -288,17 +261,6 @@
                 }
                 this.getMonitorList();
             },
-            getfindRechargeRecords () {
-                let sortStr = this.ChargeTokenSortKey ? `${this.ChargeTokenSortKey}%20${this.ChargeTokenSortVal}` : 'null';
-                financeApi.findRechargeRecords(this.curPage7, sortStr, (res, total) => {
-                    this.total7 = total;
-                    this.data8 = res;
-                });
-            },
-            changePage7 (page) {
-                this.curPage7 = page;
-                this.getfindRechargeRecords();
-            },
             getfindUserAssetList () {
                 let sortStr = this.assetSortKey ? `${this.assetSortKey}%20${this.assetSortVal}` : 'null';
                 financeApi.findUserAssetList(this.curPage6, sortStr, (res, total) => {
@@ -309,28 +271,6 @@
             changePage6 (page) {
                 this.curPage6 = page;
                 this.getfindUserAssetList();
-            },
-            custom3 (o) {
-                this.curPage6 = 1;
-                if (o.order === 'desc') {
-                    this.flag3 = 0;
-                    this.getfindUserAssetList();
-                } else {
-                    this.$refs.test3.cloneColumns[0]._sortType = 'asc';
-                    this.flag3 = 1;
-                    this.getfindUserAssetList();
-                }
-            },
-            custom2 (o) {
-                this.curPage6 = 1;
-                if (o.order === 'desc') {
-                    this.flag2 = 0;
-                    this.getfindUserAssetList();
-                } else {
-                    this.$refs.test2.cloneColumns[0]._sortType = 'asc';
-                    this.flag2 = 1;
-                    this.getfindUserAssetList();
-                }
             },
             custom1 (o) {
                 this.curPage4 = 1;
@@ -362,7 +302,6 @@
                 this.getAccountList();
                 this.getAdminWithdrawAccountInfo();
                 this.getfindUserAssetList();
-                this.getfindRechargeRecords();
             },
             getMonitorList () {
                 let sortStr = this.rechargeSortKey ? `${this.rechargeSortKey}%20${this.rechargeSortVal}` : 'null';
@@ -448,6 +387,14 @@
             changePage9 (page) {
                 this.curPage9 = page;
                 this.getDataList9();
+            },
+            reGetPoolList () {
+                this.columns4.splice(3, 2);
+                this.getPoolList();
+            },
+            reGetAccountList () {
+                this.columns5.splice(3, 2);
+                this.getAccountList();
             }
         }
     };
