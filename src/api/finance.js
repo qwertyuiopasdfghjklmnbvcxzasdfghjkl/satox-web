@@ -340,4 +340,28 @@ const addTransfer = function (data, success, error) {
 };
 finance.addTransfer = addTransfer;
 
+// 财务管理--虚拟充值
+const findRecharge = function (data, success, error) {
+    api.post(`/api/bm/financialManage/recharge`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.findRecharge = findRecharge;
+
+// 财务管理--虚拟提现
+const findWithdraw = function (data, success, error) {
+    api.post(`/api/bm/financialManage/withdraw`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.findWithdraw = findWithdraw;
+
 export default finance;
