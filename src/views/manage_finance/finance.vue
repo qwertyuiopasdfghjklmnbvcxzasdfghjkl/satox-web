@@ -87,12 +87,14 @@
                     </p>
                     <p style="margin-bottom: 20px">
                         {{$t('finance.btjzh')}}:
-                        <Select v-model="formData3.symbol" style="width: 200px" >
+                        <Select v-model="formData3.username" style="width: 200px">
                             <Option value="1">{{$t('finance.sxfzh')}}</Option>
                             <Option value="2">{{$t('finance.jqrzh')}}</Option>
                             <Option value="0">{{$t('finance.sxfjjqrzh')}}</Option>
                         </Select>
-                        <Button type="primary" @click="curPage6=1;reGetfindUserAssetList1()">{{$t('common.cx')}}</Button>
+                        <Input v-model="formData3.value" placeholder="多个用户名用,号隔开" style="width: 300px"></Input>
+                        <Button type="primary" @click="curPage6=1;reGetfindUserAssetList1()">{{$t('common.cx')}}
+                        </Button>
                     </p>
                     <Table ref="test3" :columns="columns7" :data="data7" @on-sort-change="setAssetSort"></Table>
                     <Page :current="curPage6" :total="total6" @on-change="changePage6"
@@ -150,7 +152,7 @@
                 ],
                 data2: [],
                 columns4: [
-                    {title: this.$t('common.rq'), key: 'symbol', sortable: 'custom'},
+                    {title: this.$t('common.rq'), key: 'createdTime'},
                     {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
                     {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
                     {
@@ -162,7 +164,7 @@
                 ],
                 data4: [],
                 columns5: [
-                    {title: this.$t('common.rq'), key: 'symbol'},
+                    {title: this.$t('common.rq'), key: 'createdTime'},
                     {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
                     {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
                     {
@@ -186,7 +188,7 @@
                 ],
                 data6: [],
                 columns7: [
-                    {title: this.$t('common.rq'), key: 'symbol'},
+                    {title: this.$t('common.rq'), key: 'createdTime'},
                     {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
                     {title: this.$t('finance.dqsl'), key: 'currentAssetAmount', sortable: 'custom'},
                     {title: this.$t('finance.syjyrsl'), key: 'closingAssetYesterdayQuantity', sortable: 'custom'},
@@ -194,7 +196,7 @@
                 ],
                 data7: [],
                 columns9: [
-                    {title: this.$t('finance.bz'), key: 'symbol'},
+                    {title: this.$t('common.bz'), key: 'symbol'},
                     {title: this.$t('finance.rczsl'), key: 'rechargeAmountDaily', sortable: 'custom'},
                     {title: this.$t('finance.rczbs'), key: 'rechargeCountDaily', sortable: 'custom'},
                     {title: this.$t('finance.rtxsl'), key: 'withdrawAmountDaily', sortable: 'custom'},
@@ -224,7 +226,8 @@
                     createdEnd: null
                 },
                 formData3: {
-                    symbol: '0',
+                    username: '0',
+                    value: null
                 }
             };
         },
@@ -295,9 +298,9 @@
                 }
                 this.getMonitorList();
             },
-            getfindUserAssetList () {
+            getfindUserAssetList (data) {
                 let sortStr = this.assetSortKey ? `${this.assetSortKey}%20${this.assetSortVal}` : 'null';
-                financeApi.findUserAssetList(this.curPage6, sortStr, (res, total) => {
+                financeApi.findUserAssetList(this.curPage6, sortStr, data, (res, total) => {
                     this.total6 = total;
                     this.data7 = res;
                 });
@@ -369,9 +372,9 @@
                 this.curPage2 = page;
                 this.getCheckingList();
             },
-            getPoolList () {
+            getPoolList (data) {
                 let sortStr = this.capitalPoolSortKey ? `${this.capitalPoolSortKey}%20${this.capitalPoolSortVal}` : 'null';
-                financeApi.findCapitalPoolList(this.curPage3, sortStr, (res, total) => {
+                financeApi.findCapitalPoolList(this.curPage3, sortStr, data, (res, total) => {
                     this.total3 = total;
                     this.data4 = res;
                 });
@@ -380,9 +383,9 @@
                 this.curPage3 = page;
                 this.getPoolList();
             },
-            getAccountList () {
+            getAccountList (data) {
                 let sortStr = this.chargeSortKey ? `${this.chargeSortKey}%20${this.chargeSortVal}` : 'null';
-                financeApi.findServiceFeeAccountList(this.curPage4, sortStr, (res, total) => {
+                financeApi.findServiceFeeAccountList(this.curPage4, sortStr, data, (res, total) => {
                     this.total4 = total;
                     this.data5 = res;
                 });
@@ -423,20 +426,58 @@
                 this.getDataList9();
             },
             reGetPoolList () {
+                let D = JSON.stringify(this.formData);
+                let data = JSON.parse(D);
+                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
+                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                data.symbol = data.symbol === '0' ? null : data.symbol;
+                // if (!data.symbol && !data.createdStart && !data.createdEnd) {
+                //     this.columns4 = [
+                //         {title: this.$t('common.rq'), key: 'createdTime'},
+                //         {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
+                //         {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
+                //         {
+                //             title: this.$t('finance.syjyrspsj'),
+                //             key: 'closingCapitalPoolYesterdayQuantity',
+                //             sortable: 'custom'
+                //         },
+                //         {title: this.$t('finance.rjz'), key: 'increaseDailyQuantity', sortable: 'custom'}
+                //     ];
+                // } else {
                 this.columns4.splice(3, 2);
-                this.getPoolList();
+                // }
+                this.getPoolList(data);
             },
             reGetAccountList () {
+                let D = JSON.stringify(this.formData1);
+                let data = JSON.parse(D);
+                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
+                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                data.symbol = data.symbol === '0' ? null : data.symbol;
                 this.columns5.splice(3, 2);
-                this.getAccountList();
+                this.getAccountList(data);
             },
             reGetfindUserAssetList () {
+                let D = JSON.stringify(this.formData2);
+                let data = JSON.parse(D);
+                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
+                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
+                data.symbol = data.symbol === '0' ? null : data.symbol;
                 this.columns7.splice(3, 2);
-                this.getfindUserAssetList()
+                this.formData3.value = null;
+                this.getfindUserAssetList(data);
             },
             reGetfindUserAssetList1 () {
+                let data = {
+                    username: this.formData3.value
+                };
                 this.columns7.splice(3, 2);
-                this.getfindUserAssetList()
+                this.formData2 = {
+                    symbol: '0',
+                    createdStart: null,
+                    createdEnd: null
+                };
+                this.getfindUserAssetList(data);
             }
         }
     };

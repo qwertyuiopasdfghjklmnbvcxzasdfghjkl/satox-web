@@ -4,14 +4,14 @@
         <Col span="24">
             <Row>
                 <Card>
-                    <p slot="title">USSD 充值</p>
+                    <p slot="title">USSD{{$t('finance.cz')}}</p>
                     <Row>
                         <Select v-model="formData.type" style="width:200px;">
-                            <Option value="username">用户名</Option>
-                            <Option value="mobile">手机号</Option>
+                            <Option value="username">{{$t('common.yhm')}}</Option>
+                            <Option value="mobile">{{$t('common.sjh')}}</Option>
                         </Select>
                         <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                        <Button type="primary" @click="page=1;getList()">查询</Button>
+                        <Button type="primary" @click="page=1;getList()">{{$t('common.cx')}}</Button>
                     </Row>
                     <Table :columns="columns" :data="data" style="margin-top: 20px;"></Table>
                     <Page :current="page" :total="total" :page-size="size" @on-change="changePage"
@@ -38,15 +38,15 @@
                 size: 20,
                 total: 0,
                 columns: [
-                    {title: '用户名', key: 'username'},
-                    {title: '手机号', key: 'mobile'},
-                    {title: '姓名', key: 'userRealName'},
-                    {title: '币种代号', key: 'symbol'},
-                    {title: 'USSD总金额', key: 'totalBalance'},
-                    {title: 'USSD可用金额', key: 'availableBalance'},
-                    {title: 'USSD冻结金额', key: 'frozenBalance'},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('common.sjh'), key: 'mobile'},
+                    {title: this.$t('common.xm'), key: 'userRealName'},
+                    {title: this.$t('common.bzdh'), key: 'symbol'},
+                    {title: `USSD${this.$t('common.zje')}`, key: 'totalBalance'},
+                    {title: `USSD${this.$t('common.kyje')}`, key: 'availableBalance'},
+                    {title: `USSD${this.$t('common.djje')}`, key: 'frozenBalance'},
                     {
-                        title: '操作', key: 'action', render: (h, params) => {
+                        title: this.$t('common.cz'), key: 'action', render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
@@ -62,7 +62,7 @@
                                             });
                                         }
                                     }
-                                }, '充值'),
+                                }, this.$t('finance.cz')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     on: {
@@ -76,7 +76,7 @@
                                             });
                                         }
                                     }
-                                }, '扣除')
+                                }, this.$t('finance.kc'))
                             ]);
                         }
                     }

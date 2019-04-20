@@ -27,38 +27,38 @@
                         <span class="refresh" @click="reshAll"></span>
                     </p>
                     <p style="margin-bottom: 20px">
-                        币种：
-                        <Select v-model="formData.symbol" style="width: 200px" :placeholder="'请选择币种'">
-                            <Option value="0">全部</Option>
+                        {{$t('common.bz')}}：
+                        <Select v-model="formData.symbol" style="width: 200px">
+                            <Option value="0">{{$t('common.qb')}}</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>
                         </Select>
-                        创建时间：
-                        <DatePicker type="datetime" v-model="formData.createdStart" placeholder="开始时间"
+                        {{$t('common.cjsj')}}：
+                        <DatePicker type="datetime" v-model="formData.createdStart" :placeholder="$t('common.kssj')"
                                     format="yyyy-MM-dd HH:mm:ss"
                                     style="width: 200px"></DatePicker>
-                        <DatePicker type="datetime" v-model="formData.createdEnd" placeholder="结束时间"
+                        <DatePicker type="datetime" v-model="formData.createdEnd" :placeholder="$t('common.jssj')"
                                     format="yyyy-MM-dd HH:mm:ss"
                                     style="width: 200px"></DatePicker>
-                        用户名：
+                        {{$t('common.yhm')}}：
                         <Input v-model="formData.userName" clearable style="width: 200px"
-                               :placeholder="'请输入用户名'"></Input>
-                        数量：
-                        <Select v-model="formData.amount" style="width: 200px" :placeholder="'请选择数量'">
-                            <Option value="0">全部</Option>
-                            <Option value="1">小于等于1</Option>
-                            <Option value="2">大于1小于等于1000</Option>
-                            <Option value="3">大于1000小于等于10000</Option>
-                            <Option value="4">大于10000</Option>
+                               :placeholder="$t('common.qsryhm')"></Input>
+                        {{$t('common.sl')}}：
+                        <Select v-model="formData.amount" style="width: 200px" >
+                            <Option value="0">{{$t('common.qb')}}</Option>
+                            <Option value="1">{{$t('common.xy1')}}</Option>
+                            <Option value="2">{{$t('common.dy1xy1000')}}</Option>
+                            <Option value="3">{{$t('common.dy1000xy10000')}}</Option>
+                            <Option value="4">{{$t('common.dy10000')}}</Option>
                         </Select>
-                        状态：
-                        <Select v-model="formData.auditStatus" style="width: 200px" :placeholder="'请选择状态'">
-                            <Option value="3">全部</Option>
-                            <Option value="0">未审核</Option>
-                            <Option value="1">审核通过</Option>
-                            <Option value="2">审核不通过</Option>
+                        {{$t('common.zt')}}：
+                        <Select v-model="formData.auditStatus" style="width: 200px">
+                            <Option value="3">{{$t('common.qb')}}</Option>
+                            <Option value="0">{{$t('common.wsh')}}</Option>
+                            <Option value="2">{{$t('common.shtg')}}</Option>
+                            <Option value="1">{{$t('common.shbtg')}}</Option>
                         </Select>
-                        <Button type="primary" @click="curPage=1;getAuditing()">查询</Button>
+                        <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage"
@@ -81,23 +81,23 @@
                 curPage: 1,
                 total: 0,
                 columns: [
-                    {key: 'createdTime', title: '创建时间'},
-                    {key: 'userName', title: '用户名'},
+                    {key: 'createdTime', title: this.$t('common.cjsj')},
+                    {key: 'userName', title: this.$t('common.yhm')},
                     {
-                        key: 'withdrawAmount', title: '提现金额',
+                        key: 'withdrawAmount', title: this.$t('finance.txje'),
                         render: (h, params) => {
                             return h('div', [params.row.withdrawAmount, params.row.symbol]);
                         }
                     },
-                    {key: 'phoneNumber', title: '电话'},
+                    {key: 'phoneNumber', title: this.$t('common.dh')},
                     {
-                        key: 'auditStatus', title: '状态',
+                        key: 'auditStatus', title: this.$t('common.zt'),
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.auditStatus));
                         }
                     },//0 未审核 1 审核不通过 2 审核通过
                     {
-                        key: 'action', title: '操作', render: (h, params) => {
+                        key: 'action', title: this.$t('common.cz'), render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {type: 'primary', size: 'small', disabled: params.row.auditStatus !== 0},
@@ -112,7 +112,7 @@
                                             });
                                         }
                                     }
-                                }, '审核')
+                                }, this.$t('common.sh'))
                             ]);
                         }
                     }
@@ -148,13 +148,13 @@
             switchStaus (state) {//0 未审核 1 审核不通过 2 审核通过
                 switch (state) {
                     case 0:
-                        return '未审核';
+                        return this.$t('common.wsh');
                         break;
                     case 1:
-                        return '审核不通过';
+                        return this.$t('common.shbtg');
                         break;
                     case 2:
-                        return '审核通过';
+                        return this.$t('common.shtg');
                         break;
                 }
             },

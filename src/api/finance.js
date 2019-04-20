@@ -88,26 +88,28 @@ const findRealTimeCheckingList = function (curPage, success, error) {
 finance.findRealTimeCheckingList = findRealTimeCheckingList;
 
 // 财务管理--资金池情况
-const findCapitalPoolList = function (curPage, sortStr, success, error) {
-    api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}/${sortStr}`, (res) => {
-        if (res.rst === 1) {
-            success && success(res.data, res.total);
-        } else {
-            error && error(res.msg);
-        }
-    }, error);
+const findCapitalPoolList = function (curPage, sortStr, data, success, error) {
+    api.get(`api/bm/financialManage/financialStatistics/findCapitalPoolList/10/${curPage}/${sortStr}`, data,
+        (res) => {
+            if (res.rst === 1) {
+                success && success(res.data, res.total);
+            } else {
+                error && error(res.msg);
+            }
+        }, error);
 };
 finance.findCapitalPoolList = findCapitalPoolList;
 
 // 财务管理--手续费转账
-const findServiceFeeAccountList = function (curPage, sortStr, success, error) {
-    api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}/${sortStr}`, (res) => {
-        if (res.rst === 1) {
-            success && success(res.data, res.total);
-        } else {
-            error && error(res.msg);
-        }
-    }, error);
+const findServiceFeeAccountList = function (curPage, sortStr, data, success, error) {
+    api.get(`api/bm/financialManage/financialStatistics/findServiceFeeAccountList/10/${curPage}/${sortStr}`, data,
+        (res) => {
+            if (res.rst === 1) {
+                success && success(res.data, res.total);
+            } else {
+                error && error(res.msg);
+            }
+        }, error);
 };
 finance.findServiceFeeAccountList = findServiceFeeAccountList;
 
@@ -196,14 +198,15 @@ const getAdminWithdrawAccountInfo = function (curPage, success, error) {
 finance.getAdminWithdrawAccountInfo = getAdminWithdrawAccountInfo;
 
 // 财务管理--用户总资产数据
-const findUserAssetList = function (curPage, sortStr, success, error) {
-    api.get(`/api/bm/financialManage/financialStatistics/findUserAssetList/10/${curPage}/${sortStr}`, (res) => {
-        if (res.rst === 1) {
-            success && success(res.data, res.total);
-        } else {
-            error && error(res.msg);
-        }
-    }, error);
+const findUserAssetList = function (curPage, sortStr, data, success, error) {
+    api.get(`/api/bm/financialManage/financialStatistics/findUserAssetList/10/${curPage}/${sortStr}`, data,
+        (res) => {
+            if (res.rst === 1) {
+                success && success(res.data, res.total);
+            } else {
+                error && error(res.msg);
+            }
+        }, error);
 };
 finance.findUserAssetList = findUserAssetList;
 
