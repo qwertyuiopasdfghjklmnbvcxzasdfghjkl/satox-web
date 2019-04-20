@@ -1,31 +1,31 @@
 <template>
     <Row style="margin-top:10px;">
         <Card>
-            <p slot="title">用户资产查询</p>
+            <p slot="title">{{$t('finance.yhzccx')}}</p>
             <p style="margin-bottom: 20px">
-                币种：
+                {{$t('common.bz')}}：
                 <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
-                    <Option value="0">全部</Option>
+                    <Option value="0">{{$t('common.qb')}}</Option>
                     <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                     </Option>
                 </Select>
-                用户名：
-                <Input v-model="formData.username" clearable style="width: 200px" placeholder="请输入用户名"></Input>
-                数量：
+                {{$t('common.yhm')}}：
+                <Input v-model="formData.username" clearable style="width: 200px" :placeholder="$t('common.qsryhm')"></Input>
+                {{$t('common.sl')}}：
                 <Select v-model="amount" style="width: 200px">
-                    <Option value="0">全部</Option>
-                    <Option value="1">小于等于1</Option>
-                    <Option value="2">大于1小于等于1000</Option>
-                    <Option value="3">大于1000小于等于10000</Option>
-                    <Option value="4">大于10000</Option>
+                    <Option value="0">{{$t('common.qb')}}</Option>
+                    <Option value="1">{{$t('common.xy1')}}</Option>
+                    <Option value="2">{{$t('common.dy1xy1000')}}</Option>
+                    <Option value="3">{{$t('common.dy1000xy10000')}}</Option>
+                    <Option value="4">{{$t('common.dy10000')}}</Option>
                 </Select>
-                钱包类型：
+                {{$t('common.qblx')}}：
                 <Select v-model="formData.type" style="width: 200px">
-                    <Option value="0">全部</Option>
-                    <Option value="1">主钱包</Option>
-                    <Option value="2">非主钱包</Option>
+                    <Option value="0">{{$t('common.qb')}}</Option>
+                    <Option value="1">{{$t('common.zqb')}}</Option>
+                    <Option value="2">{{$t('common.fzqb')}}</Option>
                 </Select>
-                <Button type="primary" @click="curPage=1;getfindUser()">查询</Button>
+                <Button type="primary" @click="curPage=1;getfindUser()">{{$t('common.cx')}}</Button>
             </p>
             <Table ref="test2" :columns="columns" :data="data"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage"
@@ -45,18 +45,18 @@
                 total: 0,
                 size: 20,
                 columns: [
-                    {title: '用户名', key: 'username'},
-                    {title: '币种', key: 'symbol'},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('common.bz'), key: 'symbol'},
                     {
-                        title: '钱包类型', key: 'type',
+                        title: this.$t('common.qblx'), key: 'type',
                         render: (h, params) => {
-                            return h('div', params.row.type === 1 ? '主钱包' : '非主钱包');
+                            return h('div', params.row.type === 1 ? this.$t('common.zqb') : this.$t('common.fzqb'));
                         }
                     },
-                    {title: '总金额', key: 'totalBalance'},
-                    {title: '可用金额', key: 'availableBalance'},
-                    {title: '冻结金额', key: 'frozenBalance'},
-                    {title: '更新时间', key: 'updatedAt'},
+                    {title: this.$t('common.zje'), key: 'totalBalance'},
+                    {title: this.$t('common.kyje'), key: 'availableBalance'},
+                    {title: this.$t('common.djje'), key: 'frozenBalance'},
+                    {title: this.$t('common.gxsj'), key: 'updatedAt'},
                 ],
                 data: [],
                 formData: {

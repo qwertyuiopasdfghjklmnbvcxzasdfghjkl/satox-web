@@ -1,24 +1,24 @@
 <template>
     <div class="account_manage">
         <Tabs>
-            <TabPane label="漏记">
+            <TabPane :label="$t('finance.lj')">
                 <Form ref="formItem" :model="addFormData" :rules="ruleInline" label-position="left" :label-width="100">
                     <FormItem label="LedgerID" prop="ledgerId">
                         <Input v-model="addFormData.ledgerId" name="ledgerId"></Input>
                     </FormItem>
-                    <FormItem label="科目" prop="subject">
+                    <FormItem :label="$t('finance.km')" prop="subject">
                         <Input v-model="addFormData.subject" name="subject"></Input>
                     </FormItem>
-                    <FormItem label="数量" prop="amount">
+                    <FormItem :label="$t('common.sl')" prop="amount">
                         <Input v-model="addFormData.amount" name="amount"></Input>
                     </FormItem>
-                    <FormItem label="借贷" prop="type">
+                    <FormItem :label="$t('finance.jd')" prop="type">
                        <RadioGroup ref="type" v-model="addFormData.type">
                             <Radio label="1">
-                                <span>借方</span>
+                                <span>{{$t('finance.jf')}}</span>
                             </Radio>
                             <Radio label="2">
-                                <span>贷方</span>
+                                <span>{{$t('finance.df')}}</span>
                             </Radio>
                         </RadioGroup>
                     </FormItem>
@@ -28,57 +28,57 @@
                     <FormItem label="Related" prop="related">
                         <Input v-model="addFormData.related" name="related"></Input>
                     </FormItem>
-                    <FormItem label="是否改账户" prop="updateAccount">
+                    <FormItem :label="$t('finance.sfgzh')" prop="updateAccount">
                         <RadioGroup ref="updateAccount" v-model="addFormData.updateAccount">
                             <Radio label="1">
-                                <span>是</span>
+                                <span>{{$t('common.s')}}</span>
                             </Radio>
                             <Radio label="2">
-                                <span>否</span>
+                                <span>{{$t('common.f')}}</span>
                             </Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem >
-                        <Button type="primary" @click="ledgerAdd">确定</Button>
-                        <Button type="primary" @click="reset()">取消</Button>
+                        <Button type="primary" @click="ledgerAdd">{{$t('common.qd')}}</Button>
+                        <Button type="primary" @click="reset()">{{$t('common.qx')}}</Button>
                     </FormItem>
                 </Form>
             </TabPane>
-            <TabPane label="多记">
+            <TabPane :label="$t('finance.dj')">
                 <Form ref="formItem1" :model="reduceData" :rules="ruleInline1" label-position="left" :label-width="100">
                     <FormItem label="Detail_ID" prop="detailId">
                         <Input v-model="reduceData.detailId" name="detailId"></Input>
                     </FormItem>
-                    <FormItem label="是否改账户" prop="updateAccount">
+                    <FormItem :label="$t('finance.sfgzh')" prop="updateAccount">
                         <RadioGroup v-model="reduceData.updateAccount">
                             <Radio label="1">
-                                <span>是</span>
+                                <span>{{$t('common.s')}}</span>
                             </Radio>
                             <Radio label="2">
-                                <span>否</span>
+                                <span>{{$t('common.f')}}</span>
                             </Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem >
-                        <Button type="primary" @click="reduceAdd">确定</Button>
-                        <Button type="primary" @click="reset1()">取消</Button>
+                        <Button type="primary" @click="reduceAdd">{{$t('common.qd')}}</Button>
+                        <Button type="primary" @click="reset1()">{{$t('common.qx')}}</Button>
                     </FormItem>
                  </Form>
             </TabPane>
-            <TabPane label="错记">
+            <TabPane :label="$t('finance.cj')">
                  <Form ref="formItem2" :model="fixData" :rules="ruleInline2" label-position="left" :label-width="100">
                     <Card>
-                        <p slot="title">第一步：标红</p>
+                        <p slot="title">{{$t('finance.dybbh')}}</p>
                             <FormItem label="Detail_ID" prop="detailId">
                                 <Input v-model="fixData.detailId" name="detailId"></Input>
                             </FormItem>
-                            <FormItem label="是否改账户" prop="updateAccountByOne">
+                            <FormItem :label="$t('finance.sfgzh')" prop="updateAccountByOne">
                                 <RadioGroup v-model="fixData.updateAccountByOne">
                                     <Radio label="1">
-                                        <span>是</span>
+                                        <span>{{$t('common.s')}}</span>
                                     </Radio>
                                     <Radio label="2">
-                                        <span>否</span>
+                                        <span>{{$t('common.f')}}</span>
                                     </Radio>
                                 </RadioGroup>
                             </FormItem>
@@ -89,24 +89,24 @@
                         <!-- </Form> -->
                     </Card>
                     <Card>
-                        <p slot="title">第二步：标黑</p>
+                        <p slot="title">{{$t('finance.debbh')}}</p>
                         <!-- <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100"> -->
                              <FormItem label="Ledgerid" prop="ledgerid">
                                 <Input v-model="fixData.ledgerid" name="ledgerid"></Input>
-                            </FormItem> 
-                            <FormItem label="科目" prop="subject">
+                            </FormItem>
+                            <FormItem :label="$t('finance.km')" prop="subject">
                                 <Input v-model="fixData.subject" name="subject"></Input>
                             </FormItem>
-                            <FormItem label="数量" prop="amount">
+                            <FormItem :label="$t('common.sl')" prop="amount">
                                 <Input v-model="fixData.amount" name="amount"></Input>
                             </FormItem>
-                            <FormItem label="借贷" prop="type">
+                            <FormItem :label="$t('finance.jd')" prop="type">
                                 <RadioGroup v-model="fixData.type">
                                     <Radio label="1">
-                                        <span>借方</span>
+                                        <span>{{$t('finance.jf')}}</span>
                                     </Radio>
                                     <Radio label="2">
-                                        <span>贷方</span>
+                                        <span>{{$t('finance.df')}}</span>
                                     </Radio>
                                 </RadioGroup>
                             </FormItem>
@@ -116,13 +116,13 @@
                             <FormItem label="Related" prop="related">
                                 <Input v-model="fixData.related" name="related"></Input>
                             </FormItem>
-                            <FormItem label="是否改账户" prop="updateAccountByTwo">
+                            <FormItem :label="$t('finance.sfgzh')" prop="updateAccountByTwo">
                                 <RadioGroup v-model="fixData.updateAccountByTwo">
                                     <Radio label="1">
-                                        <span>是</span>
+                                        <span>{{$t('common.s')}}</span>
                                     </Radio>
                                     <Radio label="2">
-                                        <span>否</span>
+                                        <span>{{$t('common.f')}}</span>
                                     </Radio>
                                 </RadioGroup>
                             </FormItem>
@@ -130,31 +130,31 @@
                                 <Button type="primary">确定</Button>
                                 <Button type="primary">取消</Button>
                             </FormItem> -->
-                        
+
                     </Card>
                 </Form>
                  <Card>
-                     <p slot="title" style="height:40px;line-height:40px;">第三步:执行
-                        <Button type="primary" @click="fixAdd">执行</Button>
-                        <Button type="primary" @click="reset2()">取消</Button>
+                     <p slot="title" style="height:40px;line-height:40px;">{{$t('finance.dsbzx')}}
+                        <Button type="primary" @click="fixAdd">{{$t('finance.zx')}}</Button>
+                        <Button type="primary" @click="reset2()">{{$t('common.qx')}}</Button>
                      </p>
                  </Card>
             </TabPane>
-            <TabPane label="平差">
+            <TabPane :label="$t('finance.pc')">
                  <Form ref="formItem3" :model="balanceData" :rules="ruleInline3" label-position="left" :label-width="100">
-                    <FormItem label="科目" prop="subject">
+                    <FormItem :label="$t('finance.km')" prop="subject">
                         <Input v-model="balanceData.subject" name="subject"></Input>
                     </FormItem>
-                    <FormItem label="数量" prop="amount">
+                    <FormItem :label="$t('common.sl')" prop="amount">
                         <Input v-model="balanceData.amount" name="amount"></Input>
                     </FormItem>
-                    <FormItem label="借贷" prop="type">
+                    <FormItem :label="$t('finance.jd')" prop="type">
                        <RadioGroup v-model="balanceData.type">
                             <Radio label="1">
-                                <span>借方</span>
+                                <span>{{$t('finance.jf')}}</span>
                             </Radio>
                             <Radio label="2">
-                                <span>贷方</span>
+                                <span>{{$t('finance.df')}}</span>
                             </Radio>
                         </RadioGroup>
                     </FormItem>
@@ -162,8 +162,8 @@
                         <Input v-model="balanceData.related" name="related"></Input>
                     </FormItem>
                     <FormItem >
-                        <Button type="primary" @click="balanceAdd">确定</Button>
-                        <Button type="primary" @click="reset3()">取消</Button>
+                        <Button type="primary" @click="balanceAdd">{{$t('common.qd')}}</Button>
+                        <Button type="primary" @click="reset3()">{{$t('common.qx')}}</Button>
                     </FormItem>
                  </Form>
             </TabPane>
@@ -186,19 +186,19 @@ export default {
             },
             ruleInline: {
                 ledgerId: [
-                    { required: true, message: '请输入LedgerID', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'LedgerID', trigger: 'blur' }
                 ],
                 subject: [
-                    { required: true, message: '请输入科目', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('finance.km'), trigger: 'blur' }
                 ],
                 balance: [
-                    { required: true, message: '请输入balance', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'balance', trigger: 'blur' }
                 ],
                 amount: [
-                    { required: true, message: '请输入数量', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('common.sl'), trigger: 'blur' }
                 ],
                 related: [
-                    { required: true, message: '请输入related', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'related', trigger: 'blur' }
                 ]
             },
             reduceData: {
@@ -207,7 +207,7 @@ export default {
             },
             ruleInline1: {
                detailId: [
-                    { required: true, message: '请输入detailId', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'detailId', trigger: 'blur' }
                 ]
             },
             balanceData: {
@@ -218,13 +218,13 @@ export default {
             },
             ruleInline3: {
                 amount: [
-                    { required: true, message: '请输入数量', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('common.sl'), trigger: 'blur' }
                 ],
                 related: [
-                    { required: true, message: '请输入related', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'related', trigger: 'blur' }
                 ],
                 subject: [
-                    { required: true, message: '请输入科目', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('finance.km'), trigger: 'blur' }
                 ]
             },
             fixData: {
@@ -240,22 +240,22 @@ export default {
             },
             ruleInline2: {
                 amount: [
-                    { required: true, message: '请输入数量', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('common.sl'), trigger: 'blur' }
                 ],
                 balance: [
-                    { required: true, message: '请输入balance', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'balance', trigger: 'blur' }
                 ],
                 detailId: [
-                    { required: true, message: '请输入detailId', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'detailId', trigger: 'blur' }
                 ],
                 ledgerid: [
-                    { required: true, message: '请输入ledgerid', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'ledgerid', trigger: 'blur' }
                 ],
                 related: [
-                    { required: true, message: '请输入related', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + 'related', trigger: 'blur' }
                 ],
                 subject: [
-                    { required: true, message: '请输入科目', trigger: 'blur' }
+                    { required: true, message: this.$t('common.qsr') + this.$t('finance.km'), trigger: 'blur' }
                 ]
             }
         }
@@ -304,10 +304,10 @@ export default {
                             related: this.addFormData.related,
                             updateAccount: this.addFormData.updateAccount === '1' ? true : false
                         }, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.$t('common.tjcg')})
                     }, (msg) => {
                         this.$Message.error({content: msg})
-                    }) 
+                    })
                 }
             })
        },
@@ -319,10 +319,10 @@ export default {
                             detailId: this.reduceData.detailId,
                             updateAccount: this.reduceData.updateAccount === '1' ? true : false
                         }, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.$t('common.tjcg')})
                     }, (msg) => {
                         this.$Message.error({content: msg})
-                    }) 
+                    })
                 }
             })
        },
@@ -331,10 +331,10 @@ export default {
             form.validate((valid) => {
                 if (valid) {
                     financeApi.ledgerBalance(this.balanceData, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.$t('common.tjcg')})
                     }, (msg) => {
                         this.$Message.error({content: msg})
-                    }) 
+                    })
                 }
             })
        },
@@ -353,13 +353,13 @@ export default {
                             updateAccountByOne: this.fixData.updateAccountByOne === '1' ? true : false,
                             updateAccountByTwo: this.fixData.updateAccountByTwo === '1' ? true : false
                         }, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.$t('common.tjcg')})
                     }, (msg) => {
                         this.$Message.error({content: msg})
-                    }) 
+                    })
                 }
             })
-           
+
        }
     }
 }

@@ -2,7 +2,7 @@
 <template>
     <Card style="width:430px;">
         <p slot="title">
-            创建新交易
+            创建新交易 {{$t('finance.cjxjy')}}
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Form ref="formValidate" :model="formValidate" :rules="ruleInline" :label-width="90" style="margin:0 20px;">

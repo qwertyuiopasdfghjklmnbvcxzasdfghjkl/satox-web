@@ -38,7 +38,7 @@
             <Col span="8">{{type === 0 ? '充值': '提现'}}数量</Col>
             <Col span="8">
                 <!--<InputNumber style="width:113px;" :min="0" v-model="coinPoolsDTO"></InputNumber>-->
-                <input class="number_input" type="number" @input="oninput"/>
+                <input class="number_input" type="number" @input="oninput" placeholder="请输入大于0的数"/>
             </Col>
             <Col span="8" style="text-align:right;">
                 <Button type="primary" @click="tabs('virtualBalance')">保存</Button>
@@ -65,8 +65,8 @@
                 this.$emit('removeDialog');
             },
             tabs (propName) {
-                if (!this[propName] && (this[propName] !== 0)) {
-                    this.$Message.error({content: '请输入值'});
+                if (!this[propName] && (!this[propName] !== 0)) {
+                    this.$Message.error({content: '请输入有效值'});
                     return;
                 }
                 let data = {
@@ -94,7 +94,7 @@
             oninput (e) {
                 // 通过正则过滤小数点后8位
                 e.target.value = (e.target.value.match(/^\d*(\.?\d{0,8})/g)[0]) || null;
-                this.virtualBalance = e.target.value;
+                this.virtualBalance = Number(e.target.value);
             }
         },
         filters: {

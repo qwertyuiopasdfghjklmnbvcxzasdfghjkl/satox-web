@@ -1,20 +1,20 @@
 <template>
     <Card style="width:600px;padding-bottom: 50px;">
         <p slot="title">
-            <span>{{state==='0'?'充值':'扣除'}}USSD</span>
+            <span>{{state==='0'? $t('finance.kc') :$t('finance.cz')}}USSD</span>
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <div class="detail">
-            <p><label>总金额：</label><span>{{data.totalBalance}}</span></p>
-            <p><label>可用余额：</label><span>{{data.availableBalance}}</span></p>
-            <p><label>冻结金额：</label><span>{{data.frozenBalance}}</span></p>
-            <p><label>{{state==='0'?'充值':'扣除'}}数量：</label>
+            <p><label>{{$t('common.zje')}}：</label><span>{{data.totalBalance}}</span></p>
+            <p><label>{{$t('common.kyye')}}：</label><span>{{data.availableBalance}}</span></p>
+            <p><label>{{$t('common.djje')}}：</label><span>{{data.frozenBalance}}</span></p>
+            <p><label>{{state==='0'? $t('finance.kc') :$t('finance.cz')}}{{$t('common.sl')}}：</label>
                 <input autocomplete="off" spellcheck="false" type="Number"
-                       :placeholder="state==='0'?'充值数量需大于0':'扣除数量需大于0'" class="ivu-input"
+                       :placeholder="state==='0'? $t('finance.czslxdy'):$t('finance.kcslxdy')" class="ivu-input"
                        style="width: 250px;" v-model="amount">
                 <button type="button" class="ivu-btn ivu-btn-primary recharge-btn"
                         @click="submit()" :disabled="locked">
-                    <span>保存</span></button>
+                    <span>{{$t('common.bc')}}</span></button>
             </p>
         </div>
     </Card>
@@ -40,17 +40,17 @@
                 if (Number(this.amount) > 0) {
                     this.locked = true;
                     if (this.state === '0') {
-                        this.recharge(this.amount, '充值成功');
+                        this.recharge(this.amount, this.$t('finance.czcg'));
                     } else if (this.state === '1') {
                         if (Number(this.amount) > Number(this.data.availableBalance)) {
-                            this.$Message.error({content: '扣除数量需小于等于可用余额'});
+                            this.$Message.error({content: this.$t('finance.kcslxxydykyye')});
                             this.locked = false;
                         } else {
-                            this.recharge(-this.amount, '扣除成功');
+                            this.recharge(-this.amount, this.$t('finance.kccg'));
                         }
                     }
                 } else {
-                    this.$Message.error({content: '充值数量需大于0'});
+                    this.$Message.error({content: this.$t('finance.czslxdy')});
                     this.locked = false;
                 }
             },
