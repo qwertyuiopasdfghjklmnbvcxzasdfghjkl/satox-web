@@ -64,6 +64,22 @@
             closeDialog () {
                 this.$emit('removeDialog');
             },
+            scientificToNumber (num) {
+                var str = num.toString();
+                var reg = /^(\d+)(e)([\-]?\d+)$/;
+                var arr, len,
+                    zero = '';
+                if (!reg.test(str)) {
+                    return num;
+                } else {
+                    arr = reg.exec(str);
+                    len = Math.abs(arr[3]) - 1;
+                    for (var i = 0; i < len; i++) {
+                        zero += '0';
+                    }
+                    return '0.' + zero + arr[1];
+                }
+            },
             tabs (propName) {
                 if (!this[propName] && (!this[propName] !== 0)) {
                     this.$Message.error({content: '请输入有效值'});
@@ -71,12 +87,13 @@
                 }
                 let data = {
                     'coinPoolId': this.item.coinPoolId,
-                    virtualBalance: this.virtualBalance
-                };
+                    virtualBalance: this.scientificToNumber(this.virtualBalance)
+                }
+                console.log(data);
                 if (this.type === 0) {
                     financeApi.findRecharge(data, (res) => {
                         this.$emit('okCallback');
-                        this.$Message.success({content: '修改成功'});
+                        this.$Message.success({content: '充值成功'});
                         this.$emit('removeDialog');
                     }, (msg) => {
                         this.$Message.error({content: msg});
@@ -84,7 +101,7 @@
                 } else {
                     financeApi.findWithdraw(data, (res) => {
                         this.$emit('okCallback');
-                        this.$Message.success({content: '修改成功'});
+                        this.$Message.success({content: '提现成功'});
                         this.$emit('removeDialog');
                     }, (msg) => {
                         this.$Message.error({content: msg});
