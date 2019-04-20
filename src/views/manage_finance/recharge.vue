@@ -1,4 +1,4 @@
-<!-- 财务管理 -->
+<!-- 充值管理 -->
 <template>
     <Row>
         <Col span="24">
@@ -17,7 +17,7 @@
                     <p slot="title">{{$t('finance.bzczjk')}}</p>
                     <p style="margin-bottom: 20px">
                         {{$t('common.bz')}}：
-                        <Select v-model="formData.symbol2" style="width: 200px"  :placeholder="'请选择币种'">
+                        <Select v-model="formData.symbol2" style="width: 200px">
                             <Option value="0">{{$t('common.qb')}}</Option>
                             <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                             </Option>

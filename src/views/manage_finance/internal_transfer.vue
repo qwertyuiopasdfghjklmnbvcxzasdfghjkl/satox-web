@@ -2,20 +2,20 @@
     <Row>
         <Card>
             <p slot="title">
-                内部转账
+                {{$t('finance.nbzz')}}
                 <span class="refresh" @click="getList"></span>
             </p>
             <Row>
                 <Col span="16">
                     <Select v-model="formData.type" style="width:200px;">
-                        <Option value="fromUsername">转出用户名</Option>
-                        <Option value="username">收款用户名</Option>
+                        <Option value="fromUsername">{{$t('finance.zcyhm')}}</Option>
+                        <Option value="username">{{$t('finance.skyhm')}}</Option>
                     </Select>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                    <Button type="primary" @click="getList(true)">查询</Button>
+                    <Button type="primary" @click="getList(true)">{{$t('common.cx')}}</Button>
                 </Col>
                 <Col span="8">
-                    <Button type="primary" style="float:right;" @click="addDialog">添加</Button>
+                    <Button type="primary" style="float:right;" @click="addDialog">{{$t('common.tj')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -40,15 +40,15 @@
                     text: ''
                 },
                 columns1: [
-                    {title: '创建时间', key: 'createdAt'},
-                    {title: '转出用户名', key: 'fromUsername'},
-                    {title: '收款用户名', key: 'username'},
-                    {title: '币种', key: 'symbol'},
-                    {title: '数量', key: 'quantity'},
-                    {title: '备注', key: 'remarks'},
-                    {title: '操作人', key: 'lastUpdatedBy'},
+                    {title: this.$t('common.cjsj'), key: 'createdAt'},
+                    {title: this.$t('finance.zcyhm'), key: 'fromUsername'},
+                    {title: this.$t('finance.skyhm'), key: 'username'},
+                    {title: this.$t('common.bz'), key: 'symbol'},
+                    {title: this.$t('common.sl'), key: 'quantity'},
+                    {title: this.$t('common.beiz'), key: 'remarks'},
+                    {title: this.$t('finance.czr'), key: 'lastUpdatedBy'},
                     {
-                        title: '状态',
+                        title: this.$t('common.zt'),
                         key: 'status ',
                         render: (h, params) => { // 1：进行中，2：已完成，3：已取消，4：已拒绝
                             let status = Number(params.row.status);
@@ -85,16 +85,16 @@
             switchStaus (state) {
                 switch (state) {
                     case 1:
-                        return '进行中';
+                        return this.$t('common.jxz');
                         break;
                     case 2:
-                        return '已完成';
+                        return this.$t('common.ywc');
                         break;
                     case 3:
-                        return '已取消';
+                        return this.$t('common.yqx');
                         break;
                     case 4:
-                        return '已拒绝';
+                        return this.$t('common.yjj');
                         break;
                 }
             },
