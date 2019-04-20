@@ -361,7 +361,7 @@ export default {
     },
     switchPercent (p) {
       p = p / 100
-      let amount = numUtils.mul(this.tradeType === 'buy' ? this.toBalance.availableBalance : this.fromBalance.availableBalance, p).toFixed(this.fixedNumber)
+      let amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)
       if (this.active === 'market' && this.tradeType === 'buy') {
         this.formData.amount = numUtils.div(amount, this.getLast24h.close).toFixed(this.fixedNumber, 1)
         return
