@@ -332,6 +332,8 @@ export default {
       this.klineData = []
       this.$refs.businesspanel.$refs.business_buy.formData.amount = ''
       this.$refs.businesspanel.$refs.business_sell.formData.amount = ''
+      this.$refs.businesspanel.$refs.business_buy.percent = '0'
+      this.$refs.businesspanel.$refs.business_sell.percent = '0'
       this.$router.push({name: 'exchange_index', params: {symbol: `${currentSymbol}_${baseSymbol}`}})
     },
     showCoinInfo () {
