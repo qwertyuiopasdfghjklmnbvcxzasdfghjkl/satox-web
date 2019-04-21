@@ -4,7 +4,7 @@
           <p slot="title">公告
               <Button type="primary" @click="addMarket">新增</Button>
           </p>
-          <Table :columns="columns1" :data="data1"></Table> 
+          <Table :columns="columns1" :data="data1"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
       </Card>
   </div>

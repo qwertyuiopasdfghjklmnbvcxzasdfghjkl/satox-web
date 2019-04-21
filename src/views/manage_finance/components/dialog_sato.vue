@@ -1,21 +1,21 @@
 <template>
     <Card style="width:600px;padding-bottom: 50px;">
         <p slot="title">
-            <span>{{state==='0'?'增加':'扣除'}}SATO</span>
+            <span>{{state==='0'? vm.$t('common.zj') :vm.$t('common.kc')}}SATO</span>
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <div class="detail">
-            <p><label>钱包类型：</label><span>{{data.type | myCurrency}}</span></p>
-            <p><label>总金额：</label><span>{{data.totalBalance}}</span></p>
-            <p><label>可用余额：</label><span>{{data.availableBalance}}</span></p>
-            <p><label>冻结金额：</label><span>{{data.frozenBalance}}</span></p>
-            <p><label>{{state==='0'?'增加':'扣除'}}数量：</label>
+            <p><label>{{vm.$t('common.qblx')}}：</label><span>{{data.type | myCurrency}}</span></p>
+            <p><label>{{vm.$t('common.zje')}}：</label><span>{{data.totalBalance}}</span></p>
+            <p><label>{{vm.$t('common.kyye')}}：</label><span>{{data.availableBalance}}</span></p>
+            <p><label>{{vm.$t('common.djje')}}：</label><span>{{data.frozenBalance}}</span></p>
+            <p><label>{{state==='0'?vm.$t('common.zj'):vm.$t('common.kc')}}{{vm.$t('common.sl')}}：</label>
                 <input autocomplete="off" spellcheck="false" type="Number"
-                       :placeholder="state==='0'?'增加数量需大于0':'扣除数量需大于0'" class="ivu-input"
+                       :placeholder="state==='0'? vm.$t('finance.zjslxdy'):vm.$t('finance.kcslxdy')" class="ivu-input"
                        style="width: 250px;" v-model="amount">
                 <button type="button" class="ivu-btn ivu-btn-primary recharge-btn"
                         @click="submit()" :disabled="locked">
-                    <span>保存</span></button>
+                    <span>{{vm.$t('common.bc')}}</span></button>
             </p>
         </div>
     </Card>
@@ -27,7 +27,9 @@
     export default {
         props: ['id', 'state'],
         data () {
+            var vm = window.vm;
             return {
+                vm: vm,
                 data: {},
                 amount: '',
                 locked: false
@@ -41,17 +43,20 @@
                 if (Number(this.amount) > 0) {
                     this.locked = true;
                     if (this.state === '0') {
-                        this.add(this.amount, '增加成功');
+                        this.add(this.amount, this.vm.$t('finance.zjcg'));
                     } else if (this.state === '1') {
                         if (Number(this.amount) > Number(this.data.availableBalance)) {
-                            this.$Message.error({content: '扣除数量需小于等于可用余额'});
+                            this.$Message.error({content: this.vm.$t('finance.kcslxxydykyye')});
                             this.locked = false;
                         } else {
-                            this.add(-this.amount, '扣除成功');
+                            this.add(-this.amount, this.vm.$t('finance.kccg'));
                         }
                     }
                 } else {
-                    this.$Message.error({content: '增加数量需大于0'});
+                    if (this.state === '0')
+                    this.$Message.error({content: this.vm.$t('finance.zjslxdy')});
+                    else
+                    this.$Message.error({content: this.vm.$t('finance.kcslxdy')});
                     this.locked = false;
                 }
             },
@@ -78,8 +83,8 @@
         filters: {
             myCurrency: function (myInput) {
                 let result = {
-                    1: '主钱包',
-                    2: '非主钱包'
+                    1: vm.$t('common.zqb'),
+                    2: vm.$t('common.fzqb')
                 };
                 return result[myInput];
             }
