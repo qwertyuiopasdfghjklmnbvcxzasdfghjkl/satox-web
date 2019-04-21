@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import iView from 'iview';
 import VueRouter from 'vue-router';
 import {
@@ -27,7 +28,7 @@ import 'iview/dist/styles/iview.css';
 import 'vue-directive-image-previewer/dist/assets/style.css';
 import './views/components/dialog';
 
-import VueI18n from 'vue-i18n';
+
 import Locales from 'iview/src/locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
@@ -64,8 +65,7 @@ Vue.use(iView, {
         return '';
     }
 });
-Vue.locale = () => {
-};
+Vue.locale = () => {};
 
 // 自动设置语言
 const navLang = navigator.language;
@@ -270,7 +270,7 @@ const store = new Vuex.Store({
     actions: {}
 });
 
-new Vue({
+window.vm = new Vue({
     el: '#app',
     i18n: i18n,
     router: router,

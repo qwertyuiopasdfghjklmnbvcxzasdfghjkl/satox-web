@@ -1,18 +1,18 @@
 <!-- 用户虚拟充值提现 -->
 <template>
     <Card>
-        <p slot="title">用户虚拟充值提现</p>
+        <p slot="title">{{$t('finance.yhxncztx')}}</p>
         <Row>
             <Col span="16">
-                用户名
-                <Input v-model="formData.username" clearable style="width: 200px" placeholder="请输入..."></Input>
-                币种
+                {{$t('common.yhm')}}
+                <Input v-model="formData.username" clearable style="width: 200px" :placeholder="$t('common.qsr')"></Input>
+                {{$t('common.bz')}}
                 <Select v-model="formData.symbol" style="width: 200px">
-                    <Option value="0">全部</Option>
+                    <Option value="0">{{$t('common.qb')}}</Option>
                     <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                     </Option>
                 </Select>
-                <Button type="primary" @click="users.page=1;getList()">查询</Button>
+                <Button type="primary" @click="users.page=1;getList()">{{$t('common.cx')}}</Button>
             </Col>
         </Row>
         <Table border :columns="users.columns" :data="users.data" style="margin-top:20px;"></Table>
@@ -41,16 +41,16 @@
                     size: 10,
                     total: 0,
                     columns: [
-                        {title: '用户名', key: 'username'},
-                        {title: '手机号', key: 'mobile'},
-                        {title: '姓名', key: 'userRealName'},
-                        {title: '币种代号', key: 'symbol'},
-                        {title: '总金额', key: 'totalBalance'},
-                        {title: '可用金额', key: 'availableBalance'},
-                        {title: '冻结金额', key: 'loanBalance'},
-                        {title: '币池虚拟金额', key: 'virtualBalance'},
+                        {title: this.$t('common.yhm'), key: 'username'},
+                        {title: this.$t('common.sjh'), key: 'mobile'},
+                        {title: this.$t('common.xm'), key: 'userRealName'},
+                        {title: this.$t('common.bzdh'), key: 'symbol'},
+                        {title: this.$t('common.zje'), key: 'totalBalance'},
+                        {title: this.$t('common.kyye'), key: 'availableBalance'},
+                        {title: this.$t('common.djje'), key: 'loanBalance'},
+                        {title: this.$t('finance.bcxnje'), key: 'virtualBalance'},
                         {
-                            title: '操作',
+                            title: this.$t('common.cz'),
                             key: 'dailyVoteAmount',
                             width: 210,
                             align: 'center',
@@ -74,7 +74,7 @@
                                                 });
                                             }
                                         }
-                                    }, '充值'),
+                                    }, this.$t('finance.cz')),
                                     h('Button', {
                                         props: {
                                             type: 'primary'
@@ -90,7 +90,7 @@
                                                 });
                                             }
                                         }
-                                    }, '提现')
+                                    }, this.$t('finance.tx'))
                                 ]);
                             }
                         },

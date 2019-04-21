@@ -168,7 +168,7 @@
                                 digit: this.formLeft.digit,
                                 minPlaceOrderAmount: this.formLeft.minPlaceOrderAmount,
                                 minPlaceOrderQuantity: this.formLeft.minPlaceOrderQuantity,
-                                state: '2',
+                                state: this.formLeft.state,
                                 marketType: 0
                             }, (res) => {
                                 this.$Message.success({content: '添加成功'});
