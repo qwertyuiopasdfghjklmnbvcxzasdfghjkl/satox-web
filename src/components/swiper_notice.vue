@@ -20,7 +20,7 @@ data(){
         swiperOption: {
             // 所有配置均为可选（同Swiper配置）
             direction : 'vertical',
-            height: 25,
+            height: 30,
             autoplay: true, 
             speed: 400, 
             loop:true,
@@ -67,8 +67,8 @@ methods:{
 .notice-container {display: flex; font-size: 13px;}
 .notice-container .title {line-height: 30px;}
 .notice-container .title i {color: #D79802; font-size: 16px; vertical-align: middle;}
-.notice-container .title span {display: inline-block; color: #D79802; padding-left: 5px; padding-right: 15px; padding-top: 2px;}
+.notice-container .title span {display: inline-block; color: #D79802; padding-left: 5px; padding-right: 15px;}
 .notice-list {flex: 1;}
-.notice-list .swiper-slide { color: #fff; height: 25px; line-height: 35px;}
+.notice-list .swiper-slide { color: #fff; height: 30px; line-height: 30px;}
 .notice-list .swiper-slide a:hover {text-decoration: underline;}
 </style>
