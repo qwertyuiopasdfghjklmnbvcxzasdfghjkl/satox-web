@@ -2,14 +2,14 @@
     <Row>
         <Card style="width:1000px;">
             <p slot="title">
-                <span>SATO数量修改记录</span>
+                <span>SATO{{vm.$t('finance.slxgjl')}}</span>
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Row>
                 <Col span="16">
-                    <span>用户名</span>
+                    <span>{{vm.$t('common.yhm')}}</span>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                    <Button type="primary" @click="getList(true)">查询</Button>
+                    <Button type="primary" @click="getList(true)">{{vm.$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -25,7 +25,9 @@
 
     export default {
         data () {
+            var vm = window.vm;
             return {
+                vm: vm,
                 page: 1,
                 total: 0,
                 formData: {
@@ -33,33 +35,33 @@
                     text: ''
                 },
                 columns1: [
-                    {title: '创建时间', key: 'createdAt'},
-                    {title: '用户名', key: 'username'},
-                    {title: '手机号', key: 'mobile'},
-                    {title: '姓名', key: 'userRealName'},
+                    {title: vm.$t('common.cjsj'), key: 'createdAt'},
+                    {title: vm.$t('common.yhm'), key: 'username'},
+                    {title: vm.$t('common.sjh'), key: 'mobile'},
+                    {title: vm.$t('common.xm'), key: 'userRealName'},
                     {
-                        title: '钱包类型',
+                        title: vm.$t('common.qblx'),
                         key: 'type',
                         render: (h, params) => {
-                            return h('div', params.row.type == 1 ? '主钱包' : '非主钱包');
+                            return h('div', params.row.type == 1 ? vm.$t('common.zqb') : vm.$t('common.fzqb'));
                         }
                     },
-                    {title: '币种代号', key: 'symbol'},
+                    {title: vm.$t('common.bzdh'), key: 'symbol'},
                     {
-                        title: '数量',
+                        title: vm.$t('common.sl'),
                         key: 'quantity',
                         render: (h, params) => {
                             return h('div', Math.abs(params.row.quantity));
                         }
                     },
                     {
-                        title: '修改类型',
+                        title: vm.$t('finance.xglx'),
                         key: 'direction',
                         render: (h, params) => {
-                            return h('div', params.row.direction == 1 ? '增加' : '扣除');
+                            return h('div', params.row.direction == 1 ? vm.$t('common.zj') : vm.$t('common.kc'));
                         }
                     },
-                    {title: '操作人', key: 'lastUpdatedBy'}
+                    {title: vm.$t('finance.czr'), key: 'lastUpdatedBy'}
                 ],
                 data1: []
             };

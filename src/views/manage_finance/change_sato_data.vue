@@ -2,19 +2,17 @@
     <Row>
         <Card>
             <p slot="title">
-                SATO数量修改
+                SATO{{$t('finance.slxg')}}
                 <span class="refresh" @click="getList"></span>
             </p>
             <Row>
                 <Col span="16">
-                    <Select v-model="formData.type" style="width:200px;">
-                        <Option value="username">用户名</Option>
-                    </Select>
+                    {{$t('common.yhm')}}:
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                    <Button type="primary" @click="getList(true)">查询</Button>
+                    <Button type="primary" @click="getList(true)">{{$t('common.cx')}}</Button>
                 </Col>
                 <Col span="8">
-                    <Button type="primary" style="float:right;" @click="reviseDialog">修改记录</Button>
+                    <Button type="primary" style="float:right;" @click="reviseDialog">{{$t('finance.xgjl')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -42,22 +40,22 @@
                 size: 15,
                 total: 0,
                 columns1: [
-                    {title: '用户名', key: 'username'},
-                    {title: '手机号', key: 'mobile'},
-                    {title: '姓名', key: 'userRealName'},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('common.sjh'), key: 'mobile'},
+                    {title: this.$t('common.xm'), key: 'userRealName'},
                     {
-                        title: '钱包类型',
+                        title: this.$t('common.qblx'),
                         key: 'type',
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.type));
                         }
                     },
-                    {title: '币种代号', key: 'symbol'},
-                    {title: '总金额', key: 'totalBalance'},
-                    {title: '可用金额', key: 'availableBalance'},
-                    {title: '冻结金额', key: 'frozenBalance'},
+                    {title: this.$t('common.bzdh'), key: 'symbol'},
+                    {title: this.$t('common.zje'), key: 'totalBalance'},
+                    {title: this.$t('common.kyje'), key: 'availableBalance'},
+                    {title: this.$t('common.djje'), key: 'frozenBalance'},
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'action',
                         render: (h, params) => {
                             return h('div', [
@@ -75,7 +73,7 @@
                                             });
                                         }
                                     }
-                                }, '增加'),
+                                }, this.$t('common.zj')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '3px'},
@@ -90,7 +88,7 @@
                                             });
                                         }
                                     }
-                                }, '扣除')
+                                }, this.$t('common.kc'))
                             ]);
                         }
                     }
@@ -105,10 +103,10 @@
             switchStaus (state) { // 1：主钱包，2：非主钱包）
                 switch (state) {
                     case 1:
-                        return '主钱包';
+                        return this.$t('common.zqb');
                         break;
                     case 2:
-                        return '非主钱包';
+                        return this.$t('common.fzqb');
                         break;
                 }
             },

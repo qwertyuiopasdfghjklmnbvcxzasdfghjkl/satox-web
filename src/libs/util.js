@@ -3,9 +3,9 @@ import env from '../config/env';
 import Cookies from 'js-cookie';
 import Vue from 'vue';
 import store from 'vuex';
+// import i18n from '@/i18n/'
 
 let util = {
-
 };
 util.title = function (title) {
     title = title || 'iView admin';

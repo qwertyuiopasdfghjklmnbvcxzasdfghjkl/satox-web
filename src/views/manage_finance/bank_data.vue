@@ -2,19 +2,17 @@
     <Row>
         <Card>
             <p slot="title">
-                USSD银行卡信息记录管理
+                USSD{{$t('finance.yhkxxjlgl')}}
                 <span class="refresh" @click="getList"></span>
             </p>
             <Row>
                 <Col span="16">
-                    <Select v-model="formData.type" style="width:200px;">
-                        <Option value="username">用户名</Option>
-                    </Select>
+                    {{$t('common.yhm')}}：
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                    <Button type="primary" @click="getList(true)">查询</Button>
+                    <Button type="primary" @click="getList(true)">{{$t('common.cx')}}</Button>
                 </Col>
                 <Col span="8">
-                    <Button type="primary" style="float:right;" @click="addDialog">新增记录</Button>
+                    <Button type="primary" style="float:right;" @click="addDialog">{{$t('finance.xzjl')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -41,18 +39,18 @@
                     text: ''
                 },
                 columns1: [
-                    {title: 'ID号', key: 'userId'},
-                    {title: '用户名', key: 'username'},
-                    {title: '国家银行', key: 'bankCountryCode'},
-                    {title: '银行省', key: 'bankProvince'},
-                    {title: '银行区', key: 'bankDistrict'},
-                    {title: '银行编号', key: 'bankCode'},
-                    {title: '分行名称', key: 'bankBranch'},
-                    {title: '开户名', key: 'bankRealname'},
-                    {title: '银行账号', key: 'bankNumber'},
-                    {title: '创建时间', key: 'createdAt'},
+                    {title: this.$t('common.idh'), key: 'userId'},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('finance.gjyh'), key: 'bankCountryCode'},
+                    {title: this.$t('finance.yhs'), key: 'bankProvince'},
+                    {title: this.$t('finance.yhq'), key: 'bankDistrict'},
+                    {title: this.$t('finance.yhbh'), key: 'bankCode'},
+                    {title: this.$t('finance.fhmc'), key: 'bankBranch'},
+                    {title: this.$t('finance.khm'), key: 'bankRealname'},
+                    {title: this.$t('finance.yhzh'), key: 'bankNumber'},
+                    {title: this.$t('common.cjsj'), key: 'createdAt'},
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'address',
                         render: (h, params) => {
                             return h('div', [
@@ -68,7 +66,7 @@
                                             });
                                         }
                                     }
-                                }, '修改')
+                                }, this.$t('common.xg'))
                             ]);
                         }
                     }

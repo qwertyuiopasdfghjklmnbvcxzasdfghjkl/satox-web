@@ -31,7 +31,7 @@
         data () {
             return {
                 formData: {
-                    type: '',
+                    type: 'username',
                     text: ''
                 },
                 page: 1,

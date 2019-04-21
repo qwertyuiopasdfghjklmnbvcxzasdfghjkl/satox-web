@@ -1,47 +1,47 @@
 <template>
     <Card class="market_setting" style="width:500px;">
         <p slot="title">
-            虚拟{{type === 1 ? '提现':'充值'}}
+            {{vm.$t('finance.xn')}}{{type === 1 ? vm.$t('finance.tx'):vm.$t('finance.cz')}}
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Row>
-            <Col span="8">钱包类型</Col>
+            <Col span="8">{{vm.$t('common.qblx')}}</Col>
             <Col span="8">{{item.type | myCurrency}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">币种</Col>
+            <Col span="8">{{vm.$t('common.bz')}}</Col>
             <Col span="8">{{item.symbol}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">总金额</Col>
+            <Col span="8">{{vm.$t('common.zje')}}</Col>
             <Col span="8">{{item.totalBalance}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">可用余额</Col>
+            <Col span="8">{{vm.$t('common.kyye')}}</Col>
             <Col span="8">{{item.availableBalance }}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">冻结金额</Col>
+            <Col span="8">{{vm.$t('common.djje')}}</Col>
             <Col span="8">{{item.loanBalance}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">币池虚拟金额</Col>
+            <Col span="8">{{vm.$t('finance.bcxnje')}}</Col>
             <Col span="8">{{item.virtualBalance}}</Col>
             <Col span="8"></Col>
         </Row>
         <Row>
-            <Col span="8">{{type === 0 ? '充值': '提现'}}数量</Col>
+            <Col span="8">{{type === 0 ? vm.$t('finance.cz'): vm.$t('finance.tx')}}{{vm.$t('common.sl')}}</Col>
             <Col span="8">
                 <!--<InputNumber style="width:113px;" :min="0" v-model="coinPoolsDTO"></InputNumber>-->
-                <input class="number_input" type="number" @input="oninput" placeholder="请输入大于0的数"/>
+                <input class="number_input" type="number" @input="oninput" :placeholder="vm.$t('finance.qsrdy0ds')"/>
             </Col>
             <Col span="8" style="text-align:right;">
-                <Button type="primary" @click="tabs('virtualBalance')">保存</Button>
+                <Button type="primary" @click="tabs('virtualBalance')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
     </Card>
@@ -53,12 +53,14 @@
     export default {
         props: ['item', 'type'],
         data () {
+            var vm = window.vm;
             return {
+                vm: vm,
                 virtualBalance: null
             };
         },
         created () {
-            console.log(this.item);
+            console.log(this.vm);
         },
         methods: {
             closeDialog () {
@@ -82,18 +84,18 @@
             },
             tabs (propName) {
                 if (!this[propName] && (!this[propName] !== 0)) {
-                    this.$Message.error({content: '请输入有效值'});
+                    this.$Message.error({content: this.vm.$t('finance.qsryxz')});
                     return;
                 }
                 let data = {
                     'coinPoolId': this.item.coinPoolId,
                     virtualBalance: this.scientificToNumber(this.virtualBalance)
                 }
-                console.log(data);
+                this.$Message.info({content: this.type === 0 ? this.vm.$t('finance.czzqsh'): this.vm.$t('finance.txzqsh')});
                 if (this.type === 0) {
                     financeApi.findRecharge(data, (res) => {
                         this.$emit('okCallback');
-                        this.$Message.success({content: '充值成功'});
+                        this.$Message.success({content: this.vm.$t('finance.czcg')});
                         this.$emit('removeDialog');
                     }, (msg) => {
                         this.$Message.error({content: msg});
@@ -101,7 +103,8 @@
                 } else {
                     financeApi.findWithdraw(data, (res) => {
                         this.$emit('okCallback');
-                        this.$Message.success({content: '提现成功'});
+                        this.$Message.destroy()
+                        this.$Message.success({content: this.vm.$t('finance.txcg')});
                         this.$emit('removeDialog');
                     }, (msg) => {
                         this.$Message.error({content: msg});
@@ -117,8 +120,8 @@
         filters: {
             myCurrency: function (myInput) {
                 let result = {
-                    1: '主钱包',
-                    2: '非主钱包'
+                    1: vm.$t('common.zqb'),
+                    2: vm.$t('common.fzqb')
                 };
                 return result[myInput];
             }

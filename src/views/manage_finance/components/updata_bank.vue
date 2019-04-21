@@ -2,84 +2,84 @@
     <div class="add_order">
         <Card style="width:800px;">
             <p slot="title">
-                修改信息
+                {{vm.$t('finance.xgxx')}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
-                <Col span="5">用户名</Col>
+                <Col span="5">{{vm.$t('common.yhm')}}</Col>
                 <Col span="10">{{this.datas.username}}</Col>
                 <Col span="6"></Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">国家银行</Col>
+                <Col span="5">{{vm.$t('finance.gjyh')}}</Col>
                 <Col span="8">{{this.datas.bankCountryCode}}</Col>
                 <Col span="8">
                     <Input v-model="bankCountryCode"/>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankCountryCode')">保存</Button>
+                    <Button type="primary" @click="tabs('bankCountryCode')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">银行省</Col>
+                <Col span="5">{{vm.$t('finance.yhs')}}</Col>
                 <Col span="8">{{this.datas.bankProvince}}</Col>
                 <Col span="8">
                     <Input v-model="bankProvince"/>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankProvince')">保存</Button>
+                    <Button type="primary" @click="tabs('bankProvince')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">银行区</Col>
+                <Col span="5">{{vm.$t('finance.yhq')}}}</Col>
                 <Col span="8">{{this.datas.bankDistrict}}</Col>
                 <Col span="8">
                     <Input v-model="bankDistrict"/>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankDistrict')">保存</Button>
+                    <Button type="primary" @click="tabs('bankDistrict')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
 
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">银行编号</Col>
+                <Col span="5">{{vm.$t('finance.yhbh')}}</Col>
                 <Col span="8">{{this.datas.bankCode}}</Col>
                 <Col span="8">
                     <Input v-model="bankCode"></Input>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankCode')">保存</Button>
+                    <Button type="primary" @click="tabs('bankCode')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">分行名称</Col>
+                <Col span="5">{{vm.$t('finance.fhmc')}}</Col>
                 <Col span="8">{{this.datas.bankBranch}}</Col>
                 <Col span="8">
                     <Input v-model="bankBranch"></Input>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankBranch')">保存</Button>
+                    <Button type="primary" @click="tabs('bankBranch')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-                <Col span="5">开户名</Col>
+                <Col span="5">{{vm.$t('finance.khm')}}</Col>
                 <Col span="8">{{this.datas.bankRealname}}</Col>
                 <Col span="8">
                     <Input v-model="bankRealname"></Input>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankRealname')">保存</Button>
+                    <Button type="primary" @click="tabs('bankRealname')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-                <Col span="5">银行账号</Col>
+                <Col span="5">{{vm.$t('finance.yhzh')}}</Col>
                 <Col span="8">{{this.datas.bankNumber}}
                 </Col>
                 <Col span="8">
                     <Input v-model="bankNumber"/>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('bankNumber')">保存</Button>
+                    <Button type="primary" @click="tabs('bankNumber')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -91,7 +91,9 @@
     export default {
         props: ['item'],
         data () {
+            var vm = window.vm;
             return {
+                vm: vm,
                 datas: {
                     bankProvince: null,
                     bankDistrict: null,
@@ -123,7 +125,7 @@
             },
             tabs (propName) {
                 if (!this[propName]) {
-                    this.$Message.error({content: '不能为空'});
+                    this.$Message.error({content: this.vm.$t('common.bnwk')});
                     return;
                 }
                 let data = {
@@ -132,7 +134,7 @@
                 };
                 data[propName] = this[propName];
                 finance.updateBank(data, (res) => {
-                    this.$Message.success({content: '修改成功'});
+                    this.$Message.success({content: this.vm.$t('common.xgcg')});
                     this.$emit('okCallback');
                     let d = JSON.stringify(this[propName]);
                     this.datas[propName] = JSON.parse(d);
