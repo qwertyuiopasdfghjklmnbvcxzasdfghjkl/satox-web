@@ -1,7 +1,10 @@
 <template>
-    <div class="home" :class="{hasnotice:notice.length}">
-      <div class="notice" v-if="notice.length">
-        <swiper-notice :notice="notice"></swiper-notice>
+    <div class="home" :class="{hasnotice:showNotice}">
+      <div class="notice" v-if="showNotice">
+        <div>
+          <swiper-notice :notice="notice"></swiper-notice>
+          <i @click="closeNotice" class="icon-close close"></i>
+        </div>
       </div>
       <div class="center">
         <div class="home-left">
@@ -90,6 +93,8 @@ export default {
   data () {
     return {
       notice:[], //公告列表
+      showNotice:false,
+      latestNoticeTime:'0',
       isEntrust: false,
       isFirst: true,
       fixedNumber: 8, //价格进度控制
@@ -273,10 +278,28 @@ export default {
   },
   methods: {
     ...mapActions(['setLast24h', 'tiggerEvents']),
+    closeNotice(){
+      localStorage.setItem('latestNoticeTime',this.latestNoticeTime)
+      this.showNotice = false
+    },
     getNoticeList(){
       marketApi.noticeList(res=>{
         this.notice = res
+        this.parseNotice()
       })
+    },
+    parseNotice(){
+      let local = localStorage.getItem('latestNoticeTime') || '0'
+      if(this.notice.length){
+        let times = [] 
+        for(let item of this.notice){
+          times.push(item.updatedTime)
+        }
+        this.latestNoticeTime = times.sort().reverse()[0]
+        if(this.latestNoticeTime > local) {
+          this.showNotice = true
+        }
+      } 
     },
     get24hPrice () {
       let tempSymbol = this.symbol
@@ -329,14 +352,32 @@ export default {
 <style scoped>
 /* 红涨绿跌 */
 .home{min-width:1200px;min-height:500px;height:calc(100% - 70px); background-color: #F2F3F8;}
-.home.hasnotice{height:calc(100% - 95px);}
+.home.hasnotice{height:calc(100% - 100px);}
 .notice {
-  height: 25px;
+  height: 30px;
+  background-color: #353535;
+}
+.notice > div {
+  height: 100%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
+  position: relative;
 }
+.notice > div .close {
+  position: absolute;
+  right: 0;
+  top: 0; 
+  bottom: 0;
+  line-height: 30px;
+  color: #D3CEC5; 
+  font-size: 12px;
+  transform: scale(0.7,0.7);
+  cursor: pointer;
+  z-index: 2;
+}
+
 .center{display:flex;justify-content:space-between;height:100%;}
 .home-left{display:flex;min-width:290px;width:15.7%;margin:10px 0 10px 10px;}
 .home-center{flex:1;display:flex;flex-flow:column;min-width:500px;margin:10px;}
@@ -366,7 +407,7 @@ export default {
 
 @media screen and (max-width: 1600px) and (max-height: 900px) {
   .home{height:calc(100% - 60px)}
-  .home.hasnotice{height:calc(100% - 85px)}
+  .home.hasnotice{height:calc(100% - 90px)}
   .top-left-header{height:40px;}
   .symbol-icon{width:26px;height:26px;font-size:22px;}
   .top-left-header > ul:first-child .last-item:first-child{font-size:16px;}
@@ -376,11 +417,6 @@ export default {
   .market-symbol{font-size:16px;}
   .last-valuation-price{font-size:12px;}
 }
-@media screen and (max-width: 1600px){
-  .home-left{margin:4px 0 4px 4px;}
-  .home-center{margin:4px;}
-  .home-right{margin:4px 4px 4px 0;}
-  .home-center-bottom{margin-top:4px;}
-}
+
 </style>
 
