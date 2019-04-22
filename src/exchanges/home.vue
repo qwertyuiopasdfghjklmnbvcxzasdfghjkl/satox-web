@@ -373,9 +373,8 @@ export default {
   top: 0; 
   bottom: 0;
   line-height: 30px;
-  color: #D3CEC5; 
+  color: #D79802; 
   font-size: 12px;
-  transform: scale(0.8,0.8);
   cursor: pointer;
   z-index: 2;
 }
