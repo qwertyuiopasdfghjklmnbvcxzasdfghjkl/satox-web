@@ -4,7 +4,7 @@
         <div class="notice-list">
             <swiper :options="swiperOption" ref="mySwiperA">
                 <!-- 幻灯内容 -->
-                <swiper-slide v-for="item in notice"><a :href="getLink(item)" target="_blank">{{getTitle(item)}}</a></swiper-slide>
+                <swiper-slide v-for="item in notice"><p class="ellipsis"><a :href="getLink(item)" target="_blank">{{getTitle(item)}}</a></p></swiper-slide>
             </swiper>
         </div>
     </div>
@@ -71,4 +71,5 @@ methods:{
 .notice-list {flex: 1;}
 .notice-list .swiper-slide { color: #fff; height: 30px; line-height: 30px;}
 .notice-list .swiper-slide a:hover {text-decoration: underline;}
+.ellipsis {text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 </style>

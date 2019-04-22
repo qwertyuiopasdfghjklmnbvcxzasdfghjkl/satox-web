@@ -3,8 +3,8 @@
       <div class="notice" v-if="showNotice">
         <div>
           <swiper-notice :notice="notice"></swiper-notice>
-          <i @click="closeNotice" class="icon-close close"></i>
         </div>
+        <i @click="closeNotice" class="icon-close close"></i>
       </div>
       <div class="center">
         <div class="home-left">
@@ -358,6 +358,7 @@ export default {
 .notice {
   height: 30px;
   background-color: #353535;
+  position: relative;
 }
 .notice > div {
   height: 100%;
@@ -365,17 +366,16 @@ export default {
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
-  position: relative;
 }
-.notice > div .close {
+.notice > .close {
   position: absolute;
-  right: 0;
+  right: 15px;
   top: 0; 
   bottom: 0;
   line-height: 30px;
   color: #D3CEC5; 
   font-size: 12px;
-  transform: scale(0.7,0.7);
+  transform: scale(0.8,0.8);
   cursor: pointer;
   z-index: 2;
 }
