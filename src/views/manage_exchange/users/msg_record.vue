@@ -1,12 +1,12 @@
 <template>
     <Card class="manage_exchange_msg_record" style="width:700px;">
         <p slot="title">
-            消息记录
+            {{vm.$t('exchange.xxjl')}}
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Table :columns="columns1" :data="data1"></Table>
-         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page> 
-    </Card>  
+         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+    </Card>
 </template>
 <script>
 import util from '../../../libs/util'
@@ -14,23 +14,25 @@ import currenyApi from '../../../api/currency'
 export default {
     props: ['userId'],
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             curPage: 1,
             total: 0,
             columns1: [
                 {
-                    title: '时间',
+                    title: vm.$t('common.sj'),
                     key: 'createdTime'
                 },
                 {
-                    title: '内容',
+                    title: vm.$t('common.nr'),
                     key: 'msg'
                 },
                 {
-                    title: '状态',
+                    title: vm.$t('common.zt'),
                     key: 'messageState', //1已读   2未读
                     render: (h, params) => {
-                        return h('div', params.row.messageState == 1 ? '已读' : '未读')
+                        return h('div', params.row.messageState == 1 ? vm.$t('exchange.yd') : vm.$t('exchange.wd'))
                     }
                 }
             ],

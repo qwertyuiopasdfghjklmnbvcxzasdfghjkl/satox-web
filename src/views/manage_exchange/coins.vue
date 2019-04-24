@@ -2,24 +2,24 @@
 <template>
     <Row>
         <Card>
-            <p slot="title">币种管理
+            <p slot="title">{{$t('exchange.bzgl')}}
                 <span class="refresh" @click="reshAll"></span>
             </p>
             <Row>
-                <span>代号</span>
-                <Input v-model="symbol" placeholder="Search" style="width: 300px"></Input>
-                <Button type="primary" @click="findSymbolList()">查询</Button>
-                <Button type="primary" @click="add_order()" style="float:right;">添加</Button>
+                <span>{{$t('exchange.dh')}}</span>
+                <Input v-model="symbol"  style="width: 300px"></Input>
+                <Button type="primary" @click="findSymbolList()">{{$t('common.cx')}}</Button>
+                <Button type="primary" @click="add_order()" style="float:right;">{{$t('common.tj')}}</Button>
             </Row>
         </Card>
         <Card style="margin-top:20px;">
-            <p slot="title">基本资料</p>
+            <p slot="title">{{$t('exchange.jbzl')}}</p>
             <Table ref="test" :columns="columns1" :data="data1" @on-sort-change="custom"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card style="margin-top:20px;">
-            <p slot="title">交易情况</p>
+            <p slot="title">{{$t('exchange.jbqk')}}</p>
             <Table ref="test1" :columns="columns2" :data="data2" @on-sort-change="custom1"></Table>
             <Page :current="curPage1" :total="total1" @on-change="changePage1"
                   style="text-align:center;margin-top:20px;"></Page>
@@ -47,34 +47,34 @@
                 symbol: '',
                 columns1: [
                     {
-                        title: '代号',
+                        title: this.$t('exchange.dh'),
                         key: 'symbol', sortable: 'custom', sortType: 'asc'
                     },
                     {
-                        title: '中文名',
+                        title: this.$t('exchange.zwm'),
                         key: 'captionCN'
                     },
                     {
-                        title: '主链类型',
+                        title: this.$t('common.zllx'),
                         key: 'symbolType',
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.symbolType));
                         }
                     },
                     {
-                        title: '市场',
+                        title: this.$t('exchange.sc'),
                         key: 'market'
                     },
                     {
-                        title: 'ERC20合约地址',
+                        title: this.$t('exchange.erchydz'),
                         key: 'contractAddr'
                     },
                     {
-                        title: '合约精度',
+                        title: this.$t('exchange.hyjd'),
                         key: 'contractDecimals'
                     },
                     {
-                        title: '充值权限',
+                        title: this.$t('exchange.czqx'),
                         key: 'rechargeFlag', //1 正常 2  暂停
                         render: (h, params) => {
                             let status = params.row.rechargeFlag;
@@ -90,12 +90,12 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, params.row.rechargeFlag == 1 ? '正常' : '暂停'),
+                                }, params.row.rechargeFlag == 1 ? this.$t('exchange.zc') : this.$t('exchange.zt')),
                             ]);
                         }
                     },
                     {
-                        title: '提币权限', //1 正常 2  暂停
+                        title: this.$t('exchange.tbqx'), //1 正常 2  暂停
                         key: 'withdrawFlag',
                         render: (h, params) => {
                             let status = params.row.withdrawFlag;
@@ -111,7 +111,7 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, params.row.withdrawFlag == 1 ? '正常' : '暂停'),
+                                }, params.row.withdrawFlag == 1 ? this.$t('exchange.zc') : this.$t('exchange.zt')),
                             ]);
                         }
                     },
@@ -130,28 +130,28 @@
                         }
                     },
                     {
-                        title: '最小提币数量',
+                        title: this.$t('exchange.zxtbsl'),
                         key: 'minWithdrawQuantity',
                         render: (h, params) => {
                             return h('div', params.row.minWithdrawQuantity);
                         }
                     },
                     {
-                        title: '手续费固定额度',
+                        title: this.$t('exchange.sxfgded'),
                         key: 'feeFixedAmount',
                         render: (h, params) => {
                             return h('div', params.row.feeFixedAmount);
                         }
                     },
                     {
-                        title: '矿工费',
+                        title: this.$t('exchange.kgf'),
                         key: 'minerFee',
                         render: (h, params) => {
                             return h('div', params.row.minerFee);
                         }
                     },
                     {
-                        title: '状态', //1 上线 2  下线
+                        title: this.$t('common.zt'), //1 上线 2  下线
                         key: 'status',
                         render: (h, params) => {
                             let status = params.row.status;
@@ -167,19 +167,19 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, params.row.status == 1 ? '上线' : '下线'),
+                                }, params.row.status == 1 ? this.$t('exchange.sx') : this.$t('exchange.xs')),
                             ]);
                         }
                     },
                     {
-                        title: '等待区块数',
+                        title: this.$t('exchange.ddqks'),
                         key: 'confirmBlock',
                         render: (h, params) => {
                             return h('div', params.row.confirmBlock);
                         }
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'opreat',
                         render: (h, params) => {
                             return h('div', [
@@ -193,7 +193,7 @@
                                             });
                                         }
                                     }
-                                }, '充提设置'),
+                                }, this.$t('exchange.czsz')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '3px'},
@@ -207,7 +207,7 @@
                                             });
                                         }
                                     }
-                                }, '修改'),
+                                }, this.$t('common.xg')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '3px'},
@@ -218,14 +218,14 @@
                                                 symbolId: params.row.symbolId,
                                                 version: params.row.version
                                             }, (res) => {
-                                                this.$Message.success({content: '修改成功'});
+                                                this.$Message.success({content: this.$t('common.xgcg')});
                                                 this.findSymbolList();
                                             }, (msg) => {
                                                 this.$Message.success({content: msg});
                                             });
                                         }
                                     }
-                                }, params.row.status === 1 ? '下线' : '上线')
+                                }, params.row.status === 1 ? this.$t('exchange.xs') : this.$t('exchange.sx'))
                             ]);
                         }
                     }
@@ -233,35 +233,35 @@
                 data1: [],
                 columns2: [
                     {
-                        title: '代号',
+                        title: this.$t('exchange.dh'),
                         key: 'symbol', sortable: 'custom', sortType: 'asc'
                     },
                     {
-                        title: '用户数量',
+                        title: this.$t('exchange.yhsl'),
                         key: 'userCount'
                     },
                     {
-                        title: '最新价格',
+                        title: this.$t('exchange.zxjg'),
                         key: 'currentPrice'
                     },
                     {
-                        title: '日交易量',
+                        title: this.$t('exchange.rjyl'),
                         key: 'exchangeDailyQuantity'
                     },
                     {
-                        title: '上一日收盘数量',
+                        title: this.$t('exchange.syrspsl'),
                         key: 'closingCapitalPoolYesterdayQuantity'
                     },
                     {
-                        title: '当前数量',
+                        title: this.$t('finance.dqsl'),
                         key: 'currentCapitalPoolQuantity'
                     },
                     {
-                        title: '日净增',
+                        title: this.$t('finance.rjz'),
                         key: 'netIncreaseDailyQuantity'
                     },
                     {
-                        title: '日换手率',
+                        title: this.$t('exchange.rhsl'),
                         key: 'turnoverRateDaily'
                     }
                 ],

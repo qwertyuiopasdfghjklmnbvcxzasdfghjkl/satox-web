@@ -43,8 +43,8 @@
                         </FormItem>
                     </Form>
                     <!--<p class="login-tip">输入任意用户名和密码即可</p>-->
-                    <p>
-                        {{$t('login.changeLang')}}：<span @click="changeLang()" class="langBtn">中文/EN</span>
+                    <p class="sw">
+                        {{$t('login.changeLang')}}：<span @click="changeLang()" class="langBtn">中文/English</span>
                         <!--<Select v-model="lange" @on-change="changeLang" style="width: 60px">-->
                             <!--<Option value="zh-CN">中</Option>-->
                             <!--<Option value="en-US">EN</Option>-->

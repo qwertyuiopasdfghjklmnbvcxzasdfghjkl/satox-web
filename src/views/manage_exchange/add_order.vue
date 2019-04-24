@@ -2,7 +2,7 @@
     <div class="add_order">
         <Card style="width:600px;">
             <p slot="title">
-                添加币种
+                {{vm.$t('exchange.tjbz')}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100"
@@ -190,7 +190,9 @@
                 }
                 return callback();
             };
+            const vm = window.vm;
             return {
+                vm: vm,
                 formLeft: {
                     caption: '',
                     captionCN: '',
