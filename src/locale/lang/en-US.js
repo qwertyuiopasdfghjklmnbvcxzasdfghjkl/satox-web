@@ -1,5 +1,5 @@
 export const login = {
-    login: 'register',
+    login: 'LOGIN',
     welcome: 'welcome',
     changeLang: '切换语言'
 }
