@@ -19,7 +19,7 @@
                     <Col span="6">最小金额</Col>
                     <Col span="6">{{this.item.coinMin}}</Col>
                     <Col span="6">
-                        <InputNumber style="width:100%;" :min="0.1" name="coinMin" v-model="coinMin"></InputNumber>
+                        <InputNumber style="width:100%;" :min="0" name="coinMin" v-model="coinMin"></InputNumber>
                         <!-- <Input v-model="coinMin"></Input> -->
                     </Col>
                     <Col span="6" style="text-align:right;">
@@ -174,7 +174,7 @@
             },
             tabs (propName) {
                 if (!this[propName]) {
-                    this.$Message.error({content: '请输入值'});
+                    this.$Message.error({content: '请输入有效值'});
                     return;
                 }
                 let data = {
