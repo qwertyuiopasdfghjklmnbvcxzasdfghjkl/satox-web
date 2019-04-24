@@ -510,7 +510,7 @@ export const financeRouter = [
         component: Main,
         icon: 'pie-graph',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
         },
         children: [
             {
@@ -595,7 +595,7 @@ export const financeRouter = [
         component: Main,
         icon: 'card',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_FINANCE', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
         },
         children: [
             {

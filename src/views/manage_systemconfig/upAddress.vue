@@ -19,8 +19,10 @@
                     <Col span="6">最小金额</Col>
                     <Col span="6">{{this.item.coinMin}}</Col>
                     <Col span="6">
-                        <InputNumber style="width:100%;" :min="0" name="coinMin" v-model="coinMin"></InputNumber>
-                        <!-- <Input v-model="coinMin"></Input> -->
+                        <!--<InputNumber style="width:100%;" :min="0" step="0.1" name="coinMin" v-model="coinMin"></InputNumber>-->
+                        <!--<Input v-model="coinMin"></Input>-->
+                        <numberbox v-model="coinMin" :min="0" class="num"></numberbox>
+                        <!--<input type="number" v-model="coinMin" :min="0">-->
                     </Col>
                     <Col span="6" style="text-align:right;">
                         <Button type="primary" @click="tabs('coinMin')">保存</Button>
@@ -125,8 +127,10 @@
 </template>
 <script>
     import fundApi from '../../api/fund';
+    import Numberbox from '../components/dialog/numberbox';
 
     export default {
+        components: {Numberbox},
         props: ['item'],
         data () {
             return {
@@ -200,13 +204,23 @@
     };
 </script>
 
-<style>
+<style lang="less">
     .addWallet {
         width: 500px;
     }
 
     .ivu-form-item-error .ivu-input {
         width: 200px;
+    }
+
+    input.num {
+        border: 1px solid #dddee1;
+        transition: 0.3s;
+
+        &:hover {
+            border: 1px solid #57a3f3
+        }
+
     }
 </style>
 
