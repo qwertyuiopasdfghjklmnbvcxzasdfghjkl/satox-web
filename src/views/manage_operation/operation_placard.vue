@@ -55,35 +55,27 @@
                         key: 'updatedTime'
                     },
                     {
+                        title: '状态',
+                        key: 'displayStatus',
+                        render: (h, params) => {
+                            return h('div', params.row.displayStatus === 1 ? '展示' : '不展示');
+                        }
+                    },
+                    {
                         title: '操作',
                         key: 'opreat',
                         render: (h, params) => {
                             return h('div', [
-                                h('Button', {
-                                    props: {type: params.row.displayStatus === 1 ? 'dashed' : 'primary', size: 'small'},
-                                    style: {margin: '3px'},
-                                    on: {
-                                        click: () => {
-                                            let data = {
-                                                announcementId: params.row.announcementId,
-                                                displayStatus: params.row.displayStatus === 1 ? 0 : 1
-                                            };
-                                            extendApi.updateAnnouncement(data, (res) => {
-                                                this.getfindAllAnnouncement();
-                                                this.$Message.success({content: params.row.displayStatus === 1 ? '下架成功' : '上架成功'});
-                                            }, (msg) => {
-                                                this.$Message.error({content: msg});
-                                            });
-                                        }
-                                    }
-                                }, params.row.displayStatus === 1 ? '下架' : '上架'),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {margin: '3px'},
                                     on: {
                                         click: () => {
                                             util.setDialog(upPlacard, {
-                                                item: params.row
+                                                item: params.row,
+                                                okCallback: () => {
+                                                    this.getfindAllAnnouncement();
+                                                }
                                             });
                                         }
                                     }
