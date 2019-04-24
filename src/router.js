@@ -527,7 +527,7 @@ export const financeRouter = [
         component: Main,
         icon: 'monitor',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_REBALANCE_ACCOUNT', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'ROLE_REBALANCE_ACCOUNT'],
         },
         children: [
             {
@@ -544,7 +544,7 @@ export const financeRouter = [
         component: Main,
         icon: 'radio-waves',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_USSD_RECHARGE', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'ROLE_USSD_RECHARGE'],
         },
         children: [
             {
@@ -578,7 +578,7 @@ export const financeRouter = [
         component: Main,
         icon: 'ios-compose',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_SATO_RECHARGE', 'ROLE_WITHDRAW_AUDIT'],
+            roles: ['ROLE_ADMIN', 'ROLE_SATO_RECHARGE'],
         },
         children: [
             {
