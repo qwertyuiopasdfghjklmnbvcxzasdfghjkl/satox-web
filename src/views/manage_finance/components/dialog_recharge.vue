@@ -1,14 +1,14 @@
 <template>
     <Card style="width:600px;padding-bottom: 50px;">
         <p slot="title">
-            <span>{{state==='0'? vm.$t('finance.kc') :vm.$t('finance.cz')}}USSD</span>
+            <span>{{state==='0'? vm.$t('finance.cz') :vm.$t('finance.kc')}}USSD</span>
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <div class="detail">
             <p><label>{{vm.$t('common.zje')}}：</label><span>{{data.totalBalance}}</span></p>
             <p><label>{{vm.$t('common.kyye')}}：</label><span>{{data.availableBalance}}</span></p>
             <p><label>{{vm.$t('common.djje')}}：</label><span>{{data.frozenBalance}}</span></p>
-            <p><label>{{state==='0'? vm.$t('finance.kc') :vm.$t('finance.cz')}}{{vm.$t('common.sl')}}：</label>
+            <p><label>{{state==='0'? vm.$t('finance.cz') :vm.$t('finance.kc')}}{{vm.$t('common.sl')}}：</label>
                 <input autocomplete="off" spellcheck="false" type="Number"
                        :placeholder="state==='0'? vm.$t('finance.czslxdy'):vm.$t('finance.kcslxdy')" class="ivu-input"
                        style="width: 250px;" v-model="amount">
