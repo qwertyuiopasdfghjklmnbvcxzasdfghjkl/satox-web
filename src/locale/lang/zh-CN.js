@@ -87,7 +87,8 @@ export const common = {
 export const login = {
     login: '登录',
     welcome: '欢迎登录',
-    changeLang: 'LangSwitcher'
+    changeLang: 'LangSwitcher',
+    v: '中文版'
 };
 export const finance = {
     tbsh: '提币审核',

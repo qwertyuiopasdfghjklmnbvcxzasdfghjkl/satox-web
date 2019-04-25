@@ -6,10 +6,11 @@
     <div class="login" @keydown.enter="handleSubmit">
         <div class="login-con">
             <Card :bordered="false">
-                <p slot="title">
+                <h2 slot="title" class="title">
                     <!--<Icon type="log-in"></Icon>-->
                     {{$t('login.welcome')}}
-                </p>
+                    <span class="red">{{$t('login.v')}}</span>
+                </h2>
                 <div class="form-con">
                     <Form ref="loginForm" :model="form" :rules="rules">
                         <FormItem prop="userName">
