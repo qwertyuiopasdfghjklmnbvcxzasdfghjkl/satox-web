@@ -12,7 +12,7 @@
                         iconType="person"
                         color="#64d572"
                         :iconSize="50"
-                        intro-text="总用户"
+                        :intro-text="$t('home.zyh')"
                 ></infor-card>
             </Col>
 
@@ -22,7 +22,7 @@
                         :end-val="data1.registerAmountDaily || 0"
                         iconType="person-add"
                         color="#2d8cf0"
-                        intro-text="今日新增用户"
+                        :intro-text="$t('home.jrxzyh')"
                 ></infor-card>
             </Col>
 
@@ -32,7 +32,7 @@
                         :end-val="data2.onlineUserAmount || 0"
                         iconType="mouse"
                         color="#ffd572"
-                        intro-text="当前在线用户"
+                        :intro-text="$t('home.dqzxyh')"
                 ></infor-card>
             </Col>
             <Col span="6">
@@ -41,44 +41,10 @@
                         :end-val="data1.loginAmountDaily || 0"
                         iconType="coffee"
                         color="#f25e43"
-                        intro-text="今日登陆用户"
+                        :intro-text="$t('home.jrdlyh')"
                 ></infor-card>
             </Col>
         </Row>
-
-
-        <!--<Row style="margin-top: 2rem">-->
-            <!--<Col span="6">-->
-                <!--<infor-card-->
-                        <!--id-name="btcTransactionAmount"-->
-                        <!--:end-val="data2.btcTransactionAmount || 0"-->
-                        <!--iconType="social-bitcoin"-->
-                        <!--color="#1dd5f3"-->
-                        <!--:iconSize="50"-->
-                        <!--intro-text="今日BTC交易量"-->
-                <!--&gt;</infor-card>-->
-            <!--</Col>-->
-            <!--<Col span="6">-->
-                <!--<infor-card-->
-                        <!--id-name="ethTransactionAmount"-->
-                        <!--:end-val="data2.ethTransactionAmount || 0"-->
-                        <!--iconType="ios-shuffle-strong"-->
-                        <!--color="#8424bf"-->
-                        <!--intro-text="今日ETH交易量"-->
-                <!--&gt;</infor-card>-->
-            <!--</Col>-->
-
-            <!--<Col span="6">-->
-                <!--<infor-card-->
-                        <!--id-name="usdtTransactionAmount"-->
-                        <!--:end-val="data2.usdtTransactionAmount || 0"-->
-                        <!--iconType="arrow-graph-up-right"-->
-                        <!--color="#ff72a6"-->
-                        <!--intro-text="今日USDT交易量"-->
-                <!--&gt;</infor-card>-->
-            <!--</Col>-->
-        <!--</Row>-->
-
 
         <Row style="margin-top: 2rem">
 
@@ -89,29 +55,9 @@
                         iconType="lock-combination"
                         color="#64d572"
                         :iconSize="50"
-                        intro-text="KYC待审核"
+                        :intro-text="$t('home.kycdsh')"
                 ></infor-card>
             </Col>
-            <!--<Col span="6">-->
-                <!--<infor-card-->
-                        <!--id-name="waitHandleAppealAmount"-->
-                        <!--:end-val="data3.waitHandleAppealAmount || 0"-->
-                        <!--iconType="ios-compose"-->
-                        <!--color="#2d8cf0"-->
-                        <!--intro-text="OTC待处理申诉"-->
-                <!--&gt;</infor-card>-->
-            <!--</Col>-->
-
-            <!--<Col span="6">-->
-                <!--<infor-card-->
-                        <!--id-name="shop"-->
-                        <!--:end-val="data3.shop || 0"-->
-                        <!--iconType="ios-box"-->
-                        <!--color="#ffba72"-->
-                        <!--intro-text="商家待审核"-->
-                <!--&gt;</infor-card>-->
-            <!--</Col>-->
-
         </Row>
     </div>
 
