@@ -13,12 +13,12 @@
                  :name="index">
             <template slot="title">
                 <Icon :type="icon[index]" style="width: 12px"/>
-                {{item.name}}
+                {{$t(item.name)}}
             </template>
             <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i" class="menu_left">
                 <p @click="readerTo(data)">
                     <Icon :type="data.icon"/>
-                    <span>{{data.title}}</span>
+                    <span>{{$t(data.title)}}</span>
                 </p>
             </MenuItem>
         </Submenu>
@@ -56,19 +56,19 @@
                 hideMenuText: false,
                 selected: localStorage.getItem('currentMenu') || 'kyc',
                 datas: [
-                    {id: 'kyc', path: 'kycauditing_index', name: 'KYC管理', menus: kycRouter},
+                    {id: 'kyc', path: 'kycauditing_index', name: this.$t('nav.kycsh'), menus: kycRouter},
                     // {id: 'otc', path: 'otc_data_statistics_index', name: 'OTC管理', menus: otcRouter},
-                    {id: 'exchange', path: 'exchange_data_statistics_index', name: '币币管理', menus: exchangeRouter},
+                    {id: 'exchange', path: 'exchange_data_statistics_index', name: this.$t('nav.bbgl'), menus: exchangeRouter},
                     // {id: 'community', path: 'community_data_index', name: '社区管理', menus: communityRouter},
                     // {id: 'vote', path: 'vote_data_count_index', name: '投票挖矿管理', menus: voteRouter},
-                    {id: 'finance', path: 'finance_finance_index', name: '财务管理', menus: financeRouter},
-                    {id: 'risk', path: 'risk_exchange_index', name: '风险控制管理', menus: riskRouter},
-                    {id: 'operation', path: 'operation_distribute_index', name: '运维推广管理', menus: operationRouter},
-                    {id: 'admin', path: 'admin_index', name: '管理员权限管理', menus: adminRouter},
-                    {id: 'systemconfig', path: 'systemconfig_index', name: '系统参数', menus: systemConfigRouter},
-                    {id: 'systemcogs', path: 'systemlogs_index', name: '系统日志', menus: systemLogsRouter},
-                    {id: 'monitoring', path: 'monitoring_index', name: '监控平台', menus: monitoringRouter},
-                    {id: 'fund', path: 'fund_index', name: '平台资金管理', menus: fundRouter}
+                    {id: 'finance', path: 'finance_finance_index', name: this.$t('nav.cwgl'), menus: financeRouter},
+                    {id: 'risk', path: 'risk_exchange_index', name: this.$t('nav.fxkzgl'), menus: riskRouter},
+                    {id: 'operation', path: 'operation_distribute_index', name: this.$t('nav.ywtggl'), menus: operationRouter},
+                    {id: 'admin', path: 'admin_index', name: this.$t('nav.glyxtqx'), menus: adminRouter},
+                    {id: 'systemconfig', path: 'systemconfig_index', name: this.$t('nav.xtcs'), menus: systemConfigRouter},
+                    {id: 'systemcogs', path: 'systemlogs_index', name: this.$t('nav.xtrz'), menus: systemLogsRouter},
+                    {id: 'monitoring', path: 'monitoring_index', name: this.$t('nav.jkpt'), menus: monitoringRouter},
+                    {id: 'fund', path: 'fund_index', name: this.$t('nav.ptzjgl'), menus: fundRouter}
                 ],
                 icon: ['ios-analytics', 'ios-pie-outline', 'ios-calculator', 'ios-pulse', 'ios-settings',
                     'ios-calendar-outline', 'ios-cart', 'ios-clock', 'ios-eye', 'ios-filing-outline', 'ios-folder-open-outline']

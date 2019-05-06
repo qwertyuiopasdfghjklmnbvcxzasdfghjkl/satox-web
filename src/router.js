@@ -88,7 +88,7 @@ export const kycRouter = [
     {
         path: '/kycauditing',
         name: 'kycauditing',
-        title: 'KYC审核',
+        title: 'nav.kycsh',
         component: Main,
         icon: 'briefcase',
         meta: {
@@ -105,7 +105,7 @@ export const kycRouter = [
     {
         path: '/kyccheck',
         name: 'kyccheck',
-        title: 'KYC复核',
+        title: 'nav.kycfh',
         component: Main,
         icon: 'folder',
         meta: {
@@ -122,7 +122,7 @@ export const kycRouter = [
     {
         path: '/kycmanage',
         name: 'kycmanage',
-        title: 'KYC管理',
+        title: 'nav.kycgl',
         component: Main,
         icon: 'clipboard',
         meta: {
@@ -355,7 +355,7 @@ export const exchangeRouter = [
     {
         path: '/exchange_data_statistics',
         name: 'exchange_data_statistics',
-        title: '数据统计',
+        title: 'nav.sjtj',
         component: Main,
         icon: 'ios-timer-outline',
         meta: {
@@ -372,7 +372,7 @@ export const exchangeRouter = [
     {
         path: '/exchange_users',
         name: 'exchange_users',
-        title: '用户管理',
+        title: 'nav.yhgl',
         component: Main,
         icon: 'person',
         meta: {
@@ -389,7 +389,7 @@ export const exchangeRouter = [
     {
         path: '/exchange_coins',
         name: 'exchange_coins',
-        title: '币种管理',
+        title: 'nav.bzgl',
         component: Main,
         icon: 'toggle-filled',
         meta: {
@@ -406,7 +406,7 @@ export const exchangeRouter = [
     {
         path: '/exchange_markets',
         name: 'exchange_markets',
-        title: '交易市场管理',
+        title: 'nav.jyscgl',
         component: Main,
         icon: 'shuffle',
         meta: {
@@ -435,7 +435,7 @@ export const exchangeRouter = [
     {
         path: '/exchange_address',
         name: 'exchange_address',
-        title: '地址管理',
+        title: 'nav.dzgl',
         component: Main,
         icon: 'ionic',
         meta: {
@@ -455,7 +455,7 @@ export const financeRouter = [
     {
         path: '/finance_finance',
         name: 'finance_finance',
-        title: '财务管理',
+        title: 'nav.cwgl',
         component: Main,
         icon: 'connection-bars',
         meta: {
@@ -472,7 +472,7 @@ export const financeRouter = [
     {
         path: '/recharge',
         name: 'recharge',
-        title: '充值管理',
+        title: 'nav.czgl',
         component: Main,
         icon: 'battery-charging',
         meta: {
@@ -489,7 +489,7 @@ export const financeRouter = [
     {
         path: '/finance_withdraw',
         name: 'finance_withdraw',
-        title: '提币审核',
+        title: 'nav.tbsh',
         component: Main,
         icon: 'soup-can-outline',
         meta: {
@@ -506,7 +506,7 @@ export const financeRouter = [
     {
         path: '/bank_data',
         name: 'bank_data',
-        title: 'USSD银行资料',
+        title: 'nav.ussdyhzl',
         component: Main,
         icon: 'card',
         meta: {
@@ -514,7 +514,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '内部转账', name: 'bank_data_index', component: resolve => {
+                path: 'index', title: 'nav.ussdyhzl', name: 'bank_data_index', component: resolve => {
                     require(['./views/manage_finance/bank_data.vue'], resolve);
                 }
             }
@@ -523,7 +523,7 @@ export const financeRouter = [
     {
         path: '/ussd_list',
         name: 'ussd_list',
-        title: 'USSD提现记录',
+        title: 'nav.ussdtxjl',
         component: Main,
         icon: 'document-text',
         meta: {
@@ -540,7 +540,7 @@ export const financeRouter = [
     },{
         path: '/sato_list',
         name: 'sato_list',
-        title: 'SATO提现记录',
+        title: 'nav.satotxjl',
         component: Main,
         icon: 'shuffle',
         meta: {
@@ -558,7 +558,7 @@ export const financeRouter = [
     {
         path: '/finance_user',
         name: 'finance_user',
-        title: '用户资产',
+        title: 'nav.yhzc',
         component: Main,
         icon: 'pie-graph',
         meta: {
@@ -575,7 +575,7 @@ export const financeRouter = [
     {
         path: '/account_manage',
         name: 'account_manage',
-        title: '平账管理',
+        title: 'nav.pzgl',
         component: Main,
         icon: 'monitor',
         meta: {
@@ -592,7 +592,7 @@ export const financeRouter = [
     {
         path: '/usds_recharge',
         name: 'usds_recharge',
-        title: 'USSD充值',
+        title: 'nav.ussdcz',
         component: Main,
         icon: 'radio-waves',
         meta: {
@@ -609,7 +609,7 @@ export const financeRouter = [
     {
         path: '/internal_transfer',
         name: 'internal_transfer',
-        title: '内部转账',
+        title: 'nav.nbzz',
         component: Main,
         icon: 'ios-loop-strong',
         meta: {
@@ -626,7 +626,7 @@ export const financeRouter = [
     {
         path: '/change_sato_data',
         name: 'change_sato_data',
-        title: 'SATO数量修改',
+        title: 'nav.satoslxg',
         component: Main,
         icon: 'ios-compose',
         meta: {
@@ -643,7 +643,7 @@ export const financeRouter = [
     {
         path: '/virtual',
         name: 'virtual',
-        title: '虚拟充提',
+        title: 'nav.xnct',
         component: Main,
         icon: 'arrow-swap',
         meta: {
@@ -663,7 +663,7 @@ export const riskRouter = [
     {
         path: '/risk_exchange',
         name: 'risk_exchange',
-        title: '币币异常预警',
+        title: 'nav.bbycyj',
         component: Main,
         icon: 'ios-alarm',
         meta: {
@@ -680,7 +680,7 @@ export const riskRouter = [
     {
         path: '/risk_otc',
         name: 'risk_otc',
-        title: 'OTC异常预警',
+        title: 'nav.tocycyj',
         component: Main,
         icon: 'ios-speedometer',
         meta: {
@@ -697,7 +697,7 @@ export const riskRouter = [
     {
         path: '/risk_urgent',
         name: 'risk_urgent',
-        title: '紧急异常预警',
+        title: 'nav.jjycyj',
         component: Main,
         icon: 'ios-timer',
         meta: {
@@ -726,7 +726,7 @@ export const operationRouter = [
     {
         path: '/operation_distribute',
         name: 'operation_distribute',
-        title: '分发',
+        title: 'nav.ff',
         component: Main,
         icon: 'ios-paper',
         meta: {
@@ -752,7 +752,7 @@ export const operationRouter = [
     {
         path: '/operation_activity',
         name: 'operation_activity',
-        title: '推广活动',
+        title: 'nav.tghd',
         component: Main,
         icon: 'ios-bell',
         meta: {
@@ -769,7 +769,7 @@ export const operationRouter = [
     {
         path: '/operation_market',
         name: 'operation_market',
-        title: '推荐市场',
+        title: 'nav.tjsc',
         icon: 'social-dropbox',
         component: Main,
         meta: {
@@ -786,7 +786,7 @@ export const operationRouter = [
     {
         path: '/operation_placard',
         name: 'operation_placard',
-        title: '公告',
+        title: 'nav.gg',
         component: Main,
         icon: 'android-clipboard',
         meta: {
@@ -803,7 +803,7 @@ export const operationRouter = [
     {
         path: '/operation_app',
         name: 'operation_app',
-        title: 'APP发布',
+        title: 'nav.appfb',
         component: Main,
         icon: 'social-apple-outline',
         meta: {
@@ -826,7 +826,7 @@ export const adminRouter = [
     {
         path: '/admin',
         name: 'admin',
-        title: '管理员权限管理',
+        title: 'nav.glyqxgl',
         component: Main,
         icon: 'android-settings',
         meta: {
@@ -846,7 +846,7 @@ export const systemConfigRouter = [
     {
         path: '/systemconfig',
         name: 'systemconfig',
-        title: '币币交易参数',
+        title: 'nav.bbjycs',
         component: Main,
         icon: 'android-options',
         meta: {
@@ -863,7 +863,7 @@ export const systemConfigRouter = [
     {
         path: '/system',
         name: 'system',
-        title: 'OTC交易设置',
+        title: 'nav.otcjysz',
         component: Main,
         icon: 'ios-cog',
         meta: {
@@ -880,7 +880,7 @@ export const systemConfigRouter = [
     {
         path: '/sys',
         name: 'sys',
-        title: '系统参数设置',
+        title: 'nav.xtcssz',
         component: Main,
         icon: 'ios-settings-strong',
         meta: {
@@ -897,7 +897,7 @@ export const systemConfigRouter = [
     {
         path: '/addwithdrawaladdress',
         name: 'addwithdrawaladdress',
-        title: '特殊账户参数设置',
+        title: 'nav.tszhcssz',
         component: Main,
         icon: 'ios-toggle',
         meta: {
@@ -917,7 +917,7 @@ export const systemConfigRouter = [
     {
         path: '/poolwallet',
         name: 'poolwallet',
-        title: '币池钱包整理参数',
+        title: 'nav.bcqbzlcs',
         component: Main,
         icon: 'ios-bookmarks',
         meta: {
@@ -940,7 +940,7 @@ export const systemLogsRouter = [
     {
         path: '/systemlogs',
         name: 'systemlogs',
-        title: '系统日志',
+        title: 'nav.xtrz',
         component: Main,
         icon: 'ios-list',
         meta: {
@@ -960,7 +960,7 @@ export const monitoringRouter = [
     {
         path: '/monitoring',
         name: 'monitoring',
-        title: '提现失败列表',
+        title: 'nav.txsblb',
         component: Main,
         icon: 'heart-broken',
         meta: {
@@ -977,7 +977,7 @@ export const monitoringRouter = [
     {
         path: '/congestion',
         name: 'congestion',
-        title: '提现拥堵列表',
+        title: 'nav.txydlb',
         component: Main,
         icon: 'clipboard',
         meta: {
@@ -994,7 +994,7 @@ export const monitoringRouter = [
     {
         path: '/withdraw',
         name: 'withdraw',
-        title: '提现记录列表',
+        title: 'nav.txjllb',
         component: Main,
         icon: 'ios-paper',
         meta: {
@@ -1011,7 +1011,7 @@ export const monitoringRouter = [
     {
         path: '/collection',
         name: 'collection',
-        title: '归集记录列表',
+        title: 'nav.gjjllb',
         component: Main,
         icon: 'arrow-shrink',
         meta: {
@@ -1031,7 +1031,7 @@ export const monitoringRouter = [
     {
         path: '/block',
         name: 'block',
-        title: '区块确认列表',
+        title: 'nav.qkqrlb',
         component: Main,
         icon: 'ios-photos',
         meta: {
@@ -1048,7 +1048,7 @@ export const monitoringRouter = [
     {
         path: '/account_msg',
         name: 'account_msg',
-        title: '主账户信息',
+        title: 'nav.zzhxx',
         component: Main,
         icon: 'ios-person',
         meta: {
@@ -1065,7 +1065,7 @@ export const monitoringRouter = [
     {
         path: '/accountInofo',
         name: 'accountInofo',
-        title: '用户账户信息',
+        title: 'nav.yhzhxx',
         component: Main,
         icon: 'ios-people',
         meta: {
@@ -1082,7 +1082,7 @@ export const monitoringRouter = [
     {
         path: '/userPooledMining',
         name: 'userPooledMining',
-        title: '用户币池信息',
+        title: 'nav.yhbcxx',
         component: Main,
         icon: 'social-bitcoin',
         meta: {
@@ -1102,7 +1102,7 @@ export const monitoringRouter = [
     {
         path: '/ETHNounce',
         name: 'ETHNounce',
-        title: 'ETHNounce值',
+        title: 'nav.enz',
         component: Main,
         icon: 'android-locate',
         meta: {
@@ -1122,7 +1122,7 @@ export const monitoringRouter = [
     {
         path: '/node_msg',
         name: 'node_msg',
-        title: '节点信息',
+        title: 'nav.jdxx',
         component: Main,
         icon: 'network',
         meta: {
@@ -1139,7 +1139,7 @@ export const monitoringRouter = [
     {
         path: '/error_log',
         name: 'error_log',
-        title: '错误日志',
+        title: 'nav.cwrz',
         component: Main,
         icon: 'bug',
         meta: {
@@ -1159,7 +1159,7 @@ export const fundRouter = [
     {
         path: '/coldWalletSet',
         name: 'coldWalletSet',
-        title: '冷钱包设置',
+        title: 'nav.lqbsz',
         component: Main,
         icon: 'steam',
         meta: {
@@ -1176,7 +1176,7 @@ export const fundRouter = [
     {
         path: '/addressSet',
         name: 'addressSet',
-        title: '主地址转冷钱包设置',
+        title: 'nav.zdzzlqbsz',
         component: Main,
         icon: 'pull-request',
         meta: {
@@ -1193,7 +1193,7 @@ export const fundRouter = [
     {
         path: '/transferRecord',
         name: 'transferRecord',
-        title: '转账记录',
+        title: 'nav.zzjl',
         component: Main,
         icon: 'ios-loop-strong',
         meta: {
