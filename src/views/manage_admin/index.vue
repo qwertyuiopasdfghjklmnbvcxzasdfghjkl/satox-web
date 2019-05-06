@@ -1,16 +1,16 @@
 <!-- 管理员权限管理 -->
 <template>
     <Card>
-        <p slot="title">管理员权限管理</p>
+        <p slot="title">{{$t('admin.glyqx')}}</p>
         <Row style="margin-bottom:10px;">
-            <Button type="primary" icon="android-add" style="float:right;" @click="openDialog">新增管理员</Button>
+            <Button type="primary" icon="android-add" style="float:right;" @click="openDialog">{{$t('admin.xzgly')}}</Button>
         </Row>
         <Row style="border-top:1px solid #e9eaec;height:40px;line-height:40px;">
-            <Col span="4">管理员</Col>
-            <Col span="4">账号</Col>
+            <Col span="4">{{$t('admin.gly')}}</Col>
+            <Col span="4">{{$t('common.zh')}}</Col>
             <!-- <Col span="4">权限类型</Col> -->
-            <Col span="12">修改权限类型</Col>
-            <Col span="4">操作</Col>
+            <Col span="12">{{$t('admin.xgqxlx')}}</Col>
+            <Col span="4">{{$t('common.cz')}}</Col>
         </Row>
         <Row v-for="(data, index) in data1" :key="data.id" style="border-top:1px solid #e9eaec;">
             <Col span="4" style="min-width: 100px;text-overflow: ellipsis;overflow: hidden;word-wrap: normal;">
@@ -25,8 +25,8 @@
                 </Select>
             </Col>
             <Col span="4">
-                <Button type="primary" @click="saveRole(data)">保存</Button>
-                <Button type="ghost" @click="deleteUser(index)">删除</Button>
+                <Button type="primary" @click="saveRole(data)">{{$t('common.bc')}}</Button>
+                <Button type="ghost" @click="deleteUser(index)">{{$t('common.sc')}}</Button>
             </Col>
         </Row>
         <Page :current="curPage" :total="total" @on-change="changePage"
@@ -47,7 +47,7 @@
                 cityList: [],
                 model12: [],
                 columns1: [
-                    {title: '管理员', key: 'realname'},
+                    {title: this.$t('admin.gly'), key: 'realname'},
                     {title: '账号', key: 'username'},
                     {title: '权限类型', key: 'type'},
                     {title: '修改信息', key: 'selecttype'},
@@ -76,7 +76,7 @@
             deleteUser (index) {
                 console.log(this.data1[0].bmUserId);
                 author.deleteUser(this.data1[index].bmUserId, (res) => {
-                    this.$Message.success({content: '删除成功'});
+                    this.$Message.success({content: this.$t('kyc.sccg')});
                     this.getUserList();
                 }, (msg) => {
                     this.$Message.error({content: msg});
@@ -95,7 +95,7 @@
                     version: data.version,
                     roleList: roleList
                 }, (res) => {
-                    this.$Message.success({content: '修改成功'});
+                    this.$Message.success({content: this.$t('common.xgcg')});
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });

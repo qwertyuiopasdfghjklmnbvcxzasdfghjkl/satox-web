@@ -6,33 +6,24 @@
     <div>
         <Card>
             <p slot="title">
-                <Icon type="person"></Icon>
-                修改密码
+                <!--<Icon type="person"></Icon>-->
+                {{$t('login.xgmm')}}
             </p>
              <Form  ref="editPasswordForm" :model="editPasswordForm" :label-width="100" label-position="right" :rules="passwordValidate">
-                <!-- <FormItem label="原密码" prop="oldPassword" :error="oldPasswordError">
-                    <Input v-model="editPasswordForm.oldPassword" placeholder="请输入现在使用的密码" ></Input>
-                </FormItem> -->
-                <!-- <FormItem label="新密码" prop="password" :error="passwordError">
-                    <Input v-model="editPasswordForm.password" placeholder="请输入新密码，至少6位字符" ></Input>
-                </FormItem>
-                <FormItem label="确认新密码" prop="confirmPassword" :error="confirmPasswordError">
-                    <Input v-model="editPasswordForm.confirmPassword" placeholder="请再次输入新密码" ></Input>
-                </FormItem> -->
-                <FormItem label="原密码" prop="oldPassword">
+                <FormItem :label="$t('login.ymm')" prop="oldPassword">
                     <Input type="password" v-model="editPasswordForm.oldPassword" name="oldPassword"></Input>
                 </FormItem>
-                <FormItem label="新密码" prop="password">
+                <FormItem :label="$t('login.xmm')" prop="password">
                     <Input type="password" v-model="editPasswordForm.password" name="password"></Input>
                 </FormItem>
-                <FormItem label="确认密码" prop="confirmPassword">
+                <FormItem :label="$t('login.qrmm')" prop="confirmPassword">
                     <Input type="password" v-model="editPasswordForm.confirmPassword" name="confirmPassword"></Input>
                 </FormItem>
-                
+
             </Form>
             <div class="footer">
-                <Button type="text" @click="cancelEditPass">取消</Button>
-                <Button type="primary" :loading="savePassLoading" @click="saveEditPass('editPasswordForm')">保存</Button>
+                <Button type="text" @click="cancelEditPass">{{$t('common.qx')}}</Button>
+                <Button type="primary" :loading="savePassLoading" @click="saveEditPass('editPasswordForm')">{{$t('common.bc')}}</Button>
             </div>
         </Card>
     </div>
@@ -44,7 +35,7 @@ export default {
     data () {
         const passwordCheck = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error(this.$t('login.qsrmm')));
             } else {
                 if (this.editPasswordForm.confirmPassword !== '') {
                     // 对第二个密码框单独验证
@@ -55,9 +46,9 @@ export default {
         }
         const passwordAgainCheck = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入密码'));
+                callback(new Error(this.$t('login.qzcsrmm')));
             } else if (value !== this.editPasswordForm.password) {
-                callback(new Error('密码不一致'));
+                callback(new Error(this.$t('login.mmbyz')));
             } else {
                 callback();
             }
@@ -99,27 +90,16 @@ export default {
             },
             passwordValidate: {
                 oldPassword: [
-                    { required: true, message: '请输入原密码', trigger: 'blur' }
+                    { required: true, message: this.$t('login.qsrymm'), trigger: 'blur' }
                 ],
                 password: [
-                    { required: true, message: '请输入新密码', trigger: 'blur' },
+                    { required: true, message: this.$t('login.qsrxmm'), trigger: 'blur' },
                     {validator: passwordCheck, trigger: 'blur' }
-                    // { min: 6, message: '请至少输入6个字符', trigger: 'blur' },
-                    // { max: 32, message: '最多输入32个字符', trigger: 'blur' }
                 ],
                 confirmPassword: [
-                    { required: true, message: '请输入确认密码', trigger: 'blur' },
+                    { required: true, message: this.$t('login.qsrqrmm'), trigger: 'blur' },
                     {validator: passwordAgainCheck, trigger: 'blur' }
                 ],
-                // password: [
-                //     { required: true, message: '请输入新密码', trigger: 'blur' },
-                //     { min: 6, message: '请至少输入6个字符', trigger: 'blur' },
-                //     { max: 32, message: '最多输入32个字符', trigger: 'blur' }
-                // ],
-                // confirmPassword: [
-                //     { required: true, message: '请再次输入新密码', trigger: 'blur' },
-                //     { validator: valideRePassword, trigger: 'blur' }
-                // ]
             },
             inputCodeVisible: false, // 显示填写验证码box
             initPhone: '',
@@ -204,7 +184,7 @@ export default {
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     userApi.updateUserPwd(this.editPasswordForm, (res) => {
-                        this.$Message.success({content: '修改成功'})
+                        this.$Message.success({content: this.$t('common.xgcg')})
                         this.goto()
                     }, (msg) => {
                         this.$Message.error({content: msg})

@@ -1,10 +1,10 @@
 <template>
   <div class="addMarket">
       <Card>
-          <p slot="title">新增</p>
+          <p slot="title">{{vm.$t('common.xz')}}</p>
            <Row style="margin-bottom: 20px;">
               <Col span="3">
-                市场
+                  {{vm.$t('risk.sc')}}
               </Col>
               <Col span="10">
                 <Input style="width:200px" v-model="market"></Input>
@@ -12,7 +12,7 @@
           </Row>
           <Row style="margin-bottom: 20px;">
               <Col span="3">
-                备注
+                  {{vm.$t('common.bz')}}
               </Col>
               <Col span="10">
                 <Input style="width:200px" v-model="remark"></Input>
@@ -35,20 +35,22 @@
           </Row>
           <Row style="margin-bottom: 20px;">
               <Col span="10">
-                <Button type="primary" @click="addSpecialMarket">确定</Button>
+                <Button type="primary" @click="addSpecialMarket">{{vm.$t('common.qd')}}</Button>
               </Col>
               <Col span="10">
-                <Button @click="closeDialog">取消</Button>
+                <Button @click="closeDialog">{{vm.$t('common.qx')}}</Button>
               </Col>
           </Row>
       </Card>
-  </div>  
+  </div>
 </template>
 <script>
 import extendApi from '../../api/extend'
 export default {
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             market: '',
             remark: '',
             idx:　'1'
@@ -61,7 +63,7 @@ export default {
                 remark: this.remark,
                 idx:　this.idx
             },(res) =>{
-                this.$Message.success({content: '添加成功'})
+                this.$Message.success({content: this.vm.$t('common.tjcg')})
             }, (msg) => {
                 this.$Message.error({content: msg})
             })

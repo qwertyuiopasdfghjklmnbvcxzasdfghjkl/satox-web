@@ -1,22 +1,22 @@
 <!-- 系统日志 -->
 <template>
   <Card>
-    <p slot="title">系统日志</p>
+    <p slot="title">{{$t('systemlog.xtrz')}}</p>
     <Row >
         <Col span="12"></Col>
-        <Col span="6" style="float:right;"><Button type="primary" @click="exportTable">导出</Button></Col>
+        <Col span="6" style="float:right;"><Button type="primary" @click="exportTable">{{$t('systemlog.dc')}}</Button></Col>
         <Col span="6" style="float:right;">
-          时间： <DatePicker v-model="formItem.date" format="yyyy-MM-dd" type="daterange" placement="bottom-end" style="width: 200px"></DatePicker>
+            {{$t('common.sj')}}： <DatePicker v-model="formItem.date" format="yyyy-MM-dd" type="daterange" placement="bottom-end" style="width: 200px"></DatePicker>
         </Col>
     </Row>
     <Tabs @on-click="aaa">
-        <TabPane label="管理员登录日志">
+        <TabPane :label="$t('systemlog.glydlrz')">
           <Table :columns="columns1" :data="data1"></Table>
-          <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+          <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </TabPane>
-        <TabPane label="管理员操作日志">
+        <TabPane :label="$t('systemlog.glyczrz')">
           <Table :columns="columns3" :data="data3"></Table>
-          <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>  
+          <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
         </TabPane>
     </Tabs>
   </Card>
@@ -37,13 +37,14 @@ export default {
       curPage1: 1,
       total1: 0,
       columns1: [
-        {title: '管理员', key: 'userRealName'},
-        {title: '客户端类型', key: 'clientType'},
-        {title: '登录IP', key: 'clientIp'},
-        {title: '登录IP所在地', key: 'loginLocation'},
-        {title: '登录与离线时间', key: 'loginTime',
+        {title: this.$t('systemlog.gly'), key: 'userRealName'},
+        {title: this.$t('systemlog.khdlx'), key: 'clientType'},
+        {title: this.$t('systemlog.dlip'), key: 'clientIp'},
+        {title: this.$t('systemlog.dlipszd'), key: 'loginLocation'},
+        {title: this.$t('systemlog.dlylxsj'), key: 'loginTime',
            render: (h, params) => {
-              return h('div',  [params.row.loginTime,' -- ', params.row.logoutTime == null ? '': params.row.logoutTime])
+              return h('div',  [params.row.loginTime,' -- ', params.row.logoutTime == null ? '':
+                  params.row.logoutTime])
           }
         }
       ],
@@ -54,17 +55,17 @@ export default {
       },
       tempItem: {},
       columns3: [
-        {title: '管理员', key: 'userRealName'},
-        {title: '操作对象', key: 'target'},
-        {title: '模块', key: 'optModel'},
-        {title: '操作类型', key: 'optEvent',
-           render: (h, params) => { 
+        {title: this.$t('systemlog.gly'), key: 'userRealName'},
+        {title: this.$t('systemlog.czdx'), key: 'target'},
+        {title: this.$t('systemlog.mk'), key: 'optModel'},
+        {title: this.$t('systemlog.czlx'), key: 'optEvent',
+           render: (h, params) => {
               return h('div', this.switchStaus(Number(params.row.optEvent)))
           }
         },
-        {title: '功能', key: 'desc'},
-        {title: '操作内容', key: 'optContent'},
-        {title: '操作时间', key: 'optTime'}
+        {title: this.$t('systemlog.gn'), key: 'desc'},
+        {title: this.$t('systemlog.cznr'), key: 'optContent'},
+        {title: this.$t('systemlog.czsj'), key: 'optTime'}
       ],
       data3: []
     }
@@ -99,21 +100,21 @@ export default {
       } else {
          window.location.href = `${util.baseURL}`+`api/bm/sysLog/exportUserOperateLogExcel?${this.params.join('&')}`
       }
-          
+
     },
     switchStaus(type) { //2，查询      3，新增    4，修改     5，删除
       switch(type){
         case 2:
-            return '查询'
+            return this.$t('common.cx')
             break;
         case 3:
-            return '新增'
+            return this.$t('common.xz')
             break;
         case 4:
-            return '修改'
+            return this.$t('common.xg')
             break;
         case 5:
-            return '删除'
+            return this.$t('kyc.sc')
             break;
       }
     },

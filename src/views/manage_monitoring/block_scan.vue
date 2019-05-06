@@ -5,7 +5,7 @@
                  <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
@@ -18,7 +18,7 @@ export default {
             total: 0,
             columns1: [
                 {
-                    title: '公链类型',
+                    title: this.$t('monitoring.gllx'),
                     key: 'symbolType'
                 },
                 {
@@ -54,7 +54,7 @@ export default {
                 this.total = total
                 this.data1 = res
             }, (msg) => {
-                this.$Message.error({name: msg}) 
+                this.$Message.error({name: msg})
             })
         },
         changePage (page) {

@@ -1,27 +1,27 @@
 <template>
     <div class="exchange_address">
         <Card>
-            <p slot="title">地址查询</p>
+            <p slot="title">{{$t('exchange.dzcx')}}</p>
              <Row style="margin-bottom: 20px;">
-                <Col span="2">币种</Col>
+                <Col span="2">{{$t('common.bz')}}</Col>
                 <Col span="4">
                      <Input v-model="symbol" style="width:150px;"/>
                 </Col>
-                <Col span="1">地址</Col>
+                <Col span="1">{{$t('common.dz')}}</Col>
                 <Col span="6">
                      <Input v-model="address" style="width:200px;"/>
                 </Col>
                 <Col span="3">
-                     <Button type="primary" @click="getAddress">查询</Button>
+                     <Button type="primary" @click="getAddress">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom: 20px;border-bottom: 1px solid #e9eaec;">
-                <Col span="6">账号</Col>
-                <Col span="6">币种</Col>
-                <Col span="6">地址</Col>
+                <Col span="6">{{$t('common.zh')}}</Col>
+                <Col span="6">{{$t('common.bz')}}</Col>
+                <Col span="6">{{$t('common.dz')}}</Col>
             </Row>
             <Row style="margin-bottom: 20px;text-align: center;" v-if="this.data1 == ''">
-                <Col span="24">暂无数据</Col>
+                <Col span="24">{{$t('common.zwsj')}}</Col>
             </Row>
             <Row style="margin-bottom: 20px;" v-if="this.data1 != ''">
                 <Col span="6">{{data1.username}}</Col>
@@ -54,10 +54,10 @@ export default {
                         // }
                     })
                 } else {
-                     this.$Message.error({content: '地址不能为空'})
+                     this.$Message.error({content: this.$t('exchange.dzbnwk')})
                 }
             } else {
-                this.$Message.error({content: '币种不能为空'})
+                this.$Message.error({content: this.$t('exchange.bzbnwk')})
             }
         }
     }

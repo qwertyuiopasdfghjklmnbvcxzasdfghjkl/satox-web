@@ -1,40 +1,40 @@
 <template>
     <div style="width: 1700px;">
         <Card>
-            <p slot="title">手续费账户</p>
+            <p slot="title">{{$t('finance.sxfzh')}}</p>
             <Row style="margin-bottom: 20px;">
-                <Col span="1">币种：</Col>
+                <Col span="1">{{$t('common.bz')}}：</Col>
                 <Col span="5">
                     <Input v-model="symbol" style="width:200px;"/>
                 </Col>
-                <Col span="2">用户名：</Col>
+                <Col span="2">{{$t('common.yhm')}}：</Col>
                 <Col span="2">
                     <Input v-model="username"   style="width:100px;"/>
                 </Col>
                 <Col span="2">
-                    <Button type="primary" @click="curPage=1;getAccountsList()">查询</Button>
+                    <Button type="primary" @click="curPage=1;getAccountsList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
          <Card style="margin-top:30px;">
-            <p slot="title" >提币主账户</p>
+            <p slot="title" >{{$t('monitoring.tbzzh')}}</p>
             <Row style="margin-bottom: 20px;">
-                <Col span="1">币种：</Col>
+                <Col span="1">{{$t('common.bz')}}：</Col>
                 <Col span="5">
                     <Input v-model="symbol1"  style="width:200px;"/>
                 </Col>
-                <Col span="2">用户名：</Col>
+                <Col span="2">{{$t('common.yhm')}}：</Col>
                 <Col span="2">
                     <Input v-model="username1"   style="width:100px;"/>
                 </Col>
                 <Col span="2">
-                 <Button type="primary" @click="curPage=1;getPoolsList()">查询</Button>
+                 <Button type="primary" @click="curPage=1;getPoolsList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns2" :data="data2"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
@@ -53,86 +53,86 @@ import monitApi from '../../api/monitoring'
                 total1: 0,
                 columns1: [
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '用户ID',
+                        title: this.$t('system.yhid'),
                         key: 'accountId'
                     },
                     {
-                        title: '账号ID',
+                        title: this.$t('monitoring.zhid'),
                         key: 'userId'
                     },
                     {
-                        title: '钱包地址',
+                        title: this.$t('system.qbdz'),
                         key: 'address'
                     },
                     {
-                        title: '账户表总金额',
+                        title: this.$t('monitoring.zhbzje'),
                         key: 'accountTotalBalance'
                     },
                     {
-                        title: '账户表可用金额',
+                        title: this.$t('monitoring.zhbkyje'),
                         key: 'accountAvailableBalance'
                     },
                     {
-                        title: '币池表总金额',
+                        title: this.$t('monitoring.bcbzje'),
                         key: 'coinPoolTotalBalance'
                     },
                     {
-                        title: '币池表可用金额',
+                        title: this.$t('monitoring.bcbkyje'),
                         key: 'coinPoolAvailableBalance'
                     },
                     {
-                        title: '区块链上实际金额',
+                        title: this.$t('monitoring.qklssjje'),
                         key: 'actualBalance'
                     }
                 ],
                 data1: [],
                 columns2: [
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '用户ID',
+                        title: this.$t('system.yhid'),
                         key: 'accountId'
                     },
                     {
-                        title: '账号ID',
+                        title: this.$t('monitoring.zhid'),
                         key: 'userId'
                     },
                     {
-                        title: '钱包地址',
+                        title: this.$t('system.qbdz'),
                         key: 'address'
                     },
-                     {
-                        title: '账户表总金额',
+                    {
+                        title: this.$t('monitoring.zhbzje'),
                         key: 'accountTotalBalance'
                     },
                     {
-                        title: '账户表可用金额',
+                        title: this.$t('monitoring.zhbkyje'),
                         key: 'accountAvailableBalance'
                     },
                     {
-                        title: '币池表总金额',
+                        title: this.$t('monitoring.bcbzje'),
                         key: 'coinPoolTotalBalance'
                     },
                     {
-                        title: '币池表可用金额',
+                        title: this.$t('monitoring.bcbkyje'),
                         key: 'coinPoolAvailableBalance'
                     },
                     {
-                        title: '区块链上实际金额',
+                        title: this.$t('monitoring.qklssjje'),
                         key: 'actualBalance'
                     }
                 ],

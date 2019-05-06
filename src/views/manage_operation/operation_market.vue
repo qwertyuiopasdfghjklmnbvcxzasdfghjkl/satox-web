@@ -1,13 +1,13 @@
 <template>
   <div class="operation">
       <Card>
-          <p slot="title">特殊市场 
-              <Button type="primary" @click="addMarket">新增</Button>
+          <p slot="title">{{$t('operation.tssc')}}
+              <Button type="primary" @click="addMarket">{{$t('common.xz')}}</Button>
           </p>
-          <Table :columns="columns1" :data="data1"></Table> 
+          <Table :columns="columns1" :data="data1"></Table>
           <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
       </Card>
-  </div>  
+  </div>
 </template>
 <script>
 import extendApi from '../../api/extend'
@@ -21,23 +21,23 @@ export default {
             total: 0,
             columns1: [
                 {
-                    title: '编号',
+                    title: this.$t('operation.bh'),
                     key: 'marketId'
                 },
                 {
-                    title: '位置',
+                    title: this.$t('operation.wz'),
                     key: 'idx'
                 },
                 {
-                    title: '市场名称',
+                    title: this.$t('operation.scmc'),
                     key: 'market',
                 },
                 {
-                    title: '备注',
+                    title: this.$t('common.bz'),
                     key: 'remark'
                 },
                 {
-                    title: '操作',
+                    title:  this.$t('common.cz'),
                     key: 'opreat',
                     render: (h, params) => {
                         return h('div', [
@@ -51,7 +51,7 @@ export default {
                                         })
                                     }
                                 }
-                            }, '修改'),
+                            },  this.$t('common.xg')),
                             h('Button', {
                                 props: {type: 'primary', size: 'small'},
                                 on: {
@@ -60,14 +60,14 @@ export default {
                                             marketId: params.row.marketId,
 	                                        version: params.row.version
                                         }, (res) => {
-                                            this.$Message.success({content:　'取消成功'})
+                                            this.$Message.success({content:　this.$t('operation.qxcg')})
                                             this.getfindSpecialMarket()
                                         }, (msg) => {
                                             this.$Message.error({content: msg})
                                         })
                                     }
                                 }
-                            }, '取消推荐')
+                            }, this.$t('operation.qxtj'))
                         ]);
                     }
                 }

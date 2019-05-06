@@ -1,16 +1,16 @@
 <template>
     <Card>
-        <p slot="title">特殊账户参数设置</p>
+        <p slot="title">{{$t('system.tszhcssz')}}</p>
         <Card>
             <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
-                <span style="height:32px;font-weight:normal;line-height:32px;">交易所手续费账户</span>
+                <span style="height:32px;font-weight:normal;line-height:32px;">{{$t('system.jyssxfzh')}}</span>
                 <span>
-              <Input type="text" v-model="accountsSymbolParam" placeholder="请输入要查询的币种关键字"
+              <Input type="text" v-model="accountsSymbolParam" :placeholder="$t('system.qsrycxdbzgjz')"
                      style="width:auto;margin-left:28px;"></Input>
-              <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">查询</Button>
-              <Button type="ghost" @click="fnFindAdminAccounts()">重置</Button>
+              <Button type="primary" @click="fnFindAdminAccounts(accountsSymbolParam)">{{$t('common.cx')}}</Button>
+              <Button type="ghost" @click="fnFindAdminAccounts()">{{$t('system.cz')}}</Button>
             </span>
-                <Button type="primary" style="float:right;" @click="addOrEditFeeAccountDialog">添加手续费账户</Button>
+                <Button type="primary" style="float:right;" @click="addOrEditFeeAccountDialog">{{$t('system.tjsxfzh')}}</Button>
             </p>
             <Table :columns="accountsColumns" :data="accountsData" style="margin-top:10px;"></Table>
             <Page :current="accountsPage.currentPage" :total="accountsPage.total"
@@ -18,14 +18,14 @@
         </Card>
         <Card style="margin-top:16px;">
             <p slot="title" style="height:auto;vertical-align:top;overflow:hidden;">
-                <span style="height:32px;font-weight:normal;line-height:32px;">提币主地址设置</span>
+                <span style="height:32px;font-weight:normal;line-height:32px;">{{$t('system.tbzdzsz')}}</span>
                 <span>
-              <Input type="text" v-model="coinPoolsSymbolParam" placeholder="请输入要查询的币种关键字"
+              <Input type="text" v-model="coinPoolsSymbolParam" :placeholder="$t('system.qsrycxdbzgjz')"
                      style="width:auto;margin-left:28px;"></Input>
-              <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">查询</Button>
-              <Button type="ghost" @click="fnFindAdminCoinPools()">重置</Button>
+              <Button type="primary" @click="fnFindAdminCoinPools(coinPoolsSymbolParam)">{{$t('common.cx')}}</Button>
+              <Button type="ghost" @click="fnFindAdminCoinPools()">{{$t('system.cz')}}</Button>
             </span>
-                <Button type="primary" style="float:right;" @click="addOrEditWithdrawalAddressDialog">添加提币主地址
+                <Button type="primary" style="float:right;" @click="addOrEditWithdrawalAddressDialog">{{$t('system.tjtbzdz')}}
                 </Button>
             </p>
             <Table :columns="coinPoolsColumns" :data="coinPoolsData" style="margin-top:10px;"></Table>
@@ -66,65 +66,6 @@
             return {
                 curPage: 1,
                 total: 0,
-                columnsSymbol: [
-                    {
-                        title: '币种',
-                        key: 'symbol'
-                    },
-                    {
-                        title: '最小金额',
-                        key: 'coinMin'
-                    },
-                    {
-                        title: '保留金额',
-                        key: 'coinReserve'
-                    },
-                    {
-                        title: '矿工费币种',
-                        key: 'minerSymbol'
-                    },
-                    {
-                        title: 'BTC矿工费',
-                        key: 'minerFee'
-                    },
-                    {
-                        title: 'ETH GAS单价',
-                        key: 'gasPrice'
-                    },
-                    {
-                        title: 'ETH GAS上限',
-                        key: 'gasLimit'
-                    },
-                    {
-                        title: '是否可用',
-                        key: 'enable',
-                        render: (h, params) => {
-                            return h('div', params.row.enable === 0 ? '不可用' : '可用');
-                        }
-                    },
-                    {
-                        title: ' ',
-                        key: 'address',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {type: 'primary', size: 'small'},
-                                    style: {marginRight: '10px'},
-                                    on: {
-                                        click: () => {
-                                            util.setDialog(upAddress, {
-                                                item: params.row,
-                                                okCallback: () => {
-                                                    this.getfindCollectConfig();
-                                                }
-                                            });
-                                        }
-                                    }
-                                }, '修改')
-                            ]);
-                        }
-                    }
-                ],
                 columnsSymbolData: [],
                 dataSymbol: [],
                 exchangeItem: [],
@@ -159,16 +100,16 @@
                 accountsSymbolParam: null,
                 coinPoolsSymbolParam: null,
                 accountsColumns: [
-                    {title: '币种', key: 'symbol', width: 80},
-                    {title: '用户名', key: 'username'},
-                    {title: '用户ID', key: 'userId'},
-                    {title: '账户ID', key: 'accountId'},
-                    {title: '创建人', key: 'creator'},
-                    {title: '创建时间', key: 'createdTime'},
-                    {title: '最后修改人', key: 'lastUpdatedBy'},
-                    {title: '最后修改时间', key: 'lastUpdatedTime'},
+                    {title: this.$t('common.bz'), key: 'symbol', width: 80},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('system.yhid'), key: 'userId'},
+                    {title: this.$t('system.zhid'), key: 'accountId'},
+                    {title: this.$t('system.cjr'), key: 'creator'},
+                    {title: this.$t('common.cjsj'), key: 'createdTime'},
+                    {title: this.$t('system.zhxgr'), key: 'lastUpdatedBy'},
+                    {title: this.$t('system.zhxgsj'), key: 'lastUpdatedTime'},
                     {
-                        title: '操作', render: (h, params) => {
+                        title: this.$t('common.cz'), render: (h, params) => {
                             return h('Button', {
                                 props: {
                                     type: 'primary',
@@ -187,22 +128,22 @@
                                         });
                                     }
                                 }
-                            }, '修改');
+                            }, this.$t('common.xg'));
                         }, width: 80
                     }
                 ],
                 coinPoolsColumns: [
-                    {title: '币种', key: 'symbol', width: 80},
-                    {title: '用户名', key: 'username'},
-                    {title: '用户ID', key: 'userId'},
-                    {title: '账户ID', key: 'accountId'},
-                    {title: '钱包地址', key: 'address'},
-                    {title: '创建人', key: 'creator'},
-                    {title: '创建时间', key: 'createdTime'},
-                    {title: '最后修改人', key: 'lastUpdatedBy'},
-                    {title: '最后修改时间', key: 'lastUpdatedTime'},
+                    {title: this.$t('common.bz'), key: 'symbol', width: 80},
+                    {title: this.$t('common.yhm'), key: 'username'},
+                    {title: this.$t('system.yhid'), key: 'userId'},
+                    {title: this.$t('system.zhid'), key: 'accountId'},
+                    {title: this.$t('system.qbdz'), key: 'address'},
+                    {title: this.$t('system.cjr'), key: 'creator'},
+                    {title: this.$t('common.cjsj'), key: 'createdTime'},
+                    {title: this.$t('system.zhxgr'), key: 'lastUpdatedBy'},
+                    {title: this.$t('system.zhxgsj'), key: 'lastUpdatedTime'},
                     {
-                        title: '操作', render: (h, params) => {
+                        title: this.$t('common.cz'), render: (h, params) => {
                             return h('Button', {
                                 props: {
                                     type: 'primary',
@@ -221,7 +162,7 @@
                                         });
                                     }
                                 }
-                            }, '修改');
+                            }, this.$t('common.xg'));
                         }, width: 80
                     }
                 ],
@@ -302,66 +243,6 @@
                     this.exchangeItem = res;
                 }, (msg) => {
                     this.$Message.error({content: msg});
-                });
-            },
-            updataSystem1 (data) {
-                let code = data.code;
-                let value = data.$value;
-                let value2 = data.$value2;
-                if (!value || !value2 || (code === 'otcCoinType' && value.length === 0)) {
-                    this.$Message.error({content: '请输入内容'});
-                    return;
-                }
-                if (value2 > 60) {
-                    this.$Message.error({content: '分钟不能大于60'});
-                    return;
-                }
-                value = code === 'otcCoinType' ? value.join(',') : value;
-                system.saveSysParam({
-                    value: value,
-                    value2: value2,
-                    sysParamId: this.tempItem[code].sysParamId,
-                    version: this.tempItem[code].version
-                }, (res) => {
-                    this.getfindSysParam();
-                    this.$Message.success({content: '修改成功'});
-                    if (code !== 'otcCoinType') {
-                        this[code] = '';
-                    }
-                }, (msg) => {
-                    this.$$Message.error({content: msg});
-                });
-            },
-            updataSystem (data) {
-                let code = data.code;
-                let value = data.$value;
-                let nValues = [];
-                if (!value || (code === 'otcCoinType' && value.length === 0)) {
-                    this.$Message.error({content: '请输入内容'});
-                    return;
-                } else {
-                    if (code === 'otcCoinType') {
-                        value.forEach((symbol) => {
-                            if (this.symbolMap[symbol]) {
-                                nValues.push(symbol);
-                            }
-                        });
-                    }
-
-                }
-                value = code === 'otcCoinType' ? nValues.join(',') : value;
-                system.saveSysParam({
-                    value: value,
-                    sysParamId: this.tempItem[code].sysParamId,
-                    version: this.tempItem[code].version
-                }, (res) => {
-                    this.getfindSysParam();
-                    this.$Message.success({content: '修改成功'});
-                    if (code !== 'otcCoinType') {
-                        this[code] = '';
-                    }
-                }, (msg) => {
-                    this.$$Message.error({content: msg});
                 });
             },
             getdataSymbol () {

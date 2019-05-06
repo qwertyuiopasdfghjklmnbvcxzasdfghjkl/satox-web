@@ -1,29 +1,29 @@
 <template>
     <div style="min-width:1000px;">
         <Card>
-            <p slot="title">用户币池信息</p>
+            <p slot="title">{{$t('monitoring.yhbcxx')}}</p>
             <Row style="margin-bottom: 20px;">
                 <Col span="6">
-                    币种：
+                    {{$t('common.bz')}}：
                     <Select v-model="symbol" style="width:180px;">
                         <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                         </Option>
                     </Select>
                 </Col>
                 <Col span="6">
-                    总金额：
+                    {{$t('common.zje')}}：
                     <Select v-model="totalBalance" style="width:180px;">
-                        <Option :value="0">等于0</Option>
-                        <Option :value="1">大于0小于10000</Option>
-                        <Option :value="2">大于等于10000</Option>
+                        <Option :value="0">{{$t('common.dyl')}}</Option>
+                        <Option :value="1">{{$t('common.dylxyyq')}}</Option>
+                        <Option :value="2">{{$t('common.dydyyw')}}</Option>
                     </Select>
                 </Col>
                 <Col span="6">
-                    用户名：
+                    {{$t('common.yhm')}}：
                     <Input v-model="username" style="width:180px;"/>
                 </Col>
                 <Col span="2">
-                    <Button type="primary" @click="curPage=1;getfindAccountList()">查询</Button>
+                    <Button type="primary" @click="curPage=1;getfindAccountList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1"></Table>
@@ -48,39 +48,39 @@
                 total: 0,
                 columns1: [
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '币种ID',
+                        title: this.$t('monitoring.bzid'),
                         key: 'symbolId'
                     },
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '地址',
+                        title: this.$t('common.dz'),
                         key: 'toAddress'
                     },
                     {
-                        title: '总金额',
+                        title: this.$t('common.zje'),
                         key: 'totalBalance'
                     },
                     {
-                        title: '可用金额',
+                        title: this.$t('common.kyje'),
                         key: 'availableBalance'
                     },
                     {
-                        title: '冻结金额',
+                        title: this.$t('common.djje'),
                         key: 'loanBalance'
                     },
                     {
-                        title: '创建时间',
+                        title: this.$t('common.cjsj'),
                         key: 'createdAt'
                     },
                     {
-                        title: '更新时间',
+                        title: this.$t('common.gxsj'),
                         key: 'updatedAt'
                     }
                 ],

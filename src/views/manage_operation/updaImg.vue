@@ -1,15 +1,15 @@
 <template>
   <div class="updaImge">
       <Card>
-          <p slot="title">banner修改
+          <p slot="title">{{vm.$t('operation.bnxg')}}
               <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
           </p>
           <div class="allUpdata">
-            <span>中文banner</span>
+            <span>{{vm.$t('operation.zwbn')}}</span>
             <Row style="width:100%;">
                 <Col span="4">
                     <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-                        <img :src="image" /> 
+                        <img :src="image" />
                     </div>
                 </Col>
                 <Form ref="formItem" :model="formLeft"  label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
@@ -25,7 +25,7 @@
                     </Col>
                     <Col span="5">
                         <FormItem label="" >
-                            跳转到地址
+                            {{vm.$t('operation.tzdz')}}
                         </FormItem>
                     </Col>
                     <Col span="5">
@@ -33,16 +33,16 @@
                             <Input v-model="formLeft.jumpAddress" name="jumpAddress"></Input>
                         </FormItem>
                     </Col>
-                    <Button type="primary" @click="updaImg">确定</Button>
+                    <Button type="primary" @click="updaImg">{{vm.$t('common.qd')}}</Button>
                 </Form>
             </Row>
         </div>
         <div class="allUpdata">
-            <span>英文banner</span>
+            <span>{{vm.$t('operation.ywbn')}}</span>
             <Row style="width:100%;">
                 <Col span="4">
                     <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-                        <img :src="image1" /> 
+                        <img :src="image1" />
                     </div>
                 </Col>
                     <Form ref="formItem1" :model="formLeft1" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
@@ -58,7 +58,7 @@
                        </Col>
                        <Col span="5">
                            <FormItem label="" >
-                                跳转到地址
+                               {{vm.$t('operation.tzdz')}}
                             </FormItem>
                        </Col>
                        <Col span="5">
@@ -66,16 +66,16 @@
                                 <Input v-model="formLeft1.jumpAddressEn" name="jumpAddressEn"></Input>
                             </FormItem>
                        </Col>
-                        <Button type="primary" @click="updaImgEn">确定</Button>
+                        <Button type="primary" @click="updaImgEn">{{vm.$t('common.qd')}}</Button>
                     </Form>
             </Row>
         </div>
         <div class="allUpdata">
-            <span>繁体banner</span>
+            <span>{{vm.$t('operation.ftbn')}}</span>
             <Row style="width:100%;">
                 <Col span="4">
                     <div class="allUpdata-left" style="width:150px;height:150px;background:#ccc;">
-                        <img :src="image2" /> 
+                        <img :src="image2" />
                     </div>
                 </Col>
                 <Form ref="formItem2" :model="formLeft2" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;display: flex;justify-content: space-around;">
@@ -91,7 +91,7 @@
                     </Col>
                     <Col span="5">
                         <FormItem label="" >
-                            跳转到地址
+                            {{vm.$t('operation.tzdz')}}
                         </FormItem>
                     </Col>
                     <Col span="5">
@@ -99,12 +99,12 @@
                             <Input v-model="formLeft2.jumpAddressCht" name="jumpAddressCht"></Input>
                         </FormItem>
                     </Col>
-                    <Button type="primary" @click="updaImgCht">确定</Button>
+                    <Button type="primary" @click="updaImgCht">{{vm.$t('common.qd')}}</Button>
                 </Form>
             </Row>
         </div>
       </Card>
-  </div>  
+  </div>
 </template>
 <script>
 import extendApi from '../../api/extend'
@@ -112,7 +112,9 @@ import until from '../../libs/util'
 export default {
     props: ['item'],
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             formLeft: {
                 img: '',
                 jumpAddress: ''
@@ -157,14 +159,14 @@ export default {
         updaImg () {
             let form = this.$refs.formItem;
             if (this.formLeft.img == '' && this.formLeft.jumpAddress == '') {
-                this.$Message.error({content:　'请输入中文banner修改的值'})
+                this.$Message.error({content:　this.vm.$t('operation.qsrzwbnxgdz')})
                 return
             }
             var formData = new FormData(form.$el)
             formData.append('adPosition', this.item.adPosition)
             formData.append('version', this.item.version)
             extendApi.updatePromotionActivity(formData, (res) => {
-                this.$Message.success({content:　'修改成功'})
+                this.$Message.success({content: this.vm.$t('common.xgcg')})
                 this.$emit('removeDialog')
                 this.$emit('okCallback')
             }, (msg) => {
@@ -174,14 +176,14 @@ export default {
         updaImgEn () {
             let form = this.$refs.formItem1
             if (this.formLeft1.imgEn == '' && this.formLeft1.jumpAddressEn == '') {
-                this.$Message.error({content:　'请输入英文banner修改的值'})
+                this.$Message.error({content:　this.vm.$t('operation.qsrywbnxgdz')})
                 return
             }
             var formData = new FormData(form.$el)
             formData.append('adPosition', this.item.adPosition)
             formData.append('version', this.item.version)
             extendApi.updatePromotionActivity(formData, (res) => {
-                this.$Message.success({content:　'修改成功'})
+                this.$Message.success({content:　this.vm.$t('common.xgcg')})
                 this.$emit('removeDialog')
                 this.$emit('okCallback')
             }, (msg) => {
@@ -192,14 +194,14 @@ export default {
             debugger
             let form = this.$refs.formItem2
             if (this.formLeft2.imgCht == '' && this.formLeft2.jumpAddressCht == '') {
-                this.$Message.error({content:　'请输入繁体banner修改的值'})
+                this.$Message.error({content:　this.vm.$t('operation.qsrftbnxgdz')})
                 return
             }
             var formData = new FormData(form.$el)
             formData.append('adPosition', this.item.adPosition)
             formData.append('version', this.item.version)
             extendApi.updatePromotionActivity(formData, (res) => {
-                this.$Message.success({content:　'修改成功'})
+                this.$Message.success({content:　this.vm.$t('common.xgcg')})
                 this.$emit('removeDialog')
                 this.$emit('okCallback')
             }, (msg) => {

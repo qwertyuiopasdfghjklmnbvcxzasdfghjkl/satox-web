@@ -6,12 +6,17 @@
                 <Card>
                     <p slot="title">USSD{{$t('finance.cz')}}</p>
                     <Row>
-                        <Select v-model="formData.type" style="width:200px;">
-                            <Option value="username">{{$t('common.yhm')}}</Option>
-                            <Option value="mobile">{{$t('common.sjh')}}</Option>
-                        </Select>
-                        <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                        <Button type="primary" @click="page=1;getList()">{{$t('common.cx')}}</Button>
+                        <Col span="16">
+                            <Select v-model="formData.type" style="width:200px;">
+                                <Option value="username">{{$t('common.yhm')}}</Option>
+                                <Option value="mobile">{{$t('common.sjh')}}</Option>
+                            </Select>
+                            <Input v-model="formData.text" clearable style="width: 200px"></Input>
+                            <Button type="primary" @click="page=1;getList()">{{$t('common.cx')}}</Button>
+                        </Col>
+                        <Col span="8">
+                            <Button type="primary" style="float:right;" @click="reviseDialog">{{$t('finance.xgjl')}}</Button>
+                        </Col>
                     </Row>
                     <Table :columns="columns" :data="data" style="margin-top: 20px;"></Table>
                     <Page :current="page" :total="total" :page-size="size" @on-change="changePage"
@@ -26,6 +31,7 @@
     import util from '../../libs/util';
     import dialog from './components/dialog_recharge';
     import financeApi from '../../api/finance';
+    import ussdDialog from './components/ussd_list';
 
     export default {
         data () {
@@ -97,6 +103,13 @@
                 financeApi.findUSDSRechargeRecords(data, (rdata, rtotel) => {
                     this.data = rdata;
                     this.total = rtotel;
+                });
+            },
+            reviseDialog () {
+                util.setDialog(ussdDialog, {
+                    okCallback: () => {
+                        this.getList();
+                    }
                 });
             },
             changePage (page) {

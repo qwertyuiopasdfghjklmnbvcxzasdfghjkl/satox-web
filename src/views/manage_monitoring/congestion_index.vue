@@ -2,57 +2,57 @@
   <div style="width:2500px;">
      <Card>
        <Row style="margin-bottom: 20px;">
-                <Col span="1">公链类型：</Col>
+                <Col span="1">{{$t('monitoring.gllx')}}：</Col>
                 <Col span="2">
                     <select v-model="symbolType" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
+                        <option value="">{{$t('common.qb')}}</option>
                         <option value="1">BTC</option>
                         <option value="2">ETH</option>
                         <option value="3">OMNI</option>
                         <option value="4">MBT</option>
                     </select>
                 </Col>
-                <Col span="1">币种：</Col>
+                <Col span="1">{{$t('common.bz')}}：</Col>
                 <Col span="2">
                     <Input v-model="symbol" style="width:100px;"/>
                 </Col>
-                <Col span="1">用户名：</Col>
+                <Col span="1">{{$t('common.yhm')}}：</Col>
                 <Col span="2">
                     <Input v-model="userName" style="width:100px;"/>
                 </Col>
         </Row>
         <Row style="margin-bottom: 20px;">
-                <Col span="1">提币状态：</Col>
+                <Col span="1">{{$t('monitoring.tbzt')}}：</Col>
                 <Col span="2">
                     <select v-model="status" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">未处理 </option>
-                        <option value="2">等待交易发起</option>
-                        <option value="3">交易已发送(等待对账)</option>
+                        <option value="">{{$t('common.qb')}}</option>
+                        <option value="1">{{$t('risk.wcl')}} </option>
+                        <option value="2">{{$t('finance.ddjyfq')}}</option>
+                        <option value="3">{{$t('finance.jyyfs')}}</option>
                     </select>
                 </Col>
-                <Col span="1">交易发起时长：</Col>
+                <Col span="1">{{$t('monitoring.jyfqsj')}}：</Col>
                 <Col span="2">
                     <select v-model="time" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">0.5h以内 </option>
-                        <option value="2">0.5h以上</option>
-                        <option value="3">1h以上</option>
-                        <option value="4">2h以</option>
-                        <option value="5">3h以上</option>
-                        <option value="6">5h以上</option>
-                        <option value="7">10h以上</option>
-                        <option value="8">24h以上</option>
-                        <option value="9">48h以上</option>
-                        <option value="10">72h以上</option>
+                        <option value="">{{$t('common.qb')}}</option>
+                        <option value="1">{{$t('monitoring.ldwxsyn')}} </option>
+                        <option value="2">{{$t('monitoring.ldwxsys')}}</option>
+                        <option value="3">{{$t('monitoring.yxsys')}}</option>
+                        <option value="4">{{$t('monitoring.lxsys')}}</option>
+                        <option value="5">{{$t('monitoring.sxsys')}}</option>
+                        <option value="6">{{$t('monitoring.wxsys')}}</option>
+                        <option value="7">{{$t('monitoring.shixsys')}}</option>
+                        <option value="8">{{$t('monitoring.esxsys')}}</option>
+                        <option value="9">{{$t('monitoring.sbxsys')}}</option>
+                        <option value="10">{{$t('monitoring.qexsys')}}</option>
                     </select>
                 </Col>
-                <Col span="1">提现申请ID：</Col>
+                <Col span="1">{{$t('finance.txsqid')}}：</Col>
                 <Col span="2">
                     <Input v-model="withdrawApplyId"  style="width:100px;"/>
                 </Col>
                 <Col span="2">
-                    <Button type="primary" @click="curPage=1;getWithdrawApplyList()">查询</Button>
+                    <Button type="primary" @click="curPage=1;getWithdrawApplyList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <!-- <Table :columns="columns1" :data="data1"></Table> -->
@@ -93,34 +93,34 @@ import monitorApi from '../../api/monitoring'
                         }
                     },
                     {
-                        title: '交易ID',
+                        title: this.$t('common.jyid'),
                         key: 'txId'
                     },
                     {
-                        title: '提现申请ID',
+                        title: this.$t('finance.txsqid'),
                         key: 'withdrawApplyId'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'userName'
                     },
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '公链类型',
+                        title: this.$t('monitoring.gllx'),
                         key: 'symbolType',
                         render: (h, params) => {
                             return h('div',this.switchStaus(params.row.symbolType))
                         }
                     },
                     {
-                        title: '系统打币地址',
+                        title: this.$t('monitoring.xtdbdz'),
                         key: 'fromAddress'
                     },
                     {
-                        title: '用户收币地址',
+                        title: this.$t('monitoring.yhsbdz'),
                         key: 'toAddress'
                     },
                     {
@@ -128,49 +128,49 @@ import monitorApi from '../../api/monitoring'
                         key: 'memo'
                     },
                     {
-                        title: '提现数额',
+                        title: this.$t('monitoring.txed'),
                         key: 'withdrawAmount'
                     },
                     {
-                        title: '提现手续费',
+                        title: this.$t('finance.txsxf'),
                         key: 'fee'
                     },
                     {
-                        title: '矿工费',
+                        title: this.$t('exchange.kgf'),
                         key: 'minerFee'
                     },
                     {
-                        title: '审核状态', //0 未审核  1 审核不通过  2 审核通过
+                        title: this.$t('monitoring.shzt'), //0 未审核  1 审核不通过  2 审核通过
                         key: 'auditStatus',
                         render: (h, params) => {
                             return  h('div', this.statusSwicth(params.row.auditStatus))
                         }
                     },
                     {
-                        title: '提币状态',  //1 未处理  2 等待交易发起  3 交易已发送(等待记账)
+                        title: this.$t('monitoring.tbzt'),  //1 未处理  2 等待交易发起  3 交易已发送(等待记账)
                         key: 'status',
                          render: (h, params) => {
                             return  h('div', this.statusSwicth1(params.row.status))
                         }
                     },
                     {
-                        title: '交易失败原因',
+                        title: this.$t('monitoring.jysbyy'),
                         key: 'failMsg'
                     },
                     {
-                      title: 'nonce值',
+                      title: this.$t('monitoring.nz'),
                       key: 'nonce'
                     },
                     {
-                        title: '申请时间',
+                        title: this.$t('monitoring.sqsj'),
                         key: 'createdTime'
                     },
                     {
-                        title: '交易发起时间',
+                        title: this.$t('monitoring.jyfqsj'),
                         key: 'tradeTime'
                     },
                     {
-                        title: '交易发起时长',
+                        title: this.$t('monitoring.jyfqsc'),
                         key: 'tradeWaitingTime',
                         render: (h, params) =>{
                             return h('div', [params.row.tradeWaitingTime, 'h'])
@@ -206,13 +206,13 @@ import monitorApi from '../../api/monitoring'
             statusSwicth(state) { //0 未审核  1 审核不通过  2 审核通过
                 switch(state){
                     case 0:
-                        return '未审核'
+                        return this.$t('common.wsh')
                         break;
                     case 1:
-                        return '审核不通过'
+                        return this.$t('common.wsbtg')
                         break;
                     case 2:
-                        return '审核通过'
+                        return this.$t('common.wstg')
                         break;
 
                 }
@@ -220,13 +220,13 @@ import monitorApi from '../../api/monitoring'
             statusSwicth1 (state) { //1 未处理  2 等待交易发起  3 交易已发送(等待记账)
                 switch(state){
                     case 1:
-                        return '未处理'
+                        return this.$t('risk.wcl')
                         break;
                     case 2:
-                        return '等待交易发起'
+                        return this.$t('finance.ddjyfq')
                         break;
                     case 3:
-                        return '交易已发送(等待记账)'
+                        return this.$t('finance.jyyfs')
                         break;
 
                 }

@@ -1,17 +1,17 @@
 <!-- 推广活动 -->
 <template>
   <Card>
-    <p slot="title">推广活动</p>
-    <Table :columns="columns1" :data="data1"></Table> 
+    <p slot="title">{{$t('operation.hdtg')}}</p>
+    <Table :columns="columns1" :data="data1"></Table>
     <Row style="margin-top:10px;">
         <Col span="24" style="text-align:center;margin: 0 auto;">
-            添加BANNER页
+            {{$t('operation.tjbny')}}
             <div @click="addBanner" style="display:inline-block;">
                  <Icon type="plus-round" style="cursor:pointer; color: #2d8cf0;font-size:24px;verticalAlign:middle;margin-left:10px;" ></Icon>
             </div>
         </Col>
     </Row>
-    <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page> 
+    <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
   </Card>
 </template>
 
@@ -23,23 +23,23 @@ import addBanner from './addBanner'
 export default {
   data () {
     return {
-      curPage: 1, 
+      curPage: 1,
       total: 0,
       columns1: [
           {
-              title: '广告位',
+              title: this.$t('operation.ggw'),
               key: 'adPosition'
           },
           {
-              title: '更新时间',
+              title: this.$t('common.gxsj'),
               key: 'lastUpdatedTime'
           },
           {
-              title: '图片名称',
+              title: this.$t('operation.tpmc'),
               key: 'activityImgName',
           },
           {
-              title: '跳转地址',
+              title: this.$t('operation.tzdz'),
               key: 'jumpAddress',
             //   render: (h, params) => {
             //       return h('div', [
@@ -52,11 +52,11 @@ export default {
             //   }
           },
           {
-              title: '英文图片名称',
+              title: this.$t('operation.ywtpmc'),
               key: 'activityImgNameEn',
           },
           {
-              title: '英文图片跳转地址',
+              title: this.$t('operation.ywtptzdz'),
               key: 'jumpAddressEn',
             //   render: (h, params) => {
             //       return h('div', [
@@ -69,11 +69,11 @@ export default {
             //   }
           },
           {
-              title: '繁体图片名称',
+              title: this.$t('operation.fttpmc'),
               key: 'activityImgNameCht',
           },
           {
-              title: '繁体图片跳转地址',
+              title: this.$t('operation.fttptzdz'),
               key: 'jumpAddressCht',
             //   render: (h, params) => {
             //       return h('div', [
@@ -86,7 +86,7 @@ export default {
             //   }
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                   return h('div', [
@@ -103,7 +103,7 @@ export default {
                                 });
                             }
                         }
-                    }, '修改'),
+                    }, this.$t('common.xg')),
                     h('Button', {
                         props: {type: 'primary', size: 'small'},
                         on: {
@@ -112,14 +112,14 @@ export default {
                                 extendApi.deleteBannerPage({
                                     promotionActivityId: params.row.promotionActivityId
                                 }, (res) => {
-                                    this.$Message.success({content: '删除成功'})
+                                    this.$Message.success({content: this.$t('kyc.sccg')})
                                     this.getfindAllActivity()
                                 }, (msg) => {
                                     this.$Message.error({contnet: msg})
                                 })
                             }
                         }
-                    }, '删除')
+                    }, this.$t('common.sc'))
                   ]);
               }
           }

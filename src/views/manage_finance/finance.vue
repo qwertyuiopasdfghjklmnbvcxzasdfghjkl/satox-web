@@ -38,7 +38,7 @@
                         <Button type="primary" @click="curPage3=1;reGetPoolList()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table ref="test" :columns="columns4" :data="data4" @on-sort-change="setCapitalPoolSort"></Table>
-                    <Page :current="curPage3" :total="total3" @on-change="changePage3"
+                    <Page :current="curPage3" :total="total3" :page-size="10" @on-change="changePage3"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
@@ -62,7 +62,7 @@
                         <Button type="primary" @click="curPage4=1;reGetAccountList()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table ref="test1" :columns="columns5" :data="data5" @on-sort-change="setChargeSort"></Table>
-                    <Page :current="curPage4" :total="total4" @on-change="changePage4"
+                    <Page :current="curPage4" :total="total4" :page-size="10" @on-change="changePage4"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>

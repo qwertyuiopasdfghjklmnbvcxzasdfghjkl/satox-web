@@ -1,28 +1,28 @@
 <template>
     <div class="">
         <Card>
-            <p slot="title">APP发布</p>
+            <p slot="title">{{$t('operation.appfb')}}</p>
             <p class="lit">
                 <Icon type="social-android"></Icon>
-                安卓APP
+                {{$t('operation.azapp')}}
             </p>
             <Row style="margin-bottom:20px;">
-                <Col span="10">下载网址： {{datas.androidUrl}}</Col>
+                <Col span="10">{{$t('operation.xzwz')}}： {{datas.androidUrl}}</Col>
                 <Col span="10">
                     <Input v-model="androidUrl"></Input>
                 </Col>
                 <Col span="4" style="text-align: center">
-                    <Button @click="tabs2('androidUrl')">保存</Button>
+                    <Button @click="tabs2('androidUrl')">{{$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom:20px;">
-                <Col span="10">APK文件： {{datas.androidPath}}</Col>
+                <Col span="10">{{$t('operation.apkwj')}}： {{datas.androidPath}}</Col>
                 <Col span="10">
                     <Upload
                             :before-upload="handleUpload"
                             :format="format"
                             action="//jsonplaceholder.typicode.com/posts/">
-                        <Button icon="ios-cloud-upload-outline">选择文件</Button>
+                        <Button icon="ios-cloud-upload-outline">{{$t('operation.xzwj')}}</Button>
                         <span v-if="file !== null"> {{ file.name }}</span>
                     </Upload>
                     <div class="loding" v-if="loadingStatus">
@@ -31,30 +31,31 @@
                 </Col>
                 <Col span="4" style="text-align: center">
                     <div>
-                        <Button @click="upload" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '上传' }}</Button>
+                        <Button @click="upload" :loading="loadingStatus">
+                            {{ loadingStatus ? $t('operation.scz') : $t('operation.sc') }}</Button>
                     </div>
                 </Col>
             </Row>
             <p class="lit">
                 <Icon type="social-apple"></Icon>
-                苹果APP
+                {{$t('operation.pgapp')}}
             </p>
             <Row style="margin-bottom:20px;">
-                <Col span="10">下载网址： {{datas.appleUrl}}</Col>
+                <Col span="10">{{$t('operation.xzwz')}}： {{datas.appleUrl}}</Col>
                 <Col span="10">
                     <Input v-model="appleUrl"/>
                 </Col>
                 <Col span="4" style="text-align: center">
-                    <Button @click="tabs2('appleUrl')">保存</Button>
+                    <Button @click="tabs2('appleUrl')">{{$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom:20px;">
-                <Col span="10">IPA文件： {{datas.appleIpa}}</Col>
+                <Col span="10">{{$t('operation.ipawj')}}： {{datas.appleIpa}}</Col>
                 <Col span="10">
                     <Input v-model="appleIpa"/>
                 </Col>
                 <Col span="4" style="text-align: center">
-                    <Button @click="tabs2('appleIpa')">保存</Button>
+                    <Button @click="tabs2('appleIpa')">{{$t('common.bc')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -101,7 +102,7 @@
             },
             tabs2 (propName) {
                 if (!this[propName]) {
-                    this.$Message.error({content: this.swithType(propName) + '不能为空'});
+                    this.$Message.error({content: this.swithType(propName) + this.$t('common.bnwk')});
                     return;
                 }
                 let formData = new FormData();
@@ -111,7 +112,7 @@
             upData (propName, formData) {
                 extendApi.updataAppDetail(formData, (res) => {
                     this.detail();
-                    this.$Message.success({content: '修改成功'});
+                    this.$Message.success({content: this.$t('common.xgcg')});
                     this[propName] = '';
                     this.androidFile = '0';
                     document.getElementsByTagName('input').value = '';
@@ -123,20 +124,20 @@
             swithType (i) {
                 switch (i) {
                     case 'androidPath':
-                        return '安卓上传文件';
+                        return this.$t('operation.azscwj');
                     case 'androidUrl':
-                        return '安卓下载网址';
+                        return this.$t('operation.azxzwz');
                     case 'appleIpa':
-                        return '苹果IPA文件';
+                        return this.$t('operation.pgipawj');
                     case 'appleUrl':
-                        return '苹果下载网址';
+                        return this.$t('operation.pgxzwz');
                 }
             },
             handleUpload (file) {
                 this.file = file;
                 let type = file.name.split('.');
                 if (type[type.length - 1] !== 'apk') {
-                    this.$Message.error({content: '只能上传apk的文件'});
+                    this.$Message.error({content: this.$t('operation.znscapkdwj')});
                     this.file = null;
                     return;
                 }
@@ -144,7 +145,7 @@
             },
             upload () {
                 if (!this.file) {
-                    this.$Message.error({content: 'APK文件不能为空'});
+                    this.$Message.error({content: this.$t('operation.apkbnwk')});
                     return;
                 }
                 this.loadingStatus = true;
@@ -152,7 +153,7 @@
                         if (evt.lengthComputable) {
                             this.percentComplete = Math.round(evt.loaded * 100 / evt.total);
                         } else {
-                            this.$Message.error('文件有误');
+                            this.$Message.error(this.$t('operation.wjyw'));
                         }
                     },
                     (evt) => {
@@ -160,14 +161,14 @@
                         this.file = null;
                         this.loadingStatus = false;
                         this.detail();
-                        this.$Message.success('上传成功');
+                        this.$Message.success(this.$t('operation.sccg'));
                     },
                     (evt) => {
-                        this.$Message.error('上传文件发生了错误尝试');
+                        this.$Message.error(this.$t('operation.scwjfslcw'));
                         this.status = 'wrong';
                     },
                     (evt) => {
-                        this.$Message.error('上传被取消或者浏览器断开连接');
+                        this.$Message.error(this.$t('operation.scbqx'));
                         this.status = 'wrong';
                     }
                 );

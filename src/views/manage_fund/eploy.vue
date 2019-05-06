@@ -1,32 +1,32 @@
 <template>
     <div class="eploy">
         <Card>
-            <p slot="title">添加配置</p>
+            <p slot="title">{{vm.$t('fund.tjpz')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="symbol" label="币种">
+                        <FormItem prop="symbol" :label="vm.$t('common.bz')">
                             <Input v-model="formLeft.symbol" type="text" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="coinMin" label="最小金额">
+                        <FormItem prop="coinMin" :label="vm.$t('system.zxje')">
                             <Input v-model="formLeft.coinMin" type="text" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="coinReserve" label="保留金额">
+                        <FormItem prop="coinReserve" :label="vm.$t('system.blje')">
                             <Input v-model="formLeft.coinReserve" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="minerSymbol" label="矿工费币种">
+                        <FormItem prop="minerSymbol" :label="vm.$t('system.kgfbz')">
                             <Select v-model="formLeft.minerSymbol" style="width: 200px">
                                 <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{
                                     item.symbol }}
@@ -37,26 +37,26 @@
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="minerFee" label="BTC矿工费">
+                        <FormItem prop="minerFee" :label="vm.$t('system.btckgf')">
                             <Input v-model="formLeft.minerFee" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="gasPrice" label="ETH GAS单价">
+                        <FormItem prop="gasPrice" :label="vm.$t('system.ethdj')">
                             <Input v-model="formLeft.gasPrice" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row style="height:40px;line-height:40px;margin-bottom: 20px;">
                     <Col span="24">
-                        <FormItem prop="gasLimit" label="ETH GAS上限">
+                        <FormItem prop="gasLimit" :label="vm.$t('system.ethsx')">
                             <Input v-model="formLeft.gasLimit" style="width:200px;"></Input>
                         </FormItem>
                     </Col>
                 </Row>
-                <FormItem label="主链类型" prop="symbolType">
+                <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                     <Col span="24">
                         <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
                             <Radio label="2">
@@ -79,13 +79,13 @@
                 </FormItem>
                 <Row style="height:40px;line-height:40px;margin-bottom: 40px;">
                     <Col span="24">
-                        <FormItem prop="enable" label="是否可用">
+                        <FormItem prop="enable" :label="vm.$t('system.sfky')">
                             <RadioGroup v-model="formLeft.enable">
                                 <Radio label="1">
-                                    <span>是</span>
+                                    <span>{{vm.$t('common.s')}}</span>
                                 </Radio>
                                 <Radio label="2">
-                                    <span>否</span>
+                                    <span>{{vm.$t('common.f')}}</span>
                                 </Radio>
                             </RadioGroup>
                         </FormItem>
@@ -93,8 +93,8 @@
                 </Row>
                 <Row style="height:40px;line-height:40px;">
                     <Col span="24">
-                        <Button @click="addEploy">确定</Button>
-                        <Button @click="closeDialog">取消</Button>
+                        <Button @click="addEploy">{{vm.$t('common.qd')}}</Button>
+                        <Button @click="closeDialog">{{vm.$t('common.qx')}}</Button>
                     </Col>
                 </Row>
             </Form>
@@ -107,7 +107,9 @@
 
     export default {
         data () {
+            const vm = window.vm;
             return {
+                vm: vm,
                 formLeft: {
                     symbol: '',
                     coinMin: '',
@@ -121,25 +123,25 @@
                 },
                 ruleInline: {
                     symbol: [
-                        {required: true, message: '请输入币种', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('common.bz'), trigger: 'blur'}
                     ],
                     coinMin: [
-                        {required: true, message: '请输入最小金额', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.zxje'), trigger: 'blur'}
                     ],
                     coinReserve: [
-                        {required: true, message: '请输入保留金额', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.blje'), trigger: 'blur'}
                     ],
                     minerFee: [
-                        {required: true, message: '请输入BTC矿工费', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.btckgf'), trigger: 'blur'}
                     ],
                     gasPrice: [
-                        {required: true, message: '请输入ETH GAS单价', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.ethdj'), trigger: 'blur'}
                     ],
                     gasLimit: [
-                        {required: true, message: '请输入ETH GAS上限', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.ethsx'), trigger: 'blur'}
                     ],
                     minerSymbol: [
-                        {required: true, message: '请选择矿工费币种', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.kgfbz'), trigger: 'blur'}
                     ],
                 },
                 symbolList: null
@@ -161,7 +163,7 @@
                 this.$refs.formItem.validate((valid) => {
                     if (valid) {
                         fundApi.addConfig(this.formLeft, (res) => {
-                            this.$Message.success({content: '添加成功'});
+                            this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('removeDialog');
                             this.$emit('okCallback');
                         }, (msg) => {
