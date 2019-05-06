@@ -18,72 +18,72 @@ export default {
         return {
             columns12: [
                 {
-                    title: '交易ID',
+                    title: this.$t('common.jyid'),
                     key: 'txId'
                 },
                 {
-                    title: '用户名',
+                    title: this.$t('common.yhm'),
                     key: 'userName'
                 },
                 {
-                    title: '账号ID',
+                    title: this.$t('monitoring.zhid'),
                     key: 'userId'
                 },
                 {
-                    title: '币种',
+                    title: this.$t('common.bz'),
                     key: 'symbol'
                 },
                 {
-                    title: '公链类型', 
+                    title: this.$t('monitoring.gllx'),
                     key: 'symbolType',
                     render: (h, params) => {
                         return h('div', this.switchStaus(params.row.symbolType))
                     }
                 },
                 {
-                    title: 'from地址',
+                    title: this.$t('monitoring.fdz'),
                     key: 'fromAddress'
                 },
                 {
-                    title: 'to地址',
+                    title: this.$t('monitoring.tdz'),
                     key: 'toAddress'
                 },
                 {
-                    title: '提现数额',
+                    title: this.$t('monitoring.txed'),
                     key: 'amount'
                 },
                 {
-                    title: '手续费',
+                    title: this.$t('exchange.sxf'),
                     key: 'procedureFee'
                 },
                 {
-                    title: '矿工费',
+                    title: this.$t('exchange.kgf'),
                     key: 'minerFee'
                 },
                 {
-                    title: '区块确认数',
+                    title: this.$t('monitoring.qkqrs'),
                     key: 'confirmation'
                 },
                 {
-                    title: '区块号',
+                    title: this.$t('monitoring.qkh'),
                     key: 'blockNumber'
                 },
                 {
-                    title: '状态',  //1等待 2 完成
+                    title: this.$t('common.zt'),  //1等待 2 完成
                     key: 'status',
                     render: (h, params) => {
-                        return h('div', params.row.status === 1 ? '等待': '完成')
+                        return h('div', params.row.status === 1 ? this.$t('common.dd'): this.$t('common.wc'))
                     }
                 },
                 {
-                    title: '是否已记账',//1未记账 1已记账
+                    title: this.$t('monitoring.sfyjz'),//1未记账 1已记账
                     key: 'ledgeredFlag',
                     render: (h, params) => {
-                        return h('div', params.row.ledgeredFlag === 1 ? '未记账': '已记账')
+                        return h('div', params.row.ledgeredFlag === 1 ? this.$t('monitoring.wjz'): this.$t('monitoring.yjz'))
                     }
                 },
                 {
-                    title: '创建时间',
+                    title: this.$t('common.cjsj'),
                     key: 'createdTime'
                 },
             ],
@@ -94,7 +94,7 @@ export default {
         this.gettransactionConfirmList()
     },
     methods: {
-        switchStaus(state) { 
+        switchStaus(state) {
             switch(state){
                 case 1:
                     return 'BTC'

@@ -1,48 +1,50 @@
 <template>
   <Card style="width:450px;">
       <p slot="title">
-        创建分发
+        {{vm.$t('operation.cjff')}}
         <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
       </p>
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" >
-            <FormItem label="编号" prop="serialNumber">
+            <FormItem :label="vm.$t('operation.bh')" prop="serialNumber">
                 <Input v-model="formValidate.serialNumber" :maxlength="255" name="serialNumber"></Input>
             </FormItem>
             <!-- <FormItem label="创建时间" prop="creatTime">
                 <DatePicker type="date" placeholder="请选择时间" name="creatTime" v-model="formValidate.creatTime" width="100%"></DatePicker>
             </FormItem> -->
-            <FormItem label="币种" prop="symbol">
+            <FormItem :label="vm.$t('common.bz')" prop="symbol">
                 <Select v-model="formValidate.symbol" name="symbol" @on-change="changSelect">
                     <Option :value="data.symbol" v-for="data in symbolData" :key="data.id">{{data.symbol}}</Option>
                 </Select>
             </FormItem>
-            <FormItem label="数量" prop="quantity">
+            <FormItem :label="vm.$t('common.sl')" prop="quantity">
                 <Input v-model="formValidate.quantity" name="quantity" :maxlength="255"></Input>
             </FormItem>
-            <FormItem label="目标用户ID" prop="userId">
+            <FormItem :label="vm.$t('operation.mbyhid')" prop="userId">
                 <Input v-model="formValidate.userId" name="userId"></Input>
             </FormItem>
-            <FormItem label="目标账户ID" prop="accountId">
+            <FormItem :label="vm.$t('operation.mbzhid')" prop="accountId">
                 <Input v-model="formValidate.accountId" name="accountId"></Input>
             </FormItem>
-             <FormItem label="来源账户ID" prop="sourceAccountId">
+             <FormItem :label="vm.$t('operation.lyzhid')" prop="sourceAccountId">
                 <Input v-model="formValidate.sourceAccountId" name="sourceAccountId"></Input>
             </FormItem>
-             <FormItem label="备注" prop="remarks">
+             <FormItem :label="vm.$t('common.bz')" prop="remarks">
                 <Input v-model="formValidate.remarks" name="remarks" :maxlength="255"></Input>
             </FormItem>
             <div style="text-align:center;margin-top:15px;">
-                <Button type="primary" style="margin-right:10px;" @click="creat">创建</Button>
-                <Button type="ghost" @click="cancel()">取消</Button>
+                <Button type="primary" style="margin-right:10px;" @click="creat">{{vm.$t('finance.cj')}}</Button>
+                <Button type="ghost" @click="cancel()">{{vm.$t('common.qx')}}</Button>
             </div>
       </Form>
-  </Card> 
+  </Card>
 </template>
 <script>
 import extendApi from '../../api/extend'
 export default {
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             formValidate: {
                 serialNumber: null,
                 creatTime: '',
@@ -123,7 +125,7 @@ export default {
       closeDialog () {
         this.$emit('removeDialog')
       }
-    }  
+    }
 }
 </script>
 

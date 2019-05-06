@@ -9,51 +9,51 @@
                   style="max-height:680px;overflow:auto;">
                 <Row>
                     <Col span="12">
-                        <FormItem label="代号" prop="symbol">
+                        <FormItem :label="vm.$t('exchange.dh')" prop="symbol">
                             <Input v-model="formLeft.symbol" name="symbol"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="英文全称" prop="caption">
+                        <FormItem :label="vm.$t('exchange.ywqc')" prop="caption">
                             <Input v-model="formLeft.caption" name="caption"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem label="中文名全称" prop="captionCN">
+                        <FormItem :label="vm.$t('exchange.zwmqc')" prop="captionCN">
                             <Input v-model="formLeft.captionCN" name="captionCN"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="发行总量" prop="totalIssuance">
+                        <FormItem :label="vm.$t('exchange.fxzl')" prop="totalIssuance">
                             <Input v-model="formLeft.totalIssuance" name="totalIssuance"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem label="流通总量" prop="totalCirculation">
+                        <FormItem :label="vm.$t('exchange.ltzl')" prop="totalCirculation">
                             <Input v-model="formLeft.totalCirculation" name="totalCirculation"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="发行价格" prop="issuePrice">
+                        <FormItem :label="vm.$t('exchange.fxjg')" prop="issuePrice">
                             <Input v-model="formLeft.issuePrice" name="issuePrice"></Input>
                         </FormItem>
                     </Col>
                 </Row>
-                <FormItem label="货币类型" prop="flag">
+                <FormItem :label="vm.$t('exchange.hblx')" prop="flag">
                     <RadioGroup ref="flag" v-model="formLeft.flag">
                         <Radio label="1">
                             <span>ERC20</span>
                         </Radio>
                         <Radio label="2">
-                            <span>非ERC20</span>
+                            <span>{{vm.$t('common.fei')}}ERC20</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="主链类型" prop="symbolType">
+                <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                     <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
                         <Radio label="2">
                             <span>ETH</span>
@@ -79,19 +79,19 @@
                 <FormItem label="ICON" prop="iconFile">
                     <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
                 </FormItem>
-                <FormItem label="ERC20合约地址" prop="contractAddr"
+                <FormItem :label="vm.$t('exchange.erc20hydz')" prop="contractAddr"
                           v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                     <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
                 </FormItem>
                 <Row>
                     <Col span="12">
-                        <FormItem label="合约精度" prop="contractDecimals"
+                        <FormItem :label="vm.$t('exchange.hyjd')" prop="contractDecimals"
                                   v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                             <Input v-model="formLeft.contractDecimals" name="contractDecimals"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="最小提币数量" prop="minWithdrawQuantity">
+                        <FormItem :label="vm.$t('exchange.zxtbsl')" prop="minWithdrawQuantity">
                             <numberbox ref="price" type="text" :min="0.1" name="minWithdrawQuantity"
                                        v-model="formLeft.minWithdrawQuantity"
                                        style="width100%;border:1px solid #dddee1;"/>
@@ -100,13 +100,13 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem label="手续费固定额度" prop="feeFixedAmount">
+                        <FormItem :label="vm.$t('exchange.sxfgded')" prop="feeFixedAmount">
                             <numberbox ref="price" type="text" :min="0.1" name="feeFixedAmount"
                                        v-model="formLeft.feeFixedAmount" style="width100%;border:1px solid #dddee1;"/>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="旷工费" prop="minerFee">
+                        <FormItem :label="vm.$t('exchange.kgf')" prop="minerFee">
                             <numberbox ref="price" type="text" :min="0.1" name="minerFee" v-model="formLeft.minerFee"
                                        style="width100%;border:1px solid #dddee1;"/>
                         </FormItem>
@@ -126,30 +126,30 @@
                         </FormItem>
                     </Col>
                 </Row>
-                <FormItem label="充币权限" prop="rechargeFlag">
+                <FormItem :label="vm.$t('exchange.cbqx')" prop="rechargeFlag">
                     <RadioGroup ref="rechargeFlag" v-model="formLeft.rechargeFlag">
                         <Radio label="1">
-                            <span>正常</span>
+                            <span>{{vm.$t('exchange.zc')}}</span>
                         </Radio>
                         <Radio label="2">
-                            <span>冻结</span>
+                            <span>{{vm.$t('exchange.dj')}}</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="提币权限" prop="withdrawFlag">
+                <FormItem :label="vm.$t('exchange.tbqx')" prop="withdrawFlag">
                     <RadioGroup ref="withdrawFlag" v-model="formLeft.withdrawFlag">
                         <Radio label="1">
-                            <span>正常</span>
+                            <span>{{vm.$t('exchange.zc')}}</span>
                         </Radio>
                         <Radio label="2">
-                            <span>暂停</span>
+                            <span>{{vm.$t('exchange.zt')}}</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="等待区块数" prop="confirmBlock">
+                <FormItem :label="vm.$t('exchange.ddqks')" prop="confirmBlock">
                     <InputNumber style="width:100%;" name="confirmBlock" v-model="formLeft.confirmBlock"></InputNumber>
                 </FormItem>
-                <Button type="primary" @click="addCurreny()">添加</Button>
+                <Button type="primary" @click="addCurreny()">{{vm.$t('common.tj')}}</Button>
             </Form>
         </Card>
     </div>
@@ -163,7 +163,7 @@
         data () {
             const validateAddrCheck = (rule, value, callback) => {
                 if (this.formLeft.flag === '1' && value === '') {
-                    callback(new Error('请输入ERC20合约地址'));
+                    callback(new Error(vm.$t('common.qsr') + vm.$t('exchange.erc20hydz')));
                 } else {
                     callback();
                 }
@@ -219,83 +219,107 @@
                 },
                 ruleInline: {
                     symbol: [
-                        {required: true, message: '请输入英文简称', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.dh'), trigger: 'blur'}
                     ],
                     caption: [
-                        {required: true, message: '请输入英文全称', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.ywqc'), trigger: 'blur'},
                     ],
                     captionCN: [
-                        {required: true, message: '请输入中文全称', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zwmqc'), trigger: 'blur'}
                     ],
 
                     totalIssuance: [
-                        {required: true, message: '请输入发行总量', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.fxzl'), trigger: 'blur'}
                     ],
                     totalCirculation: [
-                        {required: true, message: '请输入流通总量', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.ltzl'), trigger: 'blur'}
                     ],
                     issuePrice: [
-                        {required: true, message: '请输入发行价格', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.fxjg'), trigger: 'blur'}
                     ],
 
                     flag: [
-                        {required: true, message: '请输入货币类型', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.hblx'), trigger: 'blur'},
                     ],
                     symbolType: [
-                        {required: true, message: '请输入公链类型', trigger: 'blur'}
+                        {required: true, message: '公链类型', trigger: 'blur'}
                     ],
                     iconFile: [
-                        {required: true, message: '请输入ICON', trigger: 'blur'},
-                        {validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur'},
-                        {validator: xxx1, message: '图片不能超过2M', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + 'ICON', trigger: 'blur'},
+                        {validator: xxx, message: vm.$t('common.znscpnghjpeghbmpdtp'), trigger: 'blur'},
+                        {validator: xxx1, message: vm.$t('common.tpbncg2m'), trigger: 'blur'}
                     ],
                     // symbolServer: [
-                    //     { required: true, message: '请输入钱包服务', trigger: 'blur' },
+                    //     { required: true, message: '钱包服务', trigger: 'blur' },
                     // ],
                     contractAddr: [
-                        {required: true, message: '请输入ERC20合约地址', trigger: 'blur'},
-                        {validator: validateAddrCheck, message: '请输入ERC20合约地址', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.erc20hydz'), trigger: 'blur'},
+                        {
+                            validator: validateAddrCheck,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.erc20hydz'),
+                            trigger: 'blur'
+                        },
                     ],
                     contractDecimals: [
-                        {required: true, message: '请输入合约精度', trigger: 'blur'},
-                        {validator: validateAddrCheck, message: '请输入合约精度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.hyjd'), trigger: 'blur'},
+                        {
+                            validator: validateAddrCheck,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.hyjd'),
+                            trigger: 'blur'
+                        },
                     ],
                     minWithdrawQuantity: [
-                        {required: true, message: '请输入最小提币数量',},
-                        {validator: customValidator, message: '请输入最小提币数量', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zxtbsl'),},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.zxtbsl'),
+                            trigger: 'blur'
+                        },
                     ],
                     minerFee: [
-                        {required: true, message: '请输入旷工费',},
-                        {validator: customValidator, message: '请输入旷工费', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.kgf'),},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.kgf'),
+                            trigger: 'blur'
+                        },
                     ],
                     feeFixedAmount: [
-                        {required: true, message: '请输入手续费固定额度'},
-                        {validator: customValidator, message: '请输入手续费固定额度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.sxfgded')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.sxfgded'),
+                            trigger: 'blur'
+                        },
                     ],
                     // riseRatio: [
-                    //     { required: true, message: '请输入上浮百分比',},
-                    //     { validator: customValidator, message: '请输入上浮百分比', trigger: 'blur' },
+                    //     { required: true, message: '上浮百分比',},
+                    //     { validator: customValidator, message: '上浮百分比', trigger: 'blur' },
                     // ],
                     rechargeFlag: [
-                        {required: true, message: '请输入充币权限', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.cbqx'), trigger: 'blur'}
                     ],
                     withdrawFlag: [
-                        {required: true, message: '请输入提币权限', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.tbqx'), trigger: 'blur'}
                     ],
                     confirmBlock: [
-                        {required: true, message: '请输入等待区块数',},
-                        {validator: customValidator, message: '请输入等待区块数', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.ddqks'),},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.ddqks'),
+                            trigger: 'blur'
+                        },
                     ],
                     gasprice: [
-                        {required: true, message: '请输入gasprice'},
-                        {validator: customValidator, message: '请输入gasprice', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + 'GASPrice'},
+                        {validator: customValidator, message: vm.$t('common.qsr') + 'GASPrice', trigger: 'blur'},
                     ],
                     gaslimit: [
-                        {required: true, message: '请输入gaslimit'},
-                        {validator: customValidator, message: '请输入gaslimit', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + 'GASNumber'},
+                        {validator: customValidator, message: vm.$t('common.qsr') + 'GASNumber', trigger: 'blur'},
                     ],
                     propertyId: [
-                        {required: true, message: '请输入propertyId'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('common.propertyId')},
                     ]
                 }
             };
@@ -336,7 +360,7 @@
                             formData.append(item, this.formLeft[item]);
                         });
                         currenyApi.insertSymbol(formData, (res) => {
-                            this.$Message.success({content: '添加成功'});
+                            this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('okCallback');
                             this.$emit('removeDialog');
                         }, (msg) => {

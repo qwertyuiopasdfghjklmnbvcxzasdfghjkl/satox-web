@@ -2,67 +2,67 @@
   <div style="width:2500px;">
      <Card>
        <Row style="margin-bottom: 20px;">
-            <Col span="1">公链类型：</Col>
+            <Col span="1">{{$t('monitoring.gllx')}}：</Col>
             <Col span="2">
                 <select v-model="symbolType" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                    <option value="">全部</option>
+                    <option value="">{{$t('common.qb')}}</option>
                     <option value="1">BTC</option>
                     <option value="2">ETH</option>
                     <option value="3">OMNI</option>
                     <option value="4">MBT</option>
                 </select>
             </Col>
-            <Col span="1">币种：</Col>
+            <Col span="1">{{$t('common.bz')}}：</Col>
             <Col span="2">
                 <Input v-model="symbol" style="width:100px;"/>
             </Col>
-            <Col span="1">用户名：</Col>
+            <Col span="1">{{$t('common.yhm')}}：</Col>
             <Col span="2">
                 <Input v-model="userName" style="width:100px;"/>
             </Col>
-            <Col span="1">状态：</Col>
+            <Col span="1">{{$t('common.zt')}}：</Col>
              <Col span="2">
                 <select v-model="status" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                    <option value="">全部</option>
-                    <option value="1">等待</option>
-                    <option value="2">完成</option>
+                    <option value="">{{$t('common.qb')}}</option>
+                    <option value="1">{{$t('common.dd')}}</option>
+                    <option value="2">{{$t('common.wc')}}</option>
                 </select>
             </Col>
         </Row>
         <Row style="margin-bottom: 20px;">
-            <Col span="1">交易方向：</Col>
+            <Col span="1">{{$t('monitoring.jyfx')}}：</Col>
             <Col span="2">
                 <select v-model="direction" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                    <option value="">全部</option>
-                    <option value="1">用户充值</option>
-                    <option value="2">用户提现</option>
-                    <option value="3">交易所归集</option>
-                    <option value="4">冷钱包充值</option>
-                    <option value="5">冷钱包提现</option>
+                    <option value="">{{$t('common.qb')}}</option>
+                    <option value="1">{{$t('monitoring.yhcz')}}</option>
+                    <option value="2">{{$t('monitoring.yhtx')}}</option>
+                    <option value="3">{{$t('monitoring.jysgj')}}</option>
+                    <option value="4">{{$t('monitoring.lqbcz')}}</option>
+                    <option value="5">{{$t('monitoring.lqbtx')}}</option>
                 </select>
             </Col>
-            <Col span="1">区块等待时长：</Col>
+            <Col span="1">{{$t('monitoring.qkddsc')}}：</Col>
             <Col span="2">
                 <select v-model="time" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                    <option value="">全部</option>
-                    <option value="1">0.5h以内 </option>
-                    <option value="2">0.5h以上</option>
-                    <option value="3">1h以上</option>
-                    <option value="4">2h以</option>
-                    <option value="5">3h以上</option>
-                    <option value="6">5h以上</option>
-                    <option value="7">10h以上</option>
-                    <option value="8">24h以上</option>
-                    <option value="9">48h以上</option>
-                    <option value="10">72h以上</option>
+                    <option value="">{{$t('common.qb')}}</option>
+                    <option value="1">{{$t('monitoring.ldwxsyn')}} </option>
+                    <option value="2">{{$t('monitoring.ldwxsys')}}</option>
+                    <option value="3">{{$t('monitoring.yxsys')}}</option>
+                    <option value="4">{{$t('monitoring.lxsys')}}</option>
+                    <option value="5">{{$t('monitoring.sxsys')}}</option>
+                    <option value="6">{{$t('monitoring.wxsys')}}</option>
+                    <option value="7">{{$t('monitoring.shixsys')}}</option>
+                    <option value="8">{{$t('monitoring.esxsys')}}</option>
+                    <option value="9">{{$t('monitoring.sbxsys')}}</option>
+                    <option value="10">{{$t('monitoring.qexsys')}}</option>
                 </select>
             </Col>
-            <Col span="1">交易ID：</Col>
+            <Col span="1">{{$t('common.jyid')}}：</Col>
             <Col span="2">
                 <Input v-model="txId"  style="width:100px;"/>
             </Col>
             <Col span="2">
-                <Button type="primary" @click="curPage=1;getconfirmList()">查询</Button>
+                <Button type="primary" @click="curPage=1;getconfirmList()">{{$t('common.cx')}}</Button>
                 <!--<Button type="primary" @click="block">区块扫描进度</Button>-->
             </Col>
         </Row>
@@ -90,41 +90,41 @@ import util from '../../libs/util';
                 total: 0,
                 columns1: [
                     {
-                        title: '交易ID',
+                        title: this.$t('common.jyid'),
                         key: 'txId'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'userName'
                     },
                     {
-                        title: '账号ID',
+                        title: this.$t('monitoring.zhid'),
                         key: 'accountId'
                     },
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '公链类型',
+                        title: this.$t('monitoring.gllx'),
                         key: 'symbolType',
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.symbolType))
                         }
                     },
                     {
-                        title: '交易方向',
+                        title: this.$t('monitoring.jyfx'),
                         key: 'direction',
                         render: (h, params) => {
                             return h('div', this.switchStaus1(params.row.direction))
                         }
                     },
                     {
-                        title: 'from地址',
+                        title: this.$t('monitoring.fdz'),
                         key: 'fromAddress'
                     },
                     {
-                        title: 'to地址',
+                        title: this.$t('monitoring.tdz'),
                         key: 'toAddress'
                     },
                     {
@@ -132,45 +132,45 @@ import util from '../../libs/util';
                         key: 'memo'
                     },
                     {
-                        title: '数额',
+                        title: this.$t('monitoring.se'),
                         key: 'amount'
                     },
                     {
-                        title: '手续费',
+                        title: this.$t('exchange.sxf'),
                         key: 'procedureFee'
                     },
                     {
-                        title: '矿工费',
+                        title: this.$t('exchange.kgf'),
                         key: 'minerFee'
                     },
                     {
-                        title: '区块确认数',
+                        title: this.$t('monitoring.qkqrs'),
                         key: 'confirmation'
                     },
                     {
-                        title: '区块号',
+                        title: this.$t('monitoring.qkh'),
                         key: 'blockNumber'
                     },
                     {
-                        title: '状态', //1 等待  2 完成
+                        title: this.$t('common.zt'), //1 等待  2 完成
                         key: 'status',
                         render: (h, params) => {
-                            return h('div', params.row.status === 1 ? '等待': '完成')
+                            return h('div', params.row.status === 1 ? this.$t('common.dd'): this.$t('common.wc'))
                         }
                     },
                     {
-                        title: '是否已记账',  //0 未记账  1 已记账
+                        title: this.$t('monitoring.sfyjz'),  //0 未记账  1 已记账
                         key: 'ledgeredFlag',
                         render: (h, params) => {
-                            return h('div', params.row.ledgeredFlag === 0 ? '未记账': '已记账')
+                            return h('div', params.row.ledgeredFlag === 0 ? this.$t('monitoring.wjz'): this.$t('monitoring.yjz'))
                         }
                     },
                     {
-                        title: '创建时间',
+                        title: this.$t('common.cjsj'),
                         key: 'createdTime'
                     },
                     {
-                      title: '区块等待时长',
+                      title: this.$t('monitoring.qkddsc'),
                       key: 'tradeWaitingTime',
                       width: 120,
                       render: (h, params) => {
@@ -204,19 +204,19 @@ import util from '../../libs/util';
             switchStaus1(state) {
                 switch(state){
                     case 1:
-                        return '用户充值'
+                        return this.$t('monitoring.yhcz')
                         break;
                     case 2:
-                        return '用户提现'
+                        return this.$t('monitoring.yhtx')
                         break;
                     case 3:
-                        return '交易所归集'
+                        return this.$t('monitoring.jysgj')
                         break;
                     case 4:
-                        return '冷钱包充值'
+                        return this.$t('monitoring.lqbcz')
                         break;
                     case 5:
-                        return '冷钱包提现'
+                        return this.$t('monitoring.lqbtx')
                         break;
                 }
             },

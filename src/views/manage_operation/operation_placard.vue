@@ -1,8 +1,8 @@
 <template>
     <div class="operation_placard">
         <Card>
-            <p slot="title">公告
-                <Button type="primary" @click="addMarket">新增</Button>
+            <p slot="title">{{$t('operation.gg')}}
+                <Button type="primary" @click="addMarket">{{$t('common.xz')}}</Button>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage"
@@ -23,46 +23,47 @@
                 total: 0,
                 columns1: [
                     {
-                        title: '顺序',
+                        title: this.$t('operation.sx'),
                         key: 'sequence'
                     },
                     {
-                        title: '简体公告标题',
+                        title: this.$t('operation.jtggbt'),
                         key: 'title'
                     },
                     {
-                        title: '简体公告链接',
+                        title: this.$t('operation.jtgglj'),
                         key: 'link',
                     },
                     {
-                        title: '英文公告标题',
+                        title: this.$t('operation.ywggbt'),
                         key: 'titleEn'
                     },
                     {
-                        title: '英文公告链接',
+                        title: this.$t('operation.ywgglj'),
                         key: 'linkEn'
                     },
                     {
-                        title: '繁体公告标题',
+                        title: this.$t('operation.ftggbt'),
                         key: 'titleCht',
                     },
                     {
-                        title: '繁体公告链接',
+                        title: this.$t('operation.ftgglj'),
                         key: 'linkCht'
                     },
                     {
-                        title: '更新时间',
+                        title: this.$t('common.gxsj'),
                         key: 'updatedTime'
                     },
                     {
-                        title: '状态',
+                        title: this.$t('common.zt'),
                         key: 'displayStatus',
                         render: (h, params) => {
-                            return h('div', params.row.displayStatus === 1 ? '展示' : '不展示');
+                            return h('div', params.row.displayStatus === 1 ?
+                                this.$t('operation.zs') : this.$t('operation.bzs'));
                         }
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'opreat',
                         render: (h, params) => {
                             return h('div', [
@@ -79,7 +80,7 @@
                                             });
                                         }
                                     }
-                                }, '修改'),
+                                }, this.$t('common.xg')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     on: {
@@ -87,14 +88,14 @@
                                             extendApi.deleteAnnouncement({
                                                 announcementId: params.row.announcementId
                                             }, (res) => {
-                                                this.$Message.success({content: '取消成功'});
+                                                this.$Message.success({content: this.$t('operation.qxcg')});
                                                 this.getfindAllAnnouncement();
                                             }, (msg) => {
                                                 this.$Message.error({content: msg});
                                             });
                                         }
                                     }
-                                }, '删除公告')
+                                }, this.$t('operation.scgg'))
                             ]);
                         }
                     }

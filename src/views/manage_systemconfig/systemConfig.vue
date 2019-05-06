@@ -1,17 +1,18 @@
 <template>
     <Card>
-        <p slot="title">系统参数配置</p>
+        <p slot="title">{{$t('system.xtcspz')}}</p>
         <Row style="margin-bottom:10px;border-bottom:1px solid #dddee1;">
-            <Col span="6">项目</Col>
-            <Col span="6">现状</Col>
-            <Col span="12">修改</Col>
+            <Col span="6">{{$t('system.xm')}}</Col>
+            <Col span="6">{{$t('system.xz')}}</Col>
+            <Col span="12">{{$t('common.xg')}}</Col>
         </Row>
         <Row style="margin-bottom:10px;">
             <Col span="6">{{sysItem[0].codeDesc}}</Col>
             <Col span="6">{{sysItem[0].value}}</Col>
             <Col span="12">
                 <Input :min="0" style="width:80px;" type="text" v-model="sysItem[0].$value"></Input>
-                <Button @click="updataSystem(sysItem[0])" style="margin-left:10px;" type="primary">修改</Button>
+                <Button @click="updataSystem(sysItem[0])" style="margin-left:10px;" type="primary">{{$t('common.xg')}}
+                </Button>
             </Col>
         </Row>
         <Row v-for="(data,index) in sysItem" v-if="data.code !== 'siteName'" style="margin-bottom:10px;">
@@ -21,7 +22,7 @@
                 <input name="siteLogo" ref="form" type="file"/>
             </Col>
             <Col span="3">
-                <Button @click="updataSystemImg(data.sysParamId, index)" type="primary">保存</Button>
+                <Button @click="updataSystemImg(data.sysParamId, index)" type="primary">{{$t('common.bc')}}</Button>
             </Col>
         </Row>
     </Card>
@@ -31,11 +32,9 @@
     import system from '../../api/systemparam';
     import curreny from '../../api/currency';
     import util from '../../libs/util';
-    import numberbox from '../components/dialog/numberbox';
     import addOrEditFeeAccount from './addOrEditFeeAccount';
     import addOrEditWithdrawalAddress from './addOrEditWithdrawalAddress';
     import addConfig from './addConfig';
-    import upAddress from './upAddress';
 
     export default {
         data () {
@@ -95,73 +94,6 @@
                 userTransactMaxConcurrency: null || 0,
                 accountsSymbolParam: null,
                 coinPoolsSymbolParam: null,
-                accountsColumns: [
-                    {title: '币种', key: 'symbol', width: 80},
-                    {title: '用户名', key: 'username'},
-                    {title: '用户ID', key: 'userId'},
-                    {title: '账户ID', key: 'accountId'},
-                    {title: '创建人', key: 'creator'},
-                    {title: '创建时间', key: 'createdTime'},
-                    {title: '最后修改人', key: 'lastUpdatedBy'},
-                    {title: '最后修改时间', key: 'lastUpdatedTime'},
-                    {
-                        title: '操作', render: (h, params) => {
-                            return h('Button', {
-                                props: {
-                                    type: 'primary',
-                                    size: 'small'
-                                },
-                                on: {
-                                    click: () => {
-                                        util.setDialog(addOrEditFeeAccount, {
-                                            isEdit: true,
-                                            symbol: params.row.symbol,
-                                            username: params.row.username,
-                                            symbolType: params.row.symbolType,
-                                            okCallback: () => {
-                                                this.fnFindAdminAccounts();
-                                            }
-                                        });
-                                    }
-                                }
-                            }, '修改');
-                        }, width: 80
-                    }
-                ],
-                coinPoolsColumns: [
-                    {title: '币种', key: 'symbol', width: 80},
-                    {title: '用户名', key: 'username'},
-                    {title: '用户ID', key: 'userId'},
-                    {title: '账户ID', key: 'accountId'},
-                    {title: '钱包地址', key: 'address'},
-                    {title: '创建人', key: 'creator'},
-                    {title: '创建时间', key: 'createdTime'},
-                    {title: '最后修改人', key: 'lastUpdatedBy'},
-                    {title: '最后修改时间', key: 'lastUpdatedTime'},
-                    {
-                        title: '操作', render: (h, params) => {
-                            return h('Button', {
-                                props: {
-                                    type: 'primary',
-                                    size: 'small'
-                                },
-                                on: {
-                                    click: () => {
-                                        util.setDialog(addOrEditWithdrawalAddress, {
-                                            isEdit: true,
-                                            symbol: params.row.symbol,
-                                            username: params.row.username,
-                                            symbolType: params.row.symbolType,
-                                            okCallback: () => {
-                                                this.fnFindAdminCoinPools();
-                                            }
-                                        });
-                                    }
-                                }
-                            }, '修改');
-                        }, width: 80
-                    }
-                ],
                 accountsData: [],
                 coinPoolsData: [],
                 accountsPage: {
@@ -175,9 +107,6 @@
                     total: 0
                 },
             };
-        },
-        components: {
-            numberbox
         },
         computed: {
             symbolMap () {
@@ -373,17 +302,24 @@
             },
             updataSystemImg (d, i) {
                 var formData = new FormData();
-                console.log(this.$refs.form[i], i);
-                formData.append('file', this.$refs.form[i].files[0]);
-                formData.append('sysParamId', d);
-                if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[i].files[0].name) === false) {
-                    this.$Message.error({content: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片'})
-                    return
+                if (d == 106) {
+                    formData.append('file', this.$refs.form[1].files[0]);
+                    if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[1].files[0].name) === false) {
+                        this.$Message.error({content: this.$t('kyc.znscpnghjpeghbmpdtp')});
+                        return;
+                    }
+                } else {
+                    formData.append('file', this.$refs.form[0].files[0]);
+                    if (/\.(jpg|png|jpeg|bmp|ico)/i.test(this.$refs.form[0].files[0].name) === false) {
+                        this.$Message.error({content: this.$t('kyc.znscpnghjpeghbmpdtp')});
+                        return;
+                    }
                 }
+                formData.append('sysParamId', d);
                 system.updateAdminImg(formData, (res) => {
                     this.getfindSysParam();
-                    this.$Message.success({content: '修改成功'});
-                    document.getElementsByTagName('input').value = ''
+                    this.$Message.success({content: this.$t('common.xgcg')});
+                    document.getElementsByTagName('input').value = '';
                 }, (msg) => {
                     this.$$Message.error({content: msg});
                 });
@@ -393,8 +329,8 @@
 </script>
 
 <style scoped>
-.img{
-    max-width: 60px;
-    max-height: 40px;
-}
+    .img {
+        max-width: 60px;
+        max-height: 40px;
+    }
 </style>

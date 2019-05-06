@@ -5,7 +5,8 @@
         <Row>
             <Col span="16">
                 {{$t('common.yhm')}}
-                <Input v-model="formData.username" clearable style="width: 200px" :placeholder="$t('common.qsr')"></Input>
+                <Input v-model="formData.username" clearable style="width: 200px"
+                       :placeholder="$t('common.qsr')"></Input>
                 {{$t('common.bz')}}
                 <Select v-model="formData.symbol" style="width: 200px">
                     <Option value="0">{{$t('common.qb')}}</Option>
@@ -13,6 +14,9 @@
                     </Option>
                 </Select>
                 <Button type="primary" @click="users.page=1;getList()">{{$t('common.cx')}}</Button>
+            </Col>
+            <Col span="8" style="text-align: right">
+                <Button type="primary" @click="digList()">{{$t('finance.ctjl')}}</Button>
             </Col>
         </Row>
         <Table border :columns="users.columns" :data="users.data" style="margin-top:20px;"></Table>
@@ -24,6 +28,7 @@
 <script>
     import util from '../../libs/util';
     import virtualDialog from './virtual_dialog';
+    import dialogList from './components/dialog_list';
     import voteApi from '@/api/vote';
     import currenyApi from '../../api/currency';
     import monitApi from '../../api/monitoring';
@@ -126,6 +131,13 @@
                     this.users.data = res;
                 });
             },
+            digList () {
+                util.setDialog(dialogList, {
+                    okCallback: () => {
+                        this.getList();
+                    }
+                });
+            }
         }
     };
 </script>

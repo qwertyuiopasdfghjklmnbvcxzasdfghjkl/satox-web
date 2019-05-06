@@ -1,170 +1,170 @@
 <template>
     <Card class="market_setting" style="width:500px;">
         <p slot="title">
-            市场设置
+            {{vm.$t('exchange.scsz')}}
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
-            <Col span="6">市场名称</Col>
+            <Col span="6">{{vm.$t('exchange.scmc')}}</Col>
             <Col span="6">{{item.market}}</Col>
             <Col span="12"></Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">权限名称</Col>
-            <Col span="6">当前状态</Col>
-            <Col span="12" style="text-align:right;">修改</Col>
+            <Col span="6">{{vm.$t('exchange.qxmc')}}</Col>
+            <Col span="6">{{vm.$t('exchange.dqzt')}}</Col>
+            <Col span="12" style="text-align:right;">{{vm.$t('common.xg')}}</Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">上线状态</Col>
-            <Col span="6">{{item.state === 1 ? '上线': '下线'}}</Col>
+            <Col span="6">{{vm.$t('exchange.sxzt')}}</Col>
+            <Col span="6">{{item.state === 1 ? vm.$t('exchange.sx'): vm.$t('exchange.xs')}}</Col>
             <Col span="12" style="text-align:right;">
-                <Button type="primary" @click="update">{{this.item.state === 1 ? '下线': '上线'}}</Button>
+                <Button type="primary" @click="update">{{this.item.state === 1 ? vm.$t('exchange.xs'): vm.$t('exchange.sx')}}</Button>
             </Col>
         </Row>
 
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">标的币种</Col>
+            <Col span="6">{{vm.$t('exchange.bdbz')}}</Col>
             <Col span="6">{{item.currencySymbol}}</Col>
             <Col span="6">
                 <Input v-model="currencySymbol"></Input>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('currencySymbol')">保存</Button>
+                <Button type="primary" @click="tabs('currencySymbol')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">基本币种</Col>
+            <Col span="6">{{vm.$t('exchange.jbbz')}}</Col>
             <Col span="6">{{item.baseSymbol}}</Col>
             <Col span="6">
                 <Input v-model="baseSymbol"></Input>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('baseSymbol')">保存</Button>
+                <Button type="primary" @click="tabs('baseSymbol')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">开盘价格</Col>
+            <Col span="6">{{vm.$t('exchange.kpjg')}}</Col>
             <Col span="6">{{item.openingPrice}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0" v-model="openingPrice"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('openingPrice')">保存</Button>
+                <Button type="primary" @click="tabs('openingPrice')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">最新价格</Col>
+            <Col span="6">{{vm.$t('exchange.zxjg')}}</Col>
             <Col span="6">{{item.lastPrice}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0" v-model="lastPrice"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('lastPrice')">保存</Button>
+                <Button type="primary" @click="tabs('lastPrice')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
 
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">价格精度</Col>
+            <Col span="6">{{vm.$t('exchange.jgjd')}}</Col>
             <Col span="6">{{item.accuracy}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0.1" v-model="accuracy"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('accuracy')">保存</Button>
+                <Button type="primary" @click="tabs('accuracy')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">数量精度</Col>
+            <Col span="6">{{vm.$t('exchange.sljd')}}</Col>
             <Col span="6">{{item.quantityAccu}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :max="8" :min="0" :stpe="1" v-model="quantityAccu"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('quantityAccu')">保存</Button>
+                <Button type="primary" @click="tabs('quantityAccu')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">金额精度</Col>
+            <Col span="6">{{vm.$t('exchange.jejd')}}</Col>
             <Col span="6">{{item.amountAccu}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :max="8" :min="0" :stpe="1" v-model="amountAccu"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('amountAccu')">保存</Button>
+                <Button type="primary" @click="tabs('amountAccu')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">深度合并精度</Col>
+            <Col span="6">{{vm.$t('exchange.sdhbjd')}}</Col>
             <Col span="6">{{item.digit}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0.1" v-model="digit"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('digit')">保存</Button>
+                <Button type="primary" @click="tabs('digit')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">最小下单金额</Col>
+            <Col span="6">{{vm.$t('exchange.zxxdje')}}</Col>
             <Col span="6">{{item.minPlaceOrderAmount || 0}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderAmount"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('minPlaceOrderAmount')">保存</Button>
+                <Button type="primary" @click="tabs('minPlaceOrderAmount')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">最小交易数量</Col>
+            <Col span="6">{{vm.$t('exchange.zxjysl')}}</Col>
             <Col span="6">{{item.minPlaceOrderQuantity || 0}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderQuantity"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('minPlaceOrderQuantity')">保存</Button>
+                <Button type="primary" @click="tabs('minPlaceOrderQuantity')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">固定价格</Col>
+            <Col span="6">{{vm.$t('exchange.gdjg')}}</Col>
             <Col span="6">{{item.fixedPrice || 0}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" v-model="fixedPrice"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('fixedPrice')">保存</Button>
+                <Button type="primary" @click="tabs('fixedPrice')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">自动委托笔数</Col>
+            <Col span="6">{{vm.$t('exchange.zdwtbs')}}</Col>
             <Col span="6">{{item.autoEntrustCount || 0}}</Col>
             <Col span="6">
                 <InputNumber style="width:113px;" v-model="autoEntrustCount"></InputNumber>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('autoEntrustCount')">保存</Button>
+                <Button type="primary" @click="tabs('autoEntrustCount')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">市场类型</Col>
-            <Col span="6">{{item.marketType === 1 ? '真实市场': '虚拟市场'}}</Col>
+            <Col span="6">{{vm.$t('exchange.sclx')}}</Col>
+            <Col span="6">{{item.marketType === 1 ? vm.$t('exchange.zssc'): vm.$t('exchange.xnsc')}}</Col>
             <Col span="6">
                 <Select v-model="marketType" style="width:113px" :disabled="role">
-                    <Option :value="1">真实市场</Option>
-                    <Option :value="0">虚拟市场</Option>
+                    <Option :value="1">{{vm.$t('exchange.zssc')}}</Option>
+                    <Option :value="0">{{vm.$t('exchange.xnsc')}}</Option>
                 </Select>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('marketType')" :disabled="role">保存</Button>
+                <Button type="primary" @click="tabs('marketType')" :disabled="role">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
-            <Col span="6">24H交易量修正</Col>
+            <Col span="6">{{vm.$t('exchange.jylxz')}}</Col>
             <Col span="6">{{parseFloat(item.volumeRatio24h)/0.01 || 0}}%</Col>
             <Col span="6">
                 <input class="number_input" type="number" @input="oninput"
                        style="width:113px;border:1px solid #dddee1;padding: 4px;"/>
             </Col>
             <Col span="6" style="text-align:right;">
-                <Button type="primary" @click="tabs('volumeRatio24h')">保存</Button>
+                <Button type="primary" @click="tabs('volumeRatio24h')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
     </Card>
@@ -178,7 +178,9 @@
     export default {
         props: ['item'],
         data () {
+            const vm = window.vm;
             return {
+                vm: vm,
                 curPage: 1,
                 total: 0,
                 value1: null,
@@ -235,7 +237,7 @@
             },
             tabs (propName) {
                 if (!this[propName] && (this[propName] !== 0)) {
-                    this.$Message.error({content: '请输入值'});
+                    this.$Message.error({content: this.vm.$t('exchange.qsrz')});
                     return;
                 }
                 let data = {
@@ -245,7 +247,7 @@
                 currenyApi.updateMarket(data, (res) => {
                     this.item[propName] = this[propName];
                     this.$emit('okCallback');
-                    this.$Message.success({content: '修改成功'});
+                    this.$Message.success({content: this.vm.$t('common.xgcg')});
                     this[propName] = '';
                 }, (msg) => {
                     this.$Message.error({content: msg});
@@ -259,7 +261,7 @@
                 }, (res) => {
                     this.item.state = this.item.state === 2 ? 1 : 2;
                     this.findMarketList();
-                    this.$Message.success({content: '修改成功'});
+                    this.$Message.success({content: this.vm.$t('common.xgcg')});
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });

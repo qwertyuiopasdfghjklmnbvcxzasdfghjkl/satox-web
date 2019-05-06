@@ -2,14 +2,14 @@
     <div class="addressSet">
         <Card>
             <p slot="title">
-                ETHNounce值
+                {{$t('monitoring.enz')}}
                 <span class="refresh" @click="reshAll"></span>
             </p>
             <Row style="margin-bottom: 20px;">
                 <Col span="14">
-                    ETH地址：
+                    {{$t('monitoring.ethdz')}}：
                     <Input v-model="address" style="width:300px;"/>
-                    <Button type="primary" @click="curPage1=1;getETHNonceList()">查询</Button>
+                    <Button type="primary" @click="curPage1=1;getETHNonceList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns2" :data="data2"></Table>
@@ -32,19 +32,19 @@
                 address: '',
                 columns2: [
                     {
-                        title: 'ETH地址',
+                        title: this.$t('monitoring.ethdz'),
                         key: 'address'
                     },
                     {
-                        title: 'Nounce值',
+                        title: this.$t('monitoring.Nz'),
                         key: 'nonce'
                     },
                     {
-                        title: '更新时间',
+                        title: this.$t('common.gxsj'),
                         key: 'updatedAt'
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'address',
                         render: (h, params) => {
                             return h('div', [
@@ -60,7 +60,7 @@
                                             });
                                         }
                                     }
-                                }, '修改Nounce')
+                                }, this.$t('monitoring.xgn'))
                             ]);
                         }
                     }
@@ -80,7 +80,7 @@
                         this.data2 = res;
                     });
                 } else {
-                    this.$Message.error({content: 'ETH地址不能为空'});
+                    this.$Message.error({content: this.$t('monitoring.edzbnwk')});
                 }
             },
             changePage1 (page) {

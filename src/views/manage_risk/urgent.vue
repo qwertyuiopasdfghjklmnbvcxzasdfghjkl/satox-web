@@ -2,22 +2,22 @@
 <template>
   <div>
     <Card>
-        <p slot="title">紧急异常预警
+        <p slot="title">{{$t('risk.jjycyj')}}
             <span class="refresh" @click="getfindReconciliation"></span>
         </p>
         <Row>
-          <Col span="8">待处理紧急异常数：0</Col>
-          <Col span="8">待处理紧急预警告数：0</Col>
-          <Col span="8">日新增预警数：0</Col>
+          <Col span="8">{{$t('risk.dcljjycs')}}：0</Col>
+          <Col span="8">{{$t('risk.dcljjyjgs')}}：0</Col>
+          <Col span="8">{{$t('risk.rxzyjs')}}：0</Col>
         </Row>
     </Card>
     <Card style="margin-top:10px;">
-        <p slot="title">对账异常</p>
+        <p slot="title">{{$t('risk.dzyc')}}</p>
         <Table :columns="columns1" :data="data1"></Table>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
     </Card>
     <Card style="margin-top:10px;">
-        <p slot="title">网络拥堵</p>
+        <p slot="title">{{$t('risk.wlyd')}}</p>
         <Table :columns="columns2" :data="data2"></Table>
     </Card>
   </div>
@@ -32,27 +32,27 @@ import otcApi from '../../api/otcAberrant'
                 total: 0,
                 columns1: [
                     {
-                        title: '对账状态', // 0: 异常 
+                        title: this.$t('risk.dzzt'), // 0: 异常
                         key: 'status'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '账号',
+                        title: this.$t('common.zh'),
                         key: 'accountName'
                     },
                     {
-                        title: '异常原因',
+                        title: this.$t('risk.ycyy'),
                         key: 'abnormalReason'
                     },
                     {
-                        title: '异常时间',
+                        title: this.$t('risk.ycsj'),
                         key: 'createdTime'
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'opreat',
                         render: (h, params) => {
                           return h('div', [
@@ -64,13 +64,13 @@ import otcApi from '../../api/otcAberrant'
                                         otcApi.handleReconciliationAbnormal({
                                             emergencyAbnormalId: params.row.emergencyAbnormalId
                                         }, (res) => {
-                                            this.$Message.success({content: '忽略成功'})
+                                            this.$Message.success({content: this.$t('risk.hncg')})
                                         }, (msg) => {
                                             this.$Message.error({content: msg})
                                         })
                                       }
                                   }
-                              }, '忽略')
+                              }, this.$t('risk.hn'))
                           ]);
                       }
                     }
@@ -78,15 +78,15 @@ import otcApi from '../../api/otcAberrant'
                 data1: [],
                 columns2: [
                     {
-                        title: '时间',
+                        title: this.$t('common.sj'),
                         key: 'time'
                     },
                     {
-                        title: '延长',
+                        title: this.$t('risk.yc'),
                         key: 'overtime'
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'opreat',
                         render: (h, params) => {
                           return h('div', [
@@ -97,7 +97,7 @@ import otcApi from '../../api/otcAberrant'
                                       click: () => {
                                       }
                                   }
-                              }, '忽略')
+                              }, this.$t('risk.hn'))
                           ]);
                       }
                     }

@@ -1,33 +1,33 @@
 <template>
     <div style="width:1800px;">
         <Card>
-            <p slot="title">账户信息</p>
+            <p slot="title">{{$t('monitoring.zhxx')}}</p>
             <Row style="margin-bottom: 20px;">
-                
-                <Col span="1">用户名：</Col>
+
+                <Col span="1">{{$t('common.yhm')}}：</Col>
                 <Col span="2">
                     <Input v-model="username"   style="width:100px;"/>
                 </Col>
-                <Col span="1">币种：</Col>
+                <Col span="1">{{$t('common.bz')}}：</Col>
                 <Col span="2">
                     <Input v-model="symbol" style="width:80px;"/>
                 </Col>
-                <Col span="1">锁定状态：</Col>
+                <Col span="1">{{$t('monitoring.sdzt')}}：</Col>
                 <Col span="2">
                     <select v-model="locked" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="0">未锁定</option>
-                        <option value="1">锁定</option>
+                        <option value="">{{$t('common.qb')}}</option>
+                        <option value="0">{{$t('monitoring.wsd')}}</option>
+                        <option value="1">{{$t('monitoring.sd')}}</option>
                     </select>
                 </Col>
                 <Col span="2">
-                    <Button type="primary" @click="curPage=1;getfindAccountList()">查询</Button>
+                    <Button type="primary" @click="curPage=1;getfindAccountList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
-        
+
     </div>
 </template>
 <script>
@@ -42,20 +42,20 @@ import monitApi from '../../api/monitoring'
                 total: 0,
                 columns1: [
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '账户ID',
+                        title: this.$t('system.zhid'),
                         key: 'accountId'
                     },
                     {
-                        
-                        title: '锁定状态', // 0  未锁定   1  锁定
+
+                        title: this.$t('monitoring.sdzt'), // 0  未锁定   1  锁定
                         key: 'locked',
                         render: (h, params) => {
                             let status = params.row.locked
@@ -71,44 +71,44 @@ import monitApi from '../../api/monitoring'
                             return h('div', [
                                 h('div', {
                                     style: { color: color}
-                                }, params.row.locked === '1' ? '锁定' : '未锁定'),
+                                }, params.row.locked === '1' ? this.$t('monitoring.sd') : this.$t('monitoring.wsd')),
                             ])
                         }
                     },
                     {
-                        title: '用户真实姓名',
+                        title: this.$t('monitoring.yhzsxm'),
                         key: 'userRealName'
                     },
                     {
-                        title: '手机号',
+                        title: this.$t('common.sjh'),
                         key: 'mobile'
                     },
                     {
-                        title: '邮箱',
+                        title: this.$t('monitoring.yx'),
                         key: 'email'
                     },
                     {
-                        title: '钱包地址',
+                        title: this.$t('system.qbdz'),
                         key: 'address'
                     },
                     {
-                        title: '总金额',
+                        title: this.$t('common.zje'),
                         key: 'totalBalance'
                     },
                     {
-                        title: '可用金额',
+                        title: this.$t('common.kyje'),
                         key: 'availableBalance'
                     },
                     {
-                        title: '冻结金额',
+                        title: this.$t('common.djje'),
                         key: 'frozenBalance'
                     },
                     {
-                        title: '广告冻结金额',
+                        title: this.$t('monitoring.ggdjje'),
                         key: 'adFrozenBalance'
                     },
                     {
-                        title: '每日提现限额',
+                        title: this.$t('monitoring.mrtbxe'),
                         key: 'withdrawAmount'
                     }
                 ],

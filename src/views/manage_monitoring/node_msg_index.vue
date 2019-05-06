@@ -1,19 +1,19 @@
 <template>
     <div>
         <Card>
-            <p slot="title">比特币同步区块数</p>
+            <p slot="title">{{$t('monitoring.btbtbqks')}}</p>
             <Table :columns="columns2" :data="data1"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card style="margin-top:30px;">
-            <p slot="title">以太坊同步区块数</p>
+            <p slot="title">{{$t('monitoring.ytftbqks')}}</p>
             <Table :columns="columns2" :data="data2"></Table>
             <Page :current="curPage1" :total="total1" @on-change="changePage1"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
         <Card style="margin-top:30px;">
-            <p slot="title">OMNI同步区块数</p>
+            <p slot="title">{{$t('monitoring.omnitbqks')}}</p>
             <Table :columns="columns2" :data="data3"></Table>
         </Card>
         <!--<Card style="margin-top:30px;">-->
@@ -32,62 +32,40 @@
                 total: 0,
                 curPage1: 1,
                 total1: 0,
-                columns1: [
-                    {
-                        title: '服务名',
-                        key: 'serviceDomain'
-                    },
-                    {
-                        title: '私有节点IP',
-                        key: 'nodeIp'
-                    },
-                    {
-                        title: '私有节点最新区块',
-                        key: 'nodeLastBlockNumber'
-                    },
-                    {
-                        title: '主网络区块数',
-                        key: 'mainNetLastBlockNumber'
-                    },
-                    {
-                        title: '差值',
-                        key: 'difference'
-                    }
-                ],
                 data1: [],
                 data3: [],
                 data4: [],
                 columns2: [
                     {
-                        title: '服务名',
+                        title: this.$t('monitoring.fwt'),
                         key: 'serviceDomain'
                     },
                     {
-                        title: '私有节点IP',
+                        title: this.$t('monitoring.syjdip'),
                         key: 'nodeIp'
                     },
                     {
-                        title: '已扫描到区块',
+                        title: this.$t('monitoring.ysmdqk'),
                         key: 'scanningBlockNumber'
                     },
                     {
-                        title: '私有节点最新区块',
+                        title: this.$t('monitoring.syjdzxqk'),
                         key: 'nodeLastBlockNumber'
                     },
                     {
-                        title: '主网络区块数',
+                        title: this.$t('monitoring.zwlqks'),
                         key: 'mainNetLastBlockNumber'
                     },
                     {
-                        title: '扫描区块差值',
+                        title: this.$t('monitoring.smqkcz'),
                         key: 'scanDifference'
                     },
                     {
-                        title: '同步区块差值',
+                        title: this.$t('monitoring.tbqkcz'),
                         key: 'difference'
                     },
                     {
-                        title: '已扫描与网络差值',
+                        title: this.$t('monitoring.ysmywlcz'),
                         key: 'scanOnlineDifference'
                     }
                 ],

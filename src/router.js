@@ -504,6 +504,58 @@ export const financeRouter = [
         ]
     },
     {
+        path: '/bank_data',
+        name: 'bank_data',
+        title: 'USSD银行资料',
+        component: Main,
+        icon: 'card',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'index', title: '内部转账', name: 'bank_data_index', component: resolve => {
+                    require(['./views/manage_finance/bank_data.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/ussd_list',
+        name: 'ussd_list',
+        title: 'USSD提现记录',
+        component: Main,
+        icon: 'document-text',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'index', title: 'USSD提现记录', name: 'ussd_list_index',
+                component: resolve => {
+                    require(['./views/manage_finance/ussd_list.vue'], resolve);
+                }
+            }
+        ]
+    },{
+        path: '/sato_list',
+        name: 'sato_list',
+        title: 'SATO提现记录',
+        component: Main,
+        icon: 'shuffle',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'index', title: 'SATO提现记录', name: 'sato_list_index',
+                component: resolve => {
+                    require(['./views/manage_finance/sato_list.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/finance_user',
         name: 'finance_user',
         title: '用户资产',
@@ -584,23 +636,6 @@ export const financeRouter = [
             {
                 path: 'index', title: 'SATO数量修改', name: 'change_sato_data_index', component: resolve => {
                     require(['./views/manage_finance/change_sato_data.vue'], resolve);
-                }
-            }
-        ]
-    },
-    {
-        path: '/bank_data',
-        name: 'bank_data',
-        title: 'USSD银行资料',
-        component: Main,
-        icon: 'card',
-        meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
-        },
-        children: [
-            {
-                path: 'index', title: '内部转账', name: 'bank_data_index', component: resolve => {
-                    require(['./views/manage_finance/bank_data.vue'], resolve);
                 }
             }
         ]
@@ -759,7 +794,7 @@ export const operationRouter = [
         },
         children: [
             {
-                path: 'index', title: '推荐市场', name: 'operation_placard_index', component: resolve => {
+                path: 'index', title: '公告', name: 'operation_placard_index', component: resolve => {
                     require(['./views/manage_operation/operation_placard.vue'], resolve);
                 }
             }

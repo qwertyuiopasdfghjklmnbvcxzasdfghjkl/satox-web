@@ -6,13 +6,25 @@
     <div class="message-main-con">
         <div class="message-mainlist-con">
             <div>
-                <Button @click="setCurrentMesType('unread')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'unread'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">未读消息</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="unreadCount"></Badge></Button>
+                <Button @click="setCurrentMesType('unread')" size="large" long type="text">
+                    <transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'unread'" type="checkmark"></Icon>
+                    </transition><span class="mes-type-btn-text">{{$t('login.wdxx')}}</span>
+                    <Badge class="message-count-badge-outer" class-name="message-count-badge" :count="unreadCount"></Badge>
+                </Button>
             </div>
             <div>
-                <Button @click="setCurrentMesType('hasread')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'hasread'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">已读消息</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="hasreadCount"></Badge></Button>
+                <Button @click="setCurrentMesType('hasread')" size="large" long type="text">
+                    <transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'hasread'" type="checkmark"></Icon>
+                    </transition><span class="mes-type-btn-text">{{$t('login.ydxx')}}</span>
+                    <Badge class="message-count-badge-outer" class-name="message-count-badge" :count="hasreadCount"></Badge>
+                </Button>
             </div>
             <div>
-                <Button @click="setCurrentMesType('recyclebin')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'recyclebin'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">回收站</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="recyclebinCount"></Badge></Button>
+                <Button @click="setCurrentMesType('recyclebin')" size="large" long type="text">
+                    <transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'recyclebin'" type="checkmark"></Icon>
+                    </transition><span class="mes-type-btn-text">{{$t('login.hsz')}}</span>
+                    <Badge class="message-count-badge-outer" class-name="message-count-badge" :count="recyclebinCount"></Badge>
+                </Button>
             </div>
         </div>
         <div class="message-content-con">
@@ -50,7 +62,7 @@ export default {
                         this.hasreadMesList.unshift(this.currentMesList.splice(params.index, 1)[0]);
                     }
                 }
-            }, '标为已读');
+            }, this.$t('login.bwyd'));
         };
         const deleteMesBtn = (h, params) => {
             return h('Button', {
@@ -63,7 +75,7 @@ export default {
                         this.recyclebinList.unshift(this.hasreadMesList.splice(params.index, 1)[0]);
                     }
                 }
-            }, '删除');
+            }, this.$t('kyc.sc'));
         };
         const restoreBtn = (h, params) => {
             return h('Button', {
@@ -75,7 +87,7 @@ export default {
                         this.hasreadMesList.unshift(this.recyclebinList.splice(params.index, 1)[0]);
                     }
                 }
-            }, '还原');
+            }, this.$t('login.hy'));
         };
         return {
             currentMesList: [],
@@ -87,7 +99,7 @@ export default {
             unreadCount: 0,
             hasreadCount: 0,
             recyclebinCount: 0,
-            noDataText: '暂无未读消息',
+            noDataText: this.$t('login.zwwdxx'),
             mes: {
                 title: '',
                 time: '',
@@ -186,13 +198,13 @@ export default {
             }
             this.currentMessageType = type;
             if (type === 'unread') {
-                this.noDataText = '暂无未读消息';
+                this.noDataText = this.$t('login.zwwdxx');
                 this.currentMesList = this.unreadMesList;
             } else if (type === 'hasread') {
-                this.noDataText = '暂无已读消息';
+                this.noDataText = this.$t('login.zwydxx');
                 this.currentMesList = this.hasreadMesList;
             } else {
-                this.noDataText = '回收站无消息';
+                this.noDataText = this.$t('login.hszwxx');
                 this.currentMesList = this.recyclebinList;
             }
         },

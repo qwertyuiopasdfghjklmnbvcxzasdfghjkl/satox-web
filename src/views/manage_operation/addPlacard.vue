@@ -1,47 +1,47 @@
 <template>
   <div class="addPlacard">
       <Card>
-            <p slot="title">添加公告</p>
+            <p slot="title">{{vm.$t('operation.tjgg')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;">
-                    <FormItem label="顺序" prop="sequence">
+                    <FormItem :label="vm.$t('operation.sx')" prop="sequence">
                         <InputNumber style="width:100%;" v-model="formLeft.sequence" name="sequence"></InputNumber>
                         <!-- <Input v-model="formLeft.adPosition" name="adPosition"></Input> -->
                     </FormItem>
-                    <FormItem label="简体公告标题" prop="title">
+                    <FormItem :label="vm.$t('operation.jtggbt')" prop="title">
                         <Input v-model="formLeft.title" name="title"></Input>
                     </FormItem>
-                    <FormItem label="简体公告链接" prop="link">
+                    <FormItem :label="vm.$t('operation.jtgglj')" prop="link">
                         <Input v-model="formLeft.link" name="link" @change="checkUrl('link', $event)"></Input>
                     </FormItem>
-                    <FormItem label="英文公告标题" prop="titleEn">
+                    <FormItem :label="vm.$t('operation.ywggbt')" prop="titleEn">
                         <Input v-model="formLeft.titleEn" name="titleEn"></Input>
                     </FormItem>
-                    <FormItem label="英文公告链接" prop="linkEn">
+                    <FormItem :label="vm.$t('operation.ywgglj')" prop="linkEn">
                         <Input v-model="formLeft.linkEn" name="linkEn" @change="checkUrl('linkEn', $event)"></Input>
                     </FormItem>
-                    <FormItem label="繁体公告标题" prop="titleCht">
+                    <FormItem :label="vm.$t('operation.ftggbt')" prop="titleCht">
                          <Input v-model="formLeft.titleCht" name="titleCht"></Input>
                     </FormItem>
-                    <FormItem label="繁体公告链接" prop="linkCht">
+                    <FormItem :label="vm.$t('operation.ftgglj')" prop="linkCht">
                         <Input v-model="formLeft.linkCht" name="linkCht" @change="checkUrl('linkCht', $event)"></Input>
                     </FormItem>
-                    <FormItem label="状态" prop="displayStatus">
+                    <FormItem :label="vm.$t('common.zt')" prop="displayStatus">
                         <RadioGroup ref="displayStatus" v-model="formLeft.displayStatus">
                             <Radio label="1">
-                                    <span>展示</span>
+                                    <span>{{vm.$t('operation.zs')}}</span>
                                 </Radio>
                                 <Radio label="0">
-                                    <span>不展示</span>
+                                    <span>{{vm.$t('operation.bzs')}}</span>
                                 </Radio>
                             </RadioGroup>
                         </FormItem>
                     <div class="bannerBtn">
-                        <Button type="primary" @click="addCurreny()">添加</Button>
-                         <Button  @click="closeDialog()">取消</Button>
+                        <Button type="primary" @click="addCurreny()">{{vm.$t('common.tj')}}</Button>
+                         <Button  @click="closeDialog()">{{vm.$t('common.qx')}}</Button>
                     </div>
             </Form>
         </Card>
-  </div>  
+  </div>
 </template>
 <script>
 import extendApi from '../../api/extend'
@@ -71,7 +71,9 @@ export default {
                 return callback()
             }
         }
+        const vm = window.vm;
         return {
+            vm: vm,
             formLeft: {
                 sequence: null,
                 title: '',
@@ -84,29 +86,29 @@ export default {
             },
             ruleInline: {
                 sequence: [
-                    { required: true, message: '请输入广告位' },
-                    { validator: customValidator, message: '请输入广告位', trigger: 'blur' },
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ggw') },
+                    { validator: customValidator, message: vm.$t('common.qsr')+vm.$t('operation.ggw'), trigger: 'blur' },
                 ],
                 title: [
-                    { required: true, message: '请输入中文公告标题', trigger: 'blur' },
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.jtggbt'), trigger: 'blur' },
                 ],
                 link: [
-                    { required: true, message: '请输入中文公告链接', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.jtgglj'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur' }
                 ],
                 titleEn: [
-                    { required: true, message: '请输入英文公告标题', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ywggbt'), trigger: 'blur' }
                 ],
                 linkEn: [
-                    { required: true, message: '请输入英文公告链接', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ywgglj'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur' }
                 ],
                 titleCht: [
-                    { required: true, message: '请输入繁体公告标题', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ftggbt'), trigger: 'blur' }
                 ],
                 linkCht: [
-                    { required: true, message: '请输入繁体公告链接', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ftgglj'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur' }
                 ],
             }
         }
@@ -121,7 +123,7 @@ export default {
                 if (valid) {
                     // var formData = new FormData(form.$el)
                     extendApi.addAnnouncement(this.formLeft, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.vm.$t('common.tjcg')})
                         this.$emit('removeDialog')
                         this.$emit('okCallback')
                     }, (msg) => {

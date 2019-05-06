@@ -1,10 +1,10 @@
 <template>
     <div class="updataWaletAddress">
         <Card>
-            <p slot="title">修改地址</p>
+            <p slot="title">{{vm.$t('fund.xgdz')}}</p>
             <Row style="margin-bottom: 20px;">
                 <Col span="5">
-                    地址
+                    {{vm.$t('common.dz')}}
                 </Col>
                 <Col span="10">
                     <Input v-model="address" ></Input>
@@ -12,8 +12,8 @@
             </Row>
             <Row>
                 <Col span="24">
-                    <Button @click="updateAddress">确定修改</Button>
-                    <Button @click="closeDialog">取消</Button>
+                    <Button @click="updateAddress">{{vm.$t('common.qd')}}</Button>
+                    <Button @click="closeDialog">{{vm.$t('common.qx')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -24,7 +24,9 @@ import fundApi from '../../api/fund'
 export default {
     props: ['item'],
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             address: this.item.address
         }
     },
@@ -34,19 +36,19 @@ export default {
         },
         updateAddress () {
             if (this.address !== '') {
-                 fundApi.updateWalletAddress({                 
+                 fundApi.updateWalletAddress({
                     walletId: this.item.walletId,
                     address: this.address,
                     version: this.item.version
                 }, (res) =>{
-                    this.$Message.success({content: '修改成功'})
+                    this.$Message.success({content: this.vm.$t('common.xgcg')})
                     this.$emit('removeDialog')
                     this.$emit('okCallback')
                 })
             } else {
-                this.$Message.error({content: '请填写地址'})
+                this.$Message.error({content: this.vm.$t('fund.qtxdz')})
             }
-            
+
         }
     }
 }

@@ -1,5 +1,5 @@
 <style scoped>
-    .expand-row{
+    .expand-row {
         margin-bottom: 16px;
     }
 </style>
@@ -10,9 +10,10 @@
     </div>
 </template>
 <script>
-import monitorApi from '../../api/monitoring'
-import errorLogDetail from './errorLogDetail'
-import util from '../../libs/util'
+    import monitorApi from '../../api/monitoring';
+    import errorLogDetail from './errorLogDetail';
+    import util from '../../libs/util';
+
     export default {
         props: {
             row: Object
@@ -23,84 +24,84 @@ import util from '../../libs/util'
                 // total: 0,
                 columns12: [
                     {
-                        title: '错误id',
+                        title: this.$t('monitoring.cwid'),
                         key: 'errorLogId'
                     },
                     {
-                        title: '错误应用',
+                        title: this.$t('monitoring.cwyy'),
                         key: 'app'
                     },
                     {
-                        title: '错误模块',
+                        title: this.$t('monitoring.cwmk'),
                         key: 'module'
                     },
                     {
-                        title: '提现申请ID',
+                        title: this.$t('finance.txsqid'),
                         key: 'businessId'
                     },
                     {
-                        title: '错误类别',
+                        title: this.$t('monitoring.cwlb'),
                         key: 'errorType'
                     },
                     {
-                        title: '错误简述',
+                        title: this.$t('monitoring.cwjs'),
                         key: 'errorSketch',
-                         width: 300
+                        width: 300
                     },
                     {
-                        title: '错误详情',
+                        title: this.$t('monitoring.cwxq'),
                         key: 'errorDetails',
                         render: (h, params) => {
                             return h('div', [
-                                params.row.hasDetails===0?'':h('Button', {
+                                params.row.hasDetails === 0 ? '' : h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '10px'},
-                                    on: {   
+                                    on: {
                                         click: () => {
                                             util.setDialog(errorLogDetail, {
                                                 errorLogId: params.row.errorLogId
-                                            })
-                                            
+                                            });
+
                                         }
                                     }
-                                }, '查看详情链接')
+                                }, this.$t('monitoring.ckxqlj'))
                             ]);
                         }
                     },
                     {
-                        title: '参数',
+                        title: this.$t('monitoring.cs'),
                         key: 'params',
                         width: 300
                     },
                     {
-                        title: '产生错误的路径',
+                        title: this.$t('monitoring.cscwdlj'),
                         key: 'path'
                     },
                     {
-                        title: '创建时间',
+                        title: this.$t('common.cjsj'),
                         key: 'createdTime'
                     }
                 ],
                 data12: []
-            }
+            };
         },
         created () {
-            this.getErrorLogList()
+            this.getErrorLogList();
         },
         methods: {
             getErrorLogList () {
-                monitorApi.findErrorLogList( {
+                monitorApi.findErrorLogList({
                     businessId: this.row.withdrawApplyId
                 }, (res) => {
                     // this.total = total
-                    this.data12 = res
+                    this.data12 = res;
                 }, (msg) => {
-                     this.$Message.error({content: msg})
-                })
+                    this.$Message.error({content: msg});
+                });
             },
             changePage (page) {
-                this.curPage = page
-                this.getErrorLogList()
+                this.curPage = page;
+                this.getErrorLogList();
             }
         }
     };

@@ -1,25 +1,25 @@
 <template>
     <div class="addWallet">
         <Card>
-            <p slot="title">添加新地址</p>
+            <p slot="title">{{vm.$t('fund.tjxdz')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
                 <Row>
                     <Col span="24">
-                        <FormItem label="币种" prop="symbol">
+                        <FormItem :label="vm.$t('common.bz')" prop="symbol">
                             <Input v-model="formLeft.symbol" name="symbol"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="24">
-                        <FormItem label="地址" prop="address">
+                        <FormItem :label="vm.$t('common.dz')" prop="address">
                             <Input v-model="formLeft.address" name="address"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <FormItem label="主链类型" prop="symbolType">
+                        <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                             <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
                                 <Radio label="2">
                                     <span>ETH</span>
@@ -42,10 +42,10 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                         <Button type="primary" @click="closeDialog">取消</Button>
+                         <Button type="primary" @click="closeDialog">{{vm.$t('common.qx')}}</Button>
                     </Col>
                     <Col span="12">
-                         <Button type="primary" @click="addColdWallet('formLeft')">确定</Button>
+                         <Button type="primary" @click="addColdWallet('formLeft')">{{vm.$t('common.qd')}}</Button>
                     </Col>
                 </Row>
             </Form>
@@ -56,7 +56,9 @@
 import fundApi from '../../api/fund'
 export default {
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             formLeft: {
                 symbol: '',
                 address: '',
@@ -64,10 +66,10 @@ export default {
             },
             ruleInline: {
                 symbol: [
-                    { required: true, message: '请输入币种', trigger: 'blur' }
+                    { required: true, message: vm.$t('fund.qsrbz'), trigger: 'blur' }
                 ],
                 address: [
-                    { required: true, message: '请输入地址', trigger: 'blur' }
+                    { required: true, message: vm.$t('fund.qsrdz'), trigger: 'blur' }
                 ]
             }
         }
@@ -80,17 +82,17 @@ export default {
             if (this.formLeft.symbol) {
                 if (this.formLeft.address) {
                     fundApi.addColdWallet(this.formLeft, (res) => {
-                        this.$Message.success({content: '添加成功'})
+                        this.$Message.success({content: this.vm.$t('common.tjcg')})
                         this.$emit('okCallback')
                         this.$emit('removeDialog')
                     }, (msg) => {
-                        this.$Message.error({content: msg})                        
+                        this.$Message.error({content: msg})
                     })
                 } else {
-                    this.$Message.error({content: '请输入地址'})
+                    this.$Message.error({content: this.vm.$t('fund.qsrdz')})
                 }
             } else {
-                this.$Message.error({content: '请输入币种'})
+                this.$Message.error({content: this.vm.$t('fund.qsrbz')})
             }
         }
     }

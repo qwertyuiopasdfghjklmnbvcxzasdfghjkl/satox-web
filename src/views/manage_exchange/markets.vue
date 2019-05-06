@@ -2,45 +2,45 @@
 <template>
     <div>
         <Tabs>
-            <TabPane label="真实市场管理">
+            <TabPane :label="$t('exchange.zsscgl')">
                 <Card>
-                    <p slot="title">交易市场管理
+                    <p slot="title">{{$t('exchange.scjygl')}}
                         <span class="refresh" @click="reshAll"></span>
                     </p>
                     <Row>
-                        <span>市场名称</span>
+                        <span>{{$t('exchange.scmc')}}</span>
                         <Input v-model="symbol" style="width: 300px"></Input>
-                        <Button type="primary" @click="findMarket()">查询</Button>
-                        <Button type="primary" @click="add_market()" style="float:right;">新增真实市场</Button>
+                        <Button type="primary" @click="findMarket()">{{$t('common.cx')}}</Button>
+                        <Button type="primary" @click="add_market()" style="float:right;">{{$t('exchange.xzzssc')}}</Button>
                     </Row>
                 </Card>
                 <Card style="margin-top:10px;">
-                    <p slot="title">资本资料</p>
+                    <p slot="title">{{$t('exchange.zbzl')}}</p>
                     <Table :columns="columns2" :data="data2"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
                 <Card style="margin-top:10px;">
-                    <p slot="title">交易数据统计</p>
+                    <p slot="title">{{$t('exchange.jysjtj')}}</p>
                     <Table :columns="columns1" :data="data1"></Table>
                     <Page :current="curPage1" :total="total1" @on-change="changePage1"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </TabPane>
-            <TabPane label="虚拟市场管理">
+            <TabPane :label="$t('exchange.xnscgl')">
                 <Card>
-                    <p slot="title">虚拟市场管理
+                    <p slot="title">{{$t('exchange.xnscgl')}}
                         <span class="refresh" @click="reshAll"></span>
                     </p>
                     <Row>
-                        <span>市场名称</span>
+                        <span>{{$t('exchange.scmc')}}</span>
                         <Input v-model="symbol" style="width: 300px"></Input>
-                        <Button type="primary" @click="getMarketList1()">查询</Button>
-                        <Button type="primary" @click="add_market1()" style="float:right;">新增虚拟市场</Button>
+                        <Button type="primary" @click="getMarketList1()">{{$t('common.cx')}}</Button>
+                        <Button type="primary" @click="add_market1()" style="float:right;">{{$t('exchange.xzxnsc')}}</Button>
                     </Row>
                 </Card>
                 <Card style="margin-top:10px;">
-                    <p slot="title">资本资料</p>
+                    <p slot="title">{{$t('exchange.zbzl')}}</p>
                     <Table :columns="columns3" :data="data3"></Table>
                     <Page :current="curPage3" :total="total3" @on-change="changePage3"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -68,11 +68,11 @@
                 symbol: '',
                 columns1: [
                     {
-                        title: '市场',
+                        title: this.$t('exchange.sc'),
                         key: 'market'
                     },
                     {
-                        title: '状态',
+                        title: this.$t('common.zt'),
                         key: 'status',
                         render: (h, params) => {
                             let status = params.row.status;
@@ -88,56 +88,56 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, params.row.status == 1 ? '上线' : '下线'),
+                                }, params.row.status == 1 ? this.$t('exchange.sx') : this.$t('exchange.xs')),
                             ]);
                             //   return h('div', params.row.state == 1 ? '上线' : '下线')
                         }
                     },
                     {
-                        title: '最新价格',
+                        title: this.$t('exchange.zxjg'),
                         key: 'currentPrice'
                     },
                     {
-                        title: '日成交量',
+                        title: this.$t('exchange.rcjl'),
                         key: 'exchangeQuantityDaily'
                     },
                     {
-                        title: '日最高价',
+                        title: this.$t('exchange.rzgj'),
                         key: 'highestPriceDaily'
                     },
                     {
-                        title: '日最低价',
+                        title: this.$t('exchange.rzdj'),
                         key: 'lowestPriceDaily'
                     },
                     {
-                        title: '日用户',
+                        title: this.$t('exchange.ryh'),
                         key: 'userCountDaily'
                     },
                     {
-                        title: '日成交笔数',
+                        title: this.$t('exchange.rcjbs'),
                         key: 'exchangeCountDaily'
                     },
                     {
-                        title: '累计用户',
+                        title: this.$t('exchange.ljyh'),
                         key: 'userTotalCount'
                     },
                     {
-                        title: '累计交易量',
+                        title: this.$t('exchange.ljjyl'),
                         key: 'totalExchangeQuantity'
                     },
                     {
-                        title: '日交易比例',
+                        title: this.$t('exchange.rjybl'),
                         key: 'ratioExchangeDaily'
                     }
                 ],
                 data1: [],
                 columns2: [
                     {
-                        title: '市场名称',
+                        title: this.$t('exchange.scmc'),
                         key: 'market'
                     },
                     {
-                        title: '状态',
+                        title: this.$t('common.zt'),
                         key: 'state',
                         render: (h, params) => {
                             let status = params.row.state;
@@ -153,45 +153,45 @@
                             return h('div', [
                                 h('div', {
                                     style: {color: color}
-                                }, params.row.state == 1 ? '上线' : '下线'),
+                                }, params.row.state == 1 ? this.$t('exchange.sx') : this.$t('exchange.xs')),
                             ]);
                             //   return h('div', params.row.state == 1 ? '上线' : '下线')
                         }
                     },
                     {
-                        title: '价格精度',
+                        title: this.$t('exchange.jgjd'),
                         key: 'accuracy'
                     },
                     {
-                        title: '数量精度',
+                        title: this.$t('exchange.sljd'),
                         key: 'quantityAccu'
                     },
                     {
-                        title: '金额精度',
+                        title: this.$t('exchange.jejd'),
                         key: 'amountAccu'
                     },
                     {
-                        title: '深度合并精度',
+                        title: this.$t('exchange.sdhbjd'),
                         key: 'digit'
                     },
                     {
-                        title: '最小下单金额',
+                        title: this.$t('exchange.zxxdje'),
                         key: 'minPlaceOrderAmount2'
                     },
                     {
-                        title: '最小交易数量',
+                        title: this.$t('exchange.zxjysl'),
                         key: 'minPlaceOrderQuantity2'
                     },
                     {
-                        title: '固定价格',
+                        title: this.$t('exchange.gdjg'),
                         key: 'fixedPrice'
                     },
                     {
-                        title: '自动委托笔数',
+                        title: this.$t('exchange.zdwtbs'),
                         key: 'autoEntrustCount'
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'address',
                         render: (h, params) => {
                             return h('div', [
@@ -208,7 +208,7 @@
                                             });
                                         }
                                     }
-                                }, '市场设置')
+                                }, this.$t('exchange.scsz'))
                             ]);
                         }
                     }
@@ -217,27 +217,27 @@
 
                 columns3: [
                     {
-                        title: '市场名称',
+                        title: this.$t('exchange.scmc'),
                         key: 'market'
                     },
                     {
-                        title: '价格精度',
+                        title: this.$t('exchange.jgjd'),
                         key: 'accuracy'
                     },
                     {
-                        title: '深度合并精度',
+                        title: this.$t('exchange.sdhbjd'),
                         key: 'digit'
                     },
                     {
-                        title: '最小下单金额',
+                        title: this.$t('exchange.zxxdje'),
                         key: 'minPlaceOrderAmount2'
                     },
                     {
-                        title: '最小交易数量',
+                        title: this.$t('exchange.zxjysl'),
                         key: 'minPlaceOrderQuantity2'
                     },
                     {
-                        title: '操作',
+                        title: this.$t('common.cz'),
                         key: 'address',
                         render: (h, params) => {
                             return h('div', [
@@ -254,7 +254,7 @@
                                             });
                                         }
                                     }
-                                }, '市场设置')
+                                }, this.$t('exchange.scsz'))
                             ]);
                         }
                     }

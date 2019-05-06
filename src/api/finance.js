@@ -319,6 +319,18 @@ const recordSato = function (data, success, error) {
 };
 finance.recordSato = recordSato;
 
+// 财务管理--ussd、sato提现记录
+const withdrawsList = function (data, success, error) {
+    api.get(`api/bm/account/transfer/withdraws`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.withdrawsList = withdrawsList;
+
 // 财务管理--内部转账--列表
 const listTransfer = function (data, success, error) {
     api.get(`api/bm/account/transfer/list`, data, (res) => {
