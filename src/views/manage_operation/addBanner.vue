@@ -1,33 +1,33 @@
 <template>
     <div class="addBanner">
         <Card>
-            <p slot="title">添加</p>
+            <p slot="title">{{vm.$t('common.tj')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100" style="max-height:680px;overflow:auto;">
-                    <FormItem label="广告位" prop="adPosition">
+                    <FormItem :label="vm.$t('operation.ggw')" prop="adPosition">
                         <InputNumber style="width:100%;" v-model="formLeft.adPosition" name="adPosition"></InputNumber>
                         <!-- <Input v-model="formLeft.adPosition" name="adPosition"></Input> -->
                     </FormItem>
-                    <FormItem label="中文图片" prop="img">
+                    <FormItem :label="vm.$t('operation.zwtp')" prop="img">
                         <input type="file" ref="img" name="img" @change="iconValidator('img', $event)"/>
                     </FormItem>
-                    <FormItem label="中文图片跳转地址" prop="jumpAddress">
+                    <FormItem :label="vm.$t('operation.zwtutzdz')" prop="jumpAddress">
                         <Input v-model="formLeft.jumpAddress" name="jumpAddress" @change="checkUrl('jumpAddress', $event)"></Input>
                     </FormItem>
-                    <FormItem label="英文图片" prop="imgEn">
+                    <FormItem :label="vm.$t('operation.ywtp')" prop="imgEn">
                         <input type="file" ref="imgEn" name="imgEn" @change="iconValidator('imgEn', $event)"/>
                     </FormItem>
-                    <FormItem label="英文图片跳转地址" prop="jumpAddressEn">
+                    <FormItem :label="vm.$t('operation.ywtptzdz')" prop="jumpAddressEn">
                         <Input v-model="formLeft.jumpAddressEn" name="jumpAddressEn" @change="checkUrl('jumpAddressEn', $event)"></Input>
                     </FormItem>
-                    <FormItem label="繁体图片" prop="imgCht">
+                    <FormItem :label="vm.$t('operation.fttp')" prop="imgCht">
                         <input type="file" ref="imgCht" name="imgCht" @change="iconValidator('imgCht', $event)"/>
                     </FormItem>
-                    <FormItem label="繁体图片跳转地址" prop="jumpAddressCht">
+                    <FormItem :label="vm.$t('operation.fttptzdz')" prop="jumpAddressCht">
                         <Input v-model="formLeft.jumpAddressCht" name="jumpAddressCht" @change="checkUrl('jumpAddressCht', $event)"></Input>
                     </FormItem>
                     <div class="bannerBtn">
-                        <Button type="primary" @click="addCurreny()">添加</Button>
-                         <Button  @click="closeDialog()">取消</Button>
+                        <Button type="primary" @click="addCurreny()">{{vm.$t('common.tj')}}</Button>
+                         <Button  @click="closeDialog()">{{vm.$t('common.qx')}}</Button>
                     </div>
             </Form>
         </Card>
@@ -75,7 +75,9 @@ export default {
         //         }
         //         return callback()
         // }
+        const vm = window.vm;
         return {
+            vm: vm,
             formLeft: {
                 adPosition: null,
                 img: '',
@@ -87,31 +89,31 @@ export default {
             },
             ruleInline: {
                 adPosition: [
-                    { required: true, message: '请输入广告位' },
-                    { validator: customValidator, message: '请输入广告位', trigger: 'blur' },
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ggw') },
+                    { validator: customValidator, message: vm.$t('common.qsr')+vm.$t('operation.ggw'), trigger: 'blur' },
                 ],
                 img: [
-                    { required: true, message: '请输入中文图片', trigger: 'blur' },
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.zwtp'), trigger: 'blur' },
                 ],
                 jumpAddress: [
-                    { required: true, message: '请输入中文图片跳转地址', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.zwtutzdz'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('operation.qsryhttpktwz'), trigger: 'blur' }
                 ],
                 imgEn: [
-                    { required: true, message: '请输入英文图片', trigger: 'blur' },
-                    { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ywtp'), trigger: 'blur' },
+                    { validator: xxx, message: vm.$t('kyc.znscpnghjpeghbmpdtp'), trigger: 'blur' }
                 ],
                 jumpAddressEn: [
-                    { required: true, message: '请输入英文图片跳转地址', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.ywtptzdz'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('operation.qsryhttpktwz'), trigger: 'blur' }
                 ],
                 imgCht: [
-                    { required: true, message: '请输入繁体图片', trigger: 'blur' },
-                    { validator: xxx, message: '只能上传PNG或JPG或JPEG或bmp或ICO格式的图片', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.fttp'), trigger: 'blur' },
+                    { validator: xxx, message: vm.$t('kyc.znscpnghjpeghbmpdtp'), trigger: 'blur' }
                 ],
                 jumpAddressCht: [
-                    { required: true, message: '请输入繁体图片跳转地址', trigger: 'blur' },
-                    { validator: xxx1, message: '请输入以http:或者//https://开头的网址', trigger: 'blur' }
+                    { required: true, message: vm.$t('common.qsr')+vm.$t('operation.fttptzdz'), trigger: 'blur' },
+                    { validator: xxx1, message: vm.$t('operation.qsryhttpktwz'), trigger: 'blur' }
                 ],
             }
         }

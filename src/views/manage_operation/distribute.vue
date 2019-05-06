@@ -1,19 +1,19 @@
 <!-- 分发 -->
 <template>
     <Card>
-      <p slot="title">分发</p>
+      <p slot="title">{{$t('operation.ff')}}</p>
       <Row>
           <Col span="12">
-            状态：
+            {{$t('common.zt')}}：
             <Select v-model="stauts" style="width:200px">
-                <Option value="0">未分发</Option>
-                <Option value="1">已分发</Option>
-                <Option value="2">已取消</Option>
+                <Option value="0">{{$t('operation.wff')}}</Option>
+                <Option value="1">{{$t('operation.yff')}}</Option>
+                <Option value="2">{{$t('operation.yqx')}}</Option>
             </Select>
-             <Button type="primary" style="float:right" @click="curPage=1;getDistribute()">查询</Button>
+             <Button type="primary" style="float:right" @click="curPage=1;getDistribute()">{{$t('common.cx')}}</Button>
           </Col>
            <Col span="12">
-                <Button type="primary" style="float:right" @click="creates()">创建分发</Button>
+                <Button type="primary" style="float:right" @click="creates()">{{$t('operation.cjff')}}</Button>
            </Col>
       </Row>
       <Table :columns="columns1" :data="data1" style="margin-top:20px;"></Table>
@@ -29,38 +29,38 @@ export default {
     data () {
         return {
             stauts: 0,
-            curPage: 1, 
+            curPage: 1,
             total: 0,
             columns1: [
                 {
-                    title: '币种',
+                    title: this.$t('common.bz'),
                     key: 'symbol'
                 },
                 {
-                    title: '对象',
+                    title: this.$t('operation.dx'),
                     key: 'username'
                 },
                 {
-                    title: '时间',
+                    title: this.$t('common.sj'),
                     key: 'createdTime'
                 },
                 {
-                    title: '总量',
+                    title: this.$t('exchange.zl'),
                     key: 'quantity'
                 },
                 {
-                    title: '状态',
+                    title: this.$t('common.zt'),
                     key: 'distributeState',
                     render: (h, params) => {
                         return h('div', this.swithStatus(params.row.distributeState))
                     }
                 },
                 {
-                    title: '备注',
+                    title: this.$t('common.bz'),
                     key: 'remarks'
                 },
                 {
-                    title: '分发操作',
+                    title: this.$t('operation.ffcz'),
                     key: 'opreat',
                     render: (h, params) => {
                       return h('div', [
@@ -70,26 +70,26 @@ export default {
                               on: {
                                   click: () => {
                                      extendApi.distribute(params.row.distributeId, (res) => {
-                                         this.$Message.success({content: '分发成功'})
+                                         this.$Message.success({content: this.$t('operation.ffcg')})
                                          this.getDistribute()
                                      }, (msg) => {
                                          this.$Message.error({content: msg})
                                      })
                                   }
                               }
-                          }, '分发'),
+                          }, this.$t('operation.ff')),
                           h('Button', {
                               props: {type: 'primary', size: 'small', disabled: params.row.distributeState === 1 || params.row.distributeState === 2},
                               style: {marginRight: '10px'},
                               on: {
                                   click: () => {
                                     extendApi.cancelDistribute(params.row.distributeId, (res) => {
-                                        this.$Message.success({content: '取消成功'})
+                                        this.$Message.success({content:  this.$t('operation.qxcg')})
                                         this.getDistribute()
                                     })
                                   }
                               }
-                          }, '取消')
+                          }, this.$t('common.qx'))
                       ]);
                   }
                 }
@@ -104,13 +104,13 @@ export default {
       swithStatus (stauts) {
           switch (stauts) {
               case 0:
-                return '未分发'
+                return this.$t('operation.wff')
                 break;
               case 1:
-                return '已分发'
+                return this.$t('operation.yff')
                 break;
               case 2:
-                return '已取消'
+                return this.$t('operation.yqx')
                 break;
           }
       },

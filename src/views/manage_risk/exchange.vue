@@ -2,40 +2,40 @@
 <template>
   <div>
     <Card>
-      <p slot="title">币币异常预警
+      <p slot="title">{{$t('risk.bbycyj')}}
           <span class="refresh" @click="reshAll"></span>
       </p>
       <Row>
-          <Col span="12">待处理异常预警数：{{this.datas.waitHandleAmount}}</Col>
-          <Col span="12">日新增预警数：{{this.datas.dailyIncreaseAmount}}</Col>
+          <Col span="12">{{$t('risk.dclycyjs')}}：{{this.datas.waitHandleAmount}}</Col>
+          <Col span="12">{{$t('risk.rxzyjs')}}：{{this.datas.dailyIncreaseAmount}}</Col>
       </Row>
       <Card style="margin-top:16px;">
-        <p slot="title">大额提币</p>
+        <p slot="title">{{$t('risk.detb')}}</p>
         <Table :columns="columns1" :data="data1"></Table>
         <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
       </Card>
       <Card style="margin-top:16px;">
-        <p slot="title">大额充值</p>
+        <p slot="title">{{$t('risk.decz')}}</p>
         <Table :columns="columns2" :data="data2"></Table>
         <Page :current="curPage1" :total="total1" @on-change="changePage1" style="text-align:center;margin-top:20px;"></Page>
       </Card>
       <Card style="margin-top:16px;">
-        <p slot="title">价格异常波动</p>
+        <p slot="title">{{$t('risk.jgycbd')}}</p>
         <Table :columns="columns3" :data="data3"></Table>
         <Page :current="curPage2" :total="total2" @on-change="changePage2" style="text-align:center;margin-top:20px;"></Page>
       </Card>
       <Card style="margin-top:16px;">
-        <p slot="title">交易量异常波动</p>
+        <p slot="title">{{$t('risk.jylycbd')}}</p>
         <Table :columns="columns4" :data="data4"></Table>
         <Page :current="curPage3" :total="total3" @on-change="changePage3" style="text-align:center;margin-top:20px;"></Page>
       </Card>
       <Card style="margin-top:16px;">
-        <p slot="title">用户异常登录</p>
+        <p slot="title">{{$t('risk.yhycdl')}}</p>
         <Table :columns="columns5" :data="data5"></Table>
-        <Page :current="curPage5" :total="total5" @on-change="changePage5" style="text-align:center;margin-top:20px;"></Page>        
+        <Page :current="curPage5" :total="total5" @on-change="changePage5" style="text-align:center;margin-top:20px;"></Page>
       </Card>
       <Card style="margin-top:16px;">
-        <p slot="title">高频API访问</p>
+        <p slot="title">{{$t('risk.gpapifw')}}</p>
         <Table :columns="columns6" :data="data6"></Table>
       </Card>
     </Card>
@@ -48,35 +48,35 @@ export default {
   data () {
     return {
       datas: [],
-      curPage: 1, 
+      curPage: 1,
       total: 0,
-      curPage1: 1, 
+      curPage1: 1,
       total1: 0,
-      curPage2: 1, 
+      curPage2: 1,
       total2: 0,
-      curPage3: 1, 
+      curPage3: 1,
       total3: 0,
-      curPage5: 1, 
+      curPage5: 1,
       total5: 0,
       columns1: [
           {
-              title: '用户',
+              title: this.$t('common.yhm'),
               key: 'userName'
           },
           {
-              title: '币种',
+              title: this.$t('common.bz'),
               key: 'symbol'
           },
           {
-              title: '提币数',
+              title: this.$t('risk.tbs'),
               key: 'withdrawAmount'
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'createdTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -88,7 +88,7 @@ export default {
                                 otcApi.handleMonitoring({
                                     withdrawAbnormalId: params.row.withdrawAbnormalId
                                 }, (res) => {
-                                    this.$Message.success({content: '处理成功'})
+                                    this.$Message.success({content: this.$t('risk.clcg')})
                                     this.getMonitoring()
                                 })
                                 // util.setDialog(login_record)
@@ -97,7 +97,7 @@ export default {
                                 // this.modelShow = true
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }
@@ -105,23 +105,23 @@ export default {
       data1: [],
       columns2: [
           {
-              title: '用户',
+              title: this.$t('common.yhm'),
               key: 'userName'
           },
           {
-              title: '币种',
+              title: this.$t('common.bz'),
               key: 'symbol'
           },
           {
-              title: '充值数',
+              title: this.$t('risk.czs'),
               key: 'rechargeAmount'
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'createdTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -133,7 +133,7 @@ export default {
                                 otcApi.handleRecharge({
                                     rechargeAbnormalId: params.row.rechargeAbnormalId
                                 }, (res) => {
-                                    this.$Message.success({content: '处理成功'})
+                                    this.$Message.success({content: this.$t('risk.clcg')})
                                     this.getAbnormalInfo()
                                 })
                                 // util.setDialog(login_record)
@@ -142,7 +142,7 @@ export default {
                                 // this.modelShow = true
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }
@@ -150,30 +150,30 @@ export default {
       data2: [],
       columns3: [
           {
-              title: '市场',
+              title: this.$t('risk.sc'),
               key: 'market'
           },
           {
-              title: '5分钟前价格',
+              title: this.$t('risk.wfzqjg'),
               key: 'fiveMinutesAgo'
           },
           {
-              title: '当前价格',
+              title: this.$t('risk.dqjg'),
               key: 'now'
           },
           {
-              title: '价格浮动',
+              title: this.$t('risk.jgfd'),
               key: 'floatChange',
-              render: (h, params) => { 
+              render: (h, params) => {
                     return h('div', [params.row.floatChange * 100, '%' ])
               }
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'transactionTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -189,42 +189,42 @@ export default {
                                 otcApi.handleMarketAbnormal({
                                     marketAbnormalId: params.row.marketAbnormalId
                                 }, (res) => {
-                                     this.$Message.success({content: '处理成功'})
+                                     this.$Message.success({content: this.$t('risk.clcg')})
                                      this.getPriceFloat()
                                 })
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }
       ],
       data3: [],
       columns4: [{
-              title: '市场',
+              title: this.$t('risk.sc'),
               key: 'market'
           },
           {
-              title: '5分钟前交易量',
+              title: this.$t('risk.wfzqjyl'),
               key: 'fiveMinutesAgo'
           },
           {
-              title: '当前交易量',
+              title: this.$t('risk.dqjyl'),
               key: 'now'
           },
           {
-              title: '浮动',
+              title: this.$t('risk.fd'),
               key: 'floatChange',
-              render: (h, params) => { 
+              render: (h, params) => {
                     return h('div', [params.row.floatChange * 100, '%' ])
               }
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'transactionTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -240,48 +240,48 @@ export default {
                                  otcApi.handleMarketAbnormal({
                                     marketAbnormalId: params.row.marketAbnormalId
                                 }, (res) => {
-                                     this.$Message.success({content: '处理成功'})
+                                     this.$Message.success({content: this.$t('risk.clcg')})
                                      this.getAmountFloat()
                                 })
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }
       ],
       data4: [],
       columns5: [{
-              title: '用户',
+              title: this.$t('common.yhm'),
               key: 'username'
           },
            {
-              title: '异常类型',
+              title: this.$t('risk.yclx'),
               key: 'type',
               render: (h, params) => {
-                  return h('div', params.row.type === 1 ? '登录频率过高' : '异地登录')
+                  return h('div', params.row.type === 1 ? this.$t('risk.dlplgg') : this.$t('risk.yddl'))
               }
           },
           {
-              title: '登录次数/登录地点个数',
+              title: this.$t('risk.dlcsdlddgs'),
               key: 'loginCount',
               render: (h, params) => {
                   return h('div', [params.row.type === 1 ? params.row.loginCount : params.row.loginAddressAmount])
               }
           },
           {
-              title: '登录时间/登录地点',
+              title: this.$t('risk.dlsjdldd'),
               key: 'loginCount',
               render: (h, params) => {
                   return h('div', [params.row.type === 1 ? params.row.loginTimes : params.row.loginAddresses])
               }
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'createTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -293,14 +293,14 @@ export default {
                                 otcApi.handleUserLoginAbnormal({
                                     abnormalLoginId: params.row.abnormalLoginId
                                 }, (res) => {
-                                    this.$Message.success({content: '处理成功'})
+                                    this.$Message.success({content: this.$t('risk.clcg')})
                                     this.getLoginUserInfo()
                                 }, (msg) => {
                                     this.$Message.error({content: msg})
                                 })
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }
@@ -311,15 +311,15 @@ export default {
               key: 'market'
           },
           {
-              title: '访问次数',
+              title: this.$t('risk.fwcs'),
               key: 'fiveMinutesAgo'
           },
           {
-              title: '异常时间',
+              title: this.$t('risk.ycsj'),
               key: 'createdTime'
           },
           {
-              title: '操作',
+              title: this.$t('common.cz'),
               key: 'opreat',
               render: (h, params) => {
                 return h('div', [
@@ -330,7 +330,7 @@ export default {
                             click: () => {
                             }
                         }
-                    }, '忽略')
+                    }, this.$t('risk.hn'))
                 ]);
             }
           }

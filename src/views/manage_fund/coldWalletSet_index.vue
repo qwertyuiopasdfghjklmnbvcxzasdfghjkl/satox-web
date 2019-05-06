@@ -1,11 +1,11 @@
 <template>
     <div class="coldWalletSet">
         <Card>
-            <p slot="title">冷钱包设置
-                <Button type="primary" @click="add">添加</Button>
+            <p slot="title">{{$t('fund.lqbsz')}}
+                <Button type="primary" @click="add">{{$t('common.tj')}}</Button>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>  
+            <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
@@ -22,18 +22,18 @@ import addAddress from './addAddress'
                 total: 0,
                 columns1: [
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '主链类型',
+                        title: this.$t('common.zllx'),
                         key: 'symbolType',
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.symbolType))
                         }
                     },
                     {
-                        title: '地址',
+                        title: this.$t('common.dz'),
                         key: 'address',
                         render: (h, params) => {
                             let o = this.detail(params.row.addressList, h)
@@ -83,15 +83,17 @@ import addAddress from './addAddress'
                                                 version: sel.version,
                                                 enable: o.valueAll.enable === 1 ? 0 : 1
                                             }, (res) => {
-                                                this.$Message.success({content: '启用成功'})
+                                                this.$Message.success({content: this.$t('fund.qycg')})
                                                  this.getAllColdWallet()
-                                            }) 
-                                             
+                                            })
+
                                         }
                                     }
-                                }, o.valueAll && o.valueAll.enable === 1 ? '禁用': '启用'),
+                                }, o.valueAll && o.valueAll.enable === 1 ? this.$t('fund.jy'): this.$t('fund.qy')),
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==null && o.valueAll && o.valueAll.defaultFlag === 1) || o.valueAll &&  params.row.$select_value==o.valueAll.address},
+                                    props: {type: 'primary', size: 'small', disabled: (params.row.$select_value==
+                                            null && o.valueAll && o.valueAll.defaultFlag === 1) ||
+                                            o.valueAll &&  params.row.$select_value==o.valueAll.address},
                                     style: {marginRight: '10px'},
                                     on: {
                                         click: () => {
@@ -125,14 +127,14 @@ import addAddress from './addAddress'
                                                 oldVersion:oldVersion || null,
                                                 newVersion: sel && sel.version
                                             }, () => {
-                                                this.$Message.success({content: '设置成功'})
+                                                this.$Message.success({content: this.$t('fund.szcg')})
                                                 this.getAllColdWallet()
                                             }, (msg) => {
                                                 this.$Message.error({content: msg})
                                             })
                                         }
                                     }
-                                }, '设为默认'),
+                                }, this.$t('fund.mrsz')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '10px'},
@@ -151,7 +153,7 @@ import addAddress from './addAddress'
                                                 }
                                             }
                                             if (!selItem) {
-                                                this.$Message.error({content: '请选择默认地址'})
+                                                this.$Message.error({content: this.$t('fund.qxzmrdz')})
                                             } else {
                                                 util.setDialog(updataWaletAddress, {
                                                     item: selItem,
@@ -162,7 +164,7 @@ import addAddress from './addAddress'
                                             }
                                         }
                                     }
-                                }, '修改'),
+                                },  this.$t('common.xg')),
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '10px'},
@@ -177,7 +179,7 @@ import addAddress from './addAddress'
                                             })
                                         }
                                     }
-                                }, '新增地址'),
+                                }, this.$t('fund.xzdz')),
                                 // h('Button', {
                                 //     props: {type: 'primary', size: 'small'},
                                 //     style: {marginRight: '10px'},
@@ -215,7 +217,7 @@ import addAddress from './addAddress'
             this.getAllColdWallet()
         },
         methods: {
-            switchStaus(state) { 
+            switchStaus(state) {
                 switch(state){// 0: 未处理  1:已处理  2：已取消  3：已审核
                 case 1:
                     return 'BTC'
@@ -251,7 +253,7 @@ import addAddress from './addAddress'
                             props: {value: item.address, label: item.address}
                         }))
                     }
-                    
+
                 })
                 return {
                     options: options,

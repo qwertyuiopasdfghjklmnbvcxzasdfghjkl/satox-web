@@ -1,12 +1,12 @@
 <template>
   <div class="updataMarket">
       <Card>
-          <p slot="title">修改
+          <p slot="title">{{vm.$t('common.xg')}}
               <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
           </p>
           <Row style="margin-bottom: 20px;">
               <Col span="3">
-                市场
+                  {{vm.$t('exchange.sc')}}
               </Col>
               <Col span="3">
                 {{item.market}}
@@ -15,12 +15,12 @@
                 <Input style="width:200px" v-model="market"></Input>
               </Col>
               <Col span="6">
-                <Button type="primary" @click="upMarket('market', '1')">修改</Button>
+                <Button type="primary" @click="upMarket('market', '1')">{{vm.$t('common.xg')}}</Button>
               </Col>
           </Row>
           <Row>
               <Col span="3">
-                备注
+                  {{vm.$t('common.bz')}}
               </Col>
               <Col span="3">
                 {{item.remark}}
@@ -29,18 +29,20 @@
                 <Input style="width:200px" v-model="remark"></Input>
               </Col>
               <Col span="6">
-                <Button type="primary" @click="upMarket('remark','2')">修改</Button>
+                <Button type="primary" @click="upMarket('remark','2')">{{vm.$t('common.xg')}}</Button>
               </Col>
           </Row>
       </Card>
-  </div>  
+  </div>
 </template>
 <script>
 import extendApi from '../../api/extend'
 export default {
     props: ['item'],
     data () {
+        const vm = window.vm;
         return{
+            vm: vm,
             market: '',
             remark: ''
         }
@@ -48,7 +50,7 @@ export default {
     methods: {
         upMarket(propName, code) {
             if (!this[propName]) {
-                this.$Message.error({content: '请输入值'})
+                this.$Message.error({content: this.vm.$t('exchange.qsrz')})
                 return
             }
             if (code == '1') {
@@ -64,7 +66,7 @@ export default {
                     debugger
                     this.item[propName] = this[propName]
                     this.$emit('okCallback')
-                    this.$Message.success({content: '修改成功'})
+                    this.$Message.success({content: this.vm.$t('common.xgcg')})
                     this[propName] = ''
                 }, (msg) => {
                     this.$Message.error({content: msg})
@@ -78,7 +80,7 @@ export default {
                 extendApi.updateSpecialMarket(data1, (res) =>{
                     this.item[propName] = this[propName]
                     this.$emit('okCallback')
-                    this.$Message.success({content: '修改成功'})
+                    this.$Message.success({content: this.vm.$t('common.xgcg')})
                     this[propName] = ''
                 }, (msg) => {
                     this.$Message.error({content: msg})

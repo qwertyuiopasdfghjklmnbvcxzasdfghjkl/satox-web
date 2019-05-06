@@ -2,11 +2,11 @@
     <div class="transferRecord">
         <Card style="margin-top: 20px;">
             <Row style="margin-bottom: 20px;">
-                <Col span="2">公链类型：</Col>
+                <Col span="2">{{$t('monitoring.gllx')}}：</Col>
                 <Col span="4">
                     <select v-model="symbolType"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
+                        <option value="">{{$t('common.qb')}}</option>
                         <option value="1">BTC</option>
                         <option value="2">ETH</option>
                         <option value="3">OMNI</option>
@@ -14,57 +14,57 @@
                         <!--<option value="5">EOS</option>-->
                     </select>
                 </Col>
-                <Col span="2">币种：</Col>
+                <Col span="2">{{$t('common.bz')}}：</Col>
                 <Col span="4">
                     <Input v-model="symbol" style="width:100px;"/>
                 </Col>
-                <Col span="2">转账类型：</Col>
+                <Col span="2">{{$t('fund.zzlx')}}：</Col>
                 <Col span="4">
                     <!--<Input v-model="username" style="width:100px;"/>-->
                     <select v-model="direction"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
+                        <option value="">{{$t('common.qb')}}</option>
                         <!--<option value="1">充值</option>-->
                         <!--<option value="2">提现</option>-->
                         <!--<option value="3">交易所归集</option>-->
-                        <option value="4">冷钱包充值</option>
-                        <option value="5">冷钱包提现</option>
+                        <option value="4">{{$t('monitoring.lqbcz')}}</option>
+                        <option value="5">{{$t('monitoring.lqbtx')}}</option>
                     </select>
                 </Col>
             </Row>
             <Row style="margin-bottom: 20px;">
-                <Col span="2">转账状态：</Col>
+                <Col span="2">{{$t('fund.zzzt')}}：</Col>
                 <Col span="4">
                     <!--// 1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6对账完成 7提现失败资金返还 ,-->
                     <select v-model="status"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">未处理</option>
-                        <option value="2">等待交易发起</option>
-                        <option value="3">交易已发送</option>
-                        <option value="4">撤销</option>
-                        <option value="5">提现失败</option>
-                        <option value="6">对账完成</option>
-                        <option value="7">提现失败资金返还</option>
+                        <option value="">{{$t('common.qb')}}</option>
+                        <option value="1">{{$t('risk.wcl')}}</option>
+                        <option value="2">{{$t('finance.ddjyfq')}}</option>
+                        <option value="3">{{$t('fund.jyyfs')}}</option>
+                        <option value="4">{{$t('finance.cx')}}</option>
+                        <option value="5">{{$t('finance.txsb')}}</option>
+                        <option value="6">{{$t('monitoring.dzwc')}}</option>
+                        <option value="7">{{$t('finance.txsbzjfh')}}</option>
                     </select>
                 </Col>
-                <Col span="2">交易发起时长：</Col>
+                <Col span="2">{{$t('monitoring.jyfqsc')}}：</Col>
                 <Col span="4">
                     <select v-model="initiationTime"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
-                        <option value="">全部</option>
-                        <option value="1">1h以内</option>
-                        <option value="2">2h以内</option>
-                        <option value="5">5h以内</option>
-                        <option value="24">24小时以内</option>
+                        <option value="">{{$t('common.qb')}}</option>
+                        <option value="1">{{$t('monitoring.yxsn')}}</option>
+                        <option value="2">{{$t('monitoring.lxsn')}}</option>
+                        <option value="5">{{$t('monitoring.wxsn')}}</option>
+                        <option value="24">{{$t('monitoring.esxsn')}}</option>
                     </select>
                 </Col>
-                <Col span="2">交易ID：</Col>
+                <Col span="2">{{$t('common.jyid')}}：</Col>
                 <Col span="4">
                     <Input v-model="txId" style="width:100px;"/>
                 </Col>
                 <Col span="2">
-                    <Button type="primary" @click="curPage1=1;getconfirmList()">查询</Button>
+                    <Button type="primary" @click="curPage1=1;getconfirmList()">{{$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1"></Table>
@@ -92,68 +92,68 @@
                 size: 10,
                 columns1: [
                     {
-                        title: '转账类型',
+                        title: this.$t('fund.zzlx'),
                         key: 'direction',
                         render: (h, params) => {
                             return h('div', this.switchDirection(params.row.direction));
                         }
                     },
                     {
-                        title: '交易ID',
+                        title: this.$t('common.jyid'),
                         key: 'txId'
                     },
                     {
-                        title: '用户名',
+                        title: this.$t('common.yhm'),
                         key: 'username'
                     },
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '公链类型',
+                        title: this.$t('monitoring.gllx'),
                         key: 'symbolType',
                         render: (h, params) => {
                             return h('div', this.switchStaus(params.row.symbolType));
                         }
                     },
                     {
-                        title: 'from地址',
+                        title: this.$t('monitoring.fdz'),
                         key: 'fromAddress'
                     },
                     {
-                        title: 'to地址',
+                        title: this.$t('monitoring.tdz'),
                         key: 'toAddress'
                     },
                     {
-                        title: '数量',
+                        title: this.$t('common.sl'),
                         key: 'amount'
                     },
                     {
-                        title: '矿工费',
+                        title: this.$t('exchange.kgf'),
                         key: 'btcMinerFee'
                     },
                     {
-                        title: '转账状态', //1 等待  2 完成
+                        title: this.$t('fund.zzzt'), //1 等待  2 完成
                         key: 'status',
                         render: (h, params) => {
                             return h('div', this.switchStaus2(params.row.status));
                         }
                     },
                     {
-                        title: '交易失败原因',
+                        title: this.$t('monitoring.jysbyy'),
                         key: 'failMsg'
                     },
                     {
-                        title: 'Nounce值',
+                        title: this.$t('monitoring.Nz'),
                         key: 'nonce'
                     },
                     {
-                        title: '交易发起时间',
+                        title: this.$t('monitoring.jyfqsj'),
                         key: 'createAt'
                     },
                     {
-                        title: '交易完成时间',
+                        title: this.$t('monitoring.jywcsj'),
                         key: 'completeTime'
                     }
                 ],
@@ -186,44 +186,44 @@
             switchDirection (state) {
                 switch (state) { // 1：充值 ，2：提现，3：交易所归集，4：冷钱包充值，5：冷钱包提现
                     case 1:
-                        return '充值';
+                        return this.$t('finance.cz');
                         break;
                     case 2:
-                        return '提现';
+                        return this.$t('finance.tx');
                         break;
                     case 3:
-                        return '交易所归集';
+                        return this.$t('monitoring.jysgj');
                         break;
                     case 4:
-                        return '冷钱包充值';
+                        return this.$t('monitoring.lqbcz');
                         break;
                     case 5:
-                        return '冷钱包提现';
+                        return this.$t('monitoring.lqbtx');
                         break;
                 }
             },
             switchStaus2 (state) {
                 switch (state) { //  状态 1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6对账完成 7提现失败资金返还 ,
                     case 1:
-                        return '未处理';
+                        return this.$t('risk.wcl');
                         break;
                     case 2:
-                        return '等待交易发起';
+                        return this.$t('finance.ddjyfq');
                         break;
                     case 3:
-                        return '交易已发送';
+                        return this.$t('fund.jyyfs');
                         break;
                     case 4:
-                        return '撤销';
+                        return this.$t('finance.cx');
                         break;
                     case 5:
-                        return '提现失败';
+                        return this.$t('finance.txsb');
                         break;
                     case 6:
-                        return '对账完成';
+                        return this.$t('monitoring.dzwc');
                         break;
                     case 7:
-                        return '提现失败资金返还';
+                        return this.$t('finance.txsbzjfh');
                         break;
                 }
             },

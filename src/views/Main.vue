@@ -11,7 +11,7 @@
              :style="{width: hideMenuText?'60px':'240px', overflow: 'hidden', background: $store.state.menuTheme === 'dark'?'#363e4f':'white'}">
             <div style="width: 260px; overflow: hidden auto;height: 100vh;">
                 <div class="logo-con">
-                    后台信息管理系统
+                    {{$t('login.htxxglxt')}}
                 </div>
                 <menus/>
             </div>
@@ -20,7 +20,7 @@
             <div class="main-header">
                 <div class="back_home">
                     <Icon type="ios-monitor-outline"></Icon>
-                    <router-link to="/home">首页</router-link>
+                    <router-link to="/home">{{$t('login.sy')}}</router-link>
                 </div>
                 <div class="header-avator-con">
                     <!--<div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">-->
@@ -34,7 +34,7 @@
                         <!--</Tooltip>-->
                     <!--</div>-->
                     <div @click="showMessage" class="message-con">
-                        <Tooltip :content="messageCount > 0 ? '有' + messageCount + '条未读消息' : '无未读消息'"
+                        <Tooltip :content="messageCount > 0 ? $t('login.y') + messageCount + $t('login.twdxx') : $t('login.zwwdxx')"
                                  placement="bottom">
                             <Badge :count="messageCount" dot>
                                 <Icon type="ios-bell" :size="22"></Icon>
@@ -58,8 +58,8 @@
                                     <Icon type="arrow-down-b"></Icon>
                                 </a>
                                 <DropdownMenu slot="list">
-                                    <DropdownItem name="ownSpace">修改密码</DropdownItem>
-                                    <DropdownItem name="loginout" divided>退出登录</DropdownItem>
+                                    <DropdownItem name="ownSpace">{{$t('login.xgmm')}}</DropdownItem>
+                                    <DropdownItem name="loginout" divided>{{$t('login.tcdl')}}</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                             <Avatar :src="avatorPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
@@ -290,21 +290,21 @@
                 };
                 let userName = Cookies.get('username');
                 if (hour < 6) {
-                    greetingWord = {title: '凌晨好~' + userName, words: '早起的鸟儿有虫吃~'};
+                    greetingWord = {title: this.$t('login.lch') + userName, words: this.$t('login.zqdnrycc')};
                 } else if (hour >= 6 && hour < 9) {
-                    greetingWord = {title: '早上好~' + userName, words: '来一杯咖啡开启美好的一天~'};
+                    greetingWord = {title: this.$t('login.zsh') + userName, words: this.$t('login.lybkf')};
                 } else if (hour >= 9 && hour < 12) {
-                    greetingWord = {title: '上午好~' + userName, words: '工作要加油哦~'};
+                    greetingWord = {title: this.$t('login.swh') + userName, words: this.$t('login.gzyjy')};
                 } else if (hour >= 12 && hour < 14) {
-                    greetingWord = {title: '中午好~' + userName, words: '午饭要吃饱~'};
+                    greetingWord = {title: this.$t('login.zwh') + userName, words: this.$t('login.wfycb')};
                 } else if (hour >= 14 && hour < 17) {
-                    greetingWord = {title: '下午好~' + userName, words: '下午也要活力满满哦~'};
+                    greetingWord = {title: this.$t('login.xwh') + userName, words: this.$t('login.xwyyhlmm')};
                 } else if (hour >= 17 && hour < 19) {
-                    greetingWord = {title: '傍晚好~' + userName, words: '下班没事问候下爸妈吧~'};
+                    greetingWord = {title: this.$t('login.bwh') + userName, words: this.$t('login.xbmswhbm')};
                 } else if (hour >= 19 && hour < 21) {
-                    greetingWord = {title: '晚上好~' + userName, words: '工作之余品一品书香吧~'};
+                    greetingWord = {title: this.$t('login.wsh') + userName, words: this.$t('login.gzzypyps')};
                 } else {
-                    greetingWord = {title: '深夜好~' + userName, words: '夜深了，注意休息哦~'};
+                    greetingWord = {title: this.$t('login.syh') + userName, words: this.$t('login.yslzyxx')};
                 }
                 this.$Notice.config({
                     top: 130

@@ -1,32 +1,34 @@
 <template>
   <div class="aaa" style="width:2300px;">
      <Row style="margin-bottom: 20px;margin-top:20px;">
-       <Col span="1">错误应用：</Col>
+       <Col span="1">{{$t('monitoring.cwyy')}}：</Col>
        <Col span="2">
           <Input v-model="errorApp"  style="width:100px;"/>
        </Col>
-       <Col span="1">错误模块：</Col>
+       <Col span="1">{{$t('monitoring.cwmk')}}：</Col>
        <Col span="2">
            <Input v-model="errorModal"  style="width:100px;"/>
        </Col>
-      <Col span="1">错误发生时间：</Col>
+      <Col span="1">{{$t('monitoring.cwfssj')}}：</Col>
       <Col span="2">
-          <DatePicker type="date" v-model="date" placeholder="开始时间" format="yyyy-MM-dd" style="width: 150px"></DatePicker>
+          <DatePicker type="date" v-model="date" :placeholder="$t('common.kssj')"
+                      format="yyyy-MM-dd" style="width: 150px"></DatePicker>
       </Col>
        <Col span="2">
-          <DatePicker type="date" v-model="date1" placeholder="结束时间" format="yyyy-MM-dd" style="width: 150px"></DatePicker>
+          <DatePicker type="date" v-model="date1" :placeholder="$t('common.jssj')"
+                      format="yyyy-MM-dd" style="width: 150px"></DatePicker>
       </Col>
-      <Col span="1">业务ID: </Col>
+      <Col span="1">{{$t('monitoring.ywid')}}: </Col>
        <Col span="3">
           <Input v-model="businessId"   style="width:150px;"/>
        </Col>
        <Col span="2">
-          <Button type="primary" @click="curPage=1;getfindErrorLogList()">查询</Button>
+          <Button type="primary" @click="curPage=1;getfindErrorLogList()">{{$t('common.cx')}}</Button>
       </Col>
      </Row>
      <Table :columns="columns1" :data="data1"></Table>
-     <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>    
-  </div>  
+     <Page :current="curPage" :total="total" @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
+  </div>
 </template>
 <script>
 import monitApi from '../../api/monitoring'
@@ -46,33 +48,33 @@ import errorDe from './errorDe'
                total1: 0,
                columns1: [
                     {
-                        title: '错误应用',
+                        title: this.$t('monitoring.cwyy'),
                         key: 'app'
                     },
                     {
-                        title: '错误模块',
+                        title: this.$t('monitoring.cwmk'),
                         key: 'module'
                     },
                     {
-                        title: '业务表',
+                        title: this.$t('monitoring.ywb'),
                         key: 'businessTable'
                     },
                     {
-                        title: '业务ID',
+                        title: this.$t('monitoring.ywid'),
                         key: 'businessId'
                     },
                      {
-                        title: '错误类别',
+                        title: this.$t('monitoring.cwlb'),
                         key: 'errorType'
                     },
                     {
-                        title: '错误简述',
+                        title: this.$t('monitoring.cwjs'),
                         key: 'errorSketch',
                         width: 300
                     },
                     {
-                        title: '错误详情',
-                        key: 'errorDetails',// 
+                        title: this.$t('monitoring.cwxq'),
+                        key: 'errorDetails',//
                         render: (h, params) => {
                             return h('div', [
                                 params.row.hasDetails === 0 ? '': h('Button', {
@@ -83,29 +85,29 @@ import errorDe from './errorDe'
                                             util.setDialog(errorDe, {
                                                 errorLogId: params.row.errorLogId
                                             })
-                                            
+
                                         }
                                     }
-                                }, '查看详情链接')
+                                }, this.$t('monitoring.ckxqlj'))
                             ]);
                         }
 
                     },
                     {
-                        title: '参数',
+                        title: this.$t('monitoring.cs'),
                         key: 'params',
                         width: 300
                     },
                     {
-                        title: '发生错误的路径',
+                        title: this.$t('monitoring.cscwdlj'),
                         key: 'path'
                     },
                     {
-                        title: '外部服务地址',
+                        title: this.$t('monitoring.wbfwdz'),
                         key: 'externalServices'
                     },
                     {
-                        title: '创建时间',
+                        title: this.$t('common.cjsj'),
                         key: 'createdTime'
                     }
                 ],
@@ -125,10 +127,10 @@ import errorDe from './errorDe'
                 // data.beginDate = util.dateToStr(new Date(), 'yyyy-MM-dd 00:00:00')
                 if (this.date) {
                     data.beginTime = util.dateToStrDate(this.date)
-                } 
+                }
                 if (this.date1) {
                     data.endTime = util.dateToStrDate(this.date1)
-                } 
+                }
                 return data
             }
         },

@@ -1,8 +1,8 @@
 <template>
     <div class="addressSet">
         <Card>
-            <p slot="title">自动转账
-                <Button @click="adddEploy">添加配置</Button>
+            <p slot="title">{{$t('fund.zdzz')}}
+                <Button @click="adddEploy">{{$t('fund.tjpz')}}</Button>
             </p>
             <Table :columns="columns" :data="data"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage1" :page-size="size"
@@ -31,38 +31,38 @@
                 size: 10,
                 columns: [
                     {
-                        title: '币种',
+                        title: this.$t('common.bz'),
                         key: 'symbol'
                     },
                     {
-                        title: '最小金额',
+                        title: this.$t('system.zxje'),
                         key: 'coinMin'
                     },
                     {
-                        title: '保留金额',
+                        title: this.$t('system.blje'),
                         key: 'coinReserve'
                     },
                     {
-                        title: '矿工费币种',
+                        title: this.$t('system.kgfbz'),
                         key: 'minerSymbol'
                     },
                     {
-                        title: 'BTC矿工费',
+                        title: this.$t('system.btckgf'),
                         key: 'minerFee'
                     },
                     {
-                        title: 'ETH GAS单价',
+                        title: this.$t('system.ethdj'),
                         key: 'gasPrice'
                     },
                     {
-                        title: 'ETH GAS上限',
+                        title: this.$t('system.ethsx'),
                         key: 'gasLimit'
                     },
                     {
-                        title: '是否可用',
+                        title: this.$t('system.sfky'),
                         key: 'enable',
                         render: (h, params) => {
-                            return h('div', params.row.enable === 0 ? '不可用' : '可用');
+                            return h('div', params.row.enable === 0 ? this.$t('system.bky') : this.$t('system.ky'));
                         }
                     },
                     {
@@ -83,7 +83,7 @@
                                             });
                                         }
                                     }
-                                }, '修改')
+                                }, this.$t('common.xg'))
                             ]);
                         }
                     }

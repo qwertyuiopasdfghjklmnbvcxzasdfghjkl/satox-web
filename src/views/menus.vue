@@ -12,7 +12,7 @@
         <Submenu v-for="(item, index) in filterMenus" :key="item.id" :class="{select:item.id===selected}"
                  :name="index">
             <template slot="title">
-                <Icon :type="icon[index]"/>
+                <Icon :type="icon[index]" style="width: 12px"/>
                 {{item.name}}
             </template>
             <MenuItem v-for="(data,i) in item.menus" :name="index+'-'+i" class="menu_left">

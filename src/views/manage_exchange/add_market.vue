@@ -2,62 +2,62 @@
     <div class="coin_setting">
         <Card style="width:500px;">
             <p slot="title">
-                新增{{type == 1 ? '真实' : '虚拟'}}市场
+                {{type == 1 ? vm.$t('exchange.xzzssc') : vm.$t('exchange.xzxnsc')}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
-                <FormItem label="市场名称" prop="market">
+                <FormItem :label="vm.$t('exchange.scmc')" prop="market">
                     <Input v-model="formLeft.market" name="market"></Input>
                 </FormItem>
-                <FormItem label="标的币种" prop="currencySymbol">
+                <FormItem :label=" vm.$t('exchange.bdbz')" prop="currencySymbol">
                     <Input v-model="formLeft.currencySymbol" name="currencySymbol"></Input>
                 </FormItem>
-                <FormItem label="基础币种" prop="baseSymbol">
+                <FormItem :label=" vm.$t('exchange.jbbz')" prop="baseSymbol">
                     <Input v-model="formLeft.baseSymbol" name="baseSymbol"></Input>
                 </FormItem>
-                <FormItem label="开盘价格" prop="openingPrice">
+                <FormItem :label=" vm.$t('exchange.kpjg')" prop="openingPrice">
                     <InputNumber style="width:100%;" v-model="formLeft.openingPrice"></InputNumber>
                 </FormItem>
-                <FormItem label="状态" prop="state">
+                <FormItem :label="vm.$t('common.zt')" prop="state">
                     <RadioGroup v-model="formLeft.state" name="status">
                         <Radio label="1">
-                            <span>上线</span>
+                            <span>{{vm.$t('exchange.sx')}}</span>
                         </Radio>
                         <Radio label="2">
-                            <span>下线</span>
+                            <span>{{vm.$t('exchange.xs')}}</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="价格精度" prop="accuracy">
+                <FormItem :label="vm.$t('exchange.jgjd')" prop="accuracy">
                     <InputNumber style="width:100%;" v-model="formLeft.accuracy" name="accuracy"></InputNumber>
                 </FormItem>
-                <FormItem label="数量精度" prop="quantityAccu">
+                <FormItem :label="vm.$t('exchange.sljd')" prop="quantityAccu">
                     <InputNumber style="width:100%;" v-model="formLeft.quantityAccu"
                                  :max="8" :min="0" :stpe="1" name="quantityAccu"></InputNumber>
                 </FormItem>
-                <FormItem label="金额精度" prop="amountAccu">
+                <FormItem :label="vm.$t('exchange.jejd')" prop="amountAccu">
                     <InputNumber style="width:100%;" v-model="formLeft.amountAccu"
                                  :max="8" :min="0" :stpe="1" name="amountAccu"></InputNumber>
                 </FormItem>
-                <FormItem label="深度合并精度" prop="digit">
+                <FormItem :label="vm.$t('exchange.sdhbjd')" prop="digit">
                     <InputNumber style="width:100%;" v-model="formLeft.digit" name="digit"></InputNumber>
                 </FormItem>
-                <FormItem label="最小下单金额" prop="minPlaceOrderAmount">
+                <FormItem :label="vm.$t('exchange.zxxdje')" prop="minPlaceOrderAmount">
                     <InputNumber style="width:100%;" v-model="formLeft.minPlaceOrderAmount"
                                  name="minPlaceOrderAmount"></InputNumber>
                 </FormItem>
-                <FormItem label="最小交易数量" prop="minPlaceOrderQuantity">
+                <FormItem :label="vm.$t('exchange.zxjysl')" prop="minPlaceOrderQuantity">
                     <InputNumber style="width:100%;" v-model="formLeft.minPlaceOrderQuantity"
                                  name="minPlaceOrderQuantity"></InputNumber>
                 </FormItem>
-                <FormItem label="固定价格" prop="fixedPrice">
+                <FormItem :label="vm.$t('exchange.gdjg')" prop="fixedPrice">
                     <InputNumber style="width:100%;" v-model="formLeft.fixedPrice" name="fixedPrice"></InputNumber>
                 </FormItem>
-                <FormItem label="自动委托笔数" prop="autoEntrustCount">
+                <FormItem :label="vm.$t('exchange.zdwtbs')" prop="autoEntrustCount">
                     <InputNumber style="width:100%;" v-model="formLeft.autoEntrustCount"
                                  name="autoEntrustCount"></InputNumber>
                 </FormItem>
-                <Button type="primary" @click="getAddMarket()">添加</Button>
+                <Button type="primary" @click="getAddMarket()">{{vm.$t('common.tj')}}</Button>
             </Form>
         </Card>
     </div>
@@ -75,7 +75,9 @@
                     return callback();
                 }
             };
+            const vm = window.vm;
             return {
+                vm: vm,
                 lines: '',
                 formLeft: {
                     market: '',
@@ -94,45 +96,45 @@
                 },
                 ruleInline: {
                     market: [
-                        {required: true, message: '请输入市场名称', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.scmc'), trigger: 'blur'}
                     ],
                     currencySymbol: [
-                        {required: true, message: '请输入标的币种', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.bdbz'), trigger: 'blur'}
                     ],
                     baseSymbol: [
-                        {required: true, message: '请输入基础币种', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jbbz'), trigger: 'blur'}
                     ],
                     accuracy: [
-                        {required: true, message: '请输入价格精度'},
-                        {validator: customValidator, message: '请输入价格精度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jgjd')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.jgjd'), trigger: 'blur'},
                     ],
                     amountAccu: [
-                        {required: true, message: '请输入金额精度'},
-                        {validator: customValidator, message: '请输入金额精度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jejd')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.jejd'), trigger: 'blur'},
                     ],
                     quantityAccu: [
-                        {required: true, message: '请输入数量精度'},
-                        {validator: customValidator, message: '请输入数量精度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.sljd')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.sljd'), trigger: 'blur'},
                     ],
                     minPlaceOrderAmount: [
-                        {required: true, message: '请输入最小下单金额'},
-                        {validator: customValidator, message: '请输入最小下单金额', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.zxxdje')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.zxxdje'), trigger: 'blur'}
                     ],
                     minPlaceOrderQuantity: [
-                        {required: true, message: '请输入最小交易数量'},
-                        {validator: customValidator, message: '请输入最小交易数量', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.zxjysl')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.zxjysl'), trigger: 'blur'},
                     ],
                     state: [
-                        {required: true, message: '请输入状态'},
-                        {validator: customValidator, message: '请输入状态', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('common.zt')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('common.zt'), trigger: 'blur'},
                     ],
                     openingPrice: [
-                        {required: true, message: '请输入开盘价格'},
-                        {validator: customValidator, message: '请输入开盘价格', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.kpjg')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.kpjg'), trigger: 'blur'},
                     ],
                     digit: [
-                        {required: true, message: '请输入深度合并精度'},
-                        {validator: customValidator, message: '请输入深度合并精度', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.sdhbjd')},
+                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.sdhbjd'), trigger: 'blur'},
                     ]
                 }
             };
@@ -146,7 +148,7 @@
                     this.$refs.formItem.validate((valid) => {
                         if (valid) {
                             currenyApi.insertMarket(this.formLeft, (res) => {
-                                this.$Message.success({content: '添加成功'});
+                                this.$Message.success({content: this.vm.$t('common.tjcg')});
                                 this.$emit('okCallback');
                                 this.$emit('removeDialog');
                             }, (msg) => {
@@ -171,7 +173,7 @@
                                 state: this.formLeft.state,
                                 marketType: 0
                             }, (res) => {
-                                this.$Message.success({content: '添加成功'});
+                                this.$Message.success({content: this.vm.$t('common.tjcg')});
                                 this.$emit('okCallback');
                                 this.$emit('removeDialog');
                             }, (msg) => {

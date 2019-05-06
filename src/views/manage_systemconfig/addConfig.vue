@@ -1,21 +1,21 @@
 <template>
     <div class="addConfig">
         <Card>
-            <p slot="title">添加</p>
+            <p slot="title">{{vm.$t('common.tj')}}</p>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin:0 20px;">
-                <FormItem label="币种" prop="symbol">
+                <FormItem :label="vm.$t('common.bz')" prop="symbol">
                     <Input type="text" v-model="formValidate.symbol"></Input>
                 </FormItem>
-                <FormItem label="最小金额" prop="coinMin">
+                <FormItem :label="vm.$t('system.zxje')" prop="coinMin">
                     <Input type="text" v-model="formValidate.coinMin"></Input>
                 </FormItem>
-                <FormItem label="保留金额" prop="coinReserve">
+                <FormItem :label="vm.$t('system.blje')" prop="coinReserve">
                     <Input type="text" v-model="formValidate.coinReserve"></Input>
                 </FormItem>
-                <FormItem label="旷工费币种" prop="minerSymbol">
+                <FormItem :label="vm.$t('system.kgfbz')" prop="minerSymbol">
                     <Input type="text" v-model="formValidate.minerSymbol"></Input>
                 </FormItem>
-                <FormItem label="旷工费数量" prop="minerFee" v-if="formValidate.symbolType !== '2'">
+                <FormItem :label="vm.$t('system.kgfsl')" prop="minerFee" v-if="formValidate.symbolType !== '2'">
                     <Input type="text" v-model="formValidate.minerFee" style="width:100%;"></Input>
                 </FormItem>
                 <FormItem label="GASPrice" prop="gasPrice" v-if="formValidate.symbolType === '2'">
@@ -26,17 +26,17 @@
                     <InputNumber style="width:100%;" :min="0.1" name="gasLimit"
                                  v-model="formValidate.gasLimit"></InputNumber>
                 </FormItem>
-                <FormItem label="是否可用" prop="enable">
+                <FormItem :label="vm.$t('system.sfky')" prop="enable">
                     <RadioGroup ref="enable" v-model="formValidate.enable">
                         <Radio label="1">
-                            <span>是</span>
+                            <span>{{vm.$t('common.s')}}</span>
                         </Radio>
                         <Radio label="2">
-                            <span>否</span>
+                            <span>{{vm.$t('common.f')}}</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="主链类型" prop="symbolType">
+                <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                     <RadioGroup ref="symbolType" v-model="formValidate.symbolType">
                         <Radio label="2">
                             <span>ETH</span>
@@ -56,8 +56,8 @@
                     </RadioGroup>
                 </FormItem>
                 <FormItem style="line-height:0;text-align:center;">
-                    <Button type="ghost" style="width:100px;margin-right:50px;" @click="closeDialog">取消</Button>
-                    <Button type="primary" style="width:100px;" @click="saveConfig">确定</Button>
+                    <Button type="ghost" style="width:100px;margin-right:50px;" @click="closeDialog">{{vm.$t('common.qx')}}</Button>
+                    <Button type="primary" style="width:100px;" @click="saveConfig">{{vm.$t('common.qd')}}</Button>
                 </FormItem>
             </Form>
         </Card>
@@ -75,7 +75,9 @@
                     return callback();
                 }
             };
+            const vm = window.vm;
             return {
+                vm: vm,
                 formValidate: {
                     symbol: '',
                     coinMin: null,
@@ -89,27 +91,27 @@
                 },
                 ruleValidate: {
                     symbol: [
-                        {required: true, message: '请输入英文简称', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('common.bz'), trigger: 'blur'}
                     ],
                     coinMin: [
-                        {required: true, message: '请输入最小金额', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.zxje'), trigger: 'blur'}
                     ],
                     coinReserve: [
-                        {required: true, message: '请输入保留金额', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.blje'), trigger: 'blur'}
                     ],
                     minerSymbol: [
-                        {required: true, message: '请输入旷工费币种', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('system.kgfbz'), trigger: 'blur'}
                     ],
                     minerFee: [
-                        {required: true, message: '请输入矿工费', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.kgf'), trigger: 'blur'}
                     ],
                     gasPrice: [
-                        {required: true, message: '请输入gasPrice'},
-                        {validator: customValidator, message: '请输入gasprice', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr')+'gasPrice'},
+                        {validator: customValidator, message: vm.$t('common.qsr')+'gasprice', trigger: 'blur'}
                     ],
                     gasLimit: [
-                        {required: true, message: '请输入gasLimit'},
-                        {validator: customValidator, message: '请输入gasLimit', trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr')+'gasLimit'},
+                        {validator: customValidator, message: vm.$t('common.qsr')+'gasLimit', trigger: 'blur'},
                     ],
                 }
             };
@@ -123,11 +125,11 @@
                 form.validate((valid) => {
                     if (valid) {
                         if (Number(this.formValidate.coinReserve) > Number(this.formValidate.coinMin)) {
-                            this.$Message.error({content: '保留金额要少于等于最小金额'});
+                            this.$Message.error({content: this.vm.$t('system.bljeysyzxje')});
                             return;
                         }
                         if (Number(this.formValidate.coinReserve) < Number(this.formValidate.minerFee)) {
-                            this.$Message.error({content: '保留金额大于等于矿工费'});
+                            this.$Message.error({content: this.vm.$t('system.bljedykgf')});
                             return;
                         }
                         system.addConfig({
@@ -141,7 +143,7 @@
                             enable: this.formValidate.enable,
                             symbolType: this.formValidate.symbolType
                         }, (res) => {
-                            this.$Message.success({content: '添加成功'});
+                            this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('removeDialog');
                             this.$emit('okCallback');
                         }, (msg) => {

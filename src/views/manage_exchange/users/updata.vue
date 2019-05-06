@@ -2,11 +2,11 @@
   <div class="add_order">
     <Card style="width:800px;">
         <p slot="title">
-        修改币种
+            {{vm.$t('exchange.xgbz')}}
         <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
       </p>
      <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
-        <Col span="5">代号</Col>
+        <Col span="5">{{vm.$t('exchange.dh')}}</Col>
         <Col span="10">{{this.datas.symbol  || 0}}</Col>
         <Col span="6"></Col>
       </Row>
@@ -26,57 +26,57 @@
         </Col>
       </Row> -->
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-        <Col span="5">英文全名</Col>
+        <Col span="5">{{vm.$t('exchange.ywqc')}}</Col>
         <Col span="8">{{this.datas.caption || 0}}</Col>
         <Col span="8">
              <Input v-model="caption" style="width: 150px" />
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('caption')">保存</Button>
+            <Button type="primary" @click="tabs('caption')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-        <Col span="5">中文全名</Col>
+        <Col span="5">{{vm.$t('exchange.zwmqc')}}</Col>
         <Col span="8">{{this.datas.captionCN  || 0}}</Col>
         <Col span="8">
              <Input v-model="captionCN" style="width: 150px" />
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('captionCN')">保存</Button>
+            <Button type="primary" @click="tabs('captionCN')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
 
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-        <Col span="5">发行总量</Col>
+        <Col span="5">{{vm.$t('exchange.fxzl')}}</Col>
         <Col span="8">{{this.datas.totalIssuance  || 0}}</Col>
         <Col span="8">
          <InputNumber style="width:100%;" v-model="totalIssuance"></InputNumber>
              <!-- <Input v-model="totalIssuance" style="width: 150px" /> -->
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('totalIssuance')">保存</Button>
+            <Button type="primary" @click="tabs('totalIssuance')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-        <Col span="5">流通总量</Col>
+        <Col span="5">{{vm.$t('exchange.ltzl')}}</Col>
         <Col span="8">{{this.datas.totalCirculation  || 0}}</Col>
         <Col span="8">
          <InputNumber style="width:100%;" v-model="totalCirculation"></InputNumber>
              <!-- <Input v-model="totalCirculation" style="width: 150px" /> -->
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('totalCirculation')">保存</Button>
+            <Button type="primary" @click="tabs('totalCirculation')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
-        <Col span="5">发行价格</Col>
+        <Col span="5">{{vm.$t('exchange.fxjg')}}</Col>
         <Col span="8">{{this.datas.issuePrice  || 0}}</Col>
         <Col span="8">
          <InputNumber style="width:100%;" v-model="issuePrice"></InputNumber>
              <!-- <Input v-model="issuePrice" style="width: 150px" /> -->
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('issuePrice')">保存</Button>
+            <Button type="primary" @click="tabs('issuePrice')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
 
@@ -89,27 +89,27 @@
             <!-- </FormItem> -->
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabsImage('iconFile')">保存</Button>
+            <Button type="primary" @click="tabsImage('iconFile')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-        <Col span="5">货币类型</Col>
+        <Col span="5">{{vm.$t('exchange.hblx')}}</Col>
         <Col span="16">
             <RadioGroup v-model="datas.flag">
                 <Radio label="1">
                     <span>ERC20</span>
                 </Radio>
                 <Radio label="2">
-                    <span>非ERC20</span>
+                    <span>{{vm.$t('common.fei')}}ERC20</span>
                 </Radio>
             </RadioGroup>
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs1('flag')">保存</Button>
+            <Button type="primary" @click="tabs1('flag')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-        <Col span="5">主链类型</Col>
+        <Col span="5">{{vm.$t('common.zllx')}}</Col>
         <Col span="16">
              <RadioGroup v-model="datas.symbolType">
                 <Radio label="1">
@@ -155,7 +155,7 @@
         </Col> -->
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
-        <Col span="5">合约精度</Col>
+        <Col span="5">{{vm.$t('exchange.hyjd')}}</Col>
         <Col span="8">{{this.datas.contractDecimals || 0}}</Col>
         <Col span="8">
             <!-- <Input v-model="contractDecimals" style="width: 150px" /> -->
@@ -163,18 +163,18 @@
             <!-- <InputNumber v-model="contractDecimals"  ></InputNumber> -->
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs2('contractDecimals')">保存</Button>
+            <Button type="primary" @click="tabs2('contractDecimals')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
-        <Col span="5">ERC20合约地址</Col>
+        <Col span="5">{{vm.$t('exchange.erc20hydz')}}</Col>
         <Col span="8" >{{this.datas.contractAddr || 0}}
         </Col>
         <Col span="8">
              <Input v-model="contractAddr" style="width: 150px" />
         </Col>
         <Col span="3">
-            <Button type="primary" @click="tabs('contractAddr')">保存</Button>
+            <Button type="primary" @click="tabs('contractAddr')">{{vm.$t('common.bc')}}</Button>
         </Col>
       </Row>
     </Card>
@@ -185,7 +185,9 @@ import currenyApi from '../../../api/currency'
 export default {
     props: ['item'],
     data () {
+        const vm = window.vm;
         return {
+            vm: vm,
             symbol: '1',
             caption: '',
             captionCN: '',
@@ -245,7 +247,7 @@ export default {
             console.log(formData);
             currenyApi.updateIconFile(formData, (res) =>{
                 this.getSymbolInfo()
-                this.$Message.success({content: '修改成功'})
+                this.$Message.success({content: this.vm.$t('common.xgcg')})
             }, (msg) => {
                 this.$Message.error({content: msg})
             })
@@ -257,14 +259,14 @@ export default {
             data[propName] = this.datas[propName]
             currenyApi.updateSymbol(data, (res) =>{
                 this.getSymbolInfo()
-                this.$Message.success({content: '修改成功'})
+                this.$Message.success({content: this.vm.$t('common.xgcg')})
             }, (msg) => {
                 this.$Message.error({content: msg})
             })
         },
         tabs(propName) {
             if (!this[propName]) {
-                this.$Message.error({content: '不能为空'})
+                this.$Message.error({content: this.vm.$t('common.bnwk')})
                 return
             }
             let data = {
@@ -273,7 +275,7 @@ export default {
             data[propName] = this[propName]
             currenyApi.updateSymbol(data, (res) =>{
                 this.getSymbolInfo()
-                this.$Message.success({content: '修改成功'})
+                this.$Message.success({content: this.vm.$t('common.xgcg')})
                 // this.$emit('okCallback')
             }, (msg) => {
                 this.$Message.error({content: msg})
@@ -281,7 +283,7 @@ export default {
         },
          tabs2(propName) {
             if (!this[propName]) {
-                this.$Message.error({content: '不能为空'})
+                this.$Message.error({content: this.vm.$t('common.bnwk')})
                 return
             }
             let data = {
@@ -290,7 +292,7 @@ export default {
             data[propName] = parseFloat(this[propName])
             currenyApi.updateSymbol(data, (res) =>{
                 this.getSymbolInfo()
-                this.$Message.success({content: '修改成功'})
+                this.$Message.success({content: this.vm.$t('common.xgcg')})
             }, (msg) => {
                 this.$Message.error({content: msg})
             })

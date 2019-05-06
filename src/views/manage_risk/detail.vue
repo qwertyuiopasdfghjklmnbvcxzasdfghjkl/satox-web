@@ -1,7 +1,7 @@
 <template>
     <div class="detail" style="width: 850px;">
         <Card>
-            <p slot="title">详情
+            <p slot="title">{{vm.$t('risk.xq')}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
@@ -14,33 +14,35 @@ import util from '../../libs/util';
     export default {
         props: ['orderId'],
         data () {
+            const vm = window.vm;
             return {
+                vm: vm,
                 columns1: [
                     {
-                        title: '订单号',
+                        title: vm.$t('risk.ddh'),
                         key: 'orderNumber'
                     },
                     {
-                        title: '订单状态',//state
+                        title: vm.$t('risk.ddzt'),//state
                         key: 'state',
-                        render: (h, params) => { 
+                        render: (h, params) => {
                             return h('div', this.switchStaus(params.row.state, params.row.payState))
                         }
                     },
                     {
-                        title: '数量',
+                        title: vm.$t('common.sl'),
                         key: 'currencyCount'
                     },
                     {
-                        title: '金额',
+                        title: vm.$t('common.je'),
                         key: 'curPrice',
                         width: 200,
-                        render: (h, params) => { 
+                        render: (h, params) => {
                                 return h('div', [params.row.curPrice, params.row.currency])
                         }
                     },
                     {
-                        title: '付款剩余时间',
+                        title: vm.$t('risk.fksysj'),
                         key: 'surplus_Time',
                         width: 150,
                         render: (h, params) => {
@@ -48,7 +50,7 @@ import util from '../../libs/util';
                         }
                     },
                     {
-                        title: '完成时间',
+                        title: vm.$t('risk.wcsj'),
                         key: 'updatedAt'
                     }
                 ],
@@ -59,7 +61,7 @@ import util from '../../libs/util';
             this.getOrderInfo()
         },
         methods: {
-            switchStaus(state, payState) { 
+            switchStaus(state, payState) {
                 switch(state){
                     case 1:
                         return payState === 1 ? '已付款' : '未付款'
@@ -85,7 +87,7 @@ import util from '../../libs/util';
                         if (res.payState == 0 && res.state == 1) {
                             util.countDown(surplusTime, (time) => {
                                 res.surplus_Time = time
-                            })            
+                            })
                         }
                         res.surplus_Time = '00:00'
                     // })
