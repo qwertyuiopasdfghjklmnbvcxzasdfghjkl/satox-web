@@ -150,15 +150,17 @@
                 kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code, {
                     verifyId: this.verifyId
                 }, (res) => {
+                    console.log(res, code)
                     if (code === 'true') {
-                        this.$Message.success({content: this.$t('common.shtg')});
-                        this.$emit('okCallback');
-                        this.$emit('removeDialog');
+                        this.$Message.success({content: this.vm.$t('common.shtg')});
                     } else {
-                        this.$Message.error({content: this.$t('common.shbtg')});
-                        this.$emit('okCallback');
-                        this.$emit('removeDialog');
+                        this.$Message.error({content: this.vm.$t('common.shbtg')});
                     }
+                    this.$emit('okCallback');
+                    this.$emit('removeDialog');
+                }, (msg) => {
+                    this.$Message.error({content: msg});
+                    this.$emit('removeDialog');
                 });
             }
         }
