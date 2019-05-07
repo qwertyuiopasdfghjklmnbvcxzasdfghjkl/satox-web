@@ -23,7 +23,7 @@
         </Row>
         <Row type="flex" justify="center" v-if="this.type !== 'manage'">
             <Button type="ghost" style="margin-right: 8px" @click="disagree">{{vm.$t('common.btg')}}</Button>
-            <Button type="primary" @click="pass()">{{vm.$t('common.tg')}}</Button>
+            <Button type="primary" @click="pass()" :disabled="state">{{vm.$t('common.tg')}}</Button>
         </Row>
     </Card>
 </template>
@@ -40,6 +40,7 @@
             var vm = window.vm;
             return {
                 vm: vm,
+                state: false,
                 aaa: null,
                 columns1: [
                     {title: vm.$t('common.zh'), key: 'account'},
@@ -145,6 +146,7 @@
                 this.$emit('removeDialog');
             },
             passfirstReview (code) {
+                this.state = true;
                 kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code, {
                     verifyId: this.verifyId
                 }, (res) => {
