@@ -169,22 +169,15 @@
                     // 回复默认样式
                     let themeLink = document.querySelector('link[name="theme"]');
                     themeLink.setAttribute('href', '');
-                    // 清空打开的页面等数据，但是保存主题和语言数据
-                    // let theme = '';
-                    // let language = '';
-                    // if (localStorage.theme) {
-                    //     theme = localStorage.theme;
-                    // }
-                    // if (localStorage.lang) {
-                    //     language = localStorage.language;
-                    // }
-                    // localStorage.clear();
-                    // if (theme) {
-                    //     localStorage.theme = theme;
-                    // }
-                    // if (language) {
-                    //     localStorage.language = language;
-                    // }
+                    // 清空打开的页面等数据，但是保存语言数据
+                    let language = '';
+                    if (localStorage.language) {
+                        language = localStorage.language;
+                    }
+                    localStorage.clear();
+                    if (language) {
+                        localStorage.language = language;
+                    }
                     this.$router.push({name: 'login'});
                     return;
                 }
