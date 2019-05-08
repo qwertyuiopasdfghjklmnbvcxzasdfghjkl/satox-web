@@ -250,7 +250,9 @@ export const finance = {
     txwc: '提现完成',
     txsbzjfh: '提现失败资金返还',
     sbyy: '失败原因',
-    jdthid: '解冻退还ID'
+    jdthid: '解冻退还ID',
+    zsjy: '真实交易',
+    xnjy: '虚拟交易'
 };
 export const kyc = {
     dshyhsl: '待审核用户数量',
