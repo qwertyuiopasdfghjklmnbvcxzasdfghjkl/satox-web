@@ -15,7 +15,7 @@
                         <Option v-for="item in symbolList" :value="item.symbol" :key="item.symbol">{{ item.symbol }}
                         </Option>
                     </Select>
-                    <Button type="primary" @click="getList(true)">{{vm.$t('common.cx')}}</Button>
+                    <Button type="primary" @click="page=1;getList(true)">{{vm.$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
@@ -38,35 +38,37 @@
                 page: 1,
                 size: 10,
                 total: 0,
+                symbolList: null,
                 formData: {
                     username: '',
                     symbol: '0',
                 },
                 columns1: [
-                    {title: vm.$t('common.cjsj'), key: 'createdAt'},
-                    {title: vm.$t('common.yhm'), key: 'username'},
+                    {title: vm.$t('common.cjsj'), key: 'createdTime'},
+                    {title: vm.$t('common.yhm'), key: 'userName'},
                     {title: vm.$t('common.sjh'), key: 'mobile'},
                     {title: vm.$t('common.xm'), key: 'userRealName'},
                     {title: vm.$t('common.bzdh'), key: 'symbol'},
                     {
                         title: vm.$t('finance.lx'),
-                        key: 'quantity',
+                        key: 'transactionType',
                         render: (h, params) => {
-                            return h('div', params.row.direction == 1 ? vm.$t('common.cz') : vm.$t('common.tx'));
+                            return h('div', params.row.transactionType == 1 ? vm.$t('finance.zsjy') :
+                                vm.$t('finance.xnjy'));
                         }
                     },
                     {
                         title: vm.$t('common.sl'),
-                        key: 'quantity',
+                        key: 'amount',
                         render: (h, params) => {
-                            return h('div', Math.abs(params.row.quantity));
+                            return h('div', Math.abs(params.row.amount));
                         }
                     },
                     {
                         title: vm.$t('common.zt'),
-                        key: 'direction',
+                        key: 'status',
                         render: (h, params) => {
-                            return h('div', params.row.direction == 1 ? vm.$t('common.cg') : vm.$t('common.sb'));
+                            return h('div', params.row.status == 1 ? vm.$t('common.dd') : vm.$t('common.wc'));
                         }
                     },
                 ],
@@ -94,10 +96,10 @@
                 let data = {
                     page: this.page,
                     size: this.size,
-                    username: this.formData.username,
+                    userName: this.formData.username,
                     symbol: symbol === '0' ? null : symbol
                 };
-                financeApi.recordSato(data, (res, total) => {
+                financeApi.virtualList(data, (res, total) => {
                     this.total = total;
                     this.data1 = res;
                 });

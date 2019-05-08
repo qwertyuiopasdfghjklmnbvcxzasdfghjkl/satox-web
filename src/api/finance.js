@@ -319,6 +319,18 @@ const recordSato = function (data, success, error) {
 };
 finance.recordSato = recordSato;
 
+// 财务管理--虚拟充提历史记录
+const virtualList = function (data, success, error) {
+    api.get(`api/bm/financialManage/virtual/list`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.virtualList = virtualList;
+
 // 财务管理--ussd、sato提现记录
 const withdrawsList = function (data, success, error) {
     api.get(`api/bm/account/transfer/withdraws`, data, (res) => {
