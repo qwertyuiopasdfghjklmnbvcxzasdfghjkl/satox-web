@@ -5,16 +5,16 @@
 <template>
     <div>
         <transition-group name="taglist-moving-animation">
-            <Tag 
+            <Tag
                 type="dot"
-                v-for="item in pageTagsList2" 
-                :key="item.name" 
-                :name="item.name" 
+                v-for="item in pageTagsList2"
+                :key="item.name"
+                :name="item.name"
                 @on-close="closePage"
                 @click.native="linkTo(item.name, item.title)"
                 :closable="item.name==='home_index'||item.name===menuListFirstName?false:true"
                 :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
-            >{{ item.title }}</Tag>
+            >{{ $t(item.title) }}</Tag>
         </transition-group>
     </div> <!--v-if="item.name==='1'"-->
 </template>
