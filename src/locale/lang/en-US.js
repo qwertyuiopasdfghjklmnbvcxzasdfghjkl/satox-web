@@ -140,7 +140,8 @@ export const login = {
     xwyyhlmm: 'be energetic in the afternoon~',
     xbmswhbm: 'come off work to have no matter next parents~',
     gzzypyps: 'enjoy your books after work~',
-    yslzyxx: 'it\'s late at night. take a rest~'
+    yslzyxx: 'it\'s late at night. take a rest~',
+    xxzx: 'message center'
 };
 export const finance = {
     tbsh: 'coin review',
