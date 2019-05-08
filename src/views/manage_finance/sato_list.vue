@@ -60,7 +60,7 @@
                             return h('div', this.state(''+ params.row.status));
                         }
                     },
-                    {title: this.$t('finance.sbyy'), key: 'remarks'},
+                    // {title: this.$t('finance.sbyy'), key: 'remarks'},
                     {title: this.$t('common.cjsj'), key: 'createdAt'},
                     {title: this.$t('monitoring.jywcsj'), key: 'completedAt'},
                 ],
