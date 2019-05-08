@@ -155,7 +155,7 @@
             },
             handleClickUserDropdown (name) {
                 if (name === 'ownSpace') {
-                    util.openPage(this, 'ownspace_index', '修改密码');
+                    util.openPage(this, 'ownspace_index', this.$t('login.xgmm'));
                 } else if (name === 'loginout') {
                     userApi.logout((res) => {
                     });
@@ -209,7 +209,7 @@
                 }
             },
             showMessage () {
-                util.openPage(this, 'message_index', '消息中心');
+                util.openPage(this, 'message_index', this.$t('login.xxzx'));
             },
             lockScreen () {
                 let lockScreenBack = document.getElementById('lock_screen_back');
