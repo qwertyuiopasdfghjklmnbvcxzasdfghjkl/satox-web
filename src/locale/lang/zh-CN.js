@@ -140,7 +140,8 @@ export const login = {
     xwyyhlmm: '下午也要活力满满哦~',
     xbmswhbm: '下班没事问候下爸妈吧~',
     gzzypyps: '工作之余品一品书香吧~',
-    yslzyxx: '夜深了，注意休息哦~'
+    yslzyxx: '夜深了，注意休息哦~',
+    xxzx: '消息中心'
 };
 export const finance = {
     tbsh: '提币审核',
