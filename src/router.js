@@ -56,7 +56,7 @@ export const otherRouter = {
             }
         },
         {
-            path: 'ownspace', title: '修改密码', name: 'ownspace_index', component: resolve => {
+            path: 'ownspace', title: 'login.xgmm', name: 'ownspace_index', component: resolve => {
                 require(['./views/own-space/own-space.vue'], resolve);
             }
         },
@@ -96,7 +96,7 @@ export const kycRouter = [
         },
         children: [
             {
-                path: 'index', title: 'KYC审核', name: 'kycauditing_index', component: resolve => {
+                path: 'index', title: 'nav.kycsh', name: 'kycauditing_index', component: resolve => {
                     require(['./views/manage_kyc/auditing.vue'], resolve);
                 }
             }
@@ -113,7 +113,7 @@ export const kycRouter = [
         },
         children: [
             {
-                path: 'index', title: 'KYC复核', name: 'kyccheck_index', component: resolve => {
+                path: 'index', title: 'nav.kycfh', name: 'kyccheck_index', component: resolve => {
                     require(['./views/manage_kyc/check.vue'], resolve);
                 }
             }
@@ -130,7 +130,7 @@ export const kycRouter = [
         },
         children: [
             {
-                path: 'index', title: 'KYC管理', name: 'kycmanage_index', component: resolve => {
+                path: 'index', title: 'nav.kycgl', name: 'kycmanage_index', component: resolve => {
                     require(['./views/manage_kyc/manage.vue'], resolve);
                 }
             }
@@ -363,7 +363,7 @@ export const exchangeRouter = [
         },
         children: [
             {
-                path: 'index', title: '数据统计', name: 'exchange_data_statistics_index', component: resolve => {
+                path: 'index',  title: 'nav.sjtj', name: 'exchange_data_statistics_index', component: resolve => {
                     require(['./views/manage_exchange/data_statistics.vue'], resolve);
                 }
             }
@@ -380,7 +380,7 @@ export const exchangeRouter = [
         },
         children: [
             {
-                path: 'index', title: '用户管理', name: 'exchange_users_index', component: resolve => {
+                path: 'index', title: 'nav.yhgl', name: 'exchange_users_index', component: resolve => {
                     require(['./views/manage_exchange/users.vue'], resolve);
                 }
             }
@@ -397,7 +397,7 @@ export const exchangeRouter = [
         },
         children: [
             {
-                path: 'index', title: '币种管理', name: 'exchange_coins_index', component: resolve => {
+                path: 'index', title: 'nav.bzgl', name: 'exchange_coins_index', component: resolve => {
                     require(['./views/manage_exchange/coins.vue'], resolve);
                 }
             }
@@ -414,7 +414,7 @@ export const exchangeRouter = [
         },
         children: [
             {
-                path: 'index', title: '交易市场管理', name: 'exchange_markets_index', component: resolve => {
+                path: 'index',title: 'nav.jyscgl', name: 'exchange_markets_index', component: resolve => {
                     require(['./views/manage_exchange/markets.vue'], resolve);
                 }
             }
@@ -443,7 +443,7 @@ export const exchangeRouter = [
         },
         children: [
             {
-                path: 'index', title: '地址管理', name: 'exchange_address_index', component: resolve => {
+                path: 'index', title: 'nav.dzgl', name: 'exchange_address_index', component: resolve => {
                     require(['./views/manage_exchange/exchange_address.vue'], resolve);
                 }
             }
@@ -463,7 +463,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '财务管理', name: 'finance_finance_index', component: resolve => {
+                path: 'index', title: 'nav.cwgl', name: 'finance_finance_index', component: resolve => {
                     require(['./views/manage_finance/finance.vue'], resolve);
                 }
             }
@@ -480,7 +480,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '充值管理', name: 'recharge_index', component: resolve => {
+                path: 'index', title: 'nav.czgl', name: 'recharge_index', component: resolve => {
                     require(['./views/manage_finance/recharge.vue'], resolve);
                 }
             }
@@ -497,7 +497,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '提币审核', name: 'finance_withdraw_index', component: resolve => {
+                path: 'index', title: 'nav.tbsh', name: 'finance_withdraw_index', component: resolve => {
                     require(['./views/manage_finance/withdraw.vue'], resolve);
                 }
             }
@@ -531,7 +531,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'USSD提现记录', name: 'ussd_list_index',
+                path: 'index', title: 'nav.ussdtxjl', name: 'ussd_list_index',
                 component: resolve => {
                     require(['./views/manage_finance/ussd_list.vue'], resolve);
                 }
@@ -548,7 +548,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'SATO提现记录', name: 'sato_list_index',
+                path: 'index', title: 'nav.satotxjl', name: 'sato_list_index',
                 component: resolve => {
                     require(['./views/manage_finance/sato_list.vue'], resolve);
                 }
@@ -566,7 +566,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '用户资产', name: 'finance_user_index', component: resolve => {
+                path: 'index', title: 'nav.yhzc', name: 'finance_user_index', component: resolve => {
                     require(['./views/manage_finance/user_finance.vue'], resolve);
                 }
             }
@@ -583,7 +583,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '平账管理', name: 'account_manage_index', component: resolve => {
+                path: 'index', title: 'nav.pzgl', name: 'account_manage_index', component: resolve => {
                     require(['./views/manage_finance/account_manage.vue'], resolve);
                 }
             },
@@ -600,7 +600,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'USSD充值', name: 'usds_recharge_index', component: resolve => {
+                path: 'index', title: 'nav.ussdcz', name: 'usds_recharge_index', component: resolve => {
                     require(['./views/manage_finance/usds_recharge.vue'], resolve);
                 }
             }
@@ -617,7 +617,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '内部转账', name: 'internal_transfer_index', component: resolve => {
+                path: 'index', title: 'nav.nbzz', name: 'internal_transfer_index', component: resolve => {
                     require(['./views/manage_finance/internal_transfer.vue'], resolve);
                 }
             }
@@ -634,7 +634,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'SATO数量修改', name: 'change_sato_data_index', component: resolve => {
+                path: 'index', title: 'nav.satoslxg', name: 'change_sato_data_index', component: resolve => {
                     require(['./views/manage_finance/change_sato_data.vue'], resolve);
                 }
             }
@@ -651,7 +651,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: '虚拟充提', name: 'virtual_index', component: resolve => {
+                path: 'index', title: 'nav.xnct', name: 'virtual_index', component: resolve => {
                     require(['./views/manage_finance/virtual.vue'], resolve);
                 }
             }
@@ -671,7 +671,7 @@ export const riskRouter = [
         },
         children: [
             {
-                path: 'index', title: '币币异常预警', name: 'risk_exchange_index', component: resolve => {
+                path: 'index', title: 'nav.bbycyj', name: 'risk_exchange_index', component: resolve => {
                     require(['./views/manage_risk/exchange.vue'], resolve);
                 }
             }
@@ -688,7 +688,7 @@ export const riskRouter = [
         },
         children: [
             {
-                path: 'index', title: 'OTC异常预警', name: 'risk_otc_index', component: resolve => {
+                path: 'index', title: 'nav.tocycyj', name: 'risk_otc_index', component: resolve => {
                     require(['./views/manage_risk/otc.vue'], resolve);
                 }
             }
@@ -705,7 +705,7 @@ export const riskRouter = [
         },
         children: [
             {
-                path: 'index', title: '紧急异常预警', name: 'risk_urgent_index', component: resolve => {
+                path: 'index', title: 'nav.jjycyj', name: 'risk_urgent_index', component: resolve => {
                     require(['./views/manage_risk/urgent.vue'], resolve);
                 }
             }
@@ -734,7 +734,7 @@ export const operationRouter = [
         },
         children: [
             {
-                path: 'index', title: '分发', name: 'operation_distribute_index', component: resolve => {
+                path: 'index', title: 'nav.ff', name: 'operation_distribute_index', component: resolve => {
                     require(['./views/manage_operation/distribute.vue'], resolve);
                 }
             }
@@ -760,7 +760,7 @@ export const operationRouter = [
         },
         children: [
             {
-                path: 'index', title: '推广活动', name: 'operation_activity_index', component: resolve => {
+                path: 'index', title: 'nav.tghd', name: 'operation_activity_index', component: resolve => {
                     require(['./views/manage_operation/promotion_activities.vue'], resolve);
                 }
             }
@@ -777,7 +777,7 @@ export const operationRouter = [
         },
         children: [
             {
-                path: 'index', title: '推荐市场', name: 'operation_market_index', component: resolve => {
+                path: 'index', title: 'nav.tjsc', name: 'operation_market_index', component: resolve => {
                     require(['./views/manage_operation/operation_market.vue'], resolve);
                 }
             }
@@ -794,7 +794,7 @@ export const operationRouter = [
         },
         children: [
             {
-                path: 'index', title: '公告', name: 'operation_placard_index', component: resolve => {
+                path: 'index', title: 'nav.gg', name: 'operation_placard_index', component: resolve => {
                     require(['./views/manage_operation/operation_placard.vue'], resolve);
                 }
             }
@@ -812,7 +812,7 @@ export const operationRouter = [
         children: [
             {
                 path: 'operation_app_index',
-                title: 'APP发布',
+                title: 'nav.appfb',
                 name: 'operation_app_index',
                 component: resolve => {
                     require(['./views/manage_operation/operation_app.vue'], resolve);
@@ -834,7 +834,7 @@ export const adminRouter = [
         },
         children: [
             {
-                path: 'index', title: '管理员权限管理', name: 'admin_index', component: resolve => {
+                path: 'index', title: 'nav.glyqxgl', name: 'admin_index', component: resolve => {
                     require(['./views/manage_admin/index.vue'], resolve);
                 }
             }
@@ -854,7 +854,7 @@ export const systemConfigRouter = [
         },
         children: [
             {
-                path: 'index', title: '币币交易参数', name: 'systemconfig_index', component: resolve => {
+                path: 'index', title: 'nav.bbjycs', name: 'systemconfig_index', component: resolve => {
                     require(['./views/manage_systemconfig/index.vue'], resolve);
                 }
             }
@@ -871,7 +871,7 @@ export const systemConfigRouter = [
         },
         children: [
             {
-                path: 'otc_index', title: 'OTC交易设置', name: 'otc_index', component: resolve => {
+                path: 'otc_index', title: 'nav.otcjysz', name: 'otc_index', component: resolve => {
                     require(['./views/manage_systemconfig/otcTradeSet.vue'], resolve);
                 }
             }
@@ -888,7 +888,7 @@ export const systemConfigRouter = [
         },
         children: [
             {
-                path: 'sys_index', title: '系统参数设置', name: 'sys_index', component: resolve => {
+                path: 'sys_index', title: 'nav.xtcssz', name: 'sys_index', component: resolve => {
                     require(['./views/manage_systemconfig/systemConfig.vue'], resolve);
                 }
             }
@@ -906,7 +906,7 @@ export const systemConfigRouter = [
         children: [
             {
                 path: 'addwithdrawaladdress_index',
-                title: '特殊账户参数设置',
+                title: 'nav.tszhcssz',
                 name: 'addwithdrawaladdress_index',
                 component: resolve => {
                     require(['./views/manage_systemconfig/addWithdrawalAddress.vue'], resolve);
@@ -926,7 +926,7 @@ export const systemConfigRouter = [
         children: [
             {
                 path: 'poolwallet_index',
-                title: '币池钱包整理参数',
+                title: 'nav.bcqbzlcs',
                 name: 'poolwallet_index',
                 component: resolve => {
                     require(['./views/manage_systemconfig/poolWallet.vue'], resolve);
@@ -948,7 +948,7 @@ export const systemLogsRouter = [
         },
         children: [
             {
-                path: 'index', title: '系统日志', name: 'systemlogs_index', component: resolve => {
+                path: 'index', title: 'nav.xtrz', name: 'systemlogs_index', component: resolve => {
                     require(['./views/manage_systemlogs/index.vue'], resolve);
                 }
             }
@@ -968,7 +968,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'index', title: '提现失败列表', name: 'monitoring_index', component: resolve => {
+                path: 'index', title: 'nav.txsblb', name: 'monitoring_index', component: resolve => {
                     require(['./views/manage_monitoring/index.vue'], resolve);
                 }
             }
@@ -985,7 +985,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'congestion_index', title: '提现拥堵列表', name: 'congestion_index', component: resolve => {
+                path: 'congestion_index', title: 'nav.txydlb', name: 'congestion_index', component: resolve => {
                     require(['./views/manage_monitoring/congestion_index.vue'], resolve);
                 }
             }
@@ -1002,7 +1002,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'withdraw_index', title: '提现记录列表', name: 'withdraw_index', component: resolve => {
+                path: 'withdraw_index', title: 'nav.txjllb', name: 'withdraw_index', component: resolve => {
                     require(['./views/manage_monitoring/withdraw_index.vue'], resolve);
                 }
             }
@@ -1020,7 +1020,7 @@ export const monitoringRouter = [
         children: [
             {
                 path: 'collection_index',
-                title: '归集记录列表',
+                title: 'nav.gjjllb',
                 name: 'collection_index',
                 component: resolve => {
                     require(['./views/manage_monitoring/collection.vue'], resolve);
@@ -1039,7 +1039,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'block_index', title: '区块确认列表', name: 'block_index', component: resolve => {
+                path: 'block_index', title: 'nav.qkqrlb', name: 'block_index', component: resolve => {
                     require(['./views/manage_monitoring/block_index.vue'], resolve);
                 }
             }
@@ -1056,7 +1056,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'account_msg_index', title: '主账户信息', name: 'account_msg_index', component: resolve => {
+                path: 'account_msg_index',  title: 'nav.zzhxx', name: 'account_msg_index', component: resolve => {
                     require(['./views/manage_monitoring/account_msg_index.vue'], resolve);
                 }
             }
@@ -1073,7 +1073,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'accountInofo_index', title: '用户账户信息', name: 'accountInofo_index', component: resolve => {
+                path: 'accountInofo_index', title: 'nav.yhzhxx', name: 'accountInofo_index', component: resolve => {
                     require(['./views/manage_monitoring/accountInofo_index.vue'], resolve);
                 }
             }
@@ -1091,7 +1091,7 @@ export const monitoringRouter = [
         children: [
             {
                 path: 'userPooledMining_index',
-                title: '用户币池信息',
+                title: 'nav.yhbcxx',
                 name: 'userPooledMining_index',
                 component: resolve => {
                     require(['./views/manage_monitoring/user_pooled_mining.vue'], resolve);
@@ -1111,7 +1111,7 @@ export const monitoringRouter = [
         children: [
             {
                 path: 'ETHNounce_index',
-                title: 'ETHNounce值',
+                title: 'nav.enz',
                 name: 'ETHNounce_index',
                 component: resolve => {
                     require(['./views/manage_monitoring/ETHNounce.vue'], resolve);
@@ -1130,7 +1130,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'node_msg_index', title: '节点信息', name: 'node_msg_index', component: resolve => {
+                path: 'node_msg_index', title: 'nav.jdxx', name: 'node_msg_index', component: resolve => {
                     require(['./views/manage_monitoring/node_msg_index.vue'], resolve);
                 }
             }
@@ -1147,7 +1147,7 @@ export const monitoringRouter = [
         },
         children: [
             {
-                path: 'error_log_index', title: '错误日志', name: 'error_log_index', component: resolve => {
+                path: 'error_log_index', title: 'nav.cwrz', name: 'error_log_index', component: resolve => {
                     require(['./views/manage_monitoring/error_log_index.vue'], resolve);
                 }
             }
@@ -1167,7 +1167,7 @@ export const fundRouter = [
         },
         children: [
             {
-                path: 'coldWalletSet_index', title: '冷钱包设置', name: 'coldWalletSet_index', component: resolve => {
+                path: 'coldWalletSet_index', title: 'nav.lqbsz', name: 'coldWalletSet_index', component: resolve => {
                     require(['./views/manage_fund/coldWalletSet_index.vue'], resolve);
                 }
             }
@@ -1184,7 +1184,7 @@ export const fundRouter = [
         },
         children: [
             {
-                path: 'addressSet_index', title: '主地址转冷钱包设置', name: 'addressSet_index', component: resolve => {
+                path: 'addressSet_index', title: 'nav.zdzzlqbsz', name: 'addressSet_index', component: resolve => {
                     require(['./views/manage_fund/addressSet_index.vue'], resolve);
                 }
             }
@@ -1201,7 +1201,7 @@ export const fundRouter = [
         },
         children: [
             {
-                path: 'transferRecord_index', title: '转账记录', name: 'transferRecord_index', component: resolve => {
+                path: 'transferRecord_index', title: 'nav.zzjl', name: 'transferRecord_index', component: resolve => {
                     require(['./views/manage_fund/transferRecord_index.vue'], resolve);
                 }
             }
