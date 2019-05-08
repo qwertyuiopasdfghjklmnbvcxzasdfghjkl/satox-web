@@ -169,28 +169,17 @@
                     // 回复默认样式
                     let themeLink = document.querySelector('link[name="theme"]');
                     themeLink.setAttribute('href', '');
-                    // 清空打开的页面等数据，但是保存主题数据
-                    let theme = '';
-                    if (localStorage.theme) {
-                        theme = localStorage.theme;
+                    // 清空打开的页面等数据，但是保存语言数据
+                    let language = '';
+                    if (localStorage.language) {
+                        language = localStorage.language;
                     }
                     localStorage.clear();
-                    if (theme) {
-                        localStorage.theme = theme;
+                    if (language) {
+                        localStorage.language = language;
                     }
                     this.$router.push({name: 'login'});
                     return;
-                    util.ajax.get('login').then((res) => {
-                        this.$router.push({
-                            name: 'login'
-                        });
-                    }).catch((error) => {
-                        this.imageT = Date.now();
-                        this.$router.push({
-                            name: 'login'
-                        });
-                        window.console.log(error);
-                    });
                 }
             },
             handleFullScreen () {
