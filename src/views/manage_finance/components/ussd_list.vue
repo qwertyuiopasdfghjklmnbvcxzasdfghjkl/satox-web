@@ -9,7 +9,7 @@
                 <Col span="16">
                     <span>{{vm.$t('common.yhm')}}</span>
                     <Input v-model="formData.text" clearable style="width: 200px"></Input>
-                    <Button type="primary" @click="getList(true)">{{vm.$t('common.cx')}}</Button>
+                    <Button type="primary" @click="page=1;getList(true)">{{vm.$t('common.cx')}}</Button>
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
