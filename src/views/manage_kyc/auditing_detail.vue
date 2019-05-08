@@ -150,7 +150,6 @@
                 kycApi[this.type !== 'fuhe' ? 'firstReview' : 'secondReview'](code, {
                     verifyId: this.verifyId
                 }, (res) => {
-                    console.log(res, code)
                     if (code === 'true') {
                         this.$Message.success({content: this.vm.$t('common.shtg')});
                     } else {
