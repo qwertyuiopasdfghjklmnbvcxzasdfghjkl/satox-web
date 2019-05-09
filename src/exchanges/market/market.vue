@@ -111,7 +111,7 @@ export default {
     ...mapGetters(['getApiToken']),
     markets () {
       // 收藏
-      return ['collection', 'USSD']
+      return ['collection', 'USSD','BTC','ETH','USDT','SATO']
     },
     tipPrice () {
       return this.hoverItem || {}
@@ -343,7 +343,7 @@ export default {
 .top-input-box:focus{border-bottom-color:#333232 !important;}
 .tabs{margin-top:10px;display:flex;height:26px;max-height:22px;padding:0 10px 10px;border-bottom:1px solid #7E7E7E;}
 .tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#666;text-align:center; padding-bottom:10px; border-bottom:1px solid #7E7E7E;cursor:pointer;}
-.tabs-item:nth-of-type(n+2){margin-left: 25px;}
+.tabs-item:nth-of-type(n+2){margin-left: 10px;}
 .tabs-item:hover,
 .tabs-item.active{color:#0557E2;border-bottom-color:#0557E2;}
 
