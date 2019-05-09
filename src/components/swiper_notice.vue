@@ -1,6 +1,6 @@
 <template>
     <div class="notice-container">
-        <div class="title"><i class="icon-volume-down"></i> <span>[{{$t('public.notice')}}]</span> </div>
+        <div class="title"><i class="icon-volume-down"></i><span>[{{$t('public.notice')}}]</span> </div>
         <div class="notice-list">
             <swiper :options="swiperOption" ref="mySwiperA">
                 <!-- 幻灯内容 -->
@@ -63,8 +63,8 @@ methods:{
 }
 </script>
 <style type="text/css" scoped="">
-.notice-container {display: flex; font-size: 13px;}
-.notice-container .title {line-height: 30px;}
+.notice-container {display: flex; font-size: 13px; height: 100%;}
+.notice-container .title {line-height: 30px; min-width: 100px;}
 .notice-container .title i {color: #D79802; font-size: 24px; vertical-align: middle;}
 .notice-container .title span {display: inline-block; color: #D79802; padding-left: 5px; padding-right: 15px;}
 .notice-list {flex: 1;}
