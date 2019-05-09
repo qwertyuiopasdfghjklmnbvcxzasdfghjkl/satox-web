@@ -47,6 +47,12 @@
                     <input class="address" type="text" maxlength="100" v-validate="'required'" data-vv-name="toAddress" :class="{error:errors.has('toAddress')}" v-model="toAddress" :placeholder="$t('account.estimated_value_address')" /><!--地址-->
                     <em class="error" v-if="errors.has('alias') || errors.has('toAddress')">{{$t('public0.public45')}}<!--请输入新地址--></em>
                 </div>
+                <div class="filed memo" v-if="symbol==='EOS'">
+                    <em>
+                        {{$t('account.user_center_history_note')}}<!--提现备注-->：
+                    </em>
+                    <input type="text" maxlength="1000" v-model="memo" :placeholder="'Memo,'+$t('public0.public237')" />
+                </div>
                 <div class="filed">
                     <div class="filed-number">
                       <em>{{$t('account.user_Draw_the_number')}}<!--提现数量-->：<i class="asterisk">&nbsp;*</i></em>
@@ -123,6 +129,7 @@ export default {
       datas: {},
       showDropdown: false,
       showNewAddress: false,
+      memo:'', //提现备注
       alias: '', // 别名
       amount: '', // 提现金额
       toAddress: '', // 提现地址
@@ -309,6 +316,7 @@ export default {
               alias: this.alias,
               fee: this.procedureFee,
               userBankInfo: this.userBankInfo,
+              memo: this.memo,
               lang: window.localStorage.getItem('lang') === 'zh-CN' ? 'cn' : 'en'
             }
             let saveFun = () => {
@@ -364,6 +372,9 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   position: relative; color:#999;font-size: 0; width: 500px;height:30px;
   background-color: #FFF;border:1px solid rgba(186,141,53,0.5);
 }
+.withdrawBox .filed.memo {display: flex; padding-top: 10px; margin-bottom: 5px;}
+.withdrawBox .filed.memo em {width: 50px; height: 28px; line-height: 28px;}
+.withdrawBox .filed.memo input {flex: 1; height: 28px; border:1px solid #ccc;}
 .withAdress span.dowml{position: relative;cursor: pointer; vertical-align: top; width: 29px;height: 30px;border-left: 1px solid transparent; display: inline-block;float:right;}
 .withAdress span.dowml:before{content:"";display: inline-block; width: 0px;height: 0px;border-left: 9px solid transparent;border-bottom:9px solid transparent;border-right:9px solid transparent;border-top: 9px solid #aeb7d0;position: absolute;top:10px;left:5px;}
 .withAdress span.dowml:hover:before{border-top-color: #BA8D35;}

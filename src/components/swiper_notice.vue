@@ -22,8 +22,7 @@ data(){
             direction : 'vertical',
             height: 30,
             autoplay: true, 
-            speed: 400, 
-            loop:true,
+            speed: 400,
             setWrapperSize :true,
             observer:true,
         }
