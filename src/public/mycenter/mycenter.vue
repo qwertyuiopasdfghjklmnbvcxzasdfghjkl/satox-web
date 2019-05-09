@@ -43,7 +43,7 @@
             </p>
             <p class="sale">
               <span>
-                {{$t('account.user_center_pay_fees').format('SATOX', '50%')}}<!--使用SATOX支付交易手续费（50% 折扣）-->
+                {{$t('account.user_center_pay_fees').format('SATO', '50%')}}<!--使用SATOX支付交易手续费（50% 折扣）-->
                 <a class="icon-checkbox" href="javascript:;" :class="isUseSATOXPay ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'" @click="switchCoinState"></a>
               </span>
             </p>
