@@ -228,7 +228,8 @@
                 formData3: {
                     username: '0',
                     value: null
-                }
+                },
+                search: 0,
             };
         },
         created () {
@@ -307,7 +308,13 @@
             },
             changePage6 (page) {
                 this.curPage6 = page;
-                this.getfindUserAssetList();
+                if (this.search === 1) {
+                    this.reGetfindUserAssetList();
+                } else if (this.search === 2) {
+                    this.reGetfindUserAssetList1();
+                } else {
+                    this.getfindUserAssetList();
+                }
             },
             custom1 (o) {
                 this.curPage4 = 1;
@@ -381,7 +388,7 @@
             },
             changePage3 (page) {
                 this.curPage3 = page;
-                this.getPoolList();
+                this.reGetPoolList();
             },
             getAccountList (data) {
                 let sortStr = this.chargeSortKey ? `${this.chargeSortKey}%20${this.chargeSortVal}` : 'null';
@@ -392,7 +399,7 @@
             },
             changePage4 (page) {
                 this.curPage4 = page;
-                this.getAccountList();
+                this.reGetAccountList();
             },
             getAdminWithdrawAccountInfo () {
                 financeApi.getAdminWithdrawAccountInfo(this.curPage5, (res, total) => {
@@ -431,21 +438,7 @@
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
                 data.symbol = data.symbol === '0' ? null : data.symbol;
-                // if (!data.symbol && !data.createdStart && !data.createdEnd) {
-                //     this.columns4 = [
-                //         {title: this.$t('common.rq'), key: 'createdTime'},
-                //         {title: this.$t('common.bz'), key: 'symbol', sortable: 'custom'},
-                //         {title: this.$t('finance.dqsl'), key: 'currentCapitalPoolQuantity', sortable: 'custom'},
-                //         {
-                //             title: this.$t('finance.syjyrspsj'),
-                //             key: 'closingCapitalPoolYesterdayQuantity',
-                //             sortable: 'custom'
-                //         },
-                //         {title: this.$t('finance.rjz'), key: 'increaseDailyQuantity', sortable: 'custom'}
-                //     ];
-                // } else {
                 this.columns4.splice(3, 2);
-                // }
                 this.getPoolList(data);
             },
             reGetAccountList () {
@@ -458,6 +451,7 @@
                 this.getAccountList(data);
             },
             reGetfindUserAssetList () {
+                this.search = 1;
                 let D = JSON.stringify(this.formData2);
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
@@ -468,6 +462,7 @@
                 this.getfindUserAssetList(data);
             },
             reGetfindUserAssetList1 () {
+                this.search = 2;
                 let data = {
                     username: this.formData3.value
                 };
