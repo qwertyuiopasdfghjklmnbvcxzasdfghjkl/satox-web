@@ -64,7 +64,14 @@ util.ajax.interceptors.response.use(function (response) {
         Cookies.remove('password');
         Cookies.remove('hasGreet');
         Cookies.remove('access');
+        let language = '';
+        if (window.localStorage.language) {
+            language = window.localStorage.language;
+        }
         window.localStorage.clear();
+        if (language) {
+            window.localStorage.language = language;
+        }
         window.location.reload();
     }
     // 对响应数据做点什么
@@ -83,7 +90,14 @@ util.ajax.interceptors.response.use(function (response) {
         Cookies.remove('password');
         Cookies.remove('hasGreet');
         Cookies.remove('access');
+        let language = '';
+        if (window.localStorage.language) {
+            language = window.localStorage.language;
+        }
         window.localStorage.clear();
+        if (language) {
+            window.localStorage.language = language;
+        }
         window.location.reload();
     }
     // 对响应错误做点什么
