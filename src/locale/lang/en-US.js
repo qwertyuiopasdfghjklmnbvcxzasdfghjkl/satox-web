@@ -481,7 +481,24 @@ export const exchange = {
     qsrz: 'please enter a value',
     dzcx: 'address query',
     dzbnwk: 'the address cannot be empty',
-    bzbnwk: 'the currency cannot be empty'
+    bzbnwk: 'the currency cannot be empty',
+    ksctxz: 'quick withdrawal status',
+    kscted: 'fast withdrawal limit',
+    kstxcs: 'fast withdrawal times',
+    kq: 'open',
+    gb: 'close',
+    yhdqwtgl: 'user current delegate management',
+    yhlswtgl: 'user history delegate management',
+    wtid: 'entrust ID',
+    wtlx: 'delegate type',
+    wtfx: 'delegate orientation',
+    wtjg: 'entrust the price',
+    jysc: 'trading market',
+    wtzt: 'entrusted state',
+    xy: 'less-than',
+    dy: 'greater than',
+    dengy: 'equal to',
+    bfcjyejsbqzcx: 'part of the transaction balance is less compulsory revocation'
 }
 export const risk = {
     bbycyj: 'currency abnormal warning',
@@ -854,7 +871,8 @@ export const nav = {
     cwrz: 'error log',
     lqbsz: 'cold wallet setting',
     zdzzlqbsz: 'primary address to cold wallet setting',
-    zzjl: 'transfer record'
+    zzjl: 'transfer record',
+    wtgl: 'mandatory administration'
 }
 export const home = {
     zyh: 'total users',
