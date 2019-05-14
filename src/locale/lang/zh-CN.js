@@ -481,7 +481,25 @@ export const exchange = {
     qsrz: '请输入值',
     dzcx: '地址查询',
     dzbnwk: '地址不能为空',
-    bzbnwk: '币种不能为空'
+    bzbnwk: '币种不能为空',
+    ksctxz: '快速提现状态',
+    kscted: '快速提现额度',
+    kstxcs: '快速提现次数',
+    kq: '开启',
+    gb: '关闭',
+    //
+    yhdqwtgl: '用户当前委托管理',
+    yhlswtgl: '用户历史委托管理',
+    wtid: '委托ID',
+    wtlx: '委托类型',
+    wtfx: '委托方向',
+    wtjg: '委托价格',
+    jysc: '交易市场',
+    wtzt: '委托状态',
+    xy: '小于',
+    dy: '大于',
+    dengy: '等于',
+    bfcjyejsbqzcx: '部分成交余额较少被强制撤销'
 }
 export const risk = {
     bbycyj: '币币异常预警',
@@ -854,7 +872,8 @@ export const nav = {
     cwrz: '错误日志',
     lqbsz: '冷钱包设置',
     zdzzlqbsz: '主地址转冷钱包设置',
-    zzjl: '转账记录'
+    zzjl: '转账记录',
+    wtgl: '委托管理'
 }
 export const home = {
     zyh: '总用户',

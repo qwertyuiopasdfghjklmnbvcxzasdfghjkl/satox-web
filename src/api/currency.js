@@ -473,6 +473,18 @@ const findMarketList = function (data, curPage, success, error) {
 };
 curreny.findMarketList = findMarketList;
 
+// 交易市场管理--查询所有市场
+const findAllMarketList = function ( success, error) {
+    api.get(`api/bm/bbManage/marketManage/findAllOnlineMarkets`, {}, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+curreny.findAllMarketList = findAllMarketList;
+
 // 市场管理--市场管理新增市场
 const insertMarket = function (data, success, error) {
     api.post('api/bm/bbManage/marketManage/insertMarket', data, (res) => {
@@ -532,5 +544,29 @@ const findUserInviteInfo = function (data, success, error) {
     }, error);
 };
 curreny.findUserInviteInfo = findUserInviteInfo;
+
+// 查询币币当前委托
+const getEntrust = function (data, success, error) {
+    api.post('api/bm/bbManage/orderBooks/query', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+curreny.getEntrust = getEntrust;
+
+// 查询币币历史委托
+const getHistoryEntrust = function (data, success, error) {
+    api.post('api/bm/bbManage/orderBooks/queryHistory', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+curreny.getHistoryEntrust = getHistoryEntrust;
 
 export default curreny;

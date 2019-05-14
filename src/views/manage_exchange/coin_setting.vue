@@ -92,6 +92,31 @@
                             <Button type="primary" @click="tabs('gaslimit')">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
+                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
+                        <Col span="8">{{vm.$t('exchange.ksctxz')}}</Col>
+                        <Col span="8">{{data1.withdrawFastFlag | state }}</Col>
+                        <Col span="8">
+                            <Button type="primary" @click="tabs('withdrawFastFlag')">{{data1.withdrawFastFlag === 1?
+                                vm.$t('exchange.gb') : vm.$t('exchange.kq')}}
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
+                        <Col span="8">{{vm.$t('exchange.kscted')}}</Col>
+                        <Col span="8">{{data1.withdrawFastQuantity }}</Col>
+                        <Col span="8">
+                            <InputNumber v-model="withdrawFastQuantity"></InputNumber>
+                            <Button type="primary" @click="tabs('withdrawFastQuantity')">{{vm.$t('common.bc')}}</Button>
+                        </Col>
+                    </Row>
+                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
+                        <Col span="8">{{vm.$t('exchange.kstxcs')}}</Col>
+                        <Col span="8">{{data1.withdrawFastCounts }}</Col>
+                        <Col span="8">
+                            <InputNumber v-model="withdrawFastCounts"></InputNumber>
+                            <Button type="primary" @click="tabs('withdrawFastCounts')">{{vm.$t('common.bc')}}</Button>
+                        </Col>
+                    </Row>
                 </Card>
             </TabPane>
             <TabPane :label="vm.$t('exchange.ctsz')">
@@ -152,6 +177,9 @@
                 gaslimit: null,
                 confirmBlock: null,
                 rechargeFlag: null,
+                withdrawFastCounts: null,
+                withdrawFastQuantity: null,
+                withdrawFastFlag: 1,
                 data2: []
             };
         },
@@ -170,7 +198,11 @@
                 let data = {
                     symbolFeeId: this.data1.symbolFeeId,
                 };
-                data[propName] = this[propName];
+                if (propName === 'withdrawFastFlag') {
+                    data.withdrawFastFlag = this.data1.withdrawFastFlag === 1 ? 2 : 1;
+                } else {
+                    data[propName] = this[propName];
+                }
                 currenyApi.updateSymbolWithdrawFees(data, (res) => {
                     this.getchangeInfoList();
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
@@ -239,6 +271,11 @@
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
+            }
+        },
+        filters: {
+            state (i) {
+                return i === 1 ? vm.$t('exchange.kp') : vm.$t('exchange.gb');
             }
         }
     };
