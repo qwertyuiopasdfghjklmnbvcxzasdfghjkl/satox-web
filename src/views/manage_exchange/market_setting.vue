@@ -18,7 +18,9 @@
             <Col span="6">{{vm.$t('exchange.sxzt')}}</Col>
             <Col span="6">{{item.state === 1 ? vm.$t('exchange.sx'): vm.$t('exchange.xs')}}</Col>
             <Col span="12" style="text-align:right;">
-                <Button type="primary" @click="update">{{this.item.state === 1 ? vm.$t('exchange.xs'): vm.$t('exchange.sx')}}</Button>
+                <Button type="primary" @click="update">{{this.item.state === 1 ? vm.$t('exchange.xs'):
+                    vm.$t('exchange.sx')}}
+                </Button>
             </Col>
         </Row>
 
@@ -167,6 +169,49 @@
                 <Button type="primary" @click="tabs('volumeRatio24h')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">{{vm.$t('exchange.pullGemini')}}</Col>
+            <Col span="6">{{item.pullGemini||"无"}}</Col>
+            <Col span="6">
+                <Input v-model="pullGemini"></Input>
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('pullGemini')">{{vm.$t('common.bc')}}</Button>
+            </Col>
+        </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">{{vm.$t('exchange.buyFixedPriceRate')}}</Col>
+            <Col span="6">{{item.buyFixedPriceRate||"无"}}</Col>
+            <Col span="6">
+                <input v-model="buyFixedPriceRate" type="number" @input="oninput"
+                       style="width:113px;border:1px solid #dddee1;padding: 4px;">
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('buyFixedPriceRate')">{{vm.$t('common.bc')}}</Button>
+            </Col>
+        </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">{{vm.$t('exchange.sellFixedPriceRate')}}</Col>
+            <Col span="6">{{item.sellFixedPriceRate||"无"}}</Col>
+            <Col span="6">
+                <input v-model="sellFixedPriceRate" type="number" @input="oninput"
+                       style="width:113px;border:1px solid #dddee1;padding: 4px;">
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('sellFixedPriceRate')">{{vm.$t('common.bc')}}</Button>
+            </Col>
+        </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">{{vm.$t('exchange.pullInterval')}}</Col>
+            <Col span="6">{{item.pullInterval||"无"}}</Col>
+            <Col span="6">
+                <input v-model="pullInterval" type="number" @input="oninput"
+                       style="width:113px;border:1px solid #dddee1;padding: 4px;">
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('pullInterval')">{{vm.$t('common.bc')}}</Button>
+            </Col>
+        </Row>
     </Card>
 </template>
 
@@ -199,24 +244,28 @@
                 volumeRatio24h: null,
                 openingPrice: null,
                 marketType: null,
+                pullGemini: null,
+                buyFixedPriceRate: null,
+                sellFixedPriceRate: null,
+                pullInterval: null,
                 role: true
             };
         },
         components: {
             numberbox
         },
-        created () {
+        created() {
             this.findMarketList();
             this.getRole();
         },
         methods: {
-            oninput (e) {
+            oninput(e) {
                 // 通过正则过滤小数点后8位
                 e.target.value = (e.target.value.match(/^\d*(\.?\d{0,4})/g)[0]) || null;
                 e.target.value = e.target.value > 1 ? 1 : e.target.value;
                 this.volumeRatio24h = e.target.value;
             },
-            getRole () {
+            getRole() {
                 let roles = Cookies.get('roles');
                 if (roles.indexOf('ROLE_ADMIN') === -1) {
                     this.role = true;
@@ -224,10 +273,10 @@
                     this.role = false;
                 }
             },
-            closeDialog () {
+            closeDialog() {
                 this.$emit('removeDialog');
             },
-            findMarketList () {
+            findMarketList() {
                 currenyApi.findMarketList({}, this.curPage, (res, total) => {
                     this.total = total;
                     this.data2 = res;
@@ -235,7 +284,7 @@
                     this.$Messags.error({content: msg});
                 });
             },
-            tabs (propName) {
+            tabs(propName) {
                 if (!this[propName] && (this[propName] !== 0)) {
                     this.$Message.error({content: this.vm.$t('exchange.qsrz')});
                     return;
@@ -253,7 +302,7 @@
                     this.$Message.error({content: msg});
                 });
             },
-            update () {
+            update() {
                 currenyApi.updateMarket({
                     version: this.item.version,
                     marketId: this.item.marketId,

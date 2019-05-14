@@ -57,6 +57,24 @@
                     <InputNumber style="width:100%;" v-model="formLeft.autoEntrustCount"
                                  name="autoEntrustCount"></InputNumber>
                 </FormItem>
+
+
+                <FormItem :label="vm.$t('exchange.pullGemini')" prop="pullGemini">
+                    <Input style="width:100%;" v-model="formLeft.pullGemini"
+                                 name="pullGemini"></Input>
+                </FormItem>
+                <FormItem :label="vm.$t('exchange.buyFixedPriceRate')" prop="buyFixedPriceRate">
+                    <InputNumber style="width:100%;" v-model="formLeft.buyFixedPriceRate"
+                                 name="buyFixedPriceRate"></InputNumber>
+                </FormItem>
+                <FormItem :label="vm.$t('exchange.sellFixedPriceRate')" prop="sellFixedPriceRate">
+                    <InputNumber style="width:100%;" v-model="formLeft.sellFixedPriceRate"
+                                 name="sellFixedPriceRate"></InputNumber>
+                </FormItem>
+                <FormItem :label="vm.$t('exchange.pullInterval')" prop="pullInterval">
+                    <InputNumber style="width:100%;" v-model="formLeft.pullInterval||3000"
+                                 name="pullInterval"></InputNumber>
+                </FormItem>
                 <Button type="primary" @click="getAddMarket()">{{vm.$t('common.tj')}}</Button>
             </Form>
         </Card>
@@ -67,7 +85,7 @@
 
     export default {
         props: ['type'],
-        data () {
+        data() {
             const customValidator = (rule, value, callback) => {
                 if (this.formLeft[rule.field] === null) {
                     return callback(new Error('error'));
@@ -92,58 +110,94 @@
                     minPlaceOrderQuantity: null,
                     state: '2',
                     fixedPrice: '',
-                    autoEntrustCount: 0
+                    autoEntrustCount: 0,
+                    pullGemini: null,
+                    buyFixedPriceRate: null,
+                    sellFixedPriceRate: null,
+                    pullInterval: null
                 },
                 ruleInline: {
                     market: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.scmc'), trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.scmc'), trigger: 'blur'}
                     ],
                     currencySymbol: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.bdbz'), trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.bdbz'), trigger: 'blur'}
                     ],
                     baseSymbol: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jbbz'), trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.jbbz'), trigger: 'blur'}
                     ],
                     accuracy: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jgjd')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.jgjd'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.jgjd')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.jgjd'),
+                            trigger: 'blur'
+                        },
                     ],
                     amountAccu: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.jejd')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.jejd'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.jejd')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.jejd'),
+                            trigger: 'blur'
+                        },
                     ],
                     quantityAccu: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.sljd')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.sljd'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.sljd')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.sljd'),
+                            trigger: 'blur'
+                        },
                     ],
                     minPlaceOrderAmount: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.zxxdje')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.zxxdje'), trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zxxdje')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.zxxdje'),
+                            trigger: 'blur'
+                        }
                     ],
                     minPlaceOrderQuantity: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.zxjysl')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.zxjysl'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zxjysl')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.zxjysl'),
+                            trigger: 'blur'
+                        },
                     ],
                     state: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('common.zt')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('common.zt'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('common.zt')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('common.zt'),
+                            trigger: 'blur'
+                        },
                     ],
                     openingPrice: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.kpjg')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.kpjg'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.kpjg')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.kpjg'),
+                            trigger: 'blur'
+                        },
                     ],
                     digit: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('exchange.sdhbjd')},
-                        {validator: customValidator, message: vm.$t('common.qsr')+vm.$t('exchange.sdhbjd'), trigger: 'blur'},
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.sdhbjd')},
+                        {
+                            validator: customValidator,
+                            message: vm.$t('common.qsr') + vm.$t('exchange.sdhbjd'),
+                            trigger: 'blur'
+                        },
                     ]
                 }
             };
         },
         methods: {
-            closeDialog () {
+            closeDialog() {
                 this.$emit('removeDialog');
             },
-            getAddMarket () {
+            getAddMarket() {
                 if (this.type == 1) {
                     this.$refs.formItem.validate((valid) => {
                         if (valid) {
