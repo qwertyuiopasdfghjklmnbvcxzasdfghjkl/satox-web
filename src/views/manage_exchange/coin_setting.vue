@@ -109,7 +109,7 @@
                             <Button type="primary" @click="tabs('withdrawFastQuantity')">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
-                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
+                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">b
                         <Col span="8">{{vm.$t('exchange.kstxcs')}}</Col>
                         <Col span="8">{{data1.withdrawFastCounts }}</Col>
                         <Col span="8">

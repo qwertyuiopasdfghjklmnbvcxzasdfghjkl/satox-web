@@ -38,6 +38,7 @@
         riskRouter,
         operationRouter,
         adminRouter,
+        reportRouter,
         systemConfigRouter,
         systemLogsRouter,
         monitoringRouter,
@@ -64,6 +65,7 @@
                     {id: 'finance', path: 'finance_finance_index', name: this.$t('nav.cwgl'), menus: financeRouter},
                     {id: 'risk', path: 'risk_exchange_index', name: this.$t('nav.fxkzgl'), menus: riskRouter},
                     {id: 'operation', path: 'operation_distribute_index', name: this.$t('nav.ywtggl'), menus: operationRouter},
+                    {name: this.$t('report.tjbbgl'), menus: reportRouter},
                     {id: 'admin', path: 'admin_index', name: this.$t('nav.glyxtqx'), menus: adminRouter},
                     {id: 'systemconfig', path: 'systemconfig_index', name: this.$t('nav.xtcs'), menus: systemConfigRouter},
                     {id: 'systemcogs', path: 'systemlogs_index', name: this.$t('nav.xtrz'), menus: systemLogsRouter},
@@ -71,7 +73,8 @@
                     {id: 'fund', path: 'fund_index', name: this.$t('nav.ptzjgl'), menus: fundRouter}
                 ],
                 icon: ['ios-analytics', 'ios-pie-outline', 'ios-calculator', 'ios-pulse', 'ios-settings',
-                    'ios-calendar-outline', 'ios-cart', 'ios-clock', 'ios-eye', 'ios-filing-outline', 'ios-folder-open-outline']
+                    'ios-calendar-outline', 'ios-cart', 'ios-clock', 'ios-eye', 'ios-filing-outline',
+                    'android-clipboard', 'android-drafts']
             };
         },
         components: {

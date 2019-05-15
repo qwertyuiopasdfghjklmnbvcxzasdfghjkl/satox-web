@@ -489,6 +489,23 @@ export const financeRouter = [
         ]
     },
     {
+        path: '/thirdparty',
+        name: 'thirdparty',
+        title: 'nav.dsfczlb',
+        component: Main,
+        icon: 'android-exit',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'thirdparty_index', title: 'nav.dsfczlb', name: 'thirdparty_index', component: resolve => {
+                    require(['./views/manage_finance/thirdparty.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/finance_withdraw',
         name: 'finance_withdraw',
         title: 'nav.tbsh',
@@ -742,15 +759,6 @@ export const operationRouter = [
             }
         ]
     },
-    // {
-    //     path: '/operation_updowncoin',
-    //     name: 'operation_updowncoin',
-    //     title: '上币/退币',
-    //     component: Main,
-    //     children: [
-    //         { path: 'index', title: '上币/退币', name: 'operation_updowncoin_index', component: resolve => { require(['./views/manage_operation/updowncoin.vue'], resolve); } }
-    //     ]
-    // },
     {
         path: '/operation_activity',
         name: 'operation_activity',
@@ -818,6 +826,26 @@ export const operationRouter = [
                 name: 'operation_app_index',
                 component: resolve => {
                     require(['./views/manage_operation/operation_app.vue'], resolve);
+                }
+            }
+        ]
+    }
+];
+
+export const reportRouter = [
+    {
+        path: '/report',
+        name: 'report',
+        title: 'nav.dsfdcsj',
+        component: Main,
+        icon: 'android-archive',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'report_index', title: 'nav.dsfdcsj', name: 'report_index', component: resolve => {
+                    require(['./views/manage_report/export_data.vue'], resolve);
                 }
             }
         ]
@@ -897,9 +925,9 @@ export const systemConfigRouter = [
         ]
     },
     {
-        path: '/addwithdrawaladdress',
-        name: 'addwithdrawaladdress',
-        title: 'nav.tszhcssz',
+        path: '/addwithdrawal',
+        name: 'addwithdrawal',
+        title: 'nav.sxfzhsz',
         component: Main,
         icon: 'ios-toggle',
         meta: {
@@ -907,11 +935,51 @@ export const systemConfigRouter = [
         },
         children: [
             {
-                path: 'addwithdrawaladdress_index',
-                title: 'nav.tszhcssz',
-                name: 'addwithdrawaladdress_index',
+                path: 'addwithdrawal_index',
+                title: 'nav.sxfzhsz',
+                name: 'addwithdrawal_index',
                 component: resolve => {
-                    require(['./views/manage_systemconfig/addWithdrawalAddress.vue'], resolve);
+                    require(['./views/manage_systemconfig/addWithdrawal.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/addaddress',
+        name: 'addaddress',
+        title: 'nav.tbzdzsz',
+        component: Main,
+        icon: 'settings',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'addaddress_index',
+                title: 'nav.tbzdzsz',
+                name: 'addaddress_index',
+                component: resolve => {
+                    require(['./views/manage_systemconfig/addAddress.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/special_account',
+        name: 'special_account',
+        title: 'nav.tszhgl',
+        component: Main,
+        icon: 'person',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'special_account_index',
+                title: 'nav.tszhgl',
+                name: 'special_account_index',
+                component: resolve => {
+                    require(['./views/manage_systemconfig/special_account.vue'], resolve);
                 }
             }
         ]
@@ -1494,6 +1562,7 @@ export const routers = [
     ...riskRouter,
     ...operationRouter,
     ...adminRouter,
+    ...reportRouter,
     ...systemConfigRouter,
     ...systemLogsRouter,
     ...appRouter,

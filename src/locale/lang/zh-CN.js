@@ -499,7 +499,11 @@ export const exchange = {
     xy: '小于',
     dy: '大于',
     dengy: '等于',
-    bfcjyejsbqzcx: '部分成交余额较少被强制撤销'
+    bfcjyejsbqzcx: '部分成交余额较少被强制撤销',
+    yhlx: '用户类型',
+    xztsyh: '新增特殊用户',
+    bzcztj: '币种充值统计',
+    dsfczlb: '第三方充值列表'
 }
 export const risk = {
     bbycyj: '币币异常预警',
@@ -792,7 +796,8 @@ export const monitoring = {
     cwfssj: '错误发生时间',
     ywid: '业务ID',
     ywb: '业务表',
-    wbfwdz: '外部服务地址'
+    wbfwdz: '外部服务地址',
+    tbqks: '同步区块数'
 }
 export const fund = {
     lqbsz: '冷钱包设置',
@@ -871,9 +876,15 @@ export const nav = {
     jdxx: '节点信息',
     cwrz: '错误日志',
     lqbsz: '冷钱包设置',
+    //
     zdzzlqbsz: '主地址转冷钱包设置',
     zzjl: '转账记录',
-    wtgl: '委托管理'
+    wtgl: '委托管理',
+    sxfzhsz: '手续费账户设置',
+    tbzdzsz: '提币主地址设置',
+    tszhgl: '特殊账户管理',
+    dsfczlb: '第三方充值',
+    dsfdcsj: '第三方导出数据'
 }
 export const home = {
     zyh: '总用户',
@@ -881,4 +892,9 @@ export const home = {
     dqzxyh: '当前在线用户',
     jrdlyh: '今日登陆用户',
     kycdsh: 'KYC待审核'
+}
+export const report = {
+    tjbbgl: '统计报表管理',
+    wjm: '文件名',
+    xz: '下载'
 }

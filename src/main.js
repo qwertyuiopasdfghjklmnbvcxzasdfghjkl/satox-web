@@ -15,6 +15,7 @@ import {
     riskRouter,
     operationRouter,
     adminRouter,
+    reportRouter,
     systemConfigRouter,
     systemLogsRouter,
     monitoringRouter,
@@ -295,6 +296,7 @@ window.vm = new Vue({
         routers = routers.concat(riskRouter);
         routers = routers.concat(operationRouter);
         routers = routers.concat(adminRouter);
+        routers = routers.concat(reportRouter);
         routers = routers.concat(systemConfigRouter);
         routers = routers.concat(systemLogsRouter);
         routers = routers.concat(monitoringRouter);

@@ -134,4 +134,40 @@ const updateAdminImg = function (data, success, error) {
 };
 system.updateAdminImg = updateAdminImg;
 
+// 特殊用户列表
+const getAccounts = function (data, success, error) {
+    api.get('api/bm/special/users', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+system.getAccounts = getAccounts;
+
+// 新增特殊用户
+const addAccount = function (data, success, error) {
+    api.post('api/bm/special/user', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+system.addAccount = addAccount;
+
+// 删除特殊用户
+const deleteAccounts = function (data, success, error) {
+    api.delete(`api/bm/special/user?specialUserId=${data}`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+system.deleteAccounts = deleteAccounts;
+
 export default system;

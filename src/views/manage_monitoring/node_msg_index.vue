@@ -16,10 +16,14 @@
             <p slot="title">{{$t('monitoring.omnitbqks')}}</p>
             <Table :columns="columns2" :data="data3"></Table>
         </Card>
-        <!--<Card style="margin-top:30px;">-->
-            <!--<p slot="title">MBT同步区块数</p>-->
-            <!--<Table :columns="columns2" :data="data4"></Table>-->
-        <!--</Card>-->
+        <Card style="margin-top:30px;">
+            <p slot="title">EOS{{$t('monitoring.tbqks')}}</p>
+            <Table :columns="columns2" :data="data4"></Table>
+        </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title">LTC{{$t('monitoring.tbqks')}}</p>
+            <Table :columns="columns2" :data="data5"></Table>
+        </Card>
     </div>
 </template>
 <script>
@@ -33,8 +37,10 @@
                 curPage1: 1,
                 total1: 0,
                 data1: [],
+                data2: [],
                 data3: [],
                 data4: [],
+                data5: [],
                 columns2: [
                     {
                         title: this.$t('monitoring.fwt'),
@@ -69,7 +75,6 @@
                         key: 'scanOnlineDifference'
                     }
                 ],
-                data2: []
             };
         },
         created () {
