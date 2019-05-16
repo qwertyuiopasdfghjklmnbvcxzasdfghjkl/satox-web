@@ -117,6 +117,9 @@
                             <Radio label="5">
                                 <span>EOS</span>
                             </Radio>
+                            <Radio label="6">
+                                <span>LTC</span>
+                            </Radio>
                         </RadioGroup>
                     </Col>
                     <Col span="4" style="text-align:right;">

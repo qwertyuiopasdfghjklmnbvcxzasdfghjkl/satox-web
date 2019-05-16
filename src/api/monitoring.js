@@ -194,6 +194,18 @@ const findMBTNNodeList = function (success, error) {
 };
 monitoring.findMBTNNodeList = findMBTNNodeList;
 
+// 查询EOS节点信息
+const findEOSNodeList = function (success, error) {
+    api.get(`/api/bm/monitor/node/findEOSNode`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+monitoring.findEOSNodeList = findEOSNodeList;
+
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {
     api.post(`api/bm/monitor/errorLog/findErrorLogList/10/${curPage}`, data, (res) => {

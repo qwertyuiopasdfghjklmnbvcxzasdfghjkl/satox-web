@@ -840,7 +840,7 @@ export const reportRouter = [
         component: Main,
         icon: 'android-archive',
         meta: {
-            roles: ['ROLE_ADMIN'],
+            roles: ['ROLE_ADMIN', 'ROLE_REPORT_MANAGER'],
         },
         children: [
             {

@@ -234,6 +234,9 @@ import addAddress from './addAddress'
                 case 5:
                     return 'EOS'
                     break;
+                case 6:
+                    return 'LTC'
+                    break;
                 }
             },
             detail (addressList, h) {

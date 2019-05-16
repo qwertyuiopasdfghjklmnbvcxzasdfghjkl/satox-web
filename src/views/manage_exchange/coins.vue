@@ -297,6 +297,9 @@
                     case 5:
                         return 'EOS';
                         break;
+                    case 6:
+                        return 'LTC';
+                        break;
                 }
             },
             add_order () {

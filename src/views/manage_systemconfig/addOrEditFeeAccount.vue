@@ -24,6 +24,9 @@
                     <Radio label="5">
                         <span>EOS</span>
                     </Radio>
+                    <Radio label="6">
+                        <span>LTC</span>
+                    </Radio>
                 </RadioGroup>
             </FormItem>
             <FormItem :label="vm.$t('common.zllx')" prop="symbolType" v-if="isEdit">
@@ -85,6 +88,9 @@
                         break;
                     case 5:
                         return 'EOS';
+                        break;
+                    case 6:
+                        return 'LTC';
                         break;
                 }
             },
