@@ -205,7 +205,7 @@ export default {
       }
     })
     Validator.extend('isMoreMax', {
-      getMessage: (field, args) => this.$t('public0.public47').format(this.available), // 提现额度不能大于可用余额：{0}
+      getMessage: (field, args) => this.$t('account.input_number_gt_withdraw_quantity'), // 输入数量大于最大可快速提现数量
       validate: (files, args) => {
         return this.isMoreMax
       }
