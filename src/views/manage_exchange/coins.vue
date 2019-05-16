@@ -31,7 +31,6 @@
     import util from '../../libs/util';
     import add_order from './add_order';
     import coin_setting from './coin_setting';
-    import recharge_settings from './recharge_settings';
     import currenyApi from '../../api/currency';
     import updata from './users/updata';
 
@@ -189,7 +188,10 @@
                                     on: {
                                         click: () => {
                                             util.setDialog(coin_setting, {
-                                                item: params.row
+                                                item: params.row,
+                                                okCallback: () => {
+                                                    this.findSymbolList();
+                                                }
                                             });
                                         }
                                     }

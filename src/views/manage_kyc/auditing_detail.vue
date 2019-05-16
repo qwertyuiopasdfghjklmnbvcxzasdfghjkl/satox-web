@@ -43,6 +43,7 @@
                 state: false,
                 aaa: null,
                 columns1: [
+                    {title: vm.$t('monitoring.sqsj'), key: 'createdTime'},
                     {title: vm.$t('common.zh'), key: 'account'},
                     {title: vm.$t('common.dq'), key: 'cn'},
                     {title: vm.$t('common.xm'), key: 'verifyName'},

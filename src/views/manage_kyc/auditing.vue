@@ -47,6 +47,7 @@
                     text: ''
                 },
                 columns1: [
+                    {title: this.$t('monitoring.sqsj'), key: 'createdTime'},
                     {title: this.$t('common.zh'), key: 'account'},
                     {title: this.$t('common.dq'), key: 'cn'},
                     {title: this.$t('common.xm'), key: 'verifyName'},

@@ -1,6 +1,6 @@
 <template>
     <div class="coin_setting" style="width:635px;background: #fff;position:relative;">
-        <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+        <i @click="closeDialog" class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;"></i>
         <Tabs style="backgroung:#fff;">
             <TabPane :label="vm.$t('exchange.tbsz')">
                 <Card style="width:500px;">
@@ -18,7 +18,7 @@
                         <Col span="8">{{vm.$t('exchange.qxzt')}}</Col>
                         <Col span="8">{{item.withdrawFlag===1? vm.$t('exchange.zc'):vm.$t('exchange.zt')}}</Col>
                         <Col span="8" style="text-align:right;margin-left:-15px;">
-                            <Button type="primary" @click="updataInsertSymbol">
+                            <Button @click="updataInsertSymbol('withdrawFlag')" type="primary">
                                 {{item.withdrawFlag===2? vm.$t('exchange.zc'):vm.$t('exchange.zt')}}
                             </Button>
                         </Col>
@@ -28,10 +28,10 @@
                         <Col span="8">{{data1.minWithdrawQuantity2 || 0}}</Col>
                         <Col span="8">
                             <!-- <numberbox ref="price" :style="baseStyle" v-if="!isMarket" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.price" :readonly="isMarket"/> -->
-                            <numberbox ref="price" type="text" v-model="minWithdrawQuantity"
-                                       style="width:80px;border:1px solid #dddee1;"/>
+                            <numberbox ref="price" style="width:80px;border:1px solid #dddee1;" type="text"
+                                       v-model="minWithdrawQuantity"/>
                             <!-- <InputNumber v-model="minWithdrawQuantity" ></InputNumber> -->
-                            <Button type="primary" @click="tabs('minWithdrawQuantity')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('minWithdrawQuantity')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px; display:none">
@@ -39,7 +39,7 @@
                         <Col span="8">{{data1.convertQuantity || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="convertQuantity"></InputNumber>
-                            <Button type="primary" @click="tabs('convertQuantity')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('convertQuantity')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px; display:none">
@@ -61,7 +61,7 @@
                         <Col span="8">{{data1.feeFixedAmount || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="feeFixedAmount"></InputNumber>
-                            <Button type="primary" @click="tabs('feeFixedAmount')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('feeFixedAmount')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
 
@@ -71,7 +71,7 @@
                         <Col span="8">{{data1.minerFee || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="minerFee"></InputNumber>
-                            <Button type="primary" @click="tabs('minerFee')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('minerFee')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px; "
@@ -80,7 +80,7 @@
                         <Col span="8">{{data1.gasprice || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="gasprice"></InputNumber>
-                            <Button type="primary" @click="tabs('gasprice')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('gasprice')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;"
@@ -89,32 +89,37 @@
                         <Col span="8">{{data1.gaslimit || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="gaslimit"></InputNumber>
-                            <Button type="primary" @click="tabs('gaslimit')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs('gaslimit')" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
                         <Col span="8">{{vm.$t('exchange.ksctxz')}}</Col>
-                        <Col span="8">{{data1.withdrawFastFlag | state }}</Col>
+                        <Col span="8">{{item.withdrawFastFlag | state }}</Col>
                         <Col span="8">
-                            <Button type="primary" @click="tabs('withdrawFastFlag')">{{data1.withdrawFastFlag === 1?
+                            <Button @click="updataInsertSymbol('withdrawFastFlag')" type="primary">
+                                {{item.withdrawFastFlag === 1?
                                 vm.$t('exchange.gb') : vm.$t('exchange.kq')}}
                             </Button>
                         </Col>
                     </Row>
                     <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
                         <Col span="8">{{vm.$t('exchange.kscted')}}</Col>
-                        <Col span="8">{{data1.withdrawFastQuantity }}</Col>
+                        <Col span="8">{{item.withdrawFastQuantity || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="withdrawFastQuantity"></InputNumber>
-                            <Button type="primary" @click="tabs('withdrawFastQuantity')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="updataInsertSymbol('withdrawFastQuantity')" type="primary">
+                                {{vm.$t('common.bc')}}
+                            </Button>
                         </Col>
                     </Row>
-                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">b
+                    <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
                         <Col span="8">{{vm.$t('exchange.kstxcs')}}</Col>
-                        <Col span="8">{{data1.withdrawFastCounts }}</Col>
+                        <Col span="8">{{item.withdrawFastCounts || 0}}</Col>
                         <Col span="8">
                             <InputNumber v-model="withdrawFastCounts"></InputNumber>
-                            <Button type="primary" @click="tabs('withdrawFastCounts')">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="updataInsertSymbol('withdrawFastCounts')" type="primary">
+                                {{vm.$t('common.bc')}}
+                            </Button>
                         </Col>
                     </Row>
                 </Card>
@@ -135,7 +140,7 @@
                         <Col span="8">{{vm.$t('exchange.qxzt')}}</Col>
                         <Col span="8">{{item.rechargeFlag===1? vm.$t('exchange.zc'): vm.$t('exchange.zt')}}</Col>
                         <Col span="8" style="text-align:right;margin-left:-14px;">
-                            <Button type="primary" @click="competence()">
+                            <Button @click="competence()" type="primary">
                                 {{item.rechargeFlag===2? vm.$t('exchange.zc'): vm.$t('exchange.zt')}}
                             </Button>
                         </Col>
@@ -145,7 +150,7 @@
                         <Col span="8">{{item.confirmBlock || 0}}</Col>
                         <Col span="8">
                             <InputNumber :max="999" :min="1" v-model="confirmBlock"></InputNumber>
-                            <Button type="primary" @click="tabs1()">{{vm.$t('common.bc')}}</Button>
+                            <Button @click="tabs1()" type="primary">{{vm.$t('common.bc')}}</Button>
                         </Col>
                     </Row>
                 </Card>
@@ -172,6 +177,7 @@
                 riseRatio: null,
                 feeFixedAmount: null,
                 data1: [],
+                data: [],
                 minerFee: null,
                 gasprice: null,
                 gaslimit: null,
@@ -198,11 +204,7 @@
                 let data = {
                     symbolFeeId: this.data1.symbolFeeId,
                 };
-                if (propName === 'withdrawFastFlag') {
-                    data.withdrawFastFlag = this.data1.withdrawFastFlag === 1 ? 2 : 1;
-                } else {
-                    data[propName] = this[propName];
-                }
+                data[propName] = this[propName];
                 currenyApi.updateSymbolWithdrawFees(data, (res) => {
                     this.getchangeInfoList();
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
@@ -211,21 +213,35 @@
                 });
             },
             closeDialog () {
+                this.$emit('okCallback');
                 this.$emit('removeDialog');
             },
-            updataInsertSymbol () {
-                currenyApi.updateSymbol({
-                    symbolId: this.item.symbolId,
-                    version: this.version || this.item.version,
-                    withdrawFlag: this.item.withdrawFlag === 2 ? 1 : 2
-                }, (res) => {
-                    this.item.withdrawFlag = this.item.withdrawFlag === 2 ? 1 : 2;
+            updataInsertSymbol (propName) {
+                let data = this.item;
+                if (propName === 'withdrawFastFlag') {
+                    data.withdrawFastFlag = this.item.withdrawFastFlag === 1 ? 2 : 1;
+                } else if (propName === 'withdrawFlag') {
+                    data.withdrawFlag = this.item.withdrawFlag === 2 ? 1 : 2;
+                } else {
+                    data[propName] = this[propName];
+                }
+                currenyApi.updateSymbol(data, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
-                    currenyApi.coinFindSymbolInfo({
-                        symbolId: this.item.symbolId
-                    }, (res) => {
-                        this.version = res.version;
-                    });
+                    this.item.withdrawFastFlag = data.withdrawFastFlag;
+                    this.item.withdrawFlag = data.withdrawFlag;
+                    this.item.withdrawFastQuantity = this.withdrawFastQuantity;
+                    this.item.withdrawFastCounts = this.withdrawFastCounts;
+                    console.log(data,this.item)
+                    // currenyApi.coinFindSymbolInfo({
+                    //     symbolId: this.item.symbolId
+                    // }, (res) => {
+                    //     console.log(res)
+                    //     this.version = res.version;
+                    //     this.data1.withdrawFastFlag = res.withdrawFastFlag;
+                    //     this.data1.withdrawFlag = res.withdrawFlag;
+                    //     this.data1.withdrawFastQuantity = res.withdrawFastQuantity;
+                    //     this.data1.withdrawFastCounts = res.withdrawFastCounts;
+                    // });
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
@@ -257,9 +273,6 @@
                     this.$Message.error({content: msg});
                 });
             },
-            closeDialog () {
-                this.$emit('removeDialog');
-            },
             tabs1 () {
                 currenyApi.updateSymbol({
                     symbolId: this.item.symbolId,
@@ -275,7 +288,7 @@
         },
         filters: {
             state (i) {
-                return i === 1 ? vm.$t('exchange.kp') : vm.$t('exchange.gb');
+                return i === 1 ? vm.$t('exchange.kq') : vm.$t('exchange.gb');
             }
         }
     };
