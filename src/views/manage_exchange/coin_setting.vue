@@ -227,21 +227,10 @@
                 }
                 currenyApi.updateSymbol(data, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
-                    this.item.withdrawFastFlag = data.withdrawFastFlag;
-                    this.item.withdrawFlag = data.withdrawFlag;
-                    this.item.withdrawFastQuantity = this.withdrawFastQuantity;
-                    this.item.withdrawFastCounts = this.withdrawFastCounts;
-                    console.log(data,this.item)
-                    // currenyApi.coinFindSymbolInfo({
-                    //     symbolId: this.item.symbolId
-                    // }, (res) => {
-                    //     console.log(res)
-                    //     this.version = res.version;
-                    //     this.data1.withdrawFastFlag = res.withdrawFastFlag;
-                    //     this.data1.withdrawFlag = res.withdrawFlag;
-                    //     this.data1.withdrawFastQuantity = res.withdrawFastQuantity;
-                    //     this.data1.withdrawFastCounts = res.withdrawFastCounts;
-                    // });
+                    this.item[propName] = data[propName] || this[propName];
+                    // this.item.withdrawFlag = data.withdrawFlag;
+                    // this.item[propName] = this.withdrawFastQuantity;
+                    // this.item.withdrawFastCounts = this.withdrawFastCounts;
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
