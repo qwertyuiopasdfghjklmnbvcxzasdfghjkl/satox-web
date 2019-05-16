@@ -343,6 +343,30 @@ const withdrawsList = function (data, success, error) {
 };
 finance.withdrawsList = withdrawsList;
 
+// SATO USSD充值统计
+const statisticList = function (data, success, error) {
+    api.get(`api/bm/account/transfer/statistics`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.statisticList = statisticList;
+
+// SATO USSD 第三方充值
+const outerList = function (data, success, error) {
+    api.get(`api/bm/account/transfer/outer`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+finance.outerList = outerList;
+
 // 财务管理--内部转账--列表
 const listTransfer = function (data, success, error) {
     api.get(`api/bm/account/transfer/list`, data, (res) => {

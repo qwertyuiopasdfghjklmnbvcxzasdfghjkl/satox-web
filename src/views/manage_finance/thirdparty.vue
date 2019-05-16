@@ -23,7 +23,8 @@
                             format="yyyy-MM-dd HH:mm:ss"
                             style="width: 200px"></DatePicker>
                 {{$t('common.yhm')}}：
-                <Input v-model="formData.username" clearable style="width: 200px" :placeholder="$t('common.qsryhm')"></Input>
+                <Input v-model="formData.username" clearable style="width: 200px"
+                       :placeholder="$t('common.qsryhm')"></Input>
                 {{$t('common.sl')}}：
                 <Select v-model="amount" style="width: 200px">
                     <Option value="0">{{$t('common.qb')}}</Option>
@@ -62,18 +63,18 @@
                     {
                         title: this.$t('common.zt'), key: 'status',
                         render: (h, params) => {
-                            return h('div', this.state(''+ params.row.status));
+                            return h('div', this.state('' + params.row.status));
                         }
                     }
                 ],
                 columns1: [
                     {title: this.$t('common.bz'), key: 'symbol'},
-                    {title: this.$t('finance.jrczyhs'), key: 'createdAt'},
-                    {title: this.$t('finance.jrczbs'), key: 'createdAt'},
-                    {title: this.$t('finance.jryczsl'), key: 'createdAt'},
-                    {title: this.$t('finance.qrnczyhs'), key: 'createdAt'},
-                    {title: this.$t('finance.qrnczbs'), key: 'createdAt'},
-                    {title: this.$t('finance.qrnyczsl'), key: 'createdAt'},
+                    {title: this.$t('finance.jrczyhs'), key: 'currentRechargeUserCount'},
+                    {title: this.$t('finance.jrczbs'), key: 'currentRechargeCount'},
+                    {title: this.$t('finance.jryczsl'), key: 'currentRechargeSum'},
+                    {title: this.$t('finance.qrnczyhs'), key: 'rechargeUserCount7d'},
+                    {title: this.$t('finance.qrnczbs'), key: 'rechargeCount7d'},
+                    {title: this.$t('finance.qrnyczsl'), key: 'rechargeSum7d'},
                 ],
                 data: [],
                 data1: [],
@@ -90,8 +91,21 @@
         },
         created () {
             this.getfindUser();
+            this.getStatisticList();
         },
         methods: {
+            getStatisticList () {
+                let data = {
+                    page: this.curPage1,
+                    size: this.size
+                };
+                financeApi.statisticList(data, (res, total) => {
+                    this.data1 = res;
+                    this.total1 = total;
+                }, (msg) => {
+                    this.$Message.error({content: msg});
+                });
+            },
             getfindUser () {
                 switch (this.amount) {
                     case '1':
@@ -117,22 +131,26 @@
                 }
                 this.formData.page = this.curPage;
                 this.formData.size = this.size;
-                let D = JSON.stringify(this.formData)
+                let D = JSON.stringify(this.formData);
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
                 data.symbol = data.symbol === '0' ? null : data.symbol;
-                financeApi.withdrawsList(data, (res, total) => {
+                financeApi.outerList(data, (res, total) => {
                     this.total = total;
                     this.data = res;
                 });
             },
-            state(i){
-                switch (i) {
-                    case '1':return this.$t('common.jxz');
-                    case '2':return this.$t('common.ywc');
-                    case '3':return this.$t('common.yqx');
-                    case '4':return this.$t('common.yjj');
+            state (i) {
+                switch (i) { // 1：进行中，2：已完成，3：已取消，4：已拒绝
+                    case '1':
+                        return this.$t('common.jxz');
+                    case '2':
+                        return this.$t('common.ywc');
+                    case '3':
+                        return this.$t('common.yqx');
+                    case '4':
+                        return this.$t('common.yjj');
                 }
             },
             changePage (page) {
