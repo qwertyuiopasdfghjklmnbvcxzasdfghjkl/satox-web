@@ -5,7 +5,7 @@
                 <div class="formel price-balance">
                     {{isBuy ? baseSymbol : currentSymbol}}
                     {{$t('exchange.exchange_balance')}}<!--余额-->：
-                    {{toFixed(isBuy ? toBalance.availableBalance : (currentSymbol+baseSymbol !== 'SATOUSSD' ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
+                    {{toFixed(isBuy ? toBalance.availableBalance : (!symbol.includes('SATO') ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
                 </div>
                 <div class="formel price">
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
@@ -220,7 +220,7 @@ export default {
     fixedPrice(){
       let fixedPrice = 0, fixedBuyOrSellPrice = 0
       for(let item of this.marketList){
-        if(item.market===this.currentSymbol+this.baseSymbol){
+        if(item.market===this.symbol){
           fixedPrice = Number(item.fixedPrice)
           fixedBuyOrSellPrice = Number(this.isBuy?item.fixedBuyPrice:item.fixedSellPrice)
           break
@@ -361,7 +361,7 @@ export default {
     },
     switchPercent (p) {
       p = p / 100
-      let amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)
+      let amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (!this.symbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)
       if (this.active === 'market' && this.tradeType === 'buy') {
         this.formData.amount = Number(amount)?numUtils.div(amount, this.getLast24h.close).toFixed(this.fixedNumber, 1):''
         return
@@ -452,8 +452,8 @@ export default {
         }
       } else if (this.tradeType === 'sell') {
         direction = 2 // 卖
-        balance = (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
-        fromAccountId = (this.currentSymbol+this.baseSymbol !== 'SATOUSSD' ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
+        balance = (!this.symbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
+        fromAccountId = (!this.symbol.includes('SATO') ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
         toAccountId = this.toBalance.accountId // 帐号id
         if (numUtils.BN(amount).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
