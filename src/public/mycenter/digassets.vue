@@ -244,6 +244,8 @@ export default {
         fromAccount: data.accountId,
         withdrawFastCounts:data.withdrawFastCounts,
         withdrawFastQuantity:data.withdrawFastQuantity,
+        withdrawFastQuantityAvailable:data.withdrawFastQuantityAvailable,
+        withdrawFastCountsAvailable:data.withdrawFastQuantityAvailable,
         withdrawDalog:this.withdrawDalog,
         okCallback: () => {
           this.$emit('updateMyAssets')
