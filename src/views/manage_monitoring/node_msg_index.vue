@@ -82,6 +82,7 @@
             this.getfindEthNodeList();
             this.getfindOMNINodeList();
             this.getfindEOSNodeList();
+            this.getfindLTCNodeList();
         },
         methods: {
             getfindBtcNodeList () {
@@ -105,6 +106,12 @@
             getfindEOSNodeList () {
                 monitApi.findEOSNodeList((res, total) => {
                     this.data4.push(res);
+
+                });
+            },
+            getfindLTCNodeList () {
+                monitApi.findLTCNodeList((res, total) => {
+                    this.data5.push(res);
 
                 });
             },
