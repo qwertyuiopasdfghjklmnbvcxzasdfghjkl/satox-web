@@ -57,7 +57,7 @@
                     <div class="filed-number">
                       <em>{{$t('account.user_Draw_the_number')}}<!--提现数量-->：<i class="asterisk">&nbsp;*</i></em>
                       <span>
-                          {{$t('account.fast_withdraw_quantity')}}<!--可用余额-->：{{available}} {{symbol}}
+                          {{$t('account.fast_withdraw_quantity')}}<!--可用余额-->：{{withdrawFastQuantityAvailable}} {{symbol}}
                       </span>
                     </div>
                     <div class="number" :class="{error:errors.has('amount')}">
@@ -285,7 +285,7 @@ export default {
       this.errors.clear()
     },
     allWithdraw () {
-      this.amount = this.available
+      this.amount = this.withdrawFastQuantityAvailable
     },
     walletWithdraw () { // 提现请求
       let validData = {}
