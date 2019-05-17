@@ -216,7 +216,7 @@ const findLTCNodeList = function (success, error) {
         }
     }, error);
 };
-monitoring.findLTCNodeList = findLTCNodeList;
+monitoring.findLTCNodeList  = findLTCNodeList;
 
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {
