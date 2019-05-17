@@ -122,6 +122,8 @@ export default {
     },
     withdrawFastCounts:null,
     withdrawFastQuantity:null,
+    withdrawFastQuantityAvailable:null,
+    withdrawFastCountsAvailable:null,
     procedure: null,
     minWithdraw: null
   },
@@ -191,7 +193,7 @@ export default {
       return numUtils.BN(this.amount).gte(numUtils.BN(this.minWithdraw))
     },
     isMoreMax () { // 是否大于可用余额
-      return numUtils.BN(this.amount).lte(numUtils.BN(this.available))
+      return numUtils.BN(this.amount).lte(numUtils.BN(this.withdrawFastQuantityAvailable))
     }
   },
   created () {
