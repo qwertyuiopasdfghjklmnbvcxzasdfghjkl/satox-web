@@ -217,7 +217,10 @@
                 this.$emit('removeDialog');
             },
             updataInsertSymbol (propName) {
-                let data = this.item;
+                let data = {
+                    symbolId: this.item.symbolId,
+                    lastUpdatedBy: this.item.lastUpdatedBy
+                };
                 if (propName === 'withdrawFastFlag') {
                     data.withdrawFastFlag = this.item.withdrawFastFlag === 1 ? 2 : 1;
                 } else if (propName === 'withdrawFlag') {
@@ -229,8 +232,8 @@
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
                     this.item[propName] = data[propName] || this[propName];
                     // this.item.withdrawFlag = data.withdrawFlag;
-                    // this.item[propName] = this.withdrawFastQuantity;
-                    // this.item.withdrawFastCounts = this.withdrawFastCounts;
+                    // this.item[propName] = this.withdrawFastQuantity;        withdrawFastQuantity
+                    // this.item.withdrawFastCounts = this.withdrawFastCounts; withdrawFastCounts
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
