@@ -24,7 +24,12 @@
                 column: [
                     {title: 'ID', key: 'specialUserId'},
                     {title: this.$t('common.yhm'), key: 'username'},
-                    {title: this.$t('exchange.yhlx'), key: 'specialType'},
+                    {
+                        title: this.$t('exchange.yhlx'), key: 'specialType',
+                        render: (h, params) => {
+                            return h('div', params.row.specialType === 1 ? this.$t('finance.sxfzh') : this.$t('finance.jqrzh'));
+                        }
+                    },
                     {title: this.$t('common.cjsj'), key: 'createdAt'},
                     {
                         title: this.$t('common.cz'), render: (h, params) => {
