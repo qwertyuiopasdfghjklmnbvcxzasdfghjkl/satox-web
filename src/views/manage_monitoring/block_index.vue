@@ -10,6 +10,7 @@
                     <option value="2">ETH</option>
                     <option value="3">OMNI</option>
                     <option value="4">MBT</option>
+                    <option value="6">LTC</option>
                 </select>
             </Col>
             <Col span="1">{{$t('common.bz')}}：</Col>
