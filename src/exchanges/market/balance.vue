@@ -106,6 +106,15 @@ export default {
       })
       return w
     },
+    sellToWallet () {
+      let w = null
+      this.tradeAct.forEach((item) => {
+        if (item.symbol === this.baseSymbol) {
+          w = item
+        }
+      })
+      return w
+    },
     buyToWallet () {
       let w = null
       this.datas.forEach((item) => {
@@ -139,6 +148,9 @@ export default {
     },
     buyToWallet (){
       this.$parent.$parent.buyToWallet = this.buyToWallet
+    },
+    sellToWallet (){
+      this.$parent.$parent.sellToWallet = this.sellToWallet
     }
   },
   created () {
