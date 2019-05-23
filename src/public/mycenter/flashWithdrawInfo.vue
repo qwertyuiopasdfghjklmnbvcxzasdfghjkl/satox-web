@@ -376,7 +376,7 @@ export default {
 }
 </script>
 <style scoped>
-.large_withdraw {margin-left: 30px; color: #BA8D35; cursor: pointer; font-size: 15px;}
+.large_withdraw {margin-left: 30px; color: #BA8D35; cursor: pointer; font-size: 13px; text-decoration: underline;}
 div.error,input.error{border-color: #e53f3f !important;}
 em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;height:18px!important;line-height:18px;font-size:12px!important;}
 .withdrawBox { width: 802px; background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d; position: relative;}
