@@ -120,18 +120,18 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'USSD'
+        return symbol || 'SATO'
       } else {
-        return 'USSD'
+        return 'SATO'
       }
     },
     currentSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'SATO'
+        return symbol || 'BTC'
       } else {
-        return 'SATO'
+        return 'BTC'
       }
     },
     symbol () {
