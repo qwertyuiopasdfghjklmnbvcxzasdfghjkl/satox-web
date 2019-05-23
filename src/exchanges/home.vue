@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="home-center-bottom">
-            <businesspanel ref="businesspanel" v-show="!isEntrust" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
+            <businesspanel ref="businesspanel" v-show="!isEntrust" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :sellToWallet="sellToWallet" :marketList="marketList"/>
             <entrust ref="entrust" v-show="isEntrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
           </div>
         </div>
@@ -106,6 +106,7 @@ export default {
       fromWallet: null,
       toWallet: null,
       buyToWallet: null,
+      sellToWallet: null,
       changeEntrustData: {},
       closeMainLoading: false,
       valuationCout: 0, // 当前估值

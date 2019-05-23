@@ -420,7 +420,7 @@ export default {
 .accountInfo-lists li .items>div.total{width: 180px;}
 .accountInfo-lists li .items>div.useable{width: 180px;}
 .accountInfo-lists li .items>div.locked{width: 180px;}
-.accountInfo-lists li .items>div.opreat{width: 80px;}
+.accountInfo-lists li .items>div.opreat{width: 120px;}
 .accountInfo-lists li .items>div.action{width: 120px;color: #fdb902;}
 .acount_tab {height: 50px; display: flex; font-size: 16px; position: relative;}
 .acount_tab > div {width: 190px; border-top: 1px solid #eee; border-right: 1px solid #eee; border-top-right-radius: 10px; text-align: center; line-height: 50px; color: #808080; cursor: pointer;}
