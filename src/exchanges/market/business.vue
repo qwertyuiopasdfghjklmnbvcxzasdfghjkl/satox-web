@@ -6,7 +6,7 @@
                     {{isBuy ? baseSymbol : currentSymbol}}
                     {{$t('exchange.exchange_balance')}}<!--余额-->：
                     <template v-if="baseSymbol=='SATO'">
-                      {{toFixed(isBuy ? sellToWallet.availableBalance : buyToBalance.availableBalance).toMoney()}}
+                      {{toFixed(isBuy ? sellToBalance.availableBalance : buyToBalance.availableBalance).toMoney()}}
                     </template>
                     <template v-else>
                       {{toFixed(isBuy ? toBalance.availableBalance : (!currentSymbol.includes('SATO') ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
@@ -207,6 +207,13 @@ export default {
         return {}
       }
     },
+    sellToBalance () {
+      if (this.buyToWallet) {
+        return this.buyToWallet
+      } else {
+        return {}
+      }
+    },
     marketPrice () {
       return this.$t('exchange.exchange_market_price') // 市价
     },
@@ -371,7 +378,7 @@ export default {
       let amount
       p = p / 100
       if(this.baseSymbol.includes('SATO')){
-        amount = numUtils.mul(this.isBuy ? this.sellToWallet.availableBalance : this.buyToBalance.availableBalance, p).toFixed(this.fixedNumber)
+        amount = numUtils.mul(this.isBuy ? this.sellToBalance.availableBalance : this.buyToBalance.availableBalance, p).toFixed(this.fixedNumber)
       } else {
         amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (!this.symbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)
       }
@@ -458,8 +465,8 @@ export default {
       direction = this.tradeType === 'buy' ? 1 : 2
 
       if(this.baseSymbol.includes('SATO')){
-        balance = this.tradeType === 'buy' ? this.sellToWallet.availableBalance : this.buyToBalance.availableBalance
-        fromAccountId = this.tradeType === 'buy' ? this.sellToWallet.accountId : this.buyToBalance.accountId
+        balance = this.tradeType === 'buy' ? this.sellToBalance.availableBalance : this.buyToBalance.availableBalance
+        fromAccountId = this.tradeType === 'buy' ? this.sellToBalance.accountId : this.buyToBalance.accountId
         toAccountId = this.tradeType === 'buy' ? this.buyToBalance.accountId : this.toBalance.accountId
       } else {
         balance = this.tradeType === 'buy' ? this.toBalance.availableBalance : (!this.currentSymbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)
