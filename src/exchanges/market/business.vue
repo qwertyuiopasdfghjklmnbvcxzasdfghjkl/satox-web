@@ -208,8 +208,8 @@ export default {
       }
     },
     sellToBalance () {
-      if (this.buyToWallet) {
-        return this.buyToWallet
+      if (this.sellToWallet) {
+        return this.sellToWallet
       } else {
         return {}
       }
