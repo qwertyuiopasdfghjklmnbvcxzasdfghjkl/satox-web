@@ -180,31 +180,6 @@ import addAddress from './addAddress'
                                         }
                                     }
                                 }, this.$t('fund.xzdz')),
-                                // h('Button', {
-                                //     props: {type: 'primary', size: 'small'},
-                                //     style: {marginRight: '10px'},
-                                //     on: {
-                                //         click: () => {
-                                //             if (!params.row.addressList.length) {
-                                //                 return
-                                //             }
-                                //             let o = this.detail(params.row.addressList, h)
-                                //             o = o.valueAll
-                                //             if (!o) {
-                                //                 o = params.row.addressList[0]
-                                //             }
-                                //             if (!o.walletId) {
-                                //                 return
-                                //             }
-                                //             fundApi.deleteColdWallet({
-                                //                 walletId: o.walletId
-                                //             }, (res) => {
-                                //                 this.$Message.success({content: '删除成功'})
-                                //                 this.getAllColdWallet()
-                                //             })
-                                //         }
-                                //     }
-                                // }, '删除地址')
                             ]);
                         }
                     }
@@ -214,30 +189,16 @@ import addAddress from './addAddress'
             }
         },
         created () {
-            this.getAllColdWallet()
+            this.getAllColdWallet();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             switchStaus(state) {
-                switch(state){// 0: 未处理  1:已处理  2：已取消  3：已审核
-                case 1:
-                    return 'BTC'
-                    break;
-                case 2:
-                    return 'ETH'
-                    break;
-                case 3:
-                    return 'OMNI'
-                    break;
-                case 4:
-                    return 'MBT'
-                    break;
-                case 5:
-                    return 'EOS'
-                    break;
-                case 6:
-                    return 'LTC'
-                    break;
-                }
+                return this.symbolTypeList.map((res) => {
+                    if (res.code == state) {
+                        return res.name;
+                    }
+                });
             },
             detail (addressList, h) {
                 let options = []

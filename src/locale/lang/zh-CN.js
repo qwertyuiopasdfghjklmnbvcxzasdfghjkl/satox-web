@@ -634,7 +634,21 @@ export const operation = {
     wjyw: '文件有误',
     sccg: '上传成功',
     scwjfslcw: '上传文件发生了错误尝试',
-    scbqx: '上传被取消或者浏览器断开连接'
+    scbqx: '上传被取消或者浏览器断开连接',
+
+    //
+    zw: '中文',
+    yw: '英文',
+    zwft: '中文繁体',
+    hy: '韩语',
+    ry: '日语',
+    dy: '德语',
+    xbyy: '西班牙语',
+    fy: '法语',
+    ydly: '意大利语',
+    alby: '阿拉伯语',
+    sm: '说明',
+    xzzd: '新增字段'
 }
 export const admin = {
     glyqx: '管理员权限管理',
@@ -888,7 +902,8 @@ export const nav = {
     tbzdzsz: '提币主地址设置',
     tszhgl: '特殊账户管理',
     dsfczlb: '第三方充值',
-    dsfdcsj: '第三方导出数据'
+    dsfdcsj: '第三方导出数据',
+    gjhgl: '国际化管理'
 }
 export const home = {
     zyh: '总用户',

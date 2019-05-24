@@ -100,23 +100,8 @@
                     <Col span="6">{{vm.$t('common.zllx')}}</Col>
                     <Col span="14">
                         <RadioGroup v-model="symbolType">
-                            <Radio label="2">
-                                <span>ETH</span>
-                            </Radio>
-                            <Radio label="1">
-                                <span>BTC</span>
-                            </Radio>
-                            <Radio label="3">
-                                <span>OMNI</span>
-                            </Radio>
-                            <Radio label="4">
-                                <span>MBT</span>
-                            </Radio>
-                            <Radio label="5">
-                                <span>EOS</span>
-                            </Radio>
-                            <Radio label="6">
-                                <span>LTC</span>
+                            <Radio v-for="item in  symbolTypeList" :label="item.code">
+                                <span>{{item.name}}</span>
                             </Radio>
                         </RadioGroup>
                     </Col>
@@ -148,11 +133,13 @@
                 gasLimit: null,
                 enable: this.item.enable.toString(),
                 symbolType: this.item.symbolType.toString(),
-                datas: []
+                datas: [],
+                symbolTypeList: [],
             };
         },
         created () {
             this.getConfig();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             getConfig () {

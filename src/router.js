@@ -829,6 +829,26 @@ export const operationRouter = [
                 }
             }
         ]
+    },
+    {
+        path: '/operation_i18n',
+        name: 'operation_i18n',
+        title: 'nav.gjhgl',
+        component: Main,
+        icon: 'ios-world',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION']
+        },
+        children: [
+            {
+                path: 'operation_i18n_index',
+                title: 'nav.gjhgl',
+                name: 'operation_i18n_index',
+                component: resolve => {
+                    require(['./views/manage_operation/operation_i18n.vue'], resolve);
+                }
+            }
+        ]
     }
 ];
 

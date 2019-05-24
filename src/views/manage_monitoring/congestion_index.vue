@@ -6,11 +6,7 @@
                 <Col span="2">
                     <select v-model="symbolType" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">{{$t('common.qb')}}</option>
-                        <option value="1">BTC</option>
-                        <option value="2">ETH</option>
-                        <option value="3">OMNI</option>
-                        <option value="4">MBT</option>
-                        <option value="6">LTC</option>
+                        <option v-for="item in  symbolTypeList" :value="item.code" >{{item.name}}</option>
                     </select>
                 </Col>
                 <Col span="1">{{$t('common.bz')}}：</Col>
@@ -77,10 +73,7 @@ import monitorApi from '../../api/monitoring'
                 userName: '',
                 curPage: 1,
                 total: 0,
-                // formItem: {
-                //     date: '',
-                //     date1: ''
-                // },
+                symbolTypeList:[],
                 columns10: [
                     {
                         type: 'expand',
@@ -182,27 +175,16 @@ import monitorApi from '../../api/monitoring'
             }
         },
         created () {
-            this.getWithdrawApplyList()
+            this.getWithdrawApplyList();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             switchStaus(state) {
-                switch(state){
-                    case '1':
-                        return 'BTC'
-                        break;
-                    case '2':
-                        return 'ETH'
-                        break;
-                    case '3':
-                        return 'OMNI'
-                        break;
-                    case '4':
-                        return 'MBT'
-                        break;
-                    case 5:
-                        return 'EOS'
-                        break;
-                }
+                return this.symbolTypeList.map((res) => {
+                    if (res.code == state) {
+                        return res.name;
+                    }
+                });
             },
             statusSwicth(state) { //0 未审核  1 审核不通过  2 审核通过
                 switch(state){

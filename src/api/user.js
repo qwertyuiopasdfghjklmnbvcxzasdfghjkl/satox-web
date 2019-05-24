@@ -25,7 +25,6 @@ const logout = function (success, error) {
 };
 user.logout = logout;
 
-
 const updateUserPwd = function (data, success, error) {
     api.post('api/bm/bmUser/updateUserPwd', data, (res) => {
         if (res.rst === 1) {
@@ -36,5 +35,19 @@ const updateUserPwd = function (data, success, error) {
     }, error)
 };
 user.updateUserPwd = updateUserPwd;
+
+// 获取所有主链类型
+const getSymbolTypes = function ( success, error) {
+    api.get('api/bm/sysParam/symbolTypes', (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.getSymbolTypes = getSymbolTypes;
+
+
 
 export default user;

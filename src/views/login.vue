@@ -7,7 +7,6 @@
         <div class="login-con">
             <Card :bordered="false">
                 <h2 slot="title" class="title">
-                    <!--<Icon type="log-in"></Icon>-->
                     {{$t('login.welcome')}}
                     <span class="red">{{$t('login.v')}}</span>
                 </h2>
@@ -27,29 +26,12 @@
                                 </span>
                             </Input>
                         </FormItem>
-                        <!-- <FormItem prop="verifyCode" class="login-verifyCode">
-                            <Input v-model="form.verifyCode">
-                                <span slot="prepend">
-                                    <Icon :size="14" type="locked"></Icon>
-                                </span>
-                                <span slot="append"> -->
-                        <!--
-                        <img width="80" height="40" :src="baseUrl+'api/v1/manage/otc/verifyCode?_t='+imageT" @click="imageT = Date.now()"/>
-                        -->
-                        <!-- </span>
-                    </Input>
-                </FormItem> -->
                         <FormItem>
                             <Button @click="handleSubmit" type="primary" long>{{$t('login.login')}}</Button>
                         </FormItem>
                     </Form>
-                    <!--<p class="login-tip">输入任意用户名和密码即可</p>-->
                     <p class="sw">
                         {{$t('login.changeLang')}}：<span @click="changeLang()" class="langBtn">中文/English</span>
-                        <!--<Select v-model="lange" @on-change="changeLang" style="width: 60px">-->
-                            <!--<Option value="zh-CN">中</Option>-->
-                            <!--<Option value="en-US">EN</Option>-->
-                        <!--</Select>-->
                     </p>
 
                 </div>
@@ -72,7 +54,6 @@
                 form: {
                     userName: '',
                     password: '',
-                    verifyCode: ''
                 },
                 rules: {
                     userName: [
@@ -80,9 +61,6 @@
                     ],
                     password: [
                         {required: true, message: '密码不能为空', trigger: 'blur'}
-                    ],
-                    verifyCode: [
-                        {required: true, message: '验证码不能为空', trigger: 'blur'}
                     ]
                 },
                 lange: null
@@ -91,17 +69,13 @@
         watch: {
             imageT () {
                 this.form.verifyCode = '';
-            },
-            // lang (lang) {
-            //     this.$i18n.locale = lang
-            // }
+            }
         },
         methods: {
             handleSubmit () {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
                         userApi.login({
-                            // code: this.form.verifyCode,
                             username: this.form.userName,
                             password: this.form.password
                         }, (res) => {
@@ -111,10 +85,11 @@
                             Cookies.set('permissions', res.permissions);
                             Cookies.set('Authorization', res.Authorization);
                             Cookies.set('roles', res.roles);
-                            console.log(res.roles);
-                            console.log(res.Authorization);
                             this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
                             Cookies.set('access', 0);
+                            userApi.getSymbolTypes((res) => {
+                                window.localStorage.symbolTypes = JSON.stringify(res);
+                            });
                             this.$router.push({name: 'home_index'});
                         }, (error) => {
                             this.imageT = Date.now();

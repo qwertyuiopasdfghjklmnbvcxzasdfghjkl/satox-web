@@ -59,23 +59,8 @@
                 <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                     <Col span="24">
                         <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
-                            <Radio label="2">
-                                <span>ETH</span>
-                            </Radio>
-                            <Radio label="1">
-                                <span>BTC</span>
-                            </Radio>
-                            <Radio label="3">
-                                <span>OMNI</span>
-                            </Radio>
-                            <Radio label="4">
-                                <span>MBT</span>
-                            </Radio>
-                            <Radio label="5">
-                                <span>EOS</span>
-                            </Radio>
-                            <Radio label="6">
-                                <span>LTC</span>
+                            <Radio v-for="item in  symbolTypeList" :label="item.code">
+                                <span>{{item.name}}</span>
                             </Radio>
                         </RadioGroup>
                     </Col>
@@ -147,11 +132,13 @@
                         {required: true, message: vm.$t('common.qsr')+vm.$t('system.kgfbz'), trigger: 'blur'}
                     ],
                 },
-                symbolList: null
+                symbolList: null,
+                symbolTypeList: [],
             };
         },
         created () {
             this.getdataSymbol();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             getdataSymbol () {

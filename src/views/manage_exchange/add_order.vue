@@ -55,23 +55,8 @@
                 </FormItem>
                 <FormItem :label="vm.$t('common.zllx')" prop="symbolType">
                     <RadioGroup ref="symbolType" v-model="formLeft.symbolType">
-                        <Radio label="2">
-                            <span>ETH</span>
-                        </Radio>
-                        <Radio label="1">
-                            <span>BTC</span>
-                        </Radio>
-                        <Radio label="3">
-                            <span>OMNI</span>
-                        </Radio>
-                        <Radio label="4">
-                            <span>MBT</span>
-                        </Radio>
-                        <Radio label="5">
-                            <span>EOS</span>
-                        </Radio>
-                        <Radio label="6">
-                            <span>LTC</span>
+                        <Radio v-for="item in  symbolTypeList" :label="item.code">
+                            <span>{{item.name}}</span>
                         </Radio>
                     </RadioGroup>
                 </FormItem>
@@ -324,7 +309,8 @@
                     propertyId: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('common.propertyId')},
                     ]
-                }
+                },
+                symbolTypeList: [],
             };
         },
         components: {
@@ -339,6 +325,7 @@
                     flags[1].value = '2';
                 });
             });
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             binValidator (prop, e) {

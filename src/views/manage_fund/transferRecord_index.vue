@@ -7,12 +7,7 @@
                     <select v-model="symbolType"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">{{$t('common.qb')}}</option>
-                        <option value="1">BTC</option>
-                        <option value="2">ETH</option>
-                        <option value="3">OMNI</option>
-                        <!--<option value="4">MBT</option>-->
-                        <option value="5">EOS</option>
-                        <option value="6">LTC</option>
+                        <option v-for="item in  symbolTypeList" :value="item.code">{{item.name}}</option>
                     </select>
                 </Col>
                 <Col span="2">{{$t('common.bz')}}：</Col>
@@ -21,13 +16,9 @@
                 </Col>
                 <Col span="2">{{$t('fund.zzlx')}}：</Col>
                 <Col span="4">
-                    <!--<Input v-model="username" style="width:100px;"/>-->
                     <select v-model="direction"
                             style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">{{$t('common.qb')}}</option>
-                        <!--<option value="1">充值</option>-->
-                        <!--<option value="2">提现</option>-->
-                        <!--<option value="3">交易所归集</option>-->
                         <option value="4">{{$t('monitoring.lqbcz')}}</option>
                         <option value="5">{{$t('monitoring.lqbtx')}}</option>
                     </select>
@@ -91,6 +82,7 @@
                 txId: '',
                 status: '',
                 size: 10,
+                symbolTypeList: [],
                 columns1: [
                     {
                         title: this.$t('fund.zzlx'),
@@ -163,26 +155,15 @@
         },
         created () {
             this.getconfirmList();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             switchStaus (state) {
-                switch (state) { // 1 BTC 2 ETH 3 OMNI 4 MBT 5 EOS
-                    case 1:
-                        return 'BTC';
-                        break;
-                    case 2:
-                        return 'ETH';
-                        break;
-                    case 3:
-                        return 'OMNI';
-                        break;
-                    case 4:
-                        return 'MBT';
-                        break;
-                    case 5:
-                        return 'EOS';
-                        break;
-                }
+                return this.symbolTypeList.map((res) => {
+                    if (res.code == state) {
+                        return res.name;
+                    }
+                });
             },
             switchDirection (state) {
                 switch (state) { // 1：充值 ，2：提现，3：交易所归集，4：冷钱包充值，5：冷钱包提现

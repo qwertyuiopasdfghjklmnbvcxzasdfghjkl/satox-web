@@ -6,11 +6,7 @@
                 <Col span="2">
                     <select v-model="symbolType" style="width:100px;height:30px;border: 1px solid #dddee1;border-radius: 4px;">
                         <option value="">{{$t('common.qb')}}</option>
-                        <option value="1">BTC</option>
-                        <option value="2">ETH</option>
-                        <option value="3">OMNI</option>
-                        <option value="4">MBT</option>
-                        <option value="6">LTC</option>
+                        <option v-for="item in  symbolTypeList" :value="item.code">{{item.name}}</option>
                     </select>
                 </Col>
                 <Col span="1">{{$t('common.bz')}}：</Col>
@@ -171,11 +167,13 @@ import util from '../../libs/util'
                         width: 150
                     },
                 ],
-                data9: []
+                data9: [],
+                symbolTypeList: [],
             }
         },
         created () {
             this.getApplyList()
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         computed: {
             params () {
@@ -198,23 +196,11 @@ import util from '../../libs/util'
         },
         methods: {
             switchStaus(state) {
-                switch(state){
-                    case '1':
-                        return 'BTC'
-                        break;
-                    case '2':
-                        return 'ETH'
-                        break;
-                    case '3':
-                        return 'OMNI'
-                        break;
-                    case '4':
-                        return 'MBT'
-                        break;
-                    case 5:
-                        return 'EOS'
-                        break;
-                }
+                return this.symbolTypeList.map((res) => {
+                    if (res.code == state) {
+                        return res.name;
+                    }
+                });
             },
             statusSwicth(state) { //1 未处理 2 等待交易发起 3 交易已发送(等待对账) 4 撤销 5 提现失败 6对账完成 7提现失败资金返还
                 switch(state){

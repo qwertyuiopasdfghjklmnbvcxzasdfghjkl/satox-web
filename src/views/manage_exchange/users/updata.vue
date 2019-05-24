@@ -112,58 +112,24 @@
         <Col span="5">{{vm.$t('common.zllx')}}</Col>
         <Col span="16">
              <RadioGroup v-model="datas.symbolType">
-                <Radio label="1">
-                    <span>BTC</span>
-                </Radio>
-                <Radio label="2">
-                    <span>ETH</span>
-                </Radio>
-                <Radio label="3">
-                    <span>OMNI</span>
-                </Radio>
-                <Radio label="4">
-                    <span>MBT</span>
-                </Radio>
-                 <Radio label="5">
-                     <span>EOS</span>
-                 </Radio>
-                 <Radio label="6">
-                     <span>LTC</span>
+                 <Radio v-for="item in  symbolTypeList" :label="item.code">
+                     <span>{{item.name}}</span>
                  </Radio>
             </RadioGroup>
         </Col>
         <Col span="3">
-             <!-- <Button type="primary" @click="tabs1('symbolType')">保存</Button> -->
         </Col>
       </Row>
-      <!-- <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
-        <Col span="5">钱包服务器</Col>
-        <Col span="8" style="width:255px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{this.datas.symbolServer || 0}}</Col>
-        <Col span="8">
-             <Input v-model="symbolServer" style="width: 150px" />
-        </Col>
-        <Col span="3">
-            <Button type="primary" @click="tabs('symbolServer')">保存</Button>
-        </Col>
-      </Row> -->
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;" v-if="this.datas.symbolType === '3'">
         <Col span="5">Property ID</Col>
         <Col span="8" >{{this.datas.propertyId || 0}}
         </Col>
-        <!-- <Col span="8">
-             <Input v-model="contractAddr" style="width: 150px" />
-        </Col>
-        <Col span="3">
-            <Button type="primary" @click="tabs('contractAddr')">保存</Button>
-        </Col> -->
       </Row>
       <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;" v-if="this.datas.flag === '1' && this.datas.symbolType === '2'">
         <Col span="5">{{vm.$t('exchange.hyjd')}}</Col>
         <Col span="8">{{this.datas.contractDecimals || 0}}</Col>
         <Col span="8">
-            <!-- <Input v-model="contractDecimals" style="width: 150px" /> -->
             <InputNumber style="width:100%;" v-model="contractDecimals"></InputNumber>
-            <!-- <InputNumber v-model="contractDecimals"  ></InputNumber> -->
         </Col>
         <Col span="3">
             <Button type="primary" @click="tabs2('contractDecimals')">{{vm.$t('common.bc')}}</Button>
@@ -214,11 +180,13 @@ export default {
                 issuePrice: null,
                 totalCirculation: null,
                 totalIssuance: null,
-            }
+            },
+            symbolTypeList: [],
          }
     },
     created () {
         this.getSymbolInfo()
+        this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
     },
     methods: {
         getSymbolInfo () {
