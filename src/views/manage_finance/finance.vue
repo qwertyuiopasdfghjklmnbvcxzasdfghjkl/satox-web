@@ -88,8 +88,12 @@
                     <p style="margin-bottom: 20px">
                         {{$t('finance.btjzh')}}:
                         <Select v-model="formData3.username" style="width: 200px">
-                            <Option :value="0">{{$t('common.qb')}}</Option>
-                            <Option v-for="item in accountsData" :value="item.username">{{item.username}}</Option>
+                            <Option value="1">{{$t('finance.sxfzh')}}</Option>
+                            <Option value="2">{{$t('finance.jqrzh')}}</Option>
+                            <Option value="0">{{$t('finance.sxfjjqrzh')}}</Option>
+
+                            <!--<Option :value="0">{{$t('common.qb')}}</Option>-->
+                            <!--<Option v-for="item in accountsData" :value="item.username">{{item.username}}</Option>-->
                         </Select>
                         <!--<Input v-model="formData3.value" placeholder="多个用户名用,号隔开" style="width: 300px"></Input>-->
                         <Button type="primary" @click="curPage6=1;reGetfindUserAssetList1()">{{$t('common.cx')}}
@@ -226,7 +230,7 @@
                     createdEnd: null
                 },
                 formData3: {
-                    username: 0,
+                    username: '0',
                     value: null
                 },
                 search: 0,
@@ -468,13 +472,13 @@
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
                 data.symbol = data.symbol === '0' ? null : data.symbol;
                 this.columns7.splice(3, 2);
-                this.formData3.username = 0;
+                this.formData3.username = '0';
                 this.getfindUserAssetList(data);
             },
             reGetfindUserAssetList1 () {
                 this.search = 2;
                 let data = {
-                    username: this.formData3.username
+                    specialType: this.formData3.username === '0' ? null : this.formData3.username
                 };
                 this.columns7.splice(3, 2);
                 this.formData2 = {

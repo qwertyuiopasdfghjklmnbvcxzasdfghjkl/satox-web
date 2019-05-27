@@ -48,6 +48,4 @@ const getSymbolTypes = function ( success, error) {
 };
 user.getSymbolTypes = getSymbolTypes;
 
-
-
 export default user;
