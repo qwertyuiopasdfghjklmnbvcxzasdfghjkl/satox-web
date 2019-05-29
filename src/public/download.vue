@@ -90,7 +90,7 @@ export default {
       })
     },
     getrateSysparams () {
-      market.rateSysparams((res) => {
+      market.getSysparams((res) => {
         res.forEach((item) => {
           if (item.code === 'androidPath') {
             this.android = item.value

@@ -1,6 +1,6 @@
 // let domain = process.env.NODE_ENV === 'development' ? 'sit.satox.net' : location.host.split(':')[0]
-// let domain = process.env.NODE_ENV === 'development' ? 'satox.dev.koall.io' : location.host.split(':')[0]
-let domain = process.env.NODE_ENV === 'development' ? 'dev.koall.io' : location.host.split(':')[0]
+let domain = process.env.NODE_ENV === 'development' ? 'satox.dev.koall.io' : location.host.split(':')[0]
+// let domain = process.env.NODE_ENV === 'development' ? 'dev.koall.io' : location.host.split(':')[0]
 const config = {
   domain: domain,
   origin: `${window.location.protocol}//${domain}`,

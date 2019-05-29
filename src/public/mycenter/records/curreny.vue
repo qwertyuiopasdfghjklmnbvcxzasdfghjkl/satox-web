@@ -122,7 +122,7 @@ export default {
       }
     },
     getrateSysparams () {
-      market.rateSysparams((res) => {
+      market.getSysparams((res) => {
         res.forEach((item) => {
           if (item.code === 'symbolDeduction') {
             this.symbolDeduction = item.value
