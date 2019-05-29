@@ -22,6 +22,7 @@ import GlobalWebSocket from '@/assets/js/websocket'
 import OtcWebSocket from '@/assets/js/websocket-otc'
 import bheader from '@/components/header'
 import userApi from '@/api/user'
+import marketApi from '@/api/market'
 export default {
   name: 'app',
   components: {
@@ -88,6 +89,7 @@ export default {
     }
   },
   created () {
+    this.getSysparams()
     this.getUserInfoMethod()
     this.checkRouteChange(this.$route)
     this.ws = new OtcWebSocket({
@@ -127,7 +129,16 @@ export default {
     this.ws && this.ws.close()
   },
   methods: {
-    ...mapActions(['setBTCValuation', 'setUSDCNY', 'setNetworkSignal', 'setUserInfo']),
+    ...mapActions(['setBTCValuation', 'setUSDCNY', 'setNetworkSignal', 'setUserInfo','setSysParams']),
+    getSysparams(){
+      marketApi.getSysparams(res=>{
+        let params = {}
+        for(let item of res){
+          params[item.code] = item
+        }
+        this.setSysParams(params)
+      })
+    },
     checkRouteChange (currentRoute) {
       if (this.getApiToken) {
         currentRoute.meta.noEntry ? this.$router.push({name: 'home'}) : void 0

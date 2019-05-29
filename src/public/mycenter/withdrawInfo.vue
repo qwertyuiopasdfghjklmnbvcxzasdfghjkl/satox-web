@@ -47,7 +47,7 @@
                     <input class="address" type="text" maxlength="100" v-validate="'required'" data-vv-name="toAddress" :class="{error:errors.has('toAddress')}" v-model="toAddress" :placeholder="$t('account.estimated_value_address')" /><!--地址-->
                     <em class="error" v-if="errors.has('alias') || errors.has('toAddress')">{{$t('public0.public45')}}<!--请输入新地址--></em>
                 </div>
-                <div class="filed memo" v-if="symbol==='EOS'">
+                <div class="filed memo" v-if="symbol==='EOS' || symbol==='XRP'">
                     <em>
                         {{$t('account.user_center_history_note')}}<!--提现备注-->：
                     </em>

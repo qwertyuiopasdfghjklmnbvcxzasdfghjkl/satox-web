@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <template v-if="item.symbol==='EOS'">
+                <template v-if="item.symbol==='EOS' || item.symbol==='XRP'">
                   <div class="adr-list">
                       <label class="active" style="position:relative;">
                           {{symbol}} {{$t('account.recharge_memo')}}<!--EOS充值备注-->：
@@ -52,7 +52,7 @@
                   </div>
                   <div class="adr-list">
                       <label class="active" style="position:relative;">
-                          <i style="color: red;">{{$t('public0.public242')}}：{{$t('account.eos_recharge_warn')}}</i><!--备注和地址同时使用才能充值EOS成功-->
+                          <i style="color: red;">{{$t('public0.public242')}}：{{$t('account.eos_recharge_warn').format(item.symbol)}}</i><!--备注和地址同时使用才能充值EOS成功-->
                       </label>
                   </div>
                 </template>
@@ -125,11 +125,13 @@ export default {
       disabled: false,
       dataWallet: [],
       show: false,
-      EOS_MEMO:''
     }
   },
   computed: {
-    ...mapGetters(['getUserInfo']),
+    ...mapGetters(['getUserInfo','getSysParams']),
+    EOS_MEMO(){
+      return (this.getSysParams['mainAddXRP'] && this.getSysParams.mainAddXRP.value) || ''
+    },
     blockQuantity () {
       if (this.item.blockConfirm) {
         return this.item.blockConfirm
@@ -137,7 +139,7 @@ export default {
       return this.item.symbol === 'BTC' ? 6 : 30
     },
     getAddress(){
-      return this.symbol==='EOS'?this.EOS_MEMO:this.item.address
+      return this.symbol==='EOS'?this.EOS_MEMO:(this.symbol==='XRP'?this.EOS_MEMO:this.item.address)
     }
   },
   created(){
