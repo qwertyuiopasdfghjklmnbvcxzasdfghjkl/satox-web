@@ -24,6 +24,10 @@
             <p slot="title">LTC{{$t('monitoring.tbqks')}}</p>
             <Table :columns="columns2" :data="data5"></Table>
         </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title">XRP{{$t('monitoring.tbqks')}}</p>
+            <Table :columns="columns2" :data="data5"></Table>
+        </Card>
     </div>
 </template>
 <script>

@@ -230,7 +230,7 @@
                         {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.hblx'), trigger: 'blur'},
                     ],
                     symbolType: [
-                        {required: true, message: '公链类型', trigger: 'blur'}
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('monitoring.gllx')}
                     ],
                     iconFile: [
                         {required: true, message: vm.$t('common.qsr') + 'ICON', trigger: 'blur'},

@@ -274,12 +274,12 @@
         created () {
             this.getchangeList();
             this.findSymbolList();
+            this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
         },
         methods: {
             reshAll () {
                 this.getchangeList();
                 this.findSymbolList();
-                this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
             },
             switchStaus (state) {
                 return this.symbolTypeList.map((res) => {
