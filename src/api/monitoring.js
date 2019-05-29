@@ -216,7 +216,19 @@ const findLTCNodeList = function (success, error) {
         }
     }, error);
 };
-monitoring.findLTCNodeList  = findLTCNodeList;
+monitoring.findLTCNodeList = findLTCNodeList;
+
+// 查询XRP节点信息
+const findXRPNodeList = function (success, error) {
+    api.get(`/api/bm/monitor/node/findXRPNode`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+monitoring.findXRPNodeList = findXRPNodeList;
 
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {

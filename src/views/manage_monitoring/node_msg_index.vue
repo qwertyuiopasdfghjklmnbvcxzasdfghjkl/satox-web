@@ -26,7 +26,7 @@
         </Card>
         <Card style="margin-top:30px;">
             <p slot="title">XRP{{$t('monitoring.tbqks')}}</p>
-            <Table :columns="columns2" :data="data5"></Table>
+            <Table :columns="columns2" :data="data6"></Table>
         </Card>
     </div>
 </template>
@@ -45,6 +45,7 @@
                 data3: [],
                 data4: [],
                 data5: [],
+                data6: [],
                 columns2: [
                     {
                         title: this.$t('monitoring.fwt'),
@@ -87,6 +88,7 @@
             this.getfindOMNINodeList();
             this.getfindEOSNodeList();
             this.getfindLTCNodeList();
+            this.getfindXRPNodeList();
         },
         methods: {
             getfindBtcNodeList () {
@@ -116,6 +118,12 @@
             getfindLTCNodeList () {
                 monitApi.findLTCNodeList((res, total) => {
                     this.data5.push(res);
+
+                });
+            },
+            getfindXRPNodeList () {
+                monitApi.findXRPNodeList((res, total) => {
+                    this.data6.push(res);
 
                 });
             },
