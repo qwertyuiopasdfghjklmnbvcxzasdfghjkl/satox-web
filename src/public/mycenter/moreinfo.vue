@@ -23,7 +23,7 @@
                             <span class="copy icon_copy" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : copy()" :title="$t('account.user_Copy_address')">
                                 <!--复制地址-->
                             </span>
-                            <span class="ewm icon_recharge" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanEWM()" :title="$t('account.estimated_value_deposit')">
+                            <span class="ewm icon-qrcode" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanEWM()" :title="$t('account.estimated_value_deposit')">
                                 <!--充值-->
                             </span>
                             <!--提现-->
