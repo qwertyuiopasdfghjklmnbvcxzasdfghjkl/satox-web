@@ -28,11 +28,11 @@
              <FormItem :label="vm.$t('operation.lyzhid')" prop="sourceAccountId">
                 <Input v-model="formValidate.sourceAccountId" name="sourceAccountId"></Input>
             </FormItem>
-             <FormItem :label="vm.$t('common.bz')" prop="remarks">
+             <FormItem :label="vm.$t('common.beiz')" prop="remarks">
                 <Input v-model="formValidate.remarks" name="remarks" :maxlength="255"></Input>
             </FormItem>
             <div style="text-align:center;margin-top:15px;">
-                <Button type="primary" style="margin-right:10px;" @click="creat">{{vm.$t('finance.cj')}}</Button>
+                <Button type="primary" style="margin-right:10px;" @click="creat">{{vm.$t('common.qd')}}</Button>
                 <Button type="ghost" @click="cancel()">{{vm.$t('common.qx')}}</Button>
             </div>
       </Form>
