@@ -125,11 +125,12 @@ export default {
       disabled: false,
       dataWallet: [],
       show: false,
+      EOS_MEMO:''
     }
   },
   computed: {
     ...mapGetters(['getUserInfo','getSysParams']),
-    EOS_MEMO(){
+    XRP_MEMO(){
       return (this.getSysParams['mainAddXRP'] && this.getSysParams.mainAddXRP.value) || ''
     },
     blockQuantity () {
@@ -139,7 +140,7 @@ export default {
       return this.item.symbol === 'BTC' ? 6 : 30
     },
     getAddress(){
-      return this.symbol==='EOS'?this.EOS_MEMO:(this.symbol==='XRP'?this.EOS_MEMO:this.item.address)
+      return this.symbol==='EOS'?this.EOS_MEMO:(this.symbol==='XRP'?this.XRP_MEMO:this.item.address)
     }
   },
   created(){
