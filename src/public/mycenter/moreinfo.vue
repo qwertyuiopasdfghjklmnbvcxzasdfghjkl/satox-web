@@ -23,7 +23,7 @@
                             <span class="copy icon_copy" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : copy()" :title="$t('account.user_Copy_address')">
                                 <!--复制地址-->
                             </span>
-                            <span class="ewm icon_recharge" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanEWM()" :title="$t('account.estimated_value_deposit')">
+                            <span class="ewm icon-qrcode" :class="{disabled: Number(item.rechargeFlag) !== 1}" @click="Number(item.rechargeFlag) !== 1 ? false : scanEWM()" :title="$t('account.estimated_value_deposit')">
                                 <!--充值-->
                             </span>
                             <!--提现-->
@@ -125,11 +125,12 @@ export default {
       disabled: false,
       dataWallet: [],
       show: false,
+      EOS_MEMO:''
     }
   },
   computed: {
     ...mapGetters(['getUserInfo','getSysParams']),
-    EOS_MEMO(){
+    XRP_MEMO(){
       return (this.getSysParams['mainAddXRP'] && this.getSysParams.mainAddXRP.value) || ''
     },
     blockQuantity () {
@@ -139,7 +140,7 @@ export default {
       return this.item.symbol === 'BTC' ? 6 : 30
     },
     getAddress(){
-      return this.symbol==='EOS'?this.EOS_MEMO:(this.symbol==='XRP'?this.EOS_MEMO:this.item.address)
+      return this.symbol==='EOS'?this.EOS_MEMO:(this.symbol==='XRP'?this.XRP_MEMO:this.item.address)
     }
   },
   created(){
