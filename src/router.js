@@ -435,6 +435,20 @@ export const exchangeRouter = [
         ]
     },
     {
+        path: '/trade',
+        name: 'trade',
+        title: 'nav.jycx',
+        component: Main,
+        icon: 'ios-infinite',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            { path: 'index', title: 'nav.jycx', name: 'trade_index',
+                component: resolve => { require(['./views/manage_exchange/trade.vue'], resolve); } }
+        ]
+    },
+    {
         path: '/exchange_address',
         name: 'exchange_address',
         title: 'nav.dzgl',
@@ -447,6 +461,23 @@ export const exchangeRouter = [
             {
                 path: 'index', title: 'nav.dzgl', name: 'exchange_address_index', component: resolve => {
                     require(['./views/manage_exchange/exchange_address.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/public_link',
+        name: 'public_link',
+        title: 'nav.glgl',
+        component: Main,
+        icon: 'usb',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            {
+                path: 'public_link_index', title: 'nav.glgl', name: 'public_link_index', component: resolve => {
+                    require(['./views/manage_exchange/public_link.vue'], resolve);
                 }
             }
         ]
@@ -866,6 +897,23 @@ export const reportRouter = [
             {
                 path: 'report_index', title: 'nav.dsfdcsj', name: 'report_index', component: resolve => {
                     require(['./views/manage_report/export_data.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/report_daily',
+        name: 'report_daily',
+        title: 'nav.mrbb',
+        component: Main,
+        icon: 'archive',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_REPORT_MANAGER'],
+        },
+        children: [
+            {
+                path: 'report_daily_index', title: 'nav.mrbb', name: 'report_daily_index', component: resolve => {
+                    require(['./views/manage_report/export_daily.vue'], resolve);
                 }
             }
         ]

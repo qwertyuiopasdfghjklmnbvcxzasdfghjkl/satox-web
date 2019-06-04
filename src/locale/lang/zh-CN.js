@@ -507,7 +507,14 @@ export const exchange = {
     yhlx: '用户类型',
     xztsyh: '新增特殊用户',
     bzcztj: '币种充值统计',
-    dsfczlb: '第三方充值列表'
+    dsfczlb: '第三方充值列表',
+    xzgl: '新增公链',
+    mfyhm: '买方用户名',
+    m4fyhm: '卖方用户名',
+    cjjg: '成交价格',
+    mfsxfsq: '买方手续费收取',
+    m4fsxfsq: '卖方手续费收取',
+    cjsj: '成交时间'
 }
 export const risk = {
     bbycyj: '币币异常预警',
@@ -903,7 +910,10 @@ export const nav = {
     tszhgl: '特殊账户管理',
     dsfczlb: '第三方充值',
     dsfdcsj: '第三方导出数据',
-    gjhgl: '国际化管理'
+    gjhgl: '国际化管理',
+    mrbb: '每日报表',
+    glgl: '公链管理',
+    jycx: '交易查询'
 }
 export const home = {
     zyh: '总用户',
@@ -915,5 +925,6 @@ export const home = {
 export const report = {
     tjbbgl: '统计报表管理',
     wjm: '文件名',
-    xz: '下载'
+    xz: '下载',
+    mrbb: '每日报表'
 }

@@ -569,4 +569,16 @@ const getHistoryEntrust = function (data, success, error) {
 };
 curreny.getHistoryEntrust = getHistoryEntrust;
 
+// 查询币币历史委托
+const getTransaction = function (data, success, error) {
+    api.post('api/bm/bbManage/transaction/list', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+curreny.getTransaction = getTransaction;
+
 export default curreny;

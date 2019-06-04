@@ -19,7 +19,7 @@
                     <Button type="primary" style="margin-left:10px;" @click="updataSystem1(data)">{{$t('common.xg')}}</Button>
                 </Col>
                 <Col span="12"
-                     v-if="data.code !== 'loginLockCount' && data.code !== 'kycCount' && data.code !==
+                     v-if="data.code !== 'loginLockCount' && data.code !==
                      'nicknameUpdateCount' && data.code !== 'headUpdateCount'">
                     <Input ref="price" type="text" v-model="data.$value" style="width:80px;"/>
                     <Button type="primary" style="margin-left:10px;" @click="updataSystem(data)">{{$t('common.xg')}}</Button>
