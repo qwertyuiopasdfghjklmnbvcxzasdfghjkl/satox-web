@@ -5,7 +5,7 @@
                 <p>{{symbol}} {{$t('account.userRechargeAddress')}}<!--充值地址--></p>
             </div>
             <div ref="qrcode" class="qrcode"></div>
-            <div ref="qraddr" class="qraddess">{{addr}}</div>
+            <div ref="qraddr" class="qraddess" :title="addr">{{addr}}</div>
         </div>
 </template>
 <script>
@@ -37,12 +37,13 @@ export default {
 }
 </script>
 <style scoped>
-div.adressCava{position: absolute;width: 100px;height: 100px;padding: 0px;}
+div.adressCava{position: absolute;width: 100px;height: 120px;padding: 0px;}
 div.adressCava>.qrcode{width: 280px!important;height: 280px!important;position: absolute;left: 50%;top: 50%;margin-left: -140px;margin-top: -140px;}
 div.adressCava span{width: 20px;cursor: pointer; float:right;cursor: pointer; height: 20px;display: inline-block;background-size: 12px;margin-top: 19px;margin-right: 10px;}
 div.adressCava p{font-size: 18px;font-weight: bold;color: #333;}
 div.adressCava p:nth-child(2){position: relative;top: 15px;text-align: left; margin-left: 17px;display: inline-block;}
 div.adressCava p:nth-child(2){position: relative;top: 15px;text-align: left; margin-left: 17px;display: inline-block;}
 div.adressCava div.title-div{overflow: hidden;}
-div.adressCava div.qraddess{margin-top: 310px;font-size: 12px;text-align: center; width: 100%;}
+div.adressCava div.qraddess{margin-top: 310px;font-size: 12px;padding: 0 7%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;
+  width: 88%;}
 </style>
