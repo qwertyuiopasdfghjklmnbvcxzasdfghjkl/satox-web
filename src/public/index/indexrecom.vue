@@ -8,9 +8,9 @@
               {{item.currencySymbol}}/{{item.baseSymbol}} <i :class="[{infotip:true}, (getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']" v-html="percent(item)"></i>
             </div>
             <div class="ticker-list">
-              <p class="price" :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice)}}</p>
+              <p class="price" :class="[(getDirection(item.direction)===1 || getDirection(item.direction)===0)?'font-green':'font-red']">{{toFixed(item.lastPrice, item.accuracy)}}</p>
               <p class="value">≈<valuation :lastPrice="item.lastPrice" :baseSymbol="item.baseSymbol"/></p>
-              <p class="volume">Volume: {{toFixed(item.dealAmount,2)}}{{item.baseSymbol}}</p>
+              <p class="volume">Volume: {{toFixed(item.dealAmount, 2)}}{{item.baseSymbol}}</p>
             </div>
           </li>
         </ul>
@@ -47,7 +47,7 @@
         // 获取推荐市场
         marketApi.marketListCom(1, (res) => {
           this.products = res.filter(item=>{
-            return item.baseSymbol === 'USDS'
+            return item.baseSymbol === 'USSD'
           })
         }, () => {
         })

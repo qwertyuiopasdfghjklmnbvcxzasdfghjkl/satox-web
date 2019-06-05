@@ -1,59 +1,65 @@
 <template>
-    <div class="home">
-        <div class="center">
-          <div class="home-left">
-            <left ref="markets" :baseSymbol="baseSymbol" v-model="accuracy" :symbol="symbol" :toFixed="toFixed" @changeSymbol="changeSymbol"></left>
-          </div>
-          <div class="home-center">
-            <div class="home-center-top">
-              <div class="top-left-header">
-                <ul>
-                  <li class="last-item">
-                    <img class="symbol-icon" :src="iconUrl"/>
-                    <span>{{currentSymbol}}/{{baseSymbol}}</span>
-                    <!-- <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em> -->
-                    <em></em>
-                  </li>
-                </ul>
-                <ul class="top-left-header-right">
-                  <li class="last-item">
-                    <span class="last-price market-symbol" :class="[(getLast24h.direction===1  || getLast24h.direction===0) ? 'font-green':'font-red']">
-                      {{toFixed(getLast24h.close)}}
-                      <!-- <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font> -->
-                    </span>
-                  </li>
-                  <li class="last-item last-change">
-                    <span class="last-title">{{$t('home.home_change_24h')}}<!--24h涨跌--></span>
-                    <span class="last-price" :class="[getLast24h.isDown?'last-number-down':'last-number']">{{getLast24h.rfvol}} {{getLast24h.percent}}%</span>
-                  </li>
-                  <li class="last-item">
-                    <span class="last-title">{{$t('home.home_high_24h')}}<!--24h最高价--></span>
-                    <span class="last-price">{{toFixed(getLast24h.high)}}</span>
-                  </li>
-                  <li class="last-item">
-                    <span class="last-title">{{$t('home.home_low_24h')}}<!--24h最低价--></span>
-                    <span class="last-price">{{toFixed(getLast24h.bottom)}}</span>
-                  </li>
-                  <li class="last-item">
-                    <span class="last-title">{{$t('home.home_volume_24h')}}<!--24h成交量--></span>
-                    <span class="last-price">{{toFixed(getLast24h.vol, 2)}} {{baseSymbol}}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="market-container">
-                <market ref="kline" :iconUrl="iconUrl" :klineData="klineData" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
-              </div>
+    <div class="home" :class="{hasnotice:showNotice}">
+      <div class="notice" v-if="showNotice">
+        <div>
+          <swiper-notice :notice="notice"></swiper-notice>
+        </div>
+        <i @click="closeNotice" class="icon-close close"></i>
+      </div>
+      <div class="center">
+        <div class="home-left">
+          <left ref="markets" :baseSymbol="baseSymbol" v-model="fixedNumber" :symbol="symbol" :toFixed="toFixed" @changeSymbol="changeSymbol"></left>
+        </div>
+        <div class="home-center">
+          <div class="home-center-top">
+            <div class="top-left-header">
+              <ul>
+                <li class="last-item">
+                  <img class="symbol-icon" :src="iconUrl"/>
+                  <span>{{currentSymbol}}/{{baseSymbol}}</span>
+                  <!-- <em class="icon-introduction" :title="$t('public.introduction')" @click="showCoinInfo"></em> -->
+                  <em></em>
+                </li>
+              </ul>
+              <ul class="top-left-header-right">
+                <li class="last-item">
+                  <span class="last-price market-symbol" :class="[(getLast24h.direction===1  || getLast24h.direction===0) ? 'font-green':'font-red']">
+                    {{toFixed(getLast24h.close, fixedNumber)}}
+                    <!-- <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font> -->
+                  </span>
+                </li>
+                <li class="last-item last-change">
+                  <span class="last-title">{{$t('home.home_change_24h')}}<!--24h涨跌--></span>
+                  <span class="last-price" :class="[getLast24h.isDown?'last-number-down':'last-number']">{{toFixed(getLast24h.rfvol, fixedNumber)}}&nbsp;&nbsp;&nbsp;&nbsp;{{getLast24h.isDown?'':'+'}}{{getLast24h.percent}}%</span>
+                </li>
+                <li class="last-item">
+                  <span class="last-title">{{$t('home.home_high_24h')}}<!--24h最高价--></span>
+                  <span class="last-price">{{toFixed(getLast24h.high, fixedNumber)}}</span>
+                </li>
+                <li class="last-item">
+                  <span class="last-title">{{$t('home.home_low_24h')}}<!--24h最低价--></span>
+                  <span class="last-price">{{toFixed(getLast24h.bottom, fixedNumber)}}</span>
+                </li>
+                <li class="last-item">
+                  <span class="last-title">{{$t('home.home_volume_24h')}}<!--24h成交量--></span>
+                  <span class="last-price">{{toFixed(getLast24h.vol, 2)}} {{baseSymbol}}</span>
+                </li>
+              </ul>
             </div>
-            <div class="home-center-bottom">
-              <businesspanel ref="businesspanel" v-show="!isEntrust" :accuracy="accuracy" :fixedNumber="fixedNumber" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :marketList="marketList"/>
-              <entrust ref="entrust" v-show="isEntrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
+            <div class="market-container">
+              <market ref="kline" :iconUrl="iconUrl" :klineData="klineData" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :fixedNumber="fixedNumber" :symbol="symbol" @switchPeriod="switchPeriod" :closeMainLoading="closeMainLoading"/>
             </div>
           </div>
-          <div class="home-right">
-            <depth ref="depth" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber"/>
-            <lastdeal ref="lastdeal" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed"/>
+          <div class="home-center-bottom">
+            <businesspanel ref="businesspanel" v-show="!isEntrust" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :baseSymbol="baseSymbol" :currentSymbol="currentSymbol" :toFixed="toFixed" :fromWallet="fromWallet" :toWallet="toWallet" :buyToWallet="buyToWallet" :sellToWallet="sellToWallet" :marketList="marketList"/>
+            <entrust ref="entrust" v-show="isEntrust" :valuationCout="valuationCout" :newRmbCount="newRmbCount" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :symbol="symbol" :toFixed="toFixed" :mul="mul" :changeEntrustData="changeEntrustData"/>
           </div>
         </div>
+        <div class="home-right">
+          <depth ref="depth" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :Amountaccu="Amountaccu" :digit="digit"/>
+          <lastdeal ref="lastdeal" :currentSymbol="currentSymbol" :baseSymbol="baseSymbol" :fixedNumber="fixedNumber" :Quantityaccu="Quantityaccu" :symbol="symbol" :toFixed="toFixed"/>
+        </div>
+      </div>
     </div>
 </template>
 <script>
@@ -69,6 +75,7 @@ import numUtils from '@/assets/js/numberUtils'
 import { mapGetters, mapActions } from 'vuex'
 import config from '@/assets/js/config'
 import valuation from '@/components/valuation'
+import swiperNotice from '@/components/swiper_notice'
 let chartSettings = window.localStorage.getItem('chartSettings')
 chartSettings && (chartSettings = JSON.parse(chartSettings))
 
@@ -80,19 +87,26 @@ export default {
     lastdeal,
     entrust,
     valuation,
-    businesspanel
+    businesspanel,
+    swiperNotice
   },
   data () {
     return {
+      notice:[], //公告列表
+      showNotice:false,
+      latestNoticeTime:'0',
       isEntrust: false,
       isFirst: true,
-      accuracy: 8,
-      fixedNumber: 8,
+      fixedNumber: 8, //价格进度控制
+      Quantityaccu: 4, //数量精度控制
+      Amountaccu: 8, //金额精度控制
+      digit: 4, //深度合并的选项数量
       klineData: [], // k线数据
       socket: null,
       fromWallet: null,
       toWallet: null,
       buyToWallet: null,
+      sellToWallet: null,
       changeEntrustData: {},
       closeMainLoading: false,
       valuationCout: 0, // 当前估值
@@ -106,18 +120,18 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'USDS'
+        return symbol || 'SATO'
       } else {
-        return 'USDS'
+        return 'SATO'
       }
     },
     currentSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'SATO'
+        return symbol || 'BTC'
       } else {
-        return 'SATO'
+        return 'BTC'
       }
     },
     symbol () {
@@ -141,9 +155,13 @@ export default {
     symbol () {
       this.get24hPrice()
       this.socket && this.socket.switchPeriod && this.socket.switchSymbol(this.symbol)
+    },
+    fixedNumber(newVal){
+      this.$refs.depth.mergeValue = newVal
     }
   },
   created () {
+    this.getNoticeList()
     this.socket = KLineWebSocket({
       symbol: this.symbol,
       period: chartSettings ? chartSettings.charts.period : null,
@@ -158,7 +176,8 @@ export default {
           let datas = res.data && res.data.constructor === Array ? res.data : []
           let newArray = []
           datas.forEach((item) => {
-            newArray.push([Number(item[0]), parseFloat(item[1]) || 0, parseFloat(item[2]) || 0, parseFloat(item[3]) || 0, parseFloat(item[4]) || 0, parseFloat(item[5]) || 0])
+            // newArray.push([Number(item[0]), parseFloat(item[1]) || 0, parseFloat(item[2]) || 0, parseFloat(item[3]) || 0, parseFloat(item[4]) || 0, parseFloat(item[5]) || 0])
+            newArray.push([Number(item[0]), parseFloat(this.toFixed(Number(item[1]))) || 0, parseFloat(this.toFixed(Number(item[2]))) || 0, parseFloat(this.toFixed(Number(item[3]))) || 0, parseFloat(this.toFixed(Number(item[4]))) || 0, parseFloat(this.toFixed(Number(item[5]))) || 0])
           })
           if (!this.isFirst) {
             let tempObj = {}
@@ -260,6 +279,29 @@ export default {
   },
   methods: {
     ...mapActions(['setLast24h', 'tiggerEvents']),
+    closeNotice(){
+      localStorage.setItem('latestNoticeTime',this.latestNoticeTime)
+      this.showNotice = false
+    },
+    getNoticeList(){
+      marketApi.noticeList(res=>{
+        this.notice = res
+        this.parseNotice()
+      })
+    },
+    parseNotice(){
+      let local = localStorage.getItem('latestNoticeTime') || '0'
+      if(this.notice.length){
+        let times = [] 
+        for(let item of this.notice){
+          times.push(item.updatedTime)
+        }
+        this.latestNoticeTime = times.sort().reverse()[0]
+        if(this.latestNoticeTime > local) {
+          this.showNotice = true
+        }
+      } 
+    },
     get24hPrice () {
       let tempSymbol = this.symbol
       // 获取24小时最新价格
@@ -291,6 +333,8 @@ export default {
       this.klineData = []
       this.$refs.businesspanel.$refs.business_buy.formData.amount = ''
       this.$refs.businesspanel.$refs.business_sell.formData.amount = ''
+      this.$refs.businesspanel.$refs.business_buy.percent = '0'
+      this.$refs.businesspanel.$refs.business_sell.percent = '0'
       this.$router.push({name: 'exchange_index', params: {symbol: `${currentSymbol}_${baseSymbol}`}})
     },
     showCoinInfo () {
@@ -311,6 +355,31 @@ export default {
 <style scoped>
 /* 红涨绿跌 */
 .home{min-width:1200px;min-height:500px;height:calc(100% - 70px); background-color: #F2F3F8;}
+.home.hasnotice{height:calc(100% - 100px);}
+.notice {
+  height: 30px;
+  background-color: #353535;
+  position: relative;
+}
+.notice > div {
+  height: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+.notice > .close {
+  position: absolute;
+  right: 15px;
+  top: 0; 
+  bottom: 0;
+  line-height: 30px;
+  color: #D79802; 
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .center{display:flex;justify-content:space-between;height:100%;}
 .home-left{display:flex;min-width:290px;width:15.7%;margin:10px 0 10px 10px;}
 .home-center{flex:1;display:flex;flex-flow:column;min-width:500px;margin:10px;}
@@ -340,6 +409,7 @@ export default {
 
 @media screen and (max-width: 1600px) and (max-height: 900px) {
   .home{height:calc(100% - 60px)}
+  .home.hasnotice{height:calc(100% - 90px)}
   .top-left-header{height:40px;}
   .symbol-icon{width:26px;height:26px;font-size:22px;}
   .top-left-header > ul:first-child .last-item:first-child{font-size:16px;}
@@ -349,11 +419,6 @@ export default {
   .market-symbol{font-size:16px;}
   .last-valuation-price{font-size:12px;}
 }
-@media screen and (max-width: 1600px){
-  .home-left{margin:4px 0 4px 4px;}
-  .home-center{margin:4px;}
-  .home-right{margin:4px 4px 4px 0;}
-  .home-center-bottom{margin-top:4px;}
-}
+
 </style>
 

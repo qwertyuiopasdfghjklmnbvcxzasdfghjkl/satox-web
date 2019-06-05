@@ -9,7 +9,7 @@
             <div class="top-right">
                 <span>{{$t('exchange.exchange_Deep_merger')}}<!--深度合并--></span>
                 <select class="top-select" v-model="mergeValue">
-                    <option v-for="n in 4" :key="n + 4" :value="n + 4">{{n + 4}}{{$t('exchange.exchange_decimals')}}<!--位小数--></option>
+                    <option v-for="n in getDigit" :key="n + fixedNumber - getDigit" :value="n + fixedNumber - getDigit">{{n + fixedNumber - getDigit}}{{$t('exchange.exchange_decimals')}}<!--位小数--></option>
                 </select>
             </div>
         </div>
@@ -28,8 +28,8 @@
                     <span class="list-col sum">--</span>
                 </li>
                 <li class="list-item ask" :class="{'icon-arrow-right2':checkEntrustPrice(item)}" :style="listItemStyle(item, 'ask')" v-for="item in filterAsks" :key="item.orderBookId">
-                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-ask ask-color">{{toFixed(item.price)}}</span>
-                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 4)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-ask ask-color">{{toFixed(item.price,mergeValue)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, Quantityaccu)}}</span>
                     <span @click="clickChangeValue(item, 'total')" class="list-col sum">{{muldepth(item.price, item.avaliableAmount)}}</span>
                 </li>
             </ul>
@@ -41,8 +41,8 @@
         <div ref="parentListBid" class="list-bid" v-if="active !== 'ask'" :style="bidStyle">
             <ul class="list" :class="{'list-overflow': active === 'bid'}">
                 <li class="list-item bid" :class="{'icon-arrow-right2':checkEntrustPrice(item)}" :style="listItemStyle(item, 'bid')" v-for="item in filterBids" :key="item.orderBookId" @click="clickChangeValue(item)">
-                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-bid bid-color">{{toFixed(item.price)}}</span>
-                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, 4)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col price price-bid bid-color">{{toFixed(item.price, mergeValue)}}</span>
+                    <span @click="clickChangeValue(toFixed(item.price), 'price')" class="list-col amount" :title="getAmountTitle(item.avaliableAmount)">{{toFixed(item.avaliableAmount, Quantityaccu)}}</span>
                     <span @click="clickChangeValue(item, 'total')" class="list-col sum">{{muldepth(item.price, item.avaliableAmount)}}</span>
                 </li>
                 <li class="list-item bid" v-for="n in bidLength" :key="n">
@@ -71,6 +71,15 @@ export default {
     },
     fixedNumber: {
       type: Number
+    },
+    Quantityaccu: {
+      type: Number
+    },
+    Amountaccu: {
+      type: Number
+    },
+    digit: {
+      type: Number
     }
   },
   data () {
@@ -86,6 +95,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getLast24h', 'getEntrustPrices', 'getNetworkSignal']),
+    getDigit (){
+      return this.fixedNumber>=this.digit?this.digit:this.fixedNumber
+    },
     fromCoin () {
       return this.currentSymbol
     },
@@ -192,7 +204,7 @@ export default {
       let mergeDatas = []
       let temp = {}
       datas.forEach((item) => {
-        let key = this.toFixed(item.price)
+        let key = this.toFixed(item.price, this.mergeValue)
         let tempItem = temp[key]
         if (!tempItem) {
           temp[key] = {
@@ -284,7 +296,7 @@ export default {
       }
     },
     toFixed (value, fixed) {
-      return numUtils.BN(value || 0).toFixed(fixed === undefined ? this.mergeValue : fixed, 1)
+      return numUtils.BN(value || 0).toFixed(fixed === undefined ? this.fixedNumber : fixed, 1)
     },
     muldepth (v1, v2) {
       return numUtils.mul(v1, v2).toFixed(this.mergeValue, 1)

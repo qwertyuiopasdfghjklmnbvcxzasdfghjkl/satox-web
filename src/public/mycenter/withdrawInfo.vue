@@ -8,9 +8,9 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed" v-if="symbol==='USDS'">
+                <div class="filed" v-if="symbol==='USSD'">
                     <em>
-                        {{$t('public.account_info').format(symbol)}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
+                        {{$t('public.account_info')}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
                     </em>
                     <div class="bank-info" style="position:relative;">
                         <input type="text" maxlength="100" v-validate="'required'" data-vv-name="bankCountryCode" v-model="userBankInfo.bankCountryCode" :placeholder="$t('public.state_bank')" :class="{error:errors.has('bankCountryCode')}"/>
@@ -23,7 +23,7 @@
                      
                     </div>
                 </div>
-                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USDS'">
+                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USSD'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -46,6 +46,12 @@
                     <span class="joint">-</span>
                     <input class="address" type="text" maxlength="100" v-validate="'required'" data-vv-name="toAddress" :class="{error:errors.has('toAddress')}" v-model="toAddress" :placeholder="$t('account.estimated_value_address')" /><!--地址-->
                     <em class="error" v-if="errors.has('alias') || errors.has('toAddress')">{{$t('public0.public45')}}<!--请输入新地址--></em>
+                </div>
+                <div class="filed memo" v-if="symbol==='EOS' || symbol==='XRP'">
+                    <em>
+                        {{$t('account.user_center_history_note')}}<!--提现备注-->：
+                    </em>
+                    <input type="text" maxlength="1000" v-model="memo" :placeholder="'Memo,'+$t('public0.public237')" />
                 </div>
                 <div class="filed">
                     <div class="filed-number">
@@ -75,7 +81,7 @@
                 <ul class="tips">
                     <li>{{$t('account.user_minimum_number_of_cash').format(`：${minWithdraw} ${symbol}`)}}<!--最小提现数量为{0}。--></li>
                     <li v-if="false">{{$t('account.user_prompt7')}}<!--请勿直接提现至众筹或ICO地址.我们不会处理未来代币的发放.--></li>
-                    <li  v-if="symbol==='USDS'">{{$t('account.user_account_fill_prompt')}}<!--请仔细填写账户信息,填写错误后将无法进行正常转账。--></li>
+                    <li  v-if="symbol==='USSD'">{{$t('account.user_account_fill_prompt')}}<!--请仔细填写账户信息,填写错误后将无法进行正常转账。--></li>
                     <li>{{$t('public0.public229')}}<!--您可以在充值提现历史记录页面跟踪状态。--></li>
                 </ul>
             </div>
@@ -123,6 +129,7 @@ export default {
       datas: {},
       showDropdown: false,
       showNewAddress: false,
+      memo:'', //提现备注
       alias: '', // 别名
       amount: '', // 提现金额
       toAddress: '', // 提现地址
@@ -161,7 +168,7 @@ export default {
   },
   computed: {
     procedureFee () { // 手续费 提现数量-固定手续费
-      if(this.symbol==='USDS'){
+      if(this.symbol==='USSD'){
         return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
       } else {
         return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
@@ -183,6 +190,7 @@ export default {
   },
   created () {
     this.getUserState()
+    this.getBank()
     Validator.extend('isLessMin', {
       getMessage: (field, args) => this.$t('account.user_minimum_number_of_cash').format(`${this.minWithdraw}`),
       validate: (files, args) => {
@@ -205,6 +213,17 @@ export default {
     })
   },
   methods: {
+    getBank(){
+      userApi.getBank(data=>{
+        this.userBankInfo.bankCountryCode = data.bankCountryCode
+        this.userBankInfo.bankCode = data.bankCode
+        this.userBankInfo.bankBranch = data.bankBranch
+        this.userBankInfo.bankProvince = data.bankProvince
+        this.userBankInfo.bankDistrict = data.bankDistrict
+        this.userBankInfo.bankRealname = data.bankRealname
+        this.userBankInfo.bankNumber = data.bankNumber
+      })
+    },
     getUserState () {
       // 获取当前用户状态信息
       userApi.getUserState((data) => {
@@ -260,7 +279,7 @@ export default {
           amount: this.amount
         }
       }
-      if(this.symbol==='USDS'){
+      if(this.symbol==='USSD'){
         let userBankInfo = {
           bankCountryCode:this.userBankInfo.bankCountryCode,
           bankCode:this.userBankInfo.bankCode,
@@ -297,6 +316,7 @@ export default {
               alias: this.alias,
               fee: this.procedureFee,
               userBankInfo: this.userBankInfo,
+              memo: this.memo,
               lang: window.localStorage.getItem('lang') === 'zh-CN' ? 'cn' : 'en'
             }
             let saveFun = () => {
@@ -352,6 +372,9 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
   position: relative; color:#999;font-size: 0; width: 500px;height:30px;
   background-color: #FFF;border:1px solid rgba(186,141,53,0.5);
 }
+.withdrawBox .filed.memo {display: flex; padding-top: 10px; margin-bottom: 5px;}
+.withdrawBox .filed.memo em {width: 50px; height: 28px; line-height: 28px;}
+.withdrawBox .filed.memo input {flex: 1; height: 28px; border:1px solid #ccc;}
 .withAdress span.dowml{position: relative;cursor: pointer; vertical-align: top; width: 29px;height: 30px;border-left: 1px solid transparent; display: inline-block;float:right;}
 .withAdress span.dowml:before{content:"";display: inline-block; width: 0px;height: 0px;border-left: 9px solid transparent;border-bottom:9px solid transparent;border-right:9px solid transparent;border-top: 9px solid #aeb7d0;position: absolute;top:10px;left:5px;}
 .withAdress span.dowml:hover:before{border-top-color: #BA8D35;}

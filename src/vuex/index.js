@@ -29,9 +29,17 @@ export default new Vuex.Store({
     entrustNewPrice: 0,
     networkSignal: 0,
     events: {},
-    btcValues: {}
+    btcValues: {},
+    smsCountrys:[],
+    sysParams:{}
   },
   getters: {
+    getSysParams(state){
+      return state.sysParams
+    },
+    getSmsCountrys(state){
+      return state.smsCountrys
+    },
     getUserInfo (state) {
       return state.userInfo
     },
@@ -90,6 +98,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    updateSysParams (state, sysParams) {
+      state.sysParams = sysParams
+    },
     updateUserInfo (state, userInfo) {
       state.userInfo = userInfo
     },
@@ -155,6 +166,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setSysParams (context, sysParams) {
+      context.commit('updateSysParams', sysParams)
+    },
     setUserInfo (context, userInfo) {
       if (userInfo) {
         window.localStorage.setItem('userInfo', JSON.stringify(userInfo))

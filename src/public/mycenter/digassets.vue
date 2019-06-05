@@ -85,8 +85,10 @@
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
                             <div class="action f-right"  v-if="accountType===1">
                               <!--充值与提现-->
-                              <span class="icon_recharge" :class="{disabled: Number(data.rechargeFlag) !== 1}" @click="Number(data.rechargeFlag) === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_deposit')"></span>
-                              <span class="icon_withdraw" :class="{disabled: Number(data.withdrawFlag) !== 1}" @click="Number(data.withdrawFlag) !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
+                              <span class="icon_recharge" :class="{disabled: data.rechargeFlag !== 1}" @click="data.rechargeFlag === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_deposit')"></span>
+                              <span class="icon_withdraw" :class="{disabled: data.withdrawFlag !== 1}" @click="data.withdrawFlag !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')"></span>
+                              <span class="icon_flashWithdraw" v-if="data.withdrawFastFlag === 1"  @click="flashWithdrawDalog(data)" :title="$t('account.fast_withdraw')"></span>
+                              <span v-else></span>
                             </div>
                         </div>
                         <moreinfo v-if="data.show" :googleState="googleState" :verifyState="verifyState" :mobileState="mobileState" :symbol="data.symbol" :item="data" @updateMyAssets="getList"/>
@@ -110,6 +112,7 @@ import TansferDialog from '@/vote_mining/dialog/transfer'
 import voteMiningApi from '@/api/voteMining'
 import loading from '@/components/loading'
 import withdrawInfo from './withdrawInfo'
+import flashWithdrawInfo from './flashWithdrawInfo'
 
 export default {
   data () {
@@ -203,6 +206,47 @@ export default {
         procedure: data.procedureFee,
         minWithdraw: data.minWithdraw,
         fromAccount: data.accountId,
+        okCallback: () => {
+          this.$emit('updateMyAssets')
+        }
+      })
+    },
+    flashWithdrawDalog (data) {
+      if (this.googleState !== 1 && this.mobileState !== 1) {
+        Vue.$confirmDialog({
+          id: 'GOOGLEAUTH_OR_SMSAUTH_FIRST',
+          showCancel: true,
+          content: this.$t('error_code.GOOGLE_CELLPHONE_AUTH_FIRST'), // 请先进行谷歌验证或短信验证
+          okCallback: () => {
+            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+          }
+        })
+        return
+      }
+      if (!this.getUserInfo.email && this.mobileState !== 1) {
+        Vue.$confirmDialog({
+          id: 'SMS_AUTH_FIRST',
+          showCancel: true,
+          content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
+          okCallback: () => {
+            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
+          }
+        })
+        return
+      }
+      utils.setDialog(flashWithdrawInfo, {
+        symbol: data.symbol,
+        symbolType: data.symbolType,
+        available: data.availableBalance,
+        fromAddress: data.symbol==='EOS'?this.EOS_MEMO:data.address,
+        procedure: data.procedureFee,
+        minWithdraw: data.minWithdraw,
+        fromAccount: data.accountId,
+        withdrawFastCounts:data.withdrawFastCounts,
+        withdrawFastQuantity:data.withdrawFastQuantity,
+        withdrawFastQuantityAvailable:data.withdrawFastQuantityAvailable,
+        withdrawFastCountsAvailable:data.withdrawFastQuantityAvailable,
+        withdrawDalog:this.withdrawDalog,
         okCallback: () => {
           this.$emit('updateMyAssets')
         }
@@ -376,8 +420,8 @@ export default {
 .accountInfo-lists li .items>div.total{width: 180px;}
 .accountInfo-lists li .items>div.useable{width: 180px;}
 .accountInfo-lists li .items>div.locked{width: 180px;}
-.accountInfo-lists li .items>div.opreat{width: 80px;}
-.accountInfo-lists li .items>div.action{width: 80px;color: #fdb902;}
+.accountInfo-lists li .items>div.opreat{width: 120px;}
+.accountInfo-lists li .items>div.action{width: 120px;color: #fdb902;}
 .acount_tab {height: 50px; display: flex; font-size: 16px; position: relative;}
 .acount_tab > div {width: 190px; border-top: 1px solid #eee; border-right: 1px solid #eee; border-top-right-radius: 10px; text-align: center; line-height: 50px; color: #808080; cursor: pointer;}
 .acount_tab > div.active {background-color: #1571FF; border-color: #1571FF; color: #fff;}
@@ -385,7 +429,7 @@ export default {
 .acount_tab > div.active:hover {color: #fff;}
 .acount_tab > span {position: absolute; right: 20px; height: 50px; line-height: 50px; color: #1571FF; cursor: pointer;}
 
-.icon_withdraw, .icon_recharge{display: inline-block;width: 25px;height: 25px;margin-right: 10px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
+.icon_withdraw, .icon_recharge, .icon_flashWithdraw{display: inline-block;width: 25px;height: 25px;margin-right: 10px;background: none no-repeat left center; background-image: url(../../assets/images/icon_withdraw.png); cursor: pointer;}
 .icon_withdraw:hover{background-image: url(../../assets/images/icon_withdraw_hover.png);}
 .icon_withdraw.disabled, .icon_recharge.disabled{cursor: not-allowed;}
 .icon_withdraw.disabled,
@@ -394,5 +438,6 @@ export default {
 .icon_recharge:hover{background-image: url(../../assets/images/icon_recharge_hover.png);}
 .icon_recharge.disabled,
 .icon_recharge.disabled:hover{background-image: url(../../assets/images/icon_recharge_disabled.png);}
+.icon_flashWithdraw {background-image: url(../../assets/images/icon_flash_withdraw.png);}
 </style>
 

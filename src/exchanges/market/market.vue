@@ -27,14 +27,14 @@
                       </span>
                       <span class="list1-col list1-right">
                         <font class="list1-price">
-                          {{toFixed(data.lastPrice)}}{{data.baseSymbol}}
+                          {{toFixed(data.lastPrice, data.accuracy)}} {{data.baseSymbol}}
                         </font>
                         <!-- <font class="list1-amount">
                           <i :class="{down:getUpOrDown(data)==='down'}"><valuation :lastPrice="data.lastPrice" :baseSymbol="data.baseSymbol"/></i> 
                           <i></i>
                         </font> -->
                         <font class="list1-amount" style="margin-top: 5px;">
-                          vol. {{toFixed(data.dealAmount, 0)}} {{data.baseSymbol}}
+                          Vol. {{toFixed(data.dealAmount, 2)}} {{data.baseSymbol}}
                         </font>
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
@@ -60,7 +60,7 @@
                           <em class="list-collection icon-star-full"  :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                           {{data.currencySymbol}}/{{data.baseSymbol}}
                       </span>
-                      <span class="list-col price" :class="[(getDirection(data.direction)===1 || getDirection(data.direction)===0)?'font-green':'font-red']">{{toFixed(data.lastPrice)}}</span>
+                      <span class="list-col price" :class="[(getDirection(data.direction)===1 || getDirection(data.direction)===0)?'font-green':'font-red']">{{toFixed(data.lastPrice,data.accuracy)}}</span>
                       <span class="list-col fall" v-html="percent(data)"></span><!-- 跌涨 -->
                   </li>
                   <li class="list-loading" v-if="showLoading && products.length===0">
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import numUtils from '@/assets/js/numberUtils'
 import marketApi from '@/api/market'
@@ -110,7 +111,7 @@ export default {
     ...mapGetters(['getApiToken']),
     markets () {
       // 收藏
-      return ['collection', 'USDS']
+      return ['collection', 'SATO','USSD','BTC','ETH','USDT']
     },
     tipPrice () {
       return this.hoverItem || {}
@@ -152,15 +153,17 @@ export default {
       return datas
     },
     getAccuracy () {
-      var accuracy = 8
+      let accuracy,Quantityaccu,Amountaccu,digit
       for (let i = 0; i < this.products.length; i++) {
         let data = this.products[i]
         if (data.market === this.symbol) {
-          accuracy = Number(data.accuracy)
+          this.$parent.fixedNumber = Number(data.accuracy) || 8
+          this.$parent.Quantityaccu = Number(data.quantityAccu) || 4
+          this.$parent.Amountaccu = Number(data.amountAccu) || 8
+          this.$parent.digit = Number(data.digit) || 4
           break
         }
       }
-      return accuracy
     },
     marketConfig () {
       let config = {}
@@ -269,7 +272,8 @@ export default {
       }
     },
     keep (data) {
-      console.log(data)
+      let self = this
+      // console.log(data)
       if (this.getApiToken) {
         if (data.collection) { // 取消
           marketApi.removeCollection({
@@ -285,7 +289,14 @@ export default {
           })
         }
       } else {
-        data.collection = !data.collection
+        Vue.$confirmDialog({
+          id: 'please_login',
+          showCancel: true,
+          content: `${window.$i18n.t('exchange.exchange_Not_logged')}, ${window.$i18n.t('public0.public142')}`, // 请前往登录
+          okCallback: () => {
+            self.$router.push({path:'/login'})
+          }
+        })
       }
     },
     changeSymbol (data) {
@@ -332,7 +343,7 @@ export default {
 .top-input-box:focus{border-bottom-color:#333232 !important;}
 .tabs{margin-top:10px;display:flex;height:26px;max-height:22px;padding:0 10px 10px;border-bottom:1px solid #7E7E7E;}
 .tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#666;text-align:center; padding-bottom:10px; border-bottom:1px solid #7E7E7E;cursor:pointer;}
-.tabs-item:nth-of-type(n+2){margin-left: 25px;}
+.tabs-item:nth-of-type(n+2){margin-left: 10px;}
 .tabs-item:hover,
 .tabs-item.active{color:#0557E2;border-bottom-color:#0557E2;}
 

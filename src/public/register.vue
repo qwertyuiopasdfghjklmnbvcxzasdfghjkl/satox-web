@@ -21,9 +21,16 @@
                     </div>
                     <template v-if="formData.registerType==1">
                       <div class="mobile">
-                        <select v-model="formData.countryCode">
-                          <option v-for="item in areaCodeList" :value="item.code">{{$t(item.key)}}&nbsp;{{item.code}}</option>
-                        </select>
+                        <div class="select" @click="showFilterCountry=!showFilterCountry">{{getCountry.name}}&nbsp;{{formData.countryCode}}</div>
+                        <div class="filterCountry" v-show="showFilterCountry">
+                          <input type="text" name="filter" class="filter" v-model="filterKey" :placeholder="$t('public.keyword_prompt')">
+                          <ul class="areaCodeList">
+                            <li v-for="item in areaFilter" @click="selectCountryCode(item)">
+                              <span>{{item.name}}</span>
+                              <span>{{item.code}}</span>
+                            </li>
+                          </ul>
+                        </div>
                         <inputbox name="mobile" :maxLength="255" v-model="formData.mobile" v-validate="'required|telphone'" :msgs="msgs.mobile" :errs="errors" :placeholder="$t('public0.public6')"/><!--手机号-->
                       </div>
                       <div class="smsCode">
@@ -36,7 +43,7 @@
                     </template>
                     <inputbox id="SATOX-password" type="password" name="password" v-model="formData.password" v-validate="'required|password'" :msgs="msgs.password" :errs="errors" :title="$t('exchange.exchange_password')" :placeholder="$t('login_register.password')"/><!--密码-->
                     <inputbox type="password" name="passwordConfirm" v-model="formData.passwordConfirm" v-validate="'required|passwordAgain'" :msgs="msgs.passwordConfirm" :errs="errors" :title="$t('login_register.confirm_password')" :placeholder="$t('login_register.password')"/><!--确认密码-->
-                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')"/><!--邀请码-->
+                    <inputbox class="ref" name="ref" :maxLength="255" v-model="formData.ref" :title="$t('public0.public244')" :placeholder="$t('public0.public237')" v-show="false"/><!--邀请码-->
                     <div class="checkbox-group">
                         <i :class="[checked?'icon-checkbox-checked':'icon-checkbox-unchecked']" @click="checked=!checked"></i>
                         <span>
@@ -63,7 +70,6 @@ import userApi from '@/api/user'
 import inputbox from '@/components/formel/inputbox_horizontal'
 import buttonbox from '@/components/formel/buttonbox'
 import utils from '@/assets/js/utils'
-import commonConfig from '@/assets/js/commonConfig'
 export default {
   components: {
     inputbox,
@@ -71,14 +77,15 @@ export default {
   },
   data () {
     return {
+      filterKey:'',
+      showFilterCountry:false,
       locked: false,
       gtLocked: false,
       checked: false,
       disabled: false,
-      areaCodeList: commonConfig.areaCodeList,
       formData: {
         registerType: 1,
-        countryCode: commonConfig.defaultCode,
+        countryCode: '+86',
         mobile: '',
         smsCode: '',
         username: '',
@@ -91,7 +98,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getLang']),
+    ...mapGetters(['getLang','getSmsCountrys']),
+    areaFilter(){
+      let result = this.getSmsCountrys
+      if(this.filterKey.trim()){
+        result = this.getSmsCountrys.filter(item=>{
+          return  item.name.toLowerCase().includes(this.filterKey.trim().toLowerCase())
+        })
+      }
+      return result
+    },
+    getCountry(){
+      let country = {} 
+      for(let item of this.getSmsCountrys){
+        if(item.code === this.formData.countryCode){
+          country = item
+          break
+        }
+      }
+      return country
+    },
     msgs () {
       return {
         mobile: {required: this.$t('public0.public6')}, // 请输入手机号
@@ -160,6 +186,11 @@ export default {
     this.formData.ref = utils.getUrlHashParams().ref
   },
   methods: {
+    selectCountryCode(country){
+      this.formData.countryCode = country.code
+      this.filterKey = ''
+      this.showFilterCountry = false
+    },
     register () {
       let formData = {}
       for (let i in this.formData) {
@@ -239,7 +270,7 @@ export default {
         Vue.$koallTipBox({icon: 'success', message: this.$t('error_code.SEND_CODE_SUCCESS')})
       }, (msg) => {
         this.disabled = false
-        Vue.$koallTipBox({icon: 'notification', message: msg})
+        Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
       })
     }
   }
@@ -247,6 +278,12 @@ export default {
 </script>
 
 <style scoped>
+.filterCountry {position: absolute; left: 0; right: 0; top: 40px; padding: 15px; background-color: #fff; border-radius: 5px; z-index: 1000;}
+.filterCountry .filter {width: 100%; height: 40px; border:1px solid #ccc; border-radius: 4px; background-color: #fff; box-sizing: border-box; padding: 0 15px; line-height: 45px; font-size: 14px;}
+.filterCountry .areaCodeList {width: 100%;  max-height: 380px; overflow-y:auto; color: #666; font-size: 16px; margin-top: 5px;}
+.filterCountry .areaCodeList li {line-height: 50px; padding-left: 20px; padding-right: 20px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between;}
+.filterCountry .areaCodeList li:hover {color: #BF7600;}
+.filterCountry .areaCodeList li:last-of-type {border-bottom: none;}
 .login{display: flex;justify-content: center;align-items: center;height: calc(100% - 70px);min-height: 800px;margin-left: auto;margin-right: auto; background: url('../assets/images/login_bg.jpg') no-repeat center; background-size: cover;}
 @media screen and (max-width: 1600px) {
   .login {height: calc(100% - 60px);}
@@ -309,9 +346,8 @@ export default {
 
 .ref /deep/ .inputdiv{padding-bottom:10px;}
 .mobile{position:relative;}
-.mobile /deep/ select{
-  position: absolute;top: 0;left: 0;z-index: 1;width: 35%;height: 38px;padding-right: 20px;color: #000;
-  background-position: right 4px center; font-size: 16px;
+.mobile /deep/ .select{
+  position: absolute;top: 0;left: 0;z-index: 1;width: 30%;height: 38px; line-height: 30px; color: #fff; padding-right: 20px;font-size: 16px; background: url(../assets/images/arrow-down-lightGray.png) no-repeat right 8px;  background-size: 16px 16px; cursor: pointer;
 }
 .mobile /deep/ .inputdiv{position: relative; width: 60%; margin-left: 40%;}
 .smsCode{position: relative; }

@@ -5,7 +5,12 @@
                 <div class="formel price-balance">
                     {{isBuy ? baseSymbol : currentSymbol}}
                     {{$t('exchange.exchange_balance')}}<!--余额-->：
-                    {{toFixed(isBuy ? toBalance.availableBalance : (currentSymbol+baseSymbol !== 'SATOUSDS' ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
+                    <template v-if="baseSymbol=='SATO'">
+                      {{toFixed(isBuy ? sellToBalance.availableBalance : buyToBalance.availableBalance).toMoney()}}
+                    </template>
+                    <template v-else>
+                      {{toFixed(isBuy ? toBalance.availableBalance : (!currentSymbol.includes('SATO') ? buyToBalance.availableBalance : fromBalance.availableBalance)).toMoney()}}
+                    </template>
                 </div>
                 <div class="formel price">
                     <label class="formel-label">{{$t('exchange.exchange_price')}}<!--价格--></label>
@@ -23,7 +28,7 @@
                 <div class="formel amount">
                     <label class="formel-label">{{$t('exchange.exchange_amount')}}<!--数量--></label>
                     <div class="formel-text">
-                        <numberbox :style="currentStyle" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.amount" />
+                        <numberbox :style="currentStyle" :accuracy="Quantityaccu" class="formel-textbox" type="text" v-model="formData.amount" />
                         <em class="tip-title" ref="tipCurrentSymbol">{{currentSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.amount"/>
                     </div>
@@ -31,7 +36,7 @@
                 <div class="formel price" v-show="!isMarket">
                     <label class="formel-label">{{$t('exchange.exchange_total')}}<!--金额--></label>
                     <div class="formel-text">
-                        <numberbox ref="total" :style="baseStyle" :accuracy="fixedNumber" class="formel-textbox" type="text" v-model="formData.total" />
+                        <numberbox ref="total" :style="baseStyle" :accuracy="Amountaccu" class="formel-textbox" type="text" v-model="formData.total" />
                         <em class="tip-title">{{baseSymbol}}</em>
                         <arrows :fixedNumber="fixedNumber" v-model="formData.total"/>
                         <!-- <em v-show="isShowTotal" class="error-tip icon-arrow-down">
@@ -110,10 +115,13 @@ export default {
       type: String,
       default: 'limit'
     },
-    accuracy: {
-      default: 0
-    },
     fixedNumber: {
+      type: Number
+    },
+    Quantityaccu: {
+      type: Number
+    },
+    Amountaccu: {
       type: Number
     },
     currentSymbol: {
@@ -131,6 +139,9 @@ export default {
       type: Object
     },
     buyToWallet: {
+      type: Object
+    },
+    sellToWallet: {
       type: Object
     },
     marketList: {
@@ -196,6 +207,13 @@ export default {
         return {}
       }
     },
+    sellToBalance () {
+      if (this.sellToWallet) {
+        return this.sellToWallet
+      } else {
+        return {}
+      }
+    },
     marketPrice () {
       return this.$t('exchange.exchange_market_price') // 市价
     },
@@ -217,7 +235,7 @@ export default {
     fixedPrice(){
       let fixedPrice = 0, fixedBuyOrSellPrice = 0
       for(let item of this.marketList){
-        if(item.market===this.currentSymbol+this.baseSymbol){
+        if(item.market===this.symbol){
           fixedPrice = Number(item.fixedPrice)
           fixedBuyOrSellPrice = Number(this.isBuy?item.fixedBuyPrice:item.fixedSellPrice)
           break
@@ -246,7 +264,9 @@ export default {
     getLast24h (newVal) {
       if (this.updateValue) {
         this.updateValue = false
-        this.formData.price = utils.removeEndZero(this.getLast24h.close)
+        setTimeout(()=>{
+          this.formData.price = this.toFixed(utils.removeEndZero(this.getLast24h.close))
+        },200)
       }
     },
     symbol () {
@@ -343,28 +363,34 @@ export default {
       }
       this.changeInput = type
       if (type === 'total' && numUtils.BN(this.fixedPrice).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice), this.Quantityaccu)
       } else if (type === 'total' && numUtils.BN(this.formData.amount).gt(0)) {
         this.formData.price = this.toFixed(numUtils.div(this.formData.total, this.formData.amount))
       } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.amount).gt(0)) {
-        this.formData.total = this.toFixed(numUtils.mul(this.fixedPrice, this.formData.amount))
+        this.formData.total = this.toFixed(numUtils.mul(this.fixedPrice, this.formData.amount), this.Amountaccu)
       } else if (numUtils.BN(this.fixedPrice).gt(0) && numUtils.BN(this.formData.total).gt(0)) {
-        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice))
+        this.formData.amount = this.toFixed(numUtils.div(this.formData.total, this.fixedPrice), this.Quantityaccu)
       } else {
         this.changeInput = ''
       }
     },
     switchPercent (p) {
+      let amount
       p = p / 100
-      let amount = numUtils.mul(this.tradeType === 'buy' ? this.toBalance.availableBalance : this.fromBalance.availableBalance, p).toFixed(this.fixedNumber)
+      if(this.baseSymbol.includes('SATO')){
+        amount = numUtils.mul(this.isBuy ? this.sellToBalance.availableBalance : this.buyToBalance.availableBalance, p).toFixed(this.fixedNumber)
+      } else {
+        amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (!this.symbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)
+      }
+      
       if (this.active === 'market' && this.tradeType === 'buy') {
-        this.formData.amount = numUtils.div(amount, this.getLast24h.close).toFixed(this.fixedNumber, 1)
+        this.formData.amount = Number(amount)?numUtils.div(amount, this.getLast24h.close).toFixed(this.fixedNumber, 1):''
         return
       }
       if (this.tradeType === 'buy') {
-        this.formData.total = amount
+        this.formData.total = Number(amount)?amount:''
       } else {
-        this.formData.amount = amount
+        this.formData.amount = Number(amount)?amount:''
       }
     },
     buyOrSell () {
@@ -381,7 +407,7 @@ export default {
       let toAccountId = null
       let direction = null// 1买 2卖
       if (this.active === 'limit') { // 限价
-        price = this.formData.price
+        price = this.fixedPrice
         if (!price) {
           msg = this.$t('exchange.exchange_price_empty') // 价格不能为空
         } else if (numUtils.BN(price).equals(numUtils.BN(0))) {
@@ -436,20 +462,32 @@ export default {
         return
       }
 
+      direction = this.tradeType === 'buy' ? 1 : 2
+
+      if(this.baseSymbol.includes('SATO')){
+        balance = this.tradeType === 'buy' ? this.sellToBalance.availableBalance : this.buyToBalance.availableBalance
+        fromAccountId = this.tradeType === 'buy' ? this.sellToBalance.accountId : this.buyToBalance.accountId
+        toAccountId = this.tradeType === 'buy' ? this.buyToBalance.accountId : this.toBalance.accountId
+      } else {
+        balance = this.tradeType === 'buy' ? this.toBalance.availableBalance : (!this.currentSymbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)
+        fromAccountId = this.tradeType === 'buy' ? this.toBalance.accountId : (!this.currentSymbol.includes('SATO') ? this.buyToBalance.accountId : this.fromBalance.accountId)
+        toAccountId = this.tradeType === 'buy' ? this.buyToBalance.accountId : this.toBalance.accountId
+      }
       if (this.tradeType === 'buy') { // 买
-        direction = 1 // 买
+        /*direction = 1 // 买
         balance = this.toBalance.availableBalance // 金额
         fromAccountId = this.toBalance.accountId // baseSymbol帐号id
-        toAccountId = this.buyToBalance.accountId // currentSymbol帐号id
+        toAccountId = this.buyToBalance.accountId // currentSymbol帐号id*/
         if (numUtils.BN(amount).mul(numUtils.BN((price === -1 ? this.getLast24h.close : price))).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
           return
         }
       } else if (this.tradeType === 'sell') {
-        direction = 2 // 卖
-        balance = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
-        fromAccountId = (this.currentSymbol+this.baseSymbol !== 'SATOUSDS' ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
-        toAccountId = this.toBalance.accountId // 帐号id
+       /* direction = 2 // 卖
+        balance = (!this.symbol.includes('SATO') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance)  // 金额
+        console.log('balance===',balance)
+        fromAccountId = (!this.symbol.includes('SATO') ? this.buyToBalance.accountId : this.fromBalance.accountId) // 帐号id
+        toAccountId = this.toBalance.accountId // 帐号id*/
         if (numUtils.BN(amount).gt(numUtils.BN(balance)) || numUtils.BN(balance).isZero()) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('exchange.exchange_Insufficient_balance')}) // 余额不足
           return
