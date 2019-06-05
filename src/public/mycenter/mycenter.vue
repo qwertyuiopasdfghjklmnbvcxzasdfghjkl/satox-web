@@ -228,7 +228,7 @@ export default {
       })
     },
     showVerifyState (targetVerifyState) {
-      let verifyTimes = (this.getSysParams.kycCount && this.getSysParams.kycCount.value) || 3
+      let verifyTimes = this.getSysParams.kycCount && Number(this.getSysParams.kycCount.value) || 3
       if (this.userState.verifyTimes <= verifyTimes) {
         if (this.userState.verifyTimes === verifyTimes) {
           if (this.userState.verifyState === 0) {
