@@ -151,7 +151,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUserInfo', 'getLang']),
+    ...mapGetters(['getUserInfo', 'getLang','getSysParams']),
     isExistUserAvatar () {
       return this.avatarUrl !== avatar
     },
@@ -228,8 +228,9 @@ export default {
       })
     },
     showVerifyState (targetVerifyState) {
-      if (this.userState.verifyTimes <= 3) {
-        if (this.userState.verifyTimes === 3) {
+      let verifyTimes = (this.getSysParams.kycCount && this.getSysParams.kycCount.value) || 3
+      if (this.userState.verifyTimes <= verifyTimes) {
+        if (this.userState.verifyTimes === verifyTimes) {
           if (this.userState.verifyState === 0) {
             return targetVerifyState === 3
           } else {

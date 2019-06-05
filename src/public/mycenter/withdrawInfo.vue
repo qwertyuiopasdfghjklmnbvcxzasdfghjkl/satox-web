@@ -44,7 +44,7 @@
                 <div class="filed" v-show="showNewAddress" style="position:relative;">
                     <input class="isAddAddress" type="text" maxlength="15" v-validate="'required'" data-vv-name="alias" :class="{error:errors.has('alias')}" v-model="alias" :placeholder="$t('account.user_Remark_label')" /><!--备注标签-->
                     <span class="joint">-</span>
-                    <input class="address" type="text" maxlength="100" v-validate="'required'" data-vv-name="toAddress" :class="{error:errors.has('toAddress')}" v-model="toAddress" :placeholder="$t('account.estimated_value_address')" /><!--地址-->
+                    <input class="address" type="text" maxlength="150" v-validate="'required'" data-vv-name="toAddress" :class="{error:errors.has('toAddress')}" v-model="toAddress" :placeholder="$t('account.estimated_value_address')" /><!--地址-->
                     <em class="error" v-if="errors.has('alias') || errors.has('toAddress')">{{$t('public0.public45')}}<!--请输入新地址--></em>
                 </div>
                 <div class="filed memo" v-if="symbol==='EOS' || symbol==='XRP'">
