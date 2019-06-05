@@ -28,7 +28,7 @@
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
                     <div class="withAdress" style="position:relative;" :class="{error:errors.has('selToAddress')}">
-                        <input type="text" maxlength="100" v-if="!showNewAddress" v-validate="'required'" data-vv-name="selToAddress" v-model="toAddress" :disabled="showNewAddress" :placeholder="$t('public0.public209')"/>
+                        <input type="text" maxlength="150" v-if="!showNewAddress" v-validate="'required'" data-vv-name="selToAddress" v-model="toAddress" :disabled="showNewAddress" :placeholder="$t('public0.public209')"/>
                         <span class="dowml" @click.stop="showDropdown=!showDropdown"></span>
                         <em class="error" v-if="errors.has('selToAddress')">{{this.$t('public0.public44')}}<!--请选择地址或使用新地址--></em>
                         <ul v-show="showDropdown">
