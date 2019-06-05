@@ -399,7 +399,7 @@ em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;heigh
 .withAdress span.dowml:hover:before{border-top-color: #BA8D35;}
 .withAdress input{color: #333; width: 452px;padding-left: 12px;padding-right: 6px;background-color: transparent;height: 30px;}
 .withAdress ul{position: absolute;z-index: 22;width: 500px;top: 30px;left: -1px;border: 1px solid #283149;}
-.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #BA8D35;cursor: pointer;}
+.withAdress ul li{height: 30px;line-height: 30px;font-size: 12px;color: #fff;text-indent: 12px;background-color: #BA8D35;cursor: pointer; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 .withAdress ul li:hover{background-color: #BA8D35;}
 .withAdress ul li span{font-size: 16px;position: absolute; right: 7px;top: 8px;cursor: pointer;}
 .withAdress ul li img{width: 16px;height: 16px;vertical-align: middle;}
