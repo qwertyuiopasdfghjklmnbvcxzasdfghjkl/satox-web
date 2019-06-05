@@ -160,11 +160,6 @@ export default {
         this.alias = newVal.substring(0, 15)
       }
     },
-    'toAddress' (newVal) {
-      if (newVal.length > 100) {
-        this.toAddress = newVal.substring(0, 100)
-      }
-    }
   },
   computed: {
     procedureFee () { // 手续费 提现数量-固定手续费
