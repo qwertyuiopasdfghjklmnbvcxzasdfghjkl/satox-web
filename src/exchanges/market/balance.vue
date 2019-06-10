@@ -108,7 +108,8 @@ export default {
     },
     sellToWallet () {
       let w = null
-      this.tradeAct.forEach((item) => {
+      // this.tradeAct.forEach((item) => {
+      this.datas.forEach((item) => {
         if (item.symbol === this.baseSymbol) {
           w = item
         }
