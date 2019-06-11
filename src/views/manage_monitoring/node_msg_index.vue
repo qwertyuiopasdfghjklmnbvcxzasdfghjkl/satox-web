@@ -28,6 +28,14 @@
             <p slot="title">XRP{{$t('monitoring.tbqks')}}</p>
             <Table :columns="columns2" :data="data6"></Table>
         </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title">ADA{{$t('monitoring.tbqks')}}</p>
+            <Table :columns="columns2" :data="data7"></Table>
+        </Card>
+        <Card style="margin-top:30px;">
+            <p slot="title">NEO{{$t('monitoring.tbqks')}}</p>
+            <Table :columns="columns2" :data="data8"></Table>
+        </Card>
     </div>
 </template>
 <script>
@@ -46,6 +54,8 @@
                 data4: [],
                 data5: [],
                 data6: [],
+                data7: [],
+                data8: [],
                 columns2: [
                     {
                         title: this.$t('monitoring.fwt'),
@@ -89,6 +99,7 @@
             this.getfindEOSNodeList();
             this.getfindLTCNodeList();
             this.getfindXRPNodeList();
+            this.getNodeList();
         },
         methods: {
             getfindBtcNodeList () {
@@ -125,6 +136,14 @@
                 monitApi.findXRPNodeList((res, total) => {
                     this.data6.push(res);
 
+                });
+            },
+            getNodeList () {
+                monitApi.findNodeList('findADANode', (res) => {
+                    this.data7.push(res);
+                });
+                monitApi.findNodeList('findNEONode', (res) => {
+                    this.data8.push(res);
                 });
             },
             changePage (page) {

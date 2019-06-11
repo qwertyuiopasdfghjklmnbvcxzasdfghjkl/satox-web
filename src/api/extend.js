@@ -184,6 +184,42 @@ const findAllAnnouncement = function (curPage, data, success, error) {
 };
 extend.findAllAnnouncement = findAllAnnouncement;
 
+// 分页模糊查询国际化信息列表
+const findI18nList = function (data, success, error) {
+    api.post(`api/bm/promotionManage/global/queryList`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.findI18nList = findI18nList;
+
+// 新增国际化信息
+const addI18nList = function (data, success, error) {
+    api.post(`api/bm/promotionManage/global/insert`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.addI18nList = addI18nList;
+
+// 更新国际化信息
+const updateI18nList = function (data, success, error) {
+    api.put(`api/bm/promotionManage/global/update`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.updateI18nList = updateI18nList;
+
 //查询详情
 const findDetail = function (data, success, error) {
     api.post(`api/bm/promotionManage/announcement/findAllAnnouncement/10/1`, data, (res) => {

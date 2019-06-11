@@ -4,12 +4,13 @@
             <p slot="title">{{$t('nav.gjhgl')}}</p>
             <Row>
                 <Col span="16">
-                    <Select v-model="formData.type" style="width: 200px">
-                        <Option value="id">ID</Option>
-                        <Option value="Public_key">Public_key</Option>
-                        <Option value="cn">{{$t('operation.zw')}}</Option>
-                        <Option value="en">{{$t('operation.yw')}}</Option>
-                    </Select>
+                    <!--<Select v-model="formData.type" style="width: 200px">-->
+                        <!--<Option value="globalInfoId">ID</Option>-->
+                        <!--<Option value="publicKey">Public_key</Option>-->
+                        <!--<Option value="cn">{{$t('operation.zw')}}</Option>-->
+                        <!--<Option value="en">{{$t('operation.yw')}}</Option>-->
+                    <!--</Select>-->
+
                     <Input v-model="formData.value" clearable style="width: 200px"
                            :placeholder="$t('common.qsr')"></Input>
                     <Button type="primary" @click="curPage=1;getList()">{{$t('common.cx')}}</Button>
@@ -34,67 +35,67 @@
         data () {
             return {
                 curPage: 1,
+                size: 10,
                 total: 0,
                 formData: {
-                    type: 'id',
-                    value: ''
+                    value: null
                 },
                 columns1: [
                     {
                         title: 'ID',
-                        key: 'sequence'
+                        key: 'globalInfoId'
                     },
                     {
                         title: 'Public_key',
-                        key: 'title'
+                        key: 'publicKey'
                     },
                     {
                         title: this.$t('operation.zw'),
-                        key: 'link',
+                        key: 'cn',
                     },
                     {
                         title: this.$t('operation.yw'),
-                        key: 'titleEn'
+                        key: 'en'
                     },
                     {
                         title: this.$t('operation.zwft'),
-                        key: 'linkEn'
+                        key: 'cnzh'
                     },
                     {
                         title: this.$t('operation.hy'),
-                        key: 'titleCht',
+                        key: 'korean'
                     },
                     {
                         title: this.$t('operation.ry'),
-                        key: 'linkCht'
+                        key: 'japanese'
                     },
                     {
                         title: this.$t('operation.dy'),
-                        key: 'updatedTime'
+                        key: 'german'
                     },
                     {
                         title: this.$t('operation.xbyy'),
-                        key: 'updatedTime'
+                        key: 'spanish'
                     },
                     {
                         title: this.$t('operation.fy'),
-                        key: 'updatedTime'
+                        key: 'french'
                     },
                     {
                         title: this.$t('operation.ydly'),
-                        key: 'updatedTime'
+                        key: 'italian'
                     },
                     {
                         title: this.$t('operation.alby'),
-                        key: 'updatedTime'
+                        key: 'arabic'
                     },
                     {
                         title: this.$t('operation.sm'),
-                        key: 'updatedTime'
+                        key: 'remark'
                     },
                     {
                         title: this.$t('common.gxsj'),
-                        key: 'updatedTime'
+                        key: 'updatedAt'
                     },
                     {
                         title: this.$t('common.cz'),
@@ -134,7 +135,12 @@
                 });
             },
             getList () {
-                extendApi.findAllAnnouncement(this.curPage, {}, (res) => {
+                let data = {
+                    size: this.size,
+                    page: this.curPage,
+                    keyword: this.formData.value
+                };
+                extendApi.findI18nList(data, (res) => {
                     this.data1 = res;
                 });
             },

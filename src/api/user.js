@@ -48,4 +48,40 @@ const getSymbolTypes = function ( success, error) {
 };
 user.getSymbolTypes = getSymbolTypes;
 
+// 获取所有主链类型
+const getSymbolList = function ( success, error) {
+    api.get('api/bm/sysParam/symbolList', (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.getSymbolList = getSymbolList;
+
+// 增加主链类型
+const addSymbol = function ( data, success, error) {
+    api.post('api/bm/sysParam/addSymbol', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.addSymbol = addSymbol;
+
+// 删除主链类型
+const deleteSymbol = function ( data, success, error) {
+    api.post('api/bm/sysParam/deleteSymbol', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.deleteSymbol = deleteSymbol;
+
 export default user;

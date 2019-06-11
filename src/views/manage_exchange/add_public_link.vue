@@ -7,8 +7,8 @@
         </p>
         <Form ref="formValidate" :model="formValidate" :rules="ruleInline" :label-width="80" style="margin:0 20px;">
 
-            <FormItem :label="vm.$t('monitoring.gllx')" prop="remarks">
-                <Input v-model="formValidate.remarks" name="remarks" :maxlength="20"></Input>
+            <FormItem :label="vm.$t('monitoring.gllx')" prop="name">
+                <Input v-model="formValidate.name" name="name" :maxlength="20"></Input>
             </FormItem>
 
             <FormItem>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import financeApi from '../../api/finance';
+    import userApi from '../../api/user';
 
     export default {
         data () {
@@ -27,10 +27,10 @@
             return {
                 vm: vm,
                 formValidate: {
-                    remarks: null,
+                    name: null,
                 },
                 ruleInline: {
-                    remarks: [
+                    name: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('monitoring.gllx')}
                     ]
                 }
@@ -40,7 +40,10 @@
             addVerify () {
                 this.$refs.formValidate.validate((valid) => {
                     if (valid) {
-                        financeApi.addTransfer(this.formValidate, (res) => {
+                        let data = {
+                            name: this.formValidate.name
+                        }
+                        userApi.addSymbol(data, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('okCallback');
                             this.$emit('removeDialog');

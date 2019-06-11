@@ -4,41 +4,41 @@
             <p slot="title">{{vm.$t('operation.xzzd')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100"
                   style="width:450px;overflow:auto;">
-                <FormItem :label="'Public_key'" prop="Public_key">
-                    <Input v-model="formLeft.title" name="Public_key"></Input>
+                <FormItem :label="'Public_key'" prop="publicKey">
+                    <Input v-model="formLeft.publicKey" name="publicKey"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.zw')" prop="title">
-                    <Input v-model="formLeft.title" name="title"></Input>
+                <FormItem :label="vm.$t('operation.zw')" prop="cn">
+                    <Input v-model="formLeft.cn" name="cn"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.yw')" prop="link">
-                    <Input v-model="formLeft.link" name="link"></Input>
+                <FormItem :label="vm.$t('operation.yw')" prop="en">
+                    <Input v-model="formLeft.en" name="en"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.zwft')" prop="titleEn">
-                    <Input v-model="formLeft.titleEn" name="titleEn"></Input>
+                <FormItem :label="vm.$t('operation.zwft')" prop="cnzh">
+                    <Input v-model="formLeft.cnzh" name="cnzh"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.hy')" prop="linkEn">
-                    <Input v-model="formLeft.linkEn" name="linkEn"></Input>
+                <FormItem :label="vm.$t('operation.hy')" prop="korean">
+                    <Input v-model="formLeft.korean" name="korean"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.ry')" prop="titleCht">
-                    <Input v-model="formLeft.titleCht" name="titleCht"></Input>
+                <FormItem :label="vm.$t('operation.ry')" prop="japanese">
+                    <Input v-model="formLeft.japanese" name="japanese"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.dy')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht"></Input>
+                <FormItem :label="vm.$t('operation.dy')" prop="german">
+                    <Input v-model="formLeft.german" name="german"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.xbyy')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht"></Input>
+                <FormItem :label="vm.$t('operation.xbyy')" prop="spanish">
+                    <Input v-model="formLeft.spanish" name="spanish"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.fy')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht"></Input>
+                <FormItem :label="vm.$t('operation.fy')" prop="french">
+                    <Input v-model="formLeft.french" name="french"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.ydly')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht"></Input>
+                <FormItem :label="vm.$t('operation.ydly')" prop="italian">
+                    <Input v-model="formLeft.italian" name="italian"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.alby')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht"></Input>
+                <FormItem :label="vm.$t('operation.alby')" prop="arabic">
+                    <Input v-model="formLeft.arabic" name="arabic"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.sm')" prop="linkCht">
-                    <Input v-model="formLeft.linkCht" name="linkCht" type="textcent"></Input>
+                <FormItem :label="vm.$t('operation.sm')" prop="remark">
+                    <Input v-model="formLeft.remark" name="remark" type="textcent"></Input>
                 </FormItem>
 
                 <div class="bannerBtn">
@@ -55,72 +55,45 @@
 
     export default {
         data () {
-            const customValidator = (rule, value, callback) => {
-                if (this.formLeft[rule.field] === null) {
-                    return callback(new Error('error'));
-                } else {
-                    return callback();
-                }
-            };
-            const xxx = (rule, value, callback) => {
-                if (/\.(jpg|png|jpeg|bmp|ico)/i.test(value) === false) {
-                    return callback(new Error());
-                } else {
-                    return callback();
-                }
-            };
-            let self = this;
-            const xxx1 = (rule, value, callback) => {
-                var reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-                if (reg.test(value) === false) {
-                    return callback(new Error());
-                } else {
-                    return callback();
-                }
-            };
             const vm = window.vm;
             return {
                 vm: vm,
                 formLeft: {
-                    sequence: null,
-                    title: '',
-                    link: '',
-                    titleEn: '',
-                    linkEn: '',
-                    titleCht: '',
-                    linkCht: '',
-                    displayStatus: '1'
+                    publicKey: null,
+                    cn: null,
+                    en: null,
+                    cnzh: null,
+                    korean: null,
+                    japanese: null,
+                    german: null,
+                    spanish: null,
+                    french: null,
+                    italian: null,
+                    arabic: null,
+                    remark: null,
                 },
                 ruleInline: {
-                    sequence: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ggw')},
-                        {
-                            validator: customValidator,
-                            message: vm.$t('common.qsr') + vm.$t('operation.ggw'),
-                            trigger: 'blur'
-                        },
+                    publicKey: [
+                        {required: true, message: vm.$t('common.qsr') + 'publicKey'},
                     ],
-                    title: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.jtggbt'), trigger: 'blur'},
+                    cn: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zw'), trigger: 'blur'},
                     ],
-                    link: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.jtgglj'), trigger: 'blur'},
-                        {validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur'}
+                    en: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.yw'), trigger: 'blur'},
                     ],
-                    titleEn: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ywggbt'), trigger: 'blur'}
+                    cnzh: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zwft'), trigger: 'blur'}
                     ],
-                    linkEn: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ywgglj'), trigger: 'blur'},
-                        {validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur'}
-                    ],
-                    titleCht: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftggbt'), trigger: 'blur'}
-                    ],
-                    linkCht: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftgglj'), trigger: 'blur'},
-                        {validator: xxx1, message: vm.$t('common.qsryhttpktwz'), trigger: 'blur'}
-                    ],
+                    // korean: [
+                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ywgglj'), trigger: 'blur'},
+                    // ],
+                    // japanese: [
+                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftggbt'), trigger: 'blur'}
+                    // ],
+                    // german: [
+                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftgglj'), trigger: 'blur'},
+                    // ],
                 }
             };
         },
@@ -132,8 +105,7 @@
                 let form = this.$refs.formItem;
                 form.validate((valid) => {
                     if (valid) {
-                        // var formData = new FormData(form.$el)
-                        extendApi.addAnnouncement(this.formLeft, (res) => {
+                        extendApi.addI18nList(this.formLeft, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('removeDialog');
                             this.$emit('okCallback');

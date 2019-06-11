@@ -514,7 +514,8 @@ export const exchange = {
     cjjg: '成交价格',
     mfsxfsq: '买方手续费收取',
     m4fsxfsq: '卖方手续费收取',
-    cjsj: '成交时间'
+    cjsj: '成交时间',
+    gzusd: '估值（USD）'
 }
 export const risk = {
     bbycyj: '币币异常预警',

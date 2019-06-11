@@ -63,7 +63,7 @@
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                reportApi.getFileList(data, (res, total) => {
+                reportApi.getDailyFileList(data, (res, total) => {
                     this.total = total;
                     this.data = res;
                 });

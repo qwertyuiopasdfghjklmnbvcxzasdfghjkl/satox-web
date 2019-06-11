@@ -230,6 +230,18 @@ const findXRPNodeList = function (success, error) {
 };
 monitoring.findXRPNodeList = findXRPNodeList;
 
+// 查询节点信息
+const findNodeList = function (data, success, error) {
+    api.get(`/api/bm/monitor/node/${data}`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+monitoring.findNodeList = findNodeList;
+
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {
     api.post(`api/bm/monitor/errorLog/findErrorLogList/10/${curPage}`, data, (res) => {

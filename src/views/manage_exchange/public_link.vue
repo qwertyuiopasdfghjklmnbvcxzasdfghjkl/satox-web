@@ -24,7 +24,7 @@
 <script>
     import util from '../../libs/util';
     import add from './add_public_link.vue';
-    import financeApi from '../../api/finance';
+    import userApi from '../../api/user';
 
     export default {
         data () {
@@ -33,17 +33,18 @@
                 size: 20,
                 total: 0,
                 columns: [
-                    {title: 'ID', key: 'username'},
-                    {title: this.$t('monitoring.gllx'), key: 'mobile'},
-                    {title: this.$t('common.cjsj'), key: 'userRealName'},
+                    {title: 'ID', key: 'publicLinkId'},
+                    {title: this.$t('monitoring.gllx'), key: 'name'},
+                    {title: this.$t('common.cjsj'), key: 'createAt'},
                     {
-                        title: this.$t('common.cz'), key: 'action', render: (h, params) => {
+                        title: this.$t('common.cz'), key: 'publicLinkId', render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
                                     style: {marginRight: '3px'},
                                     on: {
                                         click: () => {
+                                            this.deleteSymbol(params.row.publicLinkId);
                                         }
                                     }
                                 }, this.$t('common.sc'))
@@ -59,10 +60,8 @@
         },
         methods: {
             getList () {
-                let data = {page: this.page, size: this.size, symbol: 'SATO'};
-                financeApi.findUSDSRechargeRecords(data, (rdata, rtotel) => {
-                    this.data = rdata;
-                    this.total = rtotel;
+                userApi.getSymbolList((res) => {
+                    this.data = res;
                 });
             },
             changePage (page) {
@@ -71,9 +70,20 @@
             },
             add () {
                 util.setDialog(add, {
-                    okCallback () {
+                    okCallback: () => {
                         this.getList();
                     }
+                });
+            },
+            deleteSymbol (id) {
+                let data = {
+                    publicLinkId: id
+                };
+                userApi.deleteSymbol(data, (res) => {
+                    this.$Message.success({content: this.$t('common.tjcg')});
+                    this.getList();
+                }, (msg) => {
+                    this.$Message.error(msg);
                 });
             }
         }
