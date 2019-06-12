@@ -15,7 +15,7 @@
                         </span>
                         <span>
                             {{$t('common.yhm')}}：
-                            <Input v-model="formData.userName" clearable style="width: 140px"
+                            <Input v-model="formData.username" clearable style="width: 140px"
                                    :placeholder="$t('common.qsryhm')"></Input>
                         </span>
                         <span>
@@ -29,23 +29,23 @@
                         </span>
                         <span>
                             {{$t('exchange.cjjg')}}：
-                            <Select v-model="formData.prePrice" style="width:60px">
+                            <Select v-model="formData.preDealPrice" style="width:60px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.xy')}}</Option>
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.price" style="width: 100px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData.dealPrice" style="width: 100px"></InputNumber>
                         </span>
                         <span>
                             {{$t('exchange.cjl')}}：
-                            <Select v-model="formData.preTotalAmount" style="width: 60px">
+                            <Select v-model="formData.preDealAmount" style="width: 60px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.xy')}}</Option>
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.totalAmount" style="width: 100px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData.dealAmount" style="width: 100px"></InputNumber>
                         </span>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
@@ -69,28 +69,27 @@
                 total: 0,
                 size: 10,
                 columns: [
-                    {key: 'orderBookId', title: this.$t('common.jyid')},
+                    {key: 'orderBookLogId', title: this.$t('common.jyid')},
                     {key: 'username', title: this.$t('exchange.mfyhm')},
-                    {key: 'market', title: this.$t('exchange.m4fyhm')},
+                    {key: 'reciprocalUsername', title: this.$t('exchange.m4fyhm')},
                     {key: 'market', title: this.$t('exchange.jysc')},
-                    {key: 'price', title: this.$t('exchange.cjjg')},
-                    {key: 'finishedAmount', title: this.$t('exchange.cjl')},
-                    {key: 'totalAmount', title: this.$t('exchange.cjje')},
-                    {key: 'totalAmount', title: this.$t('exchange.mfsxfsq')},
-                    {key: 'totalAmount', title: this.$t('exchange.m4fsxfsq')},
-                    {key: 'createdAt', title: this.$t('exchange.cjsj')},
+                    {key: 'dealPrice', title: this.$t('exchange.cjjg')},
+                    {key: 'dealAmount', title: this.$t('exchange.cjl')},
+                    {key: 'dealCurrency', title: this.$t('exchange.cjje')},
+                    {key: 'fee', title: this.$t('exchange.mfsxfsq')},
+                    {key: 'reciprocalFee', title: this.$t('exchange.m4fsxfsq')},
+                    {key: 'dealTime', title: this.$t('exchange.cjsj')}
                 ],
                 datas: [],
                 formData: {
                     endTime: null,
-                    market: 0,
-                    prePrice: 0,
-                    preTotalAmount: 0,
-                    price: null,
                     startTime: null,
-                    state: null,
-                    totalAmount: null,
-                    username: null,
+                    market: 0,
+                    preDealAmount: 0,
+                    preDealPrice: 0,
+                    dealAmount: null,
+                    dealPrice: null,
+                    username: null
                 },
                 marketList: []
             };
@@ -125,8 +124,8 @@
                 data.startTime = data.startTime ? util.dateToStr(new Date(data.startTime)) : null;
                 data.endTime = data.endTime ? util.dateToStr(new Date(data.endTime)) : null;
                 data.market = data.market === 0 ? null : data.market;
-                data.prePrice = data.prePrice === 0 ? null : data.prePrice;
-                data.preTotalAmount = data.preTotalAmount === 0 ? null : data.preTotalAmount;
+                data.preDealAmount = data.preDealAmount === 0 ? null : data.preDealAmount;
+                data.preDealPrice = data.preDealPrice === 0 ? null : data.preDealPrice;
                 data.page = this.curPage;
                 data.size = this.size;
                 currenyApi.getTransaction(data,

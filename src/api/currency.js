@@ -569,9 +569,9 @@ const getHistoryEntrust = function (data, success, error) {
 };
 curreny.getHistoryEntrust = getHistoryEntrust;
 
-// 查询币币历史委托
+// 交易查询 POST /bbManage/orderBookLogs/query
 const getTransaction = function (data, success, error) {
-    api.post('api/bm/bbManage/transaction/list', data, (res) => {
+    api.post('api/bm/bbManage/orderBookLogs/query', data, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {
