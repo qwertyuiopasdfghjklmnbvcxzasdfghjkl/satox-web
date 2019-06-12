@@ -62,9 +62,9 @@
                             </ul>
                         </Col>
                         <Col span="10" class="remaket_box">
-                            <Input v-model="androidCN" type="textarea" :placeholder="$t('operation.zw')"></Input>
-                            <Input v-model="androidEN" type="textarea" :placeholder="$t('operation.yw')"></Input>
-                            <Input v-model="androidTW" type="textarea" :placeholder="$t('operation.zwft')"></Input>
+                            <Input v-model="androidCN" type="textarea" :placeholder="$t('operation.zw')" :maxlength="1000"></Input>
+                            <Input v-model="androidEN" type="textarea" :placeholder="$t('operation.yw')" :maxlength="1000"></Input>
+                            <Input v-model="androidTW" type="textarea" :placeholder="$t('operation.zwft')" :maxlength="1000"></Input>
                         </Col>
 
 
@@ -130,9 +130,9 @@
                             </ul>
                         </Col>
                         <Col span="10" class="remaket_box">
-                            <Input v-model="appleCN" type="textarea" :placeholder="$t('operation.zw')"></Input>
-                            <Input v-model="appleEN" type="textarea" :placeholder="$t('operation.yw')"></Input>
-                            <Input v-model="appleTW" type="textarea" :placeholder="$t('operation.zwft')"></Input>
+                            <Input v-model="appleCN" type="textarea" :placeholder="$t('operation.zw')" :maxlength="1000"></Input>
+                            <Input v-model="appleEN" type="textarea" :placeholder="$t('operation.yw')" :maxlength="1000"></Input>
+                            <Input v-model="appleTW" type="textarea" :placeholder="$t('operation.zwft')" :maxlength="1000"></Input>
                         </Col>
                         <Col span="4" style="text-align: center">
                             <Button @click="tabs2('appleUpdateIntro')">{{$t('common.bc')}}</Button>
