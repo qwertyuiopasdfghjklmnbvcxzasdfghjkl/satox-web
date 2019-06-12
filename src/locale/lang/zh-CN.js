@@ -656,7 +656,11 @@ export const operation = {
     ydly: '意大利语',
     alby: '阿拉伯语',
     sm: '说明',
-    xzzd: '新增字段'
+    xzzd: '新增字段',
+    bbh: '版本号',
+    gxts: '更新提示',
+    sgts: '是否推送',
+    tsqlgx: '推送全量更新'
 }
 export const admin = {
     glyqx: '管理员权限管理',
