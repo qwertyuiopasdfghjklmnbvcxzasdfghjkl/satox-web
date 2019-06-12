@@ -33,7 +33,7 @@
                 size: 20,
                 total: 0,
                 columns: [
-                    {title: 'ID', key: 'publicLinkId'},
+                    {title: 'ID', key: 'code'},
                     {title: this.$t('monitoring.gllx'), key: 'name'},
                     {title: this.$t('common.cjsj'), key: 'createAt'},
                     {
@@ -60,8 +60,13 @@
         },
         methods: {
             getList () {
-                userApi.getSymbolList((res) => {
+                let data = {
+                    page: this.page,
+                    size: this.size
+                };
+                userApi.getSymbolList(data, (res, toatl) => {
                     this.data = res;
+                    this.total = toatl;
                 });
             },
             changePage (page) {

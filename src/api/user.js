@@ -49,10 +49,10 @@ const getSymbolTypes = function ( success, error) {
 user.getSymbolTypes = getSymbolTypes;
 
 // 获取所有主链类型
-const getSymbolList = function ( success, error) {
-    api.get('api/bm/sysParam/symbolList', (res) => {
+const getSymbolList = function (data, success, error) {
+    api.get('api/bm/sysParam/symbolList', data, (res) => {
         if (res.rst === 1) {
-            success && success(res.data);
+            success && success(res.data, res.total);
         } else {
             error && error(res.msg);
         }
