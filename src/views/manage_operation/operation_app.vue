@@ -42,7 +42,7 @@
                     <Row style="margin-bottom:20px;">
                         <Col span="10">{{$t('operation.bbh')}}： {{datas.androidVersion}}</Col>
                         <Col span="10">
-                            <Input v-model="androidVersion"></Input>
+                            <Input v-model="androidVersion" :maxlength="50"></Input>
                         </Col>
                         <Col span="4" style="text-align: center">
                             <Button @click="tabs2('androidVersion')">{{$t('common.bc')}}</Button>
@@ -114,7 +114,7 @@
                     <Row style="margin-bottom:20px;">
                         <Col span="10">{{$t('operation.bbh')}}： {{datas.appleVersion}}</Col>
                         <Col span="10">
-                            <Input v-model="appleVersion"></Input>
+                            <Input v-model="appleVersion" :maxlength="50"></Input>
                         </Col>
                         <Col span="4" style="text-align: center">
                             <Button @click="tabs2('appleVersion')">{{$t('common.bc')}}</Button>
