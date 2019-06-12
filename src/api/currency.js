@@ -569,7 +569,7 @@ const getHistoryEntrust = function (data, success, error) {
 };
 curreny.getHistoryEntrust = getHistoryEntrust;
 
-// 交易查询 POST /bbManage/orderBookLogs/query
+// 交易查询
 const getTransaction = function (data, success, error) {
     api.post('api/bm/bbManage/orderBookLogs/query', data, (res) => {
         if (res.rst === 1) {

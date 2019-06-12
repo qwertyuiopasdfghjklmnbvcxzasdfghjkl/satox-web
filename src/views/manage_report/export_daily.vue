@@ -59,11 +59,12 @@
             getfindUser () {
                 this.formData.page = this.curPage;
                 this.formData.size = this.size;
+                this.formData.type = 2;
                 let D = JSON.stringify(this.formData)
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                reportApi.getDailyFileList(data, (res, total) => {
+                reportApi.getFileList(data, (res, total) => {
                     this.total = total;
                     this.data = res;
                 });
