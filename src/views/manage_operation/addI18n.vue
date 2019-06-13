@@ -7,6 +7,9 @@
                 <FormItem :label="'Public_key'" prop="publicKey">
                     <Input v-model="formLeft.publicKey" name="publicKey"></Input>
                 </FormItem>
+                <FormItem :label="'Parent_key'" prop="publicKey">
+                    <Input v-model="formLeft.parentKey" name="publicKey"></Input>
+                </FormItem>
                 <FormItem :label="vm.$t('operation.zw')" prop="cn">
                     <Input v-model="formLeft.cn" name="cn"></Input>
                 </FormItem>
@@ -73,6 +76,9 @@
                     remark: null,
                 },
                 ruleInline: {
+                    parentKey: [
+                        {required: true, message: vm.$t('common.qsr') + 'parentKey'},
+                    ],
                     publicKey: [
                         {required: true, message: vm.$t('common.qsr') + 'publicKey'},
                     ],

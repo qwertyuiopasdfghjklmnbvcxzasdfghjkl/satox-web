@@ -50,6 +50,10 @@
                         key: 'publicKey'
                     },
                     {
+                        title: 'parent_key',
+                        key: 'parentKey'
+                    },
+                    {
                         title: this.$t('operation.zw'),
                         key: 'cn',
                     },
