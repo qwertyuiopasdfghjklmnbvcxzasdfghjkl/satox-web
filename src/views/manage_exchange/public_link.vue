@@ -12,6 +12,14 @@
                             <Button type="primary" style="float:right;" @click="add()">{{$t('common.tj')}}</Button>
                         </Col>
                     </p>
+                    <p style="margin-bottom: 20px">
+                        {{$t('monitoring.gllx')}}：
+                        <!--<Input v-model="value" style="width: 200px"></Input>-->
+                        <Select style="width:200px" v-model="value">
+                            <Option v-for="data in datas" :value="data.name">{{data.name}}</Option>
+                        </Select>
+                        <Button type="primary" @click="page=1;getList()">{{$t('common.cx')}}</Button>
+                    </p>
                     <Table :columns="columns" :data="data" style="margin-top: 20px;"></Table>
                     <Page :current="page" :total="total" :page-size="size" @on-change="changePage"
                           style="text-align:center;margin-top:20px;"></Page>
@@ -32,10 +40,12 @@
                 page: 1,
                 size: 20,
                 total: 0,
+                value: null,
+                datas: [],
                 columns: [
                     {title: 'ID', key: 'code'},
                     {title: this.$t('monitoring.gllx'), key: 'name'},
-                    {title: this.$t('common.cjsj'), key: 'createAt'},
+                    {title: this.$t('common.cjsj'), key: 'createdAt'},
                     {
                         title: this.$t('common.cz'), key: 'publicLinkId', render: (h, params) => {
                             return h('div', [
@@ -57,12 +67,20 @@
         },
         created () {
             this.getList();
+            this.getAll();
         },
         methods: {
+            getAll () {
+                userApi.getSymbolList((res) => {
+                    this.datas = res.data;
+                    console.log(this.datas)
+                });
+            },
             getList () {
                 let data = {
                     page: this.page,
-                    size: this.size
+                    size: this.size,
+                    symbol: this.value
                 };
                 userApi.getSymbolList(data, (res, toatl) => {
                     this.data = res;

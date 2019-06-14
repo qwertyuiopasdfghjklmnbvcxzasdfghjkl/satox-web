@@ -35,7 +35,7 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.dealPrice" style="width: 100px"></InputNumber>
+                            <numberbox :min="0" v-model="formData.dealPrice" style="width: 100px;border:1px solid #dddee1"></numberbox>
                         </span>
                         <span>
                             {{$t('exchange.cjl')}}：
@@ -45,7 +45,7 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.dealAmount" style="width: 100px"></InputNumber>
+                            <numberbox v-model="formData.dealAmount" style="width: 100px;border:1px solid #dddee1"></numberbox>
                         </span>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
@@ -61,8 +61,10 @@
 <script>
     import util from '../../libs/util';
     import currenyApi from '../../api/currency';
+    import Numberbox from '../components/dialog/numberbox';
 
     export default {
+        components: {Numberbox},
         data () {
             return {
                 curPage: 1,
