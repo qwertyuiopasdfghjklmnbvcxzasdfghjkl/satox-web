@@ -89,7 +89,7 @@
                             return h('div', [params.row.withdrawAmount, params.row.symbol]);
                         }
                     },
-                    {key: 'withdrawAmount', title: this.$t('exchange.gzusd')},
+                    {key: 'withdrawUsdAmount', title: this.$t('exchange.gzusd')},
                     {key: 'phoneNumber', title: this.$t('common.dh')},
                     {
                         key: 'auditStatus', title: this.$t('common.zt'),
