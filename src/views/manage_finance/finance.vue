@@ -234,7 +234,10 @@
                     value: null
                 },
                 search: 0,
-                accountsData: []
+                accountsData: [],
+                accountsDataAll: '',
+                accountsDataRobot: '',
+                accountsDataFee: '',
             };
         },
         created () {
@@ -252,8 +255,17 @@
         methods: {
             getAccounts () {
                 let data = {};
-                system.getAccounts(data, (res, total) => {
+                system.getAccounts(data, (res) => {
                     this.accountsData = res;
+                    this.accountsData.filter((res) => {
+                        this.accountsDataAll += res.username + ',';
+                        if (res.specialType === 1) {
+                            this.accountsDataFee += res.username + ',';
+                        } else if (res.specialType === 2) {
+                            this.accountsDataRobot += res.username + ',';
+                        }
+                    });
+                    console.log(this.accountsDataAll, this.accountsDataFee, this.accountsDataRobot);
                 }, (msg) => {
                     console.error(msg);
                 });
@@ -477,9 +489,14 @@
             },
             reGetfindUserAssetList1 () {
                 this.search = 2;
-                let data = {
-                    specialType: this.formData3.username === '0' ? null : this.formData3.username
-                };
+                let data = {};
+                if (this.formData3.username === '0') {
+                    data.username = this.accountsDataAll;
+                } else if (this.formData3.username === '1') {
+                    data.username = this.accountsDataFee;
+                } else if (this.formData3.username === '2') {
+                    data.username = this.accountsDataRobot;
+                }
                 this.columns7.splice(3, 2);
                 this.formData2 = {
                     symbol: '0',
