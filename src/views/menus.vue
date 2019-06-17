@@ -42,7 +42,8 @@
         systemConfigRouter,
         systemLogsRouter,
         monitoringRouter,
-        fundRouter
+        fundRouter,
+        mallRouter
     } from '../router';
     import breadcrumbNavVue from './main_components/breadcrumbNav.vue';
     import sidebarMenuShrink from './main_components/sidebarMenuShrink.vue';
@@ -63,6 +64,7 @@
                     // {id: 'community', path: 'community_data_index', name: '社区管理', menus: communityRouter},
                     // {id: 'vote', path: 'vote_data_count_index', name: '投票挖矿管理', menus: voteRouter},
                     {id: 'finance', path: 'finance_finance_index', name: this.$t('nav.cwgl'), menus: financeRouter},
+                    {id: 'mall', path: 'mall_index', name: this.$t('nav.scddgl'), menus: mallRouter},
                     {id: 'risk', path: 'risk_exchange_index', name: this.$t('nav.fxkzgl'), menus: riskRouter},
                     {id: 'operation', path: 'operation_distribute_index', name: this.$t('nav.ywtggl'), menus: operationRouter},
                     {name: this.$t('report.tjbbgl'), menus: reportRouter},
@@ -72,7 +74,7 @@
                     {id: 'monitoring', path: 'monitoring_index', name: this.$t('nav.jkpt'), menus: monitoringRouter},
                     {id: 'fund', path: 'fund_index', name: this.$t('nav.ptzjgl'), menus: fundRouter}
                 ],
-                icon: ['ios-analytics', 'ios-pie-outline', 'ios-calculator', 'ios-pulse', 'ios-settings',
+                icon: ['ios-analytics', 'ios-pie-outline', 'ios-calculator', 'ios-cart', 'ios-pulse', 'ios-settings',
                     'ios-calendar-outline', 'ios-cart', 'ios-clock', 'ios-eye', 'ios-filing-outline',
                     'android-clipboard', 'android-drafts']
             };

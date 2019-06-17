@@ -66,6 +66,10 @@
                         key: 'nickname'
                     },
                     {
+                        title: this.$t('exchange.dqm'),
+                        key: 'countryCode'
+                    },
+                    {
                         title: this.$t('common.sjh'),
                         key: 'mobile'
                     },

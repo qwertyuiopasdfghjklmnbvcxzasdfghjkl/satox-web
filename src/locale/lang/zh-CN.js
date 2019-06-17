@@ -515,7 +515,8 @@ export const exchange = {
     mfsxfsq: '买方手续费收取',
     m4fsxfsq: '卖方手续费收取',
     cjsj: '成交时间',
-    gzusd: '估值（USD）'
+    gzusd: '估值（USD）',
+    dqm: '地区码'
 }
 export const risk = {
     bbycyj: '币币异常预警',
@@ -918,7 +919,10 @@ export const nav = {
     gjhgl: '国际化管理',
     mrbb: '每日报表',
     glgl: '公链管理',
-    jycx: '交易查询'
+    jycx: '交易查询',
+    scddgl: '商城订单管理',
+    spgl: '商品管理',
+    scskzhsz: '商城收款账户设置'
 }
 export const home = {
     zyh: '总用户',
@@ -932,4 +936,21 @@ export const report = {
     wjm: '文件名',
     xz: '下载',
     mrbb: '每日报表'
+}
+export const mall = {
+    ddid: '订单ID',
+    spmc: '商品名称',
+    fkfs: '付款方式',
+    spjg: '商品价格',
+    spje: '商品金额',
+    ddzje: '订单总金额',
+    yjdz: '邮寄地址',
+    zbyj: '中本硬件',
+    zbjjk: '中本借记卡',
+    yfkdcl: '已付款待处理',
+    clz: '处理中',
+    yqs: '已签收',
+    ddsxxg: '订单属性修改',
+    tjscskzh: '添加商城收款账户',
+    xgscskzh: '修改商城收款账户'
 }

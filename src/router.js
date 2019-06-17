@@ -709,6 +709,25 @@ export const financeRouter = [
     }
 ];
 
+export const mallRouter = [
+    {
+        path: '/mall',
+        name: 'mall',
+        title: 'nav.spgl',
+        component: Main,
+        icon: 'ios-filing',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'index', title: 'nav.spgl', name: 'mall_index', component: resolve => {
+                    require(['./views/manage_mall/commodity.vue'], resolve);
+                }
+            }
+        ]
+    },
+]
 export const riskRouter = [
     {
         path: '/risk_exchange',
@@ -761,15 +780,6 @@ export const riskRouter = [
             }
         ]
     }
-    // {
-    //     path: '/risk_match',
-    //     name: 'risk_match',
-    //     title: '撮合异常监控',
-    //     component: Main,
-    //     children: [
-    //         { path: 'index', title: '撮合异常监控', name: 'risk_match_index', component: resolve => { require(['./views/manage_risk/match.vue'], resolve); } }
-    //     ]
-    // }
 ];
 
 export const operationRouter = [
@@ -1008,6 +1018,26 @@ export const systemConfigRouter = [
                 name: 'addwithdrawal_index',
                 component: resolve => {
                     require(['./views/manage_systemconfig/addWithdrawal.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/yollon',
+        name: 'yollon',
+        title: 'nav.scskzhsz',
+        component: Main,
+        icon: 'cash',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'yollon_index',
+                title: 'nav.scskzhsz',
+                name: 'yollon_index',
+                component: resolve => {
+                    require(['./views/manage_systemconfig/yollon.vue'], resolve);
                 }
             }
         ]
@@ -1628,6 +1658,7 @@ export const routers = [
     ...voteRouter,
     ...financeRouter,
     ...riskRouter,
+    ...mallRouter,
     ...operationRouter,
     ...adminRouter,
     ...reportRouter,
