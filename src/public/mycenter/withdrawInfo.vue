@@ -89,6 +89,7 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Vue from 'vue'
 import userUtils from '@/api/wallet'
 import userApi from '@/api/individual'
@@ -162,6 +163,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['getSysParams']),
     procedureFee () { // 手续费 提现数量-固定手续费
       if(this.symbol==='USSD'){
         return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
@@ -316,7 +318,7 @@ export default {
             }
             let saveFun = () => {
               userUtils.walletWithdraw(formData, () => {
-                let msg = typeof code === 'object' && code.type === 1 ? this.$t('message.WITHDRAWALS_SUCCESS') : this.$t('login_register.Mail_sent_successfully')
+                let msg = typeof code === 'object' && code.type === 1 ? this.$t('message.WITHDRAWALS_SUCCESS') : (this.getSysParams.withdrawEmail.value==='1'?this.$t('login_register.Mail_sent_successfully'):this.$t('message.WITHDRAWALS_SUCCESS'))
                 Vue.$koallTipBox({icon: 'success', message: msg}) // 邮件发送成功
                 this.$emit('okCallback')
                 this.$emit('removeDialog')
