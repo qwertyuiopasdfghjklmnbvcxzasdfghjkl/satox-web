@@ -554,6 +554,23 @@ export const financeRouter = [
         ]
     },
     {
+        path: '/finance_withdraw_list',
+        name: 'finance_withdraw_list',
+        title: 'exchange.tbjl',
+        component: Main,
+        icon: 'ios-list-outline',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_FINANCE'],
+        },
+        children: [
+            {
+                path: 'index', title: 'exchange.tbjl', name: 'finance_withdraw_list_index', component: resolve => {
+                    require(['./views/manage_finance/withdraw_list.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/bank_data',
         name: 'bank_data',
         title: 'nav.ussdyhzl',
