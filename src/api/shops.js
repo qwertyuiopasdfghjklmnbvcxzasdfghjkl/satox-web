@@ -54,6 +54,18 @@ const postShopsApply = function (data, success, error) {
 }
 shops.postShopsApply = postShopsApply
 
+// 产品列表
+const productList = function (data, success, error) {
+  api.get(`${domain}tinkey/api/sell/product`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.productList = productList
+
 
 
 export default shops

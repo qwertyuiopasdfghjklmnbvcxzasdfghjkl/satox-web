@@ -1,0 +1,193 @@
+.cont {
+  width: 1100px;
+  margin: 12px auto;
+  background: #1a1a1a;
+
+  .title {
+    background: #030303;
+    border-bottom: 1px solid #403D36;
+    padding: 15px;
+    font-size: 18px;
+    color: #5F5F5F;
+    font-weight: 400;
+  }
+
+  .box {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .box_left {
+      width: 540px;
+
+      li {
+        background: #FFFFFF;
+        border-radius: 6px;
+        width: 460px;
+        display: flex;
+        padding: 40px;
+        padding-right: 20px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        .pic {
+          width: 160px;
+          height: 160px;
+          border-radius: 10px;
+          box-shadow: 0 0 24px rgba(123, 123, 123, 0.3);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+
+        div {
+          width: 270px;
+          position: relative;
+
+          p {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(223, 5, 0, 1);
+            padding: 10px 0;
+          }
+
+          span {
+            display: block;
+            color: #474747;
+          }
+
+          h2 {
+            font-size: 20px;
+          }
+
+          button {
+            width: 136px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+        &.pay_box{
+          display: block;
+          h1{
+            font-size: 20px;
+          }
+          form{
+            margin: 12px 0;
+            label{
+              display: flex;
+              line-height: 20px;
+              padding: 8px 0;
+              font-size: 16px;
+              input{
+                border-bottom: 1px solid #dedede;
+                text-indent: 6px;
+                flex-grow: 1;
+              }
+            }
+          }
+          label{
+            display: block;
+          }
+          .as{
+            a{
+              color: #1E66C6;
+              text-decoration: underline;
+            }
+          }
+          .mt3{
+            margin-top: 26px;
+          }
+          button{
+            width: 170px;
+          }
+        }
+      }
+    }
+
+    .box_right {
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 30px;
+      flex-grow: 1;
+      .shop_list {
+        h1 {
+          font-weight: bold;
+          font-size: 20px;
+        }
+        .list_box{
+           border-bottom: 1px solid #e7e7e7;
+           padding: 10px 0;
+         }
+        .pay_radio{
+          margin: 16px 0;
+          h1{
+            line-height: 40px;
+          }
+          .pay{
+            margin-top: 5px;
+            label{
+              display: block;
+              padding: 4px 0;
+              font-size: 14px;
+              line-height: 21px;
+              span{
+                position: relative;
+                vertical-align: middle;
+                margin-right: 8px;
+              }
+              img{
+                height: 16px;
+              }
+              input{
+                opacity: 0;
+                position: absolute;
+              }
+            }
+          }
+        }
+        .amout{
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          span{
+            font-size: 16px;
+          }
+        }
+        button{
+          width: 240px;
+        }
+      }
+    }
+    &.clause{
+      color: #FFFFFF;
+      line-height: 22px;
+      ol{
+        padding-left: 30px;
+        list-style-type: decimal;
+        width: 78%;
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+      h4{
+        width: 14%;
+        flex-shrink: 1;
+      }
+    }
+  }
+  button{
+    cursor: pointer;
+    height: 36px;
+    background: #00A55E;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: block;
+  }
+}

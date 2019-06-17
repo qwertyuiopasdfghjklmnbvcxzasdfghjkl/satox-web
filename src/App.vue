@@ -63,7 +63,7 @@ export default {
           if (this.fromRoute.meta.goHome) {
             tempName = 'home'
           } else {
-            tempName = this.fromRoute.name === 'login' ? 'home' : this.fromRoute.name
+            tempName = this.fromRoute.name === 'login' ? 'login' : this.fromRoute.name
           }
         } else {
           tempName = 'home'
@@ -143,7 +143,7 @@ export default {
       if (this.getApiToken) {
         currentRoute.meta.noEntry ? this.$router.push({name: 'home'}) : void 0
       } else {
-        currentRoute.meta.login ? this.$router.push({name: 'home'}) : void 0
+        currentRoute.meta.login ? this.$router.push({name: 'login'}) : void 0
       }
     },
     closeCompa () {
