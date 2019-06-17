@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/public'
 import exchange from './exchange'
 import otc from './otc'
+import shop from './shop'
 import voteMining from './vote_mining'
 import login from '@/public/login'
 import twoverify from '@/public/twoverify'
@@ -114,5 +115,5 @@ export default new Router({
         name: 'home'
       }
     }
-  ].concat(exchange, otc, voteMining)
+  ].concat(exchange, otc, voteMining, shop)
 })
