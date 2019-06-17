@@ -44,7 +44,7 @@
                 {{$t('public.navigation_logout')}}<!--退出-->
               </a>
             </li>
-            <li>
+            <li v-if="false">
               <!--<a href="javascript:;" @click="shop">购物</a>&lt;!&ndash;购物&ndash;&gt;-->
               <router-link :to="{name:'shop_index'}">
                 购物<!--购物-->
