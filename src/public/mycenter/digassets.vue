@@ -136,7 +136,7 @@ export default {
     loading
   },
   computed: {
-    ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign','getUserInfo']),
+    ...mapGetters(['getBTCValuation', 'getUSDCNY', 'getCoinSign','getUserInfo','getSysParams']),
     USDCNY () {
       return numUtils.mul(this.getBTCValuation, this.getUSDCNY).toFixed(2).toMoney()
     }
@@ -187,17 +187,6 @@ export default {
         })
         return
       }
-      if (!this.getUserInfo.email && this.mobileState !== 1) {
-        Vue.$confirmDialog({
-          id: 'SMS_AUTH_FIRST',
-          showCancel: true,
-          content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
-          okCallback: () => {
-            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
-          }
-        })
-        return
-      }
       utils.setDialog(withdrawInfo, {
         symbol: data.symbol,
         symbolType: data.symbolType,
@@ -217,17 +206,6 @@ export default {
           id: 'GOOGLEAUTH_OR_SMSAUTH_FIRST',
           showCancel: true,
           content: this.$t('error_code.GOOGLE_CELLPHONE_AUTH_FIRST'), // 请先进行谷歌验证或短信验证
-          okCallback: () => {
-            this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
-          }
-        })
-        return
-      }
-      if (!this.getUserInfo.email && this.mobileState !== 1) {
-        Vue.$confirmDialog({
-          id: 'SMS_AUTH_FIRST',
-          showCancel: true,
-          content: this.$t('error_code.CELLPHONE_AUTH_FIRST'), // 请先进行短信验证
           okCallback: () => {
             this.$router.push({name: 'mycenter_menu', params: {menu: 'safety'}})
           }
