@@ -2,7 +2,12 @@
   <div class="myassets clearfix">
       <left :active="active" @switchTab="switch_tab"></left>
       <div class="myassets-right">
-        <component :is="active" :linkItem="linkItem" :adsSymbol="adsSymbol" :adsType="adsType" @switchTab="switch_tab"></component>
+        <component
+          :is="active"
+          :linkItem="linkItem"
+          :adsSymbol="adsSymbol"
+          :adsType="adsType"
+          @switchTab="switch_tab"></component>
       </div>
   </div>
 </template>
@@ -18,6 +23,8 @@ import safety from '@/public/mycenter/safety'
 import transaction from '@/public/mycenter/transaction'
 import message from '@/public/mycenter/message'
 import agency from '@/public/mycenter/agency'
+import hardware from '@/public/mycenter/hardware'
+import SATODebitCard from '@/public/mycenter/SATODebitCard'
 import agencyApply from '@/public/mycenter/agencyApply'
 export default {
   props: ['adsSymbol', 'adsType', 'linkItem'],
@@ -37,7 +44,9 @@ export default {
     historyrecord,
     message,
     agency,
-    agencyApply
+    agencyApply,
+    hardware,
+    SATODebitCard
   },
   watch: {
     '$route' (to, from) {

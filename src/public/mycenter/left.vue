@@ -26,11 +26,21 @@
                 <span>{{$t('trade_record.my_trade_record')}}</span>
                 <!--我的交易记录-->
             </li>
+          <li :class="{'active': active === 'hardware'}" @click="switch_tab('hardware')">
+                <i class="icon-reports"></i>
+                <span>中本硬件</span>
+                <!--中本硬件-->
+            </li>
+          <li :class="{'active': active === 'SATODebitCard'}" @click="switch_tab('SATODebitCard')">
+                <i class="icon-reports"></i>
+                <span>SATO 借记卡</span>
+                <!--SATO 借記卡-->
+            </li>
             <li :class="{'active': active === 'message'}" @click="switch_tab('message')">
                 <i class="icon-message"></i>
                 <span>{{$t('message.my_message')}}</span>
                 <!--我的站内消息-->
-            </li>            
+            </li>
             <!--我的推荐中心-->
             <!-- <li @click="switch_like">
                 <i class="icon-like"></i>
@@ -55,7 +65,7 @@ export default {
     }
   },
   created(){
-    
+
   },
   methods: {
     switch_like () {
@@ -64,7 +74,7 @@ export default {
     switch_tab (tab) {
       this.$emit('switchTab', tab)
     },
-    
+
   }
 }
 </script>
