@@ -46,7 +46,7 @@
             </li>
             <li>
               <router-link :to="{name:'shop_index'}">
-                购物<!--购物-->
+                {{$t('shop.shop')}}<!--购物-->
               </router-link>
             </li>
             <li v-if="!isLogin">
@@ -161,7 +161,7 @@
       </li>
       <li>
         <router-link :to="{name:'shop_index'}">
-          购物<!--购物-->
+          {{$t('shop.shop')}}<!--购物-->
         </router-link>
       </li>
       <li v-if="isLogin">

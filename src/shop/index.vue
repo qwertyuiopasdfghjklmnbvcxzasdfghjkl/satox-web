@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <p class="title">产品</p>
+    <p class="title">{{$t('shop.shop')}}</p>
     <div class="box">
       <ul class="box_left">
         <li v-for="data in productList">
@@ -8,21 +8,21 @@
             <img :src="baseURL+data.coverImgPath">
           </span>
           <div>
-            <h2>{{data.productName}}</h2>
+            <h2>{{lang === 1 ? data.productName:data.productNameEn}}</h2>
             <p>${{data.discountPrice}}</p>
             <span>{{data.productDescription}}</span>
-            <button @click="add(data)">加入购物车</button>
+            <button @click="add(data)">{{$t('shop.add_to_cart')}}</button>
           </div>
         </li>
       </ul>
       <div class="box_right">
         <div class="no_shop" v-if="!payCar.length">
           <p style="text-align: center"><img src="../assets/images/noShop.jpg" alt=""></p>
-          <h4>购物车空空如也</h4>
-          <h4>立即购物</h4>
+          <h4>{{$t('shop.empty_cart')}}</h4>
+          <h4>{{$t('shop.shopping_now')}}</h4>
         </div>
         <div class="shop_list" v-if="payCar.length">
-          <h1>购物车</h1>
+          <h1>{{$t('shop.cart')}}</h1>
           <div class="list_box">
             <shop-list v-for="item in payCar"
                        :item="item"
@@ -30,7 +30,7 @@
                        @del="del"></shop-list>
           </div>
           <div class="pay_radio">
-            <h1>支付方式：</h1>
+            <h1>{{$t('shop.payment')}}：</h1>
             <p class="pay">
               <label v-for="item in payList">
                 <span>
@@ -42,11 +42,11 @@
             </p>
           </div>
           <div class="amout">
-            <h1>总额</h1>
+            <h1>{{$t('shop.total_amount')}}</h1>
             <span>{{total}} {{pay}}</span>
           </div>
           <!--GET /order-->
-          <button @click="next()">继续</button>
+          <button @click="next()">{{$t('shop.continue')}}</button>
         </div>
       </div>
     </div>
@@ -60,6 +60,7 @@
   import Vue from 'vue'
   import shops from '../api/shops'
   import config from '../assets/js/config'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'shop',
@@ -76,10 +77,17 @@
         total: null,
         amount: null,
         $btc: null,
-        $eth: null
+        $eth: null,
+        lang: 1
       }
     },
+    computed: {
+      ...mapGetters(['getLang']),
+    },
     watch: {
+      getLang() {
+        this.cLang()
+      },
       payCar() {
         console.log(this.payCar)
         this.amount = 0;
@@ -102,8 +110,16 @@
         this.productList = res.data
       })
       this.getCarList();
+      this.cLang()
     },
     methods: {
+      cLang() {
+        if (this.getLang === 'zh-CN') {
+          this.lang = 1
+        } else {
+          this.lang = 2
+        }
+      },
       getCarList() {
         shops.cartList((res) => {
           console.log(res)
@@ -121,11 +137,11 @@
           console.log('加入成功')
           this.getCarList();
         }, (msg) => {
-          Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
+          Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.just_add_once')})
         });
       },
       addList() {
-        Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
+        Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.just_add_once')})
       },
       del(item) {
         let data = {

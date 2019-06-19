@@ -1,24 +1,24 @@
 <template>
   <div class="info">
     <h3 class="message-title">
-      SATO 借记卡
+      {{$t('shop.sato_card')}}
     </h3>
     <div>
       <ul class="ul">
         <li class="yellow">
-          <span>订单号码</span>
-          <span>订单日期</span>
-          <span>送货地址</span>
-          <span>数量</span>
-          <span>数额</span>
-          <span>状态</span>
+          <span>{{$t('shop.order_no')}}</span>
+          <span>{{$t('shop.order_date')}}</span>
+          <span>{{$t('shop.receiving_address')}}</span>
+          <span>{{$t('shop.quantity')}}</span>
+          <span>{{$t('shop.amount')}}</span>
+          <span>{{$t('shop.state')}}</span>
         </li>
         <li v-for="list in proList">
           <span>{{list.orderId}}</span>
           <span>{{date(list.createdAt)}}</span>
           <span>{{list.receiverAddress}}</span>
           <span>{{list.productQuantity}}</span>
-          <span>{{list.symbolPrice}}{{list.paytype}}</span>
+          <span>{{list.symbolPrice}} {{list.paytype}}</span>
           <span>{{state(list.state)}}</span>
         </li>
       </ul>
@@ -52,12 +52,12 @@
       },
       state(i){ //0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
         switch (i) {
-          case 0: return '待支付'
-          case 1: return '待确认'
-          case 2: return '已付款未发货'
-          case 3: return '已发货'
-          case 4: return '已验收'
-          case 5: return '已退回'
+          case 0: return this.$t('shop.wait_paid')
+          case 1: return this.$t('shop.wait_confirmed')
+          case 2: return this.$t('shop.wait_shipped')
+          case 3: return this.$t('shop.shipped')
+          case 4: return this.$t('shop.accept')
+          case 5: return this.$t('shop.return_back')
         }
       },
       date(d){
