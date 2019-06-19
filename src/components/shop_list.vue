@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <b>{{this.item.productName}}</b>
+    <b>{{lang === 1 ? this.item.productName : this.item.productNameEn}}</b>
     <div v-if="change">
       <label @click="del()">-</label>
       <span>1</span>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
+
   export default {
     props: {
       item: null,
@@ -20,7 +22,30 @@
       }
     },
     name: "shopList",
+    data() {
+      return {
+        lang: 1
+      }
+    },
+    computed: {
+      ...mapGetters(['getLang']),
+    },
+    watch: {
+      getLang() {
+        this.cLang()
+      },
+    },
+    created() {
+      this.cLang()
+    },
     methods: {
+      cLang() {
+        if (this.getLang === 'zh-CN') {
+          this.lang = 1
+        } else {
+          this.lang = 2
+        }
+      },
       del() {
         this.$emit('del', this.item)
       },
