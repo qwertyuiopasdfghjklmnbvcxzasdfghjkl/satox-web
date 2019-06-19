@@ -31,7 +31,7 @@
             <input type="checkbox" v-model="check">
             我同意购物的条款和条件
           </label>
-          <button @click="next()">确认支付</button>
+          <button @click="sub()">确认支付</button>
           <p>
             <router-link to="/shop" style="color: #000">← 返回产品</router-link>
           </p>
@@ -43,8 +43,7 @@
           <div class="list_box">
             <shop-list v-for="item in payCar"
                        :item="item"
-                       @add="addList"
-                       @del="del"></shop-list>
+                       :change="false"></shop-list>
           </div>
           <div class="pay_radio">
             <h1>支付方式：
@@ -53,7 +52,7 @@
           </div>
           <div class="amout">
             <h1>总额</h1>
-            <span>100 BTC</span>
+            <span>{{total}} {{pay}}</span>
           </div>
         </div>
       </div>
@@ -63,8 +62,7 @@
 
 <script>
   import shopList from '../components/shop_list'
-  import checked from '../assets/images/checked.png'
-  import no from '../assets/images/nomorl.png'
+  import shops from '../api/shops'
   import Vue from 'vue'
 
   export default {
@@ -78,12 +76,13 @@
         phone: null,
         eMail: null,
         address: null,
-        check: true
+
+        check: true,
+        total: null,
       }
     },
     watch: {
       payCar() {
-        window.localStorage.payCarList = JSON.stringify(this.payCar)
         if (!this.payCar.length) {
           this.$router.push({name: 'shop_index'})
         }
@@ -94,26 +93,73 @@
     },
     created() {
       this.pay = window.localStorage.pay;
-      let f = window.localStorage.payCarList;
-      f = JSON.parse(f);
-      if (f === 'undefined' || f === null || f === undefined || f === '') {
-        this.payCar = []
-      } else {
-        this.payCar = f;
+      this.getCarList();
+      this.total = this.$route.params.total;
+      if (!this.total) {
+        this.$router.push({name: 'shop_index'})
       }
     },
     methods: {
-      addList() {
-        Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
-      },
-      del(item) {
-        this.payCar.filter((res, i) => {
-          if (res.id === item.id) {
-            this.payCar.splice(i, 1)
-          }
+      getCarList() {
+        shops.cartList((res) => {
+          this.payCar = res.list;
         })
       },
-      next() {
+      // addList() {
+      //   Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
+      // },
+      // del(item) {
+      //   let data = {
+      //     cartId: item.cartId,
+      //     productQuantity: 0
+      //   }
+      //   shops.putCart(data, (res) => {
+      //     this.getCarList();
+      //   })
+      // },
+      sub() {
+        if (!this.check) {
+          Vue.$koallTipBox({icon: 'notification', message: '请先同意购物的条款和条件'})
+        } else {
+          if (this.ref(this.name)
+            && this.ref(this.phone)
+            && this.ref(this.address)
+            && this.refEmail(this.eMail)) {
+            let data = {
+              address: this.address,
+              email: this.eMail,
+              paytype: this.pay,
+              phone: this.phone,
+              realName: this.name
+            }
+            shops.createdOrder(data, (res) => {
+              console.log(res)
+              Vue.$koallTipBox({icon: 'success', message: '下单成功'})
+              // window.localStorage.pay = null;
+              if (this.payCar.productName === '中本硬件') {
+                this.$router.push('/mycenter/hardware')
+              } else {
+                this.$router.push('/mycenter/SATODebitCard')
+              }
+            })
+          } else {
+            Vue.$koallTipBox({icon: 'notification', message: '请完善送货信息'})
+          }
+        }
+      },
+      ref(id) {
+        if (id) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      refEmail(data) {
+        let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+        if (!reg.test(data)) {
+          Vue.$koallTipBox({icon: 'notification', message: '邮箱地址有误'})
+        }
+        return reg.test(data)
       }
     }
   }

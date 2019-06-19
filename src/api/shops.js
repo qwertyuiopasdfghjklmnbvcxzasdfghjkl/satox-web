@@ -56,7 +56,7 @@ shops.postShopsApply = postShopsApply
 
 // 产品列表
 const productList = function (data, success, error) {
-  api.get(`${domain}tinkey/api/sell/product`, data, (res) => {
+  api.get(`${domain}api/shop/products`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
@@ -64,8 +64,90 @@ const productList = function (data, success, error) {
     }
   }, error)
 }
-shops.productList = productList
+shops.productList = productList;
 
+// 预检查订单金额
+const getMoney = function (data, success, error) {
+  api.post(`${domain}api/shop/order/validate`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.getMoney = getMoney;
 
+// 创建订单
+const createdOrder = function (data, success, error) {
+  api.post(`${domain}api/shop/order`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.createdOrder = createdOrder;
+
+// 订单详情
+const orderDetail = function (data, success, error) {
+  api.get(`${domain}api/shop/order`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data,res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.orderDetail = orderDetail;
+
+// 订单列表
+const orderList = function (data, success, error) {
+  api.get(`${domain}api/shop/order/list`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.orderList = orderList;
+
+// 我的购物车
+const cartList = function ( success, error) {
+  api.get(`${domain}api/shop/cart`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.cartList = cartList;
+
+// 加入购物车
+const addCart = function (data, success, error) {
+  api.post(`${domain}api/shop/cart`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.addCart = addCart;
+
+// 更新购物车
+const putCart = function (data, success, error) {
+  api.put(`${domain}api/shop/cart`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+shops.putCart = putCart;
 
 export default shops

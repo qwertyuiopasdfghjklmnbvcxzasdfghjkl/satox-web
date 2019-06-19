@@ -10,7 +10,7 @@
           <div>
             <h2>{{data.productName}}</h2>
             <p>${{data.discountPrice}}</p>
-            <span>{{data.parameters}}</span>
+            <span>{{data.productDescription}}</span>
             <button @click="add(data)">加入购物车</button>
           </div>
         </li>
@@ -43,8 +43,9 @@
           </div>
           <div class="amout">
             <h1>总额</h1>
-            <span>100 BTC</span>
+            <span>{{total}} {{pay}}</span>
           </div>
+          <!--GET /order-->
           <button @click="next()">继续</button>
         </div>
       </div>
@@ -71,61 +72,103 @@
         payList: ['SATO', 'USSD', 'BTC', 'ETH'],
         productList: [],
         payCar: [],
-        baseURL: config.origin
+        baseURL: config.origin,
+        total: null,
+        amount: null,
+        $btc: null,
+        $eth: null
       }
     },
     watch: {
       payCar() {
         console.log(this.payCar)
-        window.localStorage.payCarList = JSON.stringify(this.payCar)
+        this.amount = 0;
+        this.payCar.filter((res) => {
+          this.amount += res.discountPrice
+        })
+      },
+      amount() {
+        this.sw()
       },
       pay() {
         window.localStorage.pay = this.pay
-      }
+        this.sw()
+      },
     },
     created() {
-      this.pay = window.localStorage.pay || 'SATO';
-      let f = window.localStorage.payCarList;
-      f = JSON.parse(f);
-      if (f === 'undefined' || f === null || f === undefined || f === '') {
-        this.payCar = []
-      } else {
-        this.payCar = f;
-      }
+      this.pay = window.localStorage.pay || 'SATO'
       shops.productList((res) => {
         console.log(res)
-        this.productList = res.data;
+        this.productList = res.data
       })
+      this.getCarList();
     },
     methods: {
-      add(data) {
-        this.payCar.push(data);
-        let k = 0
-        this.payCar.filter((res, i) => {
-          if (res.productId === data.productId) {
-            if (k > 0) {
-              this.payCar.splice(i, 1)
-              console.warn('只能添加一件')
-              Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
-              return
-            } else {
-              k++
-            }
-          }
+      getCarList() {
+        shops.cartList((res) => {
+          console.log(res)
+          this.payCar = res.list;
+          this.$btc = res.symbolCurrency.BTC;
+          this.$eth = res.symbolCurrency.ETH;
         })
+      },
+      add(data) {
+        let datas = {
+          productId: data.productId,
+          productQuantity: 1
+        }
+        shops.addCart(datas, (res) => {
+          console.log('加入成功')
+          this.getCarList();
+        }, (msg) => {
+          Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
+        });
       },
       addList() {
         Vue.$koallTipBox({icon: 'notification', message: '只能添加一件'})
       },
       del(item) {
-        this.payCar.filter((res, i) => {
-          if (res.productId === item.productId) {
-            this.payCar.splice(i, 1)
-          }
+        let data = {
+          cartId: item.cartId,
+          productQuantity: 0
+        }
+        shops.putCart(data, (res) => {
+          this.getCarList();
         })
       },
       next() {
-        this.$router.push({name: 'shop_pay'})
+        let data = {
+          paytype: this.pay
+        }
+        shops.getMoney(data, (res) => {
+          console.log(res)
+          this.$router.push({name: 'shop_pay', params: {total: this.total}})
+        }, (msg) => {
+          Vue.$koallTipBox({
+            icon: 'notification',
+            message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)
+          })
+        })
+      },
+      sw() {
+        switch (true) {
+          case this.pay === 'SATO':
+            this.total = this.amount;
+            break;
+          case this.pay === 'USSD':
+            this.total = this.amount;
+            break;
+          case this.pay === 'BTC':
+            let reg = /([0-9]+\.[0-9]{8})[0-9]*/
+            let d = this.amount / this.$btc
+            this.total = d.toString().replace(reg, "$1");
+            break;
+          case this.pay === 'ETH':
+            let re = /([0-9]+\.[0-9]{8})[0-9]*/
+            let n = this.amount / this.$eth
+            this.total = n.toString().replace(re, "$1");
+            break
+        }
       }
     }
   }
