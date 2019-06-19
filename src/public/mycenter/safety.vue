@@ -105,10 +105,10 @@
                     <div class="bind clearfix" v-if="showBindMobile">
                       <div class="bind-form">
                           <p><em class="asterisk">*&nbsp;</em><span>{{$t('account.user_center_phone')}}：<!--手机号--></span></p>
-                          <p v-if="mobileState == 1 || readonly">
+                          <p v-if="mobileState == 1">
                             {{mobileFormData.phoneNumber}}
                           </p>
-                          <p v-if="mobileState == 0 && !readonly">
+                          <p v-if="mobileState == 0">
                               <span class="mobile">
                                 <div class="select" @click="showFilterCountry=!showFilterCountry">{{getCountry.name}}&nbsp;{{mobileFormData.countryCode}}</div>
                                 <div class="filterCountry" v-show="showFilterCountry">
@@ -196,7 +196,6 @@ export default {
       },
       showBindMobile: false,
       disabled: false,
-      readonly: false,
       time: 60
     }
   },
@@ -403,13 +402,10 @@ export default {
     getMyUserInfo () {
       myApi.getUserInfo((userInfo) => {
         if (userInfo.mobile) {
-          this.readonly = true
           if (userInfo.countryCode) {
             this.mobileFormData.countryCode = userInfo.countryCode
           }
           this.mobileFormData.phoneNumber = userInfo.mobile
-        } else {
-          this.readonly = false
         }
         this.setUserInfo(userInfo)
       }, (msg) => {
