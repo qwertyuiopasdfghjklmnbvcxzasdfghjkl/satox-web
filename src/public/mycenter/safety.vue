@@ -110,7 +110,7 @@
                           </p>
                           <p v-if="mobileState == 0">
                               <span class="mobile">
-                                <div class="select" @click="showFilterCountry=!showFilterCountry">{{getCountry.name}}&nbsp;{{mobileFormData.countryCode}}</div>
+                                <div class="select" @click="showFilterCountry=!showFilterCountry">{{countryName}}&nbsp;{{mobileFormData.countryCode}}</div>
                                 <div class="filterCountry" v-show="showFilterCountry">
                                   <input type="text" name="filter" class="filter" v-model="filterKey" :placeholder="$t('public.keyword_prompt')">
                                   <ul class="areaCodeList">
@@ -196,7 +196,8 @@ export default {
       },
       showBindMobile: false,
       disabled: false,
-      time: 60
+      time: 60,
+      countryName:''
     }
   },
   computed: {
@@ -209,16 +210,6 @@ export default {
         })
       }
       return result
-    },
-    getCountry(){
-      let country = {} 
-      for(let item of this.getSmsCountrys){
-        if(item.code === this.mobileFormData.countryCode){
-          country = item
-          break
-        }
-      }
-      return country
     },
     errorsInfo () {
       let info = {}
@@ -263,6 +254,7 @@ export default {
     ...mapActions(['setUserInfo']),
     selectCountryCode(country){
       this.mobileFormData.countryCode = country.code
+      this.countryName = country.name
       this.filterKey = ''
       this.showFilterCountry = false
     },
@@ -404,6 +396,12 @@ export default {
         if (userInfo.mobile) {
           if (userInfo.countryCode) {
             this.mobileFormData.countryCode = userInfo.countryCode
+            for(let item of this.getSmsCountrys){
+              if(item.code === userInfo.countryCode){
+                this.countryName = item.name
+                break
+              }
+            }
           }
           this.mobileFormData.phoneNumber = userInfo.mobile
         }
