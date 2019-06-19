@@ -7,19 +7,19 @@ const routes = [
     path: '/shop',
     name: 'shop_index',
     component: Index,
-    // meta: {login: true}
+    meta: {login: true}
   },
   {
     path: '/shop/pay',
     name: 'shop_pay',
     component: Pay,
-    // meta: {login: true}
+    meta: {login: true}
   },
   {
     path: '/shop/clause',
     name: 'shop_clause',
     component: Clause,
-    // meta: {login: true}
+    meta: {login: true}
   }
 ]
 

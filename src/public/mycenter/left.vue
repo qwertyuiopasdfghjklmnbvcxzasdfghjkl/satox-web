@@ -26,12 +26,12 @@
                 <span>{{$t('trade_record.my_trade_record')}}</span>
                 <!--我的交易记录-->
             </li>
-          <li :class="{'active': active === 'hardware'}" @click="switch_tab('hardware')" v-if="false">
+          <li :class="{'active': active === 'hardware'}" @click="switch_tab('hardware')">
                 <i class="icon-reports"></i>
                 <span>中本硬件</span>
                 <!--中本硬件-->
             </li>
-          <li :class="{'active': active === 'SATODebitCard'}" @click="switch_tab('SATODebitCard')" v-if="false">
+          <li :class="{'active': active === 'SATODebitCard'}" @click="switch_tab('SATODebitCard')">
                 <i class="icon-reports"></i>
                 <span>SATO 借记卡</span>
                 <!--SATO 借記卡-->

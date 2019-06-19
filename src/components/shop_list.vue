@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <b>{{this.item.productName}}</b>
-    <div>
+    <div v-if="change">
       <label @click="del()">-</label>
       <span>1</span>
       <label @click="add()">+</label>
@@ -12,7 +12,13 @@
 
 <script>
   export default {
-    props: ['item'],
+    props: {
+      item: null,
+      change: {
+        type: Boolean,
+        default: true,
+      }
+    },
     name: "shopList",
     methods: {
       del() {
