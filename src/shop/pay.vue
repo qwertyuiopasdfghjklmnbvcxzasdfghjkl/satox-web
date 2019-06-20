@@ -136,11 +136,13 @@
               console.log(res)
               Vue.$koallTipBox({icon: 'success', message: this.$t('shop.order_success')})
               // window.localStorage.pay = null;
-              if (this.payCar.productName === '中本硬件') {
+              if (this.payCar[0].productName === '中本硬件') {
                 this.$router.push('/mycenter/hardware')
               } else {
                 this.$router.push('/mycenter/SATODebitCard')
               }
+            }, (msg) => {
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
             })
           } else {
             Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.improving_receiving_info')})
