@@ -155,7 +155,7 @@
         }
       },
       refEmail(data) {
-        let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+        let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
         if (!reg.test(data)) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.email_invalid')})
         }
