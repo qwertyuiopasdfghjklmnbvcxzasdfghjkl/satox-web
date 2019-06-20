@@ -4,27 +4,27 @@
         <Col span="24">
             <Row>
                 <Card style="margin-top:10px;">
-                    <p slot="title">{{$t('nav.spgl')}}
+                    <p slot="title">{{$t('nav.ddgl')}}
                         <span class="refresh" @click="reshAll"></span>
                     </p>
                     <p style="margin-bottom: 20px">
                         {{$t('mall.spmc')}}：
-                        <Select v-model="formData.symbol" style="width: 120px">
+                        <Select v-model="formData.productName" style="width: 120px">
                             <Option value="0">{{$t('common.qb')}}</Option>
-                            <Option value="1">{{$t('mall.zbyj')}}</Option>
-                            <Option value="2">{{$t('mall.zbjjk')}}</Option>
+                            <Option value="中本硬件">{{$t('mall.zbyj')}}</Option>
+                            <Option value="SATO 借记卡">{{$t('mall.zbjjk')}}</Option>
                         </Select>
                         {{$t('common.yhm')}}：
-                        <Input v-model="formData.userName" clearable style="width: 120px"
+                        <Input v-model="formData.username" clearable style="width: 120px"
                                :placeholder="$t('common.yhm')"></Input>
                         {{$t('mall.ddid')}}：
-                        <Input v-model="formData.userName" clearable style="width: 120px"
+                        <Input v-model="formData.orderId" clearable style="width: 120px"
                                :placeholder="$t('mall.ddid')"></Input>
                         {{$t('common.xm')}}：
-                        <Input v-model="formData.userName" clearable style="width: 120px"
+                        <Input v-model="formData.receiverName" clearable style="width: 120px"
                                :placeholder="$t('common.xm')"></Input>
                         {{$t('common.sjh')}}：
-                        <Input v-model="formData.userName" clearable style="width: 120px"
+                        <Input v-model="formData.receiverPhone" clearable style="width: 120px"
                                :placeholder="$t('common.sjh')"></Input>
                         {{$t('common.cjsj')}}：
                         <DatePicker type="datetime" v-model="formData.createdStart" :placeholder="$t('common.kssj')"
@@ -34,16 +34,16 @@
                                     format="yyyy-MM-dd HH:mm:ss"
                                     style="width: 160px"></DatePicker>
                         {{$t('common.zt')}}：
-                        <Select v-model="formData.auditStatus" style="width: 120px">
-                            <Option value="3">{{$t('common.qb')}}</Option>
-                            <Option value="0">{{$t('mall.yfkdcl')}}</Option>
-                            <Option value="2">{{$t('mall.clz')}}</Option>
-                            <Option value="1">{{$t('mall.yqs')}}</Option>
+                        <Select v-model="formData.state" style="width: 120px">
+                            <Option :value="0">{{$t('common.qb')}}</Option>
+                            <Option :value="2">{{$t('mall.yfkdcl')}}</Option>
+                            <Option :value="3">{{$t('mall.clz')}}</Option>
+                            <Option :value="4">{{$t('mall.yqs')}}</Option>
                         </Select>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
-                    <Page :current="curPage" :total="total" @on-change="changePage"
+                    <Page :current="curPage" :total="total" @on-change="changePage" :page-size="size"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </Row>
@@ -53,37 +53,37 @@
 
 <script>
     import util from '../../libs/util';
-    import updata from './updata_commodity';
-    import financeApi from '../../api/finance';
-    import currenyApi from '../../api/currency';
+    import updata from './list/updata';
+    import mallApi from '../../api/mall';
 
     export default {
         data () {
             return {
                 curPage: 1,
                 total: 0,
+                size: 10,
                 columns: [
-                    {key: 'createdTime', title: this.$t('common.cjsj')},
-                    {key: 'createdTime', title: 'ID'},
-                    {key: 'createdTime', title: this.$t('mall.ddid')},
-                    {key: 'userName', title: this.$t('common.yhm')},
-                    {key: 'createdTime', title: this.$t('mall.spmc')},
-                    {key: 'createdTime', title: this.$t('common.sl')},
-                    {key: 'createdTime', title: this.$t('mall.fkfs')},
-                    {key: 'createdTime', title: this.$t('mall.spjg')},
-                    {key: 'createdTime', title: this.$t('mall.spje')},
-                    {key: 'createdTime', title: this.$t('mall.ddzje')},
-                    {key: 'createdTime', title: this.$t('common.xm')},
-                    {key: 'createdTime', title: this.$t('common.sjh')},
-                    {key: 'createdTime', title: 'Email'},
-                    {key: 'createdTime', title: this.$t('mall.yjdz')},
+                    {key: 'createdAt', title: this.$t('common.cjsj')},
+                    // {key: 'orderId', title: 'ID'},
+                    {key: 'orderId', title: this.$t('mall.ddid')},
+                    {key: 'username', title: this.$t('common.yhm')},
+                    {key: 'productName', title: this.$t('mall.spmc')},
+                    {key: 'productQuantity', title: this.$t('common.sl')},
+                    {key: 'paytype', title: this.$t('mall.fkfs')},
+                    {key: 'symbolPrice', title: this.$t('mall.spjg')},
+                    {key: 'productPrice', title: this.$t('mall.spje')},
+                    {key: 'totalPrice', title: this.$t('mall.ddzje')},
+                    {key: 'receiverName', title: this.$t('common.xm')},
+                    {key: 'receiverPhone', title: this.$t('common.sjh')},
+                    {key: 'receiverEmail', title: 'Email'},
+                    {key: 'receiverAddress', title: this.$t('mall.yjdz')},
                     {
-                        key: 'auditStatus', title: this.$t('common.zt'),
+                        key: 'state', title: this.$t('common.zt'),
                         render: (h, params) => {
-                            return h('div', this.switchStaus(params.row.auditStatus));
+                            return h('div', this.switchStaus(params.row.state));
                         }
-                    },//已付款待处理、处理中、已签收
-                    {key: 'createdTime', title: this.$t('common.gxsj')},
+                    },
+                    {key: 'updatedAt', title: this.$t('common.gxsj')},
                     {
                         key: 'action', title: this.$t('common.cz'), render: (h, params) => {
                             return h('div', [
@@ -106,54 +106,61 @@
                 ],
                 datas: [],
                 formData: {
-                    userName: '',
-                    symbol: '0',
-                    amount: '0',
+                    productName: '0',
                     createdStart: null,
                     createdEnd: null,
-                    min: null,
-                    max: null,
-                    auditStatus: '3'
+                    username: null,
+                    orderId: null,
+                    receiverName: null,
+                    receiverPhone: null,
+                    state: 0
                 },
-                symbolList: []
             };
         },
         created () {
             this.getAuditing();
-            this.getdataSymbol();
         },
         methods: {
             reshAll () {
+                this.formData = {
+                    productName: '0',
+                    createdStart: null,
+                    createdEnd: null,
+                    username: null,
+                    orderId: null,
+                    receiverName: null,
+                    receiverPhone: null,
+                    state: 0
+                }
+                this.curPage = 1
                 this.getAuditing();
             },
-            getdataSymbol () {
-                currenyApi.findAllValidSymbolList((res) => {
-                    this.symbolList = res;
-                });
-            },
-            switchStaus (state) {//0 未审核 1 审核不通过 2 审核通过
+            switchStaus (state) {//0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
                 switch (state) {
                     case 0:
-                        return this.$t('common.wsh');
-                        break;
+                        return this.$t('mall.dzf');
                     case 1:
-                        return this.$t('common.shbtg');
-                        break;
+                        return this.$t('mall.dqr');
                     case 2:
-                        return this.$t('common.shtg');
-                        break;
+                        return this.$t('mall.yfk');
+                    case 3:
+                        return this.$t('mall.yfh');
+                    case 4:
+                        return this.$t('mall.yys');
+                    case 5:
+                        return this.$t('mall.yth');
                 }
             },
             getAuditing () {
-                this.switch(this.formData.amount);
                 let D = JSON.stringify(this.formData);
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                data.symbol = data.symbol === '0' ? null : data.symbol;
-                data.auditStatus = data.auditStatus === '3' ? null : data.auditStatus;
-                data.auditType = '';
-                financeApi.getAuditingList(this.curPage, data,
+                data.state = data.state === 0 ? null : data.state;
+                data.productName = data.productName === '0' ? null : data.productName;
+                data.size = this.size;
+                data.page = this.curPage;
+                mallApi.getOrderList(data,
                     (res, total) => {
                         this.total = total;
                         this.datas = res;

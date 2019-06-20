@@ -1,4 +1,4 @@
-<!-- 系统参数 -> 添加特殊账户地址参数设置 -> 添加手续费账户 -->
+<!-- 添加商城收款账户-->
 <template>
     <Card style="width:440px">
         <p slot="title">
@@ -75,7 +75,8 @@
                             system.updateAdminAccounts({
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
-                                symbolType: Number(this.formValidate.symbolType)
+                                symbolType: Number(this.formValidate.symbolType),
+                                specialType: 3
                             }, (msg) => {
                                 this.$Message.success({content: this.vm.$t('common.bccg')});
                                 this.$emit('okCallback');
@@ -87,7 +88,8 @@
                             system.addAdminAccounts({
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
-                                symbolType: Number(this.formValidate.symbolType)
+                                symbolType: Number(this.formValidate.symbolType),
+                                specialType: 3
                             }, (msg) => {
                                 this.$Message.success({content: this.vm.$t('common.bccg')});
                                 this.$emit('okCallback');

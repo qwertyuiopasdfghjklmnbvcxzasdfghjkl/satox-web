@@ -922,7 +922,8 @@ export const nav = {
     jycx: '交易查询',
     scddgl: '商城订单管理',
     spgl: '商品管理',
-    scskzhsz: '商城收款账户设置'
+    ddgl: '订单管理',
+    scskzhsz: '商城收款账户设置',
 }
 export const home = {
     zyh: '总用户',
@@ -946,11 +947,27 @@ export const mall = {
     ddzje: '订单总金额',
     yjdz: '邮寄地址',
     zbyj: '中本硬件',
-    zbjjk: '中本借记卡',
+    zbjjk: 'SATO 借记卡',
     yfkdcl: '已付款待处理',
     clz: '处理中',
     yqs: '已签收',
     ddsxxg: '订单属性修改',
     tjscskzh: '添加商城收款账户',
-    xgscskzh: '修改商城收款账户'
+    xgscskzh: '修改商城收款账户',
+    dzf: '待支付',
+    dqr: '待确认',
+    yfk: '已付款未发货',
+    yfh: '已发货',
+    yys: '已验收',
+    yth: '已退回',
+    cpid: '产品ID',
+    tp: '图片',
+    zkj: '折扣价',
+    yj: '原价',
+    jj: '简介',
+    mc: '名称',
+    ywm: '英文名',
+    cjsj: '创建时间',
+    spxg: '商品修改',
+    tjsp: '添加商品'
 }

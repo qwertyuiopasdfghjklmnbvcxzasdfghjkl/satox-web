@@ -734,12 +734,29 @@ export const mallRouter = [
         component: Main,
         icon: 'ios-filing',
         meta: {
-            roles: ['ROLE_ADMIN'],
+            roles: ['ROLE_ADMIN', 'ROLE_SHOP_MANAGER'],
         },
         children: [
             {
                 path: 'index', title: 'nav.spgl', name: 'mall_index', component: resolve => {
-                    require(['./views/manage_mall/commodity.vue'], resolve);
+                    require(['./views/manage_mall/product.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/mall_list',
+        name: 'mall_list',
+        title: 'nav.ddgl',
+        component: Main,
+        icon: 'ios-paper-outline',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_SHOP_MANAGER'],
+        },
+        children: [
+            {
+                path: 'mall_list_index', title: 'nav.ddgl', name: 'mall_list_index', component: resolve => {
+                    require(['./views/manage_mall/list.vue'], resolve);
                 }
             }
         ]
