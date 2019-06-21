@@ -52,11 +52,11 @@
       },
       state(i){ //0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
         switch (i) {
-          case 0: return this.$t('shop.wait_paid')
-          case 1: return this.$t('shop.wait_confirmed')
-          case 2: return this.$t('shop.wait_shipped')
-          case 3: return this.$t('shop.shipped')
-          case 4: return this.$t('shop.accept')
+          case 0: return this.$t('shop.status_processed') // 待处理
+          case 1: return this.$t('shop.status_processed') // 待处理
+          case 2: return this.$t('shop.status_processing') // 处理中
+          case 3: return this.$t('shop.status_processing') // 处理中
+          case 4: return this.$t('shop.status_received') // 已签收
           case 5: return this.$t('shop.return_back')
         }
       },
