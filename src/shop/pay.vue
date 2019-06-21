@@ -25,7 +25,7 @@
           </form>
           <small>{{$t('shop.warn')}}</small>
           <h1 class="mt3 as">
-            <router-link to="/shop/clause">{{$t('shop.terms')}}</router-link>
+            <router-link :to="{name: 'shop_clause', params: {total:this.total}}">{{$t('shop.terms')}}</router-link>
           </h1>
           <label class="mt3">
             <input type="checkbox" v-model="check">
@@ -121,9 +121,9 @@
         if (!this.check) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.read_terms')})
         } else {
-          if (this.ref(this.name)
-            && this.ref(this.phone)
-            && this.ref(this.address)
+          if (this.ref(this.name, 'type_in_name')
+            && this.ref(this.phone, 'type_in_phone')
+            && this.ref(this.address, 'type_in_address')
             && this.refEmail(this.eMail)) {
             let data = {
               address: this.address,
@@ -136,25 +136,32 @@
               console.log(res)
               Vue.$koallTipBox({icon: 'success', message: this.$t('shop.order_success')})
               // window.localStorage.pay = null;
-              if (this.payCar.productName === '中本硬件') {
+              if (this.payCar[0].productName === '中本硬件') {
                 this.$router.push('/mycenter/hardware')
               } else {
                 this.$router.push('/mycenter/SATODebitCard')
               }
+            }, (msg) => {
+              Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
             })
-          } else {
-            Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.improving_receiving_info')})
           }
+          // else {
+          //   Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.improving_receiving_info')})
+          // }
         }
       },
-      ref(id) {
+      ref(id, text) {
         if (id) {
           return true;
         } else {
+          Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.'+text)})
           return false;
         }
       },
       refEmail(data) {
+        if(!data){
+          Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.type_in_email')})
+        }
         let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
         if (!reg.test(data)) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.email_invalid')})
