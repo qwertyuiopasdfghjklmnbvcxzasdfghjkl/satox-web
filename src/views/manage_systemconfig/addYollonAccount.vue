@@ -72,7 +72,7 @@
                 this.$refs.formValidate.validate((valid) => {
                     if (valid) {
                         if (this.isEdit) {
-                            system.updateAdminAccounts({
+                            system.addAccount({
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
                                 symbolType: Number(this.formValidate.symbolType),
