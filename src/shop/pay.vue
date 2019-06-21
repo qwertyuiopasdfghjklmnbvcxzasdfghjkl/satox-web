@@ -20,7 +20,7 @@
             </label>
             <label>
               <span>* {{$t('shop.postal_address')}}：</span>
-              <input type="text" maxlength="20" v-model="address">
+              <input type="text" maxlength="100" v-model="address">
             </label>
           </form>
           <small>{{$t('shop.warn')}}</small>
