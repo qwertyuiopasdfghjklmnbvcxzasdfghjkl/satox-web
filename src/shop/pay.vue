@@ -16,7 +16,7 @@
             </label>
             <label>
               <span>* {{$t('shop.email')}}：</span>
-              <input type="text" maxlength="20" v-model="eMail">
+              <input type="text" maxlength="100" v-model="eMail">
             </label>
             <label>
               <span>* {{$t('shop.postal_address')}}：</span>
