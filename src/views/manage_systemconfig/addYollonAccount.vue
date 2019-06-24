@@ -15,17 +15,19 @@
                 </RadioGroup>
             </FormItem>
             <FormItem :label="vm.$t('common.zllx')" prop="symbolType" v-if="isEdit">
-                {{this.switchStaus(formValidate.symbolType)}}
+                {{showSymbolType}}
             </FormItem>
             <FormItem :label="vm.$t('common.bz')" prop="symbol">
-                <b v-if="isEdit">{{formValidate.symbol}}</b>
+                <b v-if="isEdit">{{symbol}}</b>
                 <Input type="text" v-model="formValidate.symbol" :readonly="isEdit" v-if="!isEdit"></Input>
             </FormItem>
             <FormItem :label="vm.$t('common.yhm')" prop="username">
                 <Input type="text" v-model="formValidate.username"></Input>
             </FormItem>
             <FormItem style="line-height:0;text-align:center;">
-                <Button type="ghost" style="width:100px;margin-right:50px;" @click="closeDialog">{{vm.$t('common.qx')}}</Button>
+                <Button type="ghost" style="width:100px;margin-right:50px;" @click="closeDialog">
+                    {{vm.$t('common.qx')}}
+                </Button>
                 <Button type="primary" style="width:100px;" @click="save">{{vm.$t('common.qd')}}</Button>
             </FormItem>
         </Form>
@@ -48,23 +50,36 @@
                 },
                 ruleValidate: {
                     symbol: [
-                        {required: true, type: 'string', message: vm.$t('common.qsr')+vm.$t('common.bz'), trigger: 'blur'}
+                        {
+                            required: true,
+                            type: 'string',
+                            message: vm.$t('common.qsr') + vm.$t('common.bz'),
+                            trigger: 'blur'
+                        }
                     ],
                     username: [
-                        {required: true, type: 'string', message: vm.$t('common.qsr')+vm.$t('common.yhm'), trigger: 'blur'}
+                        {
+                            required: true,
+                            type: 'string',
+                            message: vm.$t('common.qsr') + vm.$t('common.yhm'),
+                            trigger: 'blur'
+                        }
                     ]
                 },
-                symbolTypeList: []
+                symbolTypeList: [],
+                showSymbolType: null
             };
         },
         created () {
             this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
+            console.log(this.formValidate);
+            this.switchStaus(this.formValidate.symbolType);
         },
         methods: {
             switchStaus (state) {
-                return this.symbolTypeList.map((res) => {
+                this.symbolTypeList.map((res) => {
                     if (res.code == state) {
-                        return res.name;
+                        this.showSymbolType = res.name;
                     }
                 });
             },
@@ -72,7 +87,7 @@
                 this.$refs.formValidate.validate((valid) => {
                     if (valid) {
                         if (this.isEdit) {
-                            system.addAccount({
+                            system.updataAccounts({
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
                                 symbolType: Number(this.formValidate.symbolType),
@@ -85,7 +100,7 @@
                                 this.$Message.error({content: error});
                             });
                         } else {
-                            system.addAdminAccounts({
+                            system.addAccount({
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
                                 symbolType: Number(this.formValidate.symbolType),

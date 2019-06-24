@@ -170,4 +170,16 @@ const deleteAccounts = function (data, success, error) {
 };
 system.deleteAccounts = deleteAccounts;
 
+// 修改特殊用户
+const updataAccounts = function (data, success, error) {
+    api.put(`api/bm/special/user`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+system.updataAccounts = updataAccounts;
+
 export default system;

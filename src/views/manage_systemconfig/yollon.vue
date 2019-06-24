@@ -77,7 +77,7 @@
                 data.page = this.accountsPage.currentPage;
                 data.size = this.accountsPage.pageSize;
                 data.type = 3;
-                data.keyword = this.accountsSymbolParam;
+                data.symbol = this.accountsSymbolParam;
                 system.getAccounts(data, (res, total) => {
                     this.accountsData = res;
                     this.accountsPage.total = total;
