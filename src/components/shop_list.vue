@@ -99,7 +99,7 @@
     p {
       font-size: 20px;
       color: #DF0500;
-
+      width: 50px;
     }
   }
 </style>
