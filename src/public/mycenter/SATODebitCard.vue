@@ -104,31 +104,34 @@
       }
 
       span:nth-child(1) {
-        min-width: 18%;
+        width: 11%;
         text-align: left;
         text-indent: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       span:nth-child(2) {
-        min-width: 15%;
+        width: 12%;
         text-align: left;
       }
 
       span:nth-child(3) {
-        min-width: 37%;
+        width: 40%;
         text-align: left;
       }
 
       span:nth-child(4) {
-        min-width: 10%;
+        width: 10%;
       }
 
       span:nth-child(5) {
-        min-width: 10%;
+        width: 14%;
       }
 
       span:nth-child(6) {
-        min-width: 10%;
+        width: 13%;
       }
 
     }
