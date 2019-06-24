@@ -33,7 +33,7 @@
                     {title: this.$t('common.yhm'), key: 'username'},
                     {title: this.$t('system.yhid'), key: 'userId'},
                     {title: this.$t('system.zhid'), key: 'accountId'},
-                    {title: this.$t('system.cjr'), key: 'lastupdatedby'},
+                    {title: this.$t('system.cjr'), key: 'lastUpdatedBy'},
                     {title: this.$t('common.cjsj'), key: 'createdAt'},
                     {title: this.$t('system.zhxgsj'), key: 'updatedAt'},
                     {
@@ -50,6 +50,7 @@
                                             symbol: params.row.symbol,
                                             username: params.row.username,
                                             symbolType: params.row.symbolType,
+                                            specialUserId: params.row.specialUserId,
                                             okCallback: () => {
                                                 this.fnFindAdminAccounts();
                                             }

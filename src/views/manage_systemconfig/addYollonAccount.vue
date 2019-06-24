@@ -38,7 +38,7 @@
     import system from '../../api/systemparam';
 
     export default {
-        props: ['isEdit', 'symbol', 'username', 'symbolType'],
+        props: ['isEdit', 'symbol', 'username', 'symbolType', 'specialUserId'],
         data () {
             const vm = window.vm;
             return {
@@ -91,7 +91,8 @@
                                 symbol: this.formValidate.symbol,
                                 username: this.formValidate.username,
                                 symbolType: Number(this.formValidate.symbolType),
-                                specialType: 3
+                                specialType: 3,
+                                specialUserId: this.specialUserId
                             }, (msg) => {
                                 this.$Message.success({content: this.vm.$t('common.bccg')});
                                 this.$emit('okCallback');
