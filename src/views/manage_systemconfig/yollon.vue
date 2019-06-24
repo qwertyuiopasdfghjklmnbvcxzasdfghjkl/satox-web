@@ -6,14 +6,16 @@
                 <span>
               <Input type="text" v-model="accountsSymbolParam" :placeholder="$t('system.qsrycxdbzgjz')"
                      style="width:auto;margin-left:28px;"></Input>
-              <Button type="primary" @click="fnFindAdminAccounts()">{{$t('common.cx')}}</Button>
+              <Button type="primary" @click="accountsPage.currentPage = 1;fnFindAdminAccounts()">{{$t('common.cx')}}</Button>
               <Button type="ghost" @click="ref()">{{$t('system.cz')}}</Button>
             </span>
                 <Button type="primary" style="float:right;" @click="addYollonAccountDialog">{{$t('mall.tjscskzh')}}
                 </Button>
             </p>
             <Table :columns="accountsColumns" :data="accountsData" style="margin-top:10px;"></Table>
-            <Page :current="accountsPage.currentPage" :total="accountsPage.total"
+            <Page :current="accountsPage.currentPage"
+                  :total="accountsPage.total"
+                  :page-size="accountsPage.pageSize"
                   @on-change="changePage" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
