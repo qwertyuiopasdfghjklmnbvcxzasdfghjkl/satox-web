@@ -14,7 +14,7 @@
           <span>{{$t('shop.state')}}</span>
         </li>
         <li v-for="list in proList">
-          <span>{{list.orderId}}</span>
+          <span :title="list.orderId">{{list.orderId}}</span>
           <span>{{date(list.createdAt)}}</span>
           <span>{{list.receiverAddress}}</span>
           <span>{{list.productQuantity}}</span>
