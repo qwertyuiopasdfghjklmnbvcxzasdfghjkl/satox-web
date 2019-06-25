@@ -40,7 +40,9 @@
     },
     methods: {
       getList() {
-        let data = {};
+        let data = {
+          size: 999
+        };
         shopApi.orderList(data, (res) => {
           res.filter((data) => {
             if (data.productName === '中本硬件') {
@@ -50,17 +52,23 @@
           console.log(this.proList)
         })
       },
-      state(i){ //0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
+      state(i) { //0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
         switch (i) {
-          case 0: return this.$t('shop.status_processed') // 待处理
-          case 1: return this.$t('shop.status_processed') // 待处理
-          case 2: return this.$t('shop.status_processing') // 处理中
-          case 3: return this.$t('shop.status_processing') // 处理中
-          case 4: return this.$t('shop.status_received') // 已签收
-          case 5: return this.$t('shop.return_back')
+          case 0:
+            return this.$t('shop.status_processed') // 待处理
+          case 1:
+            return this.$t('shop.status_processed') // 待处理
+          case 2:
+            return this.$t('shop.status_processing') // 处理中
+          case 3:
+            return this.$t('shop.status_processing') // 处理中
+          case 4:
+            return this.$t('shop.status_received') // 已签收
+          case 5:
+            return this.$t('shop.return_back')
         }
       },
-      date(d){
+      date(d) {
         return (new Date(d)).format();
       }
     }
@@ -104,31 +112,34 @@
       }
 
       span:nth-child(1) {
-        min-width: 18%;
+        width: 11%;
         text-align: left;
         text-indent: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       span:nth-child(2) {
-        min-width: 15%;
+        width: 12%;
         text-align: left;
       }
 
       span:nth-child(3) {
-        min-width: 37%;
+        width: 40%;
         text-align: left;
       }
 
       span:nth-child(4) {
-        min-width: 10%;
+        width: 10%;
       }
 
       span:nth-child(5) {
-        min-width: 10%;
+        width: 14%;
       }
 
       span:nth-child(6) {
-        min-width: 10%;
+        width: 13%;
       }
 
     }
