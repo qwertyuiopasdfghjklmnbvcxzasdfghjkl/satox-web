@@ -813,6 +813,23 @@ export const riskRouter = [
                 }
             }
         ]
+    },
+    {
+        path: '/risk_node',
+        name: 'risk_node',
+        title: 'nav.jdyjgz',
+        component: Main,
+        icon: 'network',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RISK_CONTROL'],
+        },
+        children: [
+            {
+                path: 'index', title: 'nav.jdyjgz', name: 'risk_node_index', component: resolve => {
+                    require(['./views/manage_risk/node.vue'], resolve);
+                }
+            }
+        ]
     }
 ];
 

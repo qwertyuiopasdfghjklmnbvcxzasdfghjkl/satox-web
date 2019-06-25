@@ -570,7 +570,13 @@ export const risk = {
     wlyd: '网络拥堵',
     dzzt: '对账状态',
     hncg: '忽略成功',
-    yc: '延长'
+    yc: '延长',
+    //
+    bhid: '编号ID',
+    syjdtbczfz: '私有节点同步差值阈值',
+    qksmgdczfz: '区块扫描高度差值阈值',
+    xzgz: '新增规则',
+    xggz: '修改规则'
 }
 export const operation = {
     ff: '分发',
@@ -924,6 +930,7 @@ export const nav = {
     spgl: '商品管理',
     ddgl: '订单管理',
     scskzhsz: '商城收款账户设置',
+    jdyjgz: '节点预警规则'
 }
 export const home = {
     zyh: '总用户',

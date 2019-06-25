@@ -27,7 +27,7 @@
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="4">{{vm.$t('mall.yj')}}</Col>
-                <Col span="6">{{this.item.originalPrice}}</Col>
+                <Col span="6" style="white-space: nowrap;">{{this.item.originalPrice}}</Col>
                 <Col span="10">
                     <numberbox v-model="originalPrice" style="width: 220px;border:1px solid #dddee1"></numberbox>
                 </Col>
@@ -37,7 +37,7 @@
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="4">{{vm.$t('mall.mc')}}</Col>
-                <Col span="6">{{this.item.productName}}</Col>
+                <Col span="6"><span style="white-space: nowrap">{{this.item.productName}}</span></Col>
                 <Col span="10">
                     <Input v-model="productName" style="width: 220px"></Input>
                 </Col>
@@ -47,7 +47,7 @@
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="4">{{vm.$t('mall.ywm')}}</Col>
-                <Col span="6">{{this.item.productNameEn}}</Col>
+                <Col span="6"  style="white-space: nowrap">{{this.item.productNameEn}}</Col>
                 <Col span="10">
                     <Input v-model="productNameEn" style="width: 220px"></Input>
                 </Col>
