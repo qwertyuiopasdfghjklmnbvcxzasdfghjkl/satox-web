@@ -10,7 +10,7 @@
           <div>
             <h2>{{lang === 1 ? data.productName:data.productNameEn}}</h2>
             <p>${{data.discountPrice}}</p>
-            <span>{{data.productDescription}}</span>
+            <span>{{lang === 1 ?data.productDescription:data.productDescriptionEn}}</span>
             <button @click="add(data)">{{$t('shop.add_to_cart')}}</button>
           </div>
         </li>
