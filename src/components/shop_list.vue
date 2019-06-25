@@ -15,7 +15,10 @@
 
   export default {
     props: {
-      item: null,
+      item: {
+        type: Object,
+        default: {}
+      },
       change: {
         type: Boolean,
         default: true,
@@ -36,7 +39,8 @@
       },
     },
     created() {
-      this.cLang()
+      this.cLang();
+      console.log(this.item)
     },
     methods: {
       cLang() {
