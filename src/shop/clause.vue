@@ -33,4 +33,7 @@
   .p{
     padding: 10px;
   }
+  .clause p{
+
+  }
 </style>
