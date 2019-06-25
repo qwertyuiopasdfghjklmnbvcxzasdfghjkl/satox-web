@@ -830,6 +830,23 @@ export const riskRouter = [
                 }
             }
         ]
+    },
+    {
+        path: '/risk_markt',
+        name: 'risk_markt',
+        title: 'nav.scyjgz',
+        component: Main,
+        icon: 'ios-bookmarks-outline',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RISK_CONTROL'],
+        },
+        children: [
+            {
+                path: 'index', title: 'nav.scyjgz', name: 'risk_markt_index', component: resolve => {
+                    require(['./views/manage_risk/markt.vue'], resolve);
+                }
+            }
+        ]
     }
 ];
 
@@ -938,6 +955,26 @@ export const operationRouter = [
                 name: 'operation_i18n_index',
                 component: resolve => {
                     require(['./views/manage_operation/operation_i18n.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/operation_lang',
+        name: 'operation_lang',
+        title: 'nav.dyysz',
+        component: Main,
+        icon: 'ios-pulse-strong',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION']
+        },
+        children: [
+            {
+                path: 'operation_lang_index',
+                title: 'nav.dyysz',
+                name: 'operation_lang_index',
+                component: resolve => {
+                    require(['./views/manage_operation/operation_lang.vue'], resolve);
                 }
             }
         ]

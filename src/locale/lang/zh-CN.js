@@ -576,7 +576,8 @@ export const risk = {
     syjdtbczfz: '私有节点同步差值阈值',
     qksmgdczfz: '区块扫描高度差值阈值',
     xzgz: '新增规则',
-    xggz: '修改规则'
+    xggz: '修改规则',
+    wjyjgfz: '未交易间隔时间阈值（h）',
 }
 export const operation = {
     ff: '分发',
@@ -667,7 +668,9 @@ export const operation = {
     bbh: '版本号',
     gxts: '更新提示',
     sgts: '是否推送',
-    tsqlgx: '推送全量更新'
+    tsqlgx: '推送全量更新',
+    yymczw: '语言名称中文',
+    yyzs: '语言展示'
 }
 export const admin = {
     glyqx: '管理员权限管理',
@@ -930,7 +933,9 @@ export const nav = {
     spgl: '商品管理',
     ddgl: '订单管理',
     scskzhsz: '商城收款账户设置',
-    jdyjgz: '节点预警规则'
+    jdyjgz: '节点预警规则',
+    scyjgz: '市场预警规则',
+    dyysz: '多语言设置'
 }
 export const home = {
     zyh: '总用户',
@@ -976,5 +981,6 @@ export const mall = {
     ywm: '英文名',
     cjsj: '创建时间',
     spxg: '商品修改',
-    tjsp: '添加商品'
+    tjsp: '添加商品',
+    ywjj: '英文简介'
 }

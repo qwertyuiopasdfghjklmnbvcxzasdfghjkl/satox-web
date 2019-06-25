@@ -1,18 +1,18 @@
 <template>
     <div class="operation_placard">
         <Card>
-            <p slot="title">{{$t('nav.gjhgl')}}</p>
+            <p slot="title">{{$t('nav.dyysz')}}</p>
             <Row>
                 <Col span="16">
-                    <Select v-model="formData.type" style="width: 200px">
-                        <Option value="globalInfoId">ID</Option>
-                        <Option value="publicKey">Public_key</Option>
-                        <Option value="cn">{{$t('operation.zw')}}</Option>
-                        <Option value="en">{{$t('operation.yw')}}</Option>
-                    </Select>
-
+                    {{$t('operation.yymczw')}}
                     <Input v-model="formData.value" clearable style="width: 200px"
                            :placeholder="$t('common.qsr')"></Input>
+                    {{$t('common.zt')}}
+                    <Select v-model="formData.type" style="width: 200px">
+                        <Option :value="0">{{$t('common.qb')}}</Option>
+                        <Option :value="1">{{$t('exchange.xs')}}</Option>
+                        <Option :value="2">{{$t('exchange.sx')}}</Option>
+                    </Select>
                     <Button type="primary" @click="curPage=1;getList()">{{$t('common.cx')}}</Button>
                 </Col>
                 <Col span="8" style="text-align: right">
@@ -28,9 +28,8 @@
 <script>
     import extendApi from '../../api/extend';
     import util from '../../libs/util';
-    import addI18n from './i18n/addI18n';
-    import updataI18n from './i18n/updataI18n';
-    import look from './i18n/look';
+    import addI18n from './lang/add';
+    import updataI18n from './lang/updata';
 
     export default {
         data () {
@@ -40,7 +39,7 @@
                 total: 0,
                 formData: {
                     value: null,
-                    type: 'publicKey'
+                    type: 0,
                 },
                 columns1: [
                     {
@@ -48,60 +47,20 @@
                         key: 'globalInfoId'
                     },
                     {
-                        title: 'Public_key',
-                        key: 'publicKey'
-                    },
-                    {
-                        title: 'parent_key',
-                        key: 'parentKey'
-                    },
-                    {
-                        title: this.$t('operation.zw'),
+                        title: this.$t('operation.yymczw'),
                         key: 'cn',
                     },
                     {
-                        title: this.$t('operation.yw'),
+                        title: this.$t('operation.yyzs'),
                         key: 'en'
                     },
                     {
-                        title: this.$t('operation.zwft'),
+                        title: this.$t('common.zt'),
                         key: 'cnzh'
                     },
                     {
-                        title: this.$t('operation.hy'),
+                        title: this.$t('common.cjsj'),
                         key: 'korean'
-                    },
-                    {
-                        title: this.$t('operation.ry'),
-                        key: 'japanese'
-                    },
-                    {
-                        title: this.$t('operation.dy'),
-                        key: 'german'
-                    },
-                    {
-                        title: this.$t('operation.xbyy'),
-                        key: 'spanish'
-                    },
-                    {
-                        title: this.$t('operation.fy'),
-                        key: 'french'
-                    },
-                    {
-                        title: this.$t('operation.ydly'),
-                        key: 'italian'
-                    },
-                    {
-                        title: this.$t('operation.alby'),
-                        key: 'arabic'
-                    },
-                    {
-                        title: this.$t('operation.sm'),
-                        key: 'remark'
-                    },
-                    {
-                        title: this.$t('common.gxsj'),
-                        key: 'updatedAt'
                     },
                     {
                         title: this.$t('common.cz'),
@@ -127,12 +86,15 @@
                                     style: {margin: '3px'},
                                     on: {
                                         click: () => {
-                                            util.setDialog(look, {
-                                                item: params.row,
-                                            });
+                                            // util.setDialog(updataI18n, {
+                                            //     item: params.row,
+                                            //     okCallback: () => {
+                                            //         this.getList();
+                                            //     }
+                                            // });
                                         }
                                     }
-                                }, this.$t('kyc.ckxq')),
+                                }, this.$t('exchange.xs')),
                             ]);
                         }
                     }

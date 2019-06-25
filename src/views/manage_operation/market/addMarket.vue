@@ -45,7 +45,7 @@
   </div>
 </template>
 <script>
-import extendApi from '../../api/extend'
+import extendApi from '../../../api/extend'
 export default {
     data () {
         const vm = window.vm;

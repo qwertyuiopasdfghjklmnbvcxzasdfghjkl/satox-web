@@ -44,8 +44,8 @@
   </div>
 </template>
 <script>
-import extendApi from '../../api/extend'
-import util from '../../libs/util'
+import extendApi from '../../../api/extend'
+import util from '../../../libs/util'
 export default {
     data () {
         const customValidator = (rule, value, callback) => {

@@ -65,6 +65,16 @@
                     <Button type="primary" @click="tabs('productDescription')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;line-height:40px;">
+                <Col span="4">{{vm.$t('mall.ywjj')}}</Col>
+                <Col span="6">{{this.item.productDescriptionEn}}</Col>
+                <Col span="10">
+                    <Input v-model="productDescriptionEn" type="textarea" style="width: 220px"></Input>
+                </Col>
+                <Col span="3">
+                    <Button type="primary" @click="tabs('productDescriptionEn')">{{vm.$t('common.bc')}}</Button>
+                </Col>
+            </Row>
         </Card>
     </div>
 </template>
@@ -87,6 +97,7 @@
                 productName: null,
                 productNameEn: null,
                 productDescription: null,
+                productDescriptionEn: null,
                 iconFile: null
             };
         },

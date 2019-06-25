@@ -35,9 +35,12 @@
                 <!--<Col span="8">{{this.item.state}}</Col>-->
                 <Col span="8">
                     <Select v-model="state" style="width: 180px">
+                        <Option :value="0">{{vm.$t('mall.dzf')}}</Option>
+                        <Option :value="1">{{vm.$t('mall.dqr')}}</Option>
                         <Option :value="2">{{vm.$t('mall.yfkdcl')}}</Option>
-                        <Option :value="3">{{vm.$t('mall.clz')}}</Option>
-                        <Option :value="4">{{vm.$t('mall.yqs')}}</Option>
+                        <Option :value="3">{{vm.$t('mall.yfh')}}</Option>
+                        <Option :value="4">{{vm.$t('mall.yys')}}</Option>
+                        <Option :value="5">{{vm.$t('mall.yth')}}</Option>
                     </Select>
                 </Col>
                 <Col span="3">

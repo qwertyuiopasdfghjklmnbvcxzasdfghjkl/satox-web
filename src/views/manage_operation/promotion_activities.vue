@@ -17,9 +17,9 @@
 
 <script>
 import extendApi from '../../api/extend'
-import updaImg from './updaImg'
+import updaImg from './activities/updaImg'
 import util from '../../libs/util'
-import addBanner from './addBanner'
+import addBanner from './activities/addBanner'
 export default {
   data () {
     return {

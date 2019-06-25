@@ -35,10 +35,13 @@
                                     style="width: 160px"></DatePicker>
                         {{$t('common.zt')}}：
                         <Select v-model="formData.state" style="width: 120px">
-                            <Option :value="0">{{$t('common.qb')}}</Option>
+                            <Option :value="7">{{$t('common.qb')}}</Option>
+                            <Option :value="0">{{$t('mall.dzf')}}</Option>
+                            <Option :value="1">{{$t('mall.dqr')}}</Option>
                             <Option :value="2">{{$t('mall.yfkdcl')}}</Option>
-                            <Option :value="3">{{$t('mall.clz')}}</Option>
-                            <Option :value="4">{{$t('mall.yqs')}}</Option>
+                            <Option :value="3">{{$t('mall.yfh')}}</Option>
+                            <Option :value="4">{{$t('mall.yys')}}</Option>
+                            <Option :value="5">{{$t('mall.yth')}}</Option>
                         </Select>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
@@ -80,7 +83,10 @@
                     {
                         key: 'state', title: this.$t('common.zt'),
                         render: (h, params) => {
-                            return h('div', this.switchStaus(params.row.state));
+                            return h('div', {
+                                style: {
+                                    color: this.switchColor(params.row.state)                                }
+                            },this.switchStaus(params.row.state));
                         }
                     },
                     {key: 'updatedAt', title: this.$t('common.gxsj')},
@@ -113,7 +119,7 @@
                     orderId: null,
                     receiverName: null,
                     receiverPhone: null,
-                    state: 0
+                    state: 7
                 },
             };
         },
@@ -151,12 +157,28 @@
                         return this.$t('mall.yth');
                 }
             },
+            switchColor(i){
+                switch (i) {
+                    case 0:
+                        return '#f3b138';
+                    case 1:
+                        return '#6ff35b';
+                    case 2:
+                        return '#3ba5f3';
+                    case 3:
+                        return '#5a60f3';
+                    case 4:
+                        return '#0a5ff3';
+                    case 5:
+                        return '#d14af3';
+                }
+            },
             getAuditing () {
                 let D = JSON.stringify(this.formData);
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                data.state = data.state === 0 ? null : data.state;
+                data.state = data.state === 7 ? null : data.state;
                 data.productName = data.productName === '0' ? null : data.productName;
                 data.size = this.size;
                 data.page = this.curPage;

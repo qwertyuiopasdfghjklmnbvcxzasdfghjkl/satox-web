@@ -23,7 +23,7 @@
 
 <script>
 import util from '../../libs/util'
-import create from './create'
+import create from './distrbute/create'
 import extendApi from '../../api/extend'
 export default {
     data () {

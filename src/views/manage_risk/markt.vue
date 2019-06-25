@@ -1,66 +1,52 @@
 <template>
     <div class="operation_placard">
         <Card>
-            <p slot="title">{{$t('operation.gg')}}
+            <p slot="title">{{$t('nav.scyjgz')}}
                 <Button type="primary" @click="addMarket">{{$t('common.xz')}}</Button>
+            </p>
+            <p style="margin-bottom: 10px;">
+                {{$t('exchange.jysc')}}：
+                <Select style="width: 200px;" v-model="publicLink">
+                    <Option :value="0" :key="0">{{$t('common.qb')}}</Option>
+                    <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}</Option>
+                </Select>
+                <Button type="primary" @click="getList()">{{$t('common.cx')}}</Button>
             </p>
             <Table :columns="columns1" :data="data1"></Table>
             <Page :current="curPage" :total="total" @on-change="changePage"
-                  style="text-align:center;margin-top:20px;"></Page>
+                  :page-size="size" style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
 </template>
 <script>
     import extendApi from '../../api/extend';
     import util from '../../libs/util';
-    import addPlacard from './placard/addPlacard';
-    import upPlacard from './placard/upPlacard';
+    import add from './markt/add';
+    import updata from './markt/updata';
+    import currenyApi from '../../api/currency'
 
     export default {
         data () {
             return {
                 curPage: 1,
                 total: 0,
+                size: 20,
                 columns1: [
                     {
-                        title: this.$t('operation.sx'),
+                        title: this.$t('risk.bhid'),
                         key: 'sequence'
                     },
                     {
-                        title: this.$t('operation.jtggbt'),
+                        title: this.$t('exchange.jysc'),
                         key: 'title'
                     },
                     {
-                        title: this.$t('operation.jtgglj'),
+                        title: this.$t('risk.wjyjgfz'),
                         key: 'link',
                     },
                     {
-                        title: this.$t('operation.ywggbt'),
-                        key: 'titleEn'
-                    },
-                    {
-                        title: this.$t('operation.ywgglj'),
+                        title: this.$t('common.cjsj'),
                         key: 'linkEn'
-                    },
-                    {
-                        title: this.$t('operation.ftggbt'),
-                        key: 'titleCht',
-                    },
-                    {
-                        title: this.$t('operation.ftgglj'),
-                        key: 'linkCht'
-                    },
-                    {
-                        title: this.$t('common.gxsj'),
-                        key: 'updatedTime'
-                    },
-                    {
-                        title: this.$t('common.zt'),
-                        key: 'displayStatus',
-                        render: (h, params) => {
-                            return h('div', params.row.displayStatus === 1 ?
-                                this.$t('operation.zs') : this.$t('operation.bzs'));
-                        }
                     },
                     {
                         title: this.$t('common.cz'),
@@ -72,10 +58,10 @@
                                     style: {margin: '3px'},
                                     on: {
                                         click: () => {
-                                            util.setDialog(upPlacard, {
+                                            util.setDialog(updata, {
                                                 item: params.row,
                                                 okCallback: () => {
-                                                    this.getfindAllAnnouncement();
+                                                    this.getList();
                                                 }
                                             });
                                         }
@@ -89,37 +75,45 @@
                                                 announcementId: params.row.announcementId
                                             }, (res) => {
                                                 this.$Message.success({content: this.$t('operation.qxcg')});
-                                                this.getfindAllAnnouncement();
+                                                this.getList();
                                             }, (msg) => {
                                                 this.$Message.error({content: msg});
                                             });
                                         }
                                     }
-                                }, this.$t('operation.scgg'))
+                                }, this.$t('common.sc'))
                             ]);
                         }
                     }
                 ],
-                data1: []
+                data1: [],
+                marketList: [],
+                publicLink: 0
             };
         },
         created () {
-            this.getfindAllAnnouncement();
+            this.getList();
+            this.getAllMarket();
         },
         methods: {
+            getAllMarket () {
+                currenyApi.findAllMarketList((res) => {
+                    this.marketList = res;
+                });
+            },
             addMarket () {
-                util.setDialog(addPlacard, {
+                util.setDialog(add, {
                     okCallback: () => {
-                        this.getfindAllAnnouncement();
+                        this.getList();
                     }
                 });
             },
-            getfindAllAnnouncement () {
+            getList () {
                 extendApi.findAllAnnouncement(this.curPage, {}, (res) => {
                     this.data1 = res;
                 });
             },
-            changePage () {
+            changePage (page) {
                 this.curPage = page;
             }
         }

@@ -12,8 +12,8 @@
 <script>
 import extendApi from '../../api/extend'
 import util from '../../libs/util'
-import updataMarket from './updataMarket'
-import addMarket from './addMarket'
+import updataMarket from './market/updataMarket'
+import addMarket from './market/addMarket'
 export default {
     data () {
         return{

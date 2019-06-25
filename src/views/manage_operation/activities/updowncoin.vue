@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import util from '../../libs/util'
-import create from './create'
+import util from '../../../libs/util'
+import create from '../distrbute/create'
 export default {
     data () {
         return {

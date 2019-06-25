@@ -24,6 +24,9 @@
             <FormItem :label="vm.$t('mall.jj')" prop="productDescription">
                 <Input v-model="form.productDescription" type="textarea" :maxlength="120"></Input>
             </FormItem>
+            <FormItem :label="vm.$t('mall.ywjj')" prop="productDescriptionEn">
+                <Input v-model="form.productDescriptionEn" type="textarea" :maxlength="120"></Input>
+            </FormItem>
             <FormItem>
                 <Button type="primary" style="width:100%;" @click="addVerify">{{vm.$t('finance.chuangj')}}</Button>
             </FormItem>
@@ -48,6 +51,7 @@
                     productName: null,
                     productNameEn: null,
                     productDescription: null,
+                    productDescriptionEn: null,
                     iconFile: null,
                 },
                 ruleInline: {
@@ -65,6 +69,9 @@
                     ],
                     productDescription: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('mall.jj')}
+                    ],
+                    productDescriptionEn: [
+                        {required: true, message: vm.$t('common.qsr')+vm.$t('mall.ywjj')}
                     ],
                     iconFile: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('mall.tp')}
@@ -84,6 +91,7 @@
                         formData.append('productName', this.form.productName)
                         formData.append('productNameEn', this.form.productNameEn)
                         formData.append('productDescription', this.form.productDescription)
+                        formData.append('productDescriptionEn', this.form.productDescriptionEn)
                         formData.append('iconFile', this.form.iconFile)
                         mallApi.addProduct(formData, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});

@@ -107,8 +107,8 @@
   </div>
 </template>
 <script>
-import extendApi from '../../api/extend'
-import until from '../../libs/util'
+import extendApi from '../../../api/extend'
+import until from '../../../libs/util'
 export default {
     props: ['item'],
     data () {

@@ -48,6 +48,7 @@
                     {key: 'productName', title: this.$t('mall.mc')},
                     {key: 'productNameEn', title: this.$t('mall.ywm')},
                     {key: 'productDescription', title: this.$t('mall.jj')},
+                    {key: 'productDescriptionEn', title: this.$t('mall.ywjj')},
                     {key: 'createdAt', title: this.$t('mall.cjsj')},
                     {
                         key: 'action', title: this.$t('common.cz'), render: (h, params) => {

@@ -7,8 +7,8 @@
                 <FormItem :label="'Public_key'" prop="publicKey">
                     <Input v-model="formLeft.publicKey" name="publicKey"></Input>
                 </FormItem>
-                <FormItem :label="'Parent_key'" prop="publicKey">
-                    <Input v-model="formLeft.parentKey" name="publicKey"></Input>
+                <FormItem :label="'Parent_key'" prop="parentKey">
+                    <Input v-model="formLeft.parentKey" name="parentKey"></Input>
                 </FormItem>
                 <FormItem :label="vm.$t('operation.zw')" prop="cn">
                     <Input v-model="formLeft.cn" name="cn"></Input>
@@ -53,8 +53,8 @@
     </div>
 </template>
 <script>
-    import extendApi from '../../api/extend';
-    import util from '../../libs/util';
+    import extendApi from '../../../api/extend';
+    import util from '../../../libs/util';
 
     export default {
         data () {
