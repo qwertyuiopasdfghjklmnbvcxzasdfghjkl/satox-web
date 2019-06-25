@@ -40,7 +40,9 @@
     },
     methods: {
       getList() {
-        let data = {};
+        let data = {
+          size: 999
+        };
         shopApi.orderList(data, (res) => {
           res.filter((data) => {
             if (data.productName !== '中本硬件') {
