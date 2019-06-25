@@ -28,10 +28,10 @@
             <router-link :to="{name: 'shop_clause', params: {total:this.total}}">{{$t('shop.terms')}}</router-link>
           </h1>
           <label class="mt3">
-            <input type="checkbox" v-model="check">
+            <input type="checkbox" v-model="check" style="margin-top: 1px;vertical-align: middle;">
             {{$t('shop.agree_terms')}}
           </label>
-          <button @click="sub()">{{$t('shop.confirmation_pay')}}</button>
+          <button @click="sub()" :disabled="butState" :class="{'dis':butState}">{{$t('shop.confirmation_pay')}}</button>
           <p>
             <router-link to="/shop" style="color: #000">{{$t('shop.return_product')}}</router-link>
           </p>
@@ -76,7 +76,7 @@
         phone: null,
         eMail: null,
         address: null,
-
+        butState: false,
         check: true,
         total: null,
       }
@@ -118,8 +118,10 @@
       //   })
       // },
       sub() {
+        this.butState = true;
         if (!this.check) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.read_terms')})
+          this.butState = false;
         } else {
           if (this.ref(this.name, 'type_in_name')
             && this.ref(this.phone, 'type_in_phone')
@@ -141,13 +143,14 @@
               } else {
                 this.$router.push('/mycenter/SATODebitCard')
               }
+              this.butState = false;
             }, (msg) => {
               Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
+              this.butState = false;
             })
+          }else {
+            this.butState = false;
           }
-          // else {
-          //   Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.improving_receiving_info')})
-          // }
         }
       },
       ref(id, text) {
@@ -174,4 +177,9 @@
 
 <style scoped lang="less">
   @import "shop";
+  .cont .box .box_left li.pay_box button{
+    width: 170px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 </style>
