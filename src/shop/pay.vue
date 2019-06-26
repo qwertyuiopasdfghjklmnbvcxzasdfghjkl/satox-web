@@ -139,16 +139,20 @@
               Vue.$koallTipBox({icon: 'success', message: this.$t('shop.order_success')})
               // window.localStorage.pay = null;
               if (this.payCar[0].productName === '中本硬件') {
-                this.$router.push('/mycenter/hardware')
+                setTimeout(() => {
+                  this.$router.push('/mycenter/hardware')
+                }, 1500)
               } else {
-                this.$router.push('/mycenter/SATODebitCard')
+                setTimeout(() => {
+                  this.$router.push('/mycenter/SATODebitCard')
+                }, 1500)
               }
               this.butState = false;
             }, (msg) => {
               Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${msg}`)})
               this.butState = false;
             })
-          }else {
+          } else {
             this.butState = false;
           }
         }
@@ -157,12 +161,12 @@
         if (id) {
           return true;
         } else {
-          Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.'+text)})
+          Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.' + text)})
           return false;
         }
       },
       refEmail(data) {
-        if(!data){
+        if (!data) {
           Vue.$koallTipBox({icon: 'notification', message: this.$t('shop.type_in_email')})
         }
         let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
@@ -177,13 +181,15 @@
 
 <style scoped lang="less">
   @import "shop";
-  .cont .box .box_left li.pay_box button{
+
+  .cont .box .box_left li.pay_box button {
     width: 174px;
     margin-top: 29px;
     margin-bottom: 29px;
     padding: 0;
   }
-  .small{
+
+  .small {
     color: rgb(144, 144, 144);
     margin-top: 17px;
     font-size: 13px;
