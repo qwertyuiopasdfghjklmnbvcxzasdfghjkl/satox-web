@@ -6,14 +6,21 @@
   .title {
     background: #030303;
     border-bottom: 1px solid #403D36;
-    padding: 15px;
+    padding: 10px 20px;
     font-size: 18px;
     color: #5F5F5F;
     font-weight: 400;
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    img{
+      padding-right: 6px;
+    }
   }
 
   .box {
-    padding: 20px;
+    padding: 23px 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -44,9 +51,9 @@
         }
 
         div {
-          width: 270px;
+          width: 252px;
           position: relative;
-
+          padding-left: 30px;
           p {
             font-size: 20px;
             font-weight: 400;
@@ -65,8 +72,9 @@
 
           button {
             width: 136px;
-            left: 0;
+            left: 30px;
             bottom: 0;
+            position: absolute;
           }
         }
         &.pay_box{
@@ -163,8 +171,9 @@
           }
         }
         button{
-          width: 240px;
-          margin-bottom: 28px;
+          width: 160px;
+          margin-bottom: 10px;
+          margin-top: 50px;
         }
       }
     }

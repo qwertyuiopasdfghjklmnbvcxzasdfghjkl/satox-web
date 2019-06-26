@@ -23,7 +23,7 @@
               <input type="text" maxlength="100" v-model="address">
             </label>
           </form>
-          <small>{{$t('shop.warn')}}</small>
+          <small class="small">{{$t('shop.warn')}}</small>
           <h1 class="mt3 as">
             <router-link :to="{name: 'shop_clause', params: {total:this.total}}">{{$t('shop.terms')}}</router-link>
           </h1>
@@ -178,8 +178,15 @@
 <style scoped lang="less">
   @import "shop";
   .cont .box .box_left li.pay_box button{
-    width: 170px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    width: 174px;
+    margin-top: 29px;
+    margin-bottom: 29px;
+    padding: 0;
+  }
+  .small{
+    color: rgb(144, 144, 144);
+    margin-top: 17px;
+    font-size: 13px;
+    display: block;
   }
 </style>

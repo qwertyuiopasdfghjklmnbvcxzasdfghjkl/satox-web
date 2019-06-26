@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <p class="title">{{$t('shop.product_terms')}}</p>
+    <!--<p class="title"></p>-->
     <p class="p">
       <router-link :to="{name: 'shop_pay', params: {total:totals}}">{{$t('shop.return_payment_page')}}</router-link>
     </p>
@@ -32,6 +32,29 @@
   @import "shop";
   .p{
     padding: 10px;
+  }
+  .cont{
+    background: none;
+    .box{
+      padding: 0;
+    }
+    .box.clause{
+      h4{
+        height: 50px;
+        line-height: 50px;
+        text-indent: 18px;
+        background: #080808;
+        border-bottom: 1px solid #403D36;
+        color: #CBCBCB;
+      }
+      p{
+        padding: 15px 20px;
+        color: #CBCBCB;
+        background: #1a1a1a;
+        font-size: 14px;
+        padding-bottom: 30px;
+      }
+    }
   }
   .clause p{
 

@@ -93,7 +93,7 @@
   }
 
   .ul {
-
+    padding-bottom: 52px;
     li {
       display: flex;
       justify-content: space-between;
