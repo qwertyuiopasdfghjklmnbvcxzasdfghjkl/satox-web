@@ -122,6 +122,7 @@
       span:nth-child(3) {
         width: 40%;
         text-align: left;
+        word-break: break-word;
       }
 
       span:nth-child(4) {
