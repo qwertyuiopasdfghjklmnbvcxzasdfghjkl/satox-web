@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <p class="title"><img src="../assets/images/title-ico.jpg">{{$t('shop.shop')}}</p>
+    <p class="title"><img src="../assets/images/title-ico.jpg">{{$t('shop.product')}}</p>
     <div class="box">
       <ul class="box_left">
         <li v-for="data in productList">
