@@ -21,6 +21,11 @@
                 <i class="icon-curry"></i>
                 <span>{{$t('otc_legal.otc_legal_currency')}}</span>
             </li> -->
+            <li :class="{'active': active === 'ieorecords'}" @click="switch_tab('ieorecords')">
+                <i class="icon-sports-club"></i>
+                <span>我的IEO</span>
+                <!--我的IEO申购记录-->
+            </li>
             <li :class="{'active': active === 'transaction'}" @click="switch_tab('transaction')">
                 <i class="icon-reports"></i>
                 <span>{{$t('trade_record.my_trade_record')}}</span>
