@@ -1,10 +1,10 @@
 <template>
   <div class="list">
     <b>{{lang === 1 ? this.item.productName : this.item.productNameEn}}</b>
-    <div v-if="change">
-      <label @click="del()">-</label>
+    <div>
+      <label @click="del()" :class="{'dis':!change}">-</label>
       <span>1</span>
-      <label @click="add()">+</label>
+      <label @click="add()" :class="{'dis':!change}">+</label>
     </div>
     <p>${{this.item.discountPrice}}</p>
   </div>
@@ -72,6 +72,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      font-size: 17px;
     }
 
     div {
@@ -97,6 +98,10 @@
         flex-grow: 1;
         cursor: pointer;
         height: 16px;
+        &.dis{
+          color: #949494;
+          cursor: no-drop;
+        }
       }
     }
 

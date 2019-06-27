@@ -93,7 +93,7 @@
   }
 
   .ul {
-
+    padding-bottom: 52px;
     li {
       display: flex;
       justify-content: space-between;
@@ -128,6 +128,7 @@
       span:nth-child(3) {
         width: 40%;
         text-align: left;
+        word-break: break-word;
       }
 
       span:nth-child(4) {

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?i3gec');
-  src:  url('fonts/icomoon.eot?i3gec#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?i3gec') format('truetype'),
-    url('fonts/icomoon.woff?i3gec') format('woff'),
-    url('fonts/icomoon.svg?i3gec#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?k4x96j');
+  src:  url('fonts/icomoon.eot?k4x96j#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?k4x96j') format('truetype'),
+    url('fonts/icomoon.woff?k4x96j') format('woff'),
+    url('fonts/icomoon.svg?k4x96j#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -27,8 +27,8 @@
 .icon-info-with-circle:before {
   content: "\e960";
 }
-.icon-sports-club:before {
-  content: "\e961";
+.icon-pie-chart:before {
+  content: "\e938";
 }
 .icon-shield:before {
   content: "\e95a";
@@ -223,9 +223,6 @@
 .icon-msg-hi:before {
   content: "\e936";
   color: #11a8fe;
-}
-.icon-my:before {
-  content: "\e938";
 }
 .icon-no-order:before {
   content: "\e939";
