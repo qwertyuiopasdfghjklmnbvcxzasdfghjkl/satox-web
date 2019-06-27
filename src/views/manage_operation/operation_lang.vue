@@ -5,10 +5,10 @@
             <Row>
                 <Col span="16">
                     {{$t('operation.yymczw')}}
-                    <Input v-model="formData.value" clearable style="width: 200px"
+                    <Input v-model="formData.name" clearable style="width: 200px"
                            :placeholder="$t('common.qsr')"></Input>
                     {{$t('common.zt')}}
-                    <Select v-model="formData.type" style="width: 200px">
+                    <Select v-model="formData.status" style="width: 200px">
                         <Option :value="0">{{$t('common.qb')}}</Option>
                         <Option :value="1">{{$t('exchange.xs')}}</Option>
                         <Option :value="2">{{$t('exchange.sx')}}</Option>
@@ -28,8 +28,8 @@
 <script>
     import extendApi from '../../api/extend';
     import util from '../../libs/util';
-    import addI18n from './lang/add';
-    import updataI18n from './lang/updata';
+    import add from './lang/add';
+    import updata from './lang/updata';
 
     export default {
         data () {
@@ -38,29 +38,37 @@
                 size: 10,
                 total: 0,
                 formData: {
-                    value: null,
-                    type: 0,
+                    name: null,
+                    status: 0,
                 },
                 columns1: [
                     {
                         title: 'ID',
-                        key: 'globalInfoId'
+                        key: 'languageTypeId'
                     },
                     {
                         title: this.$t('operation.yymczw'),
-                        key: 'cn',
+                        key: 'languageTypeCode',
                     },
                     {
                         title: this.$t('operation.yyzs'),
-                        key: 'en'
+                        key: 'languageTypeName'
                     },
                     {
                         title: this.$t('common.zt'),
-                        key: 'cnzh'
+                        key: 'languageTypeState',
+                        render: (h, params) => {
+                            return h('div', {
+                                style: {
+                                    color: params.row.languageTypeState === 1 ? '' : '#1ac27f'
+                                }},
+                                params.row.languageTypeState === 1 ? this.$t('exchange.xs') : this.$t('exchange.sx')
+                            );
+                        }
                     },
                     {
                         title: this.$t('common.cjsj'),
-                        key: 'korean'
+                        key: 'createdAt'
                     },
                     {
                         title: this.$t('common.cz'),
@@ -72,7 +80,7 @@
                                     style: {margin: '3px'},
                                     on: {
                                         click: () => {
-                                            util.setDialog(updataI18n, {
+                                            util.setDialog(updata, {
                                                 item: params.row,
                                                 okCallback: () => {
                                                     this.getList();
@@ -86,15 +94,21 @@
                                     style: {margin: '3px'},
                                     on: {
                                         click: () => {
-                                            // util.setDialog(updataI18n, {
-                                            //     item: params.row,
-                                            //     okCallback: () => {
-                                            //         this.getList();
-                                            //     }
-                                            // });
+                                            let data = {
+                                                languageTypeId: params.row.languageTypeId,
+                                                languageTypeState: params.row.languageTypeState === 1 ? 2 : 1
+                                            };
+                                            extendApi.updataLang(data, (res) => {
+                                                let msg = data.languageTypeState === 1 ? this.$t('operation.sxcg')
+                                                    : this.$t('operation.xscg');
+                                                this.$Message.success({content: msg});
+                                                this.getList();
+                                            }, (msg) => {
+                                                this.$Message.error({content: msg});
+                                            });
                                         }
                                     }
-                                }, this.$t('exchange.xs')),
+                                }, params.row.languageTypeState === 1 ? this.$t('exchange.sx') : this.$t('exchange.xs')),
                             ]);
                         }
                     }
@@ -107,7 +121,7 @@
         },
         methods: {
             addMarket () {
-                util.setDialog(addI18n, {
+                util.setDialog(add, {
                     okCallback: () => {
                         this.getList();
                     }
@@ -117,9 +131,10 @@
                 let data = {
                     size: this.size,
                     page: this.curPage,
-                    keyword: this.formData.value
+                    status: this.formData.status === 0 ? null : this.formData.status,
+                    name: this.formData.name
                 };
-                extendApi.findI18nList(data, (res) => {
+                extendApi.getLang(data, (res) => {
                     this.data1 = res;
                 });
             },

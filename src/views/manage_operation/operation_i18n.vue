@@ -5,7 +5,7 @@
             <Row>
                 <Col span="16">
                     <Select v-model="formData.type" style="width: 200px">
-                        <Option value="globalInfoId">ID</Option>
+                        <Option value="languageId">ID</Option>
                         <Option value="publicKey">Public_key</Option>
                         <Option value="cn">{{$t('operation.zw')}}</Option>
                         <Option value="en">{{$t('operation.yw')}}</Option>
@@ -20,7 +20,7 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top: 10px"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
+            <Page :current="curPage" :total="total" @on-change="changePage" :page-size="size"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </div>
@@ -45,15 +45,15 @@
                 columns1: [
                     {
                         title: 'ID',
-                        key: 'globalInfoId'
-                    },
-                    {
-                        title: 'Public_key',
-                        key: 'publicKey'
+                        key: 'languageId'
                     },
                     {
                         title: 'parent_key',
                         key: 'parentKey'
+                    },
+                    {
+                        title: 'Public_key',
+                        key: 'publicKey'
                     },
                     {
                         title: this.$t('operation.zw'),
@@ -62,38 +62,6 @@
                     {
                         title: this.$t('operation.yw'),
                         key: 'en'
-                    },
-                    {
-                        title: this.$t('operation.zwft'),
-                        key: 'cnzh'
-                    },
-                    {
-                        title: this.$t('operation.hy'),
-                        key: 'korean'
-                    },
-                    {
-                        title: this.$t('operation.ry'),
-                        key: 'japanese'
-                    },
-                    {
-                        title: this.$t('operation.dy'),
-                        key: 'german'
-                    },
-                    {
-                        title: this.$t('operation.xbyy'),
-                        key: 'spanish'
-                    },
-                    {
-                        title: this.$t('operation.fy'),
-                        key: 'french'
-                    },
-                    {
-                        title: this.$t('operation.ydly'),
-                        key: 'italian'
-                    },
-                    {
-                        title: this.$t('operation.alby'),
-                        key: 'arabic'
                     },
                     {
                         title: this.$t('operation.sm'),
@@ -114,6 +82,7 @@
                                     on: {
                                         click: () => {
                                             util.setDialog(updataI18n, {
+                                                lang: this.langList,
                                                 item: params.row,
                                                 okCallback: () => {
                                                     this.getList();
@@ -128,7 +97,8 @@
                                     on: {
                                         click: () => {
                                             util.setDialog(look, {
-                                                item: params.row,
+                                                lang: this.langList,
+                                                item: params.row
                                             });
                                         }
                                     }
@@ -137,32 +107,46 @@
                         }
                     }
                 ],
-                data1: []
+                data1: [],
+                langList: []
             };
         },
         created () {
             this.getList();
+            this.getLang();
         },
         methods: {
             addMarket () {
                 util.setDialog(addI18n, {
+                    item: this.langList,
                     okCallback: () => {
                         this.getList();
                     }
                 });
             },
             getList () {
-                let data = {
+                let datas = {
                     size: this.size,
                     page: this.curPage,
-                    keyword: this.formData.value
                 };
-                extendApi.findI18nList(data, (res) => {
+                datas[this.formData.type] = this.formData.value;
+                extendApi.findI18nList(datas, (res, total) => {
                     this.data1 = res;
+                    this.total = total;
+                });
+            },
+            getLang () {
+                let data = {
+                    size: 999,
+                    page: 1,
+                };
+                extendApi.getLang(data, (res) => {
+                    this.langList = res;
                 });
             },
             changePage (e) {
-                this.curPage = e.page;
+                console.log(e);
+                this.curPage = e;
                 this.getList();
             }
         }

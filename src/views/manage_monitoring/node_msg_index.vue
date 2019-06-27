@@ -103,15 +103,13 @@
         },
         methods: {
             getfindBtcNodeList () {
-                monitApi.findBtcNodeList(this.curPage, (res, total) => {
-                    this.total = total;
+                monitApi.findBtcNodeList((res) => {
                     this.data1 = res.data;
                 });
             },
             getfindEthNodeList () {
-                monitApi.findEthNodeList(this.curPage1, (res, total) => {
-                    this.total1 = total;
-                    this.data2 = res.data;
+                monitApi.findEthNodeList((res) => {
+                    this.data2.push(res);
                 });
             },
             getfindOMNINodeList () {

@@ -670,7 +670,9 @@ export const operation = {
     sgts: '是否推送',
     tsqlgx: '推送全量更新',
     yymczw: '语言名称中文',
-    yyzs: '语言展示'
+    yyzs: '语言展示',
+    sxcg: '上线成功',
+    xscg: '下线成功'
 }
 export const admin = {
     glyqx: '管理员权限管理',

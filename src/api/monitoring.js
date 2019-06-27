@@ -147,8 +147,8 @@ const findAdminCoinPoolsList = function (curPage, data, success, error) {
 monitoring.findAdminCoinPoolsList = findAdminCoinPoolsList;
 
 //分页查询btc节点信息
-const findBtcNodeList = function (curPage, data, success, error) {
-    api.get(`api/bm/monitor/node/findBtcNodeList/10/${curPage}`, data, (res) => {
+const findBtcNodeList = function ( success, error) {
+    api.get(`api/bm/monitor/node/findBtcNode`, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {
@@ -159,8 +159,8 @@ const findBtcNodeList = function (curPage, data, success, error) {
 monitoring.findBtcNodeList = findBtcNodeList;
 
 //分页查询eth节点信息
-const findEthNodeList = function (curPage, data, success, error) {
-    api.get(`api/bm/monitor/node/findEthNodeList/10/${curPage}`, data, (res) => {
+const findEthNodeList = function ( success, error) {
+    api.get(`api/bm/monitor/node/findEthNode`, (res) => {
         if (res.rst === 1) {
             success && success(res.data, res.total);
         } else {

@@ -1,183 +1,107 @@
 <template>
     <!--<div class="upPlacard">-->
-        <Card style="width: 650px">
-            <p slot="title">{{vm.$t('common.xg')}}
-                <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
-            </p>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.zw')}}</Col>
-                <Col span="5">{{datas.cn}}</Col>
-                <Col span="11">
-                    <Input v-model="cn" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('cn')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.yw')}}</Col>
-                <Col span="5">{{datas.en}}</Col>
-                <Col span="11">
-                    <Input v-model="en" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('en')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.zwft')}}</Col>
-                <Col span="5">{{datas.cnzh}}</Col>
-                <Col span="11">
-                    <Input v-model="cnzh" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('cnzh')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.hy')}}</Col>
-                <Col span="5">{{datas.korean}}</Col>
-                <Col span="11">
-                    <Input v-model="korean" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('korean')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.ry')}}</Col>
-                <Col span="5">{{datas.japanese}}</Col>
-                <Col span="11">
-                    <Input v-model="japanese" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('japanese')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.dy')}}</Col>
-                <Col span="5">{{datas.german}}</Col>
-                <Col span="11">
-                    <Input v-model="german" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('german')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.xbyy')}}</Col>
-                <Col span="5">{{datas.spanish}}</Col>
-                <Col span="11">
-                    <Input v-model="spanish" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('spanish')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.fy')}}</Col>
-                <Col span="5">{{datas.french}}</Col>
-                <Col span="11">
-                    <Input v-model="french" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('french')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.ydly')}}</Col>
-                <Col span="5">{{datas.italian}}</Col>
-                <Col span="11">
-                    <Input v-model="italian" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('italian')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.alby')}}</Col>
-                <Col span="5">{{datas.arabic}}</Col>
-                <Col span="11">
-                    <Input v-model="arabic" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('arabic')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-            <Row style="margin-bottom:20px;">
-                <Col span="5">{{vm.$t('operation.sm')}}</Col>
-                <Col span="5">{{datas.remark}}</Col>
-                <Col span="11">
-                    <Input v-model="remark" style="width: 200px"/>
-                </Col>
-                <Col span="3">
-                    <Button @click="tabs('remark')">{{vm.$t('common.xg')}}</Button>
-                </Col>
-            </Row>
-
-        </Card>
+    <Card style="width: 650px">
+        <p slot="title">{{vm.$t('common.xg')}}
+            <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
+        </p>
+        <Row v-for="data in datas" style="margin-bottom:20px;">
+            <Col span="5">{{swLang(data.languageTypeId)}}</Col>
+            <Col span="5">{{data.languageContent}}</Col>
+            <Col span="11">
+                <Input v-model="form[data.languageTypeId]" style="width: 200px"/>
+            </Col>
+            <Col span="3">
+                <Button @click="tabs(data)">{{vm.$t('common.xg')}}</Button>
+            </Col>
+        </Row>
+        <Row style="margin-bottom:20px;">
+            <Col span="5">{{vm.$t('operation.sm')}}</Col>
+            <Col span="5">{{item.remark}}</Col>
+            <Col span="11">
+                <Input v-model="form.languageRemark" style="width: 200px"/>
+            </Col>
+            <Col span="3">
+                <Button @click="tabRemark('languageRemark')">{{vm.$t('common.xg')}}</Button>
+            </Col>
+        </Row>
+    </Card>
     <!--</div>-->
 </template>
 <script>
     import extendApi from '../../../api/extend';
 
     export default {
-        props: ['item'],
+        props: ['item', 'lang'],
         data () {
             const vm = window.vm;
             return {
                 vm: vm,
-                cn: null,
-                en: null,
-                cnzh: null,
-                korean: null,
-                japanese: null,
-                german: null,
-                spanish: null,
-                french: null,
-                italian: null,
-                arabic: null,
-                remark: null,
-                datas: {
-                    cn: null,
-                    en: null,
-                    cnzh: null,
-                    korean: null,
-                    japanese: null,
-                    german: null,
-                    spanish: null,
-                    french: null,
-                    italian: null,
-                    arabic: null,
-                    remark: null,
-                }
+                datas: null,
+                form: {}
             };
         },
         created () {
-            this.datas = this.item;
+            this.getDetail();
+            console.log(this.item)
         },
         methods: {
+            getDetail () {
+                let data = {
+                    languageId: this.item.languageId
+                };
+                extendApi.i18nDetail(data, res => {
+                    this.datas = res;
+                });
+            },
+            swLang (i) {
+                let d = this.lang.find((res) => {
+                    if (res.languageTypeId === i) {
+                        return res;
+                    }
+                });
+                return d.languageTypeName;
+            },
             closeDialog () {
                 this.$emit('removeDialog');
                 this.$emit('okCallback');
             },
-            tabs (propName) {
-                if (!this[propName]) {
+            tabs (data) {
+                console.log(data, this.item, this.form[data.languageTypeId]);
+                if (!this.form[data.languageTypeId]) {
                     this.$Message.error({content: this.vm.$t('common.bnwk')});
                     return;
                 }
-                let data = {
-                    publicKey: this.item.publicKey
+                let datas = {
+                    languageContent: this.form[data.languageTypeId],
+                    languageExtId: data.languageExtId
                 };
-                data[propName] = this[propName];
-                extendApi.updateI18nList(data, (res) => {
+                let id = data.languageTypeId;
+                this.updata(datas, id);
+            },
+            tabRemark (id) {
+                if (this.form.languageRemark) {
+                    let datas = {
+                        languageRemark: this.form.languageRemark,
+                        languageExtId: this.datas[0].languageExtId
+                    };
+                    let id = 'languageRemark';
+                    this.updata(datas, id);
+                } else {
+                    this.$Message.error({content: this.vm.$t('common.bnwk')});
+                }
+            },
+            updata (datas, id) {
+                extendApi.updateI18nList(datas, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
-                    this.datas[propName] = this[propName];
-                    this[propName] = '';
+                    this.getDetail();
+                    if(id === 'languageRemark'){
+                        this.item.remark = this.form.languageRemark;
+                    }
+                    this.form[id] = '';
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
-            },
+            }
         }
     };
 </script>

@@ -4,44 +4,17 @@
             <p slot="title">{{vm.$t('operation.xzzd')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100"
                   style="width:450px;overflow:auto;">
-                <FormItem :label="'Public_key'" prop="publicKey">
-                    <Input v-model="formLeft.publicKey" name="publicKey"></Input>
-                </FormItem>
                 <FormItem :label="'Parent_key'" prop="parentKey">
                     <Input v-model="formLeft.parentKey" name="parentKey"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.zw')" prop="cn">
-                    <Input v-model="formLeft.cn" name="cn"></Input>
+                <FormItem :label="'Public_key'" prop="publicKey">
+                    <Input v-model="formLeft.publicKey" name="publicKey"></Input>
                 </FormItem>
-                <FormItem :label="vm.$t('operation.yw')" prop="en">
-                    <Input v-model="formLeft.en" name="en"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.zwft')" prop="cnzh">
-                    <Input v-model="formLeft.cnzh" name="cnzh"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.hy')" prop="korean">
-                    <Input v-model="formLeft.korean" name="korean"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.ry')" prop="japanese">
-                    <Input v-model="formLeft.japanese" name="japanese"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.dy')" prop="german">
-                    <Input v-model="formLeft.german" name="german"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.xbyy')" prop="spanish">
-                    <Input v-model="formLeft.spanish" name="spanish"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.fy')" prop="french">
-                    <Input v-model="formLeft.french" name="french"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.ydly')" prop="italian">
-                    <Input v-model="formLeft.italian" name="italian"></Input>
-                </FormItem>
-                <FormItem :label="vm.$t('operation.alby')" prop="arabic">
-                    <Input v-model="formLeft.arabic" name="arabic"></Input>
+                <FormItem v-for="data in item" :label="data.languageTypeName" :prop="data.languageTypeCode">
+                    <Input v-model="formLeft[data.languageTypeCode]" :name="data.languageTypeCode"></Input>
                 </FormItem>
                 <FormItem :label="vm.$t('operation.sm')" prop="remark">
-                    <Input v-model="formLeft.remark" name="remark" type="textcent"></Input>
+                    <Input v-model="formLeft.remark" name="remark" type="textarea" :maxlength="250"></Input>
                 </FormItem>
 
                 <div class="bannerBtn">
@@ -57,22 +30,14 @@
     import util from '../../../libs/util';
 
     export default {
+        props: ['item'],
         data () {
             const vm = window.vm;
             return {
                 vm: vm,
                 formLeft: {
                     publicKey: null,
-                    cn: null,
-                    en: null,
-                    cnzh: null,
-                    korean: null,
-                    japanese: null,
-                    german: null,
-                    spanish: null,
-                    french: null,
-                    italian: null,
-                    arabic: null,
+                    parentKey: null,
                     remark: null,
                 },
                 ruleInline: {
@@ -82,26 +47,20 @@
                     publicKey: [
                         {required: true, message: vm.$t('common.qsr') + 'publicKey'},
                     ],
-                    cn: [
+                    zh: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zw'), trigger: 'blur'},
                     ],
                     en: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('operation.yw'), trigger: 'blur'},
-                    ],
-                    cnzh: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zwft'), trigger: 'blur'}
-                    ],
-                    // korean: [
-                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ywgglj'), trigger: 'blur'},
-                    // ],
-                    // japanese: [
-                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftggbt'), trigger: 'blur'}
-                    // ],
-                    // german: [
-                    //     {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ftgglj'), trigger: 'blur'},
-                    // ],
+                    ]
+                },
+                form: {
+                    ext: []
                 }
             };
+        },
+        created () {
+            console.log(this.item);
         },
         methods: {
             closeDialog () {
@@ -109,9 +68,19 @@
             },
             addCurreny () {
                 let form = this.$refs.formItem;
+                this.form.languageParentKey = this.formLeft.parentKey;
+                this.form.languageKey = this.formLeft.publicKey;
+                this.form.languageRemark = this.formLeft.remark;
+                this.item.filter(res => {
+                    let data = {
+                        languageContent: this.formLeft[res.languageTypeCode],
+                        languageTypeId: res.languageTypeId
+                    };
+                    this.form.ext.push(data);
+                });
                 form.validate((valid) => {
                     if (valid) {
-                        extendApi.addI18nList(this.formLeft, (res) => {
+                        extendApi.addI18nList(this.form, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('removeDialog');
                             this.$emit('okCallback');

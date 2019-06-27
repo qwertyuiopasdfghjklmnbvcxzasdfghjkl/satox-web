@@ -188,7 +188,7 @@ extend.findAllAnnouncement = findAllAnnouncement;
 const findI18nList = function (data, success, error) {
     api.post(`api/bm/promotionManage/global/queryList`, data, (res) => {
         if (res.rst === 1) {
-            success && success(res.data);
+            success && success(res.data, res.total);
         } else {
             error && error(res.msg);
         }
@@ -198,7 +198,7 @@ extend.findI18nList = findI18nList;
 
 // 新增国际化信息
 const addI18nList = function (data, success, error) {
-    api.post(`api/bm/promotionManage/global/insert`, data, (res) => {
+    api.post(`api/bm/promotionManage/global`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data);
         } else {
@@ -210,7 +210,7 @@ extend.addI18nList = addI18nList;
 
 // 更新国际化信息
 const updateI18nList = function (data, success, error) {
-    api.put(`api/bm/promotionManage/global/update`, data, (res) => {
+    api.put(`api/bm/promotionManage/global`, data, (res) => {
         if (res.rst === 1) {
             success && success(res.data);
         } else {
@@ -219,6 +219,54 @@ const updateI18nList = function (data, success, error) {
     }, error);
 };
 extend.updateI18nList = updateI18nList;
+
+// 查询国际化信息详情
+const i18nDetail = function (data, success, error) {
+    api.get(`api/bm/promotionManage/global`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.i18nDetail = i18nDetail;
+
+// 多语言列表
+const getLang = function (data, success, error) {
+    api.get(`api/bm/promotionManage/type/list`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.getLang = getLang;
+
+// 更新多语言
+const updataLang = function (data, success, error) {
+    api.put(`api/bm/promotionManage/type`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.updataLang = updataLang;
+
+// 更新多语言
+const addLang = function (data, success, error) {
+    api.post(`api/bm/promotionManage/type`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.addLang = addLang;
 
 //查询详情
 const findDetail = function (data, success, error) {

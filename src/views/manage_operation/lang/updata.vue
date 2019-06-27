@@ -6,22 +6,22 @@
             </p>
             <Row style="margin-bottom:20px;">
                 <Col span="5">{{vm.$t('operation.yymczw')}}</Col>
-                <Col span="5">{{datas.cn}}</Col>
+                <Col span="5">{{datas.languageTypeCode}}</Col>
                 <Col span="11">
-                    <Input v-model="cn" style="width: 200px"/>
+                    <Input v-model="languageTypeCode" style="width: 200px"/>
                 </Col>
                 <Col span="3">
-                    <Button @click="tabs('cn')">{{vm.$t('common.xg')}}</Button>
+                    <Button @click="tabs('languageTypeCode')">{{vm.$t('common.xg')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-bottom:20px;">
                 <Col span="5">{{vm.$t('operation.yyzs')}}</Col>
-                <Col span="5">{{datas.en}}</Col>
+                <Col span="5">{{datas.languageTypeName}}</Col>
                 <Col span="11">
-                    <Input v-model="en" style="width: 200px"/>
+                    <Input v-model="languageTypeName" style="width: 200px"/>
                 </Col>
                 <Col span="3">
-                    <Button @click="tabs('en')">{{vm.$t('common.xg')}}</Button>
+                    <Button @click="tabs('languageTypeName')">{{vm.$t('common.xg')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -36,11 +36,11 @@
             const vm = window.vm;
             return {
                 vm: vm,
-                cn: null,
-                en: null,
+                languageTypeCode: null,
+                languageTypeName: null,
                 datas: {
-                    cn: null,
-                    en: null,
+                    languageTypeCode: null,
+                    languageTypeName: null,
                 }
             };
         },
@@ -58,10 +58,10 @@
                     return;
                 }
                 let data = {
-                    publicKey: this.item.publicKey
+                    languageTypeId: this.item.languageTypeId
                 };
                 data[propName] = this[propName];
-                extendApi.updateI18nList(data, (res) => {
+                extendApi.updataLang(data, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
                     this.datas[propName] = this[propName];
                     this[propName] = '';
