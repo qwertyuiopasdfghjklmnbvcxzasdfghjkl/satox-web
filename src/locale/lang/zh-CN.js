@@ -651,7 +651,6 @@ export const operation = {
     sccg: '上传成功',
     scwjfslcw: '上传文件发生了错误尝试',
     scbqx: '上传被取消或者浏览器断开连接',
-
     //
     zw: '中文',
     yw: '英文',
@@ -672,7 +671,13 @@ export const operation = {
     yymczw: '语言名称中文',
     yyzs: '语言展示',
     sxcg: '上线成功',
-    xscg: '下线成功'
+    xscg: '下线成功',
+    ssmk: '所属模块',
+    ty: '通用（所有模块）',
+    jyspc: '交易所PC',
+    jysh5: '交易所H5',
+    jysapp: '交易所APP',
+    ht: '后台'
 }
 export const admin = {
     glyqx: '管理员权限管理',
@@ -937,7 +942,8 @@ export const nav = {
     scskzhsz: '商城收款账户设置',
     jdyjgz: '节点预警规则',
     scyjgz: '市场预警规则',
-    dyysz: '多语言设置'
+    dyysz: '多语言设置',
+    ieogl: 'IEO管理'
 }
 export const home = {
     zyh: '总用户',

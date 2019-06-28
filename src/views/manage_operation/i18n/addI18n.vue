@@ -4,6 +4,15 @@
             <p slot="title">{{vm.$t('operation.xzzd')}}</p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100"
                   style="width:450px;overflow:auto;">
+                <FormItem :label="vm.$t('operation.ssmk')" prop="languageModule">
+                    <Select v-model="formLeft.languageModule" name="languageModule">
+                        <Option :value="1">{{vm.$t('operation.ty')}}</Option>
+                        <Option :value="2">{{vm.$t('operation.jyspc')}}</Option>
+                        <Option :value="3">{{vm.$t('operation.jysh5')}}</Option>
+                        <Option :value="4">{{vm.$t('operation.jysapp')}}</Option>
+                        <Option :value="5">{{vm.$t('operation.ht')}}</Option>
+                    </Select>
+                </FormItem>
                 <FormItem :label="'Parent_key'" prop="parentKey">
                     <Input v-model="formLeft.parentKey" name="parentKey"></Input>
                 </FormItem>
@@ -36,11 +45,15 @@
             return {
                 vm: vm,
                 formLeft: {
+                    languageModule: 1,
                     publicKey: null,
                     parentKey: null,
                     remark: null,
                 },
                 ruleInline: {
+                    languageModule: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.ssmk')},
+                    ],
                     parentKey: [
                         {required: true, message: vm.$t('common.qsr') + 'parentKey'},
                     ],
@@ -68,6 +81,7 @@
             },
             addCurreny () {
                 let form = this.$refs.formItem;
+                this.form.languageModule = this.formLeft.languageModule;
                 this.form.languageParentKey = this.formLeft.parentKey;
                 this.form.languageKey = this.formLeft.publicKey;
                 this.form.languageRemark = this.formLeft.remark;
