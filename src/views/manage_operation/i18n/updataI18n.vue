@@ -66,7 +66,6 @@
                 this.$emit('okCallback');
             },
             tabs (data) {
-                console.log(data, this.item, this.form[data.languageTypeId]);
                 if (!this.form[data.languageTypeId]) {
                     this.$Message.error({content: this.vm.$t('common.bnwk')});
                     return;
