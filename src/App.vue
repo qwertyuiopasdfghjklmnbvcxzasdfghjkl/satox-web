@@ -89,6 +89,7 @@ export default {
     }
   },
   created () {
+    this.getBtcPrice()
     this.getSysparams()
     this.getUserInfoMethod()
     this.checkRouteChange(this.$route)
@@ -130,6 +131,15 @@ export default {
   },
   methods: {
     ...mapActions(['setBTCValuation', 'setUSDCNY', 'setNetworkSignal', 'setUserInfo','setSysParams']),
+    getBtcPrice(){
+      marketApi.getBtcPrice(res=>{
+        this.setUSDCNY({
+          USD: numUtils.BN(res.USD).toFixed(2),
+          CNY: numUtils.BN(res.CNY).toFixed(2)
+        })
+        this.setBTCValuation(numUtils.BN(res.btcAmount).toFixed(8)) // 当前转换人民币
+      })
+    },
     getSysparams(){
       marketApi.getSysparams(res=>{
         let params = {}
