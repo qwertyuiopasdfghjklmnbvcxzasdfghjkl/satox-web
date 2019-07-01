@@ -12,6 +12,9 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
+            <li>
+              <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
+            </li>
             <!--APP下载-->
             <li>
               <router-link :to="{name:'download'}" :class="{'current':$route.name==='download'}">
@@ -121,6 +124,9 @@
            :class="{'current':$route.name==='exchange_index2' || $route.name==='exchange_index'}">
           {{$t('public.navigation_exchange')}}<!--币币交易-->
         </a>
+      </li>
+      <li>
+        <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
       </li>
       <!--投票挖矿-->
       <!-- <li>

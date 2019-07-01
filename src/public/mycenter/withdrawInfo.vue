@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="f-fl">
-                <div class="filed" v-if="symbol==='USSD'">
+                <div class="filed" v-if="symbol==='USSD' && !ussdWithdrawKey">
                     <em>
                         {{$t('public.account_info')}}<!--账户信息-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -75,6 +75,10 @@
                 </div>
                 <div class="filed">
                     <input type="button" class="BNB-subbtn" :value="$t('account.user_submit')" @click="walletWithdraw" /><!--提交-->
+                    <template v-if="symbol==='USSD'">
+                      <span class="large_withdraw" @click="ussdWithdrawKey=false" v-if="ussdWithdrawKey">{{$t('account.withdraw_to_card')}}</span>
+                      <span class="large_withdraw" @click="ussdWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
+                    </template>
                 </div>
             </div>
             <div class="f-fr">
@@ -125,6 +129,8 @@ export default {
   },
   data () {
     return {
+      ussdWithdrawKey:false,
+      withdrawType:0,
       mobileState: null,
       fixedNumber: 8,
       datas: {},
@@ -276,7 +282,7 @@ export default {
           amount: this.amount
         }
       }
-      if(this.symbol==='USSD'){
+      if(this.symbol==='USSD' && !this.ussdWithdrawKey){
         let userBankInfo = {
           bankCountryCode:this.userBankInfo.bankCountryCode,
           bankCode:this.userBankInfo.bankCode,
@@ -286,7 +292,11 @@ export default {
           bankRealname:this.userBankInfo.bankRealname,
           bankNumber:this.userBankInfo.bankNumber
         }
+        this.withdrawType = 2
         validData = Object.assign(validData, userBankInfo)
+      }
+      if(this.symbol==='SATO' || (this.symbol==='USSD' && this.ussdWithdrawKey)){
+        this.withdrawType =1
       }
       this.$validator.validateAll(validData).then((validResult) => {
         if (!validResult) {
@@ -313,6 +323,7 @@ export default {
               alias: this.alias,
               fee: this.procedureFee,
               userBankInfo: this.userBankInfo,
+              withdrawType: this.withdrawType,
               memo: this.memo,
               lang: window.localStorage.getItem('lang') === 'zh-CN' ? 'cn' : 'en'
             }
@@ -350,6 +361,7 @@ export default {
 }
 </script>
 <style scoped>
+.large_withdraw {margin-left: 30px; color: #BA8D35; cursor: pointer; font-size: 13px; text-decoration: underline;}
 div.error,input.error{border-color: #e53f3f !important;}
 em.error{position:absolute;left:0px;bottom:-16px;color: #e53f3f !important;height:18px!important;line-height:18px;font-size:12px!important;}
 .withdrawBox { width: 802px; background-color: #fff; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px #5d5d5d; position: relative;}
