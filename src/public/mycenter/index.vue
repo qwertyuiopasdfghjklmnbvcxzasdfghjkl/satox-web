@@ -22,10 +22,9 @@ import settings from '@/public/mycenter/settings'
 import safety from '@/public/mycenter/safety'
 import transaction from '@/public/mycenter/transaction'
 import message from '@/public/mycenter/message'
-import agency from '@/public/mycenter/agency'
 import hardware from '@/public/mycenter/hardware'
 import SATODebitCard from '@/public/mycenter/SATODebitCard'
-import agencyApply from '@/public/mycenter/agencyApply'
+import ieorecords from '@/public/mycenter/ieorecords'
 export default {
   props: ['adsSymbol', 'adsType', 'linkItem'],
   data () {
@@ -43,10 +42,9 @@ export default {
     transaction,
     historyrecord,
     message,
-    agency,
-    agencyApply,
     hardware,
-    SATODebitCard
+    SATODebitCard,
+    ieorecords
   },
   watch: {
     '$route' (to, from) {

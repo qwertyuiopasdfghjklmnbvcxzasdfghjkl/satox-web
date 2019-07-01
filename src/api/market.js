@@ -333,4 +333,17 @@ const getSysparams = function (success, error) {
 }
 market.getSysparams = getSysparams
 
+
+// 查询BTC汇率价格
+const getBtcPrice = function (success, error) {
+  api.get(`${domain}api/v2/account2/btcPrice `, (res) => {
+    if (res.rst === 1) {
+      success && success(res)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+market.getBtcPrice = getBtcPrice
+
 export default market
