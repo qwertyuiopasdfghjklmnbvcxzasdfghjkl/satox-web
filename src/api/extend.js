@@ -358,4 +358,100 @@ const upData = function uploadFile (file, uploadProgress, uploadComplete, upload
 };
 extend.upData = upData;
 
+// 节点列表
+const nodeList = function (data, success, error) {
+    api.post(`api/bm/riskManage/node/list`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.nodeList = nodeList;
+
+// 新增节点
+const addNode = function (data, success, error) {
+    api.post(`api/bm/riskManage/node/add`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.addNode = addNode;
+
+// 更新节点
+const updateNode = function (data, success, error) {
+    api.put(`api/bm/riskManage/node/update`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.updateNode = updateNode;
+
+// 删除节点
+const delNode = function (nodeManageId, success, error) {
+    api.delete(`api/bm/riskManage/node/delete/${nodeManageId}`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.delNode = delNode;
+
+// 市场配置列表
+const marketList = function (data, success, error) {
+    api.post(`api/bm/riskManage/market/list`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.marketList = marketList;
+
+// 新增市场配置
+const addMarket = function (data, success, error) {
+    api.post(`api/bm/riskManage/market/add`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.addMarket = addMarket;
+
+// 更新市场配置
+const updataMarket = function (data, success, error) {
+    api.put(`api/bm/riskManage/market/update`, data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.updataMarket = updataMarket;
+
+// 删除市场配置
+const delMarket = function (marketManageId, success, error) {
+    api.delete(`api/bm/riskManage/market/delete/${marketManageId}`, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.delMarket = delMarket;
+
 export default extend;

@@ -84,4 +84,28 @@ const deleteSymbol = function ( data, success, error) {
 };
 user.deleteSymbol = deleteSymbol;
 
+// 获取国际化语言
+const getLang = function ( data, success, error) {
+    api.get('/api/v2/language', data, (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.getLang = getLang;
+
+// 获取国际化语言 语种
+const getLangType = function ( success, error) {
+    api.get('/api/v2/language/type/list', (res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error)
+};
+user.getLangType = getLangType;
+
 export default user;

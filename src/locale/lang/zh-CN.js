@@ -943,7 +943,11 @@ export const nav = {
     jdyjgz: '节点预警规则',
     scyjgz: '市场预警规则',
     dyysz: '多语言设置',
-    ieogl: 'IEO管理'
+    ieogl: 'IEO管理',
+    xmgl: '项目管理',
+    sgjl: '认购记录',
+    xjxm: '新建项目',
+    ieocs: 'IEO参数'
 }
 export const home = {
     zyh: '总用户',
@@ -991,4 +995,17 @@ export const mall = {
     spxg: '商品修改',
     tjsp: '添加商品',
     ywjj: '英文简介'
+}
+export const ieo = {
+    xmmc: '项目名称',
+    mfsl: '每份数量',
+    bj: '编辑',
+    xmbh: '项目编号',
+    fxsl: '发行数量',
+    fxjg: '发行价格',
+    mjmb: '募集目标',
+    kksj: '扣款时间',
+    fbsj: '发币时间',
+    zfs: '总份数',
+    syfs: '剩余份数',
 }

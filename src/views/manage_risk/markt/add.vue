@@ -6,13 +6,14 @@
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Form ref="form" :model="form" :rules="ruleInline" :label-width="162" style="margin:0 20px;">
-            <FormItem :label="vm.$t('exchange.jysc')" prop="productName">
-                <Select  v-model="form.productName">
-                    <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}</Option>
+            <FormItem :label="vm.$t('exchange.jysc')" prop="marketName">
+                <Select v-model="form.marketName">
+                    <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}
+                    </Option>
                 </Select>
             </FormItem>
-            <FormItem :label="vm.$t('risk.wjyjgfz')"  prop="originalPrice">
-                <numberbox class="number_input" :accuracy="0" v-model="form.originalPrice"/>
+            <FormItem :label="vm.$t('risk.wjyjgfz')" prop="marketTimeDiff">
+                <numberbox class="number_input" :accuracy="0" v-model="form.marketTimeDiff"/>
             </FormItem>
             <FormItem>
                 <Button type="primary" style="width:100%;" @click="addVerify">{{vm.$t('finance.chuangj')}}</Button>
@@ -22,10 +23,9 @@
 </template>
 
 <script>
-    import mallApi from '../../../api/mall';
-    import until from '../../../libs/util';
+    import extendApi from '../../../api/extend';
     import Numberbox from '../../components/dialog/numberbox';
-    import currenyApi from '../../../api/currency'
+    import currenyApi from '../../../api/currency';
 
     export default {
         components: {Numberbox},
@@ -34,15 +34,15 @@
             return {
                 vm: vm,
                 form: {
-                    discountPrice: null,
-                    originalPrice: null,
+                    marketName: null,
+                    marketTimeDiff: null,
                 },
                 ruleInline: {
-                    discountPrice: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('mall.zkj'), trigger: 'blur'}
+                    marketName: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.jysc'), trigger: 'blur'}
                     ],
-                    originalPrice: [
-                        {required: true, message: vm.$t('common.qsr')+vm.$t('mall.yj')}
+                    marketTimeDiff: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('mall.yj')}
                     ],
                 },
                 marketList: []
@@ -60,7 +60,7 @@
             addVerify () {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        mallApi.addProduct(this.form, (res) => {
+                        extendApi.addMarket(this.form, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('okCallback');
                             this.$emit('removeDialog');
@@ -70,7 +70,7 @@
                     }
                 });
             },
-            closeDialog(){
+            closeDialog () {
                 this.$emit('removeDialog');
             }
         }

@@ -484,6 +484,77 @@ export const exchangeRouter = [
     }
 ];
 
+export const ieoRouter = [
+    {
+        path: '/ieo',
+        name: 'ieo_project',
+        title: 'nav.xmgl',
+        component: Main,
+        icon: 'beaker',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'ieo_project', title: 'nav.xmgl', name: 'ieo_project_index', component: resolve => {
+                    require(['./views/manage_ieo/ieo_project.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/ieo',
+        name: 'record',
+        title: 'nav.sgjl',
+        component: Main,
+        icon: 'ios-paper-outline',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'record', title: 'nav.sgjl', name: 'record_index', component: resolve => {
+                    require(['./views/manage_ieo/record.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/ieo',
+        name: 'new_project',
+        title: 'nav.xjxm',
+        component: Main,
+        icon: 'android-add',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'new_project', title: 'nav.xjxm', name: 'new_project_index', component: resolve => {
+                    require(['./views/manage_ieo/new_project.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
+        path: '/ieo',
+        name: 'ieo_params',
+        title: 'nav.ieocs',
+        component: Main,
+        icon: 'android-options',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
+        children: [
+            {
+                path: 'ieo_params', title: 'nav.ieocs', name: 'ieo_params_index', component: resolve => {
+                    require(['./views/manage_ieo/ieo_params.vue'], resolve);
+                }
+            }
+        ]
+    }
+]
+
 export const financeRouter = [
     {
         path: '/finance_finance',
@@ -1744,6 +1815,7 @@ export const routers = [
     ...exchangeRouter,
     ...communityRouter,
     ...voteRouter,
+    ...ieoRouter,
     ...financeRouter,
     ...riskRouter,
     ...mallRouter,

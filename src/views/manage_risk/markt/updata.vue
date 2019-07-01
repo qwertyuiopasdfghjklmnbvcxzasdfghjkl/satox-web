@@ -7,17 +7,18 @@
             </p>
             <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
                 <Col span="7">{{vm.$t('exchange.jysc')}}</Col>
-                <Col span="10">{{this.item.orderId}}</Col>
+                <Col span="10">{{this.item.marketName}}</Col>
                 <Col span="6"></Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="7">{{vm.$t('risk.wjyjgfz')}}</Col>
-                <Col span="7">{{this.item.receiverPhone}}</Col>
+                <Col span="7">{{this.item.marketTimeDiff}}</Col>
                 <Col span="7">
-                    <numberbox v-model="receiverPhone" :accuracy="0" style="width: 160px;border:1px solid #dddee1"></numberbox>
+                    <numberbox v-model="marketTimeDiff" :accuracy="0"
+                               style="width: 160px;border:1px solid #dddee1"></numberbox>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('receiverPhone')">{{vm.$t('common.bc')}}</Button>
+                    <Button type="primary" @click="tabs('marketTimeDiff')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -26,7 +27,7 @@
 
 <script>
     import Numberbox from '../../components/dialog/numberbox';
-    import mallApi from '../../../api/mall';
+    import extendApi from '../../../api/extend';
 
     export default {
         components: {Numberbox},
@@ -35,23 +36,22 @@
             const vm = window.vm;
             return {
                 vm: vm,
-                receiverPhone: null,
-                receiverAddress: null,
-                state: null
+                marketTimeDiff: null,
             };
         },
         created () {
-            this.state = this.item.state;
         },
         methods: {
             tabs (name) {
                 let data = {
-                    orderId: this.item.orderId
+                    marketManageId: this.item.marketManageId,
+                    marketName: this.item.marketName,
                 };
                 data[name] = this[name];
-                mallApi.updataOrder(data, (res) => {
+                extendApi.updataMarket(data, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
-                    this.item[name] = this[name]
+                    this.item[name] = this[name];
+                    this.closeDialog();
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });

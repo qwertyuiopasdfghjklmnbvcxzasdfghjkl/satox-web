@@ -6,27 +6,26 @@
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Form ref="form" :model="form" :rules="ruleInline" :label-width="150" style="margin:0 20px;">
-            <FormItem :label="vm.$t('monitoring.gllx')" prop="productName">
-                <Select  v-model="form.productName">
-                    <Option v-for="item in pLink" :value="item.code">{{item.name}}</Option>
+            <FormItem :label="vm.$t('monitoring.gllx')" prop="nodeChain">
+                <Select  v-model="form.nodeChain">
+                    <Option v-for="item in pLink" :value="item.name">{{item.name}}</Option>
                 </Select>
             </FormItem>
-            <FormItem :label="vm.$t('risk.syjdtbczfz')"  prop="originalPrice">
-                <numberbox class="number_input" :accuracy="0" v-model="form.originalPrice"/>
+            <FormItem :label="vm.$t('risk.syjdtbczfz')"  prop="nodeSyncDiff">
+                <numberbox class="number_input" :accuracy="0" v-model="form.nodeSyncDiff"/>
             </FormItem>
-            <FormItem :label="vm.$t('risk.qksmgdczfz')"  prop="discountPrice">
-                <numberbox class="number_input" :accuracy="0" v-model="form.discountPrice"/>
+            <FormItem :label="vm.$t('risk.qksmgdczfz')"  prop="nodeScanDiff">
+                <numberbox class="number_input" :accuracy="0" v-model="form.nodeScanDiff"/>
             </FormItem>
             <FormItem>
-                <Button type="primary" style="width:100%;" @click="addVerify">{{vm.$t('finance.chuangj')}}</Button>
+                <Button type="primary" style="width:100%;" @click="addVerify">{{vm.$t('common.tj')}}</Button>
             </FormItem>
         </Form>
     </Card>
 </template>
 
 <script>
-    import mallApi from '../../../api/mall';
-    import until from '../../../libs/util';
+    import extendApi from '../../../api/extend';
     import Numberbox from '../../components/dialog/numberbox';
 
     export default {
@@ -36,18 +35,18 @@
             return {
                 vm: vm,
                 form: {
-                    discountPrice: null,
-                    originalPrice: null,
-                    productName: null,
+                    nodeChain: null,
+                    nodeSyncDiff: null,
+                    nodeScanDiff: null,
                 },
                 ruleInline: {
-                    discountPrice: [
+                    nodeChain: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('mall.zkj'), trigger: 'blur'}
                     ],
-                    originalPrice: [
+                    nodeSyncDiff: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('mall.yj')}
                     ],
-                    productName: [
+                    nodeScanDiff: [
                         {required: true, message: vm.$t('common.qsr')+vm.$t('mall.mc')}
                     ]
                 },
@@ -61,7 +60,7 @@
             addVerify () {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        mallApi.addProduct(this.form, (res) => {
+                        extendApi.addNode(this.form, (res) => {
                             this.$Message.success({content: this.vm.$t('common.tjcg')});
                             this.$emit('okCallback');
                             this.$emit('removeDialog');

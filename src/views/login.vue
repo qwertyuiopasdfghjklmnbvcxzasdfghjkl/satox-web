@@ -45,6 +45,7 @@
     import hexmd5 from '../libs/hex_md5';
     import util from '../libs/util';
     import userApi from '../api/user';
+    import extendApi from '../api/extend';
 
     export default {
         data () {
@@ -70,6 +71,10 @@
             imageT () {
                 this.form.verifyCode = '';
             }
+        },
+        created () {
+            this.getL();
+            this.getList();
         },
         methods: {
             handleSubmit () {
@@ -97,6 +102,21 @@
                             window.console.log(error);
                         });
                     }
+                });
+            },
+            getL () {
+                let data = {
+                    l: '',
+                    m: '5'
+                };
+                userApi.getLang(data, res => {
+                    console.log(res);
+                });
+            },
+            getList () {
+                userApi.getLangType((res) => {
+                    // this.data1 = res;
+                    console.log(res)
                 });
             },
             changeLang () {

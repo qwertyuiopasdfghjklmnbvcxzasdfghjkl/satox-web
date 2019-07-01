@@ -6,7 +6,7 @@
             </p>
             <p style="margin-bottom: 10px;">
                 {{$t('exchange.jysc')}}：
-                <Select style="width: 200px;" v-model="publicLink">
+                <Select style="width: 200px;" v-model="marketName">
                     <Option :value="0" :key="0">{{$t('common.qb')}}</Option>
                     <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}</Option>
                 </Select>
@@ -34,19 +34,19 @@
                 columns1: [
                     {
                         title: this.$t('risk.bhid'),
-                        key: 'sequence'
+                        key: 'marketManageId'
                     },
                     {
                         title: this.$t('exchange.jysc'),
-                        key: 'title'
+                        key: 'marketName'
                     },
                     {
                         title: this.$t('risk.wjyjgfz'),
-                        key: 'link',
+                        key: 'marketTimeDiff',
                     },
                     {
                         title: this.$t('common.cjsj'),
-                        key: 'linkEn'
+                        key: 'createdAt'
                     },
                     {
                         title: this.$t('common.cz'),
@@ -68,13 +68,11 @@
                                     }
                                 }, this.$t('common.xg')),
                                 h('Button', {
-                                    props: {type: 'primary', size: 'small'},
+                                    props: {type: 'warning', size: 'small'},
                                     on: {
                                         click: () => {
-                                            extendApi.deleteAnnouncement({
-                                                announcementId: params.row.announcementId
-                                            }, (res) => {
-                                                this.$Message.success({content: this.$t('operation.qxcg')});
+                                            extendApi.delMarket( params.row.marketManageId, (res) => {
+                                                this.$Message.success({content: this.$t('kyc.sccg')});
                                                 this.getList();
                                             }, (msg) => {
                                                 this.$Message.error({content: msg});
@@ -88,7 +86,7 @@
                 ],
                 data1: [],
                 marketList: [],
-                publicLink: 0
+                marketName: 0
             };
         },
         created () {
@@ -109,7 +107,12 @@
                 });
             },
             getList () {
-                extendApi.findAllAnnouncement(this.curPage, {}, (res) => {
+                let data = {
+                    page: this.curPage,
+                    size: this.size,
+                    keyword: this.marketName === 0 ? null : this.marketName
+                }
+                extendApi.marketList(data, (res) => {
                     this.data1 = res;
                 });
             },

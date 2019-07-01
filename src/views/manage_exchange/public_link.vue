@@ -65,16 +65,18 @@
                 data: []
             };
         },
+        watch: {
+            data () {
+                this.getAll();
+            }
+        },
         created () {
             this.getList();
             this.getAll();
         },
         methods: {
             getAll () {
-                userApi.getSymbolList((res) => {
-                    this.datas = res.data;
-                    console.log(this.datas)
-                });
+                this.datas = JSON.parse(window.localStorage.symbolTypes);
             },
             getList () {
                 let data = {
@@ -85,6 +87,7 @@
                 userApi.getSymbolList(data, (res, toatl) => {
                     this.data = res;
                     this.total = toatl;
+                    window.localStorage.symbolTypes = JSON.stringify(res);
                 });
             },
             changePage (page) {

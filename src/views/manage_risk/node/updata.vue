@@ -7,27 +7,27 @@
             </p>
             <Row style="border-bottom:1px solid #e9eaec;height:30px; line-height:30px;">
                 <Col span="7">{{vm.$t('monitoring.gllx')}}</Col>
-                <Col span="10">{{this.item.orderId}}</Col>
+                <Col span="10">{{this.item.nodeChain }}</Col>
                 <Col span="6"></Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="7">{{vm.$t('risk.syjdtbczfz')}}</Col>
-                <Col span="7">{{this.item.receiverPhone}}</Col>
+                <Col span="7">{{this.item.nodeSyncDiff}}</Col>
                 <Col span="7">
-                    <numberbox v-model="receiverPhone" :accuracy="0" style="width: 160px;border:1px solid #dddee1"></numberbox>
+                    <numberbox v-model="nodeSyncDiff" :accuracy="0" style="width: 160px;border:1px solid #dddee1"></numberbox>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('receiverPhone')">{{vm.$t('common.bc')}}</Button>
+                    <Button type="primary" @click="tabs('nodeSyncDiff')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="7">{{vm.$t('risk.qksmgdczfz')}}</Col>
-                <Col span="7">{{this.item.receiverAddress}}</Col>
+                <Col span="7">{{this.item.nodeScanDiff}}</Col>
                 <Col span="7">
-                    <numberbox :accuracy="0" v-model="discountPrice" style="width: 160px;border:1px solid #dddee1"/>
+                    <numberbox :accuracy="0" v-model="nodeScanDiff" style="width: 160px;border:1px solid #dddee1"/>
                 </Col>
                 <Col span="3">
-                    <Button type="primary" @click="tabs('receiverAddress')">{{vm.$t('common.bc')}}</Button>
+                    <Button type="primary" @click="tabs('nodeScanDiff')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
         </Card>
@@ -36,7 +36,7 @@
 
 <script>
     import Numberbox from '../../components/dialog/numberbox';
-    import mallApi from '../../../api/mall';
+    import extendApi from '../../../api/extend';
 
     export default {
         components: {Numberbox},
@@ -45,21 +45,19 @@
             const vm = window.vm;
             return {
                 vm: vm,
-                receiverPhone: null,
-                receiverAddress: null,
-                state: null
+                nodeSyncDiff: null,
+                nodeScanDiff: null,
             };
         },
         created () {
-            this.state = this.item.state;
         },
         methods: {
             tabs (name) {
                 let data = {
-                    orderId: this.item.orderId
+                    nodeManageId: this.item.nodeManageId
                 };
                 data[name] = this[name];
-                mallApi.updataOrder(data, (res) => {
+                extendApi.updateNode(data, (res) => {
                     this.$Message.success({content: this.vm.$t('common.xgcg')});
                     this.item[name] = this[name]
                 }, (msg) => {
