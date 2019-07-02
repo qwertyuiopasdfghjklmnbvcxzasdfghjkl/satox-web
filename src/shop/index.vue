@@ -17,7 +17,7 @@
       </ul>
       <div class="box_right">
         <div class="no_shop" v-if="!payCar.length">
-          <p style="text-align: center" class="noImg"><img src="../assets/images/noShop.jpg" alt=""></p>
+          <p style="text-align: center" class="noImg"><img src="../assets/images/noShop.png" alt=""></p>
           <h4>{{$t('shop.empty_cart')}}</h4>
           <h4>{{$t('shop.shopping_now')}}</h4>
         </div>

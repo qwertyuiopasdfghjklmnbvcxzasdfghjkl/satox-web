@@ -33,7 +33,7 @@
           </label>
           <button @click="sub()" :disabled="butState" :class="{'dis':butState}">{{$t('shop.confirmation_pay')}}</button>
           <p>
-            <router-link to="/shop" style="color: #000">{{$t('shop.return_product')}}</router-link>
+            <router-link to="/shop" style="color: #f8f8f8">{{$t('shop.return_product')}}</router-link>
           </p>
         </li>
       </ul>
