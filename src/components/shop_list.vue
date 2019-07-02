@@ -72,12 +72,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     div {
       width: 60px;
-      border: 1px solid #000;
+      border: 1px solid #F8F8F8;
       text-align: center;
       display: flex;
       justify-content: space-around;
@@ -85,7 +85,7 @@
       line-height: 14px;
 
       span {
-        border: 1px solid #000;
+        border: 1px solid #F8F8F8;
         border-top: none;
         border-bottom: none;
         display: inline-block;
@@ -107,7 +107,7 @@
 
     p {
       font-size: 20px;
-      color: #DF0500;
+      color: #bb8d34;
       width: 50px;
     }
   }

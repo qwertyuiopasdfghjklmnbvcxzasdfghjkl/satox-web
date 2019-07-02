@@ -1,7 +1,7 @@
 .cont {
   width: 1100px;
   margin: 12px auto;
-  background: #1a1a1a;
+  background: #121212;
 
   .title {
     background: #030303;
@@ -29,7 +29,7 @@
       width: 540px;
 
       li {
-        background: #FFFFFF;
+        background: #202020;
         border-radius: 6px;
         width: 480px;
         display: flex;
@@ -40,10 +40,11 @@
           width: 180px;
           height: 120px;
           border-radius: 10px;
-          box-shadow: 0 0 24px rgba(123, 123, 123, 0.3);
+          background: #ffffff;
           display: flex;
           justify-content: center;
           align-items: center;
+          overflow: hidden;
           img{
             max-width: 100%;
             max-height: 100%;
@@ -58,17 +59,18 @@
           p {
             font-size:18px;
             font-weight: 400;
-            color: rgba(223, 5, 0, 1);
+            color: #bb8d34;
             padding: 4px 0;
           }
 
           span {
             display: block;
-            color: #474747;
+            color: #CBCBCB;
           }
 
           h2 {
             font-size: 18px;
+            color: #F8F8F8;
           }
 
           button {
@@ -81,6 +83,7 @@
         }
         &.pay_box{
           display: block;
+          color: #f8f8f8;
           h1{
             font-size: 20px;
           }
@@ -92,9 +95,11 @@
               padding: 8px 0;
               font-size: 16px;
               input{
-                border-bottom: 1px solid #dedede;
+                border-bottom: 1px solid #313131;
                 text-indent: 6px;
                 flex-grow: 1;
+                background: none;
+                color: #CBCBCB;
               }
             }
           }
@@ -118,7 +123,7 @@
     }
 
     .box_right {
-      background: #FFFFFF;
+      background: #202020;
       border-radius: 6px;
       padding: 20px 30px;
       flex-grow: 1;
@@ -128,15 +133,17 @@
         }
         h4{
           //font-size: 16px;
+          color: #f8f8f8;
         }
       }
       .shop_list {
+        color: #F8F8F8;
         h1 {
           font-weight: bold;
           font-size: 20px;
         }
         .list_box{
-           border-bottom: 1px solid #e7e7e7;
+           border-bottom: 1px solid #313131;
            padding: 10px 0;
          }
         .pay_radio{
@@ -154,10 +161,12 @@
               span{
                 position: relative;
                 vertical-align: middle;
-                margin-right: 8px;
+                margin-right: 5px;
+                width: 24px;
+                display: inline-block;
               }
               img{
-                height: 16px;
+                //height: 16px;
               }
               input{
                 opacity: 0;
@@ -208,7 +217,7 @@
   button{
     cursor: pointer;
     height: 36px;
-    background: #00A55E;
+    background: #bb8d34;
     border: none;
     color: #FFFFFF;
     border-radius: 3px;
