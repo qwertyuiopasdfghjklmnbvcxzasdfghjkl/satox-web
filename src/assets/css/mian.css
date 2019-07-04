@@ -71,6 +71,12 @@ div.hopscotch-bubble h3,div.hopscotch-bubble .hopscotch-content{color:#aeb7d0;}
 
 
 .ellipsis {white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.mask-layer {position: fixed; left: 0; top: 70px; right: 0; bottom: 0; background-color: rgba(0,0,0,.6); z-index: 9999999;}
+@media screen and (max-width: 1600px) {
+  .mask-layer {
+    top: 60px;
+  }
+}
 
 .rp {position: relative;}
 .ap {position: absolute;}
