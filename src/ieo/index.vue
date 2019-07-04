@@ -1,81 +1,150 @@
 <template>
 	<div class="page">
 		<img src="" class="banner-brief">
-		<ul class="tab-bar">
-			<li class="active">进行中</li>
-			<li>即将开始</li>
-			<li>已结束</li>
+		<ul class="tab-bar"><a name="A"></a>
+			<li class="active"><a href="#A">进行中</a></li>
+			<li><a href="#B">即将开始</a></li>
+			<li><a href="#C">已结束</a></li>
 		</ul>
 		<div class="title box">进行中</div>
 		<ul class="items-container clearfix">
-			<li>
+			<li v-for="item in list1" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
-					<img src="">
-					<span class="fs16">EOSIO  EOS</span>
+					<img :src="item.projectLogo">
+					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">Start of purchase: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Subscription deadline: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Issue number: <span>3,500,000 EOS</span></p>
-				<p class="mt15">Raised amount: <span>3,500,000 ETH</span></p>
-				<p class="mt15">Subscribed: <span>2300 ETH</span></p>
+				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
-					<div class="progress-bar" style="width: 50%"></div>
+					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100}%`"></div>
 				</div>
-				<p class="mt8 text-center">已达成 50%</p>
-				<button>End of distance: 00 days 20:50:22</button>
+				<p class="mt8 text-center">已达成 {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
+				<button>距离结束：{{item.getMsec(item)|humanTime('天')}}</button>
 			</li>
 		</ul>
-		<div class="title box mt10">即将开始</div>
+		<div class="title box mt10">即将开始</div><a name="B"></a>
 		<ul class="items-container wait clearfix">
-			<li>
+			<li v-for="item in list2" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
-					<img src="">
-					<span class="fs16">EOSIO  EOS</span>
+					<img :src="item.projectLogo">
+					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">Start of purchase: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Subscription deadline: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Issue number: <span>3,500,000 EOS</span></p>
-				<p class="mt15">Raised amount: <span>3,500,000 ETH</span></p>
-				<p class="mt15">Subscribed: <span>2300 ETH</span></p>
-				<button>End of distance: 00 days 20:50:22</button>
+				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
+				<button>距离开始：{{item.getMsec(item)|humanTime('天')}}</button>
 			</li>
 		</ul>
-		<div class="title box mt10">已结束</div>
+		<div class="title box mt10">已结束</div><a name="C"></a>
 		<ul class="items-container finished clearfix">
-			<li>
+			<li v-for="item in list3" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
-					<img src="">
-					<span class="fs16">EOSIO  EOS</span>
+					<img :src="item.projectLogo">
+					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">Start of purchase: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Subscription deadline: <span>2018-07-03 20:00:00</span></p>
-				<p class="mt15">Issue number: <span>3,500,000 EOS</span></p>
-				<p class="mt15">Raised amount: <span>3,500,000 ETH</span></p>
-				<p class="mt15">Subscribed: <span>2300 ETH</span></p>
+				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
-					<div class="progress-bar" style="width: 50%"></div>
+					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100}%`"></div>
 				</div>
-				<p class="mt8 text-center">达成 50%</p>
+				<p class="mt8 text-center">达成 {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
 			</li>
 		</ul>
+		<div class="mask-layer" v-show="locked">
+			<div class="center"><loading :size="48"/></div>
+		</div>
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
+import loading from '@/components/loading'
+import ieoApi from '@/api/ieo'
 export default {
+	components: {
+	  loading
+	},
 	data(){
 		return {
-
+			list1: [],
+			list2: [],
+			list3: [],
+			timer:0,
+			interVal:null,
+			locked:true
 		}
 	},
 	computed:{
-		...mapGetters([]),
+		...mapGetters(['getLang']),
+		lang(){
+			if(this.getLang==='zh-CN' || this.getLang==='cht'){
+				return ''
+			} else {
+				return 'En'
+			}
+		}
+	},
+	created(){
+		this.getIEOProjectsList()
+	},
+	beforeRouteLeave(to, from, next){
+		clearInterval(this.interVal)
+		next()
 	},
 	methods:{
-
+		getIEOProjectsList(){
+			ieoApi.getIEOProjectsList((list, serverTime)=>{
+				let list1 = [], list2 = [], list3 = []
+				this.locked = false
+				this.timer = 0
+				if(!this.interVal){
+					this.interVal = setInterval(()=>{this.timer += 1000},1000)
+				}
+				for(let item of list){
+					item.timestamp = serverTime
+					if(item.startTime > serverTime){
+						item.getMsec = (project)=>{
+							let msec = project.startTime - project.timestamp - this.timer
+							if(msec<=0){
+								this.getIEOProjectsList()
+							}
+							return msec>=0?msec:0
+						}
+						list2.push(item)
+					} else if(item.endTime > serverTime){
+						item.getMsec = (project)=>{
+							let msec = project.endTime - project.timestamp - this.timer
+							if(msec<=0){
+								this.getIEOProjectsList()
+							}
+							return msec>=0?msec:0
+						}
+						list1.push(item)
+					} else {
+						list3.push(item)
+					}
+				}
+				this.list1 = list1
+				this.list2 = list2
+				this.list3 = list3
+			}, msg=>{
+				Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+			})
+		},
+		goDetail(id){
+			this.$router.push({name:'ieo_detail', params:{id:id}})
+		}
 	}
 
 }
@@ -103,9 +172,12 @@ export default {
 		position: relative;
 		text-align: center;
 		font-size: 16px;
-		cursor: pointer;
+		a {
+			display: block;
+			color: #fff;
+		}
 		&.active {
-			color: @main-color;
+			a {color: @main-color;}
 			&:after {
 				content: '';
 				position: absolute;
@@ -129,6 +201,7 @@ export default {
 	background-color:#fff;
 	overflow-x: hidden;
 	position: relative;
+	cursor: pointer;
 	&:nth-of-type(4n){
 		margin-right: 0;
 	}
@@ -151,7 +224,7 @@ export default {
 		width: 100%;
 		bottom: 0;
 		border:none;
-		background-color:#00A55E;
+		background-color:#E44242;
 		color: #fff;
 	}
 	.progress {
@@ -175,7 +248,7 @@ export default {
 	}
 }
 .title {background-color: #000; color: #fff; font-size: 18px; line-height: 50px;}
-.items-container.wait li button {background-color: #E44242;}
+.items-container.wait li button {background-color: #00A55E;}
 .items-container.finished li {padding-bottom: 15px;}
-
+.center { position: absolute; left: 50%; top: 50%; margin-left: -24px; margin-top: -24px; }
 </style>
