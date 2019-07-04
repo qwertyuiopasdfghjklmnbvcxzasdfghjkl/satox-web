@@ -1,28 +1,26 @@
 <template>
 	<div class="page">
 		<div class="detail-top">
-			<div class="left box-bgc"><img src="../assets/images/login_bg.jpg"></div>
+			<div class="left box-bgc"><img :src="info.projectThumb"></div>
 			<div class="right">
 				<div>
-					<strong class="fs18">EOSIO  EOS</strong>
-					<button type="button" class="mint-btn danger small ml50" style="vertical-align: bottom;">Processing</button>
-					<button type="button" class="mint-btn success small ml50" style="vertical-align: bottom;">Processing</button>
-					<button type="button" disabled="" class="mint-btn disabled small ml50" style="vertical-align: bottom;">Processing</button>
+					<strong class="fs18">{{info[`projectName${lang}`]}}</strong>
+					<button type="button" class="mint-btn danger small ml50" style="vertical-align: bottom;" v-if="stage===1">进行中</button>
+					<button type="button" class="mint-btn success small ml50" style="vertical-align: bottom;" v-if="stage===2">即将开始</button>
+					<button type="button" disabled="" class="mint-btn disabled small ml50" style="vertical-align: bottom;" v-if="stage===3">已结束</button>
 				</div>
-				<div class="mt20 fs13">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-				</div>
+				<div class="mt20 fs13" v-html="info[`projectProfile${lang}`]"></div>
 				<div class="mt20 items">
-					<p>Start of purchase: <span>2018-07-03 20:00:00</span></p>
-					<p>Subscription deadline: <span>2018-07-03 20:00:00</span></p>
+					<p>申购开始： <span>{{new Date(info.startTime).format()}}</span></p>
+					<p>申购截止： <span>{{new Date(info.endTime).format()}}</span></p>
 				</div>
 				<div class="mt15 items">
-					<p>Subscription price: <span>1 ETH = 8474 TNT </span></p>
-					<p>Issue number: <span>3,500,000 EOS</span></p>
+					<p>认购价格： <span>1 {{info.priceSymbol}} = {{info.subscriptionPrice}} {{info.projectSymbol}} </span></p>
+					<p>发行数量： <span>{{String(info.totalIssue).toMoney()}} {{info.projectSymbol}}</span></p>
 				</div>
 				<div class="mt15 items">
-					<p>Subscribed: <span>2300 ETH</span></p>
-					<p>Raising goals: <span>3,500,000 ETH</span></p>
+					<p>已认购： <span>{{info.totalSubscription}} {{info.priceSymbol}}</span></p>
+					<p>募集目标： <span>{{String(info.totalRaised).toMoney()}} {{info.priceSymbol}}</span></p>
 				</div>
 				<div class="mt20 progress-container">
 					<div class="progress" sty>
@@ -66,21 +64,57 @@
 				</div>
 			</div>
 		</div>
+		<div class="mask-layer" v-show="locked">
+			<div class="center"><loading :size="48"/></div>
+		</div>
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import utils from '@/assets/js/utils'
+import ieoApi from '@/api/ieo'
 import joinDialog from './join'
+import loading from '@/components/loading'
 export default {
+	components: {
+	  loading
+	},
 	data(){
 		return {
-
+			info:{},
+			serverTime:0,
+			locked:true,
+			interVal:null,
+			locked:true
 		}
 	},
 	computed:{
-		...mapGetters([]),
+		...mapGetters(['getLang']),
+		lang(){
+			if(this.getLang==='zh-CN' || this.getLang==='cht'){
+				return ''
+			} else {
+				return 'En'
+			}
+		},
+		stage(){
+			let _stage = 3
+			if(this.info.startTime > this.serverTime){
+				_stage = 2
+			} else if(this.info.endTime > this.serverTime){
+				_stage = 1
+			}
+			return _stage
+		},
+	},
+	created(){
+		this.getIEOprojectsDetail()
+	},
+	beforeRouteLeave(to, from, next){
+		clearInterval(this.interVal)
+		next()
 	},
 	methods:{
 		joinDialog(){
@@ -88,6 +122,15 @@ export default {
 			  okCallback: () => {
 			    
 			  }
+			})
+		},
+		getIEOprojectsDetail(){
+			ieoApi.getIEOprojectsDetail(this.$route.params.id,(res, serverTime)=>{
+				this.locked = false
+				this.info = res
+				this.serverTime = serverTime
+			}, msg=>{
+				Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
 			})
 		}
 	}
@@ -184,4 +227,5 @@ export default {
 	.brief {flex: 1; color: #fff; line-height: 1.5em;}
 	.rules {width: 400px; margin-left: 10px; color: #fff; line-height: 1.5em;}
 }
+.center { position: absolute; left: 50%; top: 50%; margin-left: -24px; margin-top: -24px; }
 </style>
