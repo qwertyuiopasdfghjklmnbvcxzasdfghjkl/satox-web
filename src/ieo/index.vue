@@ -23,7 +23,7 @@
 					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100}%`"></div>
 				</div>
 				<p class="mt8 text-center">已达成 {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
-				<button>距离结束：{{item.getMsec(item)|humanTime('天')}}</button>
+				<button>距离结束：{{item.getMsec(item)|humanTime(lang==''?'天':'days')}}</button>
 			</li>
 		</ul>
 		<div class="title box mt10">即将开始</div><a name="B"></a>

@@ -39,7 +39,7 @@ langApi.getLanguage(lang, (res) => {
   store.state.smsCountrys = res.sms_countrys
   i18n.locale = lang
   i18n.setLocaleMessage(lang, res)
-  new Vue({
+  window.vm = new Vue({
     el: '#app',
     router,
     store,
@@ -48,7 +48,7 @@ langApi.getLanguage(lang, (res) => {
     components: { App }
   })
 }, (msg) => {
-  new Vue({
+  window.vm = new Vue({
     el: '#app',
     router,
     store,
