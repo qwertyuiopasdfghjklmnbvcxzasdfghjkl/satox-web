@@ -12,9 +12,9 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
-            <!-- <li>
+            <li v-if="false">
               <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
-            </li> -->
+            </li>
             <!--APP下载-->
             <li>
               <router-link :to="{name:'download'}" :class="{'current':$route.name==='download'}">
@@ -47,7 +47,7 @@
                 {{$t('public.navigation_logout')}}<!--退出-->
               </a>
             </li>
-            <li>
+            <li v-if="false">
               <router-link :to="{name:'shop_index'}">
                 {{$t('shop.shop')}}<!--购物-->
               </router-link>
@@ -125,9 +125,9 @@
           {{$t('public.navigation_exchange')}}<!--币币交易-->
         </a>
       </li>
-      <!-- <li>
+      <li>
         <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
-      </li> -->
+      </li>
       <!--投票挖矿-->
       <!-- <li>
         <a @click="reloadPage('vote_mining_index')" :class="{'current':$route.name.includes('vote_mining')}">
@@ -165,7 +165,7 @@
       <li v-if="isLogin">
         <a @click="reloadPage('mycenter')">{{username}}</a>
       </li>
-      <li>
+      <li v-if="false">
         <router-link :to="{name:'shop_index'}">
           {{$t('shop.shop')}}<!--购物-->
         </router-link>

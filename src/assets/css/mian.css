@@ -226,6 +226,10 @@ div.hopscotch-bubble h3,div.hopscotch-bubble .hopscotch-content{color:#aeb7d0;}
   color: #fff;
   background-color: #E44242;
 }
+.mint-btn.warning {
+  color: #fff;
+  background-color: #DDC754;
+}
 .mint-btn.disabled {
   color: #999;
   background-color: #ddd;
