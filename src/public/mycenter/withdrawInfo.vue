@@ -75,7 +75,7 @@
                 </div>
                 <div class="filed">
                     <input type="button" class="BNB-subbtn" :value="$t('account.user_submit')" @click="walletWithdraw" /><!--提交-->
-                    <template v-if="symbol==='USSD'">
+                    <template v-if="symbol==='USSD'" v-show="false">
                       <span class="large_withdraw" @click="ussdWithdrawKey=false" v-if="ussdWithdrawKey">{{$t('account.withdraw_to_card')}}</span>
                       <span class="large_withdraw" @click="ussdWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
                     </template>

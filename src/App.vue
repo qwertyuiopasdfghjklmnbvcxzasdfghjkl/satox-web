@@ -50,6 +50,7 @@ export default {
     getApiToken (val) {
       if (val) {
         this.getUserInfoMethod()
+        this.getBtcPrice()
       }
       try {
         this.gws.changeLogin()
@@ -58,17 +59,17 @@ export default {
       }
       if (val) {
         // 登录跳转
-        let tempName = null
+        let tempPath = null
         if (this.fromRoute) {
           if (this.fromRoute.meta.goHome) {
-            tempName = 'home'
+            tempPath = '/'
           } else {
-            tempName = this.fromRoute.name === 'login' ? 'login' : this.fromRoute.name
+            tempPath = this.fromRoute.name === 'login' ? '/login' : this.fromRoute.fullPath
           }
         } else {
-          tempName = 'home'
+          tempPath = '/'
         }
-        this.$router.push({name: tempName})
+        this.$router.push({path: tempPath})
         try {
           this.ws && this.ws.open()
         } catch (ex) {
@@ -132,6 +133,9 @@ export default {
   methods: {
     ...mapActions(['setBTCValuation', 'setUSDCNY', 'setNetworkSignal', 'setUserInfo','setSysParams']),
     getBtcPrice(){
+      if (!this.getApiToken) {
+        return
+      }
       marketApi.getBtcPrice(res=>{
         this.setUSDCNY({
           USD: numUtils.BN(res.USD).toFixed(2),

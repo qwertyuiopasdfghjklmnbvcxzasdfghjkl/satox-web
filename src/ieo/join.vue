@@ -6,16 +6,16 @@
 		</div>
 		<div class="join-form">
 			<section class="fs16">
-				<p>可认购份数： <strong>10</strong> 份</p>
+				<p>可认购份数： <strong>{{buyLimit}}</strong> 份</p>
 				<p class="mt15">选择付款币种：
-					<select class="tokens">
-						<option value="USSD" selected="">USSD</option>
-						<option value="BTC">BTC</option>
+					<select class="tokens" v-model="accountId">
+						<option :value="item.accountId" selected="" v-for="item in info.accounts">{{item.symbol}}</option>
 					</select>
 				</p>
-				<p class="mt15">可用余额： <strong class="mr20">1000.00 USSD</strong> (每份需支付 <strong>100 USSD</strong>)</p>
-				<p class="mt15">申请份数：
-					<input type="number" name="total" class="total">
+				<p class="mt15">可用余额： <strong class="mr20">{{String(currtAccount.availableBalance).toMoney()}} {{currtAccount.symbol}}</strong> (每份需支付 <strong>{{Number(price)}} {{currtAccount.symbol}}</strong>)</p>
+				<p class="mt15">认购份数：
+					<input type="number" name="total" class="total" v-model="applyQuantity">
+					<span class="ml20" v-show="Number(applyQuantity)">需支付 ≈ <strong>{{totalPay}}</strong> {{currtAccount.symbol}} <span class="f-c-gray ml10">(注：以结算时币种市场汇率为准)</span></span>
 				</p>
 				<p class="mt15 fs14 agreement">
 					<label class="checkbox">
@@ -24,11 +24,11 @@
 					</label>
 					<label for="agreement">我已阅读并同意 <a href="/#/ieo/agreement" target="_blank" class="mcolor">XXXXXX</a> 协议条款</label>
 				</p>
-				<p class="mt25"><button type="button" class="mint-btn success" style="width: 200px">确认申购</button></p>
+				<p class="mt25"><button type="button" class="mint-btn success" :disabled="locked" style="width: 200px" @click="applyValidate">确认申购</button></p>
 			</section>
 			<section class="lh15 f-c-gray">
 				<p><span class="icon-info-with-circle f-c-danger"></span> 认购须知：</p>
-				<p>1. 认购订单无法取消，份数也无法更改。</p>
+				<div v-html="this.info.subscriptionNotice"></div>
 			</section>
 		</div>
 		<div class="title box mt10">当前参与记录</div>
@@ -41,33 +41,156 @@
 				<span>获取数量</span>
 				<span>状态</span>
 			</li>
-			<li>
-				<span>2019-05-05 00:00:00</span>
-				<span>BTC</span>
-				<span>100</span>
-				<span>100BTC</span>
-				<span>100</span>
-				<span>200</span>
+			<li v-for="item in list">
+				<span>{{new Date(item.createdAt).format()}}</span>
+				<span>{{item.subscriptionSymbol}}</span>
+				<span>{{item.applyQuantity}}</span>
+				<span>{{item.subscriptionAmount}}</span>
+				<span>{{item.gainQuantity}}</span>
+				<span>{{item.state}}</span>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
+import ieoApi from '@/api/ieo'
+import marketApi from '@/api/market'
 export default {
+	props:['info'],
 	data(){
 		return {
-
+			list:[],
+			accountId:Object.keys(this.info.accounts)[0],
+			price:null,
+			applyQuantity:'',
+			locked:false
 		}
 	},
 	computed:{
 		...mapGetters([]),
+		buyLimit(){
+			let applied = 0
+			for(let item of this.list){
+				applied += item.gainQuantity
+			}
+			return this.info.subscriptionQuantityLimit - applied
+		},
+		currtAccount(){
+			return this.info.accounts[this.accountId]
+		},
+		totalPay(){
+			return Number((Number(this.price)*Number(this.applyQuantity)).toFixed(8))
+		}
+
+	},
+	watch:{
+		accountId(_new){
+			this.getExchangePrice()
+		}
+	},
+	created(){
+		this.getUserIEOProjectsList()
+		this.getExchangePrice()
 	},
 	methods:{
+		applyValidate(){
+			let self = this
+			if(!Number(this.applyQuantity)){
+				Vue.$koallTipBox({icon: 'notification', message: '请输入认购份数'})
+				return
+			} else if(Number(this.applyQuantity)>this.buyLimit){
+				Vue.$koallTipBox({icon: 'notification', message: '超过当前可认购份数'})
+				return
+			} else if(this.totalPay> this.currtAccount.availableBalance){
+				Vue.$koallTipBox({icon: 'notification', message: this.currtAccount.symbol + ' ' + this.$t('error_code.AVAILABLE_INSUFFICIENT')})
+				return
+			} else if(!document.getElementById('agreement').checked){
+				Vue.$koallTipBox({icon: 'notification', message: this.$t('public0.public122')})
+				return
+			}
+			this.locked = true
+			ieoApi.postProjectsValidate({projectId:this.info.projectId}, res=>{
+				let formData = {
+					applyQuantity:this.applyQuantity,
+					projectId:this.info.projectId,
+					symbol:this.currtAccount.symbol,
+					symbolType:this.info.paymentConfig[this.currtAccount.symbol].symbolType
+				}
+				ieoApi.postProjectsApply(formData, res=>{
+					this.locked = false
+					Vue.$koallTipBox({icon: 'success', message: this.$t(`error_code.SUCCESS`)})
+					this.$emit('okCallback')
+					this.$emit('removeDialog')
+				}, msg=>{
+					this.locked = false
+					Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+				})
+			}, msg=>{
+				this.locked = false
+				if(msg==='KYC_AUTH_FIRST'){
+					Vue.$confirmDialog({
+					  id: 'KYC_AUTH_FIRST',
+					  showCancel: true,
+					  title:this.$t('otc_ad.otc_ad_confirm'),
+					  content: this.$t(`error_code.KYC_AUTH_FIRST`), // 请先完成实名认证
+					  okCallback: () => {
+					  	this.$emit('removeDialog')
+					    vm.$router.push({name: 'mycenter_menu', params: {menu: 'mycenter'}})
+					  }
+					})
+				} else {
+					Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+				}
+			})
+		},
+		getExchangePrice(){
+			this.get24hPrice().then(data=>{
+				if(data.symbol==`${this.info.priceSymbol}${this.currtAccount.symbol}`){
+					this.price = data.price
+				} else {
+					this.price = (1/Number(data.price)).toFixed(8)
+				}
+			}).catch(()=>{
+				this.price = null
+			})
+		},
 		closeDailog () {
 		  this.$emit('removeDialog')
 		},
+		getUserIEOProjectsList(){
+			ieoApi.getUserIEOProjectsList({projectId:this.info.projectId}, res=>{
+				this.list = res
+			}, msg=>{
+				Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
+			})
+		},
+		get24hPrice(){
+			return new Promise((resolve, reject)=>{
+				let _price = 0
+				if(this.currtAccount.symbol===this.info.priceSymbol){
+					resolve({symbol:`${this.currtAccount.symbol}${this.info.priceSymbol}`, price:1})
+					return
+				}
+				marketApi.get24hPrice({symbol: `${this.currtAccount.symbol}${this.info.priceSymbol}`}, data=>{
+					_price = data[0][3]
+					if(_price){
+						resolve({symbol:`${this.currtAccount.symbol}${this.info.priceSymbol}`, price:_price})
+					} else {
+						marketApi.get24hPrice({symbol: `${this.info.priceSymbol}${this.currtAccount.symbol}`}, data=>{
+							_price = data[0][3]
+							if(_price){
+								resolve({symbol:`${this.info.priceSymbol}${this.currtAccount.symbol}`, price:_price})
+							} else {
+								reject()
+							}
+						})
+					}
+				})
+			})
+		}
 	}
 
 }
@@ -81,10 +204,12 @@ export default {
 	padding-bottom: 10px;
 	background-color: #212020;
 	position: relative;
+	border-top-left-radius: 10px; border-top-right-radius: 10px;
+	overflow: hidden;
 	.box {padding-left: 20px; padding-right: 20px;}
 }
 .title {background-color: #000; color: #fff; font-size: 18px; line-height: 50px;}
-.join-title {position: relative; height: 50px;line-height: 50px;color: #fff;font-size: 20px;  text-align: center;background-color: #BA8D35; border-top-left-radius: 10px; border-top-right-radius: 10px;}
+.join-title {position: relative; height: 50px;line-height: 50px;color: #fff;font-size: 20px;  text-align: center;background-color: #BA8D35;}
 .join-title a {position:absolute;text-decoration:none;font-size:16px;color:#fff;top:17px;right:15px; opacity: 0.8; cursor: pointer;}
 .join-title a:hover{opacity: 1;}
 .join-form {

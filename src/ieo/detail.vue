@@ -25,12 +25,12 @@
 				<div class="mt20 progress-container">
 					<div class="progress" sty>
 						<div class="progress-bar-base"></div>
-						<div class="progress-bar" style="width: 50%"></div>
-						<p class="mt8 f-c-gray">completed: 50%</p>
+						<div class="progress-bar" :style="`width: ${info.totalSubscription/info.totalRaised*100}%`"></div>
+						<p class="mt8 f-c-gray">已完成： {{(info.totalSubscription/info.totalRaised*100).toFixed(2)}}%</p>
 					</div>
 					<div>
-						<button type="button" class="mint-btn  success"  @click="joinDialog()">Participate</button>
-						<span class="f-c-danger fs12 ml20">剩余：1小时20分</span>
+						<button type="button" class="mint-btn" :class="stage!==3?'success':'disabled'" :disabled="stage!==1"  @click="joinDialog()">立即参与</button>
+						<span class="f-c-danger fs12 ml20" v-if="stage!==3"><i v-if="stage===2">距离开始</i><i v-if="stage===1">剩余</i>：{{info.getMsec(info)|humanTime(lang==''?'天':'days')}}</span>
 					</div>
 				</div>
 			</div>
@@ -44,24 +44,20 @@
 				<span></span>
 			</div>
 			<div class="steps-title mt20">
-				<span>认购时间：2019-06-15  00:00:00</span>
-				<span>申购截止：2019-06-15  00:00:00</span>
-				<span>扣款时间：2019-06-15  00:00:00</span>
-				<span>发币时间：2019-06-15  00:00:00</span>
+				<span>申购开始：{{new Date(info.startTime).format()}}</span>
+				<span>申购截止：{{new Date(info.endTime).format()}}</span>
+				<span>扣款时间：{{new Date(info.paidTime).format()}}</span>
+				<span>发币时间：{{new Date(info.releaseTime).format()}}</span>
 			</div>
 		</div>
 		<div class="mt10 detail-bottom">
 			<div class="brief">
 				<div class="title box">项目详情</div>
-				<div class="inner box-bgc"></div>
+				<div class="inner box-bgc" v-html="info[`projectDetail${lang}`]"></div>
 			</div>
 			<div class="rules">
 				<div class="title box">参与规则</div>
-				<div class="inner box-bgc">
-					<p>1. 认购订单无法取消，份数也无法更改。</p>
-					<p>2. 一只新币一个用户只能申购一次</p>
-					<p>3. 我们严格遵守不同国家和地区的法规，用户参与认购须完成实名认证。由于相关法规，中国大陆用户和美国用户无法参与此次认购，对您造成的不便敬请谅解。  </p>             
-				</div>
+				<div class="inner box-bgc" v-html="info[`participationRules${lang}`]"></div>
 			</div>
 		</div>
 		<div class="mask-layer" v-show="locked">
@@ -84,29 +80,20 @@ export default {
 	data(){
 		return {
 			info:{},
-			serverTime:0,
-			locked:true,
+			stage:3,
+			timer:0,
 			interVal:null,
 			locked:true
 		}
 	},
 	computed:{
-		...mapGetters(['getLang']),
+		...mapGetters(['getLang', 'getApiToken']),
 		lang(){
 			if(this.getLang==='zh-CN' || this.getLang==='cht'){
 				return ''
 			} else {
 				return 'En'
 			}
-		},
-		stage(){
-			let _stage = 3
-			if(this.info.startTime > this.serverTime){
-				_stage = 2
-			} else if(this.info.endTime > this.serverTime){
-				_stage = 1
-			}
-			return _stage
 		},
 	},
 	created(){
@@ -118,17 +105,55 @@ export default {
 	},
 	methods:{
 		joinDialog(){
+			if(!this.getApiToken){
+				Vue.$confirmDialog({
+				  id: 'PLEASE_LOGIN',
+				  showCancel: true,
+				  title:this.$t('otc_ad.otc_ad_confirm'),
+				  content: `${this.$t('exchange.exchange_Not_logged')}, ${this.$t('public0.public142')}`, // 请前往登录
+				  okCallback: () => {
+				    this.$router.push({path:'/login'})
+				  }
+				})
+				return
+			}
 			utils.setDialog(joinDialog, {
-			  okCallback: () => {
-			    
-			  }
+				info:this.info,
+				okCallback: () => {
+					this.getIEOprojectsDetail()
+				}
 			})
 		},
 		getIEOprojectsDetail(){
 			ieoApi.getIEOprojectsDetail(this.$route.params.id,(res, serverTime)=>{
 				this.locked = false
+				this.timer = 0
+				if(!this.interVal){
+					this.interVal = setInterval(()=>{this.timer += 1000},1000)
+				}
+				res.timestamp = serverTime
+				res.paymentConfig = res.paymentConfig && res.paymentConfig.length?res.paymentConfig.reduce(function(obj,item){obj[item.symbol]=item;return obj;},{}):[]
+				res.accounts = res.accounts && res.accounts.length?res.accounts.reduce(function(obj,item){obj[item.accountId]=item;return obj;},{}):[]
+				if(res.startTime > serverTime){
+					this.stage = 2
+					res.getMsec = (project)=>{
+						let msec = project.startTime - project.timestamp - this.timer
+						if(msec<=0){
+							this.getIEOprojectsDetail()
+						}
+						return msec>=0?msec:0
+					}
+				} else if(res.endTime > serverTime){
+					this.stage = 1
+					res.getMsec = (project)=>{
+							let msec = project.endTime - project.timestamp - this.timer
+							if(msec<=0){
+								this.getIEOprojectsDetail()
+							}
+							return msec>=0?msec:0
+						}
+				}
 				this.info = res
-				this.serverTime = serverTime
 			}, msg=>{
 				Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
 			})
