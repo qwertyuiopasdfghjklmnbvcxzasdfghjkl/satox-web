@@ -8,16 +8,19 @@
                         <!--<span class="refresh" @click="reshAll"></span>-->
                     </p>
                     <p style="margin-bottom: 20px">
-                        {{$t('common.yhm')}}：
-                        <Input v-model="formData.username" clearable style="width: 120px"
-                               :placeholder="$t('common.yhm')"></Input>
-                        {{$t('mall.spmc')}}：
-                        <Select v-model="formData.productName" style="width: 120px">
-                            <Option value="0">{{$t('common.qb')}}</Option>
-                            <Option value="中本硬件">{{$t('mall.zbyj')}}</Option>
-                            <Option value="SATO 借记卡">{{$t('mall.zbjjk')}}</Option>
+                        {{$t('common.bzdh')}}：
+                        <Input v-model="formData.projectSymbol" clearable style="width: 200px"
+                               :placeholder="$t('common.bzdh')"></Input>
+                        {{$t('common.zt')}}：
+                        <Select v-model="formData.state" style="width: 200px">
+                            <Option :value="5">{{$t('common.qb')}}</Option>
+                            <Option :value="0">{{$t('exchange.xs')}}</Option>
+                            <Option :value="1">{{$t('ieo.jjks')}}</Option>
+                            <Option :value="2">{{$t('ieo.jxz')}}</Option>
+                            <Option :value="3">{{$t('ieo.yjs')}}</Option>
+                            <Option :value="4">{{$t('ieo.fbwc')}}</Option>
                         </Select>
-                        <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
+                        <Button type="primary" @click="curPage=1;getList()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage" :page-size="size"
@@ -30,8 +33,11 @@
 
 <script>
     import util from '../../libs/util';
-    import updata from './list/updata';
-    import mallApi from '../../api/mall';
+    import updata from './ieo_project/updata';
+    import details from './ieo_project/details';
+    import updataState from './ieo_project/updataState';
+    import confirm from './ieo_project/confirm';
+    import ieoApi from '../../api/ieo';
 
     export default {
         data () {
@@ -40,96 +46,131 @@
                 total: 0,
                 size: 10,
                 columns: [
-                    {key: 'createdAt', title: this.$t('ieo.xmbh')},
-                    {key: 'createdAt', title: this.$t('ieo.xmmc')},
-                    {key: 'orderId', title: this.$t('common.bzdh')},
-                    {key: 'username', title: this.$t('ieo.fxsl')},
-                    {key: 'productName', title: this.$t('ieo.fxjg')},
-                    {key: 'productQuantity', title: this.$t('ieo.mjmb')},
-                    {key: 'paytype', title: this.$t('common.kssj')},
-                    {key: 'symbolPrice', title: this.$t('common.jssj')},
-                    {key: 'productPrice', title: this.$t('ieo.kksj')},
-                    {key: 'totalPrice', title: this.$t('ieo.fbsj')},
+                    {key: 'projectId', title: this.$t('ieo.xmbh')},
+                    {key: 'projectName', title: this.$t('ieo.xmmc')},
+                    {key: 'projectSymbol', title: this.$t('common.bzdh')},
+                    {key: 'totalIssue', title: this.$t('ieo.fxsl')},
+                    {key: 'issuePrice', title: this.$t('ieo.fxjg')},
+                    {key: 'totalRaised', title: this.$t('ieo.mjmb')},
+                    {key: 'startTime', title: this.$t('common.kssj')},
+                    {key: 'endTime', title: this.$t('common.jssj')},
+                    {key: 'paidTime', title: this.$t('ieo.kksj')},
+                    {key: 'releaseTime', title: this.$t('ieo.fbsj')},
                     {
                         key: 'state', title: this.$t('common.zt'),
                         render: (h, params) => {
                             return h('div', {
                                 style: {
-                                    color: this.switchColor(params.row.state)                                }
-                            },this.switchStaus(params.row.state));
+                                    color: this.switchColor(params.row.state)
+                                }
+                            }, this.switchStaus(params.row.state));
                         }
                     },
-                    {key: 'receiverPhone', title: this.$t('ieo.zfs')},
-                    {key: 'receiverPhone', title: this.$t('ieo.syfs')},
+                    {key: 'totalSubscription', title: this.$t('ieo.zfs')},
+                    {key: 'remainingQuantity', title: this.$t('ieo.syfs')},
                     {key: 'updatedAt', title: this.$t('common.gxsj')},
                     {
                         key: 'action', title: this.$t('common.cz'), render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {type: 'primary', size: 'small'},
+                                    style: {margin: '3px'},
+                                    on: {
+                                        click: () => {
+                                            util.setDialog(details, {
+                                                item: params.row,
+                                            });
+                                        }
+                                    }
+                                }, this.$t('kyc.ckxq')),
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {margin: '3px'},
                                     on: {
                                         click: () => {
                                             util.setDialog(updata, {
                                                 item: params.row,
                                                 okCallback: () => {
-                                                    this.getAuditing();
+                                                    this.getList();
                                                 }
                                             });
                                         }
                                     }
-                                }, this.$t('common.xg'))
+                                }, this.$t('ieo.xgsx')),
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {margin: '3px'},
+                                    on: {
+                                        click: () => {
+                                            util.setDialog(updataState, {
+                                                item: params.row,
+                                                okCallback: () => {
+                                                    this.getList();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }, this.$t('ieo.ztxg')),
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {margin: '3px'},
+                                    on: {
+                                        click: () => {
+                                            util.setDialog(confirm, {
+                                                item: params.row,
+                                                name: 1,
+                                                okCallback: () => {
+                                                    this.getList();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }, this.$t('ieo.kkfb')),
+                                h('Button', {
+                                    props: {type: 'primary', size: 'small'},
+                                    style: {margin: '3px'},
+                                    on: {
+                                        click: () => {
+                                            util.setDialog(confirm, {
+                                                item: params.row,
+                                                name: 2,
+                                                okCallback: () => {
+                                                    this.getList();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }, this.$t('ieo.sbjd'))
                             ]);
                         }
                     }
                 ],
                 datas: [],
                 formData: {
-                    productName: '0',
-                    createdStart: null,
-                    createdEnd: null,
-                    username: null,
-                    orderId: null,
-                    receiverName: null,
-                    receiverPhone: null,
-                    state: 7
+                    projectSymbol: null,
+                    state: 5,
                 },
             };
         },
         created () {
-            this.getAuditing();
+            this.getList();
         },
         methods: {
-            reshAll () {
-                this.formData = {
-                    productName: '0',
-                    createdStart: null,
-                    createdEnd: null,
-                    username: null,
-                    orderId: null,
-                    receiverName: null,
-                    receiverPhone: null,
-                    state: 0
-                }
-                this.curPage = 1
-                this.getAuditing();
-            },
-            switchStaus (state) {//0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
+            switchStaus (state) {//0：下线，1：即将开始，2：进行中，3：已结束，4：发币完成
                 switch (state) {
                     case 0:
-                        return this.$t('mall.dzf');
+                        return this.$t('exchange.xs');
                     case 1:
-                        return this.$t('mall.dqr');
+                        return this.$t('ieo.jjks');
                     case 2:
-                        return this.$t('mall.yfk');
+                        return this.$t('ieo.jxz');
                     case 3:
-                        return this.$t('mall.yfh');
+                        return this.$t('ieo.yjs');
                     case 4:
-                        return this.$t('mall.yys');
-                    case 5:
-                        return this.$t('mall.yth');
+                        return this.$t('ieo.fbwc');
                 }
             },
-            switchColor(i){
+            switchColor (i) {
                 switch (i) {
                     case 0:
                         return '#f3b138';
@@ -145,20 +186,16 @@
                         return '#d14af3';
                 }
             },
-            getAuditing () {
+            getList () {
                 let D = JSON.stringify(this.formData);
                 let data = JSON.parse(D);
-                data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;
-                data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
-                data.state = data.state === 7 ? null : data.state;
-                data.productName = data.productName === '0' ? null : data.productName;
+                data.state = data.state === 5 ? null : data.state;
                 data.size = this.size;
                 data.page = this.curPage;
-                mallApi.getOrderList(data,
-                    (res, total) => {
-                        this.total = total;
-                        this.datas = res;
-                    });
+                ieoApi.projectList(data, (res, total) => {
+                    this.total = total;
+                    this.datas = res;
+                });
             },
             switch (i) {
                 switch (i) {
@@ -189,7 +226,7 @@
             },
             changePage (page) {
                 this.curPage = page;
-                this.getAuditing();
+                this.getList();
             }
         }
     };

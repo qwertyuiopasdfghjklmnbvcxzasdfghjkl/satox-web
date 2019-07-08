@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import userApi from '../../api/user';
+    import userApi from '../../../api/user';
 
     export default {
         data () {

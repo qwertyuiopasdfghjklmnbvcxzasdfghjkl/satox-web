@@ -484,6 +484,11 @@
                 data.createdEnd = data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : null;
                 data.symbol = data.symbol === '0' ? null : data.symbol;
                 this.columns7.splice(3, 2);
+                if(data.createdStart || data.createdEnd){
+                    this.columns7[2] = {title: this.$t('finance.dqsl'), key: 'closingAssetYesterdayQuantity', sortable: 'custom'}
+                }else{
+                    this.columns7[2] = {title: this.$t('finance.dqsl'), key: 'currentAssetAmount', sortable: 'custom'}
+                }
                 this.formData3.username = '0';
                 this.getfindUserAssetList(data);
             },
@@ -498,6 +503,7 @@
                     data.username = this.accountsDataRobot;
                 }
                 this.columns7.splice(3, 2);
+                this.columns7[2] = {title: this.$t('finance.dqsl'), key: 'currentAssetAmount', sortable: 'custom'}
                 this.formData2 = {
                     symbol: '0',
                     createdStart: null,

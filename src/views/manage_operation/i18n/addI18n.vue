@@ -63,6 +63,9 @@
                     zh: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zw'), trigger: 'blur'},
                     ],
+                    'zh-CN': [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('operation.zw'), trigger: 'blur'},
+                    ],
                     en: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('operation.yw'), trigger: 'blur'},
                     ]

@@ -30,7 +30,7 @@ import Cookies from 'js-cookie';
 import 'iview/dist/styles/iview.css';
 import 'vue-directive-image-previewer/dist/assets/style.css';
 import './views/components/dialog';
-
+import wangeEditor from 'wangeditor'
 
 import Locales from 'iview/src/locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
@@ -59,6 +59,7 @@ Vue.use(VueDirectiveImagePreviewer, {
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
+// Vue.use(wangeEditor);
 Vue.use(iView, {
     i18n: function (path, options) {
         let value = i18n.t(path, options);

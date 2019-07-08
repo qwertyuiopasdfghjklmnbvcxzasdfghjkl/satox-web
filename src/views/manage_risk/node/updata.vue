@@ -54,7 +54,7 @@
         methods: {
             tabs (name) {
                 let data = {
-                    nodeManageId: this.item.nodeManageId
+                    nodeChain: this.item.nodeChain
                 };
                 data[name] = this[name];
                 extendApi.updateNode(data, (res) => {

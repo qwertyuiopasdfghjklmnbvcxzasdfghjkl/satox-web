@@ -40,7 +40,7 @@
                 total: 0,
                 formData: {
                     value: null,
-                    type: 'publicKey'
+                    type: 'cn'
                 },
                 columns1: [
                     {
@@ -61,7 +61,10 @@
                     },
                     {
                         title: this.$t('operation.yw'),
-                        key: 'en'
+                        key: 'en',
+                        render: (h, params) => {
+                            return h('div', params.row.en || '-')
+                        }
                     },
                     {
                         title: this.$t('operation.sm'),

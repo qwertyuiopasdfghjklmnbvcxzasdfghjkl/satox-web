@@ -31,7 +31,7 @@
 
 <script>
     import util from '../../libs/util';
-    import add from './add_public_link.vue';
+    import add from './public_link/add_public_link.vue';
     import userApi from '../../api/user';
 
     export default {
@@ -87,7 +87,9 @@
                 userApi.getSymbolList(data, (res, toatl) => {
                     this.data = res;
                     this.total = toatl;
-                    window.localStorage.symbolTypes = JSON.stringify(res);
+                    if (!this.value) {
+                        window.localStorage.symbolTypes = JSON.stringify(res);
+                    }
                 });
             },
             changePage (page) {
