@@ -5,37 +5,37 @@
 			<div class="right">
 				<div>
 					<strong class="fs18">{{info[`projectName${lang}`]}}</strong>
-					<button type="button" class="mint-btn danger small ml50" style="vertical-align: bottom;" v-if="stage===1">进行中</button>
-					<button type="button" class="mint-btn success small ml50" style="vertical-align: bottom;" v-if="stage===2">即将开始</button>
-					<button type="button" disabled="" class="mint-btn disabled small ml50" style="vertical-align: bottom;" v-if="stage===3">已结束</button>
+					<button type="button" class="mint-btn danger small ml50" style="vertical-align: bottom;" v-if="stage===1">{{$t('ieo.status_processing')}}<!-- 进行中 --></button>
+					<button type="button" class="mint-btn success small ml50" style="vertical-align: bottom;" v-if="stage===2">{{$t('ieo.status_to_start')}}<!-- 即将开始 --></button>
+					<button type="button" disabled="" class="mint-btn disabled small ml50" style="vertical-align: bottom;" v-if="stage===3">{{$t('ieo.status_over')}}<!-- 已结束 --></button>
 				</div>
 				<div class="mt20 fs13" v-html="info[`projectProfile${lang}`]"></div>
 				<div class="mt20 items">
-					<p>申购开始： <span>{{new Date(info.startTime).format()}}</span></p>
-					<p>申购截止： <span>{{new Date(info.endTime).format()}}</span></p>
+					<p>{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(info.startTime).format()}}</span></p>
+					<p>{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(info.endTime).format()}}</span></p>
 				</div>
 				<div class="mt15 items">
-					<p>认购价格： <span>1 {{info.priceSymbol}} = {{info.subscriptionPrice}} {{info.projectSymbol}} </span></p>
-					<p>发行数量： <span>{{String(info.totalIssue).toMoney()}} {{info.projectSymbol}}</span></p>
+					<p>{{$t('ieo.subscription_price')}}<!-- 认购价格 -->： <span>1 {{info.priceSymbol}} = {{info.subscriptionPrice}} {{info.projectSymbol}} </span></p>
+					<p>{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(info.totalIssue).toMoney()}} {{info.projectSymbol}}</span></p>
 				</div>
 				<div class="mt15 items">
-					<p>已认购： <span>{{info.totalSubscription}} {{info.priceSymbol}}</span></p>
-					<p>募集目标： <span>{{String(info.totalRaised).toMoney()}} {{info.priceSymbol}}</span></p>
+					<p>{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{info.totalSubscription}} {{info.priceSymbol}}</span></p>
+					<p>{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(info.totalRaised).toMoney()}} {{info.priceSymbol}}</span></p>
 				</div>
 				<div class="mt20 progress-container">
 					<div class="progress" sty>
 						<div class="progress-bar-base"></div>
-						<div class="progress-bar" :style="`width: ${info.totalSubscription/info.totalRaised*100}%`"></div>
-						<p class="mt8 f-c-gray">已完成： {{(info.totalSubscription/info.totalRaised*100).toFixed(2)}}%</p>
+						<div class="progress-bar" :style="`width: ${info.totalSubscription/info.totalRaised*100>100?100:info.totalSubscription/info.totalRaised*100}%`"></div>
+						<p class="mt8 f-c-gray">{{$t('ieo.achieved')}}<!-- 已达成 -->： {{(info.totalSubscription/info.totalRaised*100).toFixed(2)}}%</p>
 					</div>
 					<div>
-						<button type="button" class="mint-btn" :class="stage!==3?'success':'disabled'" :disabled="stage!==1"  @click="joinDialog()">立即参与</button>
-						<span class="f-c-danger fs12 ml20" v-if="stage!==3"><i v-if="stage===2">距离开始</i><i v-if="stage===1">剩余</i>：{{info.getMsec(info)|humanTime(lang==''?'天':'days')}}</span>
+						<button type="button" class="mint-btn" :class="stage!==3?'success':'disabled'" :disabled="stage!==1"  @click="joinDialog()">{{$t('ieo.participate_immediately')}}<!-- 立即参与 --></button>
+						<span class="f-c-danger fs12 ml20" v-if="stage!==3"><i v-if="stage===2">{{$t('ieo.start_of_distance')}}<!-- 距离开始 --></i><i v-if="stage===1">{{$t('ieo.remaining')}}<!-- 剩余 --></i>：{{info.getMsec(info)|humanTime(lang==''?'天':'days')}}</span>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="title box mt10">项目进度</div>
+		<div class="title box mt10">{{$t('ieo.project_progres')}}<!-- 项目进度 --></div>
 		<div class="steps-container box-bgc">
 			<div class="steps">
 				<span></span>
@@ -44,19 +44,19 @@
 				<span></span>
 			</div>
 			<div class="steps-title mt20">
-				<span>申购开始：{{new Date(info.startTime).format()}}</span>
-				<span>申购截止：{{new Date(info.endTime).format()}}</span>
-				<span>扣款时间：{{new Date(info.paidTime).format()}}</span>
-				<span>发币时间：{{new Date(info.releaseTime).format()}}</span>
+				<span>{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->：{{new Date(info.startTime).format()}}</span>
+				<span>{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->：{{new Date(info.endTime).format()}}</span>
+				<span>{{$t('ieo.deduction_time')}}<!-- 扣款时间 -->：{{new Date(info.paidTime).format()}}</span>
+				<span>{{$t('ieo.currency_time')}}<!-- 发币时间 -->：{{new Date(info.releaseTime).format()}}</span>
 			</div>
 		</div>
 		<div class="mt10 detail-bottom">
 			<div class="brief">
-				<div class="title box">项目详情</div>
+				<div class="title box">{{$t('ieo.project_detail')}}<!-- 项目详情 --></div>
 				<div class="inner box-bgc" v-html="info[`projectDetail${lang}`]"></div>
 			</div>
 			<div class="rules">
-				<div class="title box">参与规则</div>
+				<div class="title box">{{$t('ieo.participation_rules')}}<!-- 参与规则 --></div>
 				<div class="inner box-bgc" v-html="info[`participationRules${lang}`]"></div>
 			</div>
 		</div>
@@ -73,6 +73,8 @@ import utils from '@/assets/js/utils'
 import ieoApi from '@/api/ieo'
 import joinDialog from './join'
 import loading from '@/components/loading'
+import socket from '@/assets/js/socket'
+import Config from '@/assets/js/config'
 export default {
 	components: {
 	  loading
@@ -83,7 +85,8 @@ export default {
 			stage:3,
 			timer:0,
 			interVal:null,
-			locked:true
+			locked:true,
+			socket:null
 		}
 	},
 	computed:{
@@ -96,14 +99,40 @@ export default {
 			}
 		},
 	},
+	watch:{
+		stage(_n){
+			if(_n===1){
+				this.connectSoket()
+			}
+		}
+	},
 	created(){
 		this.getIEOprojectsDetail()
 	},
 	beforeRouteLeave(to, from, next){
 		clearInterval(this.interVal)
+		this.socket.destroy()
 		next()
 	},
 	methods:{
+		mergeData(data){
+			if(data.dataType==='ieo' && data.data.project_id===this.info.projectId){
+				this.info.totalSubscription = Number(data.data.total_subscription)
+			}
+		},
+		connectSoket(){
+			this.socket = new socket(`${Config.protocol}${Config.domain}/ws9501`)
+			this.socket.on('open', ()=>{
+	            this.socket.send({
+	            	event: 'addChannel',
+	                channel:'subscribe_ieo',
+	                project_id:this.info.projectId,
+	                isZip:false
+	            })
+	        })
+	        this.socket.on('message', this.mergeData)
+	        this.socket.doOpen()
+		},
 		joinDialog(){
 			if(!this.getApiToken){
 				Vue.$confirmDialog({
@@ -115,6 +144,10 @@ export default {
 				    this.$router.push({path:'/login'})
 				  }
 				})
+				return
+			}
+			if(JSON.stringify(this.info.accounts)==='{}'){
+				Vue.$koallTipBox({icon: 'notification', message: this.$t('ieo.not_configured_payment_account')}) //项目未配置支付账户
 				return
 			}
 			utils.setDialog(joinDialog, {
@@ -132,8 +165,8 @@ export default {
 					this.interVal = setInterval(()=>{this.timer += 1000},1000)
 				}
 				res.timestamp = serverTime
-				res.paymentConfig = res.paymentConfig && res.paymentConfig.length?res.paymentConfig.reduce(function(obj,item){obj[item.symbol]=item;return obj;},{}):[]
-				res.accounts = res.accounts && res.accounts.length?res.accounts.reduce(function(obj,item){obj[item.accountId]=item;return obj;},{}):[]
+				res.paymentConfig = res.paymentConfig && res.paymentConfig.length?res.paymentConfig.reduce(function(obj,item){obj[item.symbol]=item;return obj;},{}):{}
+				res.accounts = res.accounts && res.accounts.length?res.accounts.reduce(function(obj,item){obj[item.accountId]=item;return obj;},{}):{}
 				if(res.startTime > serverTime){
 					this.stage = 2
 					res.getMsec = (project)=>{
