@@ -52,7 +52,7 @@
 
             <FormItem :label="vm.$t('ieo.fxsl')" prop="totalIssue">
                 <numberbox class="number_input w1" v-model="form.totalIssue"></numberbox>
-                <Tag type="border" color="green">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="green" v-if="form.projectSymbol">{{form.projectSymbol}}</Tag>
             </FormItem>
             <FormItem prop="priceSymbol">
                 <label class="red_title"><i
@@ -67,25 +67,25 @@
             </FormItem>
             <FormItem :label="vm.$t('ieo.fxjghbz')" prop="issuePrice">
                 <b style="font-size: 20px">1</b>
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red" v-if="form.priceSymbol">{{form.priceSymbol}}</Tag>
                 <b>=</b>
                 <numberbox class="number_input w2" v-model="form.issuePrice"></numberbox>
-                <Tag type="border" color="green">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="green" v-if="form.projectSymbol">{{form.projectSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mjmbhzb')" prop="totalRaised">
                 <numberbox class="number_input w1" v-model="form.totalRaised"></numberbox>
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red" v-if="form.priceSymbol">{{form.priceSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.zfs')" prop="totalSubscription">
                 <numberbox class="number_input w1" :accuracy="0" v-model="form.totalSubscription"></numberbox>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mfjghbz')" prop="subscriptionPrice">
                 <numberbox class="number_input w1" v-model="form.subscriptionPrice"></numberbox>
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red" v-if="form.priceSymbol">{{form.priceSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mfdbsl')" prop="oneSymbolCount">
                 <numberbox class="number_input w1" v-model="form.oneSymbolCount"></numberbox>
-                <Tag type="border" color="red">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="red" v-if="form.priceSymbol">{{form.priceSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.dfbz')" class="tab" prop="paymentConfig">
                 <Table :columns="columns" :data="form.paymentConfig"></Table>
