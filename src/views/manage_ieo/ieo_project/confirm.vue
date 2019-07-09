@@ -33,7 +33,7 @@
                 };
                 if (this.name === 1) {
                     ieoApi.debit(data, res => {
-                        this.$Message.success({content: this.vm.$t('ieo.kkfbcg')});
+                        this.$Message.success({content: res});
                         this.close();
                         this.state = false;
                     }, msg => {
@@ -42,7 +42,7 @@
                     });
                 } else {
                     ieoApi.unfreeze(data, res => {
-                        this.$Message.success({content: this.vm.$t('ieo.kkfbcg')});
+                        this.$Message.success({content: res});
                         this.close();
                         this.state = false;
                     }, msg => {

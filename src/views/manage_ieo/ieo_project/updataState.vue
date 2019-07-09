@@ -45,7 +45,7 @@
                     form.append('projectId', this.item.projectId)
                     form.append('state', this.state)
                     ieoApi.updataProject(form, res => {
-                        this.$Message.success({content: this.vm.$t('common.xgcg')});
+                        this.$Message.success({content: res});
                         this.closeDialog();
                         this.$emit('okCallback');
                     }, msg => {

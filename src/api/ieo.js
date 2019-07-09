@@ -52,7 +52,7 @@ let ieo = {
         api.post(`api/bm/ieoManage/project/update`, data,
             (res) => {
                 if (res.rst === 1) {
-                    success && success(res.data);
+                    success && success(res.msg);
                 } else {
                     error && error(res.msg);
                 }
@@ -64,7 +64,7 @@ let ieo = {
         api.post(`api/bm/ieoManage/project/debit`, data,
             (res) => {
                 if (res.rst === 1) {
-                    success && success(res.data);
+                    success && success(res.msg);
                 } else {
                     error && error(res.msg);
                 }
@@ -76,7 +76,7 @@ let ieo = {
         api.post(`api/bm/ieoManage/project/unfreeze`, data,
             (res) => {
                 if (res.rst === 1) {
-                    success && success(res.data);
+                    success && success(res.msg);
                 } else {
                     error && error(res.msg);
                 }
