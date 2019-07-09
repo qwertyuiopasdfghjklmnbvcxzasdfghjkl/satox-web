@@ -58,7 +58,7 @@ ieo.postProjectsApply = postProjectsApply
 const getUserIEOProjectsList = function (data, success, error) {
   api.get(`${domain}api/ieo/user/projects`, data, (res) => {
     if (res.rst === 1) {
-      success && success(res.data)
+      success && success(res.data, res.total)
     } else {
       error && error(res.msg)
     }

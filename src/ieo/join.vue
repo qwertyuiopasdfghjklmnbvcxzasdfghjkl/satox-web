@@ -2,44 +2,44 @@
 	<div class="page">
 		<div class="join-title">
 		    <a href="javascript:;" @click="closeDailog" class="icon-close"></a>
-		    立即参与 <!--立即参与-->
+		    {{$t('ieo.participate_immediately')}}<!--立即参与-->
 		</div>
 		<div class="join-form">
 			<section class="fs16">
-				<p>可认购份数： <strong>{{buyLimit}}</strong> 份</p>
-				<p class="mt15">选择付款币种：
+				<p>{{$t('ieo.subscribed_shares')}}<!-- 可认购份数 -->： <strong>{{buyLimit}}</strong></p>
+				<p class="mt15">{{$t('ieo.choose_payment_symbol')}}<!-- 选择付款币种 -->：
 					<select class="tokens" v-model="accountId">
 						<option :value="item.accountId" selected="" v-for="item in info.accounts">{{item.symbol}}</option>
 					</select>
 				</p>
-				<p class="mt15">可用余额： <strong class="mr20">{{String(currtAccount.availableBalance).toMoney()}} {{currtAccount.symbol}}</strong> (每份需支付 <strong>{{Number(price)}} {{currtAccount.symbol}}</strong>)</p>
-				<p class="mt15">认购份数：
+				<p class="mt15">{{$t('account.estimated_value_available')}}<!-- 可用余额 -->： <strong class="mr20">{{String(currtAccount.availableBalance).toMoney()}} {{currtAccount.symbol}}</strong> ({{$t('ieo.pay_per_copy')}}<!-- 每份需支付 --> <strong>{{Number(price)}} {{currtAccount.symbol}}</strong>)</p>
+				<p class="mt15">{{$t('ieo.subscription_shares')}}<!-- 认购份数 -->：
 					<input type="number" name="total" class="total" v-model="applyQuantity">
-					<span class="ml20" v-show="Number(applyQuantity)">需支付 ≈ <strong>{{totalPay}}</strong> {{currtAccount.symbol}} <span class="f-c-gray ml10">(注：以结算时币种市场汇率为准)</span></span>
+					<span class="ml20" v-show="Number(applyQuantity)">{{$t('ieo.payable')}}<!-- 需支付 --> ≈ <strong>{{totalPay}}</strong> {{currtAccount.symbol}} <span class="f-c-gray ml10">({{$t('ieo.payment_notice')}}<!-- 注：以结算时币种市场汇率为准 -->)</span></span>
 				</p>
 				<p class="mt15 fs14 agreement">
 					<label class="checkbox">
-					  <input id="agreement" type="checkbox" name="agreement">
+					  <input id="agreement" type="checkbox" name="agreement" checked="">
 					  <i type="checkbox"></i>
 					</label>
-					<label for="agreement">我已阅读并同意 <a href="/#/ieo/agreement" target="_blank" class="mcolor">XXXXXX</a> 协议条款</label>
+					<label for="agreement">{{$t('login_register.agree_Service')}}<!-- 我已阅读并同意 --> <a href="/#/ieo/agreement" target="_blank" class="mcolor">XXXXXX</a> {{$t('ieo.terms_of_agreement')}}<!-- 协议条款 --></label>
 				</p>
-				<p class="mt25"><button type="button" class="mint-btn success" :disabled="locked" style="width: 200px" @click="applyValidate">确认申购</button></p>
+				<p class="mt25"><button type="button" class="mint-btn success" :disabled="locked" style="width: 200px" @click="applyValidate">{{$t('ieo.confirm_purchase')}}<!-- 确认申购 --></button></p>
 			</section>
 			<section class="lh15 f-c-gray">
-				<p><span class="icon-info-with-circle f-c-danger"></span> 认购须知：</p>
+				<p><span class="icon-info-with-circle f-c-danger"></span> {{$t('ieo.subscription_notice')}}<!-- 认购须知 -->：</p>
 				<div v-html="this.info.subscriptionNotice"></div>
 			</section>
 		</div>
-		<div class="title box mt10">当前参与记录</div>
+		<div class="title box mt10">{{$t('ieo.participation_record')}}<!-- 当前参与记录 --></div>
 		<ul class="join-list">
 			<li class="header">
-				<span>认购时间</span>
-				<span>付款币种</span>
-				<span>申请份数</span>
-				<span>申请金额</span>
-				<span>获取数量</span>
-				<span>状态</span>
+				<span>{{$t('ieo.subscribed_time')}}<!-- 认购时间 --></span>
+				<span>{{$t('ieo.payment_symbol')}}<!-- 付款币种 --></span>
+				<span>{{$t('ieo.number_of_applications')}}<!-- 申请份数 --></span>
+				<span>{{$t('ieo.application_amount')}}<!-- 申请金额 --></span>
+				<span>{{$t('ieo.gain_quantity')}}<!-- 获取数量 --></span>
+				<span>{{$t('ieo.status')}}<!-- 状态 --></span>
 			</li>
 			<li v-for="item in list">
 				<span>{{new Date(item.createdAt).format()}}</span>
@@ -47,7 +47,7 @@
 				<span>{{item.applyQuantity}}</span>
 				<span>{{item.subscriptionAmount}}</span>
 				<span>{{item.gainQuantity}}</span>
-				<span>{{item.state}}</span>
+				<span><button type="button" class="mint-btn small" :class="getStatus(item.state).type">{{getStatus(item.state).text}}</button></span>
 			</li>
 		</ul>
 	</div>
@@ -96,13 +96,26 @@ export default {
 		this.getExchangePrice()
 	},
 	methods:{
+		getStatus(status){
+		  let rst = {type:'danger', text:''}
+		  switch(status){
+		    case 1: rst.type = 'warning';  rst.text = this.$t('ieo.confirmed'); break; //已确认
+		    case 2: rst.type = 'danger';  rst.text = this.$t('ieo.debit_unsuccessful'); break; //扣款不成功
+		    case 3: rst.type = 'success';  rst.text = this.$t('ieo.debit_success'); break; //扣款成功
+		    case 4: rst.type = 'danger';  rst.text = this.$t('ieo.unsuccessfully_distribution'); break; //发放不成功
+		    case 5: rst.type = 'success';  rst.text = this.$t('ieo.successfully_distribution'); break; //发放成功
+		    case 6: rst.type = 'danger';  rst.text = this.$t('ieo.subscription_failed'); break; //认购失败
+		    case 7: rst.type = 'success';  rst.text = this.$t('ieo.successful_subscription'); break; //认购成功
+		  }
+		  return rst
+		},
 		applyValidate(){
 			let self = this
 			if(!Number(this.applyQuantity)){
-				Vue.$koallTipBox({icon: 'notification', message: '请输入认购份数'})
+				Vue.$koallTipBox({icon: 'notification', message: this.$t('ieo.enter_number_of_subscriptions')}) //请输入认购份数
 				return
 			} else if(Number(this.applyQuantity)>this.buyLimit){
-				Vue.$koallTipBox({icon: 'notification', message: '超过当前可认购份数'})
+				Vue.$koallTipBox({icon: 'notification', message: this.$t('ieo.more_than_number_of_subscriptions')}) //超过当前可认购份数
 				return
 			} else if(this.totalPay> this.currtAccount.availableBalance){
 				Vue.$koallTipBox({icon: 'notification', message: this.currtAccount.symbol + ' ' + this.$t('error_code.AVAILABLE_INSUFFICIENT')})

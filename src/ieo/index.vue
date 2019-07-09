@@ -2,66 +2,78 @@
 	<div class="page">
 		<img src="" class="banner-brief">
 		<ul class="tab-bar"><a name="A"></a>
-			<li class="active"><a href="#A">进行中</a></li>
-			<li><a href="#B">即将开始</a></li>
-			<li><a href="#C">已结束</a></li>
+			<li class="active"><a href="#A">{{$t('ieo.status_processing')}}<!-- 进行中 --></a></li>
+			<li><a href="#B">{{$t('ieo.status_to_start')}}<!-- 即将开始 --></a></li>
+			<li><a href="#C">{{$t('ieo.status_over')}}<!-- 已结束 --></a></li>
 		</ul>
-		<div class="title box">进行中</div>
+		<div class="title box">{{$t('ieo.status_processing')}}<!-- 进行中 --></div>
 		<ul class="items-container clearfix">
 			<li v-for="item in list1" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
 					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
-				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
-				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
-				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
+				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
-					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100}%`"></div>
+					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100>100?100:item.totalSubscription/item.totalRaised*100}%`"></div>
 				</div>
-				<p class="mt8 text-center">已达成 {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
-				<button>距离结束：{{item.getMsec(item)|humanTime(lang==''?'天':'days')}}</button>
+				<p class="mt8 text-center">{{$t('ieo.achieved')}}<!-- 已达成 --> {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
+				<button>{{$t('ieo.end_of_distance')}}<!-- 距离结束 -->：{{item.getMsec(item)|humanTime(lang==''?'天':'days')}}</button>
 			</li>
 		</ul>
-		<div class="title box mt10">即将开始</div><a name="B"></a>
+		<div class="nodata" v-if="!locked && list1.length === 0">
+		  <div class="nodata-icon icon-no-order"></div>
+		  <div class="nodata-text">{{$t('public0.public50')}}<!--暂无数据--></div>
+		</div>
+		<div class="title box mt10">{{$t('ieo.status_to_start')}}<!-- 即将开始 --></div><a name="B"></a>
 		<ul class="items-container wait clearfix">
 			<li v-for="item in list2" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
 					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
-				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
-				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
-				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
-				<button>距离开始：{{item.getMsec(item)|humanTime('天')}}</button>
+				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
+				<button>{{$t('ieo.start_of_distance')}}<!-- 距离开始 -->：{{item.getMsec(item)|humanTime('天')}}</button>
 			</li>
 		</ul>
-		<div class="title box mt10">已结束</div><a name="C"></a>
+		<div class="nodata" v-if="!locked && list2.length === 0">
+		  <div class="nodata-icon icon-no-order"></div>
+		  <div class="nodata-text">{{$t('public0.public50')}}<!--暂无数据--></div>
+		</div>
+		<div class="title box mt10">{{$t('ieo.status_over')}}<!-- 已结束 --></div><a name="C"></a>
 		<ul class="items-container finished clearfix">
 			<li v-for="item in list3" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
 					<span class="fs16">{{item[`projectName${lang}`]}}</span>
 				</p>
-				<p class="mt25">申购开始： <span>{{new Date(item.startTime).format()}}</span></p>
-				<p class="mt15">申购截止： <span>{{new Date(item.endTime).format()}}</span></p>
-				<p class="mt15">发行数量： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
-				<p class="mt15">募集金额： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">已认购： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
+				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
+				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
-					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100}%`"></div>
+					<div class="progress-bar" :style="`width: ${item.totalSubscription/item.totalRaised*100>100?100:item.totalSubscription/item.totalRaised*100}%`"></div>
 				</div>
-				<p class="mt8 text-center">达成 {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
+				<p class="mt8 text-center">{{$t('ieo.reach')}}<!-- 达成 --> {{(item.totalSubscription/item.totalRaised*100).toFixed(2)}}%</p>
 			</li>
 		</ul>
+		<div class="nodata" v-if="!locked && list3.length === 0">
+		  <div class="nodata-icon icon-no-order"></div>
+		  <div class="nodata-text">{{$t('public0.public50')}}<!--暂无数据--></div>
+		</div>
 		<div class="mask-layer" v-show="locked">
-			<div class="center"><loading :size="48"/></div>
+			<div class="center"><loading/></div>
 		</div>
 	</div>
 </template>
@@ -71,6 +83,8 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import loading from '@/components/loading'
 import ieoApi from '@/api/ieo'
+import socket from '@/assets/js/socket'
+import Config from '@/assets/js/config'
 export default {
 	components: {
 	  loading
@@ -82,7 +96,8 @@ export default {
 			list3: [],
 			timer:0,
 			interVal:null,
-			locked:true
+			locked:true,
+			socket:null
 		}
 	},
 	computed:{
@@ -97,12 +112,38 @@ export default {
 	},
 	created(){
 		this.getIEOProjectsList()
+		this.connectSoket()
 	},
 	beforeRouteLeave(to, from, next){
 		clearInterval(this.interVal)
+		this.socket.destroy()
 		next()
 	},
 	methods:{
+		mergeData(data){
+			if(data.dataType==='ieo' && data.data.length){
+				for(let item of this.list1){
+					for(let rd of data.data){
+						if(item.projectId === rd.project_id){
+							item.totalSubscription = Number(rd.total_subscription)
+							break
+						}
+					}
+				}
+			}
+		},
+		connectSoket(){
+			this.socket = new socket(`${Config.protocol}${Config.domain}/ws9501`)
+			this.socket.on('open', ()=>{
+	            this.socket.send({
+	            	event: 'addChannel',
+	                channel:'subscribe_ieo',
+	                isZip:false
+	            })
+	        })
+	        this.socket.on('message', this.mergeData)
+	        this.socket.doOpen()
+		},
 		getIEOProjectsList(){
 			ieoApi.getIEOProjectsList((list, serverTime)=>{
 				let list1 = [], list2 = [], list3 = []
@@ -251,4 +292,8 @@ export default {
 .items-container.wait li button {background-color: #00A55E;}
 .items-container.finished li {padding-bottom: 15px;}
 .center { position: absolute; left: 50%; top: 50%; margin-left: -24px; margin-top: -24px; }
+
+.nodata{text-align: center;}
+.nodata .nodata-icon{height: 80px;line-height: 80px;font-size: 40px;color: #A1A1A1;}
+.nodata .nodata-text{height: 40px;line-height: 20px;color: #A1A1A1;}
 </style>
