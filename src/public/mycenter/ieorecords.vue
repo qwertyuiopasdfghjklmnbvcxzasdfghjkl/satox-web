@@ -18,7 +18,7 @@
         <span>{{item.gainAmount}}</span>
         <span>{{item.subscriptionSymbol}}</span>
         <span>{{item.subscriptionAmount}}</span>
-        <span><button type="button" class="mint-btn small" :class="getStatus(item.state).type">{{getStatus(item.state).text}}</button></span>
+        <span>{{getStatus(item.state).text}}</span>
       </li>
     </ul>
     <page v-if="!listLoading && list.length > 0" :pageIndex="page" :pageSize="size" :total="total" @changePageIndex="pageChange"/>

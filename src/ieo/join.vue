@@ -47,7 +47,7 @@
 				<span>{{item.applyQuantity}}</span>
 				<span>{{item.subscriptionAmount}}</span>
 				<span>{{item.gainQuantity}}</span>
-				<span><button type="button" class="mint-btn small" :class="getStatus(item.state).type">{{getStatus(item.state).text}}</button></span>
+				<span>{{getStatus(item.state).text}}</span>
 			</li>
 		</ul>
 	</div>
