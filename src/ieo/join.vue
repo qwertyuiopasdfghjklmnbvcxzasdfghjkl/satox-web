@@ -64,7 +64,6 @@ export default {
 		return {
 			list:[],
 			accountId:Object.keys(this.info.accounts)[0],
-			price:null,
 			applyQuantity:'',
 			locked:false
 		}
@@ -83,17 +82,14 @@ export default {
 		},
 		totalPay(){
 			return Number((Number(this.price)*Number(this.applyQuantity)).toFixed(8))
+		},
+		price(){
+			return this.info.paymentConfig[this.currtAccount.symbol].symbolCount
 		}
 
 	},
-	watch:{
-		accountId(_new){
-			this.getExchangePrice()
-		}
-	},
 	created(){
 		this.getUserIEOProjectsList()
-		this.getExchangePrice()
 	},
 	methods:{
 		getStatus(status){
@@ -159,17 +155,6 @@ export default {
 				}
 			})
 		},
-		getExchangePrice(){
-			this.get24hPrice().then(data=>{
-				if(data.symbol==`${this.info.priceSymbol}${this.currtAccount.symbol}`){
-					this.price = data.price
-				} else {
-					this.price = (1/Number(data.price)).toFixed(8)
-				}
-			}).catch(()=>{
-				this.price = null
-			})
-		},
 		closeDailog () {
 		  this.$emit('removeDialog')
 		},
@@ -180,30 +165,6 @@ export default {
 				Vue.$koallTipBox({icon: 'notification', message: this.$t(`error_code.${typeof msg === 'string' ? msg : msg[0]}`)})
 			})
 		},
-		get24hPrice(){
-			return new Promise((resolve, reject)=>{
-				let _price = 0
-				if(this.currtAccount.symbol===this.info.priceSymbol){
-					resolve({symbol:`${this.currtAccount.symbol}${this.info.priceSymbol}`, price:1})
-					return
-				}
-				marketApi.get24hPrice({symbol: `${this.currtAccount.symbol}${this.info.priceSymbol}`}, data=>{
-					_price = data[0][3]
-					if(_price){
-						resolve({symbol:`${this.currtAccount.symbol}${this.info.priceSymbol}`, price:_price})
-					} else {
-						marketApi.get24hPrice({symbol: `${this.info.priceSymbol}${this.currtAccount.symbol}`}, data=>{
-							_price = data[0][3]
-							if(_price){
-								resolve({symbol:`${this.info.priceSymbol}${this.currtAccount.symbol}`, price:_price})
-							} else {
-								reject()
-							}
-						})
-					}
-				})
-			})
-		}
 	}
 
 }
