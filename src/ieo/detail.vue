@@ -61,7 +61,7 @@
 			</div>
 		</div>
 		<div class="mask-layer" v-show="locked">
-			<div class="center"><loading :size="48"/></div>
+			<div class="center"><loading/></div>
 		</div>
 	</div>
 </template>
@@ -111,7 +111,7 @@ export default {
 	},
 	beforeRouteLeave(to, from, next){
 		clearInterval(this.interVal)
-		this.socket.destroy()
+		this.socket && this.socket.destroy()
 		next()
 	},
 	methods:{
