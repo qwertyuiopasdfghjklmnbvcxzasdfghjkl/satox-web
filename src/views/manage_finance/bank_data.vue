@@ -16,7 +16,7 @@
                 </Col>
             </Row>
             <Table :columns="columns1" :data="data1" style="margin-top:10px;"></Table>
-            <Page :current="curPage" :total="total" @on-change="changePage"
+            <Page :current="curPage" :total="total" @on-change="changePage" :page-size="size"
                   style="text-align:center;margin-top:20px;"></Page>
         </Card>
     </Row>
@@ -34,6 +34,7 @@
             return {
                 curPage: 1,
                 total: 0,
+                size: 10,
                 formData: {
                     type: 'username',
                     text: ''
@@ -84,7 +85,7 @@
                 // }
                 let data = {
                     page: this.curPage,
-                    size: 10
+                    size: this.size
                 };
                 if (this.formData.text) {
                     data[this.formData.type] = this.formData.text;

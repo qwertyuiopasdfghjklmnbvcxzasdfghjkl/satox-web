@@ -354,10 +354,10 @@
             updata () {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        delete this.form.state
-                        delete this.form.updatedAt
-                        delete this.form.createdAt
-                        delete this.form.projectLogo
+                        delete this.form.state;
+                        delete this.form.updatedAt;
+                        delete this.form.createdAt;
+                        delete this.form.projectLogo;
                         this.form.projectDetail = this.form.projectDetail.toString();
                         this.form.paymentConfig = JSON.stringify(this.form.paymentConfig);
                         let formData = new FormData();
@@ -388,6 +388,9 @@
             getImg () {
                 this.form.logoFile = this.$refs.logoFiles.files[0];
                 console.log(this.$refs.logoFiles.files[0], this.form);
+            },
+            getPdf () {
+                console.log(this.$refs.pdf.files[0]);
             }
         }
     };

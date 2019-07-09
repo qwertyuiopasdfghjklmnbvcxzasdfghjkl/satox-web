@@ -15,7 +15,7 @@
                         </span>
                         <span>
                             {{$t('common.yhm')}}：
-                            <Input v-model="formData.userName" clearable style="width: 110px"
+                            <Input v-model="formData.username" clearable style="width: 110px"
                                    :placeholder="$t('common.qsryhm')"></Input>
                         </span>
                         <span>
@@ -84,7 +84,7 @@
                         </span>
                         <span>
                             {{$t('common.yhm')}}：
-                            <Input v-model="formData1.userName" clearable style="width: 90px"
+                            <Input v-model="formData1.username" clearable style="width: 90px"
                                    :placeholder="$t('common.qsryhm')"></Input>
                         </span>
                         <span>
