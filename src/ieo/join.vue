@@ -14,8 +14,8 @@
 				</p>
 				<p class="mt15">{{$t('account.estimated_value_available')}}<!-- 可用余额 -->： <strong class="mr20">{{String(currtAccount.availableBalance).toMoney()}} {{currtAccount.symbol}}</strong> ({{$t('ieo.pay_per_copy')}}<!-- 每份需支付 --> <strong>{{Number(price)}} {{currtAccount.symbol}}</strong>)</p>
 				<p class="mt15">{{$t('ieo.subscription_shares')}}<!-- 认购份数 -->：
-					<input type="number" name="total" class="total" v-model="applyQuantity">
-					<span class="ml20" v-show="Number(applyQuantity)">{{$t('ieo.payable')}}<!-- 需支付 --> ≈ <strong>{{totalPay}}</strong> {{currtAccount.symbol}} <span class="f-c-gray ml10">({{$t('ieo.payment_notice')}}<!-- 注：以结算时币种市场汇率为准 -->)</span></span>
+					<input type="number" name="total" class="total" v-model="applyQuantity" :placeholder="`${$t('public0.public114')} ${info.subscriptionLeast} ${currtAccount.symbol}`">
+					<span class="ml20" v-show="Number(applyQuantity)">{{$t('ieo.payable')}}<!-- 需支付 --> <strong>{{totalPay}}</strong> {{currtAccount.symbol}} </span>
 				</p>
 				<p class="mt15 fs14 agreement">
 					<label class="checkbox">
@@ -112,6 +112,9 @@ export default {
 				return
 			} else if(Number(this.applyQuantity)>this.buyLimit){
 				Vue.$koallTipBox({icon: 'notification', message: this.$t('ieo.more_than_number_of_subscriptions')}) //超过当前可认购份数
+				return
+			} else if(Number(this.applyQuantity)<this.info.subscriptionLeast){
+				Vue.$koallTipBox({icon: 'notification', message: `${this.$t('public0.public114')} ${this.info.subscriptionLeast} ${this.currtAccount.symbol}`}) //最小份额
 				return
 			} else if(this.totalPay> this.currtAccount.availableBalance){
 				Vue.$koallTipBox({icon: 'notification', message: this.currtAccount.symbol + ' ' + this.$t('error_code.AVAILABLE_INSUFFICIENT')})
