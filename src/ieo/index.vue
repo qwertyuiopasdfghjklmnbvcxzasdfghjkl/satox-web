@@ -126,6 +126,9 @@ export default {
 					for(let rd of data.data){
 						if(item.projectId === rd.project_id){
 							item.remainingQuantity = Number(rd.remainingQuantity)
+							if(!rd.remainingQuantity){
+								this.getIEOProjectsList()
+							}
 							break
 						}
 					}
@@ -163,7 +166,7 @@ export default {
 							return msec>=0?msec:0
 						}
 						list2.push(item)
-					} else if(item.endTime > serverTime){
+					} else if(item.endTime > serverTime && item.remainingQuantity){
 						item.getMsec = (project)=>{
 							let msec = project.endTime - project.timestamp - this.timer
 							if(msec<=0){

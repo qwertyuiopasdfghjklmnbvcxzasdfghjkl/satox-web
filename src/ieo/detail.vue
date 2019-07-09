@@ -117,6 +117,11 @@ export default {
 	methods:{
 		mergeData(data){
 			if(data.dataType==='ieo' && data.data.project_id===this.info.projectId){
+				if(!Number(data.data.remainingQuantity)){
+					this.stage = 3
+					this.socket.destroy()
+					return
+				}
 				this.info.remainingQuantity = Number(data.data.remainingQuantity)
 			}
 		},
@@ -176,7 +181,7 @@ export default {
 						}
 						return msec>=0?msec:0
 					}
-				} else if(res.endTime > serverTime){
+				} else if(res.endTime > serverTime && res.remainingQuantity){
 					this.stage = 1
 					res.getMsec = (project)=>{
 							let msec = project.endTime - project.timestamp - this.timer
