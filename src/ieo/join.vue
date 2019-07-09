@@ -45,7 +45,7 @@
 				<span>{{new Date(item.createdAt).format()}}</span>
 				<span>{{item.subscriptionSymbol}}</span>
 				<span>{{item.applyQuantity}}</span>
-				<span>{{item.subscriptionAmount}}</span>
+				<span>{{item.subscriptionAmount}} {{item.subscriptionSymbol}}</span>
 				<span>{{item.gainQuantity}}</span>
 				<span>{{getStatus(item.state).text}}</span>
 			</li>

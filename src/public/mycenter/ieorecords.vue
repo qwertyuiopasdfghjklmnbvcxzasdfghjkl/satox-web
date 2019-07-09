@@ -17,7 +17,7 @@
         <span>{{item.gainQuantity}}</span>
         <span>{{item.gainAmount}}</span>
         <span>{{item.subscriptionSymbol}}</span>
-        <span>{{item.subscriptionAmount}}</span>
+        <span>{{item.subscriptionAmount}} {{item.subscriptionSymbol}}</span>
         <span>{{getStatus(item.state).text}}</span>
       </li>
     </ul>
