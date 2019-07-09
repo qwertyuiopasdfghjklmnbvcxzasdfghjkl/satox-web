@@ -19,14 +19,14 @@
 					<p>{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(info.totalIssue).toMoney()}} {{info.projectSymbol}}</span></p>
 				</div>
 				<div class="mt15 items">
-					<p>{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{info.totalSubscription}} {{info.priceSymbol}}</span></p>
+					<p>{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{info.totalSubscription-info.remainingQuantity}} {{info.priceSymbol}}</span></p>
 					<p>{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(info.totalRaised).toMoney()}} {{info.priceSymbol}}</span></p>
 				</div>
 				<div class="mt20 progress-container">
 					<div class="progress" sty>
 						<div class="progress-bar-base"></div>
-						<div class="progress-bar" :style="`width: ${info.totalSubscription/info.totalRaised*100>100?100:info.totalSubscription/info.totalRaised*100}%`"></div>
-						<p class="mt8 f-c-gray">{{$t('ieo.achieved')}}<!-- 已达成 -->： {{(info.totalSubscription/info.totalRaised*100).toFixed(2)}}%</p>
+						<div class="progress-bar" :style="`width: ${(info.totalSubscription-info.remainingQuantity)/info.totalRaised*100>100?100:(info.totalSubscription-info.remainingQuantity)/info.totalRaised*100}%`"></div>
+						<p class="mt8 f-c-gray">{{$t('ieo.achieved')}}<!-- 已达成 -->： {{((info.totalSubscription-info.remainingQuantity)/info.totalRaised*100).toFixed(2)}}%</p>
 					</div>
 					<div>
 						<button type="button" class="mint-btn" :class="stage!==3?'success':'disabled'" :disabled="stage!==1"  @click="joinDialog()">{{$t('ieo.participate_immediately')}}<!-- 立即参与 --></button>
@@ -117,7 +117,7 @@ export default {
 	methods:{
 		mergeData(data){
 			if(data.dataType==='ieo' && data.data.project_id===this.info.projectId){
-				this.info.totalSubscription = Number(data.data.total_subscription)
+				this.info.remainingQuantity = Number(data.data.remainingQuantity)
 			}
 		},
 		connectSoket(){
