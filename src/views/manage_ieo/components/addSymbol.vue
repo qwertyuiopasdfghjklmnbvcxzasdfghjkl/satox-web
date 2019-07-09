@@ -40,7 +40,8 @@
                 form: {
                     symbol: null,
                     symbolCount: null,
-                    symbolType: null
+                    symbolType: null,
+                    symbolId: null
                 },
                 ruleInline: {
                     symbol: [
@@ -56,7 +57,8 @@
             'form.symbol' () {
                 this.symbolList.map((res) => {
                     if (this.form.symbol === res.symbol) {
-                        this.form.symbolType = res.symbolId;
+                        this.form.symbolType = res.symbolType;
+                        this.form.symbolId = res.symbolId;
                     }
                 });
             }

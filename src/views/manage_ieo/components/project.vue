@@ -268,7 +268,7 @@
                     ],
                 },
                 columns: [
-                    {key: 'symbolType', title: vm.$t('operation.bh')},
+                    {key: 'symbolId', title: vm.$t('operation.bh')},
                     {key: 'symbol', title: vm.$t('common.bz')},
                     {key: 'symbolCount', title: vm.$t('ieo.mfsl')},
                     {
