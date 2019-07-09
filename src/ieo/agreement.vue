@@ -1,6 +1,6 @@
 <template>
 	<div class="page">
-		<div class="box title">IEO申购用户协议</div>
+		<div class="box title">{{$t('ieo.subscription_user_agreement')}}<!-- IEO申购用户协议 --></div>
 		<div class="inner"></div>
 	</div>
 </template>
