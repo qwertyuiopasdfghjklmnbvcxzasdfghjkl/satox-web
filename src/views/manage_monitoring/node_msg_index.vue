@@ -104,7 +104,7 @@
         methods: {
             getfindBtcNodeList () {
                 monitApi.findBtcNodeList((res) => {
-                    this.data1 = res.data;
+                    this.data1.push(res);
                 });
             },
             getfindEthNodeList () {
