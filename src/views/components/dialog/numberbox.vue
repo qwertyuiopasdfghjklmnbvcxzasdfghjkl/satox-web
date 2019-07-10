@@ -51,7 +51,7 @@
                 var matches = newValue.match(this.reg);
                 newValue = matches ? matches[0] : '';
                 this.$refs.input.value = newValue;
-                newValue = newValue > this.max ? this.max : newValue;
+                // newValue = newValue > this.max ? this.max : newValue;
                 util.setCursortPosition(this.$refs.input, newPos);
                 this.$emit('input', newValue);
             }
