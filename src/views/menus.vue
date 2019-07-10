@@ -62,7 +62,7 @@
                     {id: 'kyc', path: 'kycauditing_index', name: this.$t('nav.kycsh'), menus: kycRouter},
                     // {id: 'otc', path: 'otc_data_statistics_index', name: 'OTC管理', menus: otcRouter},
                     {id: 'exchange', path: 'exchange_data_statistics_index', name: this.$t('nav.bbgl'), menus: exchangeRouter},
-                    // { name: this.$t('nav.ieogl'), menus: ieoRouter},
+                    { name: this.$t('nav.ieogl'), menus: ieoRouter},
                     // {id: 'community', path: 'community_data_index', name: '社区管理', menus: communityRouter},
                     // {id: 'vote', path: 'vote_data_count_index', name: '投票挖矿管理', menus: voteRouter},
                     {id: 'finance', path: 'finance_finance_index', name: this.$t('nav.cwgl'), menus: financeRouter},
