@@ -108,5 +108,11 @@
 <style lang="less">
     .cont {
         text-align: left;
+        ul{
+            list-style-type: initial;
+        }
+        ol{
+            list-style-type: decimal;
+        }
     }
 </style>

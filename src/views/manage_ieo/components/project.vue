@@ -121,10 +121,10 @@
             </FormItem>
 
             <FormItem :label="vm.$t('ieo.rgxuzhi')" prop="subscriptionNotice">
-                <Input v-model="form.subscriptionNotice" type="textarea" :maxlength="500" :rows="8"></Input>
+                <wangeditor :catchData="noticeData" :content="form.subscriptionNotice"></wangeditor>
             </FormItem>
             <FormItem :label="vm.$t('ieo.xmgz')" prop="participationRules">
-                <Input v-model="form.participationRules" type="textarea" :maxlength="500" :rows="8"></Input>
+                <wangeditor :catchData="ruleData" :content="form.participationRules"></wangeditor>
             </FormItem>
             <FormItem :label="vm.$t('ieo.xmxq')" prop="projectDetail">
                 <div id="father">
@@ -268,7 +268,11 @@
                     ],
                 },
                 columns: [
-                    {key: 'symbolId', title: vm.$t('operation.bh')},
+                    {
+                        key: 'symbolType', title: vm.$t('operation.bh'), render: (h, params) => {
+                            return ('span', params.index+1);
+                        }
+                    },
                     {key: 'symbol', title: vm.$t('common.bz')},
                     {key: 'symbolCount', title: vm.$t('ieo.mfsl')},
                     {
@@ -359,6 +363,8 @@
                         delete this.form.createdAt;
                         delete this.form.projectLogo;
                         this.form.projectDetail = this.form.projectDetail.toString();
+                        this.form.participationRules = this.form.participationRules.toString();
+                        this.form.subscriptionNotice = this.form.subscriptionNotice.toString();
                         this.form.paymentConfig = JSON.stringify(this.form.paymentConfig);
                         let formData = new FormData();
                         let i;
@@ -377,6 +383,12 @@
             catchData (value) {
                 this.form.projectDetail = value;      //在这里接受子组件传过来的参数，赋值给data里的参数
             },
+            ruleData (value) {
+                this.form.participationRules = value;      //在这里接受子组件传过来的参数，赋值给data里的参数
+            },
+            noticeData (value) {
+                this.form.subscriptionNotice = value;      //在这里接受子组件传过来的参数，赋值给data里的参数
+            },
             add () {
                 util.setDialog(add, {
                     symbolList: this.symbolList,
@@ -387,10 +399,6 @@
             },
             getImg () {
                 this.form.logoFile = this.$refs.logoFiles.files[0];
-                console.log(this.$refs.logoFiles.files[0], this.form);
-            },
-            getPdf () {
-                console.log(this.$refs.pdf.files[0]);
             }
         }
     };

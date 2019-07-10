@@ -96,10 +96,10 @@
             </FormItem>
 
             <FormItem :label="vm.$t('ieo.rgxuzhi')+'：'" prop="productDescription">
-                <span>{{item.subscriptionNotice}}</span>
+                <div class="detail" v-html="item.subscriptionNotice"></div>
             </FormItem>
             <FormItem :label="vm.$t('ieo.xmgz')+'：'" prop="productDescriptionEn">
-                <span>{{item.participationRules}}</span>
+                <div class="detail" v-html="item.participationRules"></div>
             </FormItem>
             <FormItem :label="vm.$t('ieo.xmxq')+'：'" prop="productDescriptionEn">
                 <div v-html="item.projectDetail" class="detail"></div>
@@ -165,7 +165,9 @@
         }
     }
     .detail{
-        width: 790px;
+        width: 750px;
         display: inline-block;
+        border: 1px solid #e2e5e6;
+        padding: 20px;
     }
 </style>
