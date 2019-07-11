@@ -4,7 +4,7 @@
     <ul class="join-list">
       <li class="header">
         <span>{{$t('ieo.subscribed_time')}}<!-- 认购时间 --></span>
-        <span>{{$t('ieo.project_name')}}<!-- 项目名称 --></span>
+        <span class="ellipsis" style="min-width: 0; width: 120px">{{$t('ieo.project_name')}}<!-- 项目名称 --></span>
         <span>{{$t('ieo.number_of_copies')}}<!-- 获得份数 --></span>
         <span>{{$t('ieo.gain_quantity')}}<!-- 获得数量 --></span>
         <span>{{$t('ieo.payment_symbol')}}<!-- 付款币种 --></span>
@@ -13,7 +13,7 @@
       </li>
       <li v-for="item in list">
         <span>{{new Date(item.createdAt).format('yyyy-MM-dd')}}</span>
-        <span>{{item[`projectName${lang}`]}}</span>
+        <span class="ellipsis" style="min-width: 0; width: 120px" :title="item[`projectName${lang}`]">{{item[`projectName${lang}`]}}</span>
         <span>{{item.gainQuantity}}</span>
         <span>{{item.gainAmount}}</span>
         <span>{{item.subscriptionSymbol}}</span>

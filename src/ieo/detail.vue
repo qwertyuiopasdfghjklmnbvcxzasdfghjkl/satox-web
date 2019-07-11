@@ -143,7 +143,6 @@ export default {
 				Vue.$confirmDialog({
 				  id: 'PLEASE_LOGIN',
 				  showCancel: true,
-				  title:this.$t('otc_ad.otc_ad_confirm'),
 				  content: `${this.$t('exchange.exchange_Not_logged')}, ${this.$t('public0.public142')}`, // 请前往登录
 				  okCallback: () => {
 				    this.$router.push({path:'/login'})
