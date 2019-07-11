@@ -11,13 +11,13 @@
 			<li v-for="item in list1" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
 				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription-item.remainingQuantity}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{String(item.totalSubscription-item.remainingQuantity).toMoney()}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
 					<div class="progress-bar" :style="`width: ${(item.totalSubscription-item.remainingQuantity)/item.totalRaised*100>100?100:(item.totalSubscription-item.remainingQuantity)/item.totalRaised*100}%`"></div>
@@ -35,13 +35,13 @@
 			<li v-for="item in list2" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
 				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription-item.remainingQuantity}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{String(item.totalSubscription-item.remainingQuantity).toMoney()}} {{item.priceSymbol}}</span></p>
 				<button>{{$t('ieo.start_of_distance')}}<!-- 距离开始 -->：{{item.getMsec(item)|humanTime('天')}}</button>
 			</li>
 		</ul>
@@ -54,13 +54,13 @@
 			<li v-for="item in list3" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.issue_number')}}<!-- 发行数量 -->： <span>{{String(item.totalIssue).toMoney()}} {{item.projectSymbol}}</span></p>
 				<p class="mt15">{{$t('ieo.raised_amount')}}<!-- 募集金额 -->： <span>{{String(item.totalRaised).toMoney()}} {{item.priceSymbol}}</span></p>
-				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{item.totalSubscription-item.remainingQuantity}} {{item.priceSymbol}}</span></p>
+				<p class="mt15">{{$t('ieo.subscribed')}}<!-- 已认购 -->： <span>{{String(item.totalSubscription-item.remainingQuantity).toMoney()}} {{item.priceSymbol}}</span></p>
 				<div class="progress mt20">
 					<div class="progress-bar-base"></div>
 					<div class="progress-bar" :style="`width: ${(item.totalSubscription-item.remainingQuantity)/item.totalRaised*100>100?100:(item.totalSubscription-item.remainingQuantity)/item.totalRaised*100}%`"></div>
@@ -256,9 +256,10 @@ export default {
 		border-radius:4px;
 		object-fit: cover;
 		object-position: center;
-		vertical-align: middle;
-		margin-right: 25px;
+		vertical-align: top;
+		margin-right: 15px;
 	}
+	.ptitle {display: inline-block; max-width: 128px; margin-top: 20px; max-height: 45px; overflow: hidden;}
 	p {font-size: 13px;}
 	p span {color: #666; margin-left: 5px;}
 	button {
