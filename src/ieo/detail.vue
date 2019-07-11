@@ -4,7 +4,7 @@
 			<div class="left box-bgc"><img :src="info.projectThumb"></div>
 			<div class="right">
 				<div>
-					<strong class="fs18">{{info[`projectName${lang}`]}}</strong>
+					<strong class="fs18">{{info[`projectName${lang}`]}} {{info.projectSymbol}}</strong>
 					<button type="button" class="mint-btn danger small ml50" style="vertical-align: bottom;" v-if="stage===1">{{$t('ieo.status_processing')}}<!-- 进行中 --></button>
 					<button type="button" class="mint-btn success small ml50" style="vertical-align: bottom;" v-if="stage===2">{{$t('ieo.status_to_start')}}<!-- 即将开始 --></button>
 					<button type="button" disabled="" class="mint-btn disabled small ml50" style="vertical-align: bottom;" v-if="stage===3">{{$t('ieo.status_over')}}<!-- 已结束 --></button>

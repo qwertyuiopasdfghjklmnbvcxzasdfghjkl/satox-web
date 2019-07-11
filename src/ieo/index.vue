@@ -11,7 +11,7 @@
 			<li v-for="item in list1" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}} {{item.projectSymbol}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
@@ -35,7 +35,7 @@
 			<li v-for="item in list2" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}} {{item.projectSymbol}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
@@ -54,7 +54,7 @@
 			<li v-for="item in list3" :key="item.projectId" @click="goDetail(item.projectId)">
 				<p>
 					<img :src="item.projectLogo">
-					<span class="fs16 ptitle">{{item[`projectName${lang}`]}}</span>
+					<span class="fs16 ptitle">{{item[`projectName${lang}`]}} {{item.projectSymbol}}</span>
 				</p>
 				<p class="mt25">{{$t('ieo.status_start_purchase')}}<!-- 申购开始 -->： <span>{{new Date(item.startTime).format()}}</span></p>
 				<p class="mt15">{{$t('ieo.status_purchaes_deadline')}}<!-- 申购截止 -->： <span>{{new Date(item.endTime).format()}}</span></p>
