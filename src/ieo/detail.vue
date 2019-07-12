@@ -116,7 +116,7 @@ export default {
 	},
 	methods:{
 		mergeData(data){
-			if(data.dataType==='ieo' && data.data.project_id===this.info.projectId){
+			if(data.dataType==='ieo' && data.data.projectId===this.info.projectId){
 				if(!Number(data.data.remainingQuantity)){
 					this.stage = 3
 					this.socket.destroy()

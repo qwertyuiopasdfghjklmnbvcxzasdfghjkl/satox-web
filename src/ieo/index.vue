@@ -124,7 +124,7 @@ export default {
 			if(data.dataType==='ieo' && data.data.length){
 				for(let item of this.list1){
 					for(let rd of data.data){
-						if(item.projectId === rd.project_id){
+						if(item.projectId === rd.projectId){
 							item.remainingQuantity = Number(rd.remainingQuantity)
 							if(!rd.remainingQuantity){
 								this.getIEOProjectsList()
