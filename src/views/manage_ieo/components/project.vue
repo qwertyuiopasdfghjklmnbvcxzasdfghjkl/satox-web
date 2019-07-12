@@ -37,8 +37,9 @@
                                 format="yyyy-MM-dd HH:mm:ss"></DatePicker>
                 </FormItem>
 
-                <FormItem :label="vm.$t('ieo.xmjj')" prop="projectProfile">
-                    <Input v-model="form.projectProfile" class="w1" type="textarea" :maxlength="255"></Input>
+                <FormItem :label="vm.$t('ieo.xmtp')" prop="thumbFile">
+                    <span v-if="cont"><img :src="utils.baseURL+cont.projectThumb" width="40" height="40"></span>
+                    <input type="file" ref="thumbFile" name="thumbFile" class="w1" @change="getThumImg()">
                 </FormItem>
                 <FormItem :label="vm.$t('ieo.fbsj')" prop="releaseTime">
                     <DatePicker type="datetime"
@@ -47,6 +48,10 @@
                                 :placeholder="vm.$t('ieo.fbsj')"
                                 format="yyyy-MM-dd HH:mm:ss"></DatePicker>
                 </FormItem>
+                <FormItem :label="vm.$t('ieo.xmjj')" prop="projectProfile">
+                    <Input v-model="form.projectProfile" class="w1" type="textarea" :maxlength="255"></Input>
+                </FormItem>
+
             </div>
 
 
@@ -169,6 +174,7 @@
                     projectSymbol: null,
                     endTime: null,
                     logoFile: null,
+                    thumbFile: null,
                     paidTime: null,
                     projectProfile: null,
                     releaseTime: null,
@@ -204,6 +210,9 @@
                     ],
                     logoFile: [
                         {required: !this.cont, message: vm.$t('common.qsr') + vm.$t('ieo.bzlogo')}
+                    ],
+                    thumbFile: [
+                        {required: !this.cont, message: vm.$t('common.qsr') + vm.$t('ieo.xmtp')}
                     ],
                     paidTime: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('ieo.kksj')}
@@ -399,6 +408,9 @@
             },
             getImg () {
                 this.form.logoFile = this.$refs.logoFiles.files[0];
+            },
+            getThumImg () {
+                this.form.thumbFile = this.$refs.thumbFile.files[0];
             }
         }
     };

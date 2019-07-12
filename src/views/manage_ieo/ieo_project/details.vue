@@ -27,19 +27,22 @@
                 <FormItem :label="vm.$t('ieo.kksj')+'：'">
                     <span>{{item.paidTime}}</span>
                 </FormItem>
-
-                <FormItem :label="vm.$t('ieo.xmjj')+'：'">
-                    <span>{{item.projectProfile}}</span>
+                <FormItem :label="vm.$t('ieo.xmtp')+'：'">
+                    <span><img :src="util.baseURL+item.projectThumb" height="50"></span>
                 </FormItem>
                 <FormItem :label="vm.$t('ieo.fbsj')+'：'">
                     <span>{{item.releaseTime}}</span>
                 </FormItem>
+                <FormItem :label="vm.$t('ieo.xmjj')+'：'">
+                    <span>{{item.projectProfile}}</span>
+                </FormItem>
+
             </div>
 
 
             <FormItem :label="vm.$t('ieo.fxsl')+'：'">
                 <span>{{item.totalIssue}}</span>
-                <Tag type="border" color="green">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="green">{{item.projectSymbol}}</Tag>
             </FormItem>
             <FormItem>
                 <label class="red_title">{{vm.$t('ieo.xsd')}}<span>{{vm.$t('ieo.jjbz')}}：</span></label>
@@ -47,25 +50,25 @@
             </FormItem>
             <FormItem :label="vm.$t('ieo.fxjghbz')+'：'">
                 1
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red">{{item.priceSymbol}}</Tag>
                 =
                 <span>{{item.issuePrice}}</span>
-                <Tag type="border" color="green">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="green">{{item.projectSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mjmbhzb')+'：'">
                 <span>{{item.totalRaised}}</span>
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red">{{item.priceSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.zfs')+'：'">
                 <span>{{item.totalSubscription}}</span>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mfjghbz')+'：'">
                 <span>{{item.subscriptionPrice}}</span>
-                <Tag type="border" color="red">{{vm.$t('ieo.jjbz')}}</Tag>
+                <Tag type="border" color="red">{{item.priceSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.mfdbsl')+'：'">
                 <span>{{item.oneSymbolCount}}</span>
-                <Tag type="border" color="red">{{vm.$t('common.bzdh')}}</Tag>
+                <Tag type="border" color="red">{{item.priceSymbol}}</Tag>
             </FormItem>
             <div>
                 <span>{{vm.$t('ieo.dfbz')+'：'}}</span>

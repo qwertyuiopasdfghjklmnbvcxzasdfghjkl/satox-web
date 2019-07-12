@@ -1059,4 +1059,5 @@ export const ieo = {
     yqx: '',
     tjdfbz: '添加付款币种',
     kkfbcg: '扣款发币成功',
+    xmtp: '项目图片'
 }
