@@ -1,6 +1,6 @@
 <template>
 	<div class="page">
-		<img src="" class="banner-brief">
+		<img :src="getSysParams.ieoBanner.value" class="banner-brief">
 		<ul class="tab-bar"><a name="A"></a>
 			<li class="active"><a href="#A">{{$t('ieo.status_processing')}}<!-- 进行中 --></a></li>
 			<li><a href="#B">{{$t('ieo.status_to_start')}}<!-- 即将开始 --></a></li>
@@ -101,7 +101,7 @@ export default {
 		}
 	},
 	computed:{
-		...mapGetters(['getLang']),
+		...mapGetters(['getLang','getSysParams']),
 		lang(){
 			if(this.getLang==='zh-CN' || this.getLang==='cht'){
 				return ''
