@@ -5,7 +5,7 @@ let ieo = {
     subscriptionList (data, success, error) {
         api.post(`api/bm/ieoManage/subscription/list`, data, (res) => {
             if (res.rst === 1) {
-                success && success(res.data);
+                success && success(res.data, res.total);
             } else {
                 error && error(res.msg);
             }
@@ -40,7 +40,7 @@ let ieo = {
         api.post(`api/bm/ieoManage/project/list`, data,
             (res) => {
                 if (res.rst === 1) {
-                    success && success(res.data);
+                    success && success(res.data, res.total);
                 } else {
                     error && error(res.msg);
                 }
