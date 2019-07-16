@@ -14,7 +14,7 @@
                 <Col span="7">{{vm.$t('risk.wjyjgfz')}}</Col>
                 <Col span="7">{{this.item.marketTimeDiff}}</Col>
                 <Col span="7">
-                    <numberbox v-model="marketTimeDiff" :accuracy="0"
+                    <numberbox v-model="marketTimeDiff"
                                style="width: 160px;border:1px solid #dddee1"></numberbox>
                 </Col>
                 <Col span="3">

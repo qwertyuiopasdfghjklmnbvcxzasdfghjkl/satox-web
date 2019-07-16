@@ -13,7 +13,7 @@
                 </Select>
             </FormItem>
             <FormItem :label="vm.$t('risk.wjyjgfz')" prop="marketTimeDiff">
-                <numberbox class="number_input" :accuracy="0" v-model="form.marketTimeDiff"/>
+                <numberbox class="number_input" v-model="form.marketTimeDiff"/>
             </FormItem>
             <FormItem>
                 <Button type="primary" style="width:100%;" @click="addVerify">{{vm.$t('finance.chuangj')}}</Button>
