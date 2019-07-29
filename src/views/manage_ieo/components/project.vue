@@ -90,7 +90,7 @@
             </FormItem>
             <FormItem :label="vm.$t('ieo.mfdbsl')" prop="oneSymbolCount">
                 <numberbox class="number_input w1" v-model="form.oneSymbolCount"></numberbox>
-                <Tag type="border" color="red" v-if="form.priceSymbol">{{form.priceSymbol}}</Tag>
+                <Tag type="border" color="green" v-if="form.projectSymbol">{{form.projectSymbol}}</Tag>
             </FormItem>
             <FormItem :label="vm.$t('ieo.dfbz')" class="tab" prop="paymentConfig">
                 <Table :columns="columns" :data="form.paymentConfig"></Table>
