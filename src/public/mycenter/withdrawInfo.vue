@@ -23,7 +23,7 @@
                      
                     </div>
                 </div>
-                <div class="filed" v-if="symbol!=='SATO' && symbol!=='USSD'">
+                <div class="filed" v-if="(symbol!=='SATO' || (symbol==='SATO' && !satoWithdrawKey)) && symbol!=='USSD'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -75,10 +75,14 @@
                 </div>
                 <div class="filed">
                     <input type="button" class="BNB-subbtn" :value="$t('account.user_submit')" @click="walletWithdraw" /><!--提交-->
-                    <!-- <template v-if="symbol==='USSD'">
+                    <template v-if="symbol==='USSD'">
                       <span class="large_withdraw" @click="ussdWithdrawKey=false" v-if="ussdWithdrawKey">{{$t('account.withdraw_to_card')}}</span>
                       <span class="large_withdraw" @click="ussdWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
-                    </template> -->
+                    </template>
+                    <template v-if="symbol==='SATO'">
+                      <span class="large_withdraw" @click="satoWithdrawKey=false" v-if="satoWithdrawKey">{{$t('account.withdraw_to_wallet')}}</span>
+                      <span class="large_withdraw" @click="satoWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
+                    </template>
                 </div>
             </div>
             <div class="f-fr">
@@ -130,6 +134,7 @@ export default {
   data () {
     return {
       ussdWithdrawKey:false,
+      satoWithdrawKey:true,
       withdrawType:0,
       mobileState: null,
       fixedNumber: 8,
@@ -294,9 +299,10 @@ export default {
         }
         this.withdrawType = 2
         validData = Object.assign(validData, userBankInfo)
-      }
-      if(this.symbol==='SATO' || (this.symbol==='USSD' && this.ussdWithdrawKey)){
+      } else if((this.symbol==='SATO'  && this.satoWithdrawKey) || (this.symbol==='USSD' && this.ussdWithdrawKey)){
         this.withdrawType =1
+      } else {
+        this.withdrawType = 0
       }
       this.$validator.validateAll(validData).then((validResult) => {
         if (!validResult) {

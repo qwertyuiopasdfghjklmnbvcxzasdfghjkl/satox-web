@@ -170,6 +170,7 @@ export default {
       this.products.forEach((item) => {
         config[item.market] = item
       })
+
       return utils.isPlainEmpty(config) ? null : config
     },
     hasCollection () {
@@ -244,6 +245,7 @@ export default {
     getCollection () {
       // 获取产品
       marketApi.marketList((res) => {
+        for(let item of res) {console.log(item.market)}
         this.products = res
         if (this.hasCollection) {
           this.active = 'collection'
