@@ -47,7 +47,7 @@
                 {{$t('public.navigation_logout')}}<!--退出-->
               </a>
             </li>
-            <li v-if="false">
+            <li>
               <router-link :to="{name:'shop_index'}">
                 {{$t('shop.shop')}}<!--购物-->
               </router-link>
@@ -165,7 +165,7 @@
       <li v-if="isLogin">
         <a @click="reloadPage('mycenter')">{{username}}</a>
       </li>
-      <li v-if="false">
+      <li>
         <router-link :to="{name:'shop_index'}">
           {{$t('shop.shop')}}<!--购物-->
         </router-link>
