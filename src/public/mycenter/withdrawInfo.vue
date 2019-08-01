@@ -178,6 +178,8 @@ export default {
     procedureFee () { // 手续费 提现数量-固定手续费
       if(this.symbol==='USSD' && !this.ussdWithdrawKey){
         return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
+      } else if((this.symbol==='USSD' && this.ussdWithdrawKey) || (this.symbol==='SATO' && this.satoWithdrawKey)){
+        return '0'
       } else {
         return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
       }
