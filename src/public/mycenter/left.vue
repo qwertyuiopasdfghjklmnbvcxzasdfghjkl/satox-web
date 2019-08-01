@@ -21,7 +21,7 @@
           <i class="icon-curry"></i>
           <span>{{$t('otc_legal.otc_legal_currency')}}</span>
       </li> -->
-      <li :class="{'active': active === 'ieorecords'}" @click="switch_tab('ieorecords')">
+      <li :class="{'active': active === 'ieorecords'}" @click="switch_tab('ieorecords')"  v-if="false">
           <i class="icon-pie-chart"></i>
           <span>我的IEO</span>
           <!--我的IEO-->
