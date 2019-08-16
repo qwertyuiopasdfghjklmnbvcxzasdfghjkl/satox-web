@@ -68,13 +68,13 @@
                     <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
                 </FormItem>
                 <FormItem :label="vm.$t('exchange.erc20hydz')" prop="contractAddr"
-                          v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
+                          v-if="(this.formLeft.flag === '1' && this.formLeft.symbolType === '2')||this.formLeft.symbolType === selectSymbol">
                     <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
                 </FormItem>
                 <Row>
                     <Col span="12">
                         <FormItem :label="vm.$t('exchange.hyjd')" prop="contractDecimals"
-                                  v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
+                                  v-if="(this.formLeft.flag === '1' && this.formLeft.symbolType === '2')||this.formLeft.symbolType === selectSymbol">
                             <Input v-model="formLeft.contractDecimals" name="contractDecimals"></Input>
                         </FormItem>
                     </Col>
@@ -311,6 +311,7 @@
                     ]
                 },
                 symbolTypeList: [],
+                selectSymbol: null
             };
         },
         components: {
@@ -326,6 +327,12 @@
                 });
             });
             this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
+            console.log(this.symbolTypeList);
+            this.symbolTypeList.filter(res => {
+                if (res.name === 'SATO') {
+                    this.selectSymbol = res.code;
+                }
+            });
         },
         methods: {
             binValidator (prop, e) {
