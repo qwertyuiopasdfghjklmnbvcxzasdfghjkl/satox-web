@@ -6,7 +6,8 @@
         <Col span="12"></Col>
         <Col span="6" style="float:right;"><Button type="primary" @click="exportTable">{{$t('systemlog.dc')}}</Button></Col>
         <Col span="6" style="float:right;">
-            {{$t('common.sj')}}： <DatePicker v-model="formItem.date" format="yyyy-MM-dd" type="daterange" placement="bottom-end" style="width: 200px"></DatePicker>
+            {{$t('common.sj')}}：
+            <DatePicker v-model="formItem.date" format="yyyy-MM-dd" type="daterange" placement="bottom-end" style="width: 200px"></DatePicker>
         </Col>
     </Row>
     <Tabs @on-click="aaa">

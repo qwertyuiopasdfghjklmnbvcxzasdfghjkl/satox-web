@@ -242,6 +242,18 @@ const findNodeList = function (data, success, error) {
 };
 monitoring.findNodeList = findNodeList;
 
+// 查询all节点信息
+const findAllList = function (success, error) {
+    api.get(`/api/bm/monitor/node/findAllNode`, (res) => {
+        if (res.rst === 1) {
+            success && success(res);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+monitoring.findAllList = findAllList;
+
 //分页查询错误日志
 const findErrorLogListPage = function (curPage, data, success, error) {
     api.post(`api/bm/monitor/errorLog/findErrorLogList/10/${curPage}`, data, (res) => {

@@ -44,6 +44,7 @@
                             <Option :value="5">{{$t('mall.yth')}}</Option>
                         </Select>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
+                        <Button type="primary" @click="exportExl()">{{$t('systemlog.dc')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage" :page-size="size"
@@ -85,8 +86,9 @@
                         render: (h, params) => {
                             return h('div', {
                                 style: {
-                                    color: this.switchColor(params.row.state)                                }
-                            },this.switchStaus(params.row.state));
+                                    color: this.switchColor(params.row.state)
+                                }
+                            }, this.switchStaus(params.row.state));
                         }
                     },
                     {key: 'updatedAt', title: this.$t('common.gxsj')},
@@ -137,8 +139,8 @@
                     receiverName: null,
                     receiverPhone: null,
                     state: 0
-                }
-                this.curPage = 1
+                };
+                this.curPage = 1;
                 this.getAuditing();
             },
             switchStaus (state) {//0：待支付 1：待确认 2：已付款未发货 3：已发货 4：已验收 5：已退回
@@ -157,7 +159,7 @@
                         return this.$t('mall.yth');
                 }
             },
-            switchColor(i){
+            switchColor (i) {
                 switch (i) {
                     case 0:
                         return '#f3b138';
@@ -218,6 +220,17 @@
             changePage (page) {
                 this.curPage = page;
                 this.getAuditing();
+            },
+            exportExl () {
+                let D = JSON.stringify(this.formData);
+                let data = JSON.parse(D);
+                let arr = []
+                arr[0] = 'createdStart=' + (data.createdStart ? util.dateToStr(new Date(data.createdStart)) : '');
+                arr[1] = 'createdEnd=' + (data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : '');
+                arr[2] = 'state=' + (data.state === 7 ? '' : data.state);
+                arr[3] = 'productName=' + (data.productName === '0' ? '' : data.productName);
+                arr[4] = 'export=1';
+                window.location.href = `${util.baseURL}`+`api/bm/shop/order/list?${arr.join('&')}`
             }
         }
     };
