@@ -59,8 +59,11 @@
                 data: [],
                 columns2: [
                     {
-                        title: this.$t('monitoring.fwt'),
-                        key: 'symbolType'
+                        title: this.$t('mall.mc'),
+                        key: 'symbolType',
+                        render: (h, params)=>{
+                            return h('div', params.row.symbolType+this.$t('monitoring.tbqks'))
+                        }
                     },
                     {
                         title: this.$t('monitoring.fwt'),
