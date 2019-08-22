@@ -20,8 +20,10 @@ const noticeList = function (success, error) {
 market.noticeList = noticeList
 
 // 市场列表 获取所有产品
-const marketList = function (success, error) {
-  api.get(`${domain}api/v3/trade/market`, (res) => {
+const marketList = function (success, error, data) {
+  data = data?data:{}
+  console.log('data==',data)
+  api.get(`${domain}api/v3/trade/market`, data, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
