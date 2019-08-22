@@ -1,5 +1,20 @@
 import JsCookies from 'js-cookie'
 import Config from './config'
+/*
+"subscribe":[]
+     * @param kline K线图
+     * @param account 帐户信息
+     * @param market 市场信息
+     * @param block_trade 大宗商品市场信息
+     * @param depth 深度
+     * @param last_price 24小时最新价
+     * @param user_new_orderbook 用户当前委托
+     * @param user_history_orderbook 用户历史委托
+     * @param new_transaction 最新成交
+     * @param valuation 估值
+     * @param symbol_volumes 币种成交量
+
+*/
 (function (KLineWebSocket) {
   if (typeof module === 'object') {
     module.exports = KLineWebSocket
@@ -11,6 +26,7 @@ import Config from './config'
   opts = opts || {}
   let symbol = opts.symbol || 'ETHBTC'
   let period = opts.period || '1m'
+  let subscribe = opts.subscribe || []
   let port = '9501'
   let isLeavePage = false
 
@@ -28,7 +44,8 @@ import Config from './config'
       return
     }
     if (webSocket && webSocket.readyState === webSocket.OPEN) {
-      webSocket.send(`{"event":"addChannel","channel":"kline","api_token":"${apiToken}","period":"${period === 'line' ? '1m' : period}","symbol":"${symbol}","isZip":"false"}`)
+      let params = {"event":"addChannel","channel":"kline","api_token":apiToken,"period":period === 'line' ? '1m' : period,"symbol":symbol,"isZip":false,"subscribe":subscribe}
+      webSocket.send(JSON.stringify(params))
     }
   }
   let curTime = null

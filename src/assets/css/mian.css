@@ -69,6 +69,13 @@ div.hopscotch-bubble h3,div.hopscotch-bubble .hopscotch-content{color:#aeb7d0;}
 .table.border {border-top: 1px solid #ccc; border-left: 1px solid #ccc;}
 .table.border > div > div {border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;}
 
+.ui-flex {display: flex;}
+.ui-flex-justify {justify-content: space-between;}
+.ui-flex-center {justify-content:center;}
+.ui-flex-column {flex-direction: column;}
+.ui-flex-1 {flex: 1; min-width: 0;}
+.ui-flex-2 {flex: 2; min-width: 0;}
+.ui-flex-3 {flex: 3; min-width: 0;}
 
 .ellipsis {white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .mask-layer {position: fixed; left: 0; top: 70px; right: 0; bottom: 0; background-color: rgba(0,0,0,.6); z-index: 9999999;}
