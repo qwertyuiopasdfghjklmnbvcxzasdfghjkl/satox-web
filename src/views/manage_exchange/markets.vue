@@ -110,6 +110,10 @@
                         key: 'lowestPriceDaily'
                     },
                     {
+                        title: this.$t('exchange.syrjj'),
+                        key: 'averagePrice'
+                    },
+                    {
                         title: this.$t('exchange.ryh'),
                         key: 'userCountDaily'
                     },
