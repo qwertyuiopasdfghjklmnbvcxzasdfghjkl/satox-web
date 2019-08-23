@@ -18,8 +18,7 @@
               <ul class="top-left-header-right">
                 <li class="last-item">
                   <span class="last-price market-symbol" :class="[(getLast24h.direction===1  || getLast24h.direction===0) ? 'font-green':'font-red']">
-                    {{toFixed(getLast24h.close, fixedNumber)}}
-                    <!-- <font class="last-valuation-price"> ≈ <valuation :lastPrice="getLast24h.close" :baseSymbol="baseSymbol"/></font> -->
+                    {{toFixed(getLast24h.close, fixedNumber)}} {{baseSymbol}}
                   </span>
                 </li>
                 <li class="last-item last-change">
