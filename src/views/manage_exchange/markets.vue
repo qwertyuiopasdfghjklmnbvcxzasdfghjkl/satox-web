@@ -18,12 +18,13 @@
                     <p slot="title">{{$t('exchange.zbzl')}}</p>
                     <Table :columns="columns2" :data="data2"></Table>
                     <Page :current="curPage" :total="total" @on-change="changePage"
+                          :page-size="10"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
                 <Card style="margin-top:10px;">
                     <p slot="title">{{$t('exchange.jysjtj')}}</p>
                     <Table :columns="columns1" :data="data1"></Table>
-                    <Page :current="curPage1" :total="total1" @on-change="changePage1"
+                    <Page :current="curPage1" :total="total1" @on-change="changePage1" :page-size="10"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </TabPane>
@@ -42,7 +43,7 @@
                 <Card style="margin-top:10px;">
                     <p slot="title">{{$t('exchange.zbzl')}}</p>
                     <Table :columns="columns3" :data="data3"></Table>
-                    <Page :current="curPage3" :total="total3" @on-change="changePage3"
+                    <Page :current="curPage3" :total="total3" @on-change="changePage3" :page-size="10"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </TabPane>
@@ -61,7 +62,7 @@
                 <Card style="margin-top:10px;">
                     <p slot="title">{{$t('exchange.zbzl')}}</p>
                     <Table :columns="columns3" :data="data4"></Table>
-                    <Page :current="curPage4" :total="total4" @on-change="changePage4"
+                    <Page :current="curPage4" :total="total4" @on-change="changePage4" :page-size="10"
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </TabPane>
@@ -368,7 +369,7 @@
                 currenyApi.findMarketList({
                     market: this.symbol || null,
                     marketType: 2
-                }, this.curPage3, (res, total) => {
+                }, this.curPage4, (res, total) => {
                     this.total4 = total;
                     this.data4 = res;
                 }, (msg) => {
