@@ -109,7 +109,7 @@ export default {
     ...mapGetters(['getApiToken']),
     markets () {
       // 收藏
-      return ['collection', 'SATO','BTC','USDS']
+      return ['collection'].concat([...new Set(this.products.map(item=>{return item.baseSymbol}))])
     },
     tipPrice () {
       return this.hoverItem || {}
