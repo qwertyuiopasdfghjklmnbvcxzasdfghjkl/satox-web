@@ -61,7 +61,7 @@
 
                 <FormItem :label="vm.$t('exchange.pullGemini')" prop="pullGemini">
                     <Input style="width:100%;" v-model="formLeft.pullGemini"
-                                 name="pullGemini"></Input>
+                           name="pullGemini"></Input>
                 </FormItem>
                 <FormItem :label="vm.$t('exchange.buyFixedPriceRate')" prop="buyFixedPriceRate">
                     <InputNumber style="width:100%;" v-model="formLeft.buyFixedPriceRate"
@@ -89,7 +89,7 @@
 
     export default {
         props: ['type'],
-        data() {
+        data () {
             const customValidator = (rule, value, callback) => {
                 if (this.formLeft[rule.field] === null) {
                     return callback(new Error('error'));
@@ -199,55 +199,56 @@
             };
         },
         methods: {
-            closeDialog() {
+            closeDialog () {
                 this.$emit('removeDialog');
             },
-            getAddMarket() {
-                if (this.type == 1) {
-                    this.$refs.formItem.validate((valid) => {
-                        if (valid) {
-                            currenyApi.insertMarket(this.formLeft, (res) => {
-                                this.$Message.success({content: this.vm.$t('common.tjcg')});
-                                this.$emit('okCallback');
-                                this.$emit('removeDialog');
-                            }, (msg) => {
-                                this.$Message.error({content: msg});
-                            });
-                        }
-                    });
-                } else if (this.type == 0 || this.type == 2) {
-                    this.$refs.formItem.validate((valid) => {
-                        if (valid) {
-                            currenyApi.insertMarket({
-                                market: this.formLeft.market,
-                                currencySymbol: this.formLeft.currencySymbol,
-                                baseSymbol: this.formLeft.baseSymbol,
-                                openingPrice: this.formLeft.openingPrice,
-                                accuracy: this.formLeft.accuracy,
-                                quantityAccu: this.formLeft.quantityAccu,
-                                amountAccu: this.formLeft.amountAccu,
-                                digit: this.formLeft.digit,
-                                minPlaceOrderAmount: this.formLeft.minPlaceOrderAmount,
-                                minPlaceOrderQuantity: this.formLeft.minPlaceOrderQuantity,
-                                state: this.formLeft.state,
-                                basePrice: this.formLeft.basePrice,
-                                marketType: this.type
-                            }, (res) => {
-                                this.$Message.success({content: this.vm.$t('common.tjcg')});
-                                this.$emit('okCallback');
-                                this.$emit('removeDialog');
-                            }, (msg) => {
-                                this.$Message.error({content: msg});
-                            });
-                        }
-                    });
-                }
+            getAddMarket () {
+                // if (this.type == 1) {
+                this.$refs.formItem.validate((valid) => {
+                    if (valid) {
+                        this.formLeft.marketType = this.type;
+                        currenyApi.insertMarket(this.formLeft, (res) => {
+                            this.$Message.success({content: this.vm.$t('common.tjcg')});
+                            this.$emit('okCallback');
+                            this.$emit('removeDialog');
+                        }, (msg) => {
+                            this.$Message.error({content: msg});
+                        });
+                    }
+                });
+                // } else if (this.type == 0 || this.type == 2) {
+                //     this.$refs.formItem.validate((valid) => {
+                //         if (valid) {
+                //             currenyApi.insertMarket({
+                //                 market: this.formLeft.market,
+                //                 currencySymbol: this.formLeft.currencySymbol,
+                //                 baseSymbol: this.formLeft.baseSymbol,
+                //                 openingPrice: this.formLeft.openingPrice,
+                //                 accuracy: this.formLeft.accuracy,
+                //                 quantityAccu: this.formLeft.quantityAccu,
+                //                 amountAccu: this.formLeft.amountAccu,
+                //                 digit: this.formLeft.digit,
+                //                 minPlaceOrderAmount: this.formLeft.minPlaceOrderAmount,
+                //                 minPlaceOrderQuantity: this.formLeft.minPlaceOrderQuantity,
+                //                 state: this.formLeft.state,
+                //                 basePrice: this.formLeft.basePrice,
+                //                 marketType: this.type
+                //             }, (res) => {
+                //                 this.$Message.success({content: this.vm.$t('common.tjcg')});
+                //                 this.$emit('okCallback');
+                //                 this.$emit('removeDialog');
+                //             }, (msg) => {
+                //                 this.$Message.error({content: msg});
+                //             });
+                //         }
+                //     });
+                // }
             }
         },
-        filters:{
-            filterMarket(id){
-                let arr =[window.vm.$t('exchange.xzxnsc'), window.vm.$t('exchange.xzzssc'), window.vm.$t('exchange.xzdzsp')]
-                return arr[id]
+        filters: {
+            filterMarket (id) {
+                let arr = [window.vm.$t('exchange.xzxnsc'), window.vm.$t('exchange.xzzssc'), window.vm.$t('exchange.xzdzsp')];
+                return arr[id];
             }
         }
     };
