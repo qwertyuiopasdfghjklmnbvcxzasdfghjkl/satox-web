@@ -127,7 +127,7 @@
                     },
                     {
                         title: vm.$t('exchange.dzsj'),
-                        key: 'transferIntoTime'
+                        key: 'createdTime'
                     }
                 ],
                 data2: [],

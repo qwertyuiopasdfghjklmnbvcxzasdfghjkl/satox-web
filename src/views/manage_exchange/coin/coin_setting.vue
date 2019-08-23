@@ -160,8 +160,8 @@
 </template>
 
 <script>
-    import currenyApi from '../../api/currency';
-    import numberbox from '../components/dialog/numberbox';
+    import currenyApi from '../../../api/currency';
+    import numberbox from '../../components/dialog/numberbox';
 
     export default {
         props: ['item'],
@@ -197,10 +197,13 @@
         },
         methods: {
             tabs (propName) {
-                if (!this[propName]) {
-                    this.$Message.error({content: this.vm.$t('common.bnwk')});
-                    return;
+                if(propName !== 'feeFixedAmount'){
+                    if (!this[propName]) {
+                        this.$Message.error({content: this.vm.$t('common.bnwk')});
+                        return;
+                    }
                 }
+
                 let data = {
                     symbolFeeId: this.data1.symbolFeeId,
                 };

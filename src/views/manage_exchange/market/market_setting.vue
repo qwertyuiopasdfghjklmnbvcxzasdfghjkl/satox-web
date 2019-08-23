@@ -109,7 +109,7 @@
             <Col span="6">{{vm.$t('exchange.zxxdje')}}</Col>
             <Col span="6">{{item.minPlaceOrderAmount || 0}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderAmount"></InputNumber>
+                <numberbox style="width:113px; border:1px solid #dddee1"  v-model="minPlaceOrderAmount"></numberbox>
             </Col>
             <Col span="6" style="text-align:right;">
                 <Button type="primary" @click="tabs('minPlaceOrderAmount')">{{vm.$t('common.bc')}}</Button>
@@ -119,7 +119,7 @@
             <Col span="6">{{vm.$t('exchange.zxjysl')}}</Col>
             <Col span="6">{{item.minPlaceOrderQuantity || 0}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" :min="0.001" v-model="minPlaceOrderQuantity"></InputNumber>
+                <numberbox style="width:113px; border:1px solid #dddee1" v-model="minPlaceOrderQuantity"></numberbox>
             </Col>
             <Col span="6" style="text-align:right;">
                 <Button type="primary" @click="tabs('minPlaceOrderQuantity')">{{vm.$t('common.bc')}}</Button>
@@ -129,7 +129,7 @@
             <Col span="6">{{vm.$t('exchange.gdjg')}}</Col>
             <Col span="6">{{item.fixedPrice || 0}}</Col>
             <Col span="6">
-                <InputNumber style="width:113px;" v-model="fixedPrice"></InputNumber>
+                <numberbox style="width:113px; border:1px solid #dddee1" v-model="fixedPrice"></numberbox>
             </Col>
             <Col span="6" style="text-align:right;">
                 <Button type="primary" @click="tabs('fixedPrice')">{{vm.$t('common.bc')}}</Button>
@@ -147,11 +147,12 @@
         </Row>
         <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
             <Col span="6">{{vm.$t('exchange.sclx')}}</Col>
-            <Col span="6">{{item.marketType === 1 ? vm.$t('exchange.zssc'): vm.$t('exchange.xnsc')}}</Col>
+            <Col span="6">{{item.marketType | filterMarket}}</Col>
             <Col span="6">
                 <Select v-model="marketType" style="width:113px" :disabled="role">
                     <Option :value="1">{{vm.$t('exchange.zssc')}}</Option>
                     <Option :value="0">{{vm.$t('exchange.xnsc')}}</Option>
+                    <Option :value="2">{{vm.$t('exchange.dzsp')}}</Option>
                 </Select>
             </Col>
             <Col span="6" style="text-align:right;">
@@ -212,12 +213,22 @@
                 <Button type="primary" @click="tabs('pullInterval')">{{vm.$t('common.bc')}}</Button>
             </Col>
         </Row>
+        <Row style="margin-top:10px;border-bottom:1px solid #e9eaec;padding-bottom:5px;">
+            <Col span="6">{{vm.$t('exchange.zdwtjg')}}</Col>
+            <Col span="6">{{item.basePrice||"无"}}</Col>
+            <Col span="6">
+                <InputNumber style="width:113px;" v-model="basePrice" :min="0"></InputNumber>
+            </Col>
+            <Col span="6" style="text-align:right;">
+                <Button type="primary" @click="tabs('basePrice')">{{vm.$t('common.bc')}}</Button>
+            </Col>
+        </Row>
     </Card>
 </template>
 
 <script>
-    import currenyApi from '../../api/currency';
-    import numberbox from '../components/dialog/numberbox';
+    import currenyApi from '../../../api/currency';
+    import numberbox from '../../components/dialog/numberbox';
     import Cookies from 'js-cookie';
 
     export default {
@@ -248,7 +259,8 @@
                 buyFixedPriceRate: null,
                 sellFixedPriceRate: null,
                 pullInterval: null,
-                role: true
+                role: true,
+                basePrice: null
             };
         },
         components: {
@@ -314,6 +326,12 @@
                 }, (msg) => {
                     this.$Message.error({content: msg});
                 });
+            }
+        },
+        filters:{
+            filterMarket(id){
+                let arr = [window.vm.$t('exchange.xnsc'), window.vm.$t('exchange.zssc'), window.vm.$t('exchange.dzsp')]
+                return arr[id]
             }
         }
     };

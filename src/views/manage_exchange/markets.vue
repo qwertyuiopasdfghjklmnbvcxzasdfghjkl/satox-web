@@ -46,14 +46,33 @@
                           style="text-align:center;margin-top:20px;"></Page>
                 </Card>
             </TabPane>
+            <TabPane :label="$t('exchange.dzsp')">
+                <Card>
+                    <p slot="title">{{$t('exchange.dzspscgl')}}
+                        <span class="refresh" @click="reshAll"></span>
+                    </p>
+                    <Row>
+                        <span>{{$t('exchange.scmc')}}</span>
+                        <Input v-model="symbol" style="width: 300px"></Input>
+                        <Button type="primary" @click="getMarketList2()">{{$t('common.cx')}}</Button>
+                        <Button type="primary" @click="add_market2()" style="float:right;">{{$t('exchange.xzdzsp')}}</Button>
+                    </Row>
+                </Card>
+                <Card style="margin-top:10px;">
+                    <p slot="title">{{$t('exchange.zbzl')}}</p>
+                    <Table :columns="columns3" :data="data4"></Table>
+                    <Page :current="curPage4" :total="total4" @on-change="changePage4"
+                          style="text-align:center;margin-top:20px;"></Page>
+                </Card>
+            </TabPane>
         </Tabs>
     </div>
 </template>
 
 <script>
     import util from '../../libs/util';
-    import add_market from './add_market';
-    import market_setting from './market_setting';
+    import add_market from './market/add_market';
+    import market_setting from './market/market_setting';
     import currenyApi from '../../api/currency';
 
     export default {
@@ -65,6 +84,8 @@
                 total1: 0,
                 curPage3: 1,
                 total3: 0,
+                curPage4: 1,
+                total4: 0,
                 symbol: '',
                 columns1: [
                     {
@@ -108,10 +129,6 @@
                     {
                         title: this.$t('exchange.rzdj'),
                         key: 'lowestPriceDaily'
-                    },
-                    {
-                        title: this.$t('exchange.syrjj'),
-                        key: 'averagePrice'
                     },
                     {
                         title: this.$t('exchange.ryh'),
@@ -263,18 +280,27 @@
                         }
                     }
                 ],
-                data3: []
+                data3: [],
+                data4: [],
             };
         },
         created () {
             this.findMarketList();
             this.getMarketList();
             this.getMarketList1();
+            this.getMarketList2()
         },
         methods: {
             reshAll () {
+                this.curPage = 1;
+                this.curPage1 = 1;
+                this.curPage4 = 1;
+                this.curPage3 = 1;
+                this.symbol = '';
                 this.findMarketList();
-                this.getMarketList();
+                this.findMarketList();
+                this.getMarketList1();
+                this.getMarketList2();
             },
             findMarket () {
                 currenyApi.findMarketExchangeInfoList(this.curPage1, {
@@ -310,6 +336,14 @@
                     }
                 });
             },
+            add_market2 () {
+                util.setDialog(add_market, {
+                    type: 2,
+                    okCallback: () => {
+                        this.getMarketList2();
+                    }
+                });
+            },
             findMarketList () { // 市场交易信息
                 currenyApi.findMarketExchangeInfoList(this.curPage1, {
                     market: this.symbol || null,
@@ -326,6 +360,17 @@
                 }, this.curPage3, (res, total) => {
                     this.total3 = total;
                     this.data3 = res;
+                }, (msg) => {
+                    this.$Messags.error({content: msg});
+                });
+            },
+            getMarketList2 () { // 大宗商品查询市场
+                currenyApi.findMarketList({
+                    market: this.symbol || null,
+                    marketType: 2
+                }, this.curPage3, (res, total) => {
+                    this.total4 = total;
+                    this.data4 = res;
                 }, (msg) => {
                     this.$Messags.error({content: msg});
                 });
@@ -349,6 +394,10 @@
             changePage3 (page) {
                 this.curPage3 = page;
                 this.getMarketList1();
+            },
+            changePage4 (page) {
+                this.curPage4 = page;
+                this.getMarketList2();
             }
         }
     };

@@ -2,7 +2,7 @@
     <div class="coin_setting">
         <Card style="width:500px;">
             <p slot="title">
-                {{type == 1 ? vm.$t('exchange.xzzssc') : vm.$t('exchange.xzxnsc')}}
+                {{type | filterMarket}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Form ref="formItem" :model="formLeft" :rules="ruleInline" label-position="left" :label-width="100">
@@ -75,13 +75,17 @@
                     <InputNumber style="width:100%;" v-model="formLeft.pullInterval||3000"
                                  name="pullInterval"></InputNumber>
                 </FormItem>
+                <FormItem :label="vm.$t('exchange.zdwtjg')" prop="basePrice">
+                    <InputNumber style="width:100%;" v-model="formLeft.basePrice" :min="0"
+                                 name="basePrice"></InputNumber>
+                </FormItem>
                 <Button type="primary" @click="getAddMarket()">{{vm.$t('common.tj')}}</Button>
             </Form>
         </Card>
     </div>
 </template>
 <script>
-    import currenyApi from '../../api/currency';
+    import currenyApi from '../../../api/currency';
 
     export default {
         props: ['type'],
@@ -114,7 +118,8 @@
                     pullGemini: null,
                     buyFixedPriceRate: null,
                     sellFixedPriceRate: null,
-                    pullInterval: null
+                    pullInterval: null,
+                    basePrice: null
                 },
                 ruleInline: {
                     market: [
@@ -210,7 +215,7 @@
                             });
                         }
                     });
-                } else if (this.type == 0) {
+                } else if (this.type == 0 || this.type == 2) {
                     this.$refs.formItem.validate((valid) => {
                         if (valid) {
                             currenyApi.insertMarket({
@@ -225,7 +230,8 @@
                                 minPlaceOrderAmount: this.formLeft.minPlaceOrderAmount,
                                 minPlaceOrderQuantity: this.formLeft.minPlaceOrderQuantity,
                                 state: this.formLeft.state,
-                                marketType: 0
+                                basePrice: this.formLeft.basePrice,
+                                marketType: this.type
                             }, (res) => {
                                 this.$Message.success({content: this.vm.$t('common.tjcg')});
                                 this.$emit('okCallback');
@@ -236,6 +242,12 @@
                         }
                     });
                 }
+            }
+        },
+        filters:{
+            filterMarket(id){
+                let arr =[window.vm.$t('exchange.xzxnsc'), window.vm.$t('exchange.xzzssc'), window.vm.$t('exchange.xzdzsp')]
+                return arr[id]
             }
         }
     };

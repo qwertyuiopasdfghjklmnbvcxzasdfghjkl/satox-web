@@ -68,13 +68,13 @@
                     <input type="file" ref="iconFile" name="iconFile" @change="iconValidator('iconFile', $event)"/>
                 </FormItem>
                 <FormItem :label="vm.$t('exchange.erc20hydz')" prop="contractAddr"
-                          v-if="(this.formLeft.flag === '1' && this.formLeft.symbolType === '2')||this.formLeft.symbolType === selectSymbol">
+                          v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                     <Input v-model="formLeft.contractAddr" name="contractAddr"></Input>
                 </FormItem>
                 <Row>
                     <Col span="12">
                         <FormItem :label="vm.$t('exchange.hyjd')" prop="contractDecimals"
-                                  v-if="(this.formLeft.flag === '1' && this.formLeft.symbolType === '2')||this.formLeft.symbolType === selectSymbol">
+                                  v-if="this.formLeft.flag === '1' && this.formLeft.symbolType === '2'">
                             <Input v-model="formLeft.contractDecimals" name="contractDecimals"></Input>
                         </FormItem>
                     </Col>
@@ -137,15 +137,25 @@
                 <FormItem :label="vm.$t('exchange.ddqks')" prop="confirmBlock">
                     <InputNumber style="width:100%;" name="confirmBlock" v-model="formLeft.confirmBlock"></InputNumber>
                 </FormItem>
+
+                <FormItem :label="vm.$t('exchange.bpsdz')" prop="whitePaperUrl">
+                    <Input style="width:100%;" name="whitePaperUrl" v-model="formLeft.whitePaperUrl"></Input>
+                </FormItem>
+                <FormItem :label="vm.$t('exchange.gw')" prop="officialWebsite">
+                    <Input style="width:100%;" name="officialWebsite" v-model="formLeft.officialWebsite"></Input>
+                </FormItem>
+                <FormItem :label="vm.$t('exchange.qkcx')" prop="blockQueryUrl">
+                    <Input style="width:100%;" name="blockQueryUrl" v-model="formLeft.blockQueryUrl"></Input>
+                </FormItem>
                 <Button type="primary" @click="addCurreny()">{{vm.$t('common.tj')}}</Button>
             </Form>
         </Card>
     </div>
 </template>
 <script>
-    import currenyApi from '../../api/currency';
-    import until from '../../libs/util';
-    import numberbox from '../components/dialog/numberbox';
+    import currenyApi from '../../../api/currency';
+    import until from '../../../libs/util';
+    import numberbox from '../../components/dialog/numberbox';
 
     export default {
         data () {
@@ -203,7 +213,10 @@
                     totalIssuance: null, //发行总量
                     totalCirculation: null, //流通总量
                     issuePrice: null, //发行价格
-                    propertyId: null
+                    propertyId: null,
+                    whitePaperUrl: null,
+                    officialWebsite: null,
+                    blockQueryUrl: null,
                 },
                 ruleInline: {
                     symbol: [
@@ -308,10 +321,18 @@
                     ],
                     propertyId: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('common.propertyId')},
-                    ]
+                    ],
+                    whitePaperUrl: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('common.bpsdz')},
+                    ],
+                    officialWebsite: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('common.gw')},
+                    ],
+                    blockQueryUrl: [
+                        {required: true, message: vm.$t('common.qsr') + vm.$t('common.qkcx')},
+                    ],
                 },
                 symbolTypeList: [],
-                selectSymbol: null
             };
         },
         components: {
@@ -327,12 +348,6 @@
                 });
             });
             this.symbolTypeList = JSON.parse(window.localStorage.symbolTypes);
-            console.log(this.symbolTypeList);
-            this.symbolTypeList.filter(res => {
-                if (res.name === 'SATO') {
-                    this.selectSymbol = res.code;
-                }
-            });
         },
         methods: {
             binValidator (prop, e) {

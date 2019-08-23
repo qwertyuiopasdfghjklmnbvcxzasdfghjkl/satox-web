@@ -1,6 +1,6 @@
 <template>
     <div class="add_order">
-        <Card style="width:800px;">
+        <Card style="width:840px;">
             <p slot="title">
                 {{vm.$t('exchange.xgbz')}}
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
@@ -10,21 +10,6 @@
                 <Col span="10">{{this.datas.symbol || 0}}</Col>
                 <Col span="6"></Col>
             </Row>
-            <!-- <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
-              <Col span="5">权限名称</Col>
-              <Col span="8">当前状态</Col>
-              <Col span="3">修改</Col>
-            </Row>
-            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:40px; line-height:40px;">
-              <Col span="5">代号</Col>
-              <Col span="8">{{this.datas.symbol || 0}}</Col>
-              <Col span="8">
-                   <Input v-model="symbol" style="width: 150px" />
-              </Col>
-              <Col span="3">
-                  <Button type="primary" @click="tabs('symbol')">保存</Button>
-              </Col>
-            </Row> -->
             <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:40px;">
                 <Col span="5">{{vm.$t('exchange.ywqc')}}</Col>
                 <Col span="8">{{this.datas.caption || 0}}</Col>
@@ -111,7 +96,7 @@
                     <Button type="primary" @click="tabs1('flag')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
-            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec; line-height:45px;">
                 <Col span="5">{{vm.$t('common.zllx')}}</Col>
                 <Col span="16">
                     <RadioGroup v-model="datas.symbolType">
@@ -152,6 +137,42 @@
                     <Button type="primary" @click="tabs('contractAddr')">{{vm.$t('common.bc')}}</Button>
                 </Col>
             </Row>
+
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+                <Col span="5">{{vm.$t('exchange.bpsdz')}}</Col>
+                <Col span="8">{{this.datas.whitePaperUrl || ''}}
+                </Col>
+                <Col span="8">
+                    <Input v-model="whitePaperUrl" style="width: 150px"/>
+                </Col>
+                <Col span="3">
+                    <Button type="primary" @click="tabs('whitePaperUrl')">{{vm.$t('common.bc')}}</Button>
+                </Col>
+            </Row>
+
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+                <Col span="5">{{vm.$t('exchange.gw')}}</Col>
+                <Col span="8">{{this.datas.officialWebsite || ''}}
+                </Col>
+                <Col span="8">
+                    <Input v-model="officialWebsite" style="width: 150px"/>
+                </Col>
+                <Col span="3">
+                    <Button type="primary" @click="tabs('officialWebsite')">{{vm.$t('common.bc')}}</Button>
+                </Col>
+            </Row>
+
+            <Row style="margin-top：10px;border-bottom:1px solid #e9eaec;height:45px; line-height:45px;">
+                <Col span="5">{{vm.$t('exchange.qkcx')}}</Col>
+                <Col span="8">{{this.datas.blockQueryUrl || ''}}
+                </Col>
+                <Col span="8">
+                    <Input v-model="blockQueryUrl" style="width: 150px"/>
+                </Col>
+                <Col span="3">
+                    <Button type="primary" @click="tabs('blockQueryUrl')">{{vm.$t('common.bc')}}</Button>
+                </Col>
+            </Row>
         </Card>
     </div>
 </template>
@@ -174,6 +195,9 @@
                 issuePrice: null,
                 totalCirculation: null,
                 totalIssuance: null,
+                whitePaperUrl: null,
+                officialWebsite: null,
+                blockQueryUrl: null,
                 datas: {
                     flag: '',
                     symbolType: '',
@@ -212,11 +236,6 @@
                 this.$emit('removeDialog');
             },
             tabsImage (propName) {
-                // let data = {
-                //     symbolId: this.item.symbolId,
-                //     symbol: this.item.symbol
-                // }
-                // data[propName] = this.datas[propName]
                 var formData = new FormData();
                 console.log(this.$refs);
                 formData.append('iconFile', this.$refs.form.files[0]);

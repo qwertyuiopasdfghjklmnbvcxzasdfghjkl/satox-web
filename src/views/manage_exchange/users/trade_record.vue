@@ -126,7 +126,7 @@
             this.tradeCurreny();
         },
         methods: {
-            switchStaus (state) {
+            switchStaus (state) { // 1，正常 2，部分成交 0，已撤销 3，全部成交
                 switch (state) {
                     case 0:
                         return this.vm.$t('exchange.ycx');

@@ -29,8 +29,8 @@
 
 <script>
     import util from '../../libs/util';
-    import add_order from './add_order';
-    import coin_setting from './coin_setting';
+    import add_order from './coin/add_order';
+    import coin_setting from './coin/coin_setting';
     import currenyApi from '../../api/currency';
     import updata from './users/updata';
 

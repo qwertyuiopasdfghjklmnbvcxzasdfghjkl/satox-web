@@ -30,10 +30,10 @@
             </Row>
             <Row style="margin-bottom:10px;">
                 <Col span="12">{{vm.$t('exchange.ggecrz')}}</Col>
-                <Col span="8">{{data2.googleAuthenticate === 1? vm.$t('exchange.ybd'):vm.$t('exchange.wbd')}}</Col>
+                <Col span="8">{{item.googleAuthEnable === 1? vm.$t('exchange.ybd'):vm.$t('exchange.wbd')}}</Col>
                 <Col span="4">
-                    <Button :disabled="data2.googleAuthenticate !== 1" type="primary" style="float:right;"
-                            @click="tabs('googleAuthenticate')">{{data2.googleAuthenticate === 1?
+                    <Button :disabled="item.googleAuthEnable !== 1" type="primary" style="float:right;"
+                            @click="tabs('googleAuthenticate')">{{item.googleAuthEnable === 1?
                         vm.$t('exchange.jb'):vm.$t('exchange.bd')}}
                     </Button>
                 </Col>
@@ -59,7 +59,7 @@
             </Row>
             <Row style="margin-bottom:10px;">
                 <Col span="12">KYC{{vm.$t('common.zt')}}</Col>
-                <Col span="8">{{data2.kycStatus === 2? vm.$t('exchange.yrz'):vm.$t('exchange.wrz')}}</Col>
+                <Col span="8">{{item.kycState | kycFilter}}</Col>
                 <!-- <Col span="4">
                     <Button type="primary" style="float:right;" @click="tabs('kycStatus')">{{data2.kycStatus === 1? '解冻':'正常'}}</Button>
                 </Col> -->
@@ -127,7 +127,7 @@
     import currenyApi from '../../../api/currency';
 
     export default {
-        props: ['userId', 'version'],
+        props: ['userId', 'version','item'],
         data () {
             const vm = window.vm;
             return {
@@ -256,6 +256,19 @@
             },
             upSubmit () {
 
+            }
+        },
+        filters:{
+            kycFilter(id){
+                // KYC验证，0未通过，1已通过，-1审核中，-2错误，-3拒绝
+                let obj = {
+                    '0': window.vm.$t('common.wtg'),
+                    '1': window.vm.$t('common.ytg'),
+                    '-1': window.vm.$t('common.shz'),
+                    '-2': window.vm.$t('common.rzsb'),
+                    '-3': window.vm.$t('common.yjj'),
+                }
+                return obj[id]
             }
         }
     };
