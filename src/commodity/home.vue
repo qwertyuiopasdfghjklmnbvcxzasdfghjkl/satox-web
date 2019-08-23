@@ -209,10 +209,10 @@ export default {
               bids: data.bids || []
             }
           })
-        } else if (res.dataType === 'LastPrice') {
+        }*/ else if (res.dataType === 'LastPrice') {
           // 24小时最新信息
           this.setLast24h(res.data)
-        } else if (res.dataType === 'LastAccounts') {
+        }/* else if (res.dataType === 'LastAccounts') {
           // 用户账户余额
           this.tiggerEvents({
             name: 'balanceEvent',
@@ -248,7 +248,7 @@ export default {
               data: res.data
             }
           })
-        } */else if (res.dataType === 'markets') {
+        }*/ else if (res.dataType === 'markets') {
           // 大宗商品市场信息
           this.tiggerEvents({
             name: 'commodityMarketEvent',
