@@ -341,11 +341,11 @@ export default {
 .icon-search{width:20px;height:30px; margin-left: 5px; line-height:30px;color:#333;text-align:center;}
 .top-input-box{width:100%;height:30px;padding:0;color:#333;text-indent:10px;background-color:transparent;}
 .top-input-box:focus{border-bottom-color:#333232 !important;}
-.tabs{margin-top:10px;display:flex;height:26px;max-height:22px;padding:0 10px 10px;border-bottom:1px solid #7E7E7E;}
-.tabs-item{position:relative;height:22px;font-size:16px;line-height:20px;color:#666;text-align:center; padding-bottom:10px; border-bottom:1px solid #7E7E7E;cursor:pointer;}
+.tabs{margin-top:10px;display:flex;padding:0 10px 5px; flex-wrap: wrap;}
+.tabs-item{position:relative;font-size:16px;line-height:30px;color:#666;text-align:center; border-bottom:2px solid transparent ;cursor:pointer;}
 .tabs-item:nth-of-type(n+2){margin-left: 10px;}
-.tabs-item:hover,
-.tabs-item.active{color:#0557E2;border-bottom-color:#0557E2;}
+.tabs-item:hover, .tabs-item.active{color:#9D7B48; border-bottom-color:transparent!important;}
+.tabs-item.active {border-bottom-color:#9D7B48!important;}
 
 .list1,
 .list{height:100%;padding-top:10px;margin-right:-1px;overflow-x:hidden;overflow-y: auto;}
