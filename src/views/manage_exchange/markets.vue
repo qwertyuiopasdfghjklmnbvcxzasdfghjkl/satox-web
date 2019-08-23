@@ -140,6 +140,10 @@
                         key: 'exchangeCountDaily'
                     },
                     {
+                        title: this.$t('exchange.syrjj'),
+                        key: 'averagePrice'
+                    },
+                    {
                         title: this.$t('exchange.ljyh'),
                         key: 'userTotalCount'
                     },
