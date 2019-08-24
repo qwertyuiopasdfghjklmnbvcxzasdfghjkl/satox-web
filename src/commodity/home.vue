@@ -110,18 +110,18 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'SATO'
+        return symbol || 'BTC'
       } else {
-        return 'SATO'
+        return 'BTC'
       }
     },
     currentSymbol () {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[0]
-        return symbol || 'COF'
+        return symbol || 'XAU'
       } else {
-        return 'COF'
+        return 'XAU'
       }
     },
     symbol () {
