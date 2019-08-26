@@ -5,6 +5,7 @@ import exchange from './exchange'
 import otc from './otc'
 import shop from './shop'
 import ieo from './ieo'
+import commodity from './commodity'
 import voteMining from './vote_mining'
 import login from '@/public/login'
 import twoverify from '@/public/twoverify'
@@ -116,5 +117,5 @@ export default new Router({
         name: 'home'
       }
     }
-  ].concat(exchange, otc, voteMining, shop, ieo)
+  ].concat(exchange, otc, voteMining, shop, ieo, commodity)
 })
