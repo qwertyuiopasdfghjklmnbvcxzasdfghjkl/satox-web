@@ -608,7 +608,7 @@
   .header-center a.logo {
     position: absolute;
     width: 151px;
-    height: 50px;
+    height: 86px;
     background: url(../assets/images/logo.png) no-repeat center center;
     background-size: contain;
     background-position: center;
