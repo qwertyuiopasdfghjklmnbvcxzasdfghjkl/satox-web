@@ -4,7 +4,10 @@
         <Col span="24">
             <Row>
                 <Card style="margin-top:10px;">
-                    <p slot="title">{{$t('exchange.yhdqwtgl')}}</p>
+                    <p slot="title">
+                        {{$t('exchange.yhdqwtgl')}}
+                        <Button type="primary" @click="downloadNow()">{{$t('systemlog.dc')}}</Button>
+                    </p>
                     <p style="margin-bottom: 20px" class="input_p">
                         <span>
                             {{$t('exchange.jysc')}}：
@@ -73,7 +76,10 @@
 
             <Row>
                 <Card style="margin-top:10px;">
-                    <p slot="title">{{$t('exchange.yhlswtgl')}} </p>
+                    <p slot="title">
+                        {{$t('exchange.yhlswtgl')}}
+                        <Button type="primary" @click="download()">{{$t('systemlog.dc')}}</Button>
+                    </p>
                     <p style="margin-bottom: 20px" class="input_p">
                         <span>
                             {{$t('exchange.jysc')}}：
@@ -248,7 +254,9 @@
                     type: 0,
                     username: null,
                 },
-                marketList: []
+                marketList: [],
+                exportDocPrames:{},
+                exportNowDocPrames:{}
             };
         },
         created () {
@@ -288,6 +296,7 @@
                 data.type = data.type === 0 ? null : data.type;
                 data.page = this.curPage;
                 data.size = this.size;
+                this.exportNowDocPrames = data
                 currenyApi.getEntrust(data,
                     (res, total) => {
                         this.total = total;
@@ -307,6 +316,7 @@
                 data.state = data.state === 3 ? null : data.state;
                 data.page = this.curPage1;
                 data.size = this.size;
+                this.exportDocPrames = data
                 currenyApi.getHistoryEntrust(data,
                     (res, total) => {
                         this.total1 = total;
@@ -320,6 +330,26 @@
             changePage1 (page) {
                 this.curPage1 = page;
                 this.getHistoryEntrust();
+            },
+            downloadNow(){
+                let data = ['export=1']
+                for (let i in this.exportNowDocPrames) {
+                    if(this.exportNowDocPrames[i]){
+                        let v = this.exportNowDocPrames[i] ? this.exportNowDocPrames[i] : ''
+                        data.push(i+'='+v)
+                    }
+                }
+                window.location.href = `${util.baseURL}api/bm/bbManage/orderBooks/query?${data.join('&')}`
+            },
+            download(){
+                let data = ['export=1']
+                for (let i in this.exportDocPrames) {
+                    if(this.exportDocPrames[i]){
+                        let v = this.exportDocPrames[i] ? this.exportDocPrames[i] : ''
+                        data.push(i+'='+v)
+                    }
+                }
+                window.location.href = `${util.baseURL}api/bm/bbManage/orderBooks/queryHistory?${data.join('&')}`
             }
         }
     };

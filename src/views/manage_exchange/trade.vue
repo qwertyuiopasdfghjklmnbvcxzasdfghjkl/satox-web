@@ -4,7 +4,10 @@
         <Col span="24">
             <Row>
                 <Card style="margin-top:10px;">
-                    <p slot="title">{{$t('nav.jycx')}}</p>
+                    <p slot="title">
+                        {{$t('nav.jycx')}}
+                        <Button type="primary" @click="download()">{{$t('systemlog.dc')}}</Button>
+                    </p>
                     <p style="margin-bottom: 20px" class="input_p">
                         <span>
                             {{$t('exchange.jysc')}}：
@@ -93,7 +96,8 @@
                     dealPrice: null,
                     username: null
                 },
-                marketList: []
+                marketList: [],
+                exportDocPrames: {}
             };
         },
         created () {
@@ -130,6 +134,7 @@
                 data.preDealPrice = data.preDealPrice === 0 ? null : data.preDealPrice;
                 data.page = this.curPage;
                 data.size = this.size;
+                this.exportDocPrames = data;
                 currenyApi.getTransaction(data,
                     (res, total) => {
                         this.total = total;
@@ -140,6 +145,16 @@
                 this.curPage = page;
                 this.getAuditing();
             },
+            download(){
+                let data = ['export=1']
+                for (let i in this.exportDocPrames) {
+                    if(this.exportDocPrames[i]){
+                        let v = this.exportDocPrames[i] ? this.exportDocPrames[i] : ''
+                        data.push(i+'='+v)
+                    }
+                }
+                window.location.href = `${util.baseURL}api/bm/bbManage/orderBookLogs/query?${data.join('&')}`
+            }
         }
     };
 </script>

@@ -1,7 +1,10 @@
 <template>
     <Row style="margin-top:10px;">
         <Card>
-            <p slot="title">{{$t('finance.yhzccx')}}</p>
+            <p slot="title">
+                {{$t('finance.yhzccx')}}
+                <Button type="primary" @click="download()">{{$t('systemlog.dc')}}</Button>
+            </p>
             <p style="margin-bottom: 20px">
                 {{$t('common.bz')}}：
                 <Select v-model="formData.symbol" style="width: 200px" :clearable="true">
@@ -37,6 +40,7 @@
 <script>
     import financeApi from '../../api/finance';
     import currenyApi from '../../api/currency';
+    import util from '../../libs/util';
 
     export default {
         data () {
@@ -67,7 +71,8 @@
                     min: null
                 },
                 amount: '0',
-                symbolList: null
+                symbolList: null,
+                exportDocPrames: {}
             };
         },
         created () {
@@ -109,6 +114,7 @@
                 let data = JSON.parse(D);
                 data.symbol = data.symbol === '0' ? null : data.symbol;
                 data.type = data.type === '0' ? null : data.type;
+                this.exportDocPrames = data
                 financeApi.finduserAccountList(data, (res, total) => {
                     this.total = total;
                     this.data = res;
@@ -117,6 +123,14 @@
             changePage (page) {
                 this.curPage = page;
                 this.getfindUser();
+            },
+            download(){
+                let data = ['export=1']
+                for (let i in this.exportDocPrames) {
+                    let v = this.exportDocPrames[i] ? this.exportDocPrames[i] : ''
+                    data.push(i+'='+v)
+                }
+                window.location.href = `${util.baseURL}api/bm/monitor/userAccount/list?${data.join('&')}`
             }
         }
     };
