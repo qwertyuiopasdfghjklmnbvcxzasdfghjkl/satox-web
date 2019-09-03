@@ -79,7 +79,8 @@
                       <span class="large_withdraw" @click="ussdWithdrawKey=false" v-if="ussdWithdrawKey">{{$t('account.withdraw_to_card')}}</span>
                       <span class="large_withdraw" @click="ussdWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
                     </template>
-                    <template v-if="symbol==='SATO'">
+                    <!-- <template v-if="symbol==='SATO'"> -->
+                    <template v-if="false">
                       <span class="large_withdraw" @click="satoWithdrawKey=false" v-if="satoWithdrawKey">{{$t('account.withdraw_to_wallet')}}</span>
                       <span class="large_withdraw" @click="satoWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
                     </template>
@@ -134,7 +135,7 @@ export default {
   data () {
     return {
       ussdWithdrawKey:false,
-      satoWithdrawKey:true,
+      satoWithdrawKey:false,
       withdrawType:0,
       mobileState: null,
       fixedNumber: 8,
