@@ -12,7 +12,7 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
-            <li>
+            <li v-if="false">
               <router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}}<!-- 大宗商品 --> </router-link>
             </li>
             <li v-if="false">
