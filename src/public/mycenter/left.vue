@@ -23,7 +23,7 @@
       </li> -->
       <li :class="{'active': active === 'ieorecords'}" @click="switch_tab('ieorecords')"  v-if="false">
           <i class="icon-pie-chart"></i>
-          <span>我的IEO</span>
+          <span>{{$t('ieo.myieo')}}</span>
           <!--我的IEO-->
       </li>
       <li :class="{'active': active === 'transaction'}" @click="switch_tab('transaction')">
