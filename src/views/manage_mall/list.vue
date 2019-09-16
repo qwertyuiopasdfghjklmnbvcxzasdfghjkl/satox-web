@@ -224,13 +224,17 @@
             exportExl () {
                 let D = JSON.stringify(this.formData);
                 let data = JSON.parse(D);
-                let arr = []
+                let arr = [];
                 arr[0] = 'createdStart=' + (data.createdStart ? util.dateToStr(new Date(data.createdStart)) : '');
                 arr[1] = 'createdEnd=' + (data.createdEnd ? util.dateToStr(new Date(data.createdEnd)) : '');
                 arr[2] = 'state=' + (data.state === 7 ? '' : data.state);
                 arr[3] = 'productName=' + (data.productName === '0' ? '' : data.productName);
-                arr[4] = 'export=1';
-                window.location.href = `${util.baseURL}`+`api/bm/shop/order/list?${arr.join('&')}`
+                arr[4] = 'username=' + (data.username === null ? '' : data.username);
+                arr[5] = 'orderId=' + (data.orderId === null ? '' : data.orderId);
+                arr[6] = 'receiverName=' + (data.receiverName === null ? '' : data.receiverName);
+                arr[7] = 'receiverPhone=' + (data.receiverPhone === null ? '' : data.receiverPhone);
+                arr[8] = 'export=1';
+                window.location.href = `${util.baseURL}` + `api/bm/shop/order/list?${arr.join('&')}`;
             }
         }
     };

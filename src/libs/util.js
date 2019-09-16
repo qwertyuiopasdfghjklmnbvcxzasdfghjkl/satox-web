@@ -29,10 +29,10 @@ const setDialog = function (component, opts) {
 };
 util.setDialog = setDialog;
 
-const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.dev.koall.io/';
+// const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.dev.koall.io/';
 // const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.satox.bitark.io';
 // const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.sit.satox.net';
-// const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://manage.sit.gcox.cc';
+const ajaxUrl = env === 'production' ? `${location.protocol}//${location.host}/` : 'http://10.0.5.244:9009/';
 
 util.baseURL = ajaxUrl;
 
