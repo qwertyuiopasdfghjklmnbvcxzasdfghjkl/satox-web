@@ -581,4 +581,45 @@ const getTransaction = function (data, success, error) {
 };
 curreny.getTransaction = getTransaction;
 
+
+// 分页查找价格分片
+const sectionPriceList = function ( data, success, error) {
+    api.post(`api/bm/bbManage/sectionPriceScheduleManage/findSectionPriceList/${data.pageSize}/${data.page}`,
+        {market: data.market},
+        (res) => {
+            if (res.rst === 1) {
+                success && success(res.data,res.total);
+            } else {
+                error && error(res.msg);
+            }
+        }, error)
+};
+curreny.sectionPriceList = sectionPriceList;
+
+// 新增价格分片
+const addSectionPrice = function ( data, success, error) {
+    api.post(`api/bm/bbManage/sectionPriceScheduleManage/insertSectionPrice`,
+        data, (res) => {
+            if (res.rst === 1) {
+                success && success(res.data,);
+            } else {
+                error && error(res.msg);
+            }
+        }, error)
+};
+curreny.addSectionPrice = addSectionPrice;
+
+// 修改价格分片
+const updateSectionPrice = function ( data, success, error) {
+    api.post(`api/bm/bbManage/sectionPriceScheduleManage/updateSectionPrice`,
+        data, (res) => {
+            if (res.rst === 1) {
+                success && success(res.data,);
+            } else {
+                error && error(res.msg);
+            }
+        }, error)
+};
+curreny.updateSectionPrice = updateSectionPrice;
+
 export default curreny;

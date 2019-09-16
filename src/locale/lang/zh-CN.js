@@ -966,7 +966,13 @@ export const nav = {
     xmgl: '项目管理',
     sgjl: '认购记录',
     xjxm: '新建项目',
-    ieocs: 'IEO参数'
+    ieocs: 'IEO参数',
+    cmsgl: 'CMS管理',
+    jgfpgl: '价格分片管理',
+    apptghd: 'APP推广活动',
+    m1m2: '买1卖2',
+    scgl: '锁仓管理',
+    yhsccx: '用户锁仓查询',
 }
 export const home = {
     zyh: '总用户',

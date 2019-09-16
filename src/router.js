@@ -481,6 +481,23 @@ export const exchangeRouter = [
                 }
             }
         ]
+    },
+    {
+        path: '/section_price',
+        name: 'section_price',
+        title: 'nav.jgfpgl',
+        component: Main,
+        icon: 'pie-graph',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            {
+                path: 'section_price_index', title: 'nav.jgfpgl', name: 'section_price_index', component: resolve => {
+                    require(['./views/manage_exchange/section_price.vue'], resolve);
+                }
+            }
+        ]
     }
 ];
 
