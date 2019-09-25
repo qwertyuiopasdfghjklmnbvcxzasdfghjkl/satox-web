@@ -5,18 +5,22 @@
             <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
         </p>
         <Form ref="form" :model="form" :rules="ruleInline" :label-width="100" class="cont" style="margin:0 20px;">
-            <FormItem :label="vm.$t('exchange.zfbfb')" prop="amplitudeRate">
+            <FormItem prop="amplitudeRate">
+                <label slot="label"><i>*</i>{{vm.$t('exchange.zfbfb')}}</label>
                 <numberbox v-model="form.amplitudeRate"></numberbox>
                 <span>%</span>
             </FormItem>
-            <FormItem :label="vm.$t('exchange.zfje')" prop="changeAmount">
+            <FormItem prop="changeAmount">
+                <label slot="label"><i>*</i>{{vm.$t('exchange.zfje')}}</label>
                 <numberbox v-model="form.changeAmount" :minus="true"></numberbox>
             </FormItem>
-            <FormItem :label="vm.$t('exchange.zhangfbfb')" prop="changeRate">
+            <FormItem prop="changeRate">
+                <label slot="label"><i>*</i>{{vm.$t('exchange.zhangfbfb')}}</label>
                 <numberbox v-model="form.changeRate" :minus="true"></numberbox>
                 <span>%</span>
             </FormItem>
             <FormItem :label="vm.$t('exchange.wtpl')" prop="interval">
+                <label slot="label"><i>*</i>{{vm.$t('exchange.wtpl')}}</label>
                 <numberbox v-model="form.interval"></numberbox>
                 <span>/ms</span>
             </FormItem>
@@ -88,19 +92,19 @@
                 },
                 ruleInline: {
                     amplitudeRate: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zfbfb')}
+                        {required: false, message: vm.$t('common.qsr') + vm.$t('exchange.zfbfb')}
                     ],
                     changeAmount: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zfje')}
+                        {required: false, message: vm.$t('common.qsr') + vm.$t('exchange.zfje')}
                     ],
                     changeRate: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.zhangfbfb')}
+                        {required: false, message: vm.$t('common.qsr') + vm.$t('exchange.zhangfbfb')}
                     ],
                     quantityRange: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.slfw')}
                     ],
                     interval: [
-                        {required: true, message: vm.$t('common.qsr') + vm.$t('exchange.wtpl')}
+                        {required: false, message: vm.$t('common.qsr') + vm.$t('exchange.wtpl')}
                     ],
                     startAt: [
                         {required: true, message: vm.$t('common.qsr') + vm.$t('common.kssj')}
@@ -143,6 +147,18 @@
                 });
             },
             add () {
+                if (!this.form.amplitudeRate) {
+                    this.$Message.error({content: this.vm.$t('common.qsr') + this.vm.$t('exchange.zfbfb')});
+                    return;
+                }
+                if (!this.form.changeAmount) {
+                    this.$Message.error({content: this.vm.$t('common.qsr') + this.vm.$t('exchange.zfje')});
+                    return;
+                }
+                if (!this.form.changeRate) {
+                    this.$Message.error({content: this.vm.$t('common.qsr') + this.vm.$t('exchange.zhangfbfb')});
+                    return;
+                }
                 this.$refs.form.validate((valid) => {
                     if (valid) {
                         let d = JSON.stringify(this.form);
@@ -186,6 +202,16 @@
     .cont {
         span {
             padding: 0 6px;
+        }
+        label{
+            i{
+                font-size: 12px;
+                color: #ed3f14;
+                display: inline-block;
+                margin-right: 4px;
+                font-family: SimSun;
+                font-style: normal;
+            }
         }
     }
 </style>
