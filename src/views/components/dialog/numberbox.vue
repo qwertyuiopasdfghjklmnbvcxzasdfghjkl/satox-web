@@ -32,6 +32,10 @@
             max: {
                 type: Number,
                 default: 9999999999
+            },
+            minus:{
+                type: Boolean,
+                default: false
             }
         },
         data () {
