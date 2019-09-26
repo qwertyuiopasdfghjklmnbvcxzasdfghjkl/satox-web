@@ -114,7 +114,8 @@
                 let data = {
                     page: this.page,
                     size: this.size,
-                    symbol: 'SATO'
+                    symbol: 'SATO',
+                    type: 0
                 };
                 if (this.formData.type && this.formData.text) {
                     data[this.formData.type] = this.formData.text;
