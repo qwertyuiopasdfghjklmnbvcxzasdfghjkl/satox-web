@@ -95,7 +95,11 @@ export const common = {
     m: '秒',
     lslflm: '0天0时0分0秒',
     xz: '新增',
-    bccg: '保存成功'
+    bccg: '保存成功',
+    shz: '审核中',
+    rzsb: '认证失败',
+    wsbtg: '审核不通过',
+    wstg: '审核通过'
 };
 export const login = {
     login: '登录',
@@ -536,6 +540,7 @@ export const exchange = {
     ygm: '已购买',
     ymc: '已卖出',
     kmed: '可卖额度',
+    pctszh: '排除特殊账户'
 }
 export const risk = {
     bbycyj: '币币异常预警',
