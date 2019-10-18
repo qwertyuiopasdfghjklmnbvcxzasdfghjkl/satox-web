@@ -575,4 +575,11 @@ const encryptPwd = function (publickey, pwd) {
 }
 utils.encryptPwd = encryptPwd
 
+const setDigit = function (stringNumber, digit){
+  let _temp = stringNumber.split('.')
+  let _digit = _temp[1]?_temp[1]:''+'0'.repeat(100)
+  return _temp[0]+'.'+_digit.substring(0,digit)
+}
+utils.setDigit = setDigit
+
 export default utils
