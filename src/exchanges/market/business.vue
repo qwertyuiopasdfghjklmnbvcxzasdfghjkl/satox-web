@@ -373,15 +373,15 @@ export default {
     },
     switchPercent (p) {
       p = p / 100
-      let amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (!this.symbol.includes('SATOUSSD') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(this.fixedNumber)      
+      let amount = numUtils.mul(this.isBuy ? this.toBalance.availableBalance : (!this.symbol.includes('SATOUSSD') ? this.buyToBalance.availableBalance : this.fromBalance.availableBalance), p).toFixed(10)      
       if (this.active === 'market' && this.tradeType === 'buy') {
-        this.formData.amount = Number(amount)?numUtils.div(amount, this.getLast24h.close).toFixed(this.fixedNumber, 1):''
+        this.formData.amount = Number(amount)?numUtils.div(amount, this.getLast24h.close).toFixed(10):''
         return
       }
       if (this.tradeType === 'buy') {
-        this.formData.total = Number(amount)?amount:''
+        this.formData.total = Number(amount)?utils.setDigit(amount, this.fixedNumber):''
       } else {
-        this.formData.amount = Number(amount)?amount:''
+        this.formData.amount = Number(amount)?utils.setDigit(amount, this.fixedNumber):''
       }
     },
     buyOrSell () {
