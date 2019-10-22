@@ -85,7 +85,7 @@
                             <div class="locked f-right ng-binding">{{toFixed(data.frozenBalance)}}</div>
                             <div class="action f-right">
                               <!--充值与提现-->
-                              <span class="icon_recharge" :class="{disabled: data.rechargeFlag !== 1}" @click="data.rechargeFlag === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_deposit')" v-if="(accountType===1 && data.symbol!=='SATO') || accountType===2 && data.symbol==='SATO'"></span>
+                              <span class="icon_recharge" :class="{disabled: data.rechargeFlag !== 1}" @click="data.rechargeFlag === 1 ? data.show = !data.show : false" :title="$t('account.estimated_value_deposit')" v-if="accountType===1"></span>
                               <span class="icon_withdraw" :class="{disabled: data.withdrawFlag !== 1}" @click="data.withdrawFlag !== 1 ? false : withdrawDalog(data)" :title="$t('account.estimated_value_withdrawal')" v-if="accountType===1"></span>
                               <span class="icon_flashWithdraw" v-if="accountType===1 && data.withdrawFastFlag === 1"  @click="flashWithdrawDalog(data)" :title="$t('account.fast_withdraw')"></span>
                               <span v-else></span>
