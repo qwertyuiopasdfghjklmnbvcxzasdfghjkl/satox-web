@@ -120,9 +120,9 @@ export default {
       let symbol = this.$route.params.symbol
       if (symbol) {
         symbol = symbol.split('_')[1]
-        return symbol || 'SATO'
+        return symbol || 'USDT'
       } else {
-        return 'SATO'
+        return 'USDT'
       }
     },
     currentSymbol () {
