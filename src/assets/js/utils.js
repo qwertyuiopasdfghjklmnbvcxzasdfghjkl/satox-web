@@ -575,6 +575,7 @@ const encryptPwd = function (publickey, pwd) {
 }
 utils.encryptPwd = encryptPwd
 
+//截取小数位数
 const setDigit = function (stringNumber, digit){
   let _temp = stringNumber.split('.')
   let _digit = _temp[1]?_temp[1]:''+'0'.repeat(100)
