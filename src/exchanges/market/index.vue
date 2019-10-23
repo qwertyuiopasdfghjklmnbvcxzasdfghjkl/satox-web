@@ -12,14 +12,14 @@
         <div class="tools">
           <ul class="menus">
             <!-- K线图和深度图切换 -->
-            <!-- <li class="dropdown" :class="{active: canvasStyles.show}" @click.stop="canvasStyles.show = !canvasStyles.show">
+            <li class="dropdown" :class="{active: canvasStyles.show}" @click.stop="canvasStyles.show = !canvasStyles.show">
               <span class="dropdown-txt">{{$t(`public.${canvasStyles.active}_title`)}}</span>
               <em class="dropdown-icon icon-arrow-down" :class="{'dropdown-icon-active':canvasStyles.show}"></em>
               <ul class="dropdown-list" v-show="canvasStyles.show" style="width:80px">
                 <li class="dropdown-item" :class="{selected:canvasStyles.active==='kline'}" @click="canvasStyles.active='kline'">{{$t('public.kline_title')}}</li>
                 <li class="dropdown-item" :class="{selected:canvasStyles.active==='depth'}" @click="canvasStyles.active='depth'">{{$t('public.depth_title')}}</li>
               </ul>
-            </li> -->
+            </li>
             <!-- 周期 -->
             <li class="dropdown" :class="{active: periods.show}" @click.stop="periods.show = !periods.show" v-show="canvasStyles.active==='kline'">
               <span class="dropdown-txt">{{curPeriod}}</span>
@@ -351,17 +351,18 @@ export default {
 
       // 深度图
       this.depthChart = DepthChart({
-        riseColor: '#11BA80',
-        fallColor: '#F04A4D',
+        riseColor: '#1EC563',
+        fallColor: '#F1304A',
         fontColor: '#666',
-        gridLineColor: '#F0F0F0',
-        middleLineColor: '#CCC',
+        gridLineColor: '#333',
+        middleLineColor: '#7B7B7B',
         tpFillStyle: '#F0F0F0',
         tpStrokeStyle: '#CCC',
         tpTextColor: '#333',
         tpTextPriceColor: '#333',
         container: this.$refs.depth
       })
+      this.depthChart.drawDepth(this.depthChange)
     })
   },
   beforeDestroy () {
