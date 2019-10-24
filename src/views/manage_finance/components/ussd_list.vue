@@ -2,7 +2,7 @@
     <Row>
         <Card style="width:1000px;">
             <p slot="title">
-                <span>USSD{{vm.$t('finance.slxgjl')}}</span>
+                <span>USDT{{vm.$t('finance.slxgjl')}}</span>
                 <i class="ivu-icon ivu-icon-close" style="float:right;cursor:pointer;" @click="closeDialog"></i>
             </p>
             <Row>
@@ -72,7 +72,7 @@
                 let data = {
                     page: this.page,
                     size: 10,
-                    symbol: 'USSD'
+                    symbol: 'USDT'
                 };
                 if (this.formData.text) {
                     data[this.formData.type] = this.formData.text;
