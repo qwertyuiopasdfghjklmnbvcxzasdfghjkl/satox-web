@@ -1,10 +1,10 @@
-<!-- USSD 充值 -->
+<!-- USDT 充值 -->
 <template>
     <Row>
         <Col span="24">
             <Row>
                 <Card>
-                    <p slot="title">USSD{{$t('finance.cz')}}</p>
+                    <p slot="title">USDT{{$t('finance.cz')}}</p>
                     <Row>
                         <Col span="16">
                             <Select v-model="formData.type" style="width:200px;">
@@ -48,9 +48,9 @@
                     {title: this.$t('common.sjh'), key: 'mobile'},
                     {title: this.$t('common.xm'), key: 'userRealName'},
                     {title: this.$t('common.bzdh'), key: 'symbol'},
-                    {title: `USSD${this.$t('common.zje')}`, key: 'totalBalance'},
-                    {title: `USSD${this.$t('common.kyje')}`, key: 'availableBalance'},
-                    {title: `USSD${this.$t('common.djje')}`, key: 'frozenBalance'},
+                    {title: `USDT${this.$t('common.zje')}`, key: 'totalBalance'},
+                    {title: `USDT${this.$t('common.kyje')}`, key: 'availableBalance'},
+                    {title: `USDT${this.$t('common.djje')}`, key: 'frozenBalance'},
                     {
                         title: this.$t('common.cz'), key: 'action', render: (h, params) => {
                             return h('div', [
@@ -96,7 +96,7 @@
         },
         methods: {
             getList () {
-                let data = {page: this.page, size: this.size};
+                let data = {page: this.page, size: this.size, symbol: 'USDT'};
                 if (this.formData.type && this.formData.text) {
                     data[this.formData.type] = this.formData.text;
                 }

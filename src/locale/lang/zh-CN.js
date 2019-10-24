@@ -918,6 +918,7 @@ export const nav = {
     yhzc: '用户资产',
     pzgl: '平账管理',
     ussdcz: 'USSD充值',
+    usdtcz: 'USDT充值',
     nbzz: '内部转账',
     satoslxg: 'SATO数量修改',
     xnct: '虚拟充提',

@@ -747,7 +747,7 @@ export const financeRouter = [
     {
         path: '/usds_recharge',
         name: 'usds_recharge',
-        title: 'nav.ussdcz',
+        title: 'nav.usdtcz',
         component: Main,
         icon: 'radio-waves',
         meta: {
@@ -755,7 +755,7 @@ export const financeRouter = [
         },
         children: [
             {
-                path: 'index', title: 'nav.ussdcz', name: 'usds_recharge_index', component: resolve => {
+                path: 'index', title: 'nav.usdtcz', name: 'usds_recharge_index', component: resolve => {
                     require(['./views/manage_finance/usds_recharge.vue'], resolve);
                 }
             }
