@@ -70,14 +70,13 @@
         pay: null,
         checked: checked,
         unCheck: no,
-        payList: ['SATO', 'USSD', 'BTC', 'ETH'],
+        payList: [],
         productList: [],
         payCar: [],
         baseURL: config.origin,
         total: null,
         amount: null,
-        $btc: null,
-        $eth: null,
+        $rate:null,
         lang: 1
       }
     },
@@ -124,8 +123,8 @@
         shops.cartList((res) => {
           console.log(res)
           this.payCar = res.list;
-          this.$btc = res.symbolCurrency.BTC;
-          this.$eth = res.symbolCurrency.ETH;
+          this.payList = Object.keys(res.symbolCurrency)
+          this.$rate = res.symbolCurrency
         })
       },
       add(data) {
@@ -167,24 +166,27 @@
         })
       },
       sw() {
-        switch (true) {
-          case this.pay === 'SATO':
-            this.total = this.amount;
-            break;
-          case this.pay === 'USSD':
-            this.total = this.amount;
-            break;
-          case this.pay === 'BTC':
-            let reg = /([0-9]+\.[0-9]{8})[0-9]*/
-            let d = this.amount / this.$btc
-            this.total = d.toString().replace(reg, "$1");
-            break;
-          case this.pay === 'ETH':
-            let re = /([0-9]+\.[0-9]{8})[0-9]*/
-            let n = this.amount / this.$eth
-            this.total = n.toString().replace(re, "$1");
-            break
-        }
+        let re = /([0-9]+\.[0-9]{8})[0-9]*/
+        let n = this.amount / (this.$rate&&this.$rate[this.pay] || 1)
+        this.total = n.toString().replace(re, "$1");
+        // switch (true) {
+        //   case this.pay === 'SATO':
+        //     this.total = this.amount;
+        //     break;
+        //   case this.pay === 'USSD':
+        //     this.total = this.amount;
+        //     break;
+        //   case this.pay === 'BTC':
+        //     let reg = /([0-9]+\.[0-9]{8})[0-9]*/
+        //     let d = this.amount / this.$btc
+        //     this.total = d.toString().replace(reg, "$1");
+        //     break;
+        //   case this.pay === 'ETH':
+        //     let re = /([0-9]+\.[0-9]{8})[0-9]*/
+        //     let n = this.amount / this.$eth
+        //     this.total = n.toString().replace(re, "$1");
+        //     break
+        // }
       }
     }
   }

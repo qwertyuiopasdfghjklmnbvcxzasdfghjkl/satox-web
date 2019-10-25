@@ -23,7 +23,7 @@
                      
                     </div>
                 </div>
-                <div class="filed" v-if="(symbol!=='SATO' || (symbol==='SATO' && !satoWithdrawKey)) && symbol!=='USSD'">
+                <div class="filed" v-if="(symbol!=='SATO' || (symbol==='SATO' && !satoWithdrawKey)) && (symbol!=='USDT' || (symbol==='USDT' && !usdtWithdrawKey)) && symbol!=='USSD'">
                     <em>
                         {{$t('account.user_Pick_up_address').format(symbol)}}<!--提现地址-->：<i class="asterisk">&nbsp;*</i>
                     </em>
@@ -84,6 +84,11 @@
                       <span class="large_withdraw" @click="satoWithdrawKey=false" v-if="satoWithdrawKey">{{$t('account.withdraw_to_wallet')}}</span>
                       <span class="large_withdraw" @click="satoWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
                     </template>
+                    <template v-if="symbol==='USDT'">
+                    <!-- <template v-if="false"> -->
+                      <span class="large_withdraw" @click="usdtWithdrawKey=false" v-if="usdtWithdrawKey">{{$t('account.withdraw_to_wallet')}}</span>
+                      <span class="large_withdraw" @click="usdtWithdrawKey=true" v-else>{{$t('account.withdraw_to_satoken')}}</span>
+                    </template>
                 </div>
             </div>
             <div class="f-fr">
@@ -136,6 +141,7 @@ export default {
     return {
       ussdWithdrawKey:false,
       satoWithdrawKey:false,
+      usdtWithdrawKey:false,
       withdrawType:0,
       mobileState: null,
       fixedNumber: 8,
@@ -179,7 +185,7 @@ export default {
     procedureFee () { // 手续费 提现数量-固定手续费
       if(this.symbol==='USSD' && !this.ussdWithdrawKey){
         return utils.removeEndZero(numUtils.mul(this.amount, 0.05).toFixed(8))
-      } else if((this.symbol==='USSD' && this.ussdWithdrawKey) || (this.symbol==='SATO' && this.satoWithdrawKey)){
+      } else if((this.symbol==='USSD' && this.ussdWithdrawKey) || (this.symbol==='SATO' && this.satoWithdrawKey) || (this.symbol==='USDT' && this.usdtWithdrawKey)){
         return '0'
       } else {
         return utils.removeEndZero(numUtils.BN(this.procedure).toFixed(8))
@@ -302,7 +308,7 @@ export default {
         }
         this.withdrawType = 2
         validData = Object.assign(validData, userBankInfo)
-      } else if((this.symbol==='SATO'  && this.satoWithdrawKey) || (this.symbol==='USSD' && this.ussdWithdrawKey)){
+      } else if((this.symbol==='SATO'  && this.satoWithdrawKey) || (this.symbol==='USSD' && this.ussdWithdrawKey) || (this.symbol==='USDT' && this.usdtWithdrawKey)){
         this.withdrawType =1
       } else {
         this.withdrawType = 0
