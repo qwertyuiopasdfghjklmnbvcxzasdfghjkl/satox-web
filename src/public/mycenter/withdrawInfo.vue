@@ -344,7 +344,7 @@ export default {
             }
             let saveFun = () => {
               userUtils.walletWithdraw(formData, () => {
-                let msg = typeof code === 'object' && code.type === 1 ? this.$t('message.WITHDRAWALS_SUCCESS') : (this.getSysParams.withdrawEmail.value==='1'?this.$t('login_register.Mail_sent_successfully'):this.$t('message.WITHDRAWALS_SUCCESS'))
+                let msg = typeof code === 'object' && code.type === 1 ? this.$t('message.WITHDRAWALS_SUCCESS') : (this.getSysParams.withdrawEmail && this.getSysParams.withdrawEmail.value==='1'?this.$t('login_register.Mail_sent_successfully'):this.$t('message.WITHDRAWALS_SUCCESS'))
                 Vue.$koallTipBox({icon: 'success', message: msg}) // 邮件发送成功
                 this.$emit('okCallback')
                 this.$emit('removeDialog')
