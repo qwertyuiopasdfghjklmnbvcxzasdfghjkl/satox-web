@@ -50,6 +50,7 @@
                             </Select>
                             <numberbox v-model="formData.dealAmount" style="width: 100px;border:1px solid #dddee1"></numberbox>
                         </span>
+                        <span> <Checkbox v-model="formData.excludeSpecialUser">{{$t('exchange.pctszh')}}</Checkbox></span>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
@@ -94,7 +95,8 @@
                     preDealPrice: 0,
                     dealAmount: null,
                     dealPrice: null,
-                    username: null
+                    username: null,
+                    excludeSpecialUser: true
                 },
                 marketList: [],
                 exportDocPrames: {}
@@ -134,6 +136,7 @@
                 data.preDealPrice = data.preDealPrice === 0 ? null : data.preDealPrice;
                 data.page = this.curPage;
                 data.size = this.size;
+                data.excludeSpecialUser = this.formData.excludeSpecialUser ? 1 : 0;
                 this.exportDocPrames = data;
                 currenyApi.getTransaction(data,
                     (res, total) => {

@@ -11,19 +11,19 @@
                     <p style="margin-bottom: 20px" class="input_p">
                         <span>
                             {{$t('exchange.jysc')}}：
-                            <Select v-model="formData.market" style="width: 110px">
+                            <Select v-model="formData.market" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}</Option>
                             </Select>
                         </span>
                         <span>
                             {{$t('common.yhm')}}：
-                            <Input v-model="formData.username" clearable style="width: 110px"
+                            <Input v-model="formData.username" clearable style="width: 160px"
                                    :placeholder="$t('common.qsryhm')"></Input>
                         </span>
                         <span>
                             {{$t('exchange.wtfx')}}：
-                            <Select v-model="formData.direction" style="width: 110px">
+                            <Select v-model="formData.direction" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.m1')}}</Option>
                                 <Option :value="2">{{$t('exchange.m4')}}</Option>
@@ -31,20 +31,21 @@
                         </span>
                         <span>
                             {{$t('exchange.wtlx')}}：
-                            <Select v-model="formData.type" style="width: 110px">
+                            <Select v-model="formData.type" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.xjwt')}}</Option>
                                 <Option :value="2">{{$t('exchange.sjwt')}}</Option>
                             </Select>
                         </span>
+                        <br>
                         <span>
                             {{$t('exchange.wtsj')}}：
                             <DatePicker type="datetime" v-model="formData.startTime" :placeholder="$t('common.kssj')"
                                         format="yyyy-MM-dd HH:mm:ss"
-                                        style="width: 110px"></DatePicker>
+                                        style="width: 160px"></DatePicker>
                             <DatePicker type="datetime" v-model="formData.endTime" :placeholder="$t('common.jssj')"
                                         format="yyyy-MM-dd HH:mm:ss"
-                                        style="width: 110px"></DatePicker>
+                                        style="width: 160px"></DatePicker>
                         </span>
                         <span>
                             {{$t('exchange.wtjg')}}：
@@ -54,7 +55,7 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.price" style="width: 80px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData.price" style="width: 100px"></InputNumber>
                         </span>
                         <span>
                             {{$t('exchange.zl')}}：
@@ -64,8 +65,9 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData.totalAmount" style="width: 80px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData.totalAmount" style="width: 100px"></InputNumber>
                         </span>
+                        <span> <Checkbox v-model="formData.excludeSpecialUser">{{$t('exchange.pctszh')}}</Checkbox></span>
                         <Button type="primary" @click="curPage=1;getAuditing()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns" :data="datas"></Table>
@@ -83,19 +85,19 @@
                     <p style="margin-bottom: 20px" class="input_p">
                         <span>
                             {{$t('exchange.jysc')}}：
-                            <Select v-model="formData1.market" style="width: 100px">
+                            <Select v-model="formData1.market" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option v-for="item in marketList" :value="item.market" :key="item.market">{{ item.market }}</Option>
                             </Select>
                         </span>
                         <span>
                             {{$t('common.yhm')}}：
-                            <Input v-model="formData1.username" clearable style="width: 90px"
+                            <Input v-model="formData1.username" clearable style="width: 160px"
                                    :placeholder="$t('common.qsryhm')"></Input>
                         </span>
                         <span>
                             {{$t('exchange.wtfx')}}：
-                            <Select v-model="formData1.direction" style="width: 60px">
+                            <Select v-model="formData1.direction" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.m1')}}</Option>
                                 <Option :value="2">{{$t('exchange.m4')}}</Option>
@@ -103,7 +105,7 @@
                         </span>
                         <span>
                             {{$t('exchange.wtlx')}}：
-                            <Select v-model="formData1.type" style="width: 80px">
+                            <Select v-model="formData1.type" style="width: 160px">
                                 <Option :value="0">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.xjwt')}}</Option>
                                 <Option :value="2">{{$t('exchange.sjwt')}}</Option>
@@ -111,7 +113,7 @@
                         </span>
                         <span>
                             {{$t('exchange.wtzt')}}：
-                            <Select v-model="formData1.state" style="width: 80px">
+                            <Select v-model="formData1.state" style="width:160px">
                                 <Option :value="3">{{$t('common.qb')}}</Option>
                                 <Option :value="1">{{$t('exchange.qbcj')}}</Option>
                                 <Option :value="2">{{$t('exchange.bfcj')}}</Option>
@@ -123,10 +125,10 @@
                             {{$t('exchange.wtsj')}}：
                             <DatePicker type="datetime" v-model="formData1.startTime" :placeholder="$t('common.kssj')"
                                         format="yyyy-MM-dd HH:mm:ss"
-                                        style="width: 100px"></DatePicker>
+                                        style="width: 160px"></DatePicker>
                             <DatePicker type="datetime" v-model="formData1.endTime" :placeholder="$t('common.jssj')"
                                         format="yyyy-MM-dd HH:mm:ss"
-                                        style="width: 100px"></DatePicker>
+                                        style="width: 160px"></DatePicker>
                         </span>
                         <span>
                             {{$t('exchange.wtjg')}}：
@@ -136,7 +138,7 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData1.price" style="width: 70px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData1.price" style="width: 100px"></InputNumber>
                         </span>
                         <span>
                             {{$t('exchange.zl')}}：
@@ -146,8 +148,9 @@
                                 <Option :value="2">{{$t('exchange.dy')}}</Option>
                                 <Option :value="3">{{$t('exchange.dengy')}}</Option>
                             </Select>
-                            <InputNumber :min="0" v-model="formData1.totalAmount" style="width: 70px"></InputNumber>
+                            <InputNumber :min="0" v-model="formData1.totalAmount" style="width: 100px"></InputNumber>
                         </span>
+                        <span> <Checkbox v-model="formData1.excludeSpecialUser">{{$t('exchange.pctszh')}}</Checkbox></span>
                         <Button type="primary" @click="curPage1=1;getHistoryEntrust()">{{$t('common.cx')}}</Button>
                     </p>
                     <Table :columns="columns1" :data="datas1"></Table>
@@ -238,6 +241,7 @@
                     totalAmount: null,
                     type: 0,
                     username: null,
+                    excludeSpecialUser: true
                 },
                 formData1: {
                     direction: 0,
@@ -253,6 +257,7 @@
                     totalAmount: null,
                     type: 0,
                     username: null,
+                    excludeSpecialUser: true
                 },
                 marketList: [],
                 exportDocPrames:{},
@@ -296,6 +301,7 @@
                 data.type = data.type === 0 ? null : data.type;
                 data.page = this.curPage;
                 data.size = this.size;
+                data.excludeSpecialUser = this.formData.excludeSpecialUser ? 1 : 0;
                 this.exportNowDocPrames = data
                 currenyApi.getEntrust(data,
                     (res, total) => {
@@ -316,6 +322,7 @@
                 data.state = data.state === 3 ? null : data.state;
                 data.page = this.curPage1;
                 data.size = this.size;
+                data.excludeSpecialUser = this.formData1.excludeSpecialUser ? 1 : 0;
                 this.exportDocPrames = data
                 currenyApi.getHistoryEntrust(data,
                     (res, total) => {
