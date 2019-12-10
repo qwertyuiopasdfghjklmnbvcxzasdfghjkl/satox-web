@@ -19,10 +19,18 @@ import '@/assets/css/mian.css'
 import 'swiper/dist/css/swiper.css'
 import langApi from '@/api/language'
 
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/polar'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/title.js'
+
 Vue.use(VeeValidate)
 Vue.use(VueI18n)
 Vue.use(Vtip.directive)
 Vue.use(VueAwesomeSwiper)
+Vue.component('v-chart', ECharts)
 let i18n = window.$i18n = new VueI18n({
   locale: 'en',
   messages: {
