@@ -29,12 +29,12 @@
         <div class="item">
           <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
         </div>
-        <div class="item">
-          <a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>
-        </div>
-        <div class="item">
-          <a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>
-        </div>
+        <!--<div class="item">-->
+          <!--<a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>-->
+        <!--</div>-->
+        <!--<div class="item">-->
+          <!--<a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>-->
+        <!--</div>-->
         <div class="item">
           <a class="contact-icons icon-weixin hover" href="javascript:;"><span class="wxqr"><img src="../assets/images/wxqr.png"><i></i></span></a>
         </div>
@@ -141,12 +141,13 @@
 .bk-wrap{position:relative;overflow:hidden;min-width:1190px;}
 .bk-main{position:relative;overflow:hidden;margin:0 auto;max-width:1360px;}
 .bottom{min-width:1190px;}
-.bottom-center{display:flex;margin:0 auto;min-width:1190px; max-width:1360px;height:50px;border-bottom:1px solid #f0f0f0;color:#586687;justify-content:space-between;align-items:center;}
+.bottom-center{display:flex;margin:0 auto;min-width:1190px; max-width:1360px;height:50px;border-bottom:1px solid #343434;color:#586687;justify-content:space-between;align-items:center;}
 .bottom-center .item{text-align:left;-webkit-transition:all .2s;transition:all .2s;flex:1 1 auto;color:#FFF;}
 .bottom-center .item a{color:#FFF; position: relative;}
 .bottom-center .item a:hover,.bottom-center .item:hover{color:#FFF;cursor:pointer;}
-.bottom-center .item a.contact-icons{color:#37A6DC;}
-.bottom-center .item a.contact-icons:hover,.bottom-center .item.contact-icons:hover{color:#66b9e2;cursor:pointer;}
+.bottom-center .item a.contact-icons{color:#BA8D35;}
+/*.bottom-center .item a.contact-icons:before{color:#ffffff;}*/
+.bottom-center .item a.contact-icons:hover,.bottom-center .item.contact-icons:hover{color: #a37c2f;cursor:pointer;}
 .bottom-center .item:nth-child(5){width:680px;background:#ff0;}
 .bottom-title-img{margin-top: 48px;margin-bottom: 35px;}
 .bottom-title{font-size:30px;color:#f0f0f0;}
