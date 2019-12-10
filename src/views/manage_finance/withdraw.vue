@@ -3,28 +3,9 @@
     <Row>
         <Col span="24">
             <Row>
-                <!--<Card>-->
-                <!---->
-                <!--<Row>-->
-                <!--<Col span="12">-->
-                <!--<p>自动审核</p>-->
-                <!--<p>-->
-                <!--<span>待审核笔数：{{numberData.toBeAuditingAutoCount }}</span>-->
-                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishAutoCount }}</span>-->
-                <!--</p>-->
-                <!--</Col>-->
-                <!--<Col span="12">-->
-                <!--<p>人工审核</p>-->
-                <!--<p>-->
-                <!--<span>待审核笔数：{{numberData.toBeAuditingManualCount}}</span>-->
-                <!--<span style="margin-left:40px;">已审核笔数：{{numberData.auditingFinishManualCount}}</span>-->
-                <!--</p>-->
-                <!--</Col>-->
-                <!--</Row>-->
-                <!--</Card>-->
                 <Card style="margin-top:10px;">
                     <p slot="title">{{$t('finance.tbsh')}}
-                        <span class="refresh" @click="reshAll"></span>
+                        <Button type="primary" @click="outExl()">{{$t('systemlog.dc')}}</Button>
                     </p>
                     <p style="margin-bottom: 20px">
                         {{$t('common.bz')}}：
@@ -44,7 +25,7 @@
                         <Input v-model="formData.userName" clearable style="width: 200px"
                                :placeholder="$t('common.qsryhm')"></Input>
                         {{$t('common.sl')}}：
-                        <Select v-model="formData.amount" style="width: 200px" >
+                        <Select v-model="formData.amount" style="width: 200px">
                             <Option value="0">{{$t('common.qb')}}</Option>
                             <Option value="1">{{$t('common.xy1')}}</Option>
                             <Option value="2">{{$t('common.dy1xy1000')}}</Option>
@@ -91,6 +72,8 @@
                     },
                     {key: 'withdrawUsdAmount', title: this.$t('exchange.gzusd')},
                     {key: 'phoneNumber', title: this.$t('common.dh')},
+                    {key: 'toAddress', title: this.$t('finance.mbdz')},
+                    {key: 'memo', title: 'MEMO'},
                     {
                         key: 'auditStatus', title: this.$t('common.zt'),
                         render: (h, params) => {
@@ -130,7 +113,8 @@
                     max: null,
                     auditStatus: '3'
                 },
-                symbolList: []
+                symbolList: [],
+                outParams: {}
             };
         },
         created () {
@@ -168,6 +152,7 @@
                 data.symbol = data.symbol === '0' ? null : data.symbol;
                 data.auditStatus = data.auditStatus === '3' ? null : data.auditStatus;
                 data.auditType = '';
+                this.outParams = data;
                 financeApi.getAuditingList(this.curPage, data,
                     (res, total) => {
                         this.total = total;
@@ -204,6 +189,9 @@
             changePage (page) {
                 this.curPage = page;
                 this.getAuditing();
+            },
+            outExl () {
+                util.outExl('api/bm/financialManage/withdrawAuditing/exportWithdrawAuditingExcel', this.outParams);
             }
         }
     };
