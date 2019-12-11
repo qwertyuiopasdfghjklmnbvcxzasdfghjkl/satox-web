@@ -192,7 +192,7 @@
           return '0.00%'
         } else if (item.openingPrice && item.lastPrice) {
           var percent = numUtils.mul(numUtils.BN(item.change24h).div(item.openingPrice), 100)
-          return `<font color="${percent < 0 ? '#e65353' : '#48d417'}">` + percent.toFixed(2) + '%</font>'
+          return `<font color="${percent < 0 ? '#E44242' : '#48d417'}">` + percent.toFixed(2) + '%</font>'
         } else {
           return '0.00%'
         }
@@ -392,7 +392,7 @@
   }
 
   .layui-table .font-red {
-    color: #e65353;
+    color: #E44242;
   }
 
   .layui-table .font-green {
