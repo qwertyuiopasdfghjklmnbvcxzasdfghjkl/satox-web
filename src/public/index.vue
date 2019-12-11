@@ -2,6 +2,8 @@
   <div class="container">
     <!--轮播-->
     <indexslider></indexslider>
+    <!--公告-->
+    <note/>
     <!--推荐市场-->
     <indexrecom ref="indexrecom"></indexrecom>
     <!--数据表格-->
@@ -55,11 +57,13 @@
   import indexslider from '@/public/index/indexslider'
   import indexrecom from '@/public/index/indexrecom'
   import KLineWebSocket from '@/assets/js/websocket'
+  import Note from './index/note'
   let chartSettings = window.localStorage.getItem('chartSettings')
   chartSettings && (chartSettings = JSON.parse(chartSettings))
   export default {
     name: 'app',
     components: {
+      Note,
       indexdatatable,
       indexslider,
       indexrecom
