@@ -940,6 +940,23 @@ export const riskRouter = [
 
 export const operationRouter = [
     {
+        path: '/operation_cms',
+        name: 'operation_cms',
+        title: 'nav.cmsgl',
+        component: Main,
+        icon: 'ios-paper-outline',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+        },
+        children: [
+            {
+                path: 'index', title: 'nav.cmsgl', name: 'operation_cms_index', component: resolve => {
+                    require(['./views/manage_operation/cms.vue'], resolve);
+                }
+            }
+        ]
+    },
+    {
         path: '/operation_distribute',
         name: 'operation_distribute',
         title: 'nav.ff',

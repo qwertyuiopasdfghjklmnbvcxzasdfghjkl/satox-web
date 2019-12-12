@@ -107,7 +107,7 @@
                 }
                 this.formData.page = this.curPage;
                 this.formData.size = this.size;
-                this.formData.symbol = 'ussd';
+                this.formData.symbol = 'usdt';
                 let D = JSON.stringify(this.formData)
                 let data = JSON.parse(D);
                 data.createdStart = data.createdStart ? util.dateToStr(new Date(data.createdStart)) : null;

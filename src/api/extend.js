@@ -454,4 +454,52 @@ const delMarket = function (marketManageId, success, error) {
 };
 extend.delMarket = delMarket;
 
+// cms信息列表
+const getCms = function (data, success, error) {
+    api.post(`api/bm/promotionManage/cms/list`, data,(res) => {
+        if (res.rst === 1) {
+            success && success(res.data, res.total);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.getCms = getCms;
+
+// 新增cms信息
+const addCms = function (data, success, error) {
+    api.post(`api/bm/promotionManage/cms/add`, data,(res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.addCms = addCms;
+
+// 删除Cms信息
+const delCms = function (cmsInfoId, success, error) {
+    api.delete(`api/bm/promotionManage/cms/delete${cmsInfoId}`,(res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.delCms = delCms;
+
+// 更新cms信息
+const updataCms = function (data, success, error) {
+    api.post(`api/bm/promotionManage/cms/update`, data,(res) => {
+        if (res.rst === 1) {
+            success && success(res.data);
+        } else {
+            error && error(res.msg);
+        }
+    }, error);
+};
+extend.updataCms = updataCms;
+
 export default extend;
