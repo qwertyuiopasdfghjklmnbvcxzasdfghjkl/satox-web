@@ -37,11 +37,11 @@
       }
     },
     created() {
-
+      this.getDetail()
     },
     methods: {
       getDetail() {
-        this.id = this.$route.params.id
+        this.id = this.$route.query.id
         market.getCmsDetail(this.id, res => {
           if (this.getLang === 'zh-CN') {
             this.data = res.bodyCn

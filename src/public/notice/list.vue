@@ -49,7 +49,7 @@
           })
           this.total = total
           this.loading = false
-          this.nodata = this.list.length
+          this.nodata = !this.list.length
         },msg=>{
           this.loading = false
           this.nodata = true
