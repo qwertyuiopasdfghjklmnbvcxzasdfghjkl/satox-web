@@ -542,6 +542,7 @@
   .layui-table th em i {
     position: absolute;
     top: 0px;
+    color: #716521;
   }
 
   .layui-table th em i.icon-arrow-down {
