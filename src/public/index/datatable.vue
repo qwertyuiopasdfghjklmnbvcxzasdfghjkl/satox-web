@@ -5,7 +5,9 @@
       <section class="xmain beijing002-content">
         <div class="layui-tab layui-tab-card">
           <ul class="layui-tab-title">
-            <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item" :key="item" >{{item}}</li>
+            <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item"
+                :key="item">{{item}}
+            </li>
             <li class="volume" :title="valumeTip" v-html="'Volume:&nbsp;&nbsp;'+valumeTip" v-if="false">
               <!-- <span class="last-span" style="position:relative;padding-right:34px;">
                 <i>{{$t('home.home_connected')}}</i>
@@ -13,7 +15,7 @@
               </span> -->
               <!--是否连接-->
             </li>
-            <li><input v-model="filterValue" :placeholder="$t('public0.public284')" /></li>
+            <li><input v-model="filterValue" :placeholder="$t('public0.public284')"/></li>
           </ul>
           <div class="layui-tab-content">
             <!--2、btc市场、eth市场-->
@@ -21,11 +23,11 @@
               <table class="layui-table" lay-size="sm" lay-even="" lay-skin="line">
                 <colgroup>
                   <col width="80">
-                  <col width="150">
-                  <col width="230">
+                  <col width="180">
+                  <col width="280">
                   <col width="200">
-                  <col width="200">
-                  <col width="150">
+                  <col width="220">
+                  <col width="220">
                   <col>
                 </colgroup>
                 <thead>
@@ -78,23 +80,32 @@
                 <tbody>
                 <!--<tr v-for=" btc in getMarketFilter()" >-->
                 <tr v-for="(btc, index) in curProducts" :key="index">
-                  <td><i :class="[!btc.collection?'icon_hollow':'icon_solid']" @click.stop="keep(btc)" ></i></td>
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
-                    <span class="font-white">{{btc.currencySymbol}}</span><span class="font-default">/{{btc.baseSymbol}}</span>
+                  <td><i :class="[!btc.collection?'icon_hollow':'icon_solid']" @click.stop="keep(btc)"></i></td>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
+                    <span class="font-white">{{btc.currencySymbol}}</span><span
+                    class="font-default">/{{btc.baseSymbol}}</span>
                   </router-link><!--市场-->
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
-                    <span class="" :class="[(getDirection(btc.direction)===1 || getDirection(btc.direction)===0)?'font-green':'font-red']" >{{toFixed(btc.lastPrice)}} </span><span class="font-default">/<valuation :lastPrice="btc.lastPrice" :baseSymbol="btc.baseSymbol"/></span>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
+                    <span class=""
+                          :class="[(getDirection(btc.direction)===1 || getDirection(btc.direction)===0)?'font-green':'font-red']">{{toFixed(btc.lastPrice)}} </span><span
+                    class="font-default">/<valuation :lastPrice="btc.lastPrice" :baseSymbol="btc.baseSymbol"/></span>
                   </router-link><!--最新价-->
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
-                    <span class="font-green" v-html="percent(btc)" ></span>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
+                    <span class="font-green" v-html="percent(btc)"></span>
                   </router-link><!--24h涨跌-->
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
-                    <span class="font-default" >{{toFixed(btc.highPrice24h)}}</span>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
+                    <span class="font-default">{{toFixed(btc.highPrice24h)}}</span>
                   </router-link><!--24h最高价-->
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
                     <span class="font-default">{{toFixed(btc.lowPrice24h)}}</span>
                   </router-link><!--24h最低价-->
-                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}" tag='td'>
+                  <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
+                               tag='td'>
                     <span class="font-default">{{toFixed(btc.dealAmount,2)}}</span>
                   </router-link><!--24h成交量-->
                 </tr>
@@ -113,11 +124,12 @@
   import marketApi from '@/api/market'
   import numUtils from '@/assets/js/numberUtils'
   import valuation from '@/components/valuation'
+
   export default {
     components: {
       valuation
     },
-    data () {
+    data() {
       return {
         sort: 'asc', // 默认升序
         sortActive: 'market',
@@ -127,20 +139,26 @@
         isActive: 2, /* 样式是否选中 */
         tabContent: 2, /* tab切换 */
         optionalList: [], /* 自选临时数据 */
-        tableheadpars: { newprise1: 'idefault', newprise2: 'idefault', twhourstop: 'idefault', twhourslow: 'idefault', volume: 'idefault' },
+        tableheadpars: {
+          newprise1: 'idefault',
+          newprise2: 'idefault',
+          twhourstop: 'idefault',
+          twhourslow: 'idefault',
+          volume: 'idefault'
+        },
         checked: false,
-        active: 'USSD',
+        active: 'USDT',
         marketArry: [], // 市场信息
         filterMarketAtty: [], // 前台过滤'BTCETH、ETHBTC、BTCMARKET'市场信息
         products: []
       }
     },
-    created () {
+    created() {
       this.getMarketList() // 初始化数据
     },
     methods: {
       ...mapActions(['setBtcValues']),
-      keep (data) {
+      keep(data) {
         if (this.getApiToken) {
           if (data.collection) { // 取消
             marketApi.removeCollection({
@@ -159,32 +177,32 @@
           data.collection = !data.collection
         }
       },
-      getDirection (direction) { //  1 买  绿色  2 卖 红色
+      getDirection(direction) { //  1 买  绿色  2 卖 红色
         return parseInt(direction || 0)
       },
-      toNumberss (nu) {
+      toNumberss(nu) {
         let n = numUtils.BN(nu)
         console.log(n)
       },
-      toFixed (value, fixed) {
+      toFixed(value, fixed) {
         return numUtils.BN(value || 0).toFixed(fixed === undefined ? this.fixedNumber : fixed)
       },
-      percent (item) { // 涨跌
+      percent(item) { // 涨跌
         if (numUtils.BN(item.openingPrice).equals(0)) {
           return '0.00%'
         } else if (item.openingPrice && item.lastPrice) {
           var percent = numUtils.mul(numUtils.BN(item.change24h).div(item.openingPrice), 100)
-          return `<font color="${percent < 0 ? '#e65353' : '#48d417'}">` + percent.toFixed(2) + '%</font>'
+          return `<font color="${percent < 0 ? '#E44242' : '#48d417'}">` + percent.toFixed(2) + '%</font>'
         } else {
           return '0.00%'
         }
       },
-      getMarketList () { // 获取所有市场数据
+      getMarketList() { // 获取所有市场数据
         marketApi.marketList((res) => {
           this.products = res
         })
       },
-      getMarketFilter () { // 前台通过参数筛选市场
+      getMarketFilter() { // 前台通过参数筛选市场
         let val = this.filterValue.toUpperCase()
         return this.marketArry.filter((item) => {
           let symbol = (item.market || '').toUpperCase()
@@ -195,14 +213,14 @@
           }
         })
       },
-      switchTab (index, tabindex) {
+      switchTab(index, tabindex) {
         this.isActive = index
         this.tabContent = tabindex
       },
-      remove (index) {
+      remove(index) {
         this.optionalList.splice(index, 1)
       },
-      sortMarket (active) {
+      sortMarket(active) {
         if (active === this.sortActive) {
           this.sort = this.sort === 'asc' ? 'desc' : 'asc'
         } else {
@@ -210,7 +228,7 @@
           this.sort = 'asc'
         }
       },
-      changeUpDown (values) {
+      changeUpDown(values) {
         let tableheadpars = this.tableheadpars
         for (let ite in tableheadpars) {
           if (ite === values) {
@@ -232,7 +250,7 @@
     },
     computed: {
       ...mapGetters(['getApiToken', 'getNetworkSignal']),
-      curProducts () {
+      curProducts() {
         let val = this.filterValue.toUpperCase()
         let datas = this.products.sort((item1, item2) => {
           if (this.sortActive === 'lastPrice') {
@@ -270,9 +288,9 @@
           }
         })
       },
-      markets () {
+      markets() {
         // 收藏
-        return ['USSD']
+        return ['USDT']
         // return ['BTC', 'ETH', 'SATOX', 'USDT', this.$t('public0.public283')]
       },
       /* 选中数据的集合 */
@@ -280,7 +298,7 @@
         let checkedArry = []
         this.optionalList = checkedArry
       },
-      valumeTip () {
+      valumeTip() {
         let valumes = []
         this.symbolVolumes.forEach((item) => {
           valumes.push(` ${Math.ceil(item.volumes)} ${item.symbol}&nbsp;&nbsp;`)
@@ -289,89 +307,344 @@
       }
     },
     watch: {
-      getApiToken () {
+      getApiToken() {
         this.getMarketList()
       },
-      filterValue () {
+      filterValue() {
         this.filterValue = this.filterValue.replace(/[\W]/g, '')
       },
       active: function () {
       },
       mytotalList: function () {
       },
-      products () {
+      products() {
         this.setBtcValues(this.products)
       }
     }
   }
 </script>
 <style scoped>
-.symbol-list{min-height: 530px;background: #fff;margin-bottom:20px;height:fit-content; min-width:1190px;}
-.wrap { min-width:1190px; max-width:1360px; margin: 0 auto;}
-.holdplace {height: 50px;}
-.icondown{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-up.png") no-repeat -4px -3px}
-.iconup{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/i-down.png") no-repeat -4px -3px}
-.idefault{display:inline-block;width: 20px;height: 17px;background: url("../../assets/images/moren.png") no-repeat -4px -3px}
-.font-default{color: #586687!important;}
-.last-span{margin-left: 28px;}
-.layui-table .icon_solid{cursor: pointer;display: inline-block;height: 16px;width: 16px;background-image: url("../../assets/images/icon-start-s.png")}
-.layui-table .icon_hollow{cursor: pointer;display: inline-block;height: 16px;width: 16px;background-image: url("../../assets/images/icon-start-k.png")}
-.layui-table .font-white{color: #4d3c1a;}
-.layui-table .font-red{color: #e65353;}
-.layui-table .font-green{color: #48d417;}
-.bk-wrap{width: 100%; position: relative; overflow: hidden;}
-.bk-main{width: 1172px; margin: 0 auto; position: relative; overflow: hidden;}
+  .symbol-list {
+    min-height: 400px;
+    padding-bottom: 20px;
+    height: fit-content;
+    min-width: 1190px;
+    background-color: #262525;
+  }
 
-.slider-nav{position: absolute; bottom: 22px; left: 45%;}
-.slider-nav ul{width: 170px; margin: 0 auto;}
-.slider-nav ul::after {content: ''; display: block; clear: both;}
-.slider-nav ul li{width: 35px; display: inline-block;}
-.slider-nav ul li span{width: 30px; height: 4px; background: #47577f; display: inline-block; border-radius: 2px;}
-.slider-nav ul li span.slider-this{background: #48bcff;}
-.layui-tab{margin: 0 0; text-align: left!important;}
-.layui-tab-title{ position: relative; left: 0; height: 54px; white-space: nowrap; font-size: 0; transition: all .2s; -webkit-transition: all .2s;}
-.layui-tab-title li{display: inline-block; vertical-align: middle; font-size: 16px; transition: all .2s; -webkit-transition: all .2s; position: relative; line-height: 54px; min-width: 140px; padding: 0 10px; text-align: center; cursor: pointer; color: #5a5a5a; box-sizing: border-box;}
-.layui-tab-title li.hover {background-color: #f5f5f5;}
-.layui-tab-title li.hover:hover{color: #467daa;}
-.layui-tab-title li:last-child{float: right; padding-right: 0;}
-.layui-tab-title li.volume{margin-left: 45px;}
-.layui-tab-title li.layuithis{background-color: #FFF; color:#467daa!important;}
-.layui-tab-title li.layuithis::before {content: '';position: absolute;left: 0;right: 0;top: 0; height: 4px; background-color: #467dda;}
-.layui-tab-title li:last-child>input{width:220px; color: #5a5a5a;  border: 1px solid #8f9090; line-height: 40px; height: 38px; padding-left: 8px; background: url("../../assets/images/chazao.png") no-repeat 190px center; box-sizing: border-box;}
+  .wrap {
+    min-width: 1190px;
+    max-width: 1360px;
+    margin: 0 auto;
+  }
 
-table{border-collapse: collapse; border-spacing: 0;}
-.layui-table{width: 100%;color: #586687;}
-.layui-table tr{transition: all .3s; -webkit-transition: all .3s;cursor: pointer}
-.layui-table th{text-align: left; font-weight: 400;}
-.layui-table th em{position:relative;}
-.layui-table th em i{position:absolute;top:0px;}
-.layui-table th em i.icon-arrow-down{top:10px;}
-.layui-table th em i.active{color:#FFDE00;}
-.layui-table tbody tr:hover{background-color: #ddd;}
-.layui-table tbody tr:hover .font-white{color:#467dda;}
-.layui-table[lay-skin=nob] td,
-.layui-table[lay-skin=nob] th{border: none;}
-.layui-table td,
-.layui-table th{margin: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); position: relative; padding: 0 15px; height: 45px; line-height: 45px; font-size: 14px; border-width: 1px; border-style: solid; border-color: #CCCCCC; }
-.layui-table[lay-skin=line]{border-width: 1px; border-style: solid; border-color: #CCCCCC;background:#FFF;}
-.layui-table[lay-skin=line] td,
-.layui-table[lay-skin=line] th{border-width: 0 0 1px;}
+  .holdplace {
+    height: 20px;
+  }
 
-/*网络信号*/
-.network-signal{border-right:4px solid #03c087;height:20px;display:flex;flex:initial;position:absolute;right:10px;top:calc(50% - 14px);align-items:flex-end;}
-.network-signal::before,
-.network-signal::after{content:"";display:flex;width:4px;height:8px;background:#03c087;margin-right:2px;}
-.network-signal::after{height:14px;margin-right:2px;}
-/*信号中*/
-.signal-1{border-right-color:#717788;}
-.signal-1::after,
-.signal-1::before{background:#ffc81f;}
-/*信号弱*/
-.signal-2{border-right-color:#717788;}
-.signal-2::after{background:#717788;}
-.signal-2::before{background:#de6941;}
-/*无信号*/
-.signal-3{border-right-color:#717788;}
-.signal-3::after,
-.signal-3::before{background:#717788;}
+  .icondown {
+    display: inline-block;
+    width: 20px;
+    height: 17px;
+    background: url("../../assets/images/i-up.png") no-repeat -4px -3px
+  }
+
+  .iconup {
+    display: inline-block;
+    width: 20px;
+    height: 17px;
+    background: url("../../assets/images/i-down.png") no-repeat -4px -3px
+  }
+
+  .idefault {
+    display: inline-block;
+    width: 20px;
+    height: 17px;
+    background: url("../../assets/images/moren.png") no-repeat -4px -3px
+  }
+
+  .font-default {
+    color: #ffffff !important;
+  }
+
+  .last-span {
+    margin-left: 28px;
+  }
+
+  .layui-table .icon_solid {
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-image: url("../../assets/images/icon-start-s.png")
+  }
+
+  .layui-table .icon_hollow {
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-image: url("../../assets/images/icon-start-k.png")
+  }
+
+  .layui-table .font-white {
+    color: #ffffff;
+  }
+
+  .layui-table .font-red {
+    color: #E44242;
+  }
+
+  .layui-table .font-green {
+    color: #48d417;
+  }
+
+  .bk-wrap {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bk-main {
+    width: 1172px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slider-nav {
+    position: absolute;
+    bottom: 22px;
+    left: 45%;
+  }
+
+  .slider-nav ul {
+    width: 170px;
+    margin: 0 auto;
+  }
+
+  .slider-nav ul::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .slider-nav ul li {
+    width: 35px;
+    display: inline-block;
+  }
+
+  .slider-nav ul li span {
+    width: 30px;
+    height: 4px;
+    background: #47577f;
+    display: inline-block;
+    border-radius: 2px;
+  }
+
+  .slider-nav ul li span.slider-this {
+    background: #48bcff;
+  }
+
+  .layui-tab {
+    margin: 0 0;
+    text-align: left !important;
+  }
+
+  .layui-tab-title {
+    position: relative;
+    left: 0;
+    height: 40px;
+    white-space: nowrap;
+    font-size: 0;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    background: #000;
+    padding: 6px 20px;
+  }
+
+  .layui-tab-title li {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    position: relative;
+    line-height: 40px;
+    min-width: 140px;
+    text-align: left;
+    cursor: pointer;
+    color: #5a5a5a;
+    box-sizing: border-box;
+  }
+
+  .layui-tab-title li.hover {
+  }
+
+  .layui-tab-title li.hover:hover {
+    color: #467daa;
+  }
+
+  .layui-tab-title li:last-child {
+    float: right;
+    padding-right: 0;
+  }
+
+  .layui-tab-title li.volume {
+    margin-left: 45px;
+  }
+
+  .layui-tab-title li.layuithis {
+    color: #BA8D35 !important;
+  }
+
+  .layui-tab-title li:last-child > input {
+    width: 300px;
+    color: #5a5a5a;
+    border: 1px solid #1E1E1E;
+    line-height: 40px;
+    height: 38px;
+    padding-left: 8px;
+    background: url("../../assets/images/chazao.png") no-repeat 270px center;
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: 0.3s;
+  }
+  .layui-tab-title li:last-child > input:hover{
+    border-color: #2a74d3;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .layui-table {
+    width: 100%;
+    color: #BA8D35;
+  }
+
+  .layui-table tr {
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    cursor: pointer
+  }
+
+  .layui-table th {
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .layui-table th em {
+    position: relative;
+  }
+
+  .layui-table th em i {
+    position: absolute;
+    top: 0px;
+    color: #716521;
+  }
+
+  .layui-table th em i.icon-arrow-down {
+    top: 10px;
+  }
+
+  .layui-table th em i.active {
+    color: #FFDE00;
+  }
+
+  .layui-table tbody tr:hover {
+    background-color: #37342F;
+  }
+
+
+  .layui-table[lay-skin=nob] td,
+  .layui-table[lay-skin=nob] th {
+    border: none;
+  }
+
+  .layui-table td,
+  .layui-table th {
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    padding: 0 15px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #37342F;
+  }
+
+  .layui-table[lay-skin=line] {
+    border-width: 0;
+    border-style: solid;
+    background: #202020;
+  }
+
+  .layui-table[lay-skin=line] td,
+  .layui-table[lay-skin=line] th {
+    border-width: 0 0 1px;
+  }
+
+  /*网络信号*/
+  .network-signal {
+    border-right: 4px solid #03c087;
+    height: 20px;
+    display: flex;
+    flex: initial;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 14px);
+    align-items: flex-end;
+  }
+
+  .network-signal::before,
+  .network-signal::after {
+    content: "";
+    display: flex;
+    width: 4px;
+    height: 8px;
+    background: #03c087;
+    margin-right: 2px;
+  }
+
+  .network-signal::after {
+    height: 14px;
+    margin-right: 2px;
+  }
+
+  /*信号中*/
+  .signal-1 {
+    border-right-color: #717788;
+  }
+
+  .signal-1::after,
+  .signal-1::before {
+    background: #ffc81f;
+  }
+
+  /*信号弱*/
+  .signal-2 {
+    border-right-color: #717788;
+  }
+
+  .signal-2::after {
+    background: #717788;
+  }
+
+  .signal-2::before {
+    background: #de6941;
+  }
+
+  /*无信号*/
+  .signal-3 {
+    border-right-color: #717788;
+  }
+
+  .signal-3::after,
+  .signal-3::before {
+    background: #717788;
+  }
 </style>

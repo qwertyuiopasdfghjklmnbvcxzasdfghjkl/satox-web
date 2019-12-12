@@ -7,6 +7,7 @@ import shop from './shop'
 import ieo from './ieo'
 import commodity from './commodity'
 import voteMining from './vote_mining'
+import note from './notice'
 import login from '@/public/login'
 import twoverify from '@/public/twoverify'
 import register from '@/public/register'
@@ -28,7 +29,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Index,
-      redirect:'/exchange'
+      // redirect:'/exchange'
     },
     {
       path: '/invite',
@@ -117,5 +118,5 @@ export default new Router({
         name: 'home'
       }
     }
-  ].concat(exchange, otc, voteMining, shop, ieo, commodity)
+  ].concat(exchange, otc, voteMining, shop, ieo, commodity, note)
 })
