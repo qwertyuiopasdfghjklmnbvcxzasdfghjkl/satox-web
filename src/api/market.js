@@ -7,6 +7,30 @@ import uuid from 'uuid/v1'
 let domain = ''
 let market = {}
 
+// 公告
+const getCmsList = function (data, success, error) {
+  api.post(`${domain}api/v1/cms/list`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data, res.total)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+market.getCmsList = getCmsList
+
+// 获取cms详情
+const getCmsDetail = function (data, success, error) {
+  api.get(`${domain}api/v1/cms/detail/${data}`, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+market.getCmsDetail = getCmsDetail
+
 // 获取币币交易公告
 const noticeList = function (success, error) {
   api.get(`${domain}api/v3/kline/announcement`, (res) => {
@@ -335,7 +359,6 @@ const getSysparams = function (success, error) {
 }
 market.getSysparams = getSysparams
 
-
 // 查询BTC汇率价格
 const getBtcPrice = function (success, error) {
   api.get(`${domain}api/v2/account2/btcPrice `, (res) => {
@@ -347,5 +370,17 @@ const getBtcPrice = function (success, error) {
   }, error)
 }
 market.getBtcPrice = getBtcPrice
+
+// 查询市场Kline
+const getKlineData = function (data, success, error) {
+  api.get(`${domain}api/v3/kline`, data, (res) => {
+    if (res.rst === 1) {
+      success && success(res.data)
+    } else {
+      error && error(res.msg)
+    }
+  }, error)
+}
+market.getKlineData = getKlineData
 
 export default market
