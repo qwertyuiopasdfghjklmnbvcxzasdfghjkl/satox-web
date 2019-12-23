@@ -21,7 +21,7 @@ market.getCmsList = getCmsList
 
 // 获取cms详情
 const getCmsDetail = function (data, success, error) {
-  api.get(`${domain}api/v1/cms/detail/${data}`, (res) => {
+  api.post(`${domain}api/v1/cms/detail/${data}`, (res) => {
     if (res.rst === 1) {
       success && success(res.data)
     } else {
