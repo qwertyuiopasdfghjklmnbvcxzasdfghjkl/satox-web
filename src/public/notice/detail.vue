@@ -5,7 +5,7 @@
       <small @click="back()">{{$t('public0.public11')}}</small>
     </p>
     <div class="cont">
-      <h4 class="title" v-html="title"></h4>
+      <h4 class="top" v-html="title"></h4>
       <small class="small" v-html="small"></small>
       <div class="detail_cont" v-html="data"></div>
     </div>
@@ -37,11 +37,11 @@
       }
     },
     created() {
-
+      this.getDetail()
     },
     methods: {
       getDetail() {
-        this.id = this.$route.params.id
+        this.id = this.$route.query.id
         market.getCmsDetail(this.id, res => {
           if (this.getLang === 'zh-CN') {
             this.data = res.bodyCn
@@ -86,7 +86,8 @@
     .cont {
       background: #292828;
       padding: 20px;
-      &>.title{
+      color: #e9e9e9;
+      &>.top{
         font-size: 18px;
         text-align: center;
         line-height: 34px;
