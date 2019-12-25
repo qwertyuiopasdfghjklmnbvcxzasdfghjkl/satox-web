@@ -3,7 +3,8 @@
     <div class="header-fixed">
       <div class="header-center"
            :class="{'full-screen': $route.name === 'exchange_index2' || $route.name === 'exchange_index'}">
-        <a class="logo" href="javascript:;" @click="goHome"></a>
+        <a class="logo" href="javascript:;"></a>
+        <!--<a class="logo" href="javascript:;" @click="goHome"></a>-->
         <div class="center-left">
           <ul class="maxWidth">
             <li>
@@ -12,9 +13,9 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
-            <li>
-              <router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}}<!-- 大宗商品 --> </router-link>
-            </li>
+            <!--<li>-->
+              <!--<router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}}&lt;!&ndash; 大宗商品 &ndash;&gt; </router-link>-->
+            <!--</li>-->
             <li v-if="false">
               <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
             </li>
