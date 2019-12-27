@@ -3,8 +3,8 @@
     <div class="header-fixed">
       <div class="header-center"
            :class="{'full-screen': $route.name === 'exchange_index2' || $route.name === 'exchange_index'}">
-        <a class="logo" href="javascript:;"></a>
-        <!--<a class="logo" href="javascript:;" @click="goHome"></a>-->
+        <!--<a class="logo" href="javascript:;"></a>-->
+        <a class="logo" href="javascript:;" @click="goHome"></a>
         <div class="center-left">
           <ul class="maxWidth">
             <li>
