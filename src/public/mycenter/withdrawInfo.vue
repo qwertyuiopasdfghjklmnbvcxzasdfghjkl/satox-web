@@ -429,7 +429,7 @@
   }
 
   .withdrawBox {
-    width: 802px;
+    width: 870px;
     background-color: #fff;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
