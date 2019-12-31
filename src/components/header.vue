@@ -601,9 +601,9 @@
   .header-center.full-screen {
     box-sizing: border-box;
     min-width: 1200px;
-    width: 100%;
+    /* width: 100%;
     padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 10px; */
   }
 
   .header-center a.logo {
