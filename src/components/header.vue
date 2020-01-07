@@ -13,9 +13,9 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
-            <!--<li>-->
-              <!--<router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}}&lt;!&ndash; 大宗商品 &ndash;&gt; </router-link>-->
-            <!--</li>-->
+            <li>
+              <router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}} </router-link>
+            </li>
             <li v-if="false">
               <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
             </li>
@@ -601,9 +601,9 @@
   .header-center.full-screen {
     box-sizing: border-box;
     min-width: 1200px;
-    width: 100%;
+    /* width: 100%;
     padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 10px; */
   }
 
   .header-center a.logo {

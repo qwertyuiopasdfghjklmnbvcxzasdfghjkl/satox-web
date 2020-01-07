@@ -27,9 +27,9 @@
                     <span class="label">{{googleState === 0 ? $t('public0.public195') : $t('account.user_Google_verified_binding')}}<!--扫二维码绑定谷歌验证||已绑定谷歌验证--></span>
                 </div>
                 <div class="google-content-center">
-                    <!--<div class="state" v-if="googleState === 1 && !showUnbindGoogleForm">
-                      {{$t('account.user_center_state_bind')}}&lt;!&ndash;已绑定&ndash;&gt;
-                    </div>-->
+                    <!--<div class="state" v-if="googleState === 1 && !showUnbindGoogleForm">-->
+                      <!-- {{$t('account.user_center_state_bind')}}已绑定 -->
+                    <!-- </div>-->
                     <div class="bind clearfix" v-if="googleState === 0">
                       <div class="bind-qrcode">
                           <div class="bind-qrcode-img" ref="qrcode"></div>
