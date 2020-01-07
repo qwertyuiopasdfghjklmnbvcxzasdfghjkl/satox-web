@@ -12,24 +12,24 @@
     <div class="bottom">
       <div class="bottom-center">
         <div class="item">
-          <a :href="aboutUrl" target="_blank">{{$t('public.foot_about')}}</a>
+          <a :href="aboutUrl">{{$t('public.foot_about')}}</a>
         </div><!--关于我们-->
         <div class="item">
-          <a :href="serviceAgreementUrl" target="_blank">{{$t('public.foot_terms')}}</a>
+          <a :href="serviceAgreementUrl">{{$t('public.foot_terms')}}</a>
         </div><!--服务协议-->
         <div class="item">
-          <a :href="privacyNoticeUrl" target="_blank">{{$t('public.foot_privacy')}}</a>
+          <a :href="privacyNoticeUrl" >{{$t('public.foot_privacy')}}</a>
         </div><!--隐私声明-->
         <div class="item">
-          <a :href="rateStandardUrl" target="_blank">{{$t('public.foot_fees')}}</a>
+          <a :href="rateStandardUrl">{{$t('public.foot_fees')}}</a>
         </div><!--费率标准-->
         <div class="item"></div>
         <div class="item">{{$t('public.foot_contact')}}</div><!--联系我们-->
         <div class="item">
-          <a class="contact-icons icon-facebook" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-facebook" href="javascript:;"></a>
         </div>
         <div class="item">
-          <a class="contact-icons icon-twitter" href="javascript:;" target="_blank"></a>
+          <a class="contact-icons icon-twitter" href="javascript:;"></a>
         </div>
         <!--<div class="item">-->
           <!--<a class="contact-icons icon-telegram" href="javascript:;" target="_blank"></a>-->
@@ -45,7 +45,7 @@
 
     <section class="bk-wrap footer-main">
       <section class="bk-main footer">
-        <p>© 2018-2019 www.satox.io All Rights Reserved</p>
+        <p>©2019-2020 www.satox.com All Rights Reserved</p>
       </section>
     </section>
   </div>
@@ -76,7 +76,7 @@
         // } else {
         //   return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
         // }
-        return '#'
+        return 'javascript:;'
       },
       serviceAgreementUrl () {
         // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
@@ -84,7 +84,7 @@
         // } else {
         //   return 'https://cdcc.kf5.com/hc/kb/article/1225582/'
         // }
-        return '#'
+        return 'javascript:;'
       },
       privacyNoticeUrl () {
         // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
@@ -92,7 +92,7 @@
         // } else {
         //   return 'https://cdcc.kf5.com/hc/kb/article/1225585/'
         // }
-        return '#'
+        return 'javascript:;'
       },
       rateStandardUrl () {
         // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
@@ -100,7 +100,7 @@
         // } else {
         //   return 'https://cdcc.kf5.com/hc/kb/article/1225584/'
         // }
-        return '#'
+        return 'javascript:;'
       }
     },
     watch: {
