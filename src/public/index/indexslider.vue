@@ -160,13 +160,15 @@
   .swiper-slide /deep/ a {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 650px;
+    overflow-y: hidden;
   }
 
   .swiper-slide /deep/ img {
     width: 100%;
     object-fit: cover;
     object-position: center;
+    min-height: 650px;
   }
 
   .swiper-pagination {
