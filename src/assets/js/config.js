@@ -1,7 +1,7 @@
 // let domain = process.env.NODE_ENV === 'development' ? 'test.satox.com' : location.host.split(':')[0]
 // let domain = process.env.NODE_ENV === 'development' ? 'sit.satox.net' : location.host.split(':')[0]
 // let domain = process.env.NODE_ENV === 'development' ? 'satox.dev.koall.io' : location.host.split(':')[0]
-let domain = process.env.NODE_ENV === 'development' ? 'satox-dev.lab.ssss.so' : location.host.split(':')[0]
+let domain = process.env.NODE_ENV === 'development' ? 'trading.satox.com' : location.host.split(':')[0]
 // let domain = process.env.NODE_ENV === 'development' ? 'trading.satox.com' : location.host.split(':')[0]
 const config = {
   domain: domain,

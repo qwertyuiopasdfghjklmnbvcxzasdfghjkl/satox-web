@@ -88,9 +88,9 @@
                   </router-link><!--市场-->
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>
-                    <span class=""
-                          :class="[(getDirection(btc.direction)===1 || getDirection(btc.direction)===0)?'font-green':'font-red']">{{toFixed(btc.lastPrice)}} </span><span
-                    class="font-default">/<valuation :lastPrice="btc.lastPrice" :baseSymbol="btc.baseSymbol"/></span>
+                    <span
+                          :class="[(getDirection(btc.direction)===1 || getDirection(btc.direction)===0)?'font-green':'font-red']">{{toFixed(btc.lastPrice, 4)}} </span>
+                    <span class="font-default">/ <valuation :lastPrice="btc.lastPrice" :baseSymbol="btc.baseSymbol" :regs="2"/></span>
                   </router-link><!--最新价-->
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>
@@ -98,11 +98,11 @@
                   </router-link><!--24h涨跌-->
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>
-                    <span class="font-default">{{toFixed(btc.highPrice24h)}}</span>
+                    <span class="font-default">{{toFixed(btc.highPrice24h,4)}}</span>
                   </router-link><!--24h最高价-->
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>
-                    <span class="font-default">{{toFixed(btc.lowPrice24h)}}</span>
+                    <span class="font-default">{{toFixed(btc.lowPrice24h,4)}}</span>
                   </router-link><!--24h最低价-->
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>

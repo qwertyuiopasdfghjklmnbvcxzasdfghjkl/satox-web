@@ -37,9 +37,9 @@
         <!--<div class="item">-->
           <!--<a class="contact-icons icon-slack" href="javascript:;" target="_blank"></a>-->
         <!--</div>-->
-        <div class="item">
-          <a class="contact-icons icon-weixin hover" href="javascript:;"><span class="wxqr"><img src="../assets/images/wxqr.png"><i></i></span></a>
-        </div>
+        <!--<div class="item">-->
+          <!--<a class="contact-icons icon-weixin hover" href="javascript:;"><span class="wxqr"><img src="../assets/images/wxqr.png"><i></i></span></a>-->
+        <!--</div>-->
       </div>
     </div>
 
