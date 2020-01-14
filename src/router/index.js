@@ -22,6 +22,17 @@ import maintenance from '@/public/maintenance'
 import Invite from '@/public/invite'
 import Download from '@/public/download'
 
+const originalPush = Router.prototype.push
+const originalReplace = Router.prototype.replace
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+Router.prototype.replace = function replace(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalReplace.call(this, location, onResolve, onReject)
+  return originalReplace.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 
 export default new Router({
