@@ -45,7 +45,7 @@
 
     <section class="bk-wrap footer-main">
       <section class="bk-main footer">
-        <p>©2019-2020 www.satox.com All Rights Reserved</p>
+        <p>©2019-2020 {{location.hostname}} All Rights Reserved</p>
       </section>
     </section>
   </div>
