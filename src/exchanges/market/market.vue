@@ -16,7 +16,7 @@
         <template v-if="isList1">
           <div class="list-panel">
               <ul class="list1">
-                  <li v-for="data in curProducts" :key="data.marketId" class="list1-item" :class="{'list1-item-active':data.market === symbol}" @click="changeSymbol(data)">
+                  <li v-for="data in curProducts" :key="data.marketId" class="list1-item" :class="{'list1-item-active':data.market === symbol}" @click="changeSymbol(data)" v-if="(data.visible&&Number(data.visible)) || !data.visible">
                       <em class="list1-collection icon-star" :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                       <span class="list1-percent" :class="getUpOrDown(data)"><font v-html="percent(data)"></font></span>
                       <span class="list1-col list1-currency">
@@ -39,7 +39,7 @@
                       </span>
                       <span class="list1-col list1-fall active"></span><!-- 跌涨 -->
                   </li>
-                  <li class="list-loading" v-if="showLoading && products.length===0">
+                  <li class="list-loading" v-if="showLoading && getMarketList.length===0">
                     <loading :size="24"/>
                   </li>
               </ul>
@@ -55,7 +55,7 @@
                 </li>
               </ul>
               <ul class="list">
-                  <li v-for="(data, index) in curProducts" :key="index" class="list-item" :class="{'list-item-active':data.market === symbol}" @click="changeSymbol(data)" @mouseover="tipMouseover($event, data)" @mouseout="tipMouseout($event, data)">
+                  <li v-for="(data, index) in curProducts" :key="index" class="list-item" :class="{'list-item-active':data.market === symbol}" @click="changeSymbol(data)" @mouseover="tipMouseover($event, data)" @mouseout="tipMouseout($event, data)"  v-if="(data.visible&&Number(data.visible)) || !data.visible">
                       <span class="list-col currency">
                           <em class="list-collection icon-star-full"  :class="{collection:data.collection}" @click.stop="keep(data)"></em>
                           {{data.currencySymbol}}/{{data.baseSymbol}}
@@ -63,7 +63,7 @@
                       <span class="list-col price" :class="[(getDirection(data.direction)===1 || getDirection(data.direction)===0)?'font-green':'font-red']">{{toFixed(data.lastPrice,data.accuracy)}}</span>
                       <span class="list-col fall" v-html="percent(data)"></span><!-- 跌涨 -->
                   </li>
-                  <li class="list-loading" v-if="showLoading && products.length===0">
+                  <li class="list-loading" v-if="showLoading && getMarketList.length===0">
                     <loading :size="24"/>
                   </li>
               </ul>
@@ -98,17 +98,16 @@ export default {
       origin: config.origin,
       isList1: true,
       isShowMarketTip: false,
-      sortActive: 'market',
+      sortActive: '',
       sort: 'asc',
       hoverItem: null,
       active: this.baseSymbol,
       showLoading: true,
       filterValue: '',
-      products: []
     }
   },
   computed: {
-    ...mapGetters(['getApiToken','getMarketConfig']),
+    ...mapGetters(['getApiToken','getMarketList','getMarketConfig']),
     markets () {
       let temp = ['collection'], _markets = this.getMarketConfig? Object.values(this.getMarketConfig):[]
       temp = temp.concat([...new Set(_markets.map(item=>{return item.baseSymbol}))].sort())
@@ -119,7 +118,7 @@ export default {
     },
     curProducts () {
       let val = this.filterValue.toUpperCase()
-      let datas = this.products.sort((item1, item2) => {
+      let datas = this.getMarketList.sort((item1, item2) => {
         if (this.sortActive === 'price') {
           let m1 = numUtils.BN(item1.lastPrice)
           let m2 = numUtils.BN(item2.lastPrice)
@@ -142,6 +141,13 @@ export default {
           return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
         }
       })
+      if(this.sortActive===''){
+        datas = datas.sort((item1, item2) => {
+          let m1 = numUtils.BN(item1.idx)
+          let m2 = numUtils.BN(item2.idx)
+          return m1.gt(m2) ? -1 : 1
+        })
+      }
       datas = datas.filter((item) => {
         let symbol = (item.market || '').toUpperCase()
         if (this.active !== 'collection') {
@@ -155,8 +161,8 @@ export default {
     },
     getAccuracy () {
       let accuracy,Quantityaccu,Amountaccu,digit
-      for (let i = 0; i < this.products.length; i++) {
-        let data = this.products[i]
+      for (let i = 0; i < this.getMarketList.length; i++) {
+        let data = this.getMarketList[i]
         if (data.market === this.symbol) {
           this.$parent.fixedNumber = Number(data.accuracy) || 8
           this.$parent.Quantityaccu = Number(data.quantityAccu) || 4
@@ -168,15 +174,15 @@ export default {
     },
     marketConfig () {
       let config = {}
-      this.products.forEach((item) => {
+      this.getMarketList.forEach((item) => {
         config[item.market] = item
       })
 
       return utils.isPlainEmpty(config) ? null : config
     },
     hasCollection () {
-      for (let i = 0; i < this.products.length; i++) {
-        let d = this.products[i]
+      for (let i = 0; i < this.getMarketList.length; i++) {
+        let d = this.getMarketList[i]
         if (d.collection) {
           return true
         }
@@ -186,7 +192,7 @@ export default {
   },
   watch: {
     getApiToken () {
-      this.getCollection()
+      this.queryMarketList(true)
     },
     getAccuracy (val) {
       this.$emit('input', val)
@@ -204,8 +210,8 @@ export default {
         })
       }
     },
-    products () {
-      this.setBtcValues(this.products)
+    getMarketList () {
+      this.setBtcValues(this.getMarketList)
     }
   },
   created () {
@@ -215,16 +221,29 @@ export default {
         fun: this.marketEvent
       })
     })
-    this.getCollection()
+    this.queryMarketList()
   },
   beforeDestroy () {
     this.removeEvents('marketEvent')
   },
   methods: {
-    ...mapActions(['setMarketConfig', 'addEvents', 'removeEvents', 'setBtcValues']),
+    ...mapActions(['setMarketConfig', 'addEvents', 'removeEvents', 'setBtcValues','setMarketList']),
+    queryMarketList (key) { // 获取所有市场数据
+      if(!this.getMarketList.length || key){
+        marketApi.marketList((res) => {
+          this.setMarketList(res || [])
+          if(!this.$route.params.symbol && this.hasCollection){
+            this.active = 'collection'
+          }
+          this.showLoading = false
+        }, () => {
+          this.showLoading = false
+        })
+      }
+    },
     marketEvent (res) {
       if (res && res.type === 'updateData') {
-        let datas = this.products
+        let datas = this.getMarketList
         let tempObj = {}
         datas.forEach((item) => {
           tempObj[item.market] = item
@@ -237,23 +256,11 @@ export default {
             item.iconUrl = d.iconUrl
           }
         })
-        this.products = res.data
+        this.setMarketList(res.data || [])
       }
     },
     getDirection (direction) { //  1 买  绿色  2 卖 红色
       return parseInt(direction || 0)
-    },
-    getCollection () {
-      // 获取产品
-      marketApi.marketList((res) => {
-        this.products = res
-        if (this.hasCollection) {
-          this.active = 'collection'
-        }
-        this.showLoading = false
-      }, () => {
-        this.showLoading = false
-      })
     },
     getUpOrDown(item){
       if (item.openingPrice && item.lastPrice) {

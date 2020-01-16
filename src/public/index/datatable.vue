@@ -6,7 +6,7 @@
         <div class="layui-tab layui-tab-card">
           <ul class="layui-tab-title">
             <li class="hover" v-for="item in markets" :class="{layuithis:active ===item}" @click="active=item"
-                :key="item">{{item}}
+                :key="item">{{item !== 'collection' ? item : $t('exchange.exchange_collection')}}
             </li>
             <li class="volume" :title="valumeTip" v-html="'Volume:&nbsp;&nbsp;'+valumeTip" v-if="false">
               <!-- <span class="last-span" style="position:relative;padding-right:34px;">
@@ -79,7 +79,7 @@
                 </thead>
                 <tbody>
                 <!--<tr v-for=" btc in getMarketFilter()" >-->
-                <tr v-for="(btc, index) in curProducts" :key="index">
+                <tr v-for="(btc, index) in curProducts" :key="index"  v-if="(btc.visible&&Number(btc.visible)) || !btc.visible">
                   <td><i :class="[!btc.collection?'icon_hollow':'icon_solid']" @click.stop="keep(btc)"></i></td>
                   <router-link :to="{name: 'exchange_index',params:{symbol:btc.currencySymbol+'_'+btc.baseSymbol}}"
                                tag='td'>
@@ -132,7 +132,7 @@
     data() {
       return {
         sort: 'asc', // 默认升序
-        sortActive: 'market',
+        sortActive: '',
         symbolVolumes: [], // 币种成交量
         fixedNumber: 8,
         filterValue: '', // 市场筛选
@@ -150,14 +150,13 @@
         active: 'USDT',
         marketArry: [], // 市场信息
         filterMarketAtty: [], // 前台过滤'BTCETH、ETHBTC、BTCMARKET'市场信息
-        products: []
       }
     },
     created() {
-      this.getMarketList() // 初始化数据
+      this.queryMarketList() // 初始化数据
     },
     methods: {
-      ...mapActions(['setBtcValues']),
+      ...mapActions(['setBtcValues','setMarketList','setMarketConfig']),
       keep(data) {
         if (this.getApiToken) {
           if (data.collection) { // 取消
@@ -197,10 +196,17 @@
           return '0.00%'
         }
       },
-      getMarketList() { // 获取所有市场数据
-        marketApi.marketList((res) => {
-          this.products = res
-        })
+      queryMarketList (key) { // 获取所有市场数据
+        if(key || !this.getMarketList.length){
+          marketApi.marketList((res) => {
+            let config = {}
+            this.setMarketList(res || [])
+            this.getMarketList.forEach((item) => {
+              config[item.market] = item
+            })
+            this.setMarketConfig(config)
+          })
+        }
       },
       getMarketFilter() { // 前台通过参数筛选市场
         let val = this.filterValue.toUpperCase()
@@ -249,10 +255,10 @@
       }
     },
     computed: {
-      ...mapGetters(['getApiToken', 'getNetworkSignal']),
+      ...mapGetters(['getApiToken', 'getNetworkSignal','getMarketList','getMarketConfig']),
       curProducts() {
         let val = this.filterValue.toUpperCase()
-        let datas = this.products.sort((item1, item2) => {
+        let datas = this.getMarketList.sort((item1, item2) => {
           if (this.sortActive === 'lastPrice') {
             let m1 = numUtils.BN(item1.lastPrice)
             let m2 = numUtils.BN(item2.lastPrice)
@@ -279,19 +285,26 @@
             return this.sort === 'asc' ? (m1 < m2 ? -1 : 1) : (m1 > m2 ? -1 : 1)
           }
         })
+        if(this.sortActive===''){
+          datas = datas.sort((item1, item2) => {
+            let m1 = numUtils.BN(item1.idx)
+            let m2 = numUtils.BN(item2.idx)
+            return m1.gt(m2) ? -1 : 1
+          })
+        }
         return datas.filter((item) => {
           let symbol = (item.market || '').toUpperCase()
-          if (this.active !== this.$t('exchange.exchange_collection')) {
+          if (this.active !== 'collection') {
             return this.active === item.baseSymbol && (!val || symbol.indexOf(val) !== -1)
           } else {
             return item.collection && (!val || symbol.indexOf(val) !== -1)
           }
         })
       },
-      markets() {
-        // 收藏
-        return ['USDT']
-        // return ['BTC', 'ETH', 'SATOX', 'USDT', this.$t('public0.public283')]
+      markets () {
+        let temp = ['collection'], _markets = this.getMarketConfig? Object.values(this.getMarketConfig):[]
+        temp = temp.concat([...new Set(_markets.map(item=>{return item.baseSymbol}))].sort())
+        return temp
       },
       /* 选中数据的集合 */
       mytotalList: function () {
@@ -308,7 +321,7 @@
     },
     watch: {
       getApiToken() {
-        this.getMarketList()
+        this.queryMarketList(true)
       },
       filterValue() {
         this.filterValue = this.filterValue.replace(/[\W]/g, '')
@@ -317,8 +330,8 @@
       },
       mytotalList: function () {
       },
-      products() {
-        this.setBtcValues(this.products)
+      getMarketList() {
+        this.setBtcValues(this.getMarketList)
       }
     }
   }
@@ -471,7 +484,7 @@
     -webkit-transition: all .2s;
     position: relative;
     line-height: 40px;
-    min-width: 140px;
+    min-width: 100px;
     text-align: left;
     cursor: pointer;
     color: #5a5a5a;

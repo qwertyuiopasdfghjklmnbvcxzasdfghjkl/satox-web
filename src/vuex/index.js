@@ -17,6 +17,7 @@ const fixed = 8
 export default new Vuex.Store({
   state: {
     userInfo: userInfo || {},
+    marketList: [], // 交易市场列表
     api_token: JsCookies.get('api_token'),
     lang: window.localStorage.getItem('lang') || 'en',
     marketConfig: null,
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     sysParams:{}
   },
   getters: {
+    getMarketList (state) {
+      return state.marketList
+    },
     getSysParams(state){
       return state.sysParams
     },
@@ -98,6 +102,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    updateMarketList (state, marketList) {
+      state.marketList = marketList
+    },
     updateSysParams (state, sysParams) {
       state.sysParams = sysParams
     },
@@ -166,6 +173,18 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setMarketList (context, marketList) {
+      marketList = JSON.parse(JSON.stringify(marketList))
+      marketList.sort((item1, item2) => {
+        let m1 = `${item1.currencySymbol}/${item1.baseSymbol}`
+        let m2 = `${item2.currencySymbol}/${item2.baseSymbol}`
+        if (m1 === m2) {
+          return 0
+        }
+        return m1 < m2 ? -1 : 1
+      })
+      context.commit('updateMarketList', marketList)
+    },
     setSysParams (context, sysParams) {
       context.commit('updateSysParams', sysParams)
     },
