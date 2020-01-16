@@ -45,7 +45,7 @@
 
     <section class="bk-wrap footer-main">
       <section class="bk-main footer">
-        <p>©2019-2020 {{location.hostname}} All Rights Reserved</p>
+        <p>©2019-2020 {{gethost}} All Rights Reserved</p>
       </section>
     </section>
   </div>
@@ -70,6 +70,9 @@
     },
     computed: {
       ...mapGetters(['getApiToken', 'getLang']),
+      gethost(){
+        return location.hostname
+      },
       aboutUrl () {
         // if (this.getLang === 'zh-CN' || this.getLang === 'cht') {
         //   return 'https://cdcc.kf5.com/hc/kb/article/1225583/'
