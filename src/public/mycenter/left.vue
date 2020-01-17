@@ -31,12 +31,12 @@
         <span>{{$t('trade_record.my_trade_record')}}</span>
         <!--我的交易记录-->
       </li>
-      <li :class="{'active': active === 'hardware'}" @click="switch_tab('hardware')">
+      <li :class="{'active': active === 'hardware'}" @click="switch_tab('hardware')"  v-if="getSiteType">
         <i class=""><img :src="active === 'hardware' ? zbh : zb"/></i>
         <span>{{$t('shop.hardware')}}</span>
         <!--中本硬件-->
       </li>
-      <li :class="{'active': active === 'SATODebitCard'}" @click="switch_tab('SATODebitCard')">
+      <li :class="{'active': active === 'SATODebitCard'}" @click="switch_tab('SATODebitCard')"  v-if="getSiteType">
         <i class=""><img :src="active === 'SATODebitCard' ? sah : sa"/></i>
         <span>{{$t('shop.sato_card')}}</span>
         <!--SATO 借記卡-->
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+  import {mapGetters, mapActions} from 'vuex'
   import shopsApi from '@/api/shops'
   import sa from '@/assets/images/sa.png'
   import sah from '@/assets/images/sah.png'
@@ -77,8 +78,8 @@
         zbh: zbh
       }
     },
-    created() {
-
+    computed: {
+      ...mapGetters(['getSiteType']),
     },
     methods: {
       switch_like() {
