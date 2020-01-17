@@ -35,6 +35,9 @@ export default new Vuex.Store({
     sysParams:{}
   },
   getters: {
+    getSiteType(state){
+      return location.hostname == 'satox.io'?false:true
+    },
     getMarketList (state) {
       return state.marketList
     },

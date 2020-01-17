@@ -13,14 +13,14 @@
                 {{$t('public.navigation_exchange')}}<!--币币交易-->
               </a>
             </li>
-            <li>
+            <li v-if="getSiteType">
               <router-link :to="{name:'commodity_index2'}" :class="{'current':$route.name==='commodity_index2' || $route.name==='commodity_index'}"> {{$t('exchange.commodity')}} </router-link>
             </li>
             <li v-if="false">
               <router-link :to="{name:'ieo_index'}" :class="{'current':$route.name && $route.name.includes('ieo')}"> IEO </router-link>
             </li>
             <!--APP下载-->
-            <li>
+            <li v-if="getSiteType">
               <router-link :to="{name:'download'}" :class="{'current':$route.name==='download'}">
                 {{$t('public0.public212')}}
               </router-link>
@@ -51,7 +51,7 @@
                 {{$t('public.navigation_logout')}}<!--退出-->
               </a>
             </li>
-            <li>
+            <li v-if="getSiteType">
               <router-link :to="{name:'shop_index'}">
                 {{$t('shop.shop')}}<!--购物-->
               </router-link>
@@ -151,7 +151,7 @@
         </a>
       </li> -->
       <!--APP下载-->
-      <li>
+      <li v-if="getSiteType">
         <router-link :to="{name:'download'}">
           {{$t('public0.public212')}}
         </router-link>
@@ -169,7 +169,7 @@
       <li v-if="isLogin">
         <a @click="reloadPage('mycenter')">{{username}}</a>
       </li>
-      <li>
+      <li v-if="getSiteType">
         <router-link :to="{name:'shop_index'}">
           {{$t('shop.shop')}}<!--购物-->
         </router-link>
@@ -223,7 +223,7 @@
       }
     },
     computed: {
-      ...mapGetters(['isLogin', 'getUserInfo', 'getLang']),
+      ...mapGetters(['isLogin', 'getUserInfo', 'getLang','getSiteType']),
       isTest() {
         let url = location.href
         return url.indexOf('http://localhost') === 0 || url.indexOf('http://10.0.') === 0
